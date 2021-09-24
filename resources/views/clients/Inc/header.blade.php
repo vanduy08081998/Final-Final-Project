@@ -66,7 +66,7 @@
                     <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
                       <div class="widget-cart-item pb-2 border-bottom">
                         <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/05.jpg" width="64" alt="Product"></a>
+                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/05.jpg') }}" width="64" alt="Product"></a>
                           <div class="ps-2">
                             <h6 class="widget-product-title"><a href="shop-single-v2.html">Bluetooth Headphones</a></h6>
                             <div class="widget-product-meta"><span class="text-accent me-2">$259.<small>00</small></span><span class="text-muted">x 1</span></div>
@@ -75,7 +75,7 @@
                       </div>
                       <div class="widget-cart-item py-2 border-bottom">
                         <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/06.jpg" width="64" alt="Product"></a>
+                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/06.jpg') }}" width="64" alt="Product"></a>
                           <div class="ps-2">
                             <h6 class="widget-product-title"><a href="shop-single-v2.html">Cloud Security Camera</a></h6>
                             <div class="widget-product-meta"><span class="text-accent me-2">$122.<small>00</small></span><span class="text-muted">x 1</span></div>
@@ -84,7 +84,7 @@
                       </div>
                       <div class="widget-cart-item py-2 border-bottom">
                         <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/07.jpg" width="64" alt="Product"></a>
+                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/07.jpg') }}" width="64" alt="Product"></a>
                           <div class="ps-2">
                             <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smartphone S10</a></h6>
                             <div class="widget-product-meta"><span class="text-accent me-2">$799.<small>00</small></span><span class="text-muted">x 1</span></div>
@@ -93,7 +93,7 @@
                       </div>
                       <div class="widget-cart-item py-2 border-bottom">
                         <button class="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/08.jpg" width="64" alt="Product"></a>
+                        <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html"><img src="{{ asset('frontend/img/shop/cart/widget/08.jpg') }}" width="64" alt="Product"></a>
                           <div class="ps-2">
                             <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smart TV Box</a></h6>
                             <div class="widget-product-meta"><span class="text-accent me-2">$67.<small>00</small></span><span class="text-muted">x 1</span></div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                       <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i class="ci-arrow-right ms-1 me-n1"></i></a>
-                    </div><a class="btn btn-primary btn-sm d-block w-100" href="checkout-details.html"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                    </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout.checkout-details') }}"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/07.jpg" alt="Computers &amp; Accessories"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/07.jpg') }}" alt="Computers &amp; Accessories"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$149.<small>80</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -199,7 +199,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/09.jpg" alt="Smartphones &amp; Tablets"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/09.jpg') }}" alt="Smartphones &amp; Tablets"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$127.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -240,7 +240,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/08.jpg" alt="TV, Video &amp; Audio"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/08.jpg') }}" alt="TV, Video &amp; Audio"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$78.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -285,7 +285,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/10.jpg" alt="Cameras, Photo &amp; Video"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/10.jpg') }}" alt="Cameras, Photo &amp; Video"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$210.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -319,7 +319,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/11.jpg" alt="Headphones"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/11.jpg') }}" alt="Headphones"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$35.<small>99</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -342,7 +342,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/12.jpg" alt="Wearable Electronics"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/12.jpg') }}" alt="Wearable Electronics"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$79.<small>50</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -387,7 +387,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/13.jpg" alt="Printers &amp; Ink"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/13.jpg') }}" alt="Printers &amp; Ink"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$54.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -427,7 +427,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/14.jpg" alt="Video Games"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/14.jpg') }}" alt="Video Games"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$19.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -465,7 +465,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/16.jpg" alt="Speakers &amp; Home Music"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/16.jpg') }}" alt="Speakers &amp; Home Music"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$43.<small>00</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -489,7 +489,7 @@
                               </ul>
                             </div>
                           </div>
-                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/15.jpg" alt="HDD/SSD Data Storage"></a>
+                          <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2" href="#"><img src="{{ asset('frontend/img/shop/departments/15.jpg') }}" alt="HDD/SSD Data Storage"></a>
                             <div class="fs-sm mb-3">Starting from <span class='fw-medium'>$21.<small>60</small></span></div><a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="ci-arrow-right fs-xs ms-1"></i></a>
                           </div>
                         </div>
@@ -503,25 +503,25 @@
                 <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
                   <ul class="dropdown-menu">
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v1.html"><span class="d-block text-heading">Fashion Store v.1</span><small class="d-block text-muted">Classic shop layout</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v1.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th01.jpg" alt="Fashion Store v.1"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v1.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th01.jpg') }}" alt="Fashion Store v.1"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-electronics-store.html"><span class="d-block text-heading">Electronics Store</span><small class="d-block text-muted">Slider + Promo banners</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-electronics-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th03.jpg" alt="Electronics Store"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-electronics-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th03.jpg') }}" alt="Electronics Store"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-marketplace.html"><span class="d-block text-heading">Marketplace</span><small class="d-block text-muted">Multi-vendor, digital goods</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-marketplace.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th04.jpg" alt="Marketplace"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-marketplace.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th04.jpg') }}" alt="Marketplace"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-grocery-store.html"><span class="d-block text-heading">Grocery Store</span><small class="d-block text-muted">Full width + Side menu</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-grocery-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th06.jpg" alt="Grocery Store"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-grocery-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th06.jpg') }}" alt="Grocery Store"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-food-delivery.html"><span class="d-block text-heading">Food Delivery Service</span><small class="d-block text-muted">Food &amp; Beverages delivery</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-food-delivery.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th07.jpg" alt="Food Delivery Service"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-food-delivery.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th07.jpg') }}" alt="Food Delivery Service"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v2.html"><span class="d-block text-heading">Fashion Store v.2</span><small class="d-block text-muted">Slider + Featured categories</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v2.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th02.jpg" alt="Fashion Store v.2"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v2.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th02.jpg') }}" alt="Fashion Store v.2"></a></div>
                     </li>
                     <li class="dropdown position-static mb-0"><a class="dropdown-item py-2" href="home-single-store.html"><span class="d-block text-heading">Single Product Store</span><small class="d-block text-muted">Single product / mono brand</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-single-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th05.jpg" alt="Single Product / Brand Store"></a></div>
+                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-single-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th05.jpg') }}" alt="Single Product / Brand Store"></a></div>
                     </li>
                   </ul>
                 </li>
@@ -547,7 +547,7 @@
                             <li class="widget-list-item"><a class="widget-list-link" href="marketplace-single.html">Single Item Page</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="marketplace-vendor.html">Vendor Page</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="marketplace-cart.html">Cart</a></li>
-                            <li class="widget-list-item"><a class="widget-list-link" href="marketplace-checkout.html">Checkout</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link" href="{{ route('checkout.checkout-details') }}">Checkout</a></li>
                           </ul>
                         </div>
                       </div>

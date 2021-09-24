@@ -26,6 +26,14 @@ define('__BASECLIENT__', 'App\Http\Controllers\Clients');
 
 Route::prefix('/')->group(function () {
     Route::get('/', ['as' => 'clients.index', 'uses' => __BASECLIENT__ . '\HomeController@index']);
+    Route::get('/login', ['as' => 'clients.login', 'uses' => __BASECLIENT__ . '\HomeController@login']);
+    Route::prefix('/checkout')->group(function () {
+        Route::get('/checkout-details', ['as' => 'checkout.checkout-details', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutDetail']);
+        Route::get('/checkout-shipping', ['as' => 'checkout.checkout-shipping', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutShipping']);
+        Route::get('/checkout-payment', ['as' => 'checkout.checkout-payment', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutPayment']);
+        Route::get('/checkout-complete', ['as' => 'checkout.checkout-complete', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutComplete']);
+        Route::get('/checkout-review', ['as' => 'checkout.checkout-review', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutReview']);
+    });
 });
 
 
