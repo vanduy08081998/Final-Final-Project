@@ -34,6 +34,11 @@ Route::prefix('/')->group(function () {
         Route::get('/checkout-complete', ['as' => 'checkout.checkout-complete', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutComplete']);
         Route::get('/checkout-review', ['as' => 'checkout.checkout-review', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutReview']);
     });
+    Route::prefix('/shop')->group(function () {
+        Route::get('/shop-grid', ['as' => 'shop.shop-grid', 'uses' => __BASECLIENT__ . '\ProductController@shopGrid']);
+        Route::get('/shop-list', ['as' => 'shop.shop-list', 'uses' => __BASECLIENT__ . '\ProductController@shopList']);
+        Route::get('/product-details', ['as' => 'shop.product-details', 'uses' => __BASECLIENT__ . '\ProductController@productDetails']);
+    });
 });
 
 
