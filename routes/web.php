@@ -48,7 +48,7 @@ Route::prefix('/')->group(function () {
 Route::prefix('admin')->group(function () {
 
     // Dashboard
-    Route::get('/', ['as' => 'clients.index', 'uses' => __BASEADMIN__ . '\HomeController@index']);
+    Route::get('/', ['as' => 'admin.index', 'uses' => __BASEADMIN__ . '\HomeController@index']);
 
     // Categories
     Route::resource('categories', __BASEADMIN__.'\CategoryController'); // Route và controller đã chỉnh sửa

@@ -3,31 +3,20 @@
       <div class="topbar topbar-dark bg-dark">
         <div class="container">
           <div>
-            <div class="topbar-text dropdown disable-autohide"><a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><img class="me-2" src="{{ asset('frontend/img/flags/en.png') }}" width="20" alt="English">Eng / $</a>
-              <ul class="dropdown-menu my-1">
-                <li class="dropdown-item">
-                  <select class="form-select form-select-sm">
-                    <option value="usd">$ USD</option>
-                    <option value="eur">€ EUR</option>
-                    <option value="ukp">£ UKP</option>
-                    <option value="jpy">¥ JPY</option>
-                  </select>
-                </li>
-                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="{{ asset('frontend/img/flags/fr.png') }}" width="20" alt="Français">Français</a></li>
-                <li><a class="dropdown-item pb-1" href="#"><img class="me-2" src="{{ asset('frontend/img/flags/de.png') }}" width="20" alt="Deutsch">Deutsch</a></li>
-                <li><a class="dropdown-item" href="#"><img class="me-2" src="{{ asset('frontend/img/flags/it.png') }}" width="20" alt="Italiano">Italiano</a></li>
-              </ul>
-            </div>
-            <div class="topbar-text text-nowrap d-none d-md-inline-block border-start border-light ps-3 ms-3"><span class="text-muted me-1">Available 24/7 at</span><a class="topbar-link" href="tel:00331697720">(00) 33 169 7720</a></div>
+            <div class="topbar-text text-nowrap d-none d-md-inline-block border-light"><span class="text-muted me-1">Tư vấn 24/7 tại</span><a class="topbar-link" href="tel:00331697720">(00) 33 169 7720</a></div>
           </div>
-          <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Wishlist / Compare / Track</a>
+          <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="account-wishlist.html"><i class="ci-heart text-muted me-2"></i>Wishlist (3)</a></li>
-              <li><a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>Compare (3)</a></li>
-              <li><a class="dropdown-item" href="order-tracking.html"><i class="ci-location text-muted me-2"></i>Order tracking</a></li>
+              <li><a class="dropdown-item" href="account-wishlist.html"><i class="ci-heart text-muted me-2"></i>Yêu thích (3)</a></li>
+              <li><a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>So sánh (3)</a></li>
+              <li><a class="dropdown-item" href="order-tracking.html"><i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng</a></li>
             </ul>
           </div>
-          <div class="d-none d-md-block ms-3 text-nowrap"><a class="topbar-link d-none d-md-inline-block" href="account-wishlist.html"><i class="ci-heart mt-n1"></i>Wishlist (3)</a><a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i class="ci-compare mt-n1"></i>Compare (3)</a><a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block" href="order-tracking.html"><i class="ci-location mt-n1"></i>Order tracking</a></div>
+          <div class="d-none d-md-block ms-3 text-nowrap">
+              <a class="topbar-link d-none d-md-inline-block" href="account-wishlist.html"><i class="ci-heart mt-n1"></i>Yêu thích (3)</a>
+              <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)</a>
+              <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block" href="order-tracking.html"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng</a>
+        </div>
         </div>
       </div>
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
@@ -36,19 +25,11 @@
           <div class="container"><a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none me-2" href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla"></a>
             <!-- Search-->
             <div class="input-group d-none d-lg-flex flex-nowrap mx-4"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-              <input class="form-control rounded-start w-100" type="text" placeholder="Search for products">
+              <input class="form-control rounded-start w-100" type="text" placeholder="Tìm kiếm sản phẩm">
               <select class="form-select flex-shrink-0" style="width: 10.5rem;">
-                <option>All categories</option>
+                <option>Tất cả</option>
                 <option>Computers</option>
-                <option>Smartphones</option>
-                <option>TV, Video, Audio</option>
-                <option>Cameras</option>
-                <option>Headphones</option>
-                <option>Wearables</option>
-                <option>Printers</option>
-                <option>Video Games</option>
-                <option>Home Music</option>
-                <option>Data Storage</option>
+                <option>...</option>
               </select>
             </div>
             <!-- Toolbar-->
@@ -57,9 +38,9 @@
                 <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-menu"></i></div>
               </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
                 <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                <div class="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
+                <div class="navbar-tool-text ms-n3"><small>Xin chào, Đăng nhập</small>My Account</div>
               </a>
-              <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>My Cart</small>$1,247.00</a>
+              <div class="navbar-tool dropdown ms-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>Giỏ hàng</small>$1,247.00</a>
                 <!-- Cart dropdown-->
                 <div class="dropdown-menu dropdown-menu-end">
                   <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">
@@ -102,8 +83,8 @@
                       </div>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
-                      <div class="fs-sm me-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i class="ci-arrow-right ms-1 me-n1"></i></a>
-                    </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout.checkout-details') }}"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                      <div class="fs-sm me-2 py-2"><span class="text-muted">Tổng:</span><span class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Xem giỏ hàng<i class="ci-arrow-right ms-1 me-n1"></i></a>
+                    </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout.checkout-details') }}"><i class="ci-card me-2 fs-base align-middle"></i>Thanh toán</a>
                   </div>
                 </div>
               </div>
@@ -115,11 +96,11 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <!-- Search-->
               <div class="input-group d-lg-none my-3"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                <input class="form-control rounded-start" type="text" placeholder="Search for products">
+                <input class="form-control rounded-start" type="text" placeholder="Tìm kiếm sản phẩm...">
               </div>
               <!-- Departments menu-->
               <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>Departments</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-menu align-middle mt-n1 me-2"></i>Danh mục</a>
                   <ul class="dropdown-menu">
                     <li class="dropdown mega-dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>Computers &amp; Accessories</a>
                       <div class="dropdown-menu p-0">
@@ -500,37 +481,15 @@
               </ul>
               <!-- Primary menu-->
               <ul class="navbar-nav">
-                <li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Home</a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v1.html"><span class="d-block text-heading">Fashion Store v.1</span><small class="d-block text-muted">Classic shop layout</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v1.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th01.jpg') }}" alt="Fashion Store v.1"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-electronics-store.html"><span class="d-block text-heading">Electronics Store</span><small class="d-block text-muted">Slider + Promo banners</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-electronics-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th03.jpg') }}" alt="Electronics Store"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-marketplace.html"><span class="d-block text-heading">Marketplace</span><small class="d-block text-muted">Multi-vendor, digital goods</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-marketplace.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th04.jpg') }}" alt="Marketplace"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-grocery-store.html"><span class="d-block text-heading">Grocery Store</span><small class="d-block text-muted">Full width + Side menu</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-grocery-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th06.jpg') }}" alt="Grocery Store"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-food-delivery.html"><span class="d-block text-heading">Food Delivery Service</span><small class="d-block text-muted">Food &amp; Beverages delivery</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-food-delivery.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th07.jpg') }}" alt="Food Delivery Service"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom" href="home-fashion-store-v2.html"><span class="d-block text-heading">Fashion Store v.2</span><small class="d-block text-muted">Slider + Featured categories</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-fashion-store-v2.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th02.jpg') }}" alt="Fashion Store v.2"></a></div>
-                    </li>
-                    <li class="dropdown position-static mb-0"><a class="dropdown-item py-2" href="home-single-store.html"><span class="d-block text-heading">Single Product Store</span><small class="d-block text-muted">Single product / mono brand</small></a>
-                      <div class="dropdown-menu h-100 animation-none mt-0 p-3"><a class="d-block" href="home-single-store.html" style="width: 250px;"><img src="{{ asset('frontend/img/home/preview/th05.jpg') }}" alt="Single Product / Brand Store"></a></div>
-                    </li>
-                  </ul>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link" href="{{ route('clients.index') }}"><i class="ci-home"></i> Trang chủ</a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="ci-lable"></i> Cửa hàng</a>
                   <div class="dropdown-menu p-0">
                     <div class="d-flex flex-wrap flex-sm-nowrap px-2">
                       <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
                         <div class="widget widget-links mb-4">
-                          <h6 class="fs-base mb-3">Shop layouts</h6>
+                          <h6 class="fs-base mb-3">Danh mục 1</h6>
                           <ul class="widget-list">
                             <li class="widget-list-item"><a class="widget-list-link" href="shop-grid-ls.html">Shop Grid - Left Sidebar</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="shop-grid-rs.html">Shop Grid - Right Sidebar</a></li>
@@ -541,7 +500,7 @@
                           </ul>
                         </div>
                         <div class="widget widget-links">
-                          <h6 class="fs-base mb-3">Marketplace</h6>
+                          <h6 class="fs-base mb-3">Danh mục 2</h6>
                           <ul class="widget-list">
                             <li class="widget-list-item"><a class="widget-list-link" href="marketplace-category.html">Category Page</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="marketplace-single.html">Single Item Page</a></li>
@@ -553,7 +512,7 @@
                       </div>
                       <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
                         <div class="widget widget-links">
-                          <h6 class="fs-base mb-3">Shop pages</h6>
+                          <h6 class="fs-base mb-3">Danh mục 3</h6>
                           <ul class="widget-list">
                             <li class="widget-list-item"><a class="widget-list-link" href="shop-categories.html">Shop Categories</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="shop-single-v1.html">Product Page v.1</a></li>
@@ -571,7 +530,7 @@
                       </div>
                       <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
                         <div class="widget widget-links mb-4">
-                          <h6 class="fs-base mb-3">Grocery store</h6>
+                          <h6 class="fs-base mb-3">Danh mục 4</h6>
                           <ul class="widget-list">
                             <li class="widget-list-item"><a class="widget-list-link" href="grocery-catalog.html">Product Catalog</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="grocery-single.html">Single Product Page</a></li>
@@ -579,7 +538,7 @@
                           </ul>
                         </div>
                         <div class="widget widget-links">
-                          <h6 class="fs-base mb-3">Food Delivery</h6>
+                          <h6 class="fs-base mb-3">Danh mục 5</h6>
                           <ul class="widget-list">
                             <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-category.html">Category Page</a></li>
                             <li class="widget-list-item"><a class="widget-list-link" href="food-delivery-single.html">Single Item (Restaurant)</a></li>
@@ -591,7 +550,7 @@
                     </div>
                   </div>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Account</a>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-store"></i> Nhãn hiệu</a>
                   <ul class="dropdown-menu">
                     <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Shop User Account</a>
                       <ul class="dropdown-menu">
@@ -619,93 +578,14 @@
                     <li><a class="dropdown-item" href="account-password-recovery.html">Password Recovery</a></li>
                   </ul>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Pages</a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Navbar Variants</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="navbar-1-level-light.html">1 Level Light</a></li>
-                        <li><a class="dropdown-item" href="navbar-1-level-dark.html">1 Level Dark</a></li>
-                        <li><a class="dropdown-item" href="navbar-2-level-light.html">2 Level Light</a></li>
-                        <li><a class="dropdown-item" href="navbar-2-level-dark.html">2 Level Dark</a></li>
-                        <li><a class="dropdown-item" href="navbar-3-level-light.html">3 Level Light</a></li>
-                        <li><a class="dropdown-item" href="navbar-3-level-dark.html">3 Level Dark</a></li>
-                        <li><a class="dropdown-item" href="home-electronics-store.html">Electronics Store</a></li>
-                        <li><a class="dropdown-item" href="home-marketplace.html">Marketplace</a></li>
-                        <li><a class="dropdown-item" href="home-grocery-store.html">Side Menu (Grocery)</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                    <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Help Center</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="help-topics.html">Help Topics</a></li>
-                        <li><a class="dropdown-item" href="help-single-topic.html">Single Topic</a></li>
-                        <li><a class="dropdown-item" href="help-submit-request.html">Submit a Request</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">404 Not Found</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="404-simple.html">404 - Simple Text</a></li>
-                        <li><a class="dropdown-item" href="404-illustration.html">404 - Illustration</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="sticky-footer.html">Sticky Footer Demo</a></li>
-                  </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-auto-close="outside"><i class="ci-loudspeaker"></i> Bài viết</a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Blog</a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Blog List Layouts</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="blog-list-sidebar.html">List with Sidebar</a></li>
-                        <li><a class="dropdown-item" href="blog-list.html">List no Sidebar</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Blog Grid Layouts</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="blog-grid-sidebar.html">Grid with Sidebar</a></li>
-                        <li><a class="dropdown-item" href="blog-grid.html">Grid no Sidebar</a></li>
-                      </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">Single Post Layouts</a>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="blog-single-sidebar.html">Article with Sidebar</a></li>
-                        <li><a class="dropdown-item" href="blog-single.html">Article no Sidebar</a></li>
-                      </ul>
-                    </li>
-                  </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-auto-close="outside"><i class="ci-flag"></i> Thông tin cửa hàng</a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Docs / Components</a>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="docs/dev-setup.html">
-                        <div class="d-flex">
-                          <div class="lead text-muted pt-1"><i class="ci-book"></i></div>
-                          <div class="ms-2"><span class="d-block text-heading">Documentation</span><small class="d-block text-muted">Kick-start customization</small></div>
-                        </div>
-                      </a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="components/typography.html">
-                        <div class="d-flex">
-                          <div class="lead text-muted pt-1"><i class="ci-server"></i></div>
-                          <div class="ms-2"><span class="d-block text-heading">Components<span class="badge bg-info ms-2">40+</span></span><small class="d-block text-muted">Faster page building</small></div>
-                        </div>
-                      </a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="docs/changelog.html">
-                        <div class="d-flex">
-                          <div class="lead text-muted pt-1"><i class="ci-edit"></i></div>
-                          <div class="ms-2"><span class="d-block text-heading">Changelog<span class="badge bg-success ms-2">v2.3.0</span></span><small class="d-block text-muted">Regular updates</small></div>
-                        </div>
-                      </a></li>
-                    <li class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="mailto:support@createx.studio">
-                        <div class="d-flex">
-                          <div class="lead text-muted pt-1"><i class="ci-help"></i></div>
-                          <div class="ms-2"><span class="d-block text-heading">Support</span><small class="d-block text-muted">support@createx.studio</small></div>
-                        </div>
-                      </a></li>
-                  </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-auto-close="outside"><i class="ci-phone"></i> Liên hệ và Phản hồi</a>
                 </li>
               </ul>
             </div>
