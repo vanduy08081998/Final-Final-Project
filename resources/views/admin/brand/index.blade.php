@@ -38,16 +38,24 @@
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Tên Thương hiệu</th>
-                                        <th></th>
-
+                                        <th style="text-align: center;">Thương Hiệu</th>
+                                        <th style="text-align: center;">Tên TH</th>
+                                        <th style="text-align: center;">Công cụ</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($brandAll as $brand)
                                         <tr>
-                                            <td>{{ $brand->brand_name }}</td>
-                                            <td>
+                                            <td class="py-2">
+                                                <div style="text-align: center;">
+                                                    <div class="position-relative mr-2">
+                                                        <img class="avatar" width="90" height="58"
+                                                            src="{{ url('public/uploads/brand/', $brand->brand_image) }}" />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">{{ $brand->brand_name }}</td>
+                                            <td style="text-align: center;">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
