@@ -39,4 +39,17 @@
             </li>
         </ul>
     </li>
+    <li>
+        <a class="has-arrow" href="#">
+            <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
+            </div>
+            <div class="menu-title">Tài khoản</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('user.index') }}"> Danh sách</a>
+            </li>
+            <li> <a href="{{ route('user.create') }}"> Thêm mới</a>
+            </li>
+        </ul>
+    </li>
 </ul>

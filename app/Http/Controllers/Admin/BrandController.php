@@ -105,6 +105,7 @@ class BrandController extends Controller
            // Xóa hình ảnh cũ
            $this->generalService->deleteImage($this->path, $brandId->brand_image);
         }
+        $brandId->categories()->sync($data['category_id']);
         $brandId->update($data);
         return back()->with('message', 'Cập nhật dữ liệu thành công');
     }

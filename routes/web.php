@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
 
 /* Không cần include controller vào cho dài dòng */
 
@@ -57,11 +58,13 @@ Route::prefix('admin')->group(function () {
     Route::resource('/brand', __BASEADMIN__.'\BrandController');
 
     Route::resource('/products', __BASEADMIN__.'\ProductController');
+
+    Route::resource('/user', __BASEADMIN__.'\UserController');
 });
 
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
