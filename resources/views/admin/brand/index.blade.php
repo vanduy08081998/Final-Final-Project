@@ -40,6 +40,7 @@
                                     <tr>
                                         <th style="text-align: center;">Thương Hiệu</th>
                                         <th style="text-align: center;">Tên TH</th>
+                                        <th style="text-align: center;">Danh mục SP</th>
                                         <th style="text-align: center;">Công cụ</th>
                                     </tr>
                                 </thead>
@@ -56,8 +57,13 @@
                                             </td>
                                             <td style="text-align: center;">{{ $brand->brand_name }}</td>
                                             <td style="text-align: center;">
+
+                                            </td>
+                                            <td style="text-align: center;">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
+                                                    <button type="button" class="btn btn-success dropdown-toggle radius-30"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                                            class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                                                         <a class="dropdown-item text-warning"
                                                             href="{{ route('brand.edit', ['brand' => $brand->id]) }}">Sửa</a>
@@ -84,4 +90,3 @@
         <!--end page-content-wrapper-->
     </div>
 @endsection
-
