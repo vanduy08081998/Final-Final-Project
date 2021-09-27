@@ -18,6 +18,9 @@
 	<link href="{{ URL::to('backend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
 	<link href="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ URL::to('backend/plugins/select2/select2.min.css') }}">
+
+	<link href="{{ URL::to('backend/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet" />
+	<link href="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
     <!--Data Tables -->
 	<link href="{{ URL::to('backend/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
 	<link href="{{ URL::to('backend/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
@@ -134,6 +137,27 @@
 	<!-- App JS -->
 	<script src="{{ URL::to('backend/js/app.js')}}"></script>
     <script src="{{ URL::to('backend/plugins/select2/select2.min.js') }}"></script>
+
+
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+	<script>
+		$('#fancy-file-upload').FancyFileUpload({
+			params: {
+				action: 'fileuploader'
+			},
+			maxfilesize: 1000000
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#image-uploadify').imageuploadify();
+		})
+	</script>
+	<!-- App JS -->
 
     @stack('script')
 
