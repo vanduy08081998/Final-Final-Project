@@ -1,0 +1,141 @@
+@extends('layouts.admin_master')
+
+@section('title')
+Thêm tài khoản
+@endsection
+
+@section('content')
+
+<div class="page-wrapper">
+    <!--page-content-wrapper-->
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <!--breadcrumb-->
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">{{ __('Users') }}</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('User Registration') }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--end breadcrumb-->
+
+            <div class="card radius-15">
+                <div class="card-body border-lg-top-danger">
+
+
+                    <div class="card-body p-1">
+                        <div class="card-title d-flex align-items-center">
+                            <div><i class='bx bxs-user mr-1 font-24 text-danger'></i>
+                            </div>
+                            <h4 class="mb-0 text-danger">Tài khoản người dùng</h4>
+                        </div>
+                        <hr />
+                        <div class="form-body">
+                        @if (session('message'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+                            <form method="POST" action="{{ route('user.store') }}">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Họ và tên</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"> <span
+                                                class="input-group-text bg-transparent"><i
+                                                    class='bx bx-user'></i></span>
+                                        </div>
+                                        <input name="name" value="{{ old('name') }}" type="text"
+                                            class="form-control  @error('name') is-invalid @enderror border-left-0"
+                                            placeholder="Name" required autocomplete="off" autofocus>
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Địa chỉ email</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"> <span
+                                                class="input-group-text bg-transparent"><i
+                                                    class='bx bx-envelope'></i></span>
+                                        </div>
+                                        <input name="email" value="{{ old('email') }}" type="text"
+                                            class="form-control @error('email') is-invalid @enderror border-left-0"
+                                            placeholder="Email Address" required autocomplete="email">
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mật khẩu</label>
+                                    
+                                    <div id="show_hide_password" class="input-group">
+                                        <div class="input-group-prepend"> <span
+                                                class="input-group-text bg-transparent"><i
+                                                    class='bx bx-lock-open-alt'></i></span>
+                                        </div>
+                                        <input name="password" id="password" value="{{ old('password') }}" type="password"
+                                            class="form-control  @error('password') is-invalid @enderror border-left-0"
+                                            placeholder="Choose Password" required autocomplete="new-password">
+                                        <div class="input-group-append"> <a href="javascript:;"
+                                                class="input-group-text bg-transparent border-left-0"><i
+                                                    class='bx bx-hide'></i></a>
+                                        </div>
+
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                <div id="show_hide_password2" class="form-group">
+                                    <label>Nhập lại mật khẩu</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"> <span
+                                                class="input-group-text bg-transparent"><i
+                                                    class='bx bx-lock-open-alt'></i></span>
+                                        </div>
+                                        <input id="password-confirm" name="password_confirmation"
+                                            value="{{ old('password') }}" type="password"
+                                            class="form-control border-left-0" placeholder="Confirm Password" required
+                                            autocomplete="new-password">
+                                        <div class="input-group-append"> <a href="javascript:;"
+                                                class="input-group-text bg-transparent border-left-0"><i
+                                                    class='bx bx-hide'></i></a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-danger px-5">Thêm tài khoản</button>
+                                <form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <!--end page-content-wrapper-->
+</div>
+
+
+@endsection

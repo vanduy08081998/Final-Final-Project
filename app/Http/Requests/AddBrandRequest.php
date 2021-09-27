@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Validation\Rule;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddBrandRequest extends FormRequest
@@ -24,9 +24,9 @@ class AddBrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'brand_name' => ['required', Rule::unique('brands', 'brand_name')],
-            'brand_slug'=> ['required', Rule::unique('brands', 'brand_slug')],
-            'brand_image'=> 'required|image',
+            'brand_name' => ['required', 'unique:brands', 'max:225'],
+            'brand_slug'=> ['required', 'unique:brands', 'max:225'],
+            'brand_image'=> 'required',
             'category_id'=> 'required',
             'meta_keywords'=> 'required',
             'meta_title'=> 'required',
