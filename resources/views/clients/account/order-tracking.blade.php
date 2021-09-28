@@ -1,7 +1,7 @@
 @extends('layouts.client_master')
 
 
-@section('title', 'Thông tin giao nhận')
+@section('title', 'Thông tin giao hàng')
 
 
 @section('content')
