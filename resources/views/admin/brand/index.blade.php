@@ -26,50 +26,53 @@ Trang chủ
                         <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
                     </div>
                 </div>
-            </div>
-            <!--end breadcrumb-->
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4 class="mb-0">Liệt kê thương hiệu</h4>
-                    </div>
-                    <hr />
-                    <div class="table-responsive">
-                        <table id="example2" class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Tên thương hiệu</th>
-                                    <th>Hình thương hiệu</th>
-                                    <th>Tiêu đề (SEO)</th>
-                                    <th>Từ khóa (SEO)</th>
-                                    <th>Mô tả (SEO)</th>
-                                    <th>Hành động</th>
+                <!--end breadcrumb-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4 class="mb-0">Liệt kê thương hiệu</h4>
+                        </div>
+                        <hr />
+                        <div class="table-responsive">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">Thương Hiệu</th>
+                                        <th style="text-align: center;">Tên TH</th>
+                                        <th style="text-align: center;">Danh mục SP</th>
+                                        <th style="text-align: center;">Công cụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($brandAll as $brand)
+                                        <tr>
+                                            <td class="py-2">
+                                                <div style="text-align: center;">
+                                                    <div class="position-relative mr-2">
+                                                        <img class="avatar" width="90" height="58"
+                                                            src="{{ url('public/uploads/brand/', $brand->brand_image) }}" />
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">{{ $brand->brand_name }}</td>
+                                            <td style="text-align: center;">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($brandAll as $brand)
-                                <tr>
-                                    <td>{{ $prefix ?? '' }} {{ $brand->brand_name ?? '' }}</td>
-                                    <td><img src="{{ url('public/uploads/brand/' . $brand->brand_image) }}" alt=""
-                                    height="80px">
-                                    <td>{{ Str::limit($brand->meta_title, 30,'...' ) ?? ''}}</td>
-                                    <td>{{ Str::limit($brand->meta_keywords, 30,'...') ?? '' }}</td>
-                                    <td>{!! Str::limit($brand->meta_desc, 30,'...') ?? '' !!}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success dropdown-toggle radius-30"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                                    class="bx bx-cog"></i></button>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                <a class="dropdown-item text-warning"
-                                                    href="{{ route('brand.edit', ['brand' => $brand->id]) }}">Sửa</a>
-                                                <form action="{{ route('brand.destroy', ['brand' => $brand->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="dropdown-item text-danger">Xóa</button>
-                                                </form>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success dropdown-toggle radius-30"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                                            class="bx bx-cog"></i></button>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+                                                        <a class="dropdown-item text-warning"
+                                                            href="{{ route('brand.edit', ['brand' => $brand->id]) }}">Sửa</a>
+                                                        <form
+                                                            action="{{ route('brand.destroy', ['brand' => $brand->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="dropdown-item text-danger">Xóa</button>
+                                                        </form>
 
                                             </div>
                                         </div>
@@ -83,6 +86,4 @@ Trang chủ
             </div>
         </div>
     </div>
-    <!--end page-content-wrapper-->
-</div>
 @endsection

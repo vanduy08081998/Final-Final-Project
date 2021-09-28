@@ -43,12 +43,12 @@
         <a class="has-arrow" href="#">
             <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
             </div>
-            <div class="menu-title">Tài khoản</div>
+            <div class="menu-title">Sản phẩm</div>
         </a>
         <ul>
-            <li> <a href="{{ route('user.index') }}"> Danh sách</a>
-            </li>
-            <li> <a href="{{ route('user.create') }}"> Thêm mới</a>
+            {{-- <li> <a href="{{ route('brand.index') }}"> Danh sách</a>
+            </li> --}}
+            <li> <a href="{{ route('products.create') }}"> Thêm mới</a>
             </li>
         </ul>
     </li>
