@@ -40,6 +40,17 @@ Route::prefix('/')->group(function () {
         Route::get('/shop-list', ['as' => 'shop.shop-list', 'uses' => __BASECLIENT__ . '\ProductController@shopList']);
         Route::get('/product-details', ['as' => 'shop.product-details', 'uses' => __BASECLIENT__ . '\ProductController@productDetails']);
     });
+    Route::prefix('/cart')->group(function () {
+        Route::get('/cart-list', ['as' => 'cart.cart-list', 'uses' => __BASECLIENT__ . '\CartController@cartlist']);
+    });
+    Route::prefix('/account')->group(function () {
+        Route::get('/order-tracking', ['as' => 'account.order-tracking', 'uses' => __BASECLIENT__ . '\AccountController@orderTracking']);
+        Route::get('/wishlist', ['as' => 'account.wishlist', 'uses' => __BASECLIENT__ . '\AccountController@wishlist']);
+        Route::get('/order-list', ['as' => 'account.order-list', 'uses' => __BASECLIENT__ . '\AccountController@orderList']);
+        Route::get('/account-info', ['as' => 'account.account-info', 'uses' => __BASECLIENT__ . '\AccountController@accountInfo']);
+        Route::get('/account-address', ['as' => 'account.account-address', 'uses' => __BASECLIENT__ . '\AccountController@accountAddress']);
+        Route::get('/account-payment', ['as' => 'account.account-payment', 'uses' => __BASECLIENT__ . '\AccountController@accountPayment']);
+    });
 });
 
 
