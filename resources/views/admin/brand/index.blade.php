@@ -1,32 +1,32 @@
 @extends('layouts.admin_master')
 
 @section('title')
-Trang chủ
+    Trang chủ
 @endsection
 
 @section('content')
-<div class="page-wrapper">
-    <!--page-content-wrapper-->
-    <div class="page-content-wrapper">
-        <div class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-                <div class="breadcrumb-title pr-3">Thương hiệu</div>
-                <div class="pl-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="ml-auto">
-                    <div class="btn-group">
-                        <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
+    <div class="page-wrapper">
+        <!--page-content-wrapper-->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <!--breadcrumb-->
+                <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                    <div class="breadcrumb-title pr-3">Thương hiệu</div>
+                    <div class="pl-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="ml-auto">
+                        <div class="btn-group">
+                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
+                        </div>
                     </div>
                 </div>
-                <!--end breadcrumb-->
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
@@ -50,7 +50,7 @@ Trang chủ
                                                 <div style="text-align: center;">
                                                     <div class="position-relative mr-2">
                                                         <img class="avatar" width="90" height="58"
-                                                            src="{{ url('public/uploads/brand/', $brand->brand_image) }}" />
+                                                            src="{{ url('public/uploads/Brands/', $brand->brand_image) }}" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -74,16 +74,16 @@ Trang chủ
                                                             <button class="dropdown-item text-danger">Xóa</button>
                                                         </form>
 
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
