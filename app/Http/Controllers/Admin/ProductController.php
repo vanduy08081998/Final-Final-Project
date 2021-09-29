@@ -2,11 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\GeneralService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\AddProductRequest;
 
 class ProductController extends Controller
 {
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    protected $generalService, $path;
+
+    public function __construct(GeneralService $generalService)
+    {
+        $this->path = 'frontend/img/shop/products/';
+        $this->generalService = $generalService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +40,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
@@ -33,9 +49,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddProductRequest $addProductRequest) //AddProductRequest $addProductRequest
     {
-        //
+
+        $data = $addProductRequest->validated();
+        
+        $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
+
+        Product::create($data);
+
+        return redirect()->route('products.index');
     }
 
     /**

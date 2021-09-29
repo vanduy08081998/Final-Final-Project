@@ -39,11 +39,15 @@
             </li>
         </ul>
     </li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     <li>
         <a class="has-arrow" href="#">
             <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
             </div>
+<<<<<<< HEAD
             <div class="menu-title">Thuộc tính sản phẩm</div>
         </a>
         <ul>
@@ -54,4 +58,15 @@
         </ul>
     </li>
 
+=======
+            <div class="menu-title">Sản phẩm</div>
+        </a>
+        <ul>
+            {{-- <li> <a href="{{ route('brand.index') }}"> Danh sách</a>
+            </li> --}}
+            <li> <a href="{{ route('products.create') }}"> Thêm mới</a>
+            </li>
+        </ul>
+    </li>
+>>>>>>> main
 </ul>
