@@ -73,13 +73,10 @@ Route::prefix('admin')->group(function () {
 
     Route::resource('/products', __BASEADMIN__.'\ProductController');
 
-<<<<<<< HEAD
-    //Attributes
+    // Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
-=======
     Route::resource('/user', __BASEADMIN__.'\UserController');
->>>>>>> main
 });
 
 
