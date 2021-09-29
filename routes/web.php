@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AttributeController;
+
 /* Không cần include controller vào cho dài dòng */
 
 define('__BASEADMIN__', 'App\Http\Controllers\Admin');
@@ -57,6 +60,10 @@ Route::prefix('admin')->group(function () {
     Route::resource('/brand', __BASEADMIN__.'\BrandController');
 
     Route::resource('/products', __BASEADMIN__.'\ProductController');
+
+    //Attributes
+    Route::resource('/attribute', AttributeController::class);
+    Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
 });
 
 
