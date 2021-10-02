@@ -50,8 +50,8 @@
                                 <div class="product-gallery">
                                     <div class="product-gallery-preview order-sm-2">
                                         <div class="product-gallery-preview-item active" id="first"><img class="image-zoom"
-                                                src="{{ asset('frontend/img/shop/single/gallery/05.jpg') }}"
-                                                data-zoom="{{ asset('frontend/img/shop/single/gallery/05.jpg') }}" alt="Product image">
+                                                src="{{ asset('uploads/Products/Phone/reno6-1_1.jpg') }}"
+                                                data-zoom="{{ asset('uploads/Products/Phone/reno6-1_1.jpg') }}" alt="Product image">
                                             <div class="image-zoom-pane"></div>
                                         </div>
                                         <div class="product-gallery-preview-item" id="second"><img class="image-zoom"
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active"
-                                            href="#first"><img src="{{ asset('frontend/img/shop/single/gallery/05.jpg') }}"
+                                            href="#first"><img src="{{ asset('uploads/Products/Phone/reno6-1_1.jpg') }}"
                                                 alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img
                                                 src="{{ asset('frontend/img/shop/single/gallery/06.jpg') }}" alt="Product thumb"></a><a
                                             class="product-gallery-thumblist-item" href="#third"><img
