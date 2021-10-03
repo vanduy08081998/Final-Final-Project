@@ -55,13 +55,15 @@ class ProductController extends Controller
     public function store(AddProductRequest $addProductRequest) //AddProductRequest $addProductRequest
     {
 
-        $data = $addProductRequest->validated();
+       $data = $addProductRequest->validated();
 
-        $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
 
-        Product::create($data);
+       $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
 
-        return redirect()->route('products.index');
+
+       Product::create($data);
+
+       return redirect()->route('products.index');
     }
 
     /**
@@ -104,8 +106,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        Product::find($id)->delete();
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 }

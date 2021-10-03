@@ -6,11 +6,9 @@ class GeneralService
 {
     public function uploadImage($path ,$get_image){
         if (!is_null($get_image)) {
-            $get_name_image = $get_image->getClientOriginalName();
-            $name_image = current(explode('.', $get_name_image));
-            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move($path, $new_image);
-            return $new_image;
+            $imageName = $get_image->getClientOriginalName();
+            $get_image->move($path, $imageName);
+            return $imageName;
         }
     }
 

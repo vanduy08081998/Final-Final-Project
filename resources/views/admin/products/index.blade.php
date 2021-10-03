@@ -22,7 +22,7 @@
                     </div>
                     <div class="ml-auto">
                         <div class="btn-group">
-                            <a href="" class="btn btn-primary radius-30">Thêm mới sản phẩm</a>
+                            <a href="{{ route('products.create') }}" class="btn btn-primary radius-30">Thêm mới sản phẩm</a>
                         </div>
                     </div>
                 </div>
