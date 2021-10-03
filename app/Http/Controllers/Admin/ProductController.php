@@ -30,7 +30,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::orderByDESC('id')->get();
+        return view('admin.products.index', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -53,7 +56,7 @@ class ProductController extends Controller
     {
 
         $data = $addProductRequest->validated();
-        
+
         $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
 
         Product::create($data);

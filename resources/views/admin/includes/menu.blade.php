@@ -12,18 +12,18 @@
         <a href="{{ route('categories.index') }}">
 
 
-        <a class="has-arrow" href="#">
-            <div class="parent-icon icon-color-2"><i class="bx bx-grid"></i>
-            </div>
-            <div class="menu-title"> Danh mục</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('categories.index') }}"> Danh sách</a>
-            </li>
-            <li> <a href="{{ route('categories.create') }}"> Thêm mới</a>
+            <a class="has-arrow" href="#">
+                <div class="parent-icon icon-color-2"><i class="bx bx-grid"></i>
+                </div>
+                <div class="menu-title"> Danh mục</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('categories.index') }}"> Danh sách</a>
+                </li>
+                <li> <a href="{{ route('categories.create') }}"> Thêm mới</a>
 
-            </li>
-        </ul>
+                </li>
+            </ul>
     </li>
 
     <li>
@@ -46,8 +46,8 @@
             <div class="menu-title">Sản phẩm</div>
         </a>
         <ul>
-            {{-- <li> <a href="{{ route('brand.index') }}"> Danh sách</a>
-            </li> --}}
+            <li> <a href="{{ route('products.index') }}"> Danh sách</a>
+            </li>
             <li> <a href="{{ route('products.create') }}"> Thêm mới</a>
             </li>
         </ul>
