@@ -11,13 +11,13 @@
             <div class="page-content">
                 <!--breadcrumb-->
                 <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-                    <div class="breadcrumb-title pr-3">Thương hiệu</div>
+                    <div class="breadcrumb-title pr-3">Thuộc tính sản phẩm</div>
                     <div class="pl-3">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
+                                <li class="breadcrumb-item active" aria-current="page">Thuộc tính sản phẩm</li>
                             </ol>
                         </nav>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="mb-0">Liệt kê thương hiệu</h4>
+                            <h4 class="mb-0">Liệt kê thuộc tính</h4>
                         </div>
                         @if (session('message'))
                             <div class="alert alert-success" role="alert">
@@ -43,7 +43,7 @@
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Tên Thương hiệu</th>
+                                        <th>Tên thuộc tính</th>
                                         <th></th>
 
                                     </tr>

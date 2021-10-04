@@ -39,10 +39,6 @@
             </li>
         </ul>
     </li>
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     <li>
         <a class="has-arrow" href="#">
             <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
@@ -58,7 +54,6 @@
         </ul>
     </li>
 
-=======
             <div class="menu-title">Sản phẩm</div>
         </a>
         <ul>
