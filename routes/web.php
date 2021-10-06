@@ -2,15 +2,17 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Clients\HomeController;
+
+use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Clients\AccountController;
-/* Không cần include controller vào cho dài dòng */
 
 
 
@@ -29,8 +31,8 @@ use App\Http\Controllers\Clients\AccountController;
 /* Clients */
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('clients.index');
-    Route::get('/login', [HomeController::class, 'login'])->name('clients.login');
+    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
         Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
@@ -63,17 +65,24 @@ Route::prefix('/')->group(function () {
 Route::prefix('admin')->group(function () {
 
     // Dashboard
-    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'] )->name('admin.index');
+    Route::get('/', [HomeController::class, 'index'] )->name('admin.index');
 
     // Categories
     Route::resource('categories', CategoryController::class);
     Route::post('/detach-brand', [CategoryController::class,'detach_brand'])->name('detach-brand');
     //Request
-    Route::resource('/brand', BrandController::class ); 
+    Route::resource('/brand', BrandController::class );
 
-    Route::resource('/products', App\Http\Controllers\Admin\ProductController::class );
+    Route::resource('/products', ProductController::class );
 
-    Route::resource('/user', UserController::class ); 
+    //Attributes
+    Route::resource('/attribute', AttributeController::class);
+    Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+    Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
+    Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
+    Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
+    Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    Route::resource('/user', UserController::class );
 });
 
 
