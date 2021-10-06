@@ -30,7 +30,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::orderByDESC('id')->get();
+        return view('admin.products.index', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -52,13 +55,15 @@ class ProductController extends Controller
     public function store(AddProductRequest $addProductRequest) //AddProductRequest $addProductRequest
     {
 
-        $data = $addProductRequest->validated();
-        
-        $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
+       $data = $addProductRequest->validated();
 
-        Product::create($data);
 
-        return redirect()->route('products.index');
+       $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
+
+
+       Product::create($data);
+
+       return redirect()->route('products.index');
     }
 
     /**
@@ -101,8 +106,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        Product::find($id)->delete();
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 }

@@ -3,15 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
-
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\UserController;
 
-/* Không cần include controller vào cho dài dòng */
+use App\Http\Controllers\Clients\HomeController as HomeClient;
+use App\Http\Controllers\Clients\CheckoutController;
+use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Clients\AccountController;
 
-define('__BASEADMIN__', 'App\Http\Controllers\Admin');
-
-define('__BASECLIENT__', 'App\Http\Controllers\Clients');
 
 
 /*
@@ -29,30 +31,30 @@ define('__BASECLIENT__', 'App\Http\Controllers\Clients');
 /* Clients */
 
 Route::prefix('/')->group(function () {
-    Route::get('/', ['as' => 'clients.index', 'uses' => __BASECLIENT__ . '\HomeController@index']);
-    Route::get('/login', ['as' => 'clients.login', 'uses' => __BASECLIENT__ . '\HomeController@login']);
+    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
-        Route::get('/checkout-details', ['as' => 'checkout.checkout-details', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutDetail']);
-        Route::get('/checkout-shipping', ['as' => 'checkout.checkout-shipping', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutShipping']);
-        Route::get('/checkout-payment', ['as' => 'checkout.checkout-payment', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutPayment']);
-        Route::get('/checkout-complete', ['as' => 'checkout.checkout-complete', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutComplete']);
-        Route::get('/checkout-review', ['as' => 'checkout.checkout-review', 'uses' => __BASECLIENT__ . '\CheckoutController@checkoutReview']);
+        Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
+        Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
+        Route::get('/checkout-payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.checkout-payment');
+        Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
+        Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
     });
     Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid', ['as' => 'shop.shop-grid', 'uses' => __BASECLIENT__ . '\ProductController@shopGrid']);
-        Route::get('/shop-list', ['as' => 'shop.shop-list', 'uses' => __BASECLIENT__ . '\ProductController@shopList']);
-        Route::get('/product-details', ['as' => 'shop.product-details', 'uses' => __BASECLIENT__ . '\ProductController@productDetails']);
+        Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+        Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
+        Route::get('/product-details', [ProductController::class, 'productDetails'])->name('shop.product-details');
     });
     Route::prefix('/cart')->group(function () {
-        Route::get('/cart-list', ['as' => 'cart.cart-list', 'uses' => __BASECLIENT__ . '\CartController@cartlist']);
+        Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');
     });
     Route::prefix('/account')->group(function () {
-        Route::get('/order-tracking', ['as' => 'account.order-tracking', 'uses' => __BASECLIENT__ . '\AccountController@orderTracking']);
-        Route::get('/wishlist', ['as' => 'account.wishlist', 'uses' => __BASECLIENT__ . '\AccountController@wishlist']);
-        Route::get('/order-list', ['as' => 'account.order-list', 'uses' => __BASECLIENT__ . '\AccountController@orderList']);
-        Route::get('/account-info', ['as' => 'account.account-info', 'uses' => __BASECLIENT__ . '\AccountController@accountInfo']);
-        Route::get('/account-address', ['as' => 'account.account-address', 'uses' => __BASECLIENT__ . '\AccountController@accountAddress']);
-        Route::get('/account-payment', ['as' => 'account.account-payment', 'uses' => __BASECLIENT__ . '\AccountController@accountPayment']);
+        Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
+        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
+        Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
+        Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+        Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
+        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
     });
 });
 
@@ -63,20 +65,20 @@ Route::prefix('/')->group(function () {
 Route::prefix('admin')->group(function () {
 
     // Dashboard
-    Route::get('/', ['as' => 'admin.index', 'uses' => __BASEADMIN__ . '\HomeController@index']);
+    Route::get('/', [HomeController::class, 'index'] )->name('admin.index');
 
     // Categories
-    Route::resource('categories', __BASEADMIN__.'\CategoryController'); // Route và controller đã chỉnh sửa
-    Route::post('/detach-brand', __BASEADMIN__.'\CategoryController@detach_brand')->name('detach-brand');
+    Route::resource('categories', CategoryController::class);
+    Route::post('/detach-brand', [CategoryController::class,'detach_brand'])->name('detach-brand');
     //Request
-    Route::resource('/brand', __BASEADMIN__.'\BrandController');
+    Route::resource('/brand', BrandController::class );
 
-    Route::resource('/products', __BASEADMIN__.'\ProductController');
+    Route::resource('/products', ProductController::class );
 
     // Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
-    Route::resource('/user', __BASEADMIN__.'\UserController');
+    Route::resource('/user', UserController::class );
 });
 
 

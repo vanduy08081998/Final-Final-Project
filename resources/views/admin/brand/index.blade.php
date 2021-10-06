@@ -50,7 +50,7 @@
                                                 <div style="text-align: center;">
                                                     <div class="position-relative mr-2">
                                                         <img class="avatar" width="90" height="58"
-                                                            src="{{ url('public/uploads/Brands/', $brand->brand_image) }}" />
+                                                            src="{{ url('uploads/Brands/', $brand->brand_image) }}" />
                                                     </div>
                                                 </div>
                                             </td>
