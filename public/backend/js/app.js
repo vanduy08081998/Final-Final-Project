@@ -127,6 +127,28 @@ $(function () {
 	$("#ColorLessIcons").on("click", function () {
 		$("html").toggleClass("ColorLessIcons");
 	});
+
+
+	//Add_variants
+	$('.add_variants').on('click', function () {
+		var attri_id = $('.route').data('id');
+		var url = $(this).data("url");
+		var name = $('.name').val();
+		var slug = $('.slug').val();
+		$.ajax({
+			url: url,
+            method: 'POST',
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			data: {name:name, slug:slug, attri_id:attri_id},
+			success: function (data){
+				list_variants();
+				$('.form-control').reset();
+			}
+		})
+		
+	})
 });
 /* perfect scrol bar */
 new PerfectScrollbar('.header-message-list');
@@ -157,4 +179,42 @@ new PerfectScrollbar('.header-notifications-list');
 		slug = slug.replace(/\@\-|\-\@|\@/gi, '');
 
 	document.getElementById('convert_slug').value = slug;
+}
+
+
+//List variants
+function list_variants(){
+	var url = $('.route').data('url');
+	var id = $('.route').data('id');
+	$.ajax({
+        url: url,
+		method: 'GET',
+		data: {id:id},
+        success: function(data){
+			data = JSON.parse(data);
+			var html = '';
+			for(var item in data){		
+			html += ` <tr>
+				<td>${data[item]['name']}</td>
+				<td>${data[item]['slug']}</td>
+				<td class="text-center">            
+				 <button type="button" onclick="delete_variants(${data[item]['id']})" class="btn btn-danger">X</button>                                                                                 
+				</td>
+			</tr>`
+			}
+	    $('#list_variants').html(html);
+		}
+	});
+}
+
+function delete_variants(id){
+	var url = $('.route').data('delete');
+	$.ajax({
+		url: url,
+		method: 'GET',
+		data: {id:id},
+		success: function (data){
+			list_variants();
+		}
+	})
 }

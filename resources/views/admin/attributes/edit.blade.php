@@ -56,13 +56,20 @@
                             <div class="col-md-12 mb-3">
                                 <div class="form-group">
                                     <label for="name">Tên thuộc tính</label>
-                                    <input class="form-control" name="name"
+                                    <input class="form-control" name="name" onkeyup="ChangeToSlug();" id="slug"
                                         value="{{ $attribute->name }}" type="text">
                                 </div>
 
                             </div>
                           
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <label for="name">Slug</label>
+                                    <input class="form-control" name="slug" id="convert_slug"
+                                        value="{{ $attribute->slug }}" type="text">
+                                </div>
 
+                            </div>
                           
                          
                             <div class="col-md-12 mb-3">

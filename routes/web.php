@@ -74,9 +74,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('/products', __BASEADMIN__.'\ProductController');
 
     // Attributes
-    Route::resource('/attribute', AttributeController::class);
-    Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
-    Route::resource('/user', __BASEADMIN__.'\UserController');
+       Route::resource('/attribute', AttributeController::class);
+       Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+       Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
+       Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
+       Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
+       Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+       Route::resource('/user', __BASEADMIN__.'\UserController');
+       Route::resource('/user', UserController::class );
 });
 
 
