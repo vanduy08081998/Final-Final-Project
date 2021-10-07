@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\GeneralService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\AddProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -85,7 +86,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('admin.products.update', compact('product'));
     }
 
     /**
@@ -95,9 +97,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+       $data = $request->validated();
+
+
+       $data['product_image'] =  $this->generalService->uploadImage($this->path ,$request->product_image);
+
+
+       Product::find($id)->update($data);
+
+       return redirect()->route('products.index');
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Clients\CheckoutController;
@@ -73,7 +74,7 @@ Route::prefix('admin')->group(function () {
     //Request
     Route::resource('/brand', BrandController::class );
 
-    Route::resource('/products', ProductController::class );
+    Route::resource('/products', ProductAdmin::class );
 
     //Attributes
     Route::resource('/attribute', AttributeController::class);
