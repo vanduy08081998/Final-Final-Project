@@ -44,6 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th>Tên thuộc tính</th>
+                                        <th>Slug</th>
                                         <th></th>
 
                                     </tr>
@@ -51,7 +52,8 @@
                                 <tbody>
                                     @foreach ($attribute as $attri)
                                         <tr>
-                                            <td>{{ $attri->name }}</td>
+                                            <td><a href="{{route('variant', ['slug' => $attri->slug])}}">{{ $attri->name }}</a></td>
+                                            <td>{{$attri->slug}}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
