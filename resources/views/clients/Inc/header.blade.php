@@ -7,22 +7,22 @@
           </div>
           <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="account-wishlist.html"><i class="ci-heart text-muted me-2"></i>Yêu thích (3)</a></li>
+              <li><a class="dropdown-item" href="{{ route('account.wishlist') }}"><i class="ci-heart text-muted me-2"></i>Yêu thích (3)</a></li>
               <li><a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>So sánh (3)</a></li>
-              <li><a class="dropdown-item" href="order-tracking.html"><i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng</a></li>
+              <li><a class="dropdown-item" href="{{ route('account.order-tracking') }}"><i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng</a></li>
             </ul>
           </div>
           <div class="d-none d-md-block ms-3 text-nowrap">
-              <a class="topbar-link d-none d-md-inline-block" href="account-wishlist.html"><i class="ci-heart mt-n1"></i>Yêu thích (3)</a>
+              <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}"><i class="ci-heart mt-n1"></i>Yêu thích (3)</a>
               <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)</a>
-              <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block" href="order-tracking.html"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng</a>
+              <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block" href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng</a>
         </div>
         </div>
       </div>
       <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
       <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
-          <div class="container"><a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none me-2" href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla"></a>
+          <div class="container"><a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla"></a><a class="navbar-brand d-sm-none me-2" href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla"></a>
             <!-- Search-->
             <div class="input-group d-none d-lg-flex flex-nowrap mx-4"><i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
               <input class="form-control rounded-start w-100" type="text" placeholder="Tìm kiếm sản phẩm">
@@ -83,7 +83,7 @@
                       </div>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
-                      <div class="fs-sm me-2 py-2"><span class="text-muted">Tổng:</span><span class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Xem giỏ hàng<i class="ci-arrow-right ms-1 me-n1"></i></a>
+                      <div class="fs-sm me-2 py-2"><span class="text-muted">Tổng:</span><span class="text-accent fs-base ms-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="{{ route('cart.cart-list') }}">Xem giỏ hàng<i class="ci-arrow-right ms-1 me-n1"></i></a>
                     </div><a class="btn btn-primary btn-sm d-block w-100" href="{{ route('checkout.checkout-details') }}"><i class="ci-card me-2 fs-base align-middle"></i>Thanh toán</a>
                   </div>
                 </div>

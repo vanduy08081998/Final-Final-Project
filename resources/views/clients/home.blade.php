@@ -108,7 +108,7 @@
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
                     </div><a class="card-img-top d-block overflow-hidden" href="shop-single-v2.html"><img
-                            src="{{ asset('frontend/img/shop/catalog/58.jpg') }}" alt="Product"></a>
+                            src="{{ asset('uploads/Products/Xe/ex-1.jpg') }}" alt="Product"></a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Headphones</a>
                         <h3 class="product-title fs-sm"><a href="shop-single-v2.html">Wireless Bluetooth Headphones</a></h3>
                         <div class="d-flex justify-content-between">
@@ -135,7 +135,7 @@
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
                     </div><a class="card-img-top d-block overflow-hidden" href="shop-single-v2.html"><img
-                            src="{{ asset('frontend/img/shop/catalog/59.jpg') }}" alt="Product"></a>
+                            src="{{ asset('uploads/Products/Phone/reno6-1_1.jpg') }}" alt="Product"></a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Computers</a>
                         <h3 class="product-title fs-sm"><a href="shop-single-v2.html">AirPort Extreme Base Station</a></h3>
                         <div class="d-flex justify-content-between">

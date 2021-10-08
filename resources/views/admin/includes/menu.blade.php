@@ -12,18 +12,18 @@
         <a href="{{ route('categories.index') }}">
 
 
-        <a class="has-arrow" href="#">
-            <div class="parent-icon icon-color-2"><i class="bx bx-grid"></i>
-            </div>
-            <div class="menu-title"> Danh mục</div>
-        </a>
-        <ul>
-            <li> <a href="{{ route('categories.index') }}"> Danh sách</a>
-            </li>
-            <li> <a href="{{ route('categories.create') }}"> Thêm mới</a>
+            <a class="has-arrow" href="#">
+                <div class="parent-icon icon-color-2"><i class="bx bx-grid"></i>
+                </div>
+                <div class="menu-title"> Danh mục</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('categories.index') }}"> Danh sách</a>
+                </li>
+                <li> <a href="{{ route('categories.create') }}"> Thêm mới</a>
 
-            </li>
-        </ul>
+                </li>
+            </ul>
     </li>
 
     <li>
@@ -43,13 +43,32 @@
         <a class="has-arrow" href="#">
             <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
             </div>
-            <div class="menu-title">Tài khoản</div>
+
+            <div class="menu-title">Thuộc tính sản phẩm</div>
         </a>
         <ul>
-            <li> <a href="{{ route('user.index') }}"> Danh sách</a>
+            <li> <a href="{{ route('attribute.index') }}"> Danh sách</a>
             </li>
-            <li> <a href="{{ route('user.create') }}"> Thêm mới</a>
+            <li> <a href="{{ route('attribute.create') }}"> Thêm mới</a>
             </li>
         </ul>
     </li>
+
+
+    <li>
+        <a class="has-arrow" href="#">
+            <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
+            </div>
+
+            <div class="menu-title">Sản phẩm</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('products.index') }}"> Danh sách</a>
+            </li>
+            <li> <a href="{{ route('products.create') }}"> Thêm mới</a>
+            </li>
+        </ul>
+    </li>
+
+
 </ul>

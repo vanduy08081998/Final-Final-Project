@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Brand;
+use Illuminate\Http\Request;
+use App\Models\CategoryBrand;
+use App\Services\GeneralService;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
-use Illuminate\Http\Request;
-use App\Models\Brand;
-use App\Models\CategoryBrand;
-use App\Services\GeneralService;
 
 class BrandController extends Controller
 {
@@ -28,7 +29,11 @@ class BrandController extends Controller
     public function index()
     {
         $brandAll = Brand::orderByDESC('id')->get();
-        return view('admin.brand.index', compact('brandAll'));
+        $brandCate = CategoryBrand::all();
+        return view('admin.brand.index', [
+            'brandAll' => $brandAll,
+            'brandCate' => $brandCate
+        ]);
     }
 
     /**
@@ -64,7 +69,7 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
+
 
     /**
      * Display the specified resource.

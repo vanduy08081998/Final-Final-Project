@@ -102,5 +102,12 @@ class CategoryController extends Controller
        return back()->with('message','Xóa liên kết thương hiệu thành công');
         
     }
+
+    //ATTRIBUTE CATEGORY
+    public function attribute($id){
+      $cateId = Category::find($id);
+      $attributes = $cateId->attributes()->get();
+      dd($attributes);
+    }
  
 }

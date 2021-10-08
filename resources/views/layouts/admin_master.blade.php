@@ -8,17 +8,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Syndash - @yield('title')</title>
-    <!--favicon-->
-    <link rel="icon" href="{{ URL::to('backend/images/favicon-32x32.png')}}" type="image/png" />
-    <!-- Vector CSS -->
-    <link href="{{ URL::to('backend/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
-    <!--plugins-->
-    <link href="{{ URL::to('backend/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-    <link href="{{ URL::to('backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-    <link href="{{ URL::to('backend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
-    <link href="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.css')}}" rel="stylesheet" />
+	<title>BigDeal - @yield('title')</title>
+	<!--favicon-->
+	<link rel="icon" href="{{ URL::to('backend/images/logo.png')}}" type="image/png" />
+	<!-- Vector CSS -->
+	<link href="{{ URL::to('backend/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+	<!--plugins-->
+	<link href="{{ URL::to('backend/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+	<link href="{{ URL::to('backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
+	<link href="{{ URL::to('backend/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+	<link href="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ URL::to('backend/plugins/select2/select2.min.css') }}">
+
+	<link href="{{ URL::to('backend/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet" />
+	<link href="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
     <!--Data Tables -->
     <link href="{{ URL::to('backend/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css">
@@ -52,69 +55,61 @@
         <!--end sidebar-wrapper-->
         <!--header-->
         @include('admin.includes.header')
-        <!--end header-->
-        <!--page-wrapper-->
-        @yield('content')
-        <!--end page-wrapper-->
-        <!--start overlay-->
-        <div class="overlay toggle-btn-mobile"></div>
-        <!--end overlay-->
-        <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
-                class='bx bxs-up-arrow-alt'></i></a>
-        <!--End Back To Top Button-->
-        <!--footer -->
-        <div class="footer">
-            <p class="mb-0">Shop D.ark @2020 | Prod By : <a href="https://themeforest.net/user/codervent"
-                    target="_blank">ZuiZui</a>
-            </p>
-        </div>
-        <!-- end footer -->
-    </div>
-    <!-- end wrapper -->
-    <!--start switcher-->
-    <div class="switcher-wrapper">
-        <div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
-        </div>
-        <div class="switcher-body">
-            <h5 class="mb-0 text-uppercase">Theme Customizer</h5>
-            <hr />
-            <h6 class="mb-0">Theme Styles</h6>
-            <hr />
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="darkmode" name="customRadio" class="custom-control-input">
-                    <label class="custom-control-label" for="darkmode">Dark Mode</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="lightmode" name="customRadio" checked class="custom-control-input">
-                    <label class="custom-control-label" for="lightmode">Light Mode</label>
-                </div>
-            </div>
-            <hr />
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="DarkSidebar">
-                <label class="custom-control-label" for="DarkSidebar">Dark Sidebar</label>
-            </div>
-            <hr />
-            <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="ColorLessIcons">
-                <label class="custom-control-label" for="ColorLessIcons">Color Less Icons</label>
-            </div>
-        </div>
-    </div>
-    <!--end switcher-->
+		<!--end header-->
+		<!--page-wrapper-->
+		@yield('content')
+		<!--end page-wrapper-->
+		<!--start overlay-->
+		<div class="overlay toggle-btn-mobile"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+	</div>
+	<!-- end wrapper -->
+	<!--start switcher-->
+	<div class="switcher-wrapper">
+		<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
+		</div>
+		<div class="switcher-body">
+			<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
+			<hr/>
+			<h6 class="mb-0">Theme Styles</h6>
+			<hr/>
+			<div class="d-flex align-items-center justify-content-between">
+				<div class="custom-control custom-radio">
+					<input type="radio" id="darkmode" name="customRadio" class="custom-control-input">
+					<label class="custom-control-label" for="darkmode">Dark Mode</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="lightmode" name="customRadio" checked class="custom-control-input">
+					<label class="custom-control-label" for="lightmode">Light Mode</label>
+				</div>
+			</div>
+			<hr/>
+			<div class="custom-control custom-switch">
+				<input type="checkbox" class="custom-control-input" id="DarkSidebar">
+				<label class="custom-control-label" for="DarkSidebar">Dark Sidebar</label>
+			</div>
+			<hr/>
+			<div class="custom-control custom-switch">
+				<input type="checkbox" class="custom-control-input" id="ColorLessIcons">
+				<label class="custom-control-label" for="ColorLessIcons">Color Less Icons</label>
+			</div>
+		</div>
+	</div>
+	<!--end switcher-->
 
 
-    <!-- JavaScript -->
-    <script src="{{ URL::to('backend/js/jquery.min.js')}}"></script>
-    <script src="{{ URL::to('backend/js/popper.min.js')}}"></script>
-    <script src="{{ URL::to('backend/js/bootstrap.min.js')}}"></script>
+	<!-- JavaScript -->
+	<script src="{{ URL::to('backend/js/jquery.min.js')}}"></script>
+	<script src="{{ URL::to('backend/js/popper.min.js')}}"></script>
+	<script src="{{ URL::to('backend/js/bootstrap.min.js')}}"></script>
 
-    <!--plugins-->
-    <script src="{{ URL::to('backend/plugins/simplebar/js/simplebar.min.js')}}"></script>
-    <script src="{{ URL::to('backend/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-    <script src="{{ URL::to('backend/plugins/Ckeditor/ckeditor.js')}}"></script>
-    <script src="{{ URL::to('backend/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+	<!--plugins-->
+	<script src="{{ URL::to('backend/plugins/simplebar/js/simplebar.min.js')}}"></script>
+	<script src="{{ URL::to('backend/plugins/metismenu/js/metisMenu.min.js')}}"></script>
+	<script src="{{ URL::to('backend/plugins/Ckeditor/ckeditor.js')}}"></script>
+	<script src="{{ URL::to('backend/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{ URL::to('backend/js/tagsinput.js') }}"></script>
     <script src="{{ URL::to('backend/js/bs-custom-file-input.min.js')}}"></script>
 
@@ -178,6 +173,27 @@
     <!-- App JS -->
     <script src="{{ URL::to('backend/js/app.js')}}"></script>
     <script src="{{ URL::to('backend/plugins/select2/select2.min.js') }}"></script>
+
+
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.ui.widget.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.fileupload.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
+	<script src="{{ URL::to('backend/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+	<script>
+		$('#fancy-file-upload').FancyFileUpload({
+			params: {
+				action: 'fileuploader'
+			},
+			maxfilesize: 1000000
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#image-uploadify').imageuploadify();
+		})
+	</script>
+	<!-- App JS -->
 
     @stack('script')
 
