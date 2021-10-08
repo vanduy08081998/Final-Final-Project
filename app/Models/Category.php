@@ -37,4 +37,8 @@ class Category extends Model
     {
         return $this->belongsToMany(Brand::class, 'category_brand');
     }
+
+    public function attributes(){
+        return $this->belongsToMany(Attribute::class);
+    }
 }

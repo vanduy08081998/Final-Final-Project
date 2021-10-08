@@ -43,6 +43,23 @@
         <a class="has-arrow" href="#">
             <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
             </div>
+
+            <div class="menu-title">Thuộc tính sản phẩm</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('attribute.index') }}"> Danh sách</a>
+            </li>
+            <li> <a href="{{ route('attribute.create') }}"> Thêm mới</a>
+            </li>
+        </ul>
+    </li>
+
+
+    <li>
+        <a class="has-arrow" href="#">
+            <div class="parent-icon icon-color-2"><i class="bx bx-copy-alt"></i>
+            </div>
+
             <div class="menu-title">Sản phẩm</div>
         </a>
         <ul>
@@ -52,4 +69,6 @@
             </li>
         </ul>
     </li>
+
+
 </ul>

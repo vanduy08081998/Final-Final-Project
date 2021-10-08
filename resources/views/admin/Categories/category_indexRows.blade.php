@@ -19,6 +19,7 @@
                     <button class="dropdown-item text-danger"><i class="bx bx-trash" >Xóa</i></button>
                 </form>
                 <a href="#" class="dropdown-item text-success" data-toggle="modal" data-target="#exampleModal_{{ $value->id_cate }}"><i class="bx bx-edit"></i> Xem thương hiệu</a>
+                <a href="{{route('attribute', ['id' => $value->id_cate])}}" class="dropdown-item text-dark"><i class="bx bx-edit"></i> Xem thuộc tính</a>
             </div>
         </div>
 
