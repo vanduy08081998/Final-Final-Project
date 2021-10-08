@@ -30,7 +30,7 @@ $(function () {
 			subMenu: '.card-body'
 		});
 	});
-	// Tooltips 
+	// Tooltips
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
 	})
@@ -128,7 +128,8 @@ $(function () {
 		$("html").toggleClass("ColorLessIcons");
 	});
 
-//Add_variants
+
+	//Add_variants
 	$('.add_variants').on('click', function () {
 		var attri_id = $('.route').data('id');
 		var url = $(this).data("url");
@@ -146,17 +147,15 @@ $(function () {
 				$('.form-control').reset();
 			}
 		})
-		
+
 	})
-//Delete_variants
-  
 });
 /* perfect scrol bar */
 new PerfectScrollbar('.header-message-list');
 new PerfectScrollbar('.header-notifications-list');
 
     function ChangeToSlug(){
-	var slug;  
+	var slug;
 	slug = document.getElementById("slug").value;
 	slug = slug.toLowerCase();
 	slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
@@ -166,22 +165,24 @@ new PerfectScrollbar('.header-notifications-list');
 		slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
 		slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
 		slug = slug.replace(/đ/gi, 'd');
-	
+
 		slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-	   
+
 		slug = slug.replace(/ /gi, "-");
-	
+
 		slug = slug.replace(/\-\-\-\-\-/gi, '-');
 		slug = slug.replace(/\-\-\-\-/gi, '-');
 		slug = slug.replace(/\-\-\-/gi, '-');
 		slug = slug.replace(/\-\-/gi, '-');
-	 
+
 		slug = '@' + slug + '@';
 		slug = slug.replace(/\@\-|\-\@|\@/gi, '');
 
 	document.getElementById('convert_slug').value = slug;
 }
- //List variants
+
+
+//List variants
 function list_variants(){
 	var url = $('.route').data('url');
 	var id = $('.route').data('id');
@@ -192,12 +193,12 @@ function list_variants(){
         success: function(data){
 			data = JSON.parse(data);
 			var html = '';
-			for(var item in data){		
+			for(var item in data){
 			html += ` <tr>
 				<td>${data[item]['name']}</td>
 				<td>${data[item]['slug']}</td>
-				<td class="text-center">            
-				 <button type="button" onclick="delete_variants(${data[item]['id']})" class="btn btn-danger">X</button>                                                                                 
+				<td class="text-center">
+				 <button type="button" onclick="delete_variants(${data[item]['id']})" class="btn btn-danger">X</button>
 				</td>
 			</tr>`
 			}

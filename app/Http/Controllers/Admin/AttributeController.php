@@ -89,6 +89,7 @@ class AttributeController extends Controller
      */
     public function destroy($id)
     {
+        Variant::where('attribute_id', $id)->delete();
         Attribute::find($id)->delete();
         return back()->with('message','Xóa thuộc tính thành công');
     }
@@ -118,5 +119,4 @@ class AttributeController extends Controller
     public function delete_variants(Request $request){
         Variant::find($request->id)->delete();
     }
-
 }
