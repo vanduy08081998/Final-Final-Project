@@ -96,18 +96,24 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return redirect()->back();
     }
-    public function detach_brand(Request $request){
-       $brand = Brand::find($request->brand_id);
-       $brand->categories()->detach();
+    public function detach_brand($brand_id, $cate_id){
+       $cateId = Category::find($cate_id);
+       $cateId->brands()->detach($brand_id);
        return back()->with('message','Xóa liên kết thương hiệu thành công');
-        
+
     }
 
     //ATTRIBUTE CATEGORY
     public function attribute($id){
       $cateId = Category::find($id);
+      $cate_name = $cateId->category_name;
       $attributes = $cateId->attributes()->get();
-      dd($attributes);
+      return view('admin.attributes.category_attribute', compact('attributes','cate_name', 'id'));
     }
- 
+    public function detach_cate_attr($attr_id, $cate_id){
+        $cateId = Category::find($cate_id);
+        $cateId->attributes()->detach($attr_id);
+       return back()->with('message','Xóa liên kết thuộc tính thành công');
+    }
+
 }

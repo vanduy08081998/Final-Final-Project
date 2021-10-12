@@ -25,13 +25,8 @@
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                                         <a class="dropdown-item text-warning"
                                             href="{{ route('brand.edit', ['brand' => $brand->id]) }}">Sửa</a>
-                           
-                                        <form action="{{ route('detach-brand')}}" method="post">
-                                            @csrf
-                                            <input type="hidden" name="brand_id" value="{{ $brand->id }}">
-                                        <button type="submit" class="dropdown-item text-danger">Xóa liên kết</button>
-                                        <form>
-
+                                        <a class="dropdown-item text-danger"
+                                      href="{{ route('detach-brand', ['brand_id' => $brand->id, 'cate_id' => $value->id_cate ]) }}">Xóa liên kết</a>
                                     </div>
                                 </div>
                             </td>

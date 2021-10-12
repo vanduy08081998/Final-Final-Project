@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Services\GeneralService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\AddProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use App\Models\Product;
+use App\Services\GeneralService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
 
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -33,7 +33,7 @@ class ProductController extends Controller
     {
         $product = Product::orderByDESC('id')->get();
         return view('admin.products.index', [
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -54,17 +54,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(AddProductRequest $addProductRequest) //AddProductRequest $addProductRequest
+
     {
 
-       $data = $addProductRequest->validated();
+        $data = $addProductRequest->validated();
 
+        $data['product_image'] = $this->generalService->uploadImage($this->path, $addProductRequest->product_image);
 
-       $data['product_image'] =  $this->generalService->uploadImage($this->path ,$addProductRequest->product_image);
+        Product::create($data);
 
-
-       Product::create($data);
-
-       return redirect()->route('products.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -99,15 +98,13 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
-       $data = $request->validated();
+        $data = $request->validated();
 
+        $data['product_image'] = $this->generalService->uploadImage($this->path, $request->product_image);
 
-       $data['product_image'] =  $this->generalService->uploadImage($this->path ,$request->product_image);
+        Product::find($id)->update($data);
 
-
-       Product::find($id)->update($data);
-
-       return redirect()->route('products.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -116,7 +113,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         Product::find($id)->delete();
         return redirect()->back()->with('message', 'Xóa thành công');
     }

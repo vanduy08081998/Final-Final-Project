@@ -40,7 +40,7 @@ class UserController extends Controller
     public function store(AddUserRequest $request)
     {
         $data = $request->validated();
-        User::create([
+                     User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-       
+
     }
 
     /**

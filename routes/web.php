@@ -70,7 +70,7 @@ Route::prefix('admin')->group(function () {
 
     // Categories
     Route::resource('categories', CategoryController::class);
-    Route::post('/detach-brand', [CategoryController::class,'detach_brand'])->name('detach-brand');
+    Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
     //Request
     Route::resource('/brand', BrandController::class );
 
@@ -78,7 +78,8 @@ Route::prefix('admin')->group(function () {
 
     //Attributes
     Route::resource('/attribute', AttributeController::class);
-    Route::get('/attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+    Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+    Route::get('/detach_cate_attr/{attr_id}/{cate_id}', [CategoryController::class, 'detach_cate_attr'])->name('detach_cate_attr');
     Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
