@@ -73,7 +73,7 @@
                                             Reviews</span>
                                     </a>
                                     <button class="btn-wishlist" type="button" data-bs-toggle="tooltip"
-                                        title="Add to wishlist"><i class="ci-heart"></i></button>
+                                        title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
                                 </div>
                                 <div class="mb-3"><span
                                         class="h3 fw-normal text-accent me-1">$18.<small>99</small></span>
@@ -128,7 +128,7 @@
                                             <option value="5">5</option>
                                         </select>
                                         <button class="btn btn-primary btn-shadow d-block w-100" type="submit"><i
-                                                class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                                                class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
                                     </div>
                                 </form>
                                 <h5 class="h6 mb-3 pb-2 border-bottom"><i
@@ -158,17 +158,17 @@
     <!-- Navbar 3 Level (Light)-->
     <!-- Page Title-->
     <div class="page-title-overlap bg-dark pt-4">
-        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+        <div class="container py-2 py-lg-3">
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2 pb-2">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
                         <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
                                     class="ci-home"></i>Trang chủ</a></li>
                         <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng</a></li>
                     </ol>
                 </nav>
             </div>
-            <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+            <div class="order-lg-1 text-center">
                 <h1 class="h3 text-light mb-0">Cửa hàng</h1>
             </div>
         </div>
@@ -179,7 +179,7 @@
             <aside class="col-lg-3">
                 <!-- Sidebar-->
                 <div class="offcanvas offcanvas-collapse bg-white w-100 rounded-3 shadow-lg py-1" id="shop-sidebar"
-                    style="max-width: 20rem;">
+                    style="max-width: 24rem">
                     <div class="offcanvas-header align-items-center shadow-sm">
                         <h2 class="h5 mb-0">Bộ lọc</h2>
                         <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas"
@@ -998,7 +998,7 @@
                 </div>
             </aside>
             <!-- Content  -->
-            <section class="col-lg-9">
+            <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
                 <!-- Toolbar-->
                 <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
                     <div class="d-flex flex-wrap">
@@ -1016,31 +1016,29 @@
                                 sản phẩm</span>
                         </div>
                     </div>
-                    <div class="d-flex pb-3"><a class="nav-link-style nav-link-light me-3" href="#"><i
-                                class="ci-arrow-left"></i></a><span class="fs-md text-light">1 / 5</span><a
-                            class="nav-link-style nav-link-light ms-3" href="#"><i class="ci-arrow-right"></i></a></div>
                     <div class="d-none d-sm-flex pb-3"><a
-                            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2" href="#"><i
-                                class="ci-view-grid"></i></a><a class="btn btn-icon nav-link-style nav-link-light"
-                            href="shop-list-ls.html"><i class="ci-view-list"></i></a></div>
+                            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2"
+                            href="{{ route('shop.shop-grid') }}"><i class="ci-view-grid"></i></a><a
+                            class="btn btn-icon nav-link-style nav-link-light" href="{{ route('shop.shop-list') }}"><i
+                                class="ci-view-list"></i></a></div>
                 </div>
                 <!-- Products grid-->
                 <div class="row mx-n2">
                     <!-- Product-->
                     @foreach ($product as $pro)
-
-                        <div class="col-md-3 col-sm-6 px-2 mb-4">
+                        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
                                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Add to wishlist"><i
+                                    data-bs-placement="left" title="Thêm vào yêu thích"><i
                                         class="ci-heart"></i></button>
                                 <a class="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
-                                    <img src="{{ url('uploads/Products/', $pro->product_image) }}" alt="Product">
+                                    <img src="{{ url('uploads/Products/', $pro->product_image) }}" alt="Product"
+                                        width="80%" style="margin: auto; display: block">
                                 </a>
                                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
                                         &amp; Keds</a>
-                                    <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Women Colorblock
-                                            Sneakers</a></h3>
+                                    <h3 class="product-title fs-sm"><a
+                                            href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
                                                 class="text-accent">$154.<small>00</small></span></div>
@@ -1073,9 +1071,9 @@
                                         </div>
                                     </div>
                                     <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                     <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                            data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                            data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                     </div>
                                 </div>
                             </div>
@@ -1083,12 +1081,13 @@
                         </div>
                     @endforeach
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/02.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/02.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women’s
                                     T-shirt</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Cotton Lace Blouse</a></h3>
@@ -1140,21 +1139,22 @@
                                         <option>XL</option>
                                     </select>
                                     <button class="btn btn-primary btn-sm" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 </div>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/03.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/03.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women’s
                                     Shorts</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Mom High Waist Shorts</a>
@@ -1190,20 +1190,21 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/04.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/04.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sportswear</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Women Sports Jacket</a></h3>
                                 <div class="d-flex justify-content-between">
@@ -1237,20 +1238,21 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/05.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/05.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Sunglasses</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Polarized Sunglasses</a></h3>
@@ -1267,18 +1269,19 @@
                             <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm d-block w-100 mb-2"
                                     href="shop-single-v1.html">View details</a>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/06.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/06.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Backpacks</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">TH Jeans City Backpack</a>
                                 </h3>
@@ -1314,9 +1317,9 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                     </div>
@@ -1336,12 +1339,13 @@
                 <!-- Products grid-->
                 <div class="row mx-n2">
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/07.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/07.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women's
                                     Swimwear</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Two-Piece Bikini in Print</a>
@@ -1373,20 +1377,21 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/08.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/08.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Kid's Toys</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Panda Teddy Bear</a>
                                 </h3>
@@ -1403,20 +1408,21 @@
                             </div>
                             <div class="card-body card-body-hidden">
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/09.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/09.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Cosmetics</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Metallic Lipstick
                                         (Crimson)</a></h3>
@@ -1453,21 +1459,22 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/10.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/10.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Accessories</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">5-Pack Multicolor
@@ -1485,21 +1492,22 @@
                             </div>
                             <div class="card-body card-body-hidden">
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/11.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/11.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Sandals</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Footbed Sandals</a>
@@ -1545,22 +1553,23 @@
                                         <option>11.5</option>
                                     </select>
                                     <button class="btn btn-primary btn-sm" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 </div>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/12.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/12.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Hats</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a>
@@ -1592,21 +1601,22 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/13.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/13.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     T-shirts</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a>
@@ -1644,21 +1654,22 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/14.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/14.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Jeans</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Slim Taper Fit Jeans</a>
@@ -1694,21 +1705,22 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
                         <hr class="d-sm-none">
                     </div>
                     <!-- Product-->
-                    <div class="col-md-3 col-sm-6 px-2 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Add to wishlist"><i class="ci-heart"></i></button><a
-                                class="card-img-top d-block overflow-hidden" href="shop-single-v1.html"><img
-                                    src="{{ asset('frontend/img/shop/catalog/15.jpg') }}" alt="Product"></a>
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/15.jpg') }}"
+                                    alt="Product"></a>
                             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
                                     Waistcoats</a>
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Single-breasted
@@ -1740,7 +1752,7 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
                                         data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
                                 </div>
