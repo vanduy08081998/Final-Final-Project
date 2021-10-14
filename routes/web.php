@@ -71,6 +71,7 @@ Route::prefix('admin')->group(function () {
     // Categories
     Route::resource('categories', CategoryController::class);
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
+    Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Request
     Route::resource('/brand', BrandController::class );
 
@@ -92,4 +93,3 @@ Route::prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-

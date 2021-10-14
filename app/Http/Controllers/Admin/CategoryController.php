@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Attribute;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -96,6 +97,7 @@ class CategoryController extends Controller
         Category::find($id)->delete();
         return redirect()->back();
     }
+    
     public function detach_brand($brand_id, $cate_id){
        $cateId = Category::find($cate_id);
        $cateId->brands()->detach($brand_id);
@@ -107,13 +109,22 @@ class CategoryController extends Controller
     public function attribute($id){
       $cateId = Category::find($id);
       $cate_name = $cateId->category_name;
+      $attributeAll = Attribute::get();
       $attributes = $cateId->attributes()->get();
-      return view('admin.attributes.category_attribute', compact('attributes','cate_name', 'id'));
+      $attr_arr = $attributes->pluck('id')->all();
+      return view('admin.attributes.category_attribute', compact('attributes','attributeAll','cate_name', 'id', 'attr_arr'));
     }
+
     public function detach_cate_attr($attr_id, $cate_id){
         $cateId = Category::find($cate_id);
         $cateId->attributes()->detach($attr_id);
        return back()->with('message','Xóa liên kết thuộc tính thành công');
+    }
+
+    public function add_attr_category($id, Request $request){
+       $cate_id = Category::find($id);
+       $cate_id->attributes()->sync($request->attribute_id);
+       return back()->with('message', 'Thêm thuộc tính thành công');
     }
 
 }
