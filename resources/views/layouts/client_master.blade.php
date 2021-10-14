@@ -31,6 +31,7 @@
         href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
     <!-- Google Tag Manager-->
     <script>
         (function(w, d, s, l, i) {
