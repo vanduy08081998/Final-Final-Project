@@ -164,7 +164,12 @@
                                 <div class="card-header">
                                     Logo thương hiệu
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body d-flex justify-content-center">
+                                    <div class="preview hide mb-3">
+                                        <img src="" alt="" height="100px" width="100px">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" name="brand_image" onchange="readURL(this);"
@@ -179,7 +184,6 @@
                                         <span class="text-danger">{{ $errors->first('brand_image') }}</span>
                                     @enderror
                                 </div>
-
                             </div>
 
                         </div>
