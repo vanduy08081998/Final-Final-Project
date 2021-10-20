@@ -45,6 +45,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($brandAll as $brand)
+
                                         <tr>
                                             <td class="py-2">
                                                 <div style="text-align: center;">
@@ -54,9 +55,15 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td style="text-align: center;">{{ $brand->brand_name }}</td>
                                             <td style="text-align: center;">
+                                                {{ $brand->brand_name }}
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @foreach ($brand->categories as $item)
 
+                                                    <button class="btn-sm btn-primary">{{ $item->category_name }}</button>
+
+                                                @endforeach
                                             </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">

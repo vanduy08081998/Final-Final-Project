@@ -28,12 +28,8 @@ class BrandController extends Controller
 
     public function index()
     {
-        $brandAll = Brand::orderByDESC('id')->get();
-        $brandCate = CategoryBrand::all();
-        return view('admin.brand.index', [
-            'brandAll' => $brandAll,
-            'brandCate' => $brandCate
-        ]);
+        $brandAll = Brand::with('categories')->orderByDESC('id')->get();
+        return view('admin.brand.index', compact('brandAll'));
     }
 
     /**
