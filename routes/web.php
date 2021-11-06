@@ -72,8 +72,12 @@ Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
-    //Request
+    //Brand
+    Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
+    Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
+    Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
+    
 
     Route::resource('/products', ProductAdmin::class );
 

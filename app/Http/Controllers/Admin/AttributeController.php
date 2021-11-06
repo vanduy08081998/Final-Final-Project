@@ -93,6 +93,7 @@ class AttributeController extends Controller
         Attribute::find($id)->delete();
         return back()->with('message', 'Xóa thuộc tính thành công');
     }
+    
     public function variant($attri_slug)
     {
         $attribute = Attribute::where('slug', $attri_slug)->first();
