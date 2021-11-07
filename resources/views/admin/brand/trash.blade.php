@@ -1,7 +1,7 @@
 @extends('layouts.admin_master')
 
 @section('title')
-    Trang chủ
+    Thương hiệu | Thùng rác
 @endsection
 
 @section('content')
@@ -30,9 +30,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="mb-0">Liệt kê thương hiệu</h4>
-                            <a href="{{ url('admin/brand/trash') }}" class="btn btn-warning">Thùng rác
-                                ({{ $countTrashed }})</a>
+                            <h4 class="mb-0">Thùng rác</h4>
                         </div>
                         <hr />
                         <div class="table-responsive">
@@ -73,14 +71,17 @@
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                        <a class="dropdown-item text-warning"
-                                                            href="{{ route('brand.edit', ['brand' => $brand->id]) }}">Sửa</a>
-                                                        <form
-                                                            action="{{ route('brand.destroy', ['brand' => $brand->id]) }}"
+                                                        <form action="{{ url('admin/brand/restore/' . $brand->id) }}"
                                                             method="POST">
                                                             @csrf
-                                                            @method('DELETE')
-                                                            <button class="dropdown-item text-danger">Xóa</button>
+
+                                                            <button class="dropdown-item text-infor">Khôi phục</button>
+                                                        </form>
+
+                                                        <form action="{{ url('admin/brand/force-delete/' . $brand->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <button class="dropdown-item text-danger">Xóa vĩnh viễn</button>
                                                         </form>
 
                                                     </div>

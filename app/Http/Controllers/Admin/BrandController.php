@@ -22,14 +22,15 @@ class BrandController extends Controller
 
     public function __construct(GeneralService $generalService)
     {
-        $this->path = 'public/uploads/brand/';
+        $this->path = 'uploads/Brands/';
         $this->generalService = $generalService;
     }
 
     public function index()
     {
         $brandAll = Brand::with('categories')->orderByDESC('id')->get();
-        return view('admin.brand.index', compact('brandAll'));
+        $countTrashed = Brand::onlyTrashed()->count();
+        return view('admin.brand.index', compact('brandAll', 'countTrashed'));
     }
 
     /**
@@ -119,9 +120,24 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $brandId = Brand::find($id);
+        Brand::find($id)->delete();
+        return back()->with('message', 'Xóa dữ liệu thành công');
+    }
+
+    public function trash(){
+        $brandAll = Brand::onlyTrashed()->get();
+        return view('admin.brand.trash', compact('brandAll'));
+    }
+
+    public function restore($id){
+        Brand::where('id', $id)->restore();
+        return back()->with('message', 'Đã khôi phục dữ liệu');
+    }
+
+    public function forceDelete($id){
+        $brandId = Brand::withTrashed()->find($id);
         $this->generalService->deleteImage($this->path, $brandId->brand_image);
-        $brandId->delete();
+        $brandId->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
 }
