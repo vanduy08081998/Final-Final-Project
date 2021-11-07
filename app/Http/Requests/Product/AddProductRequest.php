@@ -27,9 +27,9 @@ class AddProductRequest extends FormRequest
             'product_name' => 'required',
             'product_slug' => 'required',
             'product_image'=> 'required',
-            'meta_description' => 'required',
-            'meta_title' => 'required',
-            'meta_keywords' => 'required'
+            'product_gallery' => 'required',
+            'product_id_category' => 'required',
+            'unit_price' => 'required',
         ];
     }
 }

@@ -24,8 +24,8 @@
 
 <body class="bg-forgot">
 	<!-- wrapper -->
-	    @yield('content')
-	<!-- end wrapper -->
+	@yield('content')
+	<!-- end wrapper --> 
 </body>
 
 <script src="{{ URL::to('backend/js/jquery.min.js')}}"></script>
@@ -44,7 +44,7 @@
 				}
 			});
 
-            $("#show_hide_password2 a").on('click', function (event) {
+        $("#show_hide_password2 a").on('click', function (event) {
 				event.preventDefault();
 				if ($('#show_hide_password2 input').attr("type") == "text") {
 					$('#show_hide_password2 input').attr('type', 'password');
