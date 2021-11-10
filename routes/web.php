@@ -15,6 +15,8 @@ use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Clients\AccountController;
 
+use App\Http\Controllers\Auth\LoginController;
+
 
 
 /*
@@ -77,7 +79,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
     Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
-    
+
 
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
@@ -91,7 +93,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
- 
+
     Route::resource('/user', UserController::class );
 
     //Route prefix function
@@ -106,3 +108,15 @@ Route::prefix('admin')->group(function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Login Google
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Login Google
+Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
+//Login Google
+Route::get('login/github', [LoginController::class, 'redirectToGithub'])->name('login.github');
+Route::get('login/github/callback', [LoginController::class, 'handleGithubCallback']);

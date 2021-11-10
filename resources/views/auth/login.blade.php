@@ -22,7 +22,9 @@
                                         class="input-group-text bg-transparent border-0 cursor-pointer"><img
                                             src="{{asset('backend/images/icons/search.svg')}}" alt="" width="16"></span>
                                 </div>
+                                <a href="{{route('login.google')}}">
                                 <input type="button" class="form-control  border-0" value="Đăng nhập bằng google">
+                                </a>
                             </div>
                             <div class="input-group shadow-sm rounded mt-2">
                                 <div class="input-group-prepend"> <span
@@ -30,7 +32,19 @@
                                             src="{{asset('backend/images/icons/facebook.svg')}}" alt=""
                                             width="16"></span>
                                 </div>
+                                <a href="{{route('login.facebook')}}">
                                 <input type="button" class="form-control  border-0" value="Đăng nhập bằng facebook">
+                                </a>
+                            </div>
+                            <div class="input-group shadow-sm rounded mt-2">
+                                <div class="input-group-prepend"> <span
+                                        class="input-group-text bg-transparent border-0 cursor-pointer"><img
+                                            src="{{asset('backend/images/icons/facebook.svg')}}" alt=""
+                                            width="16"></span>
+                                </div>
+                                <a href="{{route('login.github')}}">
+                                <input type="button" class="form-control  border-0" value="Đăng nhập bằng Github">
+                                </a>
                             </div>
                             <div class="login-separater text-center"> <span>HOẶC ĐĂNG NHẬP BẰNG TÀI KHOẢN EMAIL</span>
                                 <hr />

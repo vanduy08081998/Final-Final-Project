@@ -274,16 +274,22 @@
 				<!-- /Message Notifications -->
 
 				<li class="nav-item dropdown has-arrow main-drop">
-						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+
+                        @if(Auth::user())
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 								<span class="user-img"><img
-												src="{{ URL::to('backend/img/profiles/avatar-21.jpg') }}" alt="">
+												src="{{Auth::user()->avatar}}" alt="">
 										<span class="status online"></span></span>
-								<span>Soeng Souy</span>
-						</a>
+								<span>{{Auth::user()->name}}</span>
+                        </a>
+                        @endif
 						<div class="dropdown-menu">
 								<a class="dropdown-item" href="profile.html">My Profile</a>
 								<a class="dropdown-item" href="settings.html">Settings</a>
-								<a class="dropdown-item" href="login.html">Logout</a>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+								<a class="dropdown-item"><button type="submit">Logout</button></a>
+                                </form>
 						</div>
 				</li>
 		</ul>
