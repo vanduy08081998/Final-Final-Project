@@ -72,11 +72,17 @@ Route::prefix('admin')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
-    //Request
+    //Brand
+    Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
+    Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
+    Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
+    
 
     Route::resource('/products', ProductAdmin::class );
-
+    Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
+    Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
+    Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
     //Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
@@ -85,7 +91,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+ 
     Route::resource('/user', UserController::class );
+
+    //Route prefix function
+
+    Route::get('filemanager', function () {
+        return view('admin.FileManager.index');
+    })->name('filemanager');
 });
 
 
