@@ -7,8 +7,9 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\BlogCateController;
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
@@ -101,7 +102,7 @@ Route::prefix('admin')->group(function () {
         return view('admin.FileManager.index');
     })->name('filemanager');
 
-    Route::resource('blogCate', BlogController::class);
+    Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
 });
 

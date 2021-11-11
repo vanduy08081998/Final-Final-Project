@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BlogCate;
 
-class BlogController extends Controller
+class BlogCateController extends Controller
 {
         /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderByDESC('id')->get();
-        return view('admin.blog.Blog.index', compact('blogs'));
+        $blogCate = BlogCate::orderByDESC('id')->get();
+        return view('admin.blog.blogCate.index', compact('blogCate'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.Blog.create');
+        return view('admin.blog.blogCate.create');
     }
 
     /**
@@ -37,8 +37,8 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        Blog::create($request->all());
-        return redirect()->route('Blog.index');
+        BlogCate::create($request->all());
+        return redirect()->route('blogCate.index');
     }
 
     /**
@@ -60,8 +60,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $blogs = Blog::find($id);
-        return view('admin.blog.Blog.edit', compact('blogs'));
+        $blogCate = BlogCate::find($id);
+        return view('admin.blog.blogCate.edit', compact('blogCate'));
     }
 
     /**
@@ -73,9 +73,9 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Blog::find($id)->update($request->all());
+        BlogCate::find($id)->update($request->all());
 
-        return redirect()->route('Blog.index');
+        return redirect()->route('blogCate.index');
     }
 
     /**
@@ -86,7 +86,7 @@ class BlogController extends Controller
      */
     public function delete($id)
     {
-        Blog::find($id)->delete();
+        BlogCate::find($id)->delete();
         return redirect()->back();
     }
 

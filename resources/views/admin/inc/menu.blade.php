@@ -9,7 +9,7 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-shopping-cart"></i> <span> Danh mục</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
+            <li><a href="{{ route('blogCate.index') }}">Danh sách</a></li>
             <li><a href="{{ route('blogCate.create') }}">Thêm danh mục</a></li>
 
         </ul>
