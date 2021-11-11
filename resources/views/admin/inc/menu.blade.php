@@ -1,7 +1,7 @@
 <ul>
     <li class="">
-        <a href="{{ url('admin') }}"><i class="la la-dashboard"></i> <span>Thống
-                kê</span></span></a>
+        <a href="{{ url('admin') }}" style="font-size: 23px;"><i class="la la-dashboard" style="font-size: 25px;"></i> <span>Thống
+                Kê</span></span></a>
     </li>
     <li class="menu-title">
         <span>Bài viết</span>
@@ -17,8 +17,8 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-shopping-cart"></i> <span> Bài viết</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Bài viết</a></li>
-            <li><a href="#">Thêm bài viết</a></li>
+            <li><a href="{{ route('blogs.index') }}"">Bài viết</a></li>
+            <li><a href="{{ route('blogs.create') }}">Thêm bài viết</a></li>
 
         </ul>
     </li>

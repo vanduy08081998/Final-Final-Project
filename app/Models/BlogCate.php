@@ -13,7 +13,7 @@ class BlogCate extends Model
 
     public $table = 'blog_category';
 
-    public $fillable = ['blogCate_name', 'blogCate_slug', 'meta_keywords', 'meta_title', 'meta_desc'];
+    public $fillable = ['blogCate_name', 'poster', 'blog_title', 'blog_description', 'blog_image', ''];
 
     public $timestamp = false;
 
