@@ -33,6 +33,9 @@ use App\Http\Controllers\Clients\AccountController;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
@@ -51,11 +54,11 @@ Route::prefix('/')->group(function () {
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
         Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
         Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
     });
 });
 
@@ -77,7 +80,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
     Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
-    
+
 
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
@@ -91,7 +94,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
- 
+
     Route::resource('/user', UserController::class );
 
     //Route prefix function
