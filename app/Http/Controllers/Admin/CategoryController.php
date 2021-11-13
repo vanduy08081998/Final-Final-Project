@@ -95,7 +95,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::find($id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Xóa danh mục thành công');
     }
     
     public function detach_brand($brand_id, $cate_id){

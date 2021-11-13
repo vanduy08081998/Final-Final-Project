@@ -86,18 +86,80 @@ class ProductController extends Controller
      */
     public function store(Request $request,AddProductRequest $addProductRequest) 
     {
+
+      if($request->shipping_type == 'flat_rate'){
+        $shipping_stock  = 0;
+      }else if($request->shipping_type = 'free_ship'){
+        $shipping_stock = $request->shipping_stock;
+      }
+
+      if($request->has('quantity')){
+        $quantity = $request->quantity;
+      }else{
+        $quantity = $request->unit_quantity;
+      }
+
+      if($request->has('sku')){
+        $single_sku = $request->sku;
+      }else{
+        $single_sku = '';
+      }
+
+      if($request->has('unit_price')){
+        $single_price = $request->unit_price;
+      }else if($request->has('price')){
+        $single_price = $request->price;
+      }
+      
+      if($request->has('sale_dates')){
+        $var_date = explode(' - ', $request->sale_dates);
+        $discount_start_date = strtotime($var_date[0]);
+        $discount_end_date = strtotime($var_date[1]); 
+      }
+
+      if($request->has('expiry')){
+        $date_of_manufacture_expiry = explode(' - ', $request->expiry);
+        $date_of_manufacture = strtotime($date_of_manufacture_expiry[0]);
+        $expiry = strtotime($date_of_manufacture_expiry[1]);
+      }else{
+        $date_of_manufacture = 0;
+        $expiry = 0;
+      }
+
       $data = [
         'product_name' => $request->product_name,
         'product_slug' => $request->product_slug,
         'product_image' => $request->product_image,
-        'product_gallery' => $request->product_gallery,
+        'product_gallery' => json_encode($request->product_gallery),
         'product_id_category' => $request->product_id_category,
         'meta_title' => $request->meta_title,
         'meta_description' => $request->meta_description,
         'meta_keywords' => $request->meta_keywords,
         'product_attribute' => json_encode($request->attribute),
-        'unit_price' => $request->unit_price
+        'unit_price' => $single_price,
+        'discount' => $request->discount,
+        'shipping_type' => $request->shipping_type,
+        'shipping_stock' => $shipping_stock,
+        'discount_unit' => $request->discount_unit,
+        'multiple_stock' => $request->multiple_stock,
+        'stock_warning' => $request->stock_warning,
+        'feature_product' => $request->feature_product,
+        'ex_link' => $request->ex_link,
+        'shipping_day' => $request->shipping_day,
+        'vat' => $request->vat,
+        'vat_unit' => $request->vat_unit,
+        'sku' => $request->sku,
+        'quantity' => $request->quantity,
+        'short_description' => $request->short_description,
+        'long_description' => $request->long_description,
+        'show_hide_quantity' => $request->show_hide_quantity,
+        'discount_start_date' => $discount_start_date,
+        'discount_end_date' => $discount_end_date,
+        'date_of_manufacture' => $date_of_manufacture,
+        'expiry' => $expiry,
+        'type_of_category' => $request->type_of_category
       ];
+
       $product = Product::create($data);
 
       $options = array();
@@ -195,7 +257,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::find($id)->delete();
-        return redirect()->back()->with('message', 'Xóa thành công');
+        return redirect()->back()->with('message', 'Xóa sản phẩm thành công');
     }
 
     public function getProductAttributes(Request $request){
