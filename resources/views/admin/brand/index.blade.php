@@ -1,11 +1,11 @@
-@extends('layouts.admin_master')
+@extends('admin.layouts.master')
 
 @section('title')
     Trang chủ
 @endsection
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">

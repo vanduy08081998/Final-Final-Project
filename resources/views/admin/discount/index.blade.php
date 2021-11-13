@@ -1,69 +1,58 @@
 @extends('admin.layouts.master')
 
-@section('title')
-    Thương hiệu | Thùng rác
-@endsection
-
+@section('title', 'Danh sách')
 @section('content')
-    <div class="page-wrapper">
+    <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">
                 <!--breadcrumb-->
                 <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-                    <div class="breadcrumb-title pr-3">Thương hiệu</div>
+                    <div class="breadcrumb-title pr-3">Mã giảm giá</div>
                     <div class="pl-3">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
+                                <li class="breadcrumb-item active" aria-current="page">Mã giảm giá</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="ml-auto">
                         <div class="btn-group">
-                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
+                            <a href="{{ route('discount.create') }}" class="btn btn-primary radius-30">Thêm mới</a>
                         </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="mb-0">Thùng rác</h4>
+                            <h4 class="mb-0">Liệt kê mã giảm giá</h4>
+
                         </div>
                         <hr />
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center;">Thương Hiệu</th>
-                                        <th style="text-align: center;">Tên TH</th>
-                                        <th style="text-align: center;">Danh mục SP</th>
-                                        <th style="text-align: center;">Công cụ</th>
+                                        <th style="text-align: center;">Mã</th>
+                                        <th style="text-align: center;">Ngày bắt đầu</th>
+                                        <th style="text-align: center;">Ngày kết thúc</th>
+                                        <th style="text-align: center;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($brandAll as $brand)
+                                    @foreach ($discountAll as $discount)
 
                                         <tr>
                                             <td class="py-2">
-                                                <div style="text-align: center;">
-                                                    <div class="position-relative mr-2">
-                                                        <img class="avatar" width="90" height="58"
-                                                            src="{{ url('uploads/Brands/', $brand->brand_image) }}" />
-                                                    </div>
-                                                </div>
+                                                {{ $discount->discount_code }}
                                             </td>
-                                            <td style="text-align: center;">
-                                                {{ $brand->brand_name }}
+                                            <td>
+                                                {{ $discount->discount_start }}
                                             </td>
-                                            <td style="text-align: center;">
-                                                @foreach ($brand->categories as $item)
-
-                                                    <button class="btn-sm btn-primary">{{ $item->category_name }}</button>
-
-                                                @endforeach
+                                            <td>
+                                                {{ $discount->discount_end }}
                                             </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
@@ -71,17 +60,14 @@
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                        <form action="{{ url('admin/brand/restore/' . $brand->id) }}"
+                                                        <a class="dropdown-item text-warning"
+                                                            href="{{ route('discount.edit', ['discount' => $discount->id]) }}">Sửa</a>
+                                                        <form
+                                                            action="{{ route('discount.destroy', ['discount' => $discount->id]) }}"
                                                             method="POST">
                                                             @csrf
-
-                                                            <button class="dropdown-item text-infor">Khôi phục</button>
-                                                        </form>
-
-                                                        <form action="{{ url('admin/brand/force-delete/' . $brand->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <button class="dropdown-item text-danger">Xóa vĩnh viễn</button>
+                                                            @method('DELETE')
+                                                            <button class="dropdown-item text-danger">Xóa</button>
                                                         </form>
 
                                                     </div>
