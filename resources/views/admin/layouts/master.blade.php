@@ -33,7 +33,7 @@
 <body>
   <!-- Main Wrapper -->
   <div class="main-wrapper">
-
+    
     @include('admin.inc.header')
     @include('admin.inc.sidebar')
 
@@ -46,8 +46,7 @@
 
     </div>
 
-    @include('admin.Modal.fileManagerModal')
-    @include('admin.Modal.multipleFileManagerModal')
+    <input type="hidden" name="" id="path" value="{{ URL::to('/') }}"> <!-- Path -->
     <!-- /Page Wrapper -->
 
   </div>

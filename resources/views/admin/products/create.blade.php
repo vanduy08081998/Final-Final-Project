@@ -5,7 +5,6 @@
 
 @section('content')
 
-
 <div class="content container-fluid">
   <div class="row">
 
@@ -96,7 +95,7 @@
                             <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                           </div>
                           <div class="custom-file">
-                            <input type="file" data-input="thumbnail" data-preview="thumbnail" class="custom-file-input thumbnail" id="inputGroupFile01"
+                            <input type="file" data-input="thumbnail" data-preview="holder" class="custom-file-input thumbnail" id="inputGroupFile01"
                               aria-describedby="inputGroupFileAddon01">
                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             <input type="hidden"
@@ -104,7 +103,7 @@
                           </div>
                         </div>
                       </div>
-                      <div id="thumbnail" class="render_image_input" style="margin-top:15px;max-height:100px;"></div>
+                      <div id="holder" class="render_image_input" style="margin-top:15px;max-height:100px;"></div>
                     </div>
                     <div class="form-group">
                       <label>Thư viện ảnh</label>
@@ -501,7 +500,7 @@
             $('.js-example-basic-multiple').selectpicker();
             $('input[name="sale_dates"]').daterangepicker();
             $('input[name="expiry"]').daterangepicker();
-            var route_prefix = "/laravel-filemanager";
+            var route_prefix = `${$('#path').val()}/laravel-filemanager`;
             $('.gallery').filemanager('image', {prefix: route_prefix});
             $('.thumbnail').filemanager('image', {prefix: route_prefix});
         });
