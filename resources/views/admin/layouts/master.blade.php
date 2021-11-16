@@ -74,6 +74,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="{{ asset('Backend/plugins/daterangepicker/moment.min.js') }}"></script>
   <script src="{{ asset('Backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
+  <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
   @stack('script')
 </body>
 

@@ -13,13 +13,11 @@
       .text-danger {
         font-style: italic;
       }
-
     </style>
 
     <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
 
-      <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data"
-            id="choice-form">
+      <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data" id="choice-form">
         @csrf
         @method('POST')
 
@@ -33,9 +31,8 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Nhập tên sản phẩm</label>
-                      <input class="form-control" name="product_name" onchange="update_sku()"
-                             type="text" onkeyup="ChangeToSlug();" id="slug"
-                             placeholder="Enter your name product">
+                      <input class="form-control" name="product_name" onchange="update_sku()" type="text"
+                        onkeyup="ChangeToSlug();" id="slug" placeholder="Enter your name product">
                     </div>
 
                     @error('product_name')
@@ -45,7 +42,7 @@
                     <div class="form-group">
                       <label>Slug sản phẩm</label>
                       <input class="form-control" name="product_slug" type="text" id="convert_slug"
-                             placeholder="Enter your name product">
+                        placeholder="Enter your name product">
                     </div>
 
                     @error('product_slug')
@@ -55,7 +52,7 @@
                     <div class="form-group">
                       <label for="name">Tiêu đề (SEO)</label>
                       <input class="form-control" name="meta_title" type="text" value=""
-                             placeholder="Enter your meta title">
+                        placeholder="Enter your meta title">
                     </div>
 
                     @error('meta_title')
@@ -64,8 +61,8 @@
 
                     <div class="form-group">
                       <label for="">Từ khóa (SEO)</label>
-                      <input type="text" data-role="tagsinput" class="form-control"
-                             name="meta_keywords" value="" placeholder="Enter your meta keywords">
+                      <input type="text" data-role="tagsinput" class="form-control" name="meta_keywords" value=""
+                        placeholder="Enter your meta keywords">
                     </div>
 
                     @error('meta_keywords')
@@ -74,9 +71,8 @@
 
                     <div class="form-group">
                       <label for="name">Mô tả (SEO)</label>
-                      <textarea class="form-control" name="meta_description" id="meta_desc"
-                                type="text" placeholder="Enter your meta description" cols="30"
-                                rows="10"></textarea>
+                      <textarea class="form-control" name="meta_description" id="meta_desc" type="text"
+                        placeholder="Enter your meta description" cols="30" rows="10"></textarea>
                     </div>
 
                     @error('meta_description')
@@ -93,53 +89,52 @@
                   <div class="card-header">Hình ảnh sản phẩm</div>
                   <div class="card-body">
                     <div class="form-group">
-                      <label class="mb-3">Hình ảnh sản phẩm</label>
-                      <div class="input-group mb-3" data-type="image">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text bg-soft-secondary font-weight-medium">
-                            {{ 'Browse' }}
+                      <label>Hình ảnh sản phẩm</label>
+                      <div class="file-field">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" data-input="thumbnail" data-preview="thumbnail" class="custom-file-input thumbnail" id="inputGroupFile01"
+                              aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            <input type="hidden"
+                              name="product_image" id="thumbnail">
                           </div>
                         </div>
-                        <div class="form-control file-amount"
-                             onclick="singleModalShow('image','render__image__single')">
-                          {{ 'Choose File' }}
-                        </div>
-                        <input type="hidden" name="product_image" id="image" value=""
-                               class="selected-files">
                       </div>
+                      <div id="thumbnail" class="render_image_input" style="margin-top:15px;max-height:100px;"></div>
                     </div>
-                    <div id="render__image__single"></div>
-                    @error('product_image')
-                    <span class="text-danger"> {{ $message }} </span>
-                    @enderror
                     <div class="form-group">
-                      <label class="mb-3">Thư viện ảnh</label>
-                      <div class="input-group" data-type="image">
-                        <div class=" input-group-prepend">
-                          <div class="input-group-text bg-soft-secondary font-weight-medium">
-                            {{ 'Browse' }}
+                      <label>Thư viện ảnh</label>
+                      <div class="file-field">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                          </div>
+                          <div class="custom-file">
+                            <input type="file" id="gallery" data-input="gallery" data-preview="gallery" class="custom-file-input gallery" id="inputGroupFile01"
+                              aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Chọn từ máy tính</label>
+                            <input type="hidden" name="product_gallery" id="gallery">
                           </div>
                         </div>
-                        <div class="form-control file-amount"
-                             onclick="multipleModalShow('multipleImage','render__image__multiple')">
-                          {{ 'Choose File' }}
-                        </div>
-                        <input type="hidden" name="product_gallery" id="multipleImage" value=""
-                               class="selected-files">
+                      </div>
+                      <div id="gallery" class="render_image_input" style="margin-top:15px;max-height:100px;">
+                      </div>
+                      <div>
                       </div>
                     </div>
-                    <div id="render__image__multiple"></div>
-                    @error('product_gallery')
-                    <span class="text-danger"> {{ $message }} </span>
-                    @enderror
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
                 <div class="card">
-                  <div class="card-header">Hình ảnh sản phẩm</div>
+                  <div class="card-header">Mô tả sản phẩm</div>
                   <div class="card-body">
                     <div class="form-group">
                       <label>Mô tả ngắn</label>
@@ -200,10 +195,9 @@
                     <h4 class="card-title">Danh mục, thuộc tính, biến thể</h4>
                     <ul class="nav nav-tabs nav-tabs-top nav-justified">
                       <li class="nav-item" onclick="isProductAttribute('true')"><a class="nav-link active"
-                           href="#top-justified-tab1"
-                           data-toggle="tab">Sản phẩm có thuộc tính</a></li>
+                          href="#top-justified-tab1" data-toggle="tab">Sản phẩm có thuộc tính</a></li>
                       <li class="nav-item" onclick="isProductAttribute('false')"><a class="nav-link"
-                           href="#top-justified-tab2" data-toggle="tab">Sản phẩm
+                          href="#top-justified-tab2" data-toggle="tab">Sản phẩm
                           không thuộc tính</a>
                       </li>
                       <input type="hidden" name="type_of_category">
@@ -228,16 +222,15 @@
                                 <div class="form-group mb-3">
                                   <label>Liên kết bên ngoài</label>
                                   <input type="text" name="ex-link" id="" class="form-control"
-                                         placeholder="http://www.example.com">
+                                    placeholder="http://www.example.com">
                                 </div>
                                 <div id="attribute__and__variant">
                                   <!-- Category End -->
                                   <div id="choiceAttribute">
                                     <div class="form-group">
                                       <label>Thuộc tính sản phẩm</label>
-                                      <select class="js-example-basic-multiple form-control" id="attribute"
-                                              name=""
-                                              multiple="multiple" data-live-search="true">
+                                      <select class="js-example-basic-multiple form-control" id="attribute" name=""
+                                        multiple="multiple" data-live-search="true">
 
                                         @foreach (App\Models\Attribute::all() as $attribute)
                                         <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
@@ -288,7 +281,7 @@
                                 <div class="form-group mb-3">
                                   <label>Liên kết bên ngoài</label>
                                   <input type="text" name="ex_link" id="" class="form-control"
-                                         placeholder="http://www.example.com">
+                                    placeholder="http://www.example.com">
                                 </div>
                                 @error('unit_price')
                                 <div class="text-danger">{{ $message }}</div>
@@ -353,7 +346,7 @@
                         Vận chuyển nhanh
                         <div class="status-toggle">
                           <input type="radio" id="flat_rate" name="shipping_type" value="flat_rate" class="check"
-                                 checked="">
+                            checked="">
                           <label for="flat_rate" class="checktoggle">checkbox</label>
                         </div>
                         <div class="flat_rate_shipping_div mt-3">
@@ -445,7 +438,7 @@
                         Hiển thị tổng số lượng
                         <div class="status-toggle">
                           <input type="radio" id="qt_total" name="show_hide_quantity" value="qt_total" class="check"
-                                 checked="">
+                            checked="">
                           <label for="qt_total" class="checktoggle">radio</label>
                         </div>
                       </li>
@@ -453,7 +446,7 @@
                         Hiển thị số lượng tồn kho
                         <div class="status-toggle">
                           <input type="radio" id="qt_stock" name="show_hide_quantity" value="qt_stock" class="check"
-                                 checked="">
+                            checked="">
                           <label for="qt_stock" class="checktoggle">radio</label>
                         </div>
                       </li>
@@ -461,8 +454,7 @@
                         Không hiển thị
                         <div class="status-toggle">
                           <input type="radio" id="stock_hidden" name="show_hide_quantity" value="qt_hidden"
-                                 class="check"
-                                 checked="">
+                            class="check" checked="">
                           <label for="stock_hidden" class="checktoggle">radio</label>
                         </div>
                       </li>
@@ -483,11 +475,10 @@
 
         <div class="row">
           <div class="col-sm-8">
-            <button
-                    class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i
-                 class="fa fa-check"></i>Thêm sản phẩm</button>
+            <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-check"></i>Thêm sản
+              phẩm</button>
             <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
-                 class="fa fa-times"></i>Hủy</button>
+                class="fa fa-times"></i>Hủy</button>
           </div>
         </div>
 
@@ -510,6 +501,9 @@
             $('.js-example-basic-multiple').selectpicker();
             $('input[name="sale_dates"]').daterangepicker();
             $('input[name="expiry"]').daterangepicker();
+            var route_prefix = "/laravel-filemanager";
+            $('.gallery').filemanager('image', {prefix: route_prefix});
+            $('.thumbnail').filemanager('image', {prefix: route_prefix});
         });
 
 

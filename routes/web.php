@@ -93,10 +93,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('/user', UserController::class );
     Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
-
-    Route::get('filemanager', function () {
-        return view('admin.FileManager.index');
-    })->name('filemanager');
 });
 
 
@@ -104,3 +100,6 @@ Route::group(['prefix' => 'admin'], function(){
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'laravel-filemanager'], function () {
+  \UniSharp\LaravelFilemanager\Lfm::routes();
+});
