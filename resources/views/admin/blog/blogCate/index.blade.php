@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    Quản lý loại sản phẩm
+    Quản lý danh mục bài viết
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
             <div class="col-sm-12">
                 <div class="card mb-0">
                     @include('admin.inc.card-header', ['table_title' => 'Danh mục bài viết' , 'table_content' =>
-                    'Quản lý ldanh mục bài viết'])
+                    'Quản lý danh mục bài viết'])
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered datatable" style="width:100%">

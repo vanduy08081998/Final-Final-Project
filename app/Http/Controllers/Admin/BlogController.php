@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
+use App\Models\BlogCate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +16,10 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderByDESC('id')->get();
+        $blogs = Blog::orderByDESC('blogs.id')
+        ->join('blog_category','blogs.id_blogCate','=','blog_category.id')
+        ->join('users','blogs.poster','=','users.id')
+        ->get();
         return view('admin.blog.Blog.index', compact('blogs'));
     }
 
@@ -26,7 +30,10 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.Blog.create');
+        $blogCate = BlogCate::orderByDESC('id')->get();
+        return view('admin.blog.Blog.create',[
+            'blogCate' => $blogCate
+        ]);
     }
 
     /**

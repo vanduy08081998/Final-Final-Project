@@ -18,7 +18,7 @@
         <a href="#"><i class="fa fa-shopping-cart"></i> <span> Bài viết</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('blogs.index') }}"">Bài viết</a></li>
-            <li><a href="{{ route('blogs.create') }}">Thêm bài viết</a></li>
+            <li><a href="{{ route('blogs.create') }}">Viết bài</a></li>
 
         </ul>
     </li>

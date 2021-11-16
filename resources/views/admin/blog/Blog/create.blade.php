@@ -16,26 +16,14 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Danh mục</label>
-                                        <select name="product_id_category" class="form-control" id="single__category">
-                                            <option value=""> Danh mục bài viết</option>
-                                            @foreach (App\Models\BlogCate::where('id', null)->get() as $item)
-                                                @include('admin.', ['item' => $item])
-
-                                                @foreach ($item->subcategory()->get() as $childCategory)
-                                                    @include('admin.', ['item' =>
-                                                    $childCategory,
-                                                    'prefix' => '--'])
-
-                                                    @foreach ($childCategory->subcategory()->get() as $childCategory2)
-                                                        @include('admin.', ['item' =>
-                                                        $childCategory2,
-                                                        'prefix' => '----'])
-                                                    @endforeach
-                                                @endforeach
+                                        <select name="id_blogCate" class="form-control" id="single__category">
+                                            @foreach ($blogCate as $blogCate)
+                                                <option name="id_blogCate" value="{{ $blogCate->id }}">{{ $blogCate->blogCate_name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('product_id_category')
+                                    @error('id_blogCate')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -47,23 +35,24 @@
                         <div class="col-md-8 col-sm-12 col-lg-8 col-8 col-xl-8">
                             <div class="card">
                                 <div class="card-body">
+                                    <input type="hidden" name="poster" value="1">
                                     <div class="form-group">
                                         <label>Tiêu đề</label>
                                         <input class="form-control" name="blog_title" type="text" id="slug"
                                             placeholder="Enter your name post">
                                     </div>
 
-                                    @error('product_name')
+                                    @error('blog_title')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
 
                                     <div class="form-group">
-                                        <label for="name">Mô tả ngắn</label>
+                                        <label for="name">Mô tả</label>
                                         <input class="form-control" name="blog_description" type="text" value=""
                                             placeholder="Enter your meta title">
                                     </div>
 
-                                    @error('meta_title')
+                                    @error('blog_description')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
 
@@ -79,11 +68,11 @@
 
                                     <div class="form-group">
                                         <label for="name">Nội dung</label>
-                                        <textarea class="form-control" name="blog_content" id="meta_desc" type="text"
+                                        <textarea class="form-control" name="blog_content" id="blog_content" type="text"
                                             placeholder="Enter your meta description" cols="30" rows="10"></textarea>
                                     </div>
 
-                                    @error('meta_description')
+                                    @error('blog_content')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
                                 </div>
@@ -104,12 +93,12 @@
                                             <div class="form-control file-amount"
                                                 onclick="singleModalShow('image','render__image__single')">
                                                 {{ 'Choose File' }}</div>
-                                            <input type="hidden" name="product_image" id="image" value=""
+                                            <input type="hidden" name="blog_image" id="image" value="logo.png"
                                                 class="selected-files">
                                         </div>
                                     </div>
                                     <div id="render__image__single"></div>
-                                    @error('product_image')
+                                    @error('blog_image')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
                                 </div>
@@ -217,6 +206,6 @@
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#meta_desc'))
+            .create(document.querySelector('#blog_content'))
     </script>
 @endpush
