@@ -130,7 +130,7 @@ class ProductController extends Controller
         'product_name' => $request->product_name,
         'product_slug' => $request->product_slug,
         'product_image' => $request->product_image,
-        'product_gallery' => $request->product_gallery,
+        'product_gallery' => json_encode($request->product_gallery),
         'product_id_category' => $request->product_id_category,
         'meta_title' => $request->meta_title,
         'meta_description' => $request->meta_description,

@@ -25,6 +25,10 @@
     <ul style="display: none;">
     </ul>
   </li>
+  <li>
+    <a href="{{ route('filemanager') }}"> <i class="fa fa-folder"></i> <span>Quản lý
+        file</span></a>
+  </li>
   <li><a href=""><i class="fa fa-money"></i> <span>Seller</span></a></li>
 
 </ul>

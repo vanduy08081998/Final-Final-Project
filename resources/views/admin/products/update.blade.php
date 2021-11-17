@@ -34,7 +34,7 @@
                     <div class="form-group">
                       <label>Nhập tên sản phẩm</label>
                       <input class="form-control" name="product_name" onchange="update_sku()"
-                             type="text" onkeyup="ChangeToSlug();" id="slug"
+                             type="text" onkeyup="ChangeToSlug();" id="slug" value="{{ $product->product_name }}"
                              placeholder="Enter your name product">
                     </div>
 
@@ -45,7 +45,7 @@
                     <div class="form-group">
                       <label>Slug sản phẩm</label>
                       <input class="form-control" name="product_slug" type="text" id="convert_slug"
-                             placeholder="Enter your name product">
+                             placeholder="Enter your name product" value="{{ $product->product_slug }}">
                     </div>
 
                     @error('product_slug')
@@ -55,7 +55,7 @@
                     <div class="form-group">
                       <label for="name">Tiêu đề (SEO)</label>
                       <input class="form-control" name="meta_title" type="text" value=""
-                             placeholder="Enter your meta title">
+                             placeholder="Enter your meta title" value="{{ $product->meta_title }}">
                     </div>
 
                     @error('meta_title')
@@ -65,7 +65,8 @@
                     <div class="form-group">
                       <label for="">Từ khóa (SEO)</label>
                       <input type="text" data-role="tagsinput" class="form-control"
-                             name="meta_keywords" value="" placeholder="Enter your meta keywords">
+                             name="meta_keywords" value="{{ $product->meta_keywords }}"
+                             placeholder="Enter your meta keywords">
                     </div>
 
                     @error('meta_keywords')
@@ -76,7 +77,7 @@
                       <label for="name">Mô tả (SEO)</label>
                       <textarea class="form-control" name="meta_description" id="meta_desc"
                                 type="text" placeholder="Enter your meta description" cols="30"
-                                rows="10"></textarea>
+                                rows="10">value="{{ $product->meta_description }}"</textarea>
                     </div>
 
                     @error('meta_description')
@@ -101,14 +102,16 @@
                           </div>
                         </div>
                         <div class="form-control file-amount"
-                             onclick="singleModalShow('edit_image','render__image__single')">
+                             onclick="singleModalShow('image','render__image__single')">
                           {{ 'Choose File' }}
                         </div>
-                        <input type="hidden" name="product_image" id="edit_image" value=""
+                        <input type="hidden" name="product_image" id="image" value=""
                                class="selected-files">
                       </div>
                     </div>
-                    <div id="render__image__single"></div>
+                    <div id="render__image__single">
+                      <img src="{{ asset('uploads') }}/{{ $product->product_image }}" width="150" height="150" alt="">
+                    </div>
                     @error('product_image')
                     <span class="text-danger"> {{ $message }} </span>
                     @enderror
@@ -121,16 +124,16 @@
                           </div>
                         </div>
                         <div class="form-control file-amount"
-                             onclick="multipleModalShow('multipleImage','render__image__multiple','product_gallery')">
+                             onclick="multipleModalShow('multipleImage','render__image__multiple')">
                           {{ 'Choose File' }}
                         </div>
-                        <input type="hidden" name="" id="multipleImage" value=""
-                               class="selected-files">
-                        <input type="hidden" name="product_gallery" id="product_gallery" value=""
+                        <input type="hidden" name="product_gallery" id="multipleImage"
+                               value="{{ json_encode($product->product_gallery) }}"
                                class="selected-files">
                       </div>
                     </div>
-                    <div id="render__image__multiple"></div>
+                    <div id="render__image__multiple">
+                    </div>
                     @error('product_gallery')
                     <span class="text-danger"> {{ $message }} </span>
                     @enderror

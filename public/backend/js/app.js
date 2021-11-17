@@ -478,4 +478,3 @@ function delete_variants(id) {
     });
 }
 
-

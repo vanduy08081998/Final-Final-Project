@@ -140,12 +140,6 @@ a:focus {
     text-decoration: none;
     outline: none;
 }
-
-.text-danger {
-        font-style: italic;
-      }
-
-
 .form-control {
     border-color: #e3e3e3;
     box-shadow: none;
@@ -8779,5 +8773,3 @@ ul.comment-list li ul.children {
     position: absolute;
     top: -1px;
 }
-
- 
