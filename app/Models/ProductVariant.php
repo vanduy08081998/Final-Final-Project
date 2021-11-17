@@ -19,7 +19,7 @@ class ProductVariant extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function product(): BelongsTo
+    public function product()
     {
         return $this->belongsTo(Product::class, 'id_product');
     }

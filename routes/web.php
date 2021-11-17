@@ -8,9 +8,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Admin\BlogCateController;
-
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
@@ -66,11 +66,8 @@ Route::prefix('/')->group(function () {
 
 
 /* Admin */
-
-
-Route::prefix('admin')->group(function () {
-
-    // Dashboard
+Route::group(['prefix' => 'admin'], function(){
+// Dashboard
     Route::get('/', [HomeController::class, 'index'] )->name('admin.index');
 
     // Categories
@@ -97,8 +94,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
 
+
     Route::resource('/user', UserController::class );
 
+
+    Route::resource('/user', UserController::class );
+    Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
 
     Route::get('filemanager', function () {
