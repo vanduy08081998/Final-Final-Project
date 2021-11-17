@@ -1,5 +1,9 @@
 @extends('admin.layouts.user')
 
+@section('title')
+Đăng nhập
+@endsection
+
 @section('content')
 <div class="registration-form form-authetication">
   <form action="{{ route('register') }}" method="POST">
@@ -47,5 +51,6 @@
     </div>
   </div>
 </div>
+
 
 @endsection

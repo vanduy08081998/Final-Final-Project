@@ -35,11 +35,8 @@
 
 										</form>
 
-										<a href="{{ route('login') }}" class="btn btn-link btn-block"><i
-														class='bx bx-arrow-back mr-1'></i>Back to
-												Login</a>
-								</div>
-						</div>
-				</div>
-		</div>
+                <a href="{{route('login')}}" class="btn btn-link btn-block"><i class='bx bx-arrow-back mr-1'></i>Quay lại đăng nhập</a>
+            </div>
+
+    </div>
 @endsection

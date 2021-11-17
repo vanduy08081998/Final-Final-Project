@@ -17,6 +17,8 @@ use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
+use App\Http\Controllers\Auth\LoginController;
+
 
 
 /*
@@ -94,7 +96,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
 
-
     Route::resource('/user', UserController::class );
 
 
@@ -115,3 +116,12 @@ Route::group(['prefix' => 'admin'], function(){
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Login Google
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Login Facebook
+Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
