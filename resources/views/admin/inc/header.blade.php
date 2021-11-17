@@ -3,9 +3,9 @@
 
     <!-- Logo -->
     <div class="header-left">
-        <a href="index.html" class="logo">
-            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="46"
-                style="margin-top: 8px; margin-left: -35px;" alt="">
+        <a href="#" class="logo">
+            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="45"
+                style="margin-left: -35px;" alt="">
         </a>
     </div>
     <!-- /Logo -->
