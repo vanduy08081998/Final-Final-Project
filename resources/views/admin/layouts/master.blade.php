@@ -28,6 +28,7 @@
   <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   <link rel="stylesheet" type="text/css" href="{{ asset('Backend/plugins/daterangepicker/daterangepicker.css') }}">
+  <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -46,11 +47,13 @@
 
     </div>
   <!-- /Page Wrapper -->
-
+  <!-- __DIR__ -->
+  <input type="hidden" name="" id="__dir"> 
   </div>
   <!-- /Main Wrapper -->
   <!-- jQuery -->
   <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
+  <script src="{{ URL::to('fancybox/dist/jquery.fancybox.min.js') }}"></script>
   <!-- Bootstrap Core JS -->
   <script src="{{ URL::to('backend/js/popper.min.js') }}"></script>
   <script src="{{ URL::to('backend/js/bootstrap.min.js') }}"></script>
@@ -71,6 +74,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="{{ asset('Backend/plugins/daterangepicker/moment.min.js') }}"></script>
   <script src="{{ asset('Backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
+  
   @stack('script')
 </body>
 

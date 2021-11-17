@@ -45,7 +45,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         Blog::create($request->all());
-        return redirect()->route('Blog.index');
+        return redirect()->route('blogs.index');
     }
 
     /**

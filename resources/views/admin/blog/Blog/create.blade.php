@@ -86,15 +86,15 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="input-group mb-3" data-type="image">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text bg-soft-secondary font-weight-medium">
-                                                    {{ 'Browse' }}</div>
-                                            </div>
-                                            <div class="form-control file-amount"
-                                                onclick="singleModalShow('image','render__image__single')">
-                                                {{ 'Choose File' }}</div>
-                                            <input type="hidden" name="blog_image" id="image" value="logo.png"
-                                                class="selected-files">
+                                          <div class="custom-file">
+                                            <a href="{{ asset('rfm/filemanager/dialog.php?field_id=image') }}"  class="custom-file-input iframe-btn" id="customFile"></a>
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <input type="hidden" id="image" data-upload="blog_image" data-preview="preview">
+                                            <input type="hidden" name="blog_image">
+                                          </div>
+                                        </div>
+                                        <div id="preview">
+                                              
                                         </div>
                                     </div>
                                     <div id="render__image__single"></div>
@@ -121,87 +121,15 @@
 @endsection
 
 @push('script')
+
     <script>
+        
         $(document).ready(function() {
             $('.js-example-basic-multiple').selectpicker();
         });
+        
+    
 
-        $('#single__category').on('change', () => {
-            let idCategory = $(`#single__category option:selected`).val()
-
-            $.ajax({
-                type: "GET",
-                url: "{{ route('admin.product__attributes') }}",
-                data: {
-                    id: idCategory
-                },
-                success: function(response) {
-                    let val = new Array()
-                    $.each(response, (indexInArray, valueOfElement) => {
-                        console.log(valueOfElement)
-                        $('#attribute').append(
-                            `<option value="${valueOfElement.id}">${valueOfElement.name}</option>`
-                        )
-                        val.push(valueOfElement.name)
-                    });
-                    $('#attribute_array').val(val)
-                    $('.js-example-basic-multiple').selectpicker('refresh')
-
-                }
-            });
-            update_sku()
-        })
-
-        const add_more_customer_choice_option = (i, name) => {
-            $.ajax({
-                type: "GET",
-                url: "{{ route('admin.product__variants') }}",
-                data: {
-                    id: i
-                },
-                success: function(response) {
-                    console.log("🚀 ~ file: create.blade.php ~ line 325 ~ response", response)
-                    $('#customer_choice_options').append(`<div class="form-group">
-              <label>${name}</label>
-              <input type="hidden" name="choice_no[]" value="${i}">
-              <select name="attribute_value_${i}[]" multiple="multiple" data-live-search="true"  class="form-control attribute-value" id="attribute-value">
-                ${response}
-              </select>
-            </div>`)
-                    $('.attribute-value').selectpicker('refresh');
-
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            $('.attribute-value').selectpicker();
-        });
-
-        $(document).on("change", ".attribute-value", function() {
-            update_sku();
-        });
-
-        function update_sku() {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('sku_combinations') }}",
-                data: $('#choice-form').serialize(),
-                success: function(response) {
-                    $('#sku_combination').html(response);
-                }
-            });
-        }
-
-        $('#attribute').on('change', function() {
-            $('input[name="attribute"]').val($(this).val())
-            $('#customer_choice_options').html(null);
-            $.each($("#attribute option:selected"), function() {
-                add_more_customer_choice_option($(this).val(), $(this).text())
-
-            })
-            update_sku()
-        })
     </script>
 
     <script>
