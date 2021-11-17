@@ -113,10 +113,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
-//Login Google
+//Login Facebook
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
 
-//Login Google
-Route::get('login/github', [LoginController::class, 'redirectToGithub'])->name('login.github');
-Route::get('login/github/callback', [LoginController::class, 'handleGithubCallback']);

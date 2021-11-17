@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="wrapper">
+<!-- <div class="wrapper">
     <div class="authentication-reset-password d-flex align-items-center justify-content-center">
         <div class="col-12 col-lg-10 mx-auto">
             <div class="card radius-15">
@@ -81,5 +81,66 @@
         </div>
 
     </div>
+</div> -->
+
+<h2 class="mt-4">Thế giới mua sắm trực tuyến Bigdeal</h2>
+<div class="container" id="container">
+
+    <h4 class="mt-4 font-weight-bold">{{ __('Tạo mật khẩu mới') }}</h4>
+    <p class="text-muted">
+        {{ __('Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu của bạn. Vui lòng nhập mật khẩu mới của bạn!') }}
+    </p>
+    <form method="POST" action="{{ route('password.update') }}">
+        @csrf
+
+        <input type="hidden" name="token" value="{{ $token }}">
+
+
+            <label for="email" class="col-form-label text-md-left">{{ __('E-Mail Address') }}</label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+
+
+
+            <label for="password" class="col-form-label text-md-left">{{ __('Mật khẩu') }}</label>
+            <div id="show_hide_password" class="input-group">
+                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+                    name="password" required autocomplete="new-password">
+                <div class="input-group-append"> <a href="javascript:;"
+                        class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </div>
+
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+            </div>
+
+
+
+            <label for="password-confirm" class="col-form-label text-md-left">{{ __('Xác nhận mật khẩu') }}</label>
+            <div id="show_hide_password2" class="input-group">
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
+                    autocomplete="new-password">
+                <div class="input-group-append"> <a href="javascript:;"
+                        class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+
+        <button type="submit" class="btn btn-primary mt-3 btn-block">{{ __('Thay đổi mật khẩu') }}</button>
+        <a href="{{route('login')}}" class="btn btn-link btn-block"><i
+                class='bx bx-arrow-back mr-1'></i>{{ __('Quay lại đăng nhập') }}</a>
+
+    </form>
+</div>
 </div>
 @endsection

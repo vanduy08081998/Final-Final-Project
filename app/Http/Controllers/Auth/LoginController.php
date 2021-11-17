@@ -30,6 +30,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
     /**
      * Create a new controller instance.
      *
@@ -65,28 +66,16 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-//Login Google
-    public function redirectToGithub()
-    {
-        return Socialite::driver('github')->redirect();
-//Google Callback
-    }
-    public function handleGithubCallback()
-    {
-        $user = Socialite::driver('github')->user();
-        $this->_registerOrLoginUser($user);
-        return redirect()->route('home');
-    }
 
     protected function _registerOrLoginUser($data)
     {
         $user = User::where('email', $data->email)->first();
         if(!$user){
             $user = New User();;
-            $user->name = $data->name;
-            $user->email = $data->email;
-            $user->provider_id = $data->id;
-            $user->avatar = $data->avatar;
+            $user->name = $data->getName();
+            $user->email = $data->getEmail();
+            $user->provider_id = $data->getId();
+            $user->avatar = $data->getAvatar();
             $user->save();
         }
         Auth::login($user);

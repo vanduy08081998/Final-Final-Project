@@ -5,113 +5,134 @@
 @endsection
 
 @section('content')
-<div class="wrapper">
-    <div class="section-authentication-login d-flex align-items-center justify-content-center">
 
-        <div class="col-12 col-lg-10 mx-auto">
-            <div class="card radius-15">
-                <div class="row no-gutters">
-                    <div class="col-lg-6">
-                        <div class="card-body p-md-5">
-                            <div class="text-center">
-                                <img src="{{asset('backend/images/logo-icon.png')}}" width="50" alt="">
-                                <h3 class="mt-4 font-weight-bold"> {{ __('Welcome Back') }}</h3>
-                            </div>
-                            <div class="input-group shadow-sm rounded mt-5">
-                                <div class="input-group-prepend"> <span
-                                        class="input-group-text bg-transparent border-0 cursor-pointer"><img
-                                            src="{{asset('backend/images/icons/search.svg')}}" alt="" width="16"></span>
-                                </div>
-                                <a href="{{route('login.google')}}">
-                                <input type="button" class="form-control  border-0" value="Đăng nhập bằng google">
-                                </a>
-                            </div>
-                            <div class="input-group shadow-sm rounded mt-2">
-                                <div class="input-group-prepend"> <span
-                                        class="input-group-text bg-transparent border-0 cursor-pointer"><img
-                                            src="{{asset('backend/images/icons/facebook.svg')}}" alt=""
-                                            width="16"></span>
-                                </div>
-                                <a href="{{route('login.facebook')}}">
-                                <input type="button" class="form-control  border-0" value="Đăng nhập bằng facebook">
-                                </a>
-                            </div>
-                            <div class="input-group shadow-sm rounded mt-2">
-                                <div class="input-group-prepend"> <span
-                                        class="input-group-text bg-transparent border-0 cursor-pointer"><img
-                                            src="{{asset('backend/images/icons/facebook.svg')}}" alt=""
-                                            width="16"></span>
-                                </div>
-                                <a href="{{route('login.github')}}">
-                                <input type="button" class="form-control  border-0" value="Đăng nhập bằng Github">
-                                </a>
-                            </div>
-                            <div class="login-separater text-center"> <span>HOẶC ĐĂNG NHẬP BẰNG TÀI KHOẢN EMAIL</span>
-                                <hr />
-                            </div>
-                            <form action="{{ route('login') }}" method="post" class="" enctype="multipart/form-data">
-                                @csrf
+<h2 class="mt-4">Thế giới mua sắm trực tuyến Bigdeal</h2>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form class="form_register form-horizontal form " role="form">
+            <!-- <form method="POST" action="{{ route('register') }}"> -->
+            <h2 class="mt-4">Đăng ký</h2>
+            <div class="social-container text-left">
+                <a href="{{route('login.facebook')}}" class="social facebook"><i
+                        class="fa fa-facebook mr-2"></i><strong>Facebook</strong></a>
+                <a href="{{route('login.google')}}" class="social google"><i
+                        class="fa fa-google mr-2"></i><strong>Google</strong></a>
+            </div>
+            <span>Hoặc đăng ký bằng tài khoản email của bạn</span>
+            <div class="text-left">
+                <div class="form-group form-register">
+                    <div class="input-group">
+                        <input type="text" name="name" class="name_regis form-control" value="{{old('name')}}"
+                            placeholder="Tên đăng nhập" />
+                    </div>
+                    <span class="name_error_regis text-danger text-italic"></span>
+
+                </div>
 
 
-                                <div class="form-group mt-4">
-                                    <label> {{ __('Email') }} </label>
-                                    <input type="text" class="form-control" value="{{old('email')}}" name="email"
-                                        placeholder="Enter your email address" />
-                                    @error('email')
-                                    <span class="text-danger text-italic">{{$message}}</span>
-                                    @enderror
-                                </div>
+                <div class="form-group form-register">
+                    <div class="input-group">
+                        <input type="email" name="email" class="email_regis form-control" value="{{old('email')}}"
+                            placeholder="Email" />
+                    </div>
+                    <span class="email_error_regis text-danger text-italic"></span>
+                </div>
 
-                                <label for="password" class="col-form-label text-md-right">{{ __('Password') }}</label>
-                                <div class="input-group" id="show_hide_password">
-                                    <input type="password" class="form-control" value="{{old('password')}}"
-                                        name="password" placeholder="Enter your email address" />
-                                    <div class="input-group-append"> <a href="javascript:;"
-                                            class="input-group-text bg-transparent border-left-0"><i
-                                                class='bx bx-hide'></i></a>
-                                    </div>
-                                    @error('password')
-                                    <span class="text-danger text-italic">{{$message}}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-row mt-3">
-                                    <div class="form-group col">
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                                                checked>
-                                            <label class="custom-control-label" for="customSwitch1">
-                                                {{ __('Remember Me') }} </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col text-right"> <a href="{{ route('password.request') }}"><i
-                                                class='bx bxs-key mr-2'></i> {{ __('Forget Password?') }}</a>
-                                    </div>
-                                </div>
-                                <div class="btn-group mt-3 w-100">
-                                    <button type="submit" class="btn btn-primary btn-block"> {{ __('Login') }}</button>
-                                    <button type="button" class="btn btn-primary"><i class="lni lni-arrow-right"></i>
-                                    </button>
-                                </div>
-                                <hr>
-                                <div class="text-center">
-                                    <p class="mb-0">{{ __('Do not have an account?') }} <a href="{{route('register')}}">
-                                            {{ __('Sign up') }}</a>
-                                    </p>
-                                </div>
-                                <form>
+                <div class="form-group form-register">
+                    <div id="show_hide_password" class="input-group">
+                        <input type="password" name="password" class="pass_regis form-control" placeholder="Mật khẩu" />
+                        <div class="input-group-append"> <a href="javascript:;"
+                                class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye"
+                                    aria-hidden="true"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <img src="{{asset('backend/images/login-images/login-frent-img.jpg')}}"
-                            class="card-img login-img h-100" alt="...">
+                    <span class="pass_error_regis text-danger text-italic"></span>
+                </div>
+
+                <div class="form-group form-register">
+                    <div id="show_hide_password" class="input-group">
+                        <input type="password" name="password_confirmation" class="pass_conf form-control"
+                            placeholder="Nhập lại mật khẩu" />
+                        <div class="input-group-append"> <a href="javascript:;"
+                                class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye"
+                                    aria-hidden="true"></i></a>
+                        </div>
                     </div>
                 </div>
-                <!--end row-->
+            </div>
+            <div class="div_button">
+                <button type="button" class="register mt-3">Đăng ký</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="form-container sign-in-container">
+        <form class="form_login form-horizontal form" role="form">
+            <!-- <form action="{{ route('login') }}" method="post" enctype="multipart/form-data">
+            @csrf -->
+            <h2 class="mt-5">Đăng nhập</h2>
+            <div class="social-container text-left">
+                <a href="{{route('login.facebook')}}" class="social facebook"><i
+                        class="fa fa-facebook mr-2"></i><strong>Facebook</strong></a>
+                <a href="{{route('login.google')}}" class="social google"><i
+                        class="fa fa-google mr-2"></i><strong>Google</strong></a>
+            </div>
+            <span>Hoặc sử dụng tài khoản của bạn</span>
+            <div class="text-left">
+
+                <div class="form-group form-login">
+                    <input type="email" name="email" class="email form-control" value="{{old('email')}}"
+                        placeholder="Email" />
+                    <span class="name_error text-danger"></span>
+                </div>
+
+                <div class="form-group form-login">
+                    <div id="show_hide_password" class="input-group">
+                        <input type="password" name="password" class="password form-control" value="{{old('password')}}"
+                            placeholder="Password" />
+                        <div class="input-group-append"> <a href="javascript:;"
+                                class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye"
+                                    aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <span class="pass_error text-danger text-italic"></span>
+                </div>
+
+                <div class="custom-control custom-switch mt-3">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                    <label class="custom-control-label" for="customSwitch1">Ghi nhớ mật khẩu </label>
+                </div>
+
+            </div>
+
+            <!-- <a href="{{ route('password.request') }}">Quên mật khẩu?</a> -->
+            <div class="div_button">
+                <button class="mt-3 login" type="button">Đăng nhập</button>
+            </div>
+            <a class="text-primary forgot_pass mt-4" href="{{ route('password.request') }}"><i
+                    class='bx bxs-key mr-2'></i> Quên mật khẩu?</a>
+
+        </form>
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>Đăng ký tài khoản để có thể tham gia với chúng tôi</p>
+                <button class="ghost" id="signIn">Đăng nhập</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Đăng nhập tài khoản của bạn để bắt đầu hành trình với chúng tôi</p>
+                <button class="ghost" id="signUp">Đăng ký</button>
             </div>
         </div>
-
     </div>
 </div>
+
+
 
 @endsection
