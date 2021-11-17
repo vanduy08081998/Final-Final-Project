@@ -16,10 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::orderByDESC('blogs.id')
-        ->join('blog_category','blogs.id_blogCate','=','blog_category.id')
-        ->join('users','blogs.poster','=','users.id')
-        ->get();
+        $blogs = Blog::all();
         return view('admin.blog.Blog.index', compact('blogs'));
     }
 
@@ -67,8 +64,9 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $blogs = Blog::find($id);
-        return view('admin.blog.Blog.edit', compact('blogs'));
+        $blog = Blog::find($id);
+        $blogCate = BlogCate::orderByDESC('id')->get();
+        return view('admin.blog.Blog.edit', compact('blog', 'blogCate'));
     }
 
     /**
@@ -81,8 +79,7 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         Blog::find($id)->update($request->all());
-
-        return redirect()->route('Blog.index');
+        return redirect()->route('blogs.index');
     }
 
     /**
@@ -91,9 +88,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete($id)
+    public function destroy(Blog $blog)
     {
-        Blog::find($id)->delete();
+        $blog->delete();
         return redirect()->back();
     }
 

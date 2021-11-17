@@ -16,7 +16,16 @@ class Blog extends Model
 
     public $timestamp = true;
 
-    public $primaryKey = 'id';
+    
+   /**
+    * Get the user that owns the Blog
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function user()
+   {
+       return $this->belongsTo(User::class, 'poster');
+   }
 
         /**
      * Get the category that owns the Product
@@ -28,13 +37,4 @@ class Blog extends Model
         return $this->belongsTo(BlogCate::class, 'id_blogCate');
     }
 
-        /**
-     * Get all of the billdetails for the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function user()
-    {
-        return $this->hasMany(User::class, 'poster');
-    }
 }

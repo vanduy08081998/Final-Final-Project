@@ -29,22 +29,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($blogs as $blogs)
+                                    @foreach ($blogs as $blog)
                                         <tr>
                                             <td style="text-align: center;">
-                                                {{ $blogs->blog_title }}
+                                                {{ $blog->blog_title }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {{ $blogs->blogCate_name }}
+                                                {{ $blog->blogCate()->first()->blogCate_name }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {{ $blogs->blog_description }}
+                                                {{ $blog->blog_description }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {{ $blogs->name }}
+                                                @php
+                                                    var_dump($blog->user()->first())
+                                                @endphp
+                                                {{-- {{ $blog->user->name}} --}}
                                             </td>
                                             <td style="text-align: center;">
-                                                {{ $blogs->created_at }}
+                                                {{ $blog->created_at }}
                                             </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
@@ -53,9 +56,9 @@
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                                                         <a class="dropdown-item text-warning"
-                                                            href="#">Sửa</a>
+                                                            href="{{ route('blogs.edit', $blog->id) }}">Sửa</a>
                                                         <form
-                                                            action="#"
+                                                            action="{{ route('blogs.destroy', $blog->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')

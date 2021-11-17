@@ -57,7 +57,7 @@
                                     @enderror
 
                                     <div class="form-group">
-                                        <label for="">Từ khóa</label>
+                                        <label for="">Từ khóa</label><br>
                                         <input type="text" data-role="tagsinput" class="form-control" name="meta_keywords"
                                             value="" placeholder="Enter your meta keywords">
                                     </div>
@@ -123,17 +123,12 @@
 @push('script')
 
     <script>
-        
+      CKEDITOR.replace( 'blog_content' )
         $(document).ready(function() {
             $('.js-example-basic-multiple').selectpicker();
         });
         
     
 
-    </script>
-
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#blog_content'))
     </script>
 @endpush

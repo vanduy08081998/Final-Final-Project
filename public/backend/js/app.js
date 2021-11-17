@@ -497,4 +497,5 @@ function responsive_filemanager_callback(field_id){
     $(`#${preview}`).html(`<img src="${dir}/${url}" width="80" hetght="80">`)
     $(`input[name="${upload}"]`).val(url)
   }
+  // console.log(dir)
 }

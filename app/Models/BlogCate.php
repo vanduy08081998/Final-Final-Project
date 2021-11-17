@@ -24,7 +24,7 @@ class BlogCate extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function blogs(): HasMany
+    public function blogs()
     {
         return $this->hasMany(Blog::class);
     }
