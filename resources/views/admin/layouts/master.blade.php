@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <meta name="description" content="Smarthr - Bootstrap Admin Template">
-  <title>Dashboard - @yield('title')</title>
+  <title>Big Deals - @yield('title')</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicon -->
@@ -67,8 +67,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js">
   </script>
-  <script script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js">
-  </script>
+  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   <script src="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script src="{{ asset('Backend/plugins/daterangepicker/moment.min.js') }}"></script>

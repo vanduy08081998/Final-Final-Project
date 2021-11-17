@@ -8,11 +8,6 @@
 <div class="content container-fluid">
   <div class="row">
 
-    <style>
-      .text-danger {
-        font-style: italic;
-      }
-    </style>
 
     <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
 
@@ -59,8 +54,8 @@
                     @enderror
 
                     <div class="form-group">
-                      <label for="">Từ khóa (SEO)</label>
-                      <input type="text" data-role="tagsinput" class="form-control" name="meta_keywords" value=""
+                      <label for="">Từ khóa (SEO)</label><br>
+                      <input type="text" data-role="tagsinput" style="width: 100%;" class="form-control" name="meta_keywords" value=""
                         placeholder="Enter your meta keywords">
                     </div>
 
@@ -113,14 +108,14 @@
                             <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                           </div>
                           <div class="custom-file">
-                            <input type="file" id="gallery" data-input="gallery" data-preview="gallery" class="custom-file-input gallery" id="inputGroupFile01"
+                            <input type="file" id="gallery" data-input="gallery_image" data-preview="gallery_image_preview" class="custom-file-input gallery" id="inputGroupFile01"
                               aria-describedby="inputGroupFileAddon01">
                             <label class="custom-file-label" for="inputGroupFile01">Chọn từ máy tính</label>
-                            <input type="hidden" name="product_gallery" id="gallery">
+                            <input type="hidden" name="product_gallery" id="gallery_image">
                           </div>
                         </div>
                       </div>
-                      <div id="gallery" class="render_image_input" style="margin-top:15px;max-height:100px;">
+                      <div id="gallery_image_preview" class="render_image_input" style="margin-top:15px;max-height:100px;">
                       </div>
                       <div>
                       </div>
@@ -496,14 +491,23 @@
 
 @push('script')
 <script>
-  $(document).ready(function () {
-            $('.js-example-basic-multiple').selectpicker();
-            $('input[name="sale_dates"]').daterangepicker();
-            $('input[name="expiry"]').daterangepicker();
-            var route_prefix = `${$('#path').val()}/laravel-filemanager`;
-            $('.gallery').filemanager('image', {prefix: route_prefix});
-            $('.thumbnail').filemanager('image', {prefix: route_prefix});
-        });
+
+  
+
+  const library = function(){
+    CKEDITOR.replace( 'meta_description' );
+    CKEDITOR.replace( 'short_description' );
+    CKEDITOR.replace( 'long_description' );
+    $('.js-example-basic-multiple').selectpicker();
+    $('input[name="sale_dates"]').daterangepicker();
+    $('input[name="expiry"]').daterangepicker();
+    var route_prefix = `${$('#path').val()}/laravel-filemanager`;
+    $('.gallery').filemanager('image', {prefix: route_prefix});
+    $('.thumbnail').filemanager('image', {prefix: route_prefix});
+  }
+
+  library()
+
 
 
 
@@ -585,13 +589,5 @@
         
 </script>
 
-<script>
-  ClassicEditor
-            .create(document.querySelector('#meta_desc'))
 
-        ClassicEditor
-          .create(document.querySelector('#short_description'))
-        ClassicEditor
-          .create(document.querySelector('#long_description'))
-</script>
 @endpush
