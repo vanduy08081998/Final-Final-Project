@@ -35,6 +35,9 @@ use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
@@ -53,11 +56,11 @@ Route::prefix('/')->group(function () {
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
         Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
         Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
     });
 });
 
