@@ -30,6 +30,10 @@ class AddProductRequest extends FormRequest
             'product_gallery' => 'required',
             'product_id_category' => 'required',
             'unit_price' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+            'product_id_category' => 'required',
+            
         ];
     }
 }
