@@ -2,19 +2,20 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-
-use App\Http\Controllers\Clients\HomeController as HomeClient;
-use App\Http\Controllers\Clients\CheckoutController;
-use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Admin\BlogCateController;
+
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Clients\AccountController;
+use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Clients\CheckoutController;
+use App\Http\Controllers\Clients\HomeController as HomeClient;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 
 
@@ -34,6 +35,9 @@ use App\Http\Controllers\Clients\AccountController;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
@@ -52,11 +56,11 @@ Route::prefix('/')->group(function () {
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
         Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
         Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
     });
 });
 
@@ -78,8 +82,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
     Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
-    //Discount
-    Route::resource('/discount', DiscountController::class);
 
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
@@ -93,7 +95,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
- 
+
     Route::resource('/user', UserController::class );
 
     //Route prefix function
@@ -101,6 +103,9 @@ Route::prefix('admin')->group(function () {
     Route::get('filemanager', function () {
         return view('admin.FileManager.index');
     })->name('filemanager');
+
+    Route::resource('blogCate', BlogCateController::class);
+    Route::resource('blogs', BlogController::class);
 });
 
 
