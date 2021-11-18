@@ -92,7 +92,24 @@
                 <div class="card">
                   <div class="card-header">Hình ảnh sản phẩm</div>
                   <div class="card-body">
-                    
+                    <div class="form-group">
+                      <label for="">Hình ảnh sản phẩm (1 hình 300 x 300)</label>
+                      <div class="file-options">
+												<a class="btn-file iframe-btn" href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image" style="color: #1e272e; font-size: 24px;"><input class="upload"><i class="fa fa-upload"></i></span></a>
+											</div>
+                      <input type="hidden" id="image" data-upload="product_image" data-preview="image__preview">
+                      <input type="hidden" name="product_image">
+                      <div id="image__preview"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="">Thư viện ảnh sản phẩm (200 x 200 - Hơn 1 hình)</label>
+                      <div class="file-options">
+												<a class="btn-file iframe-btn" href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=gallery" style="color: #1e272e; font-size: 24px;"><input class="upload"><i class="fa fa-upload"></i></span></a>
+											</div>
+                      <input type="hidden" id="gallery" data-upload="product_gallery" data-preview="gallery__preview">
+                      <input type="hidden" name="product_gallery">
+                      <div id="gallery__preview"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -100,7 +117,7 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
                 <div class="card">
-                  <div class="card-header">Hình ảnh sản phẩm</div>
+                  <div class="card-header">Mô tả sản phẩm</div>
                   <div class="card-body">
                     <div class="form-group">
                       <label>Mô tả ngắn</label>
@@ -182,10 +199,7 @@
                                   <label>Giá gốc (*)</label>
                                   <input type="text" name="unit_price" id="" class="form-control">
                                 </div>
-                                <div class="form-group mb-3">
-                                  <label>Số lượng nhập kho (*)</label>
-                                  <input type="number" name="unit_quantity" id="unit_quantity" class="form-control">
-                                </div>
+                              
                                 <div class="form-group mb-3">
                                   <label>Liên kết bên ngoài</label>
                                   <input type="text" name="ex-link" id="" class="form-control"
@@ -467,11 +481,15 @@
 
 @push('script')
 <script>
-  $(document).ready(function () {
+            CKEDITOR.replace( 'meta_description' )
+            CKEDITOR.replace('short_description');
+            CKEDITOR.replace('long_description');
+
             $('.js-example-basic-multiple').selectpicker();
             $('input[name="sale_dates"]').daterangepicker();
             $('input[name="expiry"]').daterangepicker();
-        });
+            
+       
 
 
 
@@ -551,15 +569,5 @@
         isProductAttribute('true')
         
         
-</script>
-
-<script>
-  ClassicEditor
-            .create(document.querySelector('#meta_desc'))
-
-        ClassicEditor
-          .create(document.querySelector('#short_description'))
-        ClassicEditor
-          .create(document.querySelector('#long_description'))
 </script>
 @endpush
