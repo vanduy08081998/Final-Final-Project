@@ -50,8 +50,21 @@ try {
             $cycle = false;
         }
         if (file_exists($path . "config.php")) {
+            $configMain = $config;
             $configTemp = include $path . 'config.php';
-            $config = array_merge($config, $configTemp);
+            if(is_array($configTemp) && count($configTemp) > 0){
+                $config = array_merge($configMain, $configTemp);
+                $config['ext'] = array_merge(
+                    $config['ext_img'],
+                    $config['ext_file'],
+                    $config['ext_misc'],
+                    $config['ext_video'],
+                    $config['ext_music']
+                );
+            }
+            else{
+                $config = $configMain;
+            }
             //TODO switch to array
             $cycle = false;
         }
@@ -63,35 +76,36 @@ try {
     if (trans("Upload_error_messages") !== "Upload_error_messages") {
         $messages = trans("Upload_error_messages");
     }
+    if ($config['url_upload']) {
+        // make sure the length is limited to avoid DOS attacks
+        if (isset($_POST['url']) && strlen($_POST['url']) < 2000) {
+            $url = $_POST['url'];
+            $urlPattern = '/^(https?:\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/?=&#]{1}[\da-z\.-]+)*[\/\?]?$/i';
 
-    // make sure the length is limited to avoid DOS attacks
-    if (isset($_POST['url']) && strlen($_POST['url']) < 2000) {
-        $url = $_POST['url'];
-        $urlPattern = '/^(https?:\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/?=&#]{1}[\da-z\.-]+)*[\/\?]?$/i';
+            if (preg_match($urlPattern, $url)) {
+                $temp = tempnam('/tmp', 'RF');
 
-        if (preg_match($urlPattern, $url)) {
-            $temp = tempnam('/tmp','RF');
-
-            $ch = curl_init($url);
-            $fp = fopen($temp, 'wb');
-            curl_setopt($ch, CURLOPT_FILE, $fp);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_exec($ch);
-            if (curl_errno($ch)) {
+                $ch = curl_init($url);
+                $fp = fopen($temp, 'wb');
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_exec($ch);
+                if (curl_errno($ch)) {
+                    curl_close($ch);
+                    throw new Exception('Invalid URL');
+                }
                 curl_close($ch);
-                throw new Exception('Invalid URL');
-            }
-            curl_close($ch);
-            fclose($fp);
+                fclose($fp);
 
-            $_FILES['files'] = array(
-                'name' => array(basename($_POST['url'])),
-                'tmp_name' => array($temp),
-                'size' => array(filesize($temp)),
-                'type' => null
-            );
-        } else {
-            throw new Exception('Is not a valid URL.');
+                $_FILES['files'] = array(
+                    'name' => array(basename($_POST['url'])),
+                    'tmp_name' => array($temp),
+                    'size' => array(filesize($temp)),
+                    'type' => null
+                );
+            } else {
+                throw new Exception('Is not a valid URL.');
+            }
         }
     }
 
