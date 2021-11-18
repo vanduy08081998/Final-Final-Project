@@ -82,7 +82,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
     Route::resource('/brand', BrandController::class );
 
-
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
