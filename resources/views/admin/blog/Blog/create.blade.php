@@ -11,7 +11,7 @@
                     @csrf
                     @method('POST')
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-8 col-sm-12 col-lg-8 col-8 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-8 col-8 col-xl-8">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-8 col-sm-12 col-lg-8 col-8 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-8 col-8 col-xl-8">
                             <div class="card">
                                 <div class="card-body">
                                     <input type="hidden" name="poster" value="1">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-8 col-sm-12 col-lg-8 col-8 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-8 col-12 col-xl-8">
                             <div class="card">
                                 <div class="card-header">Ảnh tiêu đề</div>
                                 <div class="card-body">

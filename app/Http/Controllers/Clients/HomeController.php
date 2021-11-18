@@ -21,6 +21,14 @@ class HomeController extends Controller
         ]);
     }
 
+    public function blogSingle($id){
+        $blogs = Blog::orderByDESC('id')
+        ->where('id', $id)->first();
+        return view('clients.about.blog-single',[
+            'blogs' => $blogs
+        ]);;
+    }
+
     public function contact(){
         return view('clients.about.contact');
     }
