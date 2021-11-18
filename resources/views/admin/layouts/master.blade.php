@@ -25,8 +25,10 @@
 				href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 		<link rel="stylesheet"
 				href="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
+        <!-- Change -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
+        {{-- <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body>
@@ -45,7 +47,7 @@
 
 				</div>
 
-        
+
 				<!-- /Page Wrapper -->
 
 		</div>
@@ -72,9 +74,11 @@
 		</script>
 		<script src="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}">
 		</script>
+    <!-- Commit change -->
     <script src="{{ asset('backend/plugins/daterangepicker/moment.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('backend/js/fancybox.js') }}"></script>
+    <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
 		@stack('script')
 </body>
 
