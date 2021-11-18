@@ -34,7 +34,7 @@
                                                 {{ $blogCate->blogCate_name }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {!! $blogCate->meta_desc !!}
+                                                {!! $blogCate->meta_title !!}
                                             </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
