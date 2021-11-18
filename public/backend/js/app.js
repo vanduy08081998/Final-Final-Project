@@ -478,3 +478,24 @@ function delete_variants(id) {
     });
 }
 
+
+
+function responsive_filemanager_callback(field_id){
+  var url=$('#'+field_id).val();      
+  let preview = $(`#${field_id}`).attr('data-preview');
+  let dir = $('#__dir').val()
+  let upload = $(`#${field_id}`).attr('data-upload')      
+  try{
+    let args = $.parseJSON(url);       
+    let output = '';
+    $(`input[name="${upload}"]`).val(args.join(','))
+    for(let i = 0; i<args.length; i++ ){
+      output += `<img src="${dir}/${args[i]}" width="80" hetght="80">`
+    }
+    $(`#${preview}`).html(output)
+  }catch(e){
+    $(`#${preview}`).html(`<img src="${dir}/${url}" width="80" hetght="80">`)
+    $(`input[name="${upload}"]`).val(url)
+  }
+  // console.log(dir)
+}

@@ -1,4 +1,4 @@
-@extends('layouts.admin_master')
+@extends('admin.layouts.master')
 
 @section('title')
     Thương hiệu | Thùng rác

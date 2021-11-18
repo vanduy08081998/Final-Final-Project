@@ -13,6 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -21,8 +22,20 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'provider_id',
+        'avatar',
         'password',
     ];
+
+     /**
+     * Get all of the blogs for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +55,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+   
 }

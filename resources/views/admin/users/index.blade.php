@@ -1,7 +1,7 @@
-@extends('layouts.admin_master')
+@extends('admin.layouts.master')
 
 @section('title')
-		Tài khoản
+		Quản lý tài khoản
 @endsection
 
 @section('content')
