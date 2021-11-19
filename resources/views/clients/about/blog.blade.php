@@ -105,31 +105,17 @@
                         data-simplebar-auto-hide="true">
                         <!-- Categories-->
                         <div class="widget widget-links mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
-                            <h3 class="widget-title">Blog categories</h3>
+                            <h3 class="widget-title">Danh mục bài viết</h3>
                             <ul class="widget-list">
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Online shopping</span><span
-                                            class="fs-xs text-muted ms-3">18</span></a></li>
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Fashion</span><span class="fs-xs text-muted ms-3">25</span></a></li>
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Personal finance</span><span
-                                            class="fs-xs text-muted ms-3">13</span></a></li>
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Travel &amp; vacation</span><span
-                                            class="fs-xs text-muted ms-3">7</span></a></li>
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Lifestyle</span><span class="fs-xs text-muted ms-3">34</span></a>
-                                </li>
-                                <li class="widget-list-item"><a
-                                        class="widget-list-link d-flex justify-content-between align-items-center"
-                                        href="#"><span>Technology</span><span class="fs-xs text-muted ms-3">6</span></a>
-                                </li>
+                                @foreach ($blogCate as $blogCate)
+                                    <li class="widget-list-item">
+                                        <a class="widget-list-link d-flex justify-content-between align-items-center"
+                                            href="#">
+                                            <span>{{ $blogCate->blogCate_name }}</span>
+                                            <span class="fs-xs text-muted ms-3" onload="CateBlog($blogCate->id)"></span>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <!-- Trending posts-->
@@ -170,4 +156,25 @@
             </aside>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        function CateBlog(id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: '{{ route('clients.CateBlog') }}',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#CateBlog').html(response.CateBlog)
+                }
+            });
+        }
+    </script>
 @endsection
