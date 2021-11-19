@@ -12,6 +12,7 @@
 		<link rel="stylesheet"
 				href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="{{ URL::to('backend/auth/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 
 <body>
@@ -20,6 +21,7 @@
 		<script type="text/javascript"
 		  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 		<script src="{{ URL::to('backend/auth/script.js') }}"></script>
+        <script src="{{ URL::to('backend/js/user.js')}}"></script>
 </body>
 
 </html>
