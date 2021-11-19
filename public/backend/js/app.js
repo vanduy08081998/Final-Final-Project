@@ -481,12 +481,12 @@ function delete_variants(id) {
 
 
 function responsive_filemanager_callback(field_id){
-  var url=$('#'+field_id).val();      
+  var url=$('#'+field_id).val();
   let preview = $(`#${field_id}`).attr('data-preview');
   let dir = $('#__dir').val()
-  let upload = $(`#${field_id}`).attr('data-upload')      
+  let upload = $(`#${field_id}`).attr('data-upload')
   try{
-    let args = $.parseJSON(url);       
+    let args = $.parseJSON(url);
     let output = '';
     $(`input[name="${upload}"]`).val(args.join(','))
     for(let i = 0; i<args.length; i++ ){
@@ -499,3 +499,31 @@ function responsive_filemanager_callback(field_id){
   }
   // console.log(dir)
 }
+
+
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass("bx-hide");
+            $('#show_hide_password i').removeClass("bx-show");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass("bx-hide");
+            $('#show_hide_password i').addClass("bx-show");
+        }
+    });
+
+    $("#show_hide_password2 a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password2 input').attr("type") == "text") {
+            $('#show_hide_password2 input').attr('type', 'password');
+            $('#show_hide_password2 i').addClass("bx-hide");
+            $('#show_hide_password2 i').removeClass("bx-show");
+        } else if ($('#show_hide_password2 input').attr("type") == "password") {
+            $('#show_hide_password2 input').attr('type', 'text');
+            $('#show_hide_password2 i').removeClass("bx-hide");
+            $('#show_hide_password2 i').addClass("bx-show");
+        }
+    });
+
