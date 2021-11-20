@@ -51,43 +51,6 @@
                             <div class="col-lg-7 pe-lg-0">
                                 <div class="product-gallery">
                                     <div class="product-gallery-preview order-sm-2">
-<<<<<<< HEAD
-                                        <div class="product-gallery-preview-item active" id="first"><img
-                                                class="image-zoom"
-                                                src="{{ asset('frontend/img/shop/single/gallery/06.jpg') }}"
-                                                data-zoom="{{ asset('frontend/img/shop/single/gallery/06.jpg') }}"
-                                                alt="Product image">
-                                            <div class="image-zoom-pane"></div>
-                                        </div>
-                                        <div class="product-gallery-preview-item" id="second"><img class="image-zoom"
-                                                src="{{ asset('frontend/img/shop/single/gallery/07.jpg') }}"
-                                                data-zoom="{{ asset('frontend/img/shop/single/gallery/07.jpg') }}"
-                                                alt="Product image">
-                                            <div class="image-zoom-pane"></div>
-                                        </div>
-                                        <div class="product-gallery-preview-item" id="third"><img class="image-zoom"
-                                                src="{{ asset('frontend/img/shop/single/gallery/08.jpg') }}"
-                                                data-zoom="{{ asset('frontend/img/shop/single/gallery/08.jpg') }}"
-                                                alt="Product image">
-                                            <div class="image-zoom-pane"></div>
-                                        </div>
-
-                                    </div>
-                                    <div class="product-gallery-thumblist order-sm-1"><a
-                                            class="product-gallery-thumblist-item active" href="#first"><img
-                                                src="{{ asset('frontend/img/shop/single/gallery/06.jpg') }}"
-                                                alt="Product thumb"></a><a class="product-gallery-thumblist-item"
-                                            href="#second"><img
-                                                src="{{ asset('frontend/img/shop/single/gallery/07.jpg') }}"
-                                                alt="Product thumb"></a><a class="product-gallery-thumblist-item"
-                                            href="#third"><img
-                                                src="{{ asset('frontend/img/shop/single/gallery/08.jpg') }}"
-                                                alt="Product thumb"></a><a class="product-gallery-thumblist-item video-item"
-                                            href="https://www.youtube.com/watch?v=nrQevwouWn0">
-                                            <div class="product-gallery-thumblist-item-text"><i
-                                                    class="ci-video"></i>Video</div>
-                                        </a></div>
-=======
                                         <div class="product-gallery-preview-item active" id="1"><img class="image-zoom"
                                                 src="{{ asset($product->product_image) }}"
                                                 data-zoom="{{ asset($product->product_image) }}" alt="Product image">
@@ -113,7 +76,6 @@
                                                     src="{{ asset($value) }}" alt="Product thumb"></a>
                                         @endforeach
                                     </div>
->>>>>>> main
                                 </div>
                             </div>
                             <!-- Product details-->
