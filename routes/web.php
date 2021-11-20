@@ -115,8 +115,9 @@ Route::resource('/users', UserController::class );
 Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
 Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
 Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-
-
+route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
 });
 
 
