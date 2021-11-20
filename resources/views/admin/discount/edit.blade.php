@@ -125,8 +125,8 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">Số lượng mã</label>
-                                        <input class="form-control" data-role="tagsinput" name="discount_limit"
-                                            value="{{ old('discount_limit') }}" type="text">
+                                        <input class="form-control" name="discount_limit"
+                                            value="{{ $discountId->discount_limit }}" type="text">
                                         @error('discount_limit')
                                             <span class="text-danger">{{ $errors->first('discount_limit') }}</span>
                                         @enderror

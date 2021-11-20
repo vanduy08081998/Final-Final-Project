@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
@@ -94,7 +95,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
-
+    // Discount
+    Route::resource('/discount', DiscountController::class);
     Route::resource('/user', UserController::class );
 
 
@@ -123,4 +125,3 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 //Login Facebook
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
-
