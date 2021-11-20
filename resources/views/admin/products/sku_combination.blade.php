@@ -47,20 +47,15 @@
                class="form-control">
       </td>
       <td>
-        <div class=" input-group " data-type="image">
-          <div class="input-group-prepend">
-            <div class="input-group-text bg-soft-secondary font-weight-medium">
-              {{ trans('Browse') }}
-            </div>
+        <div class="form-group">
+          <label for="">Hình ảnh sản phẩm (1 hình 300 x 300)</label>
+          <div class="file-options">
+            <a class="btn-file iframe-btn" href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image_{{ $str }}" style="color: #1e272e; font-size: 24px;"><input class="upload"><i class="fa fa-upload"></i></span></a>
           </div>
-          <div class="form-control file-amount text-truncate"
-               onclick="singleModalShow('img_{{ $str }}','file-preview_{{ $str }}')">
-            {{ trans('Choose File') }}
-          </div>
-          <input type="hidden" name="img_{{ $str }}" id="img_{{ $str }}"
-                 class="selected-files">
+          <input type="hidden" id="image_{{ $str }}" data-upload="img_{{ $str }}" data-preview="image__preview__{{ $str }}">
+          <input type="hidden" name="img_{{ $str }}">
+          <div id="image__preview__{{ $str }}"></div>
         </div>
-        <div class="file-preview box sm" id="file-preview_{{ $str }}"></div>
       </td>
       {{-- <td>
         <button type="button" class="btn btn-icon btn-sm btn-danger"
@@ -71,6 +66,14 @@
     @endforeach
   </tbody>
 </table>
+<script>
+  $('.iframe-btn').fancybox({	
+    'width'		: 900,
+    'height'	: 600,
+    'type'		: 'iframe',
+    'autoScale'    	: false
+  });
+</script>
 @else
 
 @endif

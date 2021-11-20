@@ -23,9 +23,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('id_blogCate')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -94,7 +91,7 @@
                                           </div>
                                         </div>
                                         <div id="preview">
-                                              
+
                                         </div>
                                     </div>
                                     <div id="render__image__single"></div>
@@ -123,12 +120,18 @@
 @push('script')
 
     <script>
+        $('.iframe-btn').fancybox({
+            'width'		: 900,
+            'height'	: 600,
+            'type'		: 'iframe',
+            'autoScale'    	: false
+        });
       CKEDITOR.replace( 'blog_content' )
         $(document).ready(function() {
             $('.js-example-basic-multiple').selectpicker();
         });
-        
-    
+
+
 
     </script>
 @endpush

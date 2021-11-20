@@ -16,7 +16,7 @@ class Blog extends Model
 
     public $timestamp = true;
 
-    
+
    /**
     * Get the user that owns the Blog
     *
