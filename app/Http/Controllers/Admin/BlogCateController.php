@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\BlogCate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BlogCate;
+use App\Http\Requests\AddBlogCateRequest;
+
 
 class BlogCateController extends Controller
 {
@@ -35,7 +37,7 @@ class BlogCateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, AddBlogCateRequest $validate)
     {
         BlogCate::create($request->all());
         return redirect()->route('blogCate.index');

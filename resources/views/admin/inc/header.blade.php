@@ -4,8 +4,7 @@
     <!-- Logo -->
     <div class="header-left">
         <a href="#" class="logo">
-            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="45"
-                style="margin-left: -35px;" alt="">
+            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="45" style="margin-left: -35px;" alt="">
         </a>
     </div>
     <!-- /Logo -->
@@ -242,19 +241,30 @@
             </div>
         </li>
         <!-- /Message Notifications -->
-
+        @if(Auth::user())
         <li class="nav-item dropdown has-arrow main-drop">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <span class="user-img"><img src="{{ URL::to('backend/img/profiles/avatar-21.jpg') }}" alt="">
+                <span class="user-img">
+                    @if(Auth::user()->avatar)
+                    <img src="{{ Auth::user()->avatar }}" alt="">
+                    @else
+                    <img src="{{ URL::to('backend/img/profiles/avt.png') }}" alt="">
+                    @endif
                     <span class="status online"></span></span>
-                <span>Soeng Souy</span>
+                <span>{{Auth::user()->name}}</span>
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <form action="{{route('logout')}}" method="post">
+                    @csrf
+                    <a class="dropdown-item"><button type="submit">Logout</a>
+                </form>
+
             </div>
         </li>
+        @endif
+
     </ul>
     <!-- /Header Menu -->
 

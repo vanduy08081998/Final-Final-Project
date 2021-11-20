@@ -52,7 +52,7 @@ Route::prefix('/')->group(function () {
     Route::prefix('/shop')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
-        Route::get('/product-details', [ProductController::class, 'productDetails'])->name('shop.product-details');
+        Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
     });
     Route::prefix('/cart')->group(function () {
         Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');
@@ -100,7 +100,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('/user', UserController::class );
 
 
-    Route::resource('/user', UserController::class );
     Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
 
@@ -110,6 +109,14 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
+
+    //user
+Route::resource('/users', UserController::class );
+Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
+Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+
+
 });
 
 
@@ -117,6 +124,7 @@ Route::group(['prefix' => 'admin'], function(){
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 //Login Google
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');

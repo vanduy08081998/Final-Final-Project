@@ -1,7 +1,7 @@
 @extends('layouts.client_master')
 
 
-@section('title', 'Chi tiết sản phẩm')
+@section('title', $product->product_name)
 
 
 @section('content')
@@ -20,7 +20,7 @@
                 </nav>
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-                <h1 class="h3 text-light mb-2">Smartwatch Youth Edition</h1>
+                <h1 class="h3 text-light mb-2">{{ $product->product_name }}</h1>
                 <div>
                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                             class="star-rating-icon ci-star-filled active"></i><i
@@ -51,6 +51,7 @@
                             <div class="col-lg-7 pe-lg-0">
                                 <div class="product-gallery">
                                     <div class="product-gallery-preview order-sm-2">
+<<<<<<< HEAD
                                         <div class="product-gallery-preview-item active" id="first"><img
                                                 class="image-zoom"
                                                 src="{{ asset('frontend/img/shop/single/gallery/06.jpg') }}"
@@ -86,14 +87,41 @@
                                             <div class="product-gallery-thumblist-item-text"><i
                                                     class="ci-video"></i>Video</div>
                                         </a></div>
+=======
+                                        <div class="product-gallery-preview-item active" id="1"><img class="image-zoom"
+                                                src="{{ asset($product->product_image) }}"
+                                                data-zoom="{{ asset($product->product_image) }}" alt="Product image">
+                                            <div class="image-zoom-pane"></div>
+                                        </div>
+                                        @foreach(explode(',', $product->product_galley) as $key => $val)
+                                        <div class="product-gallery-preview-item" id="{{ $key }}"><img class="image-zoom"
+                                                src="{{ asset($val) }}"
+                                                data-zoom="{{ asset($val) }}" alt="Product image">
+                                            <div class="image-zoom-pane"></div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="product-gallery-thumblist order-sm-1">
+
+                                        <a class="product-gallery-thumblist-item" href="#1"><img
+                                                src="{{ asset($product->product_image) }}" alt="Product thumb"></a>
+                                        @php
+                                            $gallery = explode(',', $product->product_gallery)
+                                        @endphp
+                                        @foreach($gallery as $key => $value)
+                                            <a class="product-gallery-thumblist-item" href="#{{ $key }}"><img
+                                                    src="{{ asset($value) }}" alt="Product thumb"></a>
+                                        @endforeach
+                                    </div>
+>>>>>>> main
                                 </div>
                             </div>
                             <!-- Product details-->
                             <div class="col-lg-5 pt-4 pt-lg-0">
                                 <div class="product-details ms-auto pb-3">
-                                    <div class="h3 fw-normal text-accent mb-3 me-1">$124.<small>99</small></div>
-                                    <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span
-                                            class="text-muted" id="colorOption">Dark blue/Orange</span></div>
+                                    <div class="h3 fw-normal text-accent mb-3 me-1">{{ number_format($product->unit_price) }}</div>
+{{--                                    <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span--}}
+{{--                                            class="text-muted" id="colorOption">Dark blue/Orange</span></div>--}}
                                     <div class="position-relative me-n4 mb-3">
                                         <div class="form-check form-option form-check-inline mb-2">
                                             <input class="form-check-input" type="radio" name="color" id="color1"
@@ -160,36 +188,51 @@
                                     <!-- Product panels-->
                                     <div class="accordion mb-4" id="productPanels">
                                         <div class="accordion-item">
+<<<<<<< HEAD
                                             <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions"
                                                     role="button" data-bs-toggle="collapse" aria-expanded="true"
                                                     aria-controls="shippingOptions"><i
                                                         class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Tùy
                                                     chọn giao hàng</a>
+=======
+                                            <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions" role="button"
+                                                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i
+                                                        class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Giao hàng</a>
+>>>>>>> main
                                             </h3>
                                             <div class="accordion-collapse collapse show" id="shippingOptions"
                                                 data-bs-parent="#productPanels">
                                                 <div class="accordion-body fs-sm">
                                                     <div class="d-flex justify-content-between border-bottom pb-2">
                                                         <div>
-                                                            <div class="fw-semibold text-dark">Local courier shipping</div>
-                                                            <div class="fs-sm text-muted">2 - 4 days</div>
+                                                            <div class="fw-semibold text-dark">Ngày vận chuyển ước tính</div>
+                                                            <div class="fs-sm text-muted">{{ $product->shipping_day }} Ngày</div>
                                                         </div>
-                                                        <div>$16.50</div>
                                                     </div>
                                                     <div class="d-flex justify-content-between border-bottom py-2">
                                                         <div>
-                                                            <div class="fw-semibold text-dark">UPS ground shipping</div>
-                                                            <div class="fs-sm text-muted">4 - 6 days</div>
+                                                            <div class="fw-semibold text-dark">Phí vận chuyển</div>
+                                                            @if($product->shipping_stock == NULL)
+                                                                <div class="fs-sm text-muted">{{ $product->shipping_type }}</div>
+                                                            @else
+                                                                <div class="fs-sm text-muted">{{ $product->shipping_stock }} VND</div>
+                                                            @endif
+
                                                         </div>
-                                                        <div>$19.00</div>
+
                                                     </div>
                                                     <div class="d-flex justify-content-between pt-2">
                                                         <div>
+<<<<<<< HEAD
                                                             <div class="fw-semibold text-dark">Local pickup from store
                                                             </div>
                                                             <div class="fs-sm text-muted">&mdash;</div>
+=======
+                                                            <div class="fw-semibold text-dark">VAT</div>
+                                                            <div class="fs-sm text-muted">{{ $product->vat }}{{ $product->vat_unit }}</div>
+>>>>>>> main
                                                         </div>
-                                                        <div>$0.00</div>
+
                                                     </div>
                                                 </div>
                                             </div>
