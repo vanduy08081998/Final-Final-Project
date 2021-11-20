@@ -19,7 +19,8 @@ class ProductController extends Controller
         return view('clients.shop.shop-list-ls');
     }
 
-    public function productDetails() {
-        return view('clients.shop.product-details');
+    public function productDetails($slug) {
+        $product = Product::where('product_slug', $slug)->first();
+        return view('clients.shop.product-details', compact('product'));
     }
 }

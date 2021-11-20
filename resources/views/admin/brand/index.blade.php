@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <div class="card-title">
                             <h4 class="mb-0">Liệt kê thương hiệu</h4>
-                            <a href="{{ url('admin/brand/trash') }}" class="btn btn-warning">Thùng rác
+                            <a href="{{ asset('admin/brand/trash') }}" class="btn btn-warning">Thùng rác
                                 ({{ $countTrashed }})</a>
                         </div>
                         <hr />
