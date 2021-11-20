@@ -63,7 +63,7 @@
                     @enderror
 
                     <div class="form-group">
-                      <label for="">Từ khóa (SEO)</label>
+                      <label for="">Từ khóa (SEO)</label><br>
                       <input type="text" data-role="tagsinput" class="form-control"
                              name="meta_keywords" value="" placeholder="Enter your meta keywords">
                     </div>
@@ -199,7 +199,7 @@
                                   <label>Giá gốc (*)</label>
                                   <input type="text" name="unit_price" id="" class="form-control">
                                 </div>
-                              
+
                                 <div class="form-group mb-3">
                                   <label>Liên kết bên ngoài</label>
                                   <input type="text" name="ex-link" id="" class="form-control"
@@ -226,6 +226,7 @@
                                   </div>
                                   <div id="customer_choice_options">
                                   </div>
+                                    <input type="hidden" name="total_quantity" id="totalquantity">
                                 </div>
                                 <input type="hidden" id="customer_choice_option_values" value="">
                                 @error('unit_price')
@@ -488,8 +489,8 @@
             $('.js-example-basic-multiple').selectpicker();
             $('input[name="sale_dates"]').daterangepicker();
             $('input[name="expiry"]').daterangepicker();
-            
-       
+
+
 
 
 
@@ -529,6 +530,16 @@
                 data: $('#choice-form').serialize(),
                 success: function (response) {
                     $('#sku_combination').html(response);
+                    // let qtyPro = $('.qty');
+                    // let quantity = 0;
+                    // for(let i = 0; i< qtyPro.length; i++){
+                    //     quantity += Number(qtyPro[i].value);
+                    //     qtyPro[i].addEventListener('keyup', function () {
+                    //         quantity += Number(qtyPro[i].value);
+                    //     })
+                    // }
+                    // console.log(quantity)
+                    // $('#totalquantity').val(quantity)
                 }
             });
         }
@@ -552,10 +563,10 @@
                 $(".flat_rate_shipping_div").show();
             }
         });
-        
+
 
         const isProductAttribute = (boolean) => {
-          
+
           if(boolean == 'true'){
             $('input[name="type_of_category"]').val('isAttribute')
             $('#show_hide_date_of_manufacture_and_expiry').hide()
@@ -567,7 +578,8 @@
         }
 
         isProductAttribute('true')
-        
-        
+
+
+
 </script>
 @endpush
