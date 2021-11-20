@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     /**
@@ -17,9 +19,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userAll = User::orderByDESC('id')->get();
+        $user = User::latest()->get();
+        $userAll = $users = User::role(['published','admin','editor','author'])->get();
         $countTrashed = User::onlyTrashed()->count();
         return view('admin.users.index', compact('userAll','countTrashed'));
+    }
+
+    public function list_customer(){
+        $user = User::latest()->get();
+        $customerAll = $users = User::role(['customer'])->get();
+        $countTrashed = User::onlyTrashed()->count();
+        return view('admin.users.list_customer', compact('customerAll','countTrashed'));
     }
 
     /**
@@ -29,7 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $all_roles = Role::all();
+        return view('admin.users.create')->with(compact('all_roles'));
     }
 
     /**
@@ -41,11 +52,12 @@ class UserController extends Controller
     public function store(AddUserRequest $request)
     {
         $data = $request->validated();
-                     User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->syncRoles($data['role']);
+        $user->save();
         return back()->with('message','Thêm tài khoản thành công');
     }
 
@@ -113,6 +125,22 @@ class UserController extends Controller
     {
         $userId = User::find($id)->delete();
         return back()->with('message','Xóa tài khoản thành công');
+    }
+
+    public function assignRoles($id)
+    {
+        $user = User::find($id);
+        $role = Role::all();
+        $user_role = $user->roles->first();
+        return view('admin.users.assign_roles')->with(compact('user','role','user_role'));
+    }
+
+    public function insertRoles(Request $request, $id)
+    {
+        $data = $request->all();
+        $user = User::find($id);
+        $user->syncRoles($data['role']);
+        return back()->with('message', 'Cấp vai trò thành công');
     }
 
 }

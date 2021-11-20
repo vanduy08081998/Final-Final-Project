@@ -83,11 +83,29 @@ Thêm tài khoản
                                     </div>
                                     <input id="password-confirm" name="password_confirmation"
                                         value="{{ old('password') }}" type="password" class="form-control border-left-0"
-                                        placeholder="Confirm Password">
+                                        placeholder="Xác nhận mật khẩu">
                                     <div class="input-group-append"> <a href="javascript:;"
                                             class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></a>
                                     </div>
+                                </div>
+
+                                <label>Vai trò quản lý </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <select name="role" class="form-control">
+                                        @foreach($all_roles as $key => $r)
+                                        <option value="{{$r->name}}">{{$r->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <button type="submit" class="btn btn-primary px-5 mt-2">Thêm tài khoản</button>
