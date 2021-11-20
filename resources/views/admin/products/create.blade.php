@@ -492,7 +492,12 @@
 
 
 
-
+            $('.iframe-btn').fancybox({
+            'width'		: 900,
+            'height'	: 600,
+            'type'		: 'iframe',
+            'autoScale'    	: false
+            });
 
         const add_more_customer_choice_option = (i, name) => {
             $.ajax({

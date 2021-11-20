@@ -53,23 +53,12 @@
             @yield('content')
 
         </div>
-<<<<<<< HEAD
-
-
         <!-- /Page Wrapper -->
 
-=======
-        <!-- /Page Wrapper -->
-
->>>>>>> main
     </div>
     <input type="hidden" name="__dir" id="__dir" value="{{ URL::to('/') }}">
     <!-- /Main Wrapper -->
     <!-- jQuery -->
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <!-- Bootstrap Core JS -->
@@ -83,17 +72,6 @@
     <script src="{{ URL::to('Backend/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::to('Backend/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
-<<<<<<< HEAD
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js">
-    </script>
-    <script script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js">
-    </script>
-    <script src="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}">
-    </script>
-    <script src="{{ asset('backend/js/fancybox.js') }}"></script>
-    @stack('script')
-=======
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js">
 		</script>
@@ -107,7 +85,6 @@
     <script src="{{ asset('backend/js/fancybox.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
 		@stack('script')
->>>>>>> main
 </body>
 
 </html>
