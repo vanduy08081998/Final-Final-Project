@@ -15,25 +15,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
-<<<<<<< HEAD
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('backend/img/favicon.png') }}">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ URL::to('backend/css/bootstrap.min.css') }}">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="{{ URL::to('backend/css/font-awesome.min.css') }}">
-    <!-- Lineawesome CSS -->
-    <link rel="stylesheet" href="{{ URL::to('backend/css/line-awesome.min.css') }}">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ URL::to('backend/css/style.css') }}">
-    <!-- Datatable CSS -->
-    <link rel="stylesheet" href="{{ URL::to('Backend/css/dataTables.bootstrap4.min.css') }}">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
-    <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
-=======
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('backend/img/favicon.png') }}">
 		<!-- Bootstrap CSS -->
@@ -55,7 +36,6 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
         {{-- <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet"> --}}
->>>>>>> main
 </head>
 
 <body>
