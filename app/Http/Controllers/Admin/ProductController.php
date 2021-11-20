@@ -60,7 +60,7 @@ class ProductController extends Controller
             foreach ($request->choice_no as $key => $no) {
                 $name = 'attribute_value_'.$no;
                 $data = array();
-               
+
 
                 // foreach (json_decode($request[$name][0]) as $key => $item) {
                 foreach ($request[$name] as $key => $item) {
@@ -76,7 +76,7 @@ class ProductController extends Controller
       $combinations = Combinations::makeCombinations($options);
       return view('admin.products.sku_combination', compact('combinations', 'unit_price', 'product_name'));
     }
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -84,7 +84,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,AddProductRequest $addProductRequest) 
+    public function store(Request $request,AddProductRequest $addProductRequest)
     {
 
       if($request->shipping_type == 'flat_rate'){
@@ -96,7 +96,7 @@ class ProductController extends Controller
       if($request->has('quantity')){
         $quantity = $request->quantity;
       }else{
-        $quantity = $request->unit_quantity;
+        $quantity = 0;
       }
 
       if($request->has('sku')){
@@ -110,11 +110,11 @@ class ProductController extends Controller
       }else if($request->has('price')){
         $single_price = $request->price;
       }
-      
+
       if($request->has('sale_dates')){
         $var_date = explode(' - ', $request->sale_dates);
         $discount_start_date = strtotime($var_date[0]);
-        $discount_end_date = strtotime($var_date[1]); 
+        $discount_end_date = strtotime($var_date[1]);
       }
 
       if($request->has('expiry')){
@@ -126,11 +126,12 @@ class ProductController extends Controller
         $expiry = 0;
       }
 
+
       $data = [
         'product_name' => $request->product_name,
         'product_slug' => $request->product_slug,
         'product_image' => $request->product_image,
-        'product_gallery' => json_encode($request->product_gallery),
+        'product_gallery' => $request->product_gallery,
         'product_id_category' => $request->product_id_category,
         'meta_title' => $request->meta_title,
         'meta_description' => $request->meta_description,
@@ -157,7 +158,8 @@ class ProductController extends Controller
         'discount_end_date' => $discount_end_date,
         'date_of_manufacture' => $date_of_manufacture,
         'expiry' => $expiry,
-        'type_of_category' => $request->type_of_category
+        'type_of_category' => $request->type_of_category,
+          'shipping_day' => $request->shipping_day
       ];
 
       $product = Product::create($data);
@@ -167,7 +169,7 @@ class ProductController extends Controller
             foreach ($request->choice_no as $key => $no) {
                 $name = 'attribute_value_'.$no;
                 $data = array();
-               
+
 
                 // foreach (json_decode($request[$name][0]) as $key => $item) {
                 foreach ($request[$name] as $key => $item) {
@@ -203,7 +205,7 @@ class ProductController extends Controller
           }
         }
 
-        
+
         return redirect()->route('products.index');
     }
 

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Clients;
 
-use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,12 @@ class HomeController extends Controller
     }
 
     public function blog(){
-        return view('clients.about.blog');
+        $blogs = Blog::all();
+        $blogs1 = Blog::all();
+        return view('clients.about.blog',[
+            'blogs' => $blogs,
+            'blogs1' => $blogs1
+        ]);
     }
 
     public function contact(){

@@ -28,199 +28,43 @@
         <div class="featured-posts-carousel tns-carousel pt-5">
             <div class="tns-carousel-inner"
                 data-carousel-options="{&quot;items&quot;: 2, &quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;700&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20},&quot;991&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 30}}}">
-                <article>
-                    <a class="blog-entry-thumb mb-3" href="blog-single-sidebar.html"><span
-                            class="blog-entry-meta-label fs-sm"><i class="ci-time"></i>Sep 10</span><img
-                            src="{{ asset('frontend/img/blog/featured/01.jpg') }}" alt="Featured post"></a>
-                    <div class="d-flex justify-content-between mb-2 pt-1">
-                        <h2 class="h5 blog-entry-title mb-0"><a href="blog-single-sidebar.html">Healthy Food - New Way of
-                                Living</a></h2><a class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
-                            href="blog-single-sidebar.html#comments"><i class="ci-message"></i>13</a>
-                    </div>
-                    <div class="d-flex align-items-center fs-sm"><a class="blog-entry-meta-link" href="#">
-                            <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/04.jpg') }}"
-                                    alt="Olivia Reyes"></div>
-                            Olivia Reyes
-                        </a><span class="blog-entry-meta-divider"></span>
-                        <div class="fs-sm text-muted">in <a href='#' class='blog-entry-meta-link'>Lifestyle</a>, <a href='#'
-                                class='blog-entry-meta-link'>Nutrition</a></div>
-                    </div>
-                </article>
-                <article><a class="blog-entry-thumb mb-3" href="blog-single-sidebar.html"><span
-                            class="blog-entry-meta-label fs-sm"><i class="ci-time"></i>Aug 27</span><img
-                            src="{{ asset('frontend/img/blog/featured/02.jpg') }}" alt="Featured post"></a>
-                    <div class="d-flex justify-content-between mb-2 pt-1">
-                        <h2 class="h5 blog-entry-title mb-0"><a href="blog-single-sidebar.html">Online Payment Security Tips
-                                for Shoppers</a></h2><a class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
-                            href="blog-single-sidebar.html#comments"><i class="ci-message"></i>9</a>
-                    </div>
-                    <div class="d-flex align-items-center fs-sm"><a class="blog-entry-meta-link" href="#">
-                            <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/05.jpg') }}"
-                                    alt="Rafael Marquez"></div>
-                            Rafael Marquez
-                        </a><span class="blog-entry-meta-divider"></span>
-                        <div class="fs-sm text-muted">in <a href='#' class='blog-entry-meta-link'>Online shpopping</a></div>
-                    </div>
-                </article>
-                <article><a class="blog-entry-thumb mb-3" href="blog-single-sidebar.html"><span
-                            class="blog-entry-meta-label fs-sm"><i class="ci-time"></i>Aug 16</span><img
-                            src="{{ asset('frontend/img/blog/featured/03.jpg') }}" alt="Featured post"></a>
-                    <div class="d-flex justify-content-between mb-2 pt-1">
-                        <h2 class="h5 blog-entry-title mb-0"><a href="blog-single-sidebar.html">We Launched New Store in San
-                                Francisco!</a></h2><a class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
-                            href="blog-single-sidebar.html#comments"><i class="ci-message"></i>23</a>
-                    </div>
-                    <div class="d-flex align-items-center fs-sm"><a class="blog-entry-meta-link" href="#">
-                            <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/03.jpg') }}"
-                                    alt="Paul Woodred"></div>Paul
-                            Woodred
-                        </a><span class="blog-entry-meta-divider"></span>
-                        <div class="fs-sm text-muted">in <a href='#' class='blog-entry-meta-link'>Cartzilla news</a></div>
-                    </div>
-                </article>
+                @foreach ($blogs as $blog)
+                    <article>
+                        <a class="blog-entry-thumb mb-3" href="#" style="height: 200px;"><span
+                                class="blog-entry-meta-label fs-sm"><i
+                                    class="ci-time"></i>{{ $blog->created_at }}</span><img
+                                src="{{ asset($blog->blog_image) }}" alt="Featured post"></a>
+                        <div class="d-flex justify-content-between mb-2 pt-1">
+                            <h2 class="h5 blog-entry-title mb-0"><a
+                                    href="blog-single-sidebar.html">{{ $blog->blog_title }}</a></h2><a
+                                class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
+                                href="blog-single-sidebar.html#comments"></a>
+                        </div>
+                    </article>
+                @endforeach
             </div>
         </div>
-        <hr class="mt-5">
-        <div class="row justify-content-center pt-5 mt-2">
+        <div class="row justify-content-center">
             <!-- Entries list-->
             <section class="col-lg-9">
                 <!-- Entry-->
-                <article class="blog-list border-bottom pb-4 mb-5">
-                    <div class="blog-start-column">
-                        <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/01.jpg') }}"
-                                        alt="Emma Gallaher">
-                                </div>Emma Gallaher
-                            </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">Aug
-                                15</a></div>
-                        <h2 class="h5 blog-entry-title"><a href="blog-single.html">Global Travel and Vacations on a Tight
-                                Budget</a></h2>
-                    </div>
-                    <div class="blog-end-column">
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="fs-sm text-muted pe-2 mb-2">in <a href='#' class='blog-entry-meta-link'>Travel</a>,
-                                <a href='#' class='blog-entry-meta-link'>Personal finance</a>
-                            </div>
-                            <div class="fs-sm mb-2"><a class="blog-entry-meta-link text-nowrap"
-                                    href="blog-single.html#comments"><i class="ci-message"></i>8</a></div>
+                @foreach ($blogs1 as $blog)
+                    <article class="blog-list border-bottom pb-4 mb-5">
+                        <div class="blog-start-column" style="margin-top: 50px;">
+                            <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
+                                    <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/02.jpg') }}"
+                                            alt="Cynthia Gomez">
+                                    </div>Phan Văn Lâm
+                                </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">{{ $blog->created_at }}</a></div>
+                            <h2 class="h5 blog-entry-title"><a href="blog-single.html">{{ $blog->blog_title }}</a></h2>
                         </div>
-                        <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea com consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt… <a href='blog-single.html'
-                                class='blog-entry-meta-link fw-medium'>[Read more]</a></p>
-                    </div>
-                </article>
-                <!-- Entry-->
-                <article class="blog-list border-bottom pb-4 mb-5">
-                    <div class="blog-start-column">
-                        <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/02.jpg') }}"
-                                        alt="Cynthia Gomez">
-                                </div>Cynthia Gomez
-                            </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">Jul
-                                23</a></div>
-                        <h2 class="h5 blog-entry-title"><a href="blog-single.html">Top New Trends in Suburban High
-                                Fashion</a></h2>
-                    </div>
-                    <div class="blog-end-column"><a class="blog-entry-thumb mb-3" href="blog-single.html"><img
-                                src="{{ asset('frontend/img/blog/01.jpg') }}" alt="Post"></a>
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="fs-sm text-muted pe-2 mb-2">in <a href='#'
-                                    class='blog-entry-meta-link'>Shopping</a>, <a href='#'
-                                    class='blog-entry-meta-link'>Fashion</a></div>
-                            <div class="fs-sm mb-2"><a class="blog-entry-meta-link text-nowrap"
-                                    href="blog-single.html#comments"><i class="ci-message"></i>19</a></div>
+                        <div class="blog-end-column"><a class="blog-entry-thumb mb-3" href="#" style="height: 350px;"><img
+                                    src="{{ asset($blog->blog_image) }}" alt="Post"></a>
+                            <p class="fs-sm">{{ $blog->blog_description }}… <a href='#' class='blog-entry-meta-link fw-medium'>[Read more]</a>
+                            </p>
                         </div>
-                        <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation… <a href='blog-single.html' class='blog-entry-meta-link fw-medium'>[Read more]</a>
-                        </p>
-                    </div>
-                </article>
-                <!-- Entry-->
-                <article class="blog-list border-bottom pb-4 mb-5">
-                    <div class="blog-start-column">
-                        <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/03.jpg') }}"
-                                        alt="Paul Woodred"></div>
-                                Paul Woodred
-                            </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">Jul
-                                6</a></div>
-                        <h2 class="h5 blog-entry-title"><a href="blog-single.html">Shopping Tips. Places Where to Buy
-                                Cheap</a></h2>
-                    </div>
-                    <div class="blog-end-column"><a class="blog-entry-thumb mb-3" href="blog-single.html"><img
-                                src="{{ asset('frontend/img/blog/02.jpg') }}" alt="Post"></a>
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="fs-sm text-muted pe-2 mb-2">in <a href='#'
-                                    class='blog-entry-meta-link'>Shopping</a>, <a href='#'
-                                    class='blog-entry-meta-link'>Personal finance</a></div>
-                            <div class="fs-sm mb-2"><a class="blog-entry-meta-link text-nowrap"
-                                    href="blog-single.html#comments"><i class="ci-message"></i>15</a></div>
-                        </div>
-                        <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation… <a href='blog-single.html' class='blog-entry-meta-link fw-medium'>[Read more]</a>
-                        </p>
-                    </div>
-                </article>
-                <!-- Entry-->
-                <article class="blog-list border-bottom pb-4 mb-4">
-                    <div class="blog-start-column">
-                        <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                <div class="blog-entry-author-ava"><img
-                                        src="{{ asset('frontend/img/blog/meta/04.jpg') }}" alt="Olivia Reyes">
-                                </div>Olivia Reyes
-                            </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">Jun
-                                12</a></div>
-                        <h2 class="h5 blog-entry-title"><a href="blog-single.html">Google Pay is Now Available in All
-                                Outlets</a></h2>
-                    </div>
-                    <div class="blog-end-column">
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="fs-sm text-muted pe-2 mb-2">in <a href='#' class='blog-entry-meta-link'>Cartzilla
-                                    news</a></div>
-                            <div class="fs-sm mb-2"><a class="blog-entry-meta-link text-nowrap"
-                                    href="blog-single.html#comments"><i class="ci-message"></i>7</a></div>
-                        </div>
-                        <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea com consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                            occaecat cupidatat non proident, sunt in culpa qui officia deserunt… <a href='blog-single.html'
-                                class='blog-entry-meta-link fw-medium'>[Read more]</a></p>
-                    </div>
-                </article>
-                <!-- Entry-->
-                <article class="blog-list border-bottom pb-4 mb-5">
-                    <div class="blog-start-column">
-                        <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                <div class="blog-entry-author-ava"><img
-                                        src="{{ asset('frontend/img/blog/meta/05.jpg') }}" alt="Rafael Marquez">
-                                </div>Rafael Marquez
-                            </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">May
-                                29</a></div>
-                        <h2 class="h5 blog-entry-title"><a href="blog-single.html">We Launched Regular Drone Delivery in
-                                California. Watch Demo Video</a></h2>
-                    </div>
-                    <div class="blog-end-column gallery"><a class="blog-entry-thumb gallery-item video-item mb-3"
-                            href="https://www.youtube.com/watch?v=TedKIlo0c04"><span class="blog-entry-meta-label fs-sm"><i
-                                    class="ci-video"></i><span class="fs-ms">Watch video</span></span><img
-                                src="{{ asset('frontend/img/blog/03.jpg') }}" alt="Post"></a>
-                        <div class="d-flex justify-content-between mb-1">
-                            <div class="fs-sm text-muted pe-2 mb-2">in <a href='#' class='blog-entry-meta-link'>Cartzilla
-                                    news</a></div>
-                            <div class="fs-sm mb-2"><a class="blog-entry-meta-link text-nowrap"
-                                    href="blog-single.html#comments"><i class="ci-message"></i>31</a></div>
-                        </div>
-                        <p class="fs-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation… <a href='blog-single.html' class='blog-entry-meta-link fw-medium'>[Read more]</a>
-                        </p>
-                    </div>
-                </article>
+                    </article>
+                @endforeach
                 <!-- Pagination-->
                 <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
                     <ul class="pagination">

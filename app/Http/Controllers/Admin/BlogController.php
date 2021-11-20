@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\BlogCate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddBlogRequest;
 
 class BlogController extends Controller
 {

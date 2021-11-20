@@ -29,10 +29,11 @@ class Product extends Model
         'long_description',
         'show_hide_quantity',
         'discount_start_date',
-        'discount_end_date', 
+        'discount_end_date',
         'date_of_manufacture',
         'expiry',
-        'type_of_category'
+        'type_of_category',
+        'shipping_day'
     ];
 
     public $timestamps = TRUE;
