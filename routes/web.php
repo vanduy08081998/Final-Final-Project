@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
@@ -96,6 +97,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    // Discount
+    Route::resource('/discount', DiscountController::class);
+    Route::resource('/user', UserController::class );
 
 
     Route::resource('/flash-deals', FlashDealController::class);
@@ -113,8 +117,9 @@ Route::resource('/users', UserController::class );
 Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
 Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
 Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-
-
+route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
 });
 
 

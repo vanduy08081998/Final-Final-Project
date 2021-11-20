@@ -108,7 +108,7 @@
                                 <div class="card-header">Thời gian</div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">Ngày bắt đầu)</label>
+                                        <label for="name">Ngày bắt đầu</label>
                                         <input class="form-control" name="discount_start"
                                             value="{{ old('discount_start') }}" type="date">
                                         @error('discount_start')
@@ -119,7 +119,7 @@
 
                                     <div class="form-group">
                                         <label for="name">Ngày kết thúc</label>
-                                        <input class="form-control" data-role="tagsinput" name="discount_end"
+                                        <input class="form-control" name="discount_end"
                                             value="{{ old('discount_end') }}" type="date">
                                         @error('discount_end')
                                             <span class="text-danger">{{ $errors->first('discount_end') }}</span>

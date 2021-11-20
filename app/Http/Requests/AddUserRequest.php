@@ -27,6 +27,7 @@ class AddUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
         ];
     }
 
@@ -45,6 +46,7 @@ class AddUserRequest extends FormRequest
             'password.string'=> 'Mật khẩu không hợp lệ! ',
             'password.min'=> 'Mật khẩu không được nhỏ hơn 8 ký tự! ',
             'password.confirmed'=> 'Mật khẩu xác nhận không hợp lệ! ',
+            'role.required' => 'Vui lòng chọn vai trò',
         ];
     }
 }
