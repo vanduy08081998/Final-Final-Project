@@ -25,10 +25,12 @@ class HomeController extends Controller
     }
 
     public function blogSingle($id){
+        $blogCate = BlogCate::all();
         $blogs = Blog::orderByDESC('id')
         ->where('id', $id)->first();
         return view('clients.about.blog-single',[
-            'blogs' => $blogs
+            'blogs' => $blogs,
+            'blogCate' => $blogCate
         ]);;
     }
 

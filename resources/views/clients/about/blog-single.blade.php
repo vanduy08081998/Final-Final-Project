@@ -27,7 +27,7 @@
     </div>
     <div class="container pb-5">
         <div class="row pt-5 mt-md-2">
-            <section class="col-lg-12">
+            <section class="col-lg-8">
                 <!-- Post meta-->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
                     <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">
@@ -53,6 +53,69 @@
                             class="btn-social bs-pinterest me-2 mb-2" href="#"><i class="ci-pinterest"></i></a></div>
                 </div>
             </section>
+
+            <aside class="col-lg-4">
+                <!-- Sidebar-->
+                <div class="offcanvas offcanvas-collapse offcanvas-end border-start ms-lg-auto" id="blog-sidebar"
+                    style="max-width: 22rem;">
+                    <div class="offcanvas-header align-items-center shadow-sm">
+                        <h2 class="h5 mb-0">Sidebar</h2>
+                        <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body py-grid-gutter py-lg-1 px-lg-4" data-simplebar
+                        data-simplebar-auto-hide="true">
+                        <!-- Categories-->
+                        <div class="widget widget-links mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
+                            <h3 class="widget-title">Danh mục bài viết</h3>
+                            <ul class="widget-list">
+                                @foreach ($blogCate as $blogCate)
+                                    <li class="widget-list-item">
+                                        <a class="widget-list-link d-flex justify-content-between align-items-center"
+                                            href="#">
+                                            <span>{{ $blogCate->blogCate_name }}</span>
+                                            <span class="fs-xs text-muted ms-3" onload="CateBlog($blogCate->id)"></span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <!-- Trending posts-->
+                        <div class="widget mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
+                            <h3 class="widget-title">Trending posts</h3>
+                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
+                                    href="blog-single.html"><img class="rounded"
+                                        src="{{ asset('frontend/img/blog/widget/01.jpg') }}" width="64"
+                                        alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Retro Cameras are
+                                            Trending. Why so Popular?</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>Andy Williams</a></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
+                                    href="blog-single.html"><img class="rounded"
+                                        src="{{ asset('frontend/img/blog/widget/02.jpg') }}" width="64"
+                                        alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">New Trends in
+                                            Suburban Fashion</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>Susan Mayer</a></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center"><a class="flex-shrink-0" href="blog-single.html"><img
+                                        class="rounded" src="{{ asset('frontend/img/blog/widget/03.jpg') }}"
+                                        width="64" alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Augmented Reality -
+                                            Game Changing Technology</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>John Doe</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
     <!-- Related posts-->
