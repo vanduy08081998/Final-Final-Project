@@ -19,7 +19,7 @@
                         class="fa fa-google mr-2"></i><strong>Google</strong></a>
             </div>
             <span>Hoặc đăng ký bằng tài khoản email của bạn</span>
-            <div class="text-left">
+            <div class="text-left mt-2">
                 <div class="form-group form-register">
                     <div class="input-group">
                         <input type="text" name="name" class="name_regis form-control" value="{{old('name')}}"
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="form-group form-register">
-                    <div id="show_hide_password" class="input-group">
+                    <div id="show_hide_password2" class="input-group">
                         <input type="password" name="password_confirmation" class="pass_conf form-control"
                             placeholder="Nhập lại mật khẩu" />
                         <div class="input-group-append"> <a href="javascript:;"
@@ -79,7 +79,7 @@
                         class="fa fa-google mr-2"></i><strong>Google</strong></a>
             </div>
             <span>Hoặc sử dụng tài khoản của bạn</span>
-            <div class="text-left">
+            <div class="text-left mt-2">
 
                 <div class="form-group form-login">
                     <input type="email" name="email" class="email form-control" value="{{old('email')}}"

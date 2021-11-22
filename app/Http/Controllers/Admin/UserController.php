@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $userAll = User::orderByDESC('id')->get();
-        return view('admin.users.index', compact('userAll'));
+        $countTrashed = User::onlyTrashed()->count();
+        return view('admin.users.index', compact('userAll','countTrashed'));
     }
 
     /**
@@ -84,7 +85,7 @@ class UserController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $userId->update($data);
-        return back()->with('message','Cập nhật dữ liệu thành công');
+        return back()->with('message','Cập nhật tài khoản thành công');
     }
 
     /**
@@ -93,10 +94,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function trash(){
+        $userAll = User::onlyTrashed()->get();
+        return view('admin.users.trash', compact('userAll'));
+    }
+
+    public function restore($id){
+        User::where('id', $id)->restore();
+        return back()->with('message', 'Đã khôi phục tài khoản');
+    }
+
+    public function forceDelete($id){
+        $userId = User::withTrashed()->find($id)->forceDelete();
+        return back()->with('message', 'Xóa tài khoản vĩnh viễn thành công');
+    }
+
     public function destroy($id)
     {
-        $userId = User::find($id);
-        $userId->delete();
+        $userId = User::find($id)->delete();
         return back()->with('message','Xóa tài khoản thành công');
     }
+
 }

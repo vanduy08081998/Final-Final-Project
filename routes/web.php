@@ -96,10 +96,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
 
-    Route::resource('/user', UserController::class );
 
-
-    Route::resource('/user', UserController::class );
     Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
 
@@ -109,6 +106,14 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
+
+    //user
+Route::resource('/users', UserController::class );
+Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
+Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+
+
 });
 
 
@@ -117,6 +122,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
 //Login Google
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
@@ -124,4 +130,3 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 //Login Facebook
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
-
