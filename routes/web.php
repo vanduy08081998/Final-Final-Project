@@ -86,6 +86,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
     Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
+    Route::post('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
     //Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');

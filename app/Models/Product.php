@@ -33,7 +33,8 @@ class Product extends Model
         'date_of_manufacture',
         'expiry',
         'type_of_category',
-        'shipping_day'
+        'shipping_day',
+        'choice_options'
     ];
 
     public $timestamps = TRUE;
