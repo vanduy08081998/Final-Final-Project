@@ -27,7 +27,7 @@
     </div>
     <div class="container pb-5">
         <div class="row pt-5 mt-md-2">
-            <section class="col-lg-12">
+            <section class="col-lg-9" style="margin: 0 auto;">
                 <!-- Post meta-->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
                     <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">

@@ -911,9 +911,20 @@
                                         Recovery</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.blog') }}"
-                                data-bs-auto-close="outside"><i class="ci-loudspeaker"></i> Bài viết</a>
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+                                href="{{ route('clients.blog') }}" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside"><i class="ci-store"></i>
+                                Bài viết</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Shop
+                                        User Account</a></li>
+                                <li><a class="dropdown-item" href="#">Shop
+                                        User Account</a></li>
+                                <li><a class="dropdown-item" href="#">Shop
+                                        User Account</a></li>
+                                <li><a class="dropdown-item" href="#">Shop
+                                        User Account</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.about') }}"
