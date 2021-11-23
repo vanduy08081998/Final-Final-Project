@@ -32,6 +32,7 @@
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
     <!-- Google Tag Manager-->
     <script>
         (function(w, d, s, l, i) {
@@ -91,6 +92,7 @@
     <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"></script>
 </body>
 
 <!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:40 GMT -->

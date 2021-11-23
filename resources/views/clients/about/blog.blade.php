@@ -25,42 +25,48 @@
     </div>
     <div class="container pb-5 mb-2 mb-md-4">
         <!-- Featured posts carousel-->
-        <div class="featured-posts-carousel tns-carousel pt-5">
+        <div class="featured-posts-carousel tns-carousel pt-5" style="margin-bottom: 30px;">
             <div class="tns-carousel-inner"
                 data-carousel-options="{&quot;items&quot;: 2, &quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;700&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20},&quot;991&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 30}}}">
                 @foreach ($blogs as $blog)
                     <article>
-                        <a class="blog-entry-thumb mb-3" href="#" style="height: 200px;"><span
-                                class="blog-entry-meta-label fs-sm"><i
+                        <a class="blog-entry-thumb mb-3" href="{{ route('clients.blog-single', $blog->id) }}"
+                            style="height: 200px;"><span class="blog-entry-meta-label fs-sm"><i
                                     class="ci-time"></i>{{ $blog->created_at }}</span><img
                                 src="{{ asset($blog->blog_image) }}" alt="Featured post"></a>
                         <div class="d-flex justify-content-between mb-2 pt-1">
                             <h2 class="h5 blog-entry-title mb-0"><a
-                                    href="blog-single-sidebar.html">{{ $blog->blog_title }}</a></h2><a
-                                class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
-                                href="blog-single-sidebar.html#comments"></a>
+                                    href="{{ route('clients.blog-single', $blog->id) }}">{{ $blog->blog_title }}</a>
+                            </h2><a class="blog-entry-meta-link fs-sm text-nowrap ms-3 pt-1"
+                                href="{{ route('clients.blog-single', $blog->id) }}"></a>
                         </div>
                     </article>
                 @endforeach
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row">
             <!-- Entries list-->
-            <section class="col-lg-9">
+            <section class="col-lg-8">
                 <!-- Entry-->
                 @foreach ($blogs1 as $blog)
                     <article class="blog-list border-bottom pb-4 mb-5">
                         <div class="blog-start-column" style="margin-top: 50px;">
                             <div class="d-flex align-items-center fs-sm pb-2 mb-1"><a class="blog-entry-meta-link" href="#">
-                                    <div class="blog-entry-author-ava"><img src="{{ asset('frontend/img/blog/meta/02.jpg') }}"
-                                            alt="Cynthia Gomez">
-                                    </div>Phan Văn Lâm
-                                </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link" href="#">{{ $blog->created_at }}</a></div>
-                            <h2 class="h5 blog-entry-title"><a href="blog-single.html">{{ $blog->blog_title }}</a></h2>
+                                    <div class="blog-entry-author-ava"><img
+                                            src="{{ asset('frontend/img/blog/meta/02.jpg') }}" alt="Cynthia Gomez">
+                                    </div>Lâm Văn
+                                </a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link"
+                                    href="#">{{ $blog->created_at }}</a></div>
+                            <h2 class="h5 blog-entry-title"><a
+                                    href="{{ route('clients.blog-single', $blog->id) }}">{{ $blog->blog_title }}</a>
+                            </h2>
                         </div>
-                        <div class="blog-end-column"><a class="blog-entry-thumb mb-3" href="#" style="height: 350px;"><img
+                        <div class="blog-end-column"><a class="blog-entry-thumb mb-3"
+                                href="{{ route('clients.blog-single', $blog->id) }}" style="height: 300px;"><img
                                     src="{{ asset($blog->blog_image) }}" alt="Post"></a>
-                            <p class="fs-sm">{{ $blog->blog_description }}… <a href='#' class='blog-entry-meta-link fw-medium'>[Read more]</a>
+                            <p class="fs-sm">{{ $blog->blog_description }}… <a
+                                    href='{{ route('clients.blog-single', $blog->id) }}'
+                                    class='blog-entry-meta-link fw-medium'>[Read more]</a>
                             </p>
                         </div>
                     </article>
@@ -86,6 +92,89 @@
                     </ul>
                 </nav>
             </section>
+            <aside class="col-lg-4">
+                <!-- Sidebar-->
+                <div class="offcanvas offcanvas-collapse offcanvas-end border-start ms-lg-auto" id="blog-sidebar"
+                    style="max-width: 22rem;">
+                    <div class="offcanvas-header align-items-center shadow-sm">
+                        <h2 class="h5 mb-0">Sidebar</h2>
+                        <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body py-grid-gutter py-lg-1 px-lg-4" data-simplebar
+                        data-simplebar-auto-hide="true">
+                        <!-- Categories-->
+                        <div class="widget widget-links mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
+                            <h3 class="widget-title">Danh mục bài viết</h3>
+                            <ul class="widget-list">
+                                @foreach ($blogCate as $blogCate)
+                                    <li class="widget-list-item">
+                                        <a class="widget-list-link d-flex justify-content-between align-items-center"
+                                            href="#">
+                                            <span>{{ $blogCate->blogCate_name }}</span>
+                                            <span class="fs-xs text-muted ms-3" onload="CateBlog($blogCate->id)"></span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <!-- Trending posts-->
+                        <div class="widget mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
+                            <h3 class="widget-title">Trending posts</h3>
+                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
+                                    href="blog-single.html"><img class="rounded"
+                                        src="{{ asset('frontend/img/blog/widget/01.jpg') }}" width="64"
+                                        alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Retro Cameras are
+                                            Trending. Why so Popular?</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>Andy Williams</a></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
+                                    href="blog-single.html"><img class="rounded"
+                                        src="{{ asset('frontend/img/blog/widget/02.jpg') }}" width="64"
+                                        alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">New Trends in
+                                            Suburban Fashion</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>Susan Mayer</a></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center"><a class="flex-shrink-0" href="blog-single.html"><img
+                                        class="rounded" src="{{ asset('frontend/img/blog/widget/03.jpg') }}"
+                                        width="64" alt="Post image"></a>
+                                <div class="ps-3">
+                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Augmented Reality -
+                                            Game Changing Technology</a></h6><span class="fs-ms text-muted">by <a href='#'
+                                            class='blog-entry-meta-link'>John Doe</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        function CateBlog(id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: '{{ route('clients.CateBlog') }}',
+                data: {
+                    id: id
+                },
+                success: function(response) {
+                    $('#CateBlog').html(response.CateBlog)
+                }
+            });
+        }
+    </script>
 @endsection

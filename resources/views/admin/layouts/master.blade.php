@@ -59,7 +59,6 @@
     <input type="hidden" name="__dir" id="__dir" value="{{ URL::to('/') }}">
     <!-- /Main Wrapper -->
     <!-- jQuery -->
-
     <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <!-- Bootstrap Core JS -->
