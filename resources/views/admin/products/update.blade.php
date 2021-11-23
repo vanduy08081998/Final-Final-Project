@@ -118,7 +118,7 @@
                                                     <a class="btn-file iframe-btn"
                                                        href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=gallery"
                                                        style="color: #1e272e; font-size: 24px;"><input class="upload"><i
-                                                            class="fa fa-upload"></i></span></a>
+                                                            class="fa fa-upload"></i></a>
                                                 </div>
                                                 <input type="hidden" id="gallery" data-upload="product_gallery"
                                                        data-preview="gallery__preview">
@@ -298,13 +298,16 @@
                                                                                 <label>{{ \App\Models\Attribute::where('id', $options->attribute_id)->first()->name }}</label>
                                                                                 <input type="hidden" name="choice_no[]"
                                                                                        value="{{ $options->attribute_id }}">
-                                                                                <select name="attribute_value_{{ $options->attribute_id }}[]"
-                                                                                        multiple="multiple"
-                                                                                        data-live-search="true"
-                                                                                        class="form-control attribute-value"
-                                                                                        id="attribute-value">
+                                                                                <select
+                                                                                    name="attribute_value_{{ $options->attribute_id }}[]"
+                                                                                    multiple="multiple"
+                                                                                    data-live-search="true"
+                                                                                    class="form-control attribute-value"
+                                                                                    id="attribute-value">
                                                                                     @foreach(\App\Models\Attribute::where('id', $options->attribute_id)->first()->variants()->get() as $variant)
-                                                                                        <option value="{{ $variant->name }}" @if(in_array($variant->name, $options->values) ) selected @endif>{{ $variant->name }}</option>
+                                                                                        <option
+                                                                                            value="{{ $variant->name }}"
+                                                                                            @if(in_array($variant->name, $options->values) ) selected @endif>{{ $variant->name }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
@@ -345,8 +348,9 @@
                                                                 <div class="form-group mb-3">
                                                                     <label>Số lượng (*)</label>
                                                                     @if($product->type_of_category == 'isNotAttribute')
-                                                                    <input type="text" name="quantity" id=""
-                                                                           class="form-control" value="{{ $product->quantity }}">
+                                                                        <input type="text" name="quantity" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->quantity }}">
                                                                     @else
                                                                         <input type="text" name="quantity" id=""
                                                                                class="form-control" value="">
@@ -366,9 +370,9 @@
                                                                 <div class="form-group mb-3">
                                                                     <label>SKU (*)</label>
                                                                     @if($product->type_of_category == 'isNotAttribute')
-                                                                    <input type="text" name="sku" id=""
-                                                                           class="form-control"
-                                                                           value="{{ $product->sku }}">
+                                                                        <input type="text" name="sku" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->sku }}">
                                                                     @else
                                                                         <input type="text" name="sku" id=""
                                                                                class="form-control"
@@ -378,9 +382,9 @@
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
                                                                     @if($product->type_of_category == 'isNotAttribute')
-                                                                    <input type="text" name="ex_link" id=""
-                                                                           class="form-control"
-                                                                           value="{{ $product->ex_link }}">
+                                                                        <input type="text" name="ex_link" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->ex_link }}">
                                                                     @else
                                                                         <input type="text" name="ex_link" id=""
                                                                                class="form-control"
@@ -468,7 +472,8 @@
                                                         <div class="form-group">
                                                             <label>Phí vận chuyển</label>
                                                             <input type="text" class="form-control"
-                                                                   name="shipping_stock" value="{{ $product->shipping_stock }}">
+                                                                   name="shipping_stock"
+                                                                   value="{{ $product->shipping_stock }}">
                                                         </div>
                                                     </div>
                                                 </li>
@@ -476,7 +481,8 @@
                                                     Sản phẩm số lượng lớn
                                                     <div class="status-toggle">
                                                         <input type="checkbox" id="multiple_stock" name="multiple_stock"
-                                                               class="check" @if($product->multiple_stock == 'on') checked @endif>
+                                                               class="check"
+                                                               @if($product->multiple_stock == 'on') checked @endif>
                                                         <label for="multiple_stock" class="checktoggle">checkbox</label>
                                                     </div>
                                                 </li>
@@ -654,10 +660,10 @@
         $('input[name="sale_dates"]').daterangepicker();
         $('input[name="expiry"]').daterangepicker();
 
+
+
         $('input[name="type_of_category"]').on("change", function () {
-
-            if ($(this).val() == 'isNotAttribute') {
-
+            if ($(this:checked).val() == 'isNotAttribute') {
                 $('.is__attribute').hide();
                 $('.is__not__attribute').show()
             } else {
@@ -666,7 +672,7 @@
             }
         })
 
-        $.each($('.attribute-value option:selected'), function (index, val){
+        $.each($('.attribute-value option:selected'), function (index, val) {
             update_sku()
         })
 
@@ -697,7 +703,6 @@
         });
 
 
-
         function update_sku() {
             $.ajax({
                 type: "POST",
@@ -708,6 +713,7 @@
                 }
             });
         }
+
         $(document).on("change", ".attribute-value", function () {
             update_sku();
         });
@@ -724,29 +730,29 @@
             // update_sku()
 
 
-            $.each($("#attribute option:selected"), function(j, attribute){
+            $.each($("#attribute option:selected"), function (j, attribute) {
                 flag = false;
-                $('input[name="choice_no[]"]').each(function(i, choice_no) {
-                    if($(attribute).val() == $(choice_no).val()){
+                $('input[name="choice_no[]"]').each(function (i, choice_no) {
+                    if ($(attribute).val() == $(choice_no).val()) {
                         flag = true;
                     }
                 });
-                if(!flag){
+                if (!flag) {
                     add_more_customer_choice_option($(attribute).val(), $(attribute).text());
                 }
             });
 
             var str = @php echo $product->product_attribute @endphp;
 
-            $.each(str, function(index, value){
+            $.each(str, function (index, value) {
                 flag = false;
-                $.each($("#choice_attributes option:selected"), function(j, attribute){
-                    if(value == $(attribute).val()){
+                $.each($("#choice_attributes option:selected"), function (j, attribute) {
+                    if (value == $(attribute).val()) {
                         flag = true;
                     }
                 });
-                if(!flag){
-                    $('input[name="choice_no[]"][value="'+value+'"]').parent().parent().remove();
+                if (!flag) {
+                    $('input[name="choice_no[]"][value="' + value + '"]').parent().parent().remove();
                 }
             });
 

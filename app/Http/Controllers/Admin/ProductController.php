@@ -72,9 +72,7 @@ class ProductController extends Controller
                 array_push($options, $data);
             }
         }
-        // echo "<pre>";
-        //   print_r($request->all());
-        // echo "</pre>";
+
         $combinations = Combinations::makeCombinations($options);
         return view('admin.products.sku_combination', compact('combinations', 'unit_price', 'product_name'));
     }
