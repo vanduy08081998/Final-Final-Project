@@ -718,8 +718,7 @@
                                             </div>
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
                                                     class="d-block mb-2" href="#"><img
-                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}"
-                                                        alt="Speakers &amp; Home Music"></a>
+                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}" alt="Speakers &amp; Home Music"></a>
                                                 <div class="fs-sm mb-3">Starting from <span
                                                         class='fw-medium'>$43.<small>00</small></span></div><a
                                                     class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
@@ -911,20 +910,9 @@
                                         Recovery</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-                                href="{{ route('clients.blog') }}" data-bs-toggle="dropdown"
-                                data-bs-auto-close="outside"><i class="ci-store"></i>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
+                                    class="ci-store"></i>
                                 Bài viết</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Shop
-                                        User Account</a></li>
-                                <li><a class="dropdown-item" href="#">Shop
-                                        User Account</a></li>
-                                <li><a class="dropdown-item" href="#">Shop
-                                        User Account</a></li>
-                                <li><a class="dropdown-item" href="#">Shop
-                                        User Account</a></li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.about') }}"

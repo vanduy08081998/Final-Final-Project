@@ -40,7 +40,7 @@ Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
     Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
-    Route::get('/CateBlog', [HomeClient::class, 'loadCateBlog'])->name('clients.CateBlog');
+    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
