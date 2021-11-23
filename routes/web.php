@@ -98,14 +98,11 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
-<<<<<<< HEAD
     //banner
     Route::resource('/banners', BannerController::class );
-=======
     // Discount
     Route::resource('/discount', DiscountController::class);
     Route::resource('/user', UserController::class );
->>>>>>> a15a86f13797abd99877551d702df64ad9f3c264
 
 
     Route::resource('/flash-deals', FlashDealController::class);
