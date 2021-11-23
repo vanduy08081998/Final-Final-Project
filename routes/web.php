@@ -10,6 +10,7 @@ use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
@@ -94,6 +95,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    //banner
+    Route::resource('/banners', BannerController::class );
 
 
     Route::resource('/flash-deals', FlashDealController::class);
