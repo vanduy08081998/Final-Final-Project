@@ -13,8 +13,7 @@
                 <!-- Slider     -->
                 <div class="col-xl-9 pt-xl-4 order-xl-2">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner"
-                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: false, &quot;loop&quot;: false}">
+                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true}">
                             <div>
                                 <div class="row align-items-center">
                                     <div class="col-md-6 order-md-2"><img class="d-block mx-auto"
@@ -108,7 +107,7 @@
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm thịnh hành</h2>
-            <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">More products<i
+            <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
                         class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
         <!-- Grid-->
