@@ -26,8 +26,8 @@ Danh sách thuộc tính
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h6 class="mb-0">Thêm thuộc tính <span class="text-primary">{{ $cate_name }}</span>
-                                    </h6>
+                                    <h4 class="mb-0"><span class="text-primary">{{ $cate_name }}</span>
+                                    </h4>
                                 </div>
                                 <hr />
                                 <div class="form-group">
@@ -63,8 +63,8 @@ Danh sách thuộc tính
                 <div class="card">
                     <div class="card-body">
                         <div class="card-title">
-                            <h6 class="mb-0">Thuộc tính của danh mục <span class="text-primary">{{ $cate_name }}</span>
-                            </h6>
+                            <h4 class="mb-0">Thuộc tính danh mục: <span class="text-primary">{{ $cate_name }}</span>
+                            </h4>
                         </div>
                         @if (session('message'))
                         <div class="alert alert-danger" role="alert">

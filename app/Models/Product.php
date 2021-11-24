@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -33,7 +34,8 @@ class Product extends Model
         'date_of_manufacture',
         'expiry',
         'type_of_category',
-        'shipping_day'
+        'shipping_day',
+        'choice_options'
     ];
 
     public $timestamps = TRUE;

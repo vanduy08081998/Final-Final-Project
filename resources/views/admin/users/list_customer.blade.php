@@ -16,6 +16,11 @@ Quản lý tài khoản
         <div class="col-sm-12">
             <div class="card mb-0">
                 <div class="card-body">
+                <div class="card-title">
+                        <a href="{{ route('customer_trash') }}" class="btn btn-warning">Thùng rác
+                            ({{ $countTrashed }})</a>
+                        <hr />
+                    </div>
                     @if (session('message'))
                     <div class="alert alert-success" role="alert">
                         {{ session('message') }}
