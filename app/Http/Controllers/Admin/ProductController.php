@@ -55,6 +55,13 @@ class ProductController extends Controller
     {
         $options = array();
 
+        if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
+            $colors_active = 1;
+            array_push($options, $request->colors);
+        } else {
+            $colors_active = 0;
+        }
+
         $product_name = $request->product_name;
         $unit_price = $request->unit_price;
 
@@ -62,11 +69,7 @@ class ProductController extends Controller
             foreach ($request->choice_no as $key => $no) {
                 $name = 'attribute_value_' . $no;
                 $data = array();
-
-
-                // foreach (json_decode($request[$name][0]) as $key => $item) {
                 foreach ($request[$name] as $key => $item) {
-                    // array_push($data, $item->value);
                     array_push($data, $item);
                 }
                 array_push($options, $data);
@@ -74,7 +77,7 @@ class ProductController extends Controller
         }
 
         $combinations = Combinations::makeCombinations($options);
-        return view('admin.products.sku_combination', compact('combinations', 'unit_price', 'product_name'));
+        return view('admin.products.sku_combination', compact('combinations', 'unit_price', 'product_name','colors_active'));
     }
 
     public function sku_combinations_edit(Request $request)
@@ -101,7 +104,7 @@ class ProductController extends Controller
         }
 
         $combinations = Combinations::makeCombinations($options);
-        return view('admin.products.sku_combination_edit', compact('combinations', 'unit_price', 'product_name','product'));
+        return view('admin.products.sku_combination_edit', compact('combinations', 'unit_price', 'product_name', 'product'));
     }
 
     /**
@@ -171,8 +174,6 @@ class ProductController extends Controller
         }
 
 
-
-
         $data = [
             'product_name' => $request->product_name,
             'product_slug' => $request->product_slug,
@@ -206,12 +207,22 @@ class ProductController extends Controller
             'date_of_manufacture' => $date_of_manufacture,
             'expiry' => $expiry,
             'type_of_category' => $request->type_of_category,
-            'shipping_day' => $request->shipping_day
+            'shipping_day' => $request->shipping_day,
+            'colors' => json_encode($request->colors)
         ];
 
         $product = Product::create($data);
 
         $options = array();
+
+        if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
+            $colors_active = 1;
+            array_push($options, $request->colors);
+        } else {
+            $colors_active = 0;
+        }
+
+
         if ($request->has('choice_no')) {
             foreach ($request->choice_no as $key => $no) {
                 $name = 'attribute_value_' . $no;
@@ -229,12 +240,23 @@ class ProductController extends Controller
         $combinations = Combinations::makeCombinations($options);
         if (count($combinations[0]) > 0) {
             foreach ($combinations as $key => $combination) {
+                $sku = '';
+
                 $str = '';
+
                 foreach ($combination as $key => $item) {
                     if ($key > 0) {
                         $str .= '-' . str_replace(' ', '', $item);
+                        $sku .= '-' . str_replace(' ', '', $item);
                     } else {
-                        $str .= str_replace(' ', '', $item);
+                        if($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0){
+                            $color_name = \App\Models\Color::where('color_code', $item)->first()->color_slug;
+                            $str .= $color_name;$sku .='-'.$color_name;
+                        }
+                        else{
+                            $str .= str_replace(' ', '', $item);
+                            $sku .='-'.str_replace(' ', '', $item);
+                        }
                     }
                 }
                 $product_variant = ProductVariant::where('id_product', $product->id)->where('variant', $str)->first();

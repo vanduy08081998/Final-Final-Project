@@ -35,7 +35,7 @@
                                                 <label>Nhập tên sản phẩm</label>
                                                 <input class="form-control" name="product_name" onchange="update_sku()"
                                                        type="text" onkeyup="ChangeToSlug();" id="slug"
-                                                       placeholder="Enter your name product">
+                                                >
                                             </div>
 
                                             @error('product_name')
@@ -46,7 +46,7 @@
                                                 <label>Slug sản phẩm</label>
                                                 <input class="form-control" name="product_slug" type="text"
                                                        id="convert_slug"
-                                                       placeholder="Enter your name product">
+                                                >
                                             </div>
 
                                             @error('product_slug')
@@ -56,7 +56,7 @@
                                             <div class="form-group">
                                                 <label for="name">Tiêu đề (SEO)</label>
                                                 <input class="form-control" name="meta_title" type="text" value=""
-                                                       placeholder="Enter your meta title">
+                                                >
                                             </div>
 
                                             @error('meta_title')
@@ -67,7 +67,7 @@
                                                 <label for="">Từ khóa (SEO)</label><br>
                                                 <input type="text" data-role="tagsinput" class="form-control"
                                                        name="meta_keywords" value=""
-                                                       placeholder="Enter your meta keywords">
+                                                >
                                             </div>
 
                                             @error('meta_keywords')
@@ -77,7 +77,7 @@
                                             <div class="form-group">
                                                 <label for="name">Mô tả (SEO)</label>
                                                 <textarea class="form-control" name="meta_description" id="meta_desc"
-                                                          type="text" placeholder="Enter your meta description"
+                                                          type="text"
                                                           cols="30"
                                                           rows="10"></textarea>
                                             </div>
@@ -180,7 +180,25 @@
                                             @error('product_id_category')
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
+                                            <div class="form-group">
+                                                <div class="status-toggle">
 
+                                                    <input value="1" type="checkbox" name="colors_active"
+                                                           id="colors_active" class="check">
+                                                    <label for="colors_active" class="checktoggle">checkbox</label>
+
+                                                </div>
+                                                <label class="mt-3">Màu sắc sản phẩm</label>
+
+
+                                                <select name="colors[]" id="product_color" class="form-control"
+                                                        multiple="multiple" data-live-search="true" disabled>
+                                                    @foreach(\App\Models\Color::all() as $color)
+                                                        <option value="{{ $color->color_code }}"
+                                                                data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>"></option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +266,7 @@
                                                                             <select
                                                                                 class="js-example-basic-multiple form-control"
                                                                                 id="attribute"
-                                                                                name="js-example-basic-multiple"
+                                                                                name="attribute[]"
                                                                                 multiple="multiple"
                                                                                 data-live-search="true">
 
@@ -422,7 +440,7 @@
                                                 <label>Số lượng cảnh báo</label>
                                                 <input type="number" name="stock_warning" id="stock_warning"
                                                        class="form-control">
-                                                <div class="text-danger text-italic" id="qt_error"></div>
+                                                <div class="text-danger" id="stock_error"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -522,7 +540,7 @@
                     <div class="row">
                         <div class="col-sm-8">
                             <button
-                                class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i
+                                class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" type="submit"><i
                                     class="fa fa-check"></i>Thêm sản phẩm
                             </button>
                             <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
@@ -554,6 +572,21 @@
         $('.js-example-basic-multiple').selectpicker();
         $('input[name="sale_dates"]').daterangepicker();
         $('input[name="expiry"]').daterangepicker();
+        $('#product_color').selectpicker();
+
+        // Form on submit
+        $('form').on('submit', function (event) {
+
+            event.preventDefault()
+            let quantity = $('.qty');
+
+            for (let index = 0; index < quantity.length; index++) {
+                // console.log(Number(quantity[index].val()))
+                quantity[index].on('change', function () {
+                    console.log(quantity[index])
+                })
+            }
+        });
 
         if ($('input[name="type_of_category"]:checked').val() == 'isNotAttribute') {
             $('.is__attribute').hide();
@@ -602,6 +635,8 @@
             update_sku();
         });
 
+
+        // Update SKU
         function update_sku() {
             $.ajax({
                 type: "POST",
@@ -631,21 +666,21 @@
             }
         });
 
-
-        const isProductAttribute = (boolean) => {
-
-            if (boolean == 'true') {
-                $('input[name="type_of_category"]').val('isAttribute')
-                $('#show_hide_date_of_manufacture_and_expiry').hide()
-            } else if (boolean == 'false') {
-                $('input[name="type_of_category"]').val('isNotAttribute')
-                $('#show_hide_date_of_manufacture_and_expiry').show()
+        $('input[name="colors_active"]').on('change', function () {
+            if (!$('input[name="colors_active"]').is(':checked')) {
+                $('#product_color').prop('disabled', true);
+                $('#product_color').selectpicker('refresh');
+            } else {
+                $('#product_color').prop('disabled', false);
+                $('#product_color').selectpicker('refresh');
             }
+            update_sku();
+        });
 
-        }
 
-        isProductAttribute('true')
-
+        $('#product_color').on('change', () => {
+            update_sku();
+        })
 
     </script>
 @endpush

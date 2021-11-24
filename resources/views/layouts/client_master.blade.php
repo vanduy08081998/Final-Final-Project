@@ -9,10 +9,7 @@
     <meta charset="utf-8">
     <title>BigDeal | @yield('title')</title>
     <!-- SEO Meta Tags-->
-    <meta name="description" content="Cartzilla - Bootstrap E-commerce Template">
-    <meta name="keywords"
-        content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap, html5, css3, js, gallery, slider, touch, creative, clean">
-    <meta name="author" content="Createx Studio">
+   @yield('meta')
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
@@ -32,6 +29,8 @@
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.css') }}">
     <!-- Google Tag Manager-->
     <script>
         (function(w, d, s, l, i) {
@@ -82,6 +81,8 @@
             class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
         </i></a>
     <!-- Vendor scrits: js libraries and plugins-->
+    <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
@@ -91,6 +92,7 @@
     <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
+    @stack('script')
 </body>
 
 <!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:40 GMT -->

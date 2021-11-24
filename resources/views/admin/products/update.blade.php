@@ -269,7 +269,7 @@
                                                                             <select
                                                                                 class="js-example-basic-multiple form-control"
                                                                                 id="attribute"
-                                                                                name="js-example-basic-multiple"
+                                                                                name="attribute[]"
                                                                                 multiple="multiple"
                                                                                 data-live-search="true">
 

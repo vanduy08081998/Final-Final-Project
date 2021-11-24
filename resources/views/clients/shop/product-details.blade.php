@@ -3,6 +3,12 @@
 
 @section('title', $product->product_name)
 
+@section('meta')
+    <meta name="description" content="{!! $product->meta_description !!}">
+    <meta name="keywords"
+          content="{!! $product->meta_keywords !!}">
+    <meta name="author" content="{!! $product->meta_title !!}">
+@endsection
 
 @section('content')
     <!-- Size chart modal-->
@@ -206,108 +212,100 @@
                         </div>
                     </div>
                     <!-- Tech specs tab-->
-                    <div class="tab-pane fade" id="specs" role="tabpanel">
-                        <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                            <div class="d-flex align-items-center me-md-3"><img src="{{ asset('frontend/img/shop/single/gallery/th05.jpg')}}" width="90"
-                                    alt="Product thumb">
-                                <div class="ps-3">
-                                    <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
-                                    <div class="h4 fw-normal text-accent">$124.<small>99</small></div>
+
+                        <div class="tab-pane fade" id="specs" role="tabpanel">
+                            <div class="justify-content-between align-items-start pb-4 mb-4 border-bottom">
+                                <div class="d-flex align-items-center me-md-3"><img src="{{ asset('frontend/img/shop/single/gallery/th05.jpg')}}" width="90"
+                                                                                    alt="Product thumb">
+                                    <div class="ps-3">
+                                        <h6 class="fs-base mb-2">{{ $product->product_name }}</h6>
+                                        <div class="fw-normal text-accent">Giá gốc: {{ number_format($product->unit_price) }}</div>
+                                        <div class="fw-normal text-accent">Tổng giá tiền: 5.000.000</div>
+
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="align-items-center pt-3">
+                                            <div class="row">
+
+                                                @foreach(json_decode($product->choice_options) as $attr)
+
+                                                    <div class="col-sm-2">
+                                                        <div class="opacity-50 my-2">{{ \App\Models\Attribute::find( $attr->attribute_id)->name }}:</div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <style>
+                                                            .boxed-check-group .boxed-check{
+                                                                display: inline-flex;
+                                                            }
+                                                        </style>
+                                                        <div class="boxed-check-group" style="margin-left: 40px">
+                                                            @foreach($attr->values as $key => $value)
+                                                                <label class="boxed-check">
+                                                                    <input class="boxed-check-input" type="radio" name="radio_attribute_{{  $attr->attribute_id }}" value="{{ $value }}" checked>
+                                                                    <div class="boxed-check-label" style="border-radius: 0">{{ $value }}</div>
+                                                                </label>
+                                                            @endforeach
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                @endforeach
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        @if(count(json_decode($product->colors)) > 0)
+                                            <div class="align-items-center pt-3">
+                                                <div class="row">
+                                                    <div class="col-sm-2">
+                                                        <div class="opacity-50 my-2">Màu sắc: </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="boxed-check-group" style="margin-left: 40px">
+                                                            @foreach(json_decode($product->colors) as $key => $color)
+                                                                <label class="boxed-check">
+                                                                    <input class="boxed-check-input" type="radio" name="radio-color" value="{{ $color }}" checked>
+                                                                    <div class="boxed-check-label" style="background: {{ $color }}; height: 44px; width: 56.84px; border-radius: 0"  ></div>
+                                                                </label>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+
                             </div>
-                            <div class="d-flex align-items-center pt-3">
-                                <select class="form-select" required id="product-size" style="margin-right: 10px">
-                                    <option value="">Chọn thông số</option>
-                                    <option value="xs">XS</option>
-                                    <option value="s">S</option>
-                                    <option value="m">M</option>
-                                    <option value="l">L</option>
-                                    <option value="xl">XL</option>
-                                </select>
-                                <select class="form-select me-2" style="width: 5rem;">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <button class="btn btn-primary btn-shadow me-2" type="button"><i class="ci-cart fs-lg me-sm-2"></i><span
-                                        class="d-none d-sm-inline">Thêm vào giỏ hàng</span></button>
-                                <div class="me-2">
-                                    <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip"
-                                        title="Thêm vào yêu thích"><i class="ci-heart fs-lg"></i></button>
-                                </div>
-                                <div>
-                                    <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip" title="So sánh"><i
-                                            class="ci-compare fs-lg"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Specs table-->
-                        <div class="row pt-2">
-                            <div class="col-lg-5 col-sm-6">
-                                <h3 class="h6">General specs</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Model:</span><span>Amazfit Smartwatch</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Gender:</span><span>Unisex</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Smartphone
+                            <!-- Specs table-->
+                            <div class="row pt-2">
+                                <div class="col-lg-12 col-sm-12">
+                                    <h3 class="h6">General specs</h3>
+                                    <ul class="list-unstyled fs-sm pb-2">
+                                        <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                                class="text-muted">Model:</span><span>Amazfit Smartwatch</span></li>
+                                        <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                                class="text-muted">Gender:</span><span>Unisex</span></li>
+                                        <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Smartphone
                                             app:</span><span>Amazfit Watch</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">OS
+                                        <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">OS
                                             campitibility:</span><span>Android / iOS</span></li>
-                                </ul>
-                                <h3 class="h6">Physical specs</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Shape:</span><span>Rectangular</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Body
-                                            material:</span><span>Plastics / Ceramics</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Band
-                                            material:</span><span>Silicone</span></li>
-                                </ul>
-                                <h3 class="h6">Display</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display
-                                            type:</span><span>Color</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Display
-                                            size:</span><span>1.28"</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Screen
-                                            resolution:</span><span>176 x 176</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Touch
-                                            screen:</span><span>No</span></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-5 col-sm-6 offset-lg-1">
-                                <h3 class="h6">Functions</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Phone
-                                            calls:</span><span>Incoming call notification</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Monitoring:</span><span>Heart rate / Physical activity</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">GPS
-                                            support:</span><span>Yes</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Sensors:</span><span>Heart rate, Gyroscope, Geomagnetic, Light sensor</span>
-                                    </li>
-                                </ul>
-                                <h3 class="h6">Battery</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Battery:</span><span>Li-Pol</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span class="text-muted">Battery
-                                            capacity:</span><span>190 mAh</span></li>
-                                </ul>
-                                <h3 class="h6">Dimensions</h3>
-                                <ul class="list-unstyled fs-sm pb-2">
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Dimensions:</span><span>195 x 20 mm</span></li>
-                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
-                                            class="text-muted">Weight:</span><span>32 g</span></li>
-                                </ul>
+                                    </ul>
+
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+
+
                     <!-- Reviews tab-->
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
                         <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
@@ -577,16 +575,7 @@
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2 class="h3 pb-2">Choose your style</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident.</p><img src="img/shop/single/prod-img2.jpg" alt="Product description">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                    ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                    voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi
-                    tempora.</p>
+               {!! $product->long_description !!}
             </div>
         </div>
     </div>
@@ -788,3 +777,15 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            getVariantPrice();
+        });
+
+
+        const getVariantPrice = () => {
+           // $('#option-choice-form').on('submit', function ())
+        }
+    </script>
+@endpush
