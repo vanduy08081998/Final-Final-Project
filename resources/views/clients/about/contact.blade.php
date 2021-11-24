@@ -22,14 +22,13 @@
         </div>
     </div>
     <!-- Contact detail cards-->
+    @foreach ($infors as $infor)
     <section class="container-fluid pt-grid-gutter">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-grid-gutter"><a class="card h-100" href="#map" data-scroll>
                     <div class="card-body text-center"><i class="ci-location h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-2">Địa chỉ cửa hàng</h3>
-                        <p class="fs-sm text-muted">396 Lillian Blvd, Holbrook, NY 11741, USA</p>
-                        <div class="fs-sm text-primary">Click to see map<i class="ci-arrow-right align-middle ms-1"></i>
-                        </div>
+                        <p class="fs-sm text-muted">{{ $infor->address }}</p>
                     </div>
                 </a></div>
             <div class="col-xl-3 col-sm-6 mb-grid-gutter">
@@ -37,8 +36,8 @@
                     <div class="card-body text-center"><i class="ci-time h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Giờ làm việc</h3>
                         <ul class="list-unstyled fs-sm text-muted mb-0">
-                            <li>Mon - Fri: 10AM - 7PM</li>
-                            <li class="mb-0">Sta: 11AM - 5PM</li>
+                            <li>Mở cữa: {{ $infor->start_time }}</li>
+                            <li>Đóng cữa: {{ $infor->end_time }}</li>
                         </ul>
                     </div>
                 </div>
@@ -48,11 +47,7 @@
                     <div class="card-body text-center"><i class="ci-phone h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Số điện thoại</h3>
                         <ul class="list-unstyled fs-sm mb-0">
-                            <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style"
-                                    href="tel:+108044357260">+1 (080) 44 357 260</a></li>
-                            <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a
-                                    class="nav-link-style" href="tel:+100331697720">+1 00 33 169 7720</a></li>
-                        </ul>
+                            <li><a class="nav-link-style" href="#">{{ $infor->phone }}</a></li>                        </ul>
                     </div>
                 </div>
             </div>
@@ -61,105 +56,21 @@
                     <div class="card-body text-center"><i class="ci-mail h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Địa chỉ liên hệ</h3>
                         <ul class="list-unstyled fs-sm mb-0">
-                            <li><span class="text-muted me-1">For customers:</span><a class="nav-link-style"
-                                    href="mailto:+108044357260">customer@example.com</a></li>
-                            <li class="mb-0"><span class="text-muted me-1">Tech support:</span><a
-                                    class="nav-link-style" href="mailto:support@example.com">support@example.com</a></li>
+                            <li><a class="nav-link-style" href="#">{{ $infor->email }}</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Outlet stores-->
-    {{-- <section class="container pt-4 mt-md-4 mb-5">
-        <h2 class="h3 text-center mb-3">Partner outlet stores</h2>
-        <div class="row pt-4">
-            <div class="col-md-4 col-sm-6 mb-grid-gutter">
-                <div class="card border-0 shadow"><img class="card-img-top" src="img/contacts/orlando.jpg" alt="Orlando">
-                    <div class="card-body">
-                        <h6>Orlando, USA</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li class="d-flex pb-3 border-bottom"><i class="ci-location fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Find us</span><a
-                                        class="d-block text-heading fs-sm" href="#">514 S. Magnolia St. Orlando, FL 32806,
-                                        USA</a></div>
-                            </li>
-                            <li class="d-flex pt-2 pb-3 border-bottom"><i class="ci-phone fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Call us</span><a
-                                        class="d-block text-heading fs-sm" href="tel:+178632256040">+1 (786) 322 560 40</a>
-                                </div>
-                            </li>
-                            <li class="d-flex pt-2"><i class="ci-mail fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Write us</span><a
-                                        class="d-block text-heading fs-sm"
-                                        href="mailto:orlando@example.com">orlando@example.com</a></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 mb-grid-gutter">
-                <div class="card border-0 shadow"><img class="card-img-top" src="img/contacts/chicago.jpg" alt="Chicago">
-                    <div class="card-body">
-                        <h6>Chicago, USA</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li class="d-flex pb-3 border-bottom"><i class="ci-location fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Find us</span><a
-                                        class="d-block text-heading fs-sm" href="#">769, Industrial, West Chicago, IL
-                                        60185, USA</a></div>
-                            </li>
-                            <li class="d-flex pt-2 pb-3 border-bottom"><i class="ci-phone fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Call us</span><a
-                                        class="d-block text-heading fs-sm" href="tel:+184725276533">+1 (847) 252 765 33</a>
-                                </div>
-                            </li>
-                            <li class="d-flex pt-2"><i class="ci-mail fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Write us</span><a
-                                        class="d-block text-heading fs-sm"
-                                        href="mailto:chicago@example.com">chicago@example.com</a></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12 mb-grid-gutter">
-                <div class="card border-0 shadow"><img class="card-img-top" src="img/contacts/newyork.jpg" alt="New York">
-                    <div class="card-body">
-                        <h6>New York, USA</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li class="d-flex pb-3 border-bottom"><i class="ci-location fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Find us</span><a
-                                        class="d-block text-heading fs-sm" href="#">396 Lillian Blvd, Holbrook, NY 11741,
-                                        USA</a></div>
-                            </li>
-                            <li class="d-flex pt-2 pb-3 border-bottom"><i
-                                    class="ci-phone fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Call us</span><a
-                                        class="d-block text-heading fs-sm" href="tel:+1212477690000">+1 (212) 477 690
-                                        000</a></div>
-                            </li>
-                            <li class="d-flex pt-2"><i class="ci-mail fs-lg mt-2 mb-0 text-primary"></i>
-                                <div class="ps-3"><span class="fs-ms text-muted">Write us</span><a
-                                        class="d-block text-heading fs-sm"
-                                        href="mailto:newyork@example.com">newyork@example.com</a></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- Split section: Map + Contact form-->
     <div class="container-fluid px-0" id="map">
         <div class="row g-0">
             <div class="col-lg-6 iframe-full-height-wrap">
-                <iframe class="iframe-full-height" width="600" height="250"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53357.14257194912!2d-73.07268695801845!3d40.78017062807504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8483b8bffed93%3A0x53467ceb834b7397!2s396+Lillian+Blvd%2C+Holbrook%2C+NY+11741%2C+USA!5e0!3m2!1sen!2sua!4v1558703206875!5m2!1sen!2sua"></iframe>
+                {!! $infor->gg_map !!}
             </div>
             <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
-                <h2 class="h4 mb-4">Drop us a line</h2>
-                <form class="needs-validation mb-3" novalidate>
+                <h2 class="h4 mb-4">Đóng gop ý kiến</h2>
+                <form class="needs-validation mb-3" >
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label class="form-label" for="cf-name">Your name:&nbsp;<span
@@ -199,4 +110,5 @@
             </div>
         </div>
     </div>
+    @endforeach
 @endsection

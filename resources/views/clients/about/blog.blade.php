@@ -105,14 +105,13 @@
                         data-simplebar-auto-hide="true">
                         <!-- Categories-->
                         <div class="widget widget-links mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
-                            <h3 class="widget-title">Danh mục bài viết</h3>
+                            <h2 class="widget-title" style="text-align: center;">Danh mục bài viết </h2>
                             <ul class="widget-list">
                                 @foreach ($blogCate as $blogCate)
                                     <li class="widget-list-item">
-                                        <a class="widget-list-link d-flex justify-content-between align-items-center"
-                                            href="#">
-                                            <span>{{ $blogCate->blogCate_name }}</span>
-                                            <span class="fs-xs text-muted ms-3" onload="CateBlog($blogCate->id)"></span>
+                                        <a class="widget-list-link d-flex justify-content-center"
+                                        href="{{ route('clients.blog-category', $blogCate->id) }}">
+                                            <span style="text-align: center;"> {{ $blogCate->blogCate_name }} </span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -120,36 +119,21 @@
                         </div>
                         <!-- Trending posts-->
                         <div class="widget mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
-                            <h3 class="widget-title">Trending posts</h3>
-                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
-                                    href="blog-single.html"><img class="rounded"
-                                        src="{{ asset('frontend/img/blog/widget/01.jpg') }}" width="64"
-                                        alt="Post image"></a>
-                                <div class="ps-3">
-                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Retro Cameras are
-                                            Trending. Why so Popular?</a></h6><span class="fs-ms text-muted">by <a href='#'
-                                            class='blog-entry-meta-link'>Andy Williams</a></span>
+                            <h2 class="widget-title">Bài viết mới</h2>
+                            @foreach ($blogs2 as $blogs)
+                                <div class="d-flex align-items-center mb-3">
+                                    <a class="flex-shrink-0" href="{{ route('clients.blog-single', $blog->id) }}">
+                                        <img class="rounded" src="{{ asset($blogs->blog_image) }}" width="64"
+                                            alt="Post image">
+                                    </a>
+                                    <div class="ps-3">
+                                        <h6 class="blog-entry-title fs-sm mb-0"><a
+                                                href="{{ route('clients.blog-single', $blog->id) }}">{{ $blogs->blog_title }}</a>
+                                        </h6><span class="fs-ms text-muted">từ <a href='#' class='blog-entry-meta-link'>Lâm
+                                                Văn</a></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-center mb-3"><a class="flex-shrink-0"
-                                    href="blog-single.html"><img class="rounded"
-                                        src="{{ asset('frontend/img/blog/widget/02.jpg') }}" width="64"
-                                        alt="Post image"></a>
-                                <div class="ps-3">
-                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">New Trends in
-                                            Suburban Fashion</a></h6><span class="fs-ms text-muted">by <a href='#'
-                                            class='blog-entry-meta-link'>Susan Mayer</a></span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center"><a class="flex-shrink-0" href="blog-single.html"><img
-                                        class="rounded" src="{{ asset('frontend/img/blog/widget/03.jpg') }}"
-                                        width="64" alt="Post image"></a>
-                                <div class="ps-3">
-                                    <h6 class="blog-entry-title fs-sm mb-0"><a href="blog-single.html">Augmented Reality -
-                                            Game Changing Technology</a></h6><span class="fs-ms text-muted">by <a href='#'
-                                            class='blog-entry-meta-link'>John Doe</a></span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -157,24 +141,4 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script>
-        function CateBlog(id) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                type: "POST",
-                url: '{{ route('clients.CateBlog') }}',
-                data: {
-                    id: id
-                },
-                success: function(response) {
-                    $('#CateBlog').html(response.CateBlog)
-                }
-            });
-        }
-    </script>
-@endsection
+

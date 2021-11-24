@@ -794,8 +794,7 @@ $categories = Category::where('category_parent_id', null)
                                             </div>
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
                                                     class="d-block mb-2" href="#"><img
-                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}"
-                                                        alt="Speakers &amp; Home Music"></a>
+                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}" alt="Speakers &amp; Home Music"></a>
                                                 <div class="fs-sm mb-3">Starting from <span
                                                         class='fw-medium'>$43.<small>00</small></span></div><a
                                                     class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
@@ -852,6 +851,10 @@ $categories = Category::where('category_parent_id', null)
                         <li class="nav-item dropdown active">
                             <a class="nav-link" href="{{ route('clients.index') }}"><i
                                     class="ci-home"></i> Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('clients.about') }}"
+                                data-bs-auto-close="outside"><i class="ci-flag"></i> Giới thiệu</a>
                         </li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
                                 data-bs-toggle="dropdown"><i class="ci-lable"></i> Cửa hàng</a>
@@ -987,13 +990,9 @@ $categories = Category::where('category_parent_id', null)
                                         Recovery</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.blog') }}"
-                                data-bs-auto-close="outside"><i class="ci-loudspeaker"></i> Bài viết</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.about') }}"
-                                data-bs-auto-close="outside"><i class="ci-flag"></i> Thông tin cửa hàng</a>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
+                                    class="ci-store"></i>
+                                Bài viết</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.contact') }}"

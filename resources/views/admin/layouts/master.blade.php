@@ -35,7 +35,6 @@
         <!-- Change -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
-        {{-- <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body>

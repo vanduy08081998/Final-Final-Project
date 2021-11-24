@@ -27,7 +27,7 @@
     </div>
     <div class="container pb-5">
         <div class="row pt-5 mt-md-2">
-            <section class="col-lg-8">
+            <section class="col-lg-9" style="margin: 0 auto;">
                 <!-- Post meta-->
                 <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mt-n1">
                     <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">
@@ -121,45 +121,19 @@
     <!-- Related posts-->
     <div class="bg-secondary py-5">
         <div class="container py-3">
-            <h2 class="h4 text-center pb-4">You may also like</h2>
+            <h2 class="h4 text-center pb-4">Bài viết liên quan</h2>
             <div class="tns-carousel">
                 <div class="tns-carousel-inner"
                     data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: false, &quot;autoHeight&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20},&quot;900&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 30}}}">
-                    <!-- article-->
-                    <article><a class="blog-entry-thumb mb-3" href="#"><img
-                                src="{{ asset('frontend/img/blog/03.jpg') }}" alt="Post"></a>
-                        <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">by
-                                Rafael Marquez</a><span class="blog-entry-meta-divider"></span><a
-                                class="blog-entry-meta-link" href="#">Sep 16</a></div>
-                        <h3 class="h6 blog-entry-title"><a href="#">We Launched Regular Drone Delivery in California. Watch
-                                Demo Video</a></h3>
-                    </article>
-                    <!-- article-->
-                    <article><a class="blog-entry-thumb mb-3" href="#"><img
-                                src="{{ asset('frontend/img/blog/04.jpg') }}" alt="Post"></a>
-                        <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">by Emma
-                                Gallaher</a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link"
-                                href="#">Sep 5</a></div>
-                        <h3 class="h6 blog-entry-title"><a href="#">Payments Made Easy. How New Technology will Affect
-                                E-Commerce Industry Worldwide?</a></h3>
-                    </article>
-                    <!-- article-->
-                    <article><a class="blog-entry-thumb mb-3" href="#"><img
-                                src="{{ asset('frontend/img/blog/02.jpg') }}" alt="Post"></a>
-                        <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">by Emma
-                                Gallaher</a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link"
-                                href="#">Aug 28</a></div>
-                        <h3 class="h6 blog-entry-title"><a href="#">Shopping Tips. Complete Guide of Places Where to Buy
-                                Cheap and Get Cashback</a></h3>
-                    </article>
-                    <!-- article-->
-                    <article><a class="blog-entry-thumb mb-3" href="#"><img
-                                src="{{ asset('frontend/img/blog/01.jpg') }}" alt="Post"></a>
-                        <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">by Emma
-                                Gallaher</a><span class="blog-entry-meta-divider"></span><a class="blog-entry-meta-link"
-                                href="#">Aug 28</a></div>
-                        <h3 class="h6 blog-entry-title"><a href="#">Top 10 New Trends in Suburban High Fashion</a></h3>
-                    </article>
+                    @foreach ($blogs1 as $blog)
+                        <article><a class="blog-entry-thumb mb-3" href="{{ route('clients.blog-single', $blog->id) }}"><img
+                                    src="{{ asset($blog->blog_image) }}" alt="Post"></a>
+                            <div class="d-flex align-items-center fs-sm mb-2"><a class="blog-entry-meta-link" href="#">by
+                                    Lâm Văn</a><span class="blog-entry-meta-divider"></span><a
+                                    class="blog-entry-meta-link" href="#">{{ $blog->created_at }}</a></div>
+                            <h3 class="h6 blog-entry-title"><a href="{{ route('clients.blog-single', $blog->id) }}">{{ $blog->blog_title }}</a></h3>
+                        </article>
+                    @endforeach
                 </div>
             </div>
         </div>
