@@ -10,9 +10,7 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> <span>Chức vụ</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="{{ route('categories.index') }}">Danh sách</a></li>
-        </ul>
-        <ul style="display: none;">
+            <li><a href="{{ route('list-role') }}">Vai trò</a></li>
             <li><a href="{{ route('categories.index') }}">Phân quyền</a></li>
         </ul>
     </li>

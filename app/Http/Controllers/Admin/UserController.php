@@ -143,4 +143,33 @@ class UserController extends Controller
         return back()->with('message', 'Cấp vai trò thành công');
     }
 
+    public function list_role()
+    {
+        $all_roles = Role::latest()->get();
+        return view('admin.users.list_roles')->with(compact('all_roles'));
+    }
+
+    public function delete_role($id)
+    {
+        $role = Role::find($id);
+        $users = User::role($role->name)->get();
+        foreach ($users as $user){
+            $user->removeRole($role->name);
+        }
+        $role->delete();
+        return back()->with('message','Xóa vai trò thành công');
+    }
+    public function create_role(Request $request)
+    {
+        $this->validate($request,[
+            'name'=> 'required',
+        ],
+        [
+            'name.required' => 'Tên vai trò không được bỏ trống!',
+        ]
+        );
+        Role::create(['name'=>$request['name']]);
+        return back()->with('message1','Thêm vai trò thành công');
+    }
+
 }
