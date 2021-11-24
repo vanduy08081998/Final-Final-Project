@@ -135,12 +135,16 @@
                 file</span></a>
     </li>
     <li class="menu-title">
-        <span>Cấu hình website</span>
+        <span>Website</span>
     </li>
     <li>
         <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> <span>Cấu hình</span><span class="menu-arrow"></span></a>
     </li>
     <li>
         <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Thông tin</span><span class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('informations.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('informations.create') }}">Thêm địa chỉ</a></li>
+        </ul>
     </li>
 </ul>

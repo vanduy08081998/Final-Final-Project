@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Models\Blog;
+use App\Models\BlogCate;
+use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BlogCate;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -49,7 +52,19 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        return view('clients.about.contact');
+        $infors = Information::all();
+        return view('clients.about.contact',[
+            'infors' => $infors
+        ]);
+    }
+
+    public function feedback(Request $request){
+        $detail = [
+            'title' => '',
+            'pass' => ''
+        ];
+        Mail::to('nkokkenpro1995@gmail.com')->send(new SendMail($detail));
+
     }
 
     public function about(){

@@ -776,6 +776,10 @@
                             <a class="nav-link" href="{{ route('clients.index') }}"><i
                                     class="ci-home"></i> Trang chủ</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('clients.about') }}"
+                                data-bs-auto-close="outside"><i class="ci-flag"></i> Giới thiệu</a>
+                        </li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
                                 data-bs-toggle="dropdown"><i class="ci-lable"></i> Cửa hàng</a>
                             <div class="dropdown-menu p-0">
@@ -913,10 +917,6 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
                                     class="ci-store"></i>
                                 Bài viết</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.about') }}"
-                                data-bs-auto-close="outside"><i class="ci-flag"></i> Thông tin cửa hàng</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.contact') }}"

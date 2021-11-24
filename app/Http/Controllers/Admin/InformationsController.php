@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
-use App\Models\BlogCate;
+use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddBlogRequest;
+use App\Http\Requests\AddInforRequest;
 
-class BlogController extends Controller
+class InformationsController extends Controller
 {
         /**
      * Display a listing of the resource.
@@ -17,8 +16,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
-        return view('admin.blog.Blog.index', compact('blogs'));
+        $infors = Information::all();
+        return view('admin.informations.index', compact('infors'));
     }
 
     /**
@@ -28,10 +27,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $blogCate = BlogCate::orderByDESC('id')->get();
-        return view('admin.blog.Blog.create',[
-            'blogCate' => $blogCate
-        ]);
+        return view('admin.informations.create');
     }
 
     /**
@@ -40,10 +36,10 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, AddBlogRequest $validate)
+    public function store(Request $request, AddInforRequest $validate)
     {
-        Blog::create($request->all());
-        return redirect()->route('blogs.index');
+        Information::create($request->all());
+        return redirect()->route('informations.index');
     }
 
     /**
@@ -65,9 +61,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $blog = Blog::find($id);
-        $blogCate = BlogCate::orderByDESC('id')->get();
-        return view('admin.blog.Blog.edit', compact('blog', 'blogCate'));
+        $infors = Information::find($id);
+        return view('admin.informations.edit', compact('infors'));
     }
 
     /**
@@ -79,8 +74,8 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Blog::find($id)->update($request->all());
-        return redirect()->route('blogs.index');
+        Information::find($id)->update($request->all());
+        return redirect()->route('informations.index');
     }
 
     /**
@@ -89,9 +84,9 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Information $infors)
     {
-        $blog->delete();
+        $infors->delete();
         return redirect()->back();
     }
 

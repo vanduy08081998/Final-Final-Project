@@ -5,20 +5,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
-use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
+
+use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-
-use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -111,6 +113,8 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
+    Route::resource('informations', InformationsController::class);
+    Route::resource('mail', MailController::class);
 
     //user
 Route::resource('/users', UserController::class );
