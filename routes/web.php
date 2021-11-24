@@ -121,7 +121,7 @@ Route::get('/list-customer', [UserController::class, 'list_customer'])->name('li
 Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
 Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
 Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-
+Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
 Route::resource('/users', UserController::class );
 });
 

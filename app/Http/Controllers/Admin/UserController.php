@@ -176,4 +176,11 @@ class UserController extends Controller
         return back()->with('message1','Thêm vai trò thành công');
     }
 
+    public function add_permissions($id)
+    {
+        $role = Role::find($id);
+        $all_permissions = Permission::latest()->get();
+        $permissions_by_role = $role->permissions->pluck('id')->all();
+        return view('admin.users.assign_permissions')->with(compact('role','all_permissions','permissions_by_role'));
+    }
 }

@@ -52,7 +52,7 @@ Quản lý vai trò
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                     class="bx bx-cog"></i></button>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                <a class="dropdown-item text-primary" href="">
+                                                <a class="dropdown-item text-primary" href="{{route('add_permissions', [$role->id])}}">
                                                     Gán quyền</a>
                                                 <a class="dropdown-item text-danger"
                                                     href="{{route('delete-role',[$role->id])}}"
