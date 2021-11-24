@@ -52,6 +52,7 @@ Route::prefix('/')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
+        Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
     });
     Route::prefix('/cart')->group(function () {
         Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');

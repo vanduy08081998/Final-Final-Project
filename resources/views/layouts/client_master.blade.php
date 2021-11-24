@@ -21,6 +21,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
@@ -30,7 +31,6 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.css') }}">
     <!-- Google Tag Manager-->
     <script>
         (function(w, d, s, l, i) {
@@ -90,6 +90,7 @@
     <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
     @stack('script')
