@@ -19,16 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::latest()->get();
-        $userAll = $users = User::role(['published','admin','editor','author'])->get();
-        $countTrashed = User::onlyTrashed()->count();
-        return view('admin.users.index', compact('userAll','countTrashed'));
+        $adminAll = User::where('position','admin')->latest()->get();
+        $countTrashed = User::where('position','admin')->onlyTrashed()->count();
+        return view('admin.users.index', compact('adminAll','countTrashed'));
     }
 
     public function list_customer(){
-        $user = User::latest()->get();
-        $customerAll = $users = User::role(['customer'])->get();
-        $countTrashed = User::onlyTrashed()->count();
+        $customerAll = User::where('position',null)->get();
+        $countTrashed = User::where('position',null)->onlyTrashed()->count();
         return view('admin.users.list_customer', compact('customerAll','countTrashed'));
     }
 
@@ -55,6 +53,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->position = 'admin';
         $user->password = Hash::make($data['password']);
         $user->syncRoles($data['role']);
         $user->save();
@@ -106,8 +105,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function trash(){
-        $userAll = User::onlyTrashed()->get();
+    public function admin_trash(){
+        $userAll = User::where('position', 'admin')->onlyTrashed()->get();
+        return view('admin.users.trash', compact('userAll'));
+    }
+
+    public function customer_trash(){
+        $userAll = User::where('position', null)->onlyTrashed()->get();
         return view('admin.users.trash', compact('userAll'));
     }
 
@@ -143,4 +147,40 @@ class UserController extends Controller
         return back()->with('message', 'Cấp vai trò thành công');
     }
 
+    public function list_role()
+    {
+        $all_roles = Role::latest()->get();
+        return view('admin.users.list_roles')->with(compact('all_roles'));
+    }
+
+    public function delete_role($id)
+    {
+        $role = Role::find($id);
+        $users = User::role($role->name)->get();
+        foreach ($users as $user){
+            $user->removeRole($role->name);
+        }
+        $role->delete();
+        return back()->with('message','Xóa vai trò thành công');
+    }
+    public function create_role(Request $request)
+    {
+        $this->validate($request,[
+            'name'=> 'required',
+        ],
+        [
+            'name.required' => 'Tên vai trò không được bỏ trống!',
+        ]
+        );
+        Role::create(['name'=>$request['name']]);
+        return back()->with('message1','Thêm vai trò thành công');
+    }
+
+    public function add_permissions($id)
+    {
+        $role = Role::find($id);
+        $all_permissions = Permission::latest()->get();
+        $permissions_by_role = $role->permissions->pluck('id')->all();
+        return view('admin.users.assign_permissions')->with(compact('role','all_permissions','permissions_by_role'));
+    }
 }

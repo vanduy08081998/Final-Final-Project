@@ -101,8 +101,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
     // Discount
     Route::resource('/discount', DiscountController::class);
-    Route::resource('/user', UserController::class );
-
 
     Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
@@ -117,13 +115,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('mail', MailController::class);
 
     //user
-Route::resource('/users', UserController::class );
-Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
-Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
 route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
 route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
 Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+Route::resource('/users', UserController::class );
 });
 
 

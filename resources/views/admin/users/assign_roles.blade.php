@@ -22,7 +22,7 @@ Thêm tài khoản
                             @endif
                             <h3 class="text-danger">Cấp vai trò cho tài khoản: <strong class="text-primary">{{$user->name}}</strong></h3>
                             <hr>
-                            <h4>Vai trò hiện tại:
+                            <h4 class="text-dark">Vai trò hiện tại:
                                 <strong style="text-transform:uppercase" class="text-danger font-weight-bold">
                                     @if($user_role)
                                     <!-- <span aria-hidden="true" class="icon-user-following "></span> -->
@@ -41,14 +41,14 @@ Thêm tài khoản
                                 <div style="font-size:16px" class="form-check">
                                     <input {{$r->id==$user_role->id ? 'checked' : ''}} class="form-check-input" type="radio" name="role" value="{{$r->name}}">
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        <strong class="text-Dark"> {{$r->name}} </strong>
+                                        <strong class="text-dark"> {{$r->name}} </strong>
                                     </label>
                                 </div>
                                 @else
                                 <div style="font-size:16px" class="form-check">
                                     <input class="form-check-input" type="radio" name="role" value="{{$r->name}}">
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        <strong class="text-Dark"> {{$r->name}} </strong>
+                                        <strong class="text-dark"> {{$r->name}} </strong>
                                     </label>
                                 </div>
                                 @endif
@@ -70,68 +70,3 @@ Thêm tài khoản
 
 @endsection
 
-<style>
-/* The container */
-.container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Hide the browser's default radio button */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Create a custom radio button */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.container:hover input~.checkmark {
-    background-color: #ccc;
-}
-
-/* When the radio button is checked, add a blue background */
-.container input:checked~.checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.container input:checked~.checkmark:after {
-    display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.container .checkmark:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
-}
-</style>

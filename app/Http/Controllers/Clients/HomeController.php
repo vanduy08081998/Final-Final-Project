@@ -30,6 +30,7 @@ class HomeController extends Controller
     }
 
     public function blogSingle($id){
+        $blogCate = BlogCate::all();
         $blogs = Blog::orderByDESC('id')
         ->where('id', $id)->first();
         $blogs1 = Blog::orderByDESC('id')
