@@ -19,16 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::latest()->get();
-        $userAll = $users = User::role(['published','admin','editor','author'])->get();
-        $countTrashed = User::onlyTrashed()->count();
-        return view('admin.users.index', compact('userAll','countTrashed'));
+        $adminAll = User::where('position','admin')->latest()->get();
+        $countTrashed = User::where('position','admin')->onlyTrashed()->count();
+        return view('admin.users.index', compact('adminAll','countTrashed'));
     }
 
     public function list_customer(){
-        $user = User::latest()->get();
-        $customerAll = $users = User::role(['customer'])->get();
-        $countTrashed = User::onlyTrashed()->count();
+        $customerAll = User::where('position',null)->get();
+        $countTrashed = User::where('position',null)->onlyTrashed()->count();
         return view('admin.users.list_customer', compact('customerAll','countTrashed'));
     }
 
@@ -55,6 +53,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
+        $user->position = 'admin';
         $user->password = Hash::make($data['password']);
         $user->syncRoles($data['role']);
         $user->save();
@@ -106,8 +105,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function trash(){
-        $userAll = User::onlyTrashed()->get();
+    public function admin_trash(){
+        $userAll = User::where('position', 'admin')->onlyTrashed()->get();
+        return view('admin.users.trash', compact('userAll'));
+    }
+
+    public function customer_trash(){
+        $userAll = User::where('position', null)->onlyTrashed()->get();
         return view('admin.users.trash', compact('userAll'));
     }
 
