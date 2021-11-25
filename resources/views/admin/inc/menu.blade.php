@@ -63,6 +63,7 @@
             <li><a href="{{ route('products.create') }}">Thêm sản phẩm</a></li>
         </ul>
     </li>
+
     <li class="submenu">
         <a href="#"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
@@ -75,8 +76,8 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-object-ungroup" aria-hidden="true"></i> <span> Slide</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
-            <li><a href="#">Thêm slide</a></li>
+            <li><a href="{{ route('banners.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('banners.create') }}">Thêm slide</a></li>
         </ul>
     </li>
     <li class="submenu">

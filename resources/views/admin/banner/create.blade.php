@@ -1,16 +1,16 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Thêm thương hiệu')
+@section('title', 'Thêm slide')
 
 
 @section('content')
-    <div class="content container-fluid">
+    <div class="page-wrapper">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">
                 <!--breadcrumb-->
                 <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-                    <div class="breadcrumb-title pr-3">Thương hiệu</div>
+                    <div class="breadcrumb-title pr-3">Slide</div>
                     <div class="pl-3">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0 p-0">
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <!--end breadcrumb-->
-                <form action="{{ route('brand.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8">
@@ -55,11 +55,11 @@
                                     <!-- INput Group -->
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
-                                            <label for="name">Tên thương hiệu</label>
-                                            <input class="form-control" name="brand_name" onkeyup="ChangeToSlug();"
-                                                id="slug" value="{{ old('brand_name') }}" type="text">
-                                            @error('brand_name')
-                                                <span class="text-danger">{{ $errors->first('brand_name') }}</span>
+                                            <label for="name">Tên slide</label>
+                                            <input class="form-control" name="banner_name"
+                                                 value="{{ old('banner_name') }}" type="text">
+                                            @error('banner_name')
+                                                <span class="text-danger">{{ $errors->first('banner_name') }}</span>
                                             @enderror
                                         </div>
 
@@ -69,52 +69,18 @@
                                     <!-- INput Group -->
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
-                                            <label for="name">Slug thương hiệu</label>
-                                            <input class="form-control" name="brand_slug" id="convert_slug"
-                                                value="{{ old('brand_slug') }}" type="text">
-                                            @error('brand_slug')
-                                                <span class="text-danger">{{ $errors->first('brand_slug') }}</span>
+                                            <label for="name">Link slide</label>
+                                            <input class="form-control" name="banner_link" id=""
+                                                value="{{ old('banner_link') }}" type="text">
+                                            @error('banner_link')
+                                                <span class="text-danger">{{ $errors->first('banner_link') }}</span>
                                             @enderror
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card">
-                                <div class="card-header">SEO</div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="name">Tiêu đề (SEO)</label>
-                                        <input class="form-control" name="meta_title" value="{{ old('meta_title') }}"
-                                            type="text">
-                                        @error('meta_title')
-                                            <span class="text-danger">{{ $errors->first('meta_title') }}</span>
-                                        @enderror
-
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="name">Từ khóa (SEO)</label>
-                                        <input id="tags" class="form-control" data-role="tagsinput" name="meta_keywords"
-                                            type="text" value="{{ old('meta_keywords') }}">
-                                        @error('meta_keywords')
-                                            <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="name">Mô tả (SEO)</label>
-                                        <input class="form-control" id="meta_desc" name="meta_desc"
-                                            value="{{ old('meta_desc') }}" type="text">
-                                        @error('meta_desc')
-                                            <span class="text-danger">{{ $errors->first('meta_desc') }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
@@ -129,41 +95,11 @@
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    Danh mục
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="name">Thuộc danh mục</label>
-                                        <select name="category_id[]" class="js-example-basic-multiple form-control"
-                                            data-live-search="true">
-                                            @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
-                                                @include('admin.Categories.categoryOptions', ['item' => $item])
 
-                                                @foreach ($item->subcategory()->get() as $childCategory)
-                                                    @include('admin.Categories.categoryOptions', ['item' =>
-                                                    $childCategory,
-                                                    'prefix' => '--'])
-
-                                                    @foreach ($childCategory->subcategory()->get() as $childCategory2)
-                                                        @include('admin.Categories.categoryOptions', ['item' =>
-                                                        $childCategory2,
-                                                        'prefix' => '----'])
-                                                    @endforeach
-                                                @endforeach
-                                            @endforeach
-                                        </select>
-                                        @error('category_id')
-                                            <span class="text-danger">{{ $errors->first('category_id') }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="card">
                                 <div class="card-header">
-                                    Logo thương hiệu
+                                    Ảnh
                                 </div>
                                 <div class="card-body d-flex justify-content-center">
                                     <div class="preview hide mb-3">
@@ -174,7 +110,7 @@
                                 <div class="card-footer">
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="brand_image" onchange="readURL(this);"
+                                            <input type="file" name="banner_img" onchange="readURL(this);"
                                                 class="custom-file-input" id="inputGroupFile04"
                                                 aria-describedby="inputGroupFileAddon04">
                                             <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
@@ -182,8 +118,8 @@
 
                                         </div>
                                     </div>
-                                    @error('brand_image')
-                                        <span class="text-danger">{{ $errors->first('brand_image') }}</span>
+                                    @error('banner_img')
+                                        <span class="text-danger">{{ $errors->first('banner_img') }}</span>
                                     @enderror
                                 </div>
                             </div>
@@ -201,9 +137,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-multiple').selectpicker();
-
-
+            $('.js-example-basic-multiple').select2();
         });
 
         $(document).ready(function() {

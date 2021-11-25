@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
@@ -83,11 +84,16 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Brand
-    Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
-    Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
-    Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
+    
+    Route::prefix('/brand')->group(function () {
+        Route::get('/trash', [BrandController::class, 'trash'])->name('brand.trash');
+        Route::post('/restore/{id}', [BrandController::class, 'restore'])->name('brand.restore');
+        Route::post('/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('brand.forceDelete');
+        Route::post('/handle', [BrandController::class, 'handle'])->name('brand.handle');
+    });
     Route::resource('/brand', BrandController::class );
-
+    
+    // Products
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
@@ -101,6 +107,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    //banner
+    Route::resource('/banners', BannerController::class );
     // Discount
     Route::resource('/discount', DiscountController::class);
 
