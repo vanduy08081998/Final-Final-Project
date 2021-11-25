@@ -30,11 +30,8 @@
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
-<<<<<<< HEAD
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
-=======
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
->>>>>>> Product
     <!-- Google Tag Manager-->
     <script>
         (function(w, d, s, l, i) {
