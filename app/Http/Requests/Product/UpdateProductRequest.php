@@ -26,10 +26,7 @@ class UpdateProductRequest extends FormRequest
         return [
             'product_name' => 'required',
             'product_slug' => 'required',
-            'product_image'=> 'required',
-            'meta_description' => 'required',
-            'meta_title' => 'required',
-            'meta_keywords' => 'required'
+           
         ];
     }
 }

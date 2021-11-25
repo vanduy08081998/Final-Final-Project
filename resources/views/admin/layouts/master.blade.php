@@ -28,7 +28,6 @@
         <!-- Change -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
-        {{-- <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet"> --}}
 </head>
 
 <body>
@@ -78,6 +77,7 @@
     <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('backend/js/fancybox.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 		@stack('script')
 </body>
 

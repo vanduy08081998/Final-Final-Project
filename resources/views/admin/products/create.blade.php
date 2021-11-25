@@ -54,6 +54,15 @@
                                             @enderror
 
                                             <div class="form-group">
+                                                <label for="name">Thương hiệu sản phẩm</label>
+                                                <select name="product_id_brand" class="form-control" id="">
+                                                    @foreach ($brands as $brand)
+                                                        <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="name">Tiêu đề (SEO)</label>
                                                 <input class="form-control" name="meta_title" type="text" value=""
                                                 >
@@ -235,8 +244,6 @@
 
                                         </div>
                                         <div class="card-body">
-                                            <input type="hidden" name="type_of_category"
-                                            >
                                             <div class="is__attribute">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
@@ -255,7 +262,7 @@
 
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
-                                                                    <input type="text" name="ex-link" id=""
+                                                                    <input type="text" name="ex_link" id=""
                                                                            class="form-control"
                                                                     >
                                                                 </div>
@@ -317,7 +324,7 @@
                                                                 <div class="form-group mb-3">
                                                                     <label>Số lượng (*)</label>
 
-                                                                    <input type="text" name="quantity" id=""
+                                                                    <input type="number" name="quantity" id=""
                                                                            class="form-control"
                                                                     >
 
@@ -341,7 +348,7 @@
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
 
-                                                                    <input type="text" name="ex_link" id=""
+                                                                    <input type="text" name="ex_link_not_attr" id=""
                                                                            class="form-control"
                                                                     >
 
@@ -577,14 +584,26 @@
         // Form on submit
         $('form').on('submit', function (event) {
 
-            event.preventDefault()
+            
             let quantity = $('.qty');
-
+            let total_quantity = 0; 
             for (let index = 0; index < quantity.length; index++) {
-                // console.log(Number(quantity[index].val()))
-                quantity[index].on('change', function () {
-                    console.log(quantity[index])
-                })
+                total_quantity += Number(quantity[index].value)
+            }
+            console.log(total_quantity);
+
+            if($('input[name="type_of_category"]:checked').val() == 'isAttribute'){
+                if($('#stock_warning').val() >= total_quantity){
+                    event.preventDefault()
+                    $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
+                }
+            }
+
+            if($('input[name="type_of_category"]:checked').val() == 'isNotAttribute'){
+                if($('input[name="quantity"]').val() <= $('#stock_warning').val()){
+                    event.preventDefault()
+                    $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
+                }
             }
         });
 
