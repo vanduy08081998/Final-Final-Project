@@ -45,6 +45,7 @@ Route::prefix('/')->group(function () {
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::post('/contact',[HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
@@ -122,7 +123,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('informations', InformationsController::class);
-    Route::resource('mail', MailController::class);
 
     //user
 Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');

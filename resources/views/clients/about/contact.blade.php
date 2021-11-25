@@ -69,41 +69,33 @@
                 {!! $infor->gg_map !!}
             </div>
             <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
-                <h2 class="h4 mb-4">Đóng gop ý kiến</h2>
-                <form class="needs-validation mb-3" >
+                <h2 class="h4">Đóng gop ý kiến</h2>
+                <form class="needs-validation" action="{{ route('clients.feedback') }}" method="post" enctype="multipart/form-data" id="choice-form">
+                    @csrf
+                    @method('POST')
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <label class="form-label" for="cf-name">Your name:&nbsp;<span
-                                    class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="cf-name" placeholder="John Doe" required>
-                            <div class="invalid-feedback">Please fill in you name!</div>
+                            <label class="form-label">Họ và tên: </label>
+                            <input class="form-control" type="text" name="fullname" required>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" for="cf-email">Email address:&nbsp;<span
-                                    class="text-danger">*</span></label>
-                            <input class="form-control" type="email" id="cf-email" placeholder="johndoe@email.com"
+                            <label class="form-label">Email: </label>
+                            <input class="form-control" type="email" name="email" placeholder="*******@email.com"
+                                required>                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Số điện thoại: </label>
+                            <input class="form-control" type="text" name="phone" placeholder="+84********"
                                 required>
-                            <div class="invalid-feedback">Please provide valid email address!</div>
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label" for="cf-phone">Your phone:&nbsp;<span
-                                    class="text-danger">*</span></label>
-                            <input class="form-control" type="text" id="cf-phone" placeholder="+1 (212) 00 000 000"
-                                required>
-                            <div class="invalid-feedback">Please provide valid phone number!</div>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="form-label" for="cf-subject">Subject:</label>
-                            <input class="form-control" type="text" id="cf-subject"
-                                placeholder="Provide short title of your request">
+                            <label class="form-label">Tiêu đề: </label>
+                            <input class="form-control" type="text" name="title" required>
                         </div>
                         <div class="col-12">
-                            <label class="form-label" for="cf-message">Message:&nbsp;<span
-                                    class="text-danger">*</span></label>
-                            <textarea class="form-control" id="cf-message" rows="6"
-                                placeholder="Please describe in detail your request" required></textarea>
-                            <div class="invalid-feedback">Please write a message!</div>
-                            <button class="btn btn-primary mt-4" type="submit">Send message</button>
+                            <label class="form-label">Nội dung: </label>
+                            <textarea class="form-control" name="message" rows="6"
+                                placeholder="Hãy cho chúng tôi biết vấn đề bạn gặp phải?" required></textarea>
+                            <button class="btn btn-primary mt-4" type="submit" style="float: right;">Gửi</button>
                         </div>
                     </div>
                 </form>
