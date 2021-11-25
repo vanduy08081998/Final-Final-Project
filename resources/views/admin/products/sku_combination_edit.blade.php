@@ -2,11 +2,11 @@
     <table class="table table-bordered review-table mb-0">
         <thead class="thead-light">
         <tr>
-            <th scope="col">Biến thể</th>
-            <th scope="col">Giá biến thể</th>
-            <th scope="col">SKU</th>
-            <th scope="col">Số lượng</th>
-            <th scope="col">Hình ảnh</th>
+            <th scope="col">{{ trans('Biến thể') }}</th>
+            <th scope="col">{{ trans('Giá biến thể') }}</th>
+            <th scope="col">{{ trans('SKU') }}</th>
+            <th scope="col">{{ trans('Số lượng') }}</th>
+            <th scope="col">{{ trans('Hình ảnh') }}</th>
             {{-- <th scope="col">Hành động</th> --}}
         </tr>
         </thead>
@@ -22,19 +22,14 @@
                 $str = '';
 
                 foreach ($combination as $key => $item) {
-                if ($key > 0) {
-                    $str .= '-' . str_replace(' ', '', $item);
-                    $sku .= '-' . str_replace(' ', '', $item);
-                } else {
-                    if($colors_active == 1){
-                        $color_name = \App\Models\Color::where('color_code', $item)->first()->color_slug;
-                        $str .= $color_name;$sku .='-'.$color_name;
-                    }
-                    else{
+                    if ($key > 0) {
+                        $str .= '-' . str_replace(' ', '', $item);
+                        $sku .= '-' . str_replace(' ', '', $item);
+                    } else {
                         $str .= str_replace(' ', '', $item);
-                        $sku .='-'.str_replace(' ', '', $item);
+                        $sku .= '-' . str_replace(' ', '', $item);
                     }
-                }
+                    $stock = $product->variants()->where('variant', $str)->first();
                 }
             @endphp
             @if (strlen($str) > 0)
@@ -43,14 +38,40 @@
                         <label for="">{{ $str }}</label>
                     </td>
                     <td>
-                        <input type="number" name="price_{{ $str }}" value="" class="form-control">
+                        <input type="number" name="price_{{ $str }}" value="@php
+                            if ($product->unit_price == $unit_price) {
+                                if($stock != null){
+                                    echo $stock->variant_price;
+                                }
+                                else {
+                                    echo $unit_price;
+                                }
+                            }
+                            else{
+                                echo $unit_price;
+                            }
+                        @endphp" class="form-control">
                     </td>
                     <td>
-                        <input type="text" name="sku_{{ $str }}" value="" class="form-control">
+                        <input type="text" name="sku_{{ $str }}" value="@php
+                            if($stock != null) {
+                                echo $stock->SKU;
+                            }
+                            else {
+                                echo $str;
+                            }
+                        @endphp" class="form-control">
                     </td>
                     <td>
-                        <input type="number" name="qty_{{ $str }}" class="form-control qty" value="10" min="0" step="1"
-                             >
+                        <input type="number" name="qty_{{ $str }}" class="form-control qty" value="@php
+                            if($stock != null){
+                                echo $stock->variant_quantity;
+                            }
+                            else{
+                                echo '10';
+                            }
+                        @endphp" min="0" step="1"
+                               class="form-control">
                     </td>
                     <td>
                         <div class="form-group">
@@ -64,7 +85,12 @@
                             <input type="hidden" id="image_{{ $str }}" data-upload="img_{{ $str }}"
                                    data-preview="image__preview__{{ $str }}">
                             <input type="hidden" name="img_{{ $str }}">
-                            <div id="image__preview__{{ $str }}"></div>
+                            <div id="image__preview__{{ $str }}">
+                                @if($stock != null)
+                                    <img src="{{ asset($stock->variant_image) }}" width="80" height="80" alt="">
+                                @else
+                                @endif
+                            </div>
                         </div>
                     </td>
                     {{-- <td>

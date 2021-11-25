@@ -31,6 +31,7 @@
                                     <div class="card">
                                         <div class="card-header">Thông tin cơ bản</div>
                                         <div class="card-body">
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
                                             <div class="form-group">
                                                 <label>Nhập tên sản phẩm</label>
                                                 <input class="form-control" name="product_name" onchange="update_sku()"
@@ -117,7 +118,7 @@
                                                     <a class="btn-file iframe-btn"
                                                        href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=gallery"
                                                        style="color: #1e272e; font-size: 24px;"><input class="upload"><i
-                                                            class="fa fa-upload"></i></span></a>
+                                                            class="fa fa-upload"></i></a>
                                                 </div>
                                                 <input type="hidden" id="gallery" data-upload="product_gallery"
                                                        data-preview="gallery__preview">
@@ -202,19 +203,22 @@
                                                 <li class="list-group-item">
                                                     Hiển thị thuộc tính
                                                     <div class="status-toggle">
-                                                        <input type="radio" id="is__attribute" name="choose__type__category"
+                                                        <input type="radio" id="is__attribute"
+                                                               name="type_of_category"
                                                                value="isAttribute" class="check"
-                                                               @if($product->type_of_category == 'isAttribute') checked @endif  >
+                                                               @if($product->type_of_category == 'isAttribute') checked @endif >
                                                         <label for="is__attribute" class="checktoggle">checkbox</label>
                                                     </div>
                                                 </li>
                                                 <li class="list-group-item">
                                                     Không hiển thị thuộc tính
                                                     <div class="status-toggle">
-                                                        <input type="radio" id="is__not__attribute" name="choose__type__category"
+                                                        <input type="radio" id="is__not__attribute"
+                                                               name="type_of_category"
                                                                value="isNotAttribute" class="check"
-                                                           @if($product->type_of_category == 'isNotAttribute') checked @endif >
-                                                        <label for="is__not__attribute" class="checktoggle">checkbox</label>
+                                                               @if($product->type_of_category == 'isNotAttribute') checked @endif >
+                                                        <label for="is__not__attribute"
+                                                               class="checktoggle">checkbox</label>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -222,7 +226,8 @@
 
                                         </div>
                                         <div class="card-body">
-                                            <input type="hidden" name="type_of_category">
+                                            <input type="hidden" name="type_of_category"
+                                                   value="{{ $product->type_of_category }}">
                                             <div class="is__attribute">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
@@ -240,10 +245,19 @@
                                                                                value=""
                                                                                class="form-control">
                                                                     @endif
+
+                                                                    @error('unit_price')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                    @enderror
                                                                 </div>
 
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
+                                                                    @php
+                                                                        foreach (json_decode($product->product_attribute ) as $key => $val){
+                                                                            $array_attribute = explode(',', $val);
+                                                                        }
+                                                                    @endphp
                                                                     <input type="text" name="ex-link" id=""
                                                                            class="form-control"
                                                                            value="{{ $product->ex_link }}">
@@ -255,17 +269,23 @@
                                                                             <select
                                                                                 class="js-example-basic-multiple form-control"
                                                                                 id="attribute"
-                                                                                name=""
+                                                                                name="attribute[]"
                                                                                 multiple="multiple"
                                                                                 data-live-search="true">
 
                                                                                 @foreach (App\Models\Attribute::all() as $attribute)
+
                                                                                     <option
-                                                                                        value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                                                                        value="{{ $attribute->id }}"
+                                                                                        @if(in_array($attribute->id,$array_attribute)) selected @endif >{{ $attribute->name }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            <input type="hidden" name="attribute[]"
-                                                                                   id="attribute_array">
+                                                                            @foreach(json_decode($product->product_attribute ) as $key => $value)
+                                                                                <input type="hidden" name="attribute[]"
+                                                                                       id="attribute_array"
+                                                                                       value="{{ $value }}">
+                                                                            @endforeach
+
                                                                         </div>
                                                                         @error('attribute')
                                                                         <div
@@ -273,6 +293,26 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div id="customer_choice_options">
+                                                                        @foreach(json_decode($product->choice_options) as $index => $options)
+                                                                            <div class="form-group">
+                                                                                <label>{{ \App\Models\Attribute::where('id', $options->attribute_id)->first()->name }}</label>
+                                                                                <input type="hidden" name="choice_no[]"
+                                                                                       value="{{ $options->attribute_id }}">
+                                                                                <select
+                                                                                    name="attribute_value_{{ $options->attribute_id }}[]"
+                                                                                    multiple="multiple"
+                                                                                    data-live-search="true"
+                                                                                    class="form-control attribute-value"
+                                                                                    id="attribute-value">
+                                                                                    @foreach(\App\Models\Attribute::where('id', $options->attribute_id)->first()->variants()->get() as $variant)
+                                                                                        <option
+                                                                                            value="{{ $variant->name }}"
+                                                                                            @if(in_array($variant->name, $options->values) ) selected @endif>{{ $variant->name }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                            </div>
+
+                                                                        @endforeach
                                                                     </div>
                                                                     <input type="hidden" name="total_quantity"
                                                                            id="totalquantity">
@@ -296,34 +336,62 @@
                                                             <div class="card-body">
                                                                 <div class="form-group mb-3">
                                                                     <label>Giá sản phẩm (*)</label>
-                                                                    <input type="text" name="price" id=""
-                                                                           class="form-control">
+                                                                    @if($product->type_of_category == 'isNotAttribute')
+                                                                        <input type="text" name="price" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->unit_price }}">
+                                                                    @else
+                                                                        <input type="text" name="price" id=""
+                                                                               class="form-control">
+                                                                    @endif
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label>Số lượng (*)</label>
-                                                                    <input type="text" name="quantity" id=""
-                                                                           class="form-control">
+                                                                    @if($product->type_of_category == 'isNotAttribute')
+                                                                        <input type="text" name="quantity" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->quantity }}">
+                                                                    @else
+                                                                        <input type="text" name="quantity" id=""
+                                                                               class="form-control" value="">
+                                                                    @endif
                                                                 </div>
                                                                 <div class="form-group mb-3"
                                                                      id="show_hide_date_of_manufacture_and_expiry">
                                                                     <label>Ngày sản xuát - Hạn sử dụng</label>
+                                                                    @php
+                                                                        $date_of_manufacture = date('m/d/Y', $product->date_of_manufacture);
+                                                                        $expiry = date('m/d/y', $product->expiry);
+                                                                    @endphp
                                                                     <input type="text" name="expiry"
-                                                                           class="form-control">
+                                                                           class="form-control"
+                                                                           value="{{ $date_of_manufacture.' - '.$expiry }}">
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label>SKU (*)</label>
-                                                                    <input type="text" name="sku" id=""
-                                                                           class="form-control">
+                                                                    @if($product->type_of_category == 'isNotAttribute')
+                                                                        <input type="text" name="sku" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->sku }}">
+                                                                    @else
+                                                                        <input type="text" name="sku" id=""
+                                                                               class="form-control"
+                                                                               value="">
+                                                                    @endif
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
-                                                                    <input type="text" name="ex_link" id=""
-                                                                           class="form-control"
-                                                                           placeholder="http://www.example.com">
+                                                                    @if($product->type_of_category == 'isNotAttribute')
+                                                                        <input type="text" name="ex_link" id=""
+                                                                               class="form-control"
+                                                                               value="{{ $product->ex_link }}">
+                                                                    @else
+                                                                        <input type="text" name="ex_link" id=""
+                                                                               class="form-control"
+                                                                               value="">
+                                                                    @endif
                                                                 </div>
-                                                                @error('unit_price')
-                                                                <div class="text-danger">{{ $message }}</div>
-                                                                @enderror
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -345,20 +413,31 @@
                                                 <li class="list-group-item">
                                                     <div class="row">
                                                         <div class="col-md-6 form-group">
-                                                            <input type="text" class="form-control" name="discount">
+                                                            <input type="text" class="form-control" name="discount"
+                                                                   value="{{ $product->discount }}">
                                                         </div>
                                                         <div class="col-md-6t form-group">
                                                             <select name="discount_unit" id="" class="form-control">
-                                                                <option value="%">%</option>
-                                                                <option value="money">VND/USD</option>
+                                                                <option value="%"
+                                                                        @if($product->discount_unit == '%') selected @endif >
+                                                                    %
+                                                                </option>
+                                                                <option value="money"
+                                                                        @if($product->discount_unit == 'money') selected @endif>
+                                                                    VND/USD
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12 form-group">
                                                             <label>Ngày giảm giá</label>
+                                                            @php
+                                                                $start_date = date('m/d/Y', $product->discount_start_date);
+                                                                $end_date = date('m/d/Y', $product->discount_end_date)
+                                                            @endphp
                                                             <input type="text" name="sale_dates" class="form-control"
-                                                                   value="">
+                                                                   value="{{ $start_date.' - '.$end_date }}">
                                                         </div>
                                                     </div>
                                                 </li>
@@ -375,7 +454,8 @@
                                                     Vận chuyển miễn phí
                                                     <div class="status-toggle">
                                                         <input type="radio" id="free_ship" name="shipping_type"
-                                                               value="free_ship" class="check">
+                                                               value="free_ship" class="check"
+                                                               @if($product->shipping_type == 'free_ship') checked @endif >
                                                         <label for="free_ship" class="checktoggle">checkbox</label>
                                                     </div>
                                                 </li>
@@ -384,14 +464,16 @@
                                                     <div class="status-toggle">
                                                         <input type="radio" id="flat_rate" name="shipping_type"
                                                                value="flat_rate" class="check"
-                                                               checked="">
+                                                               @if($product->shipping_type == 'flat_rate') checked @endif >
                                                         <label for="flat_rate" class="checktoggle">checkbox</label>
                                                     </div>
+
                                                     <div class="flat_rate_shipping_div mt-3">
                                                         <div class="form-group">
                                                             <label>Phí vận chuyển</label>
                                                             <input type="text" class="form-control"
-                                                                   name="shipping_stock">
+                                                                   name="shipping_stock"
+                                                                   value="{{ $product->shipping_stock }}">
                                                         </div>
                                                     </div>
                                                 </li>
@@ -399,7 +481,8 @@
                                                     Sản phẩm số lượng lớn
                                                     <div class="status-toggle">
                                                         <input type="checkbox" id="multiple_stock" name="multiple_stock"
-                                                               class="check" checked="">
+                                                               class="check"
+                                                               @if($product->multiple_stock == 'on') checked @endif>
                                                         <label for="multiple_stock" class="checktoggle">checkbox</label>
                                                     </div>
                                                 </li>
@@ -415,7 +498,7 @@
                                             <div class="form-group">
                                                 <label>Số lượng cảnh báo</label>
                                                 <input type="number" name="stock_warning" id="stock_warning"
-                                                       class="form-control">
+                                                       class="form-control" value="{{ $product->stock_warning }}">
                                                 <div class="text-danger text-italic" id="qt_error"></div>
                                             </div>
                                         </div>
@@ -430,7 +513,8 @@
                                                     Trạng thái
                                                     <div class="status-toggle">
                                                         <input type="checkbox" id="feature_product"
-                                                               name="feature_product" class="check" checked="">
+                                                               name="feature_product" class="check"
+                                                               @if($product->feature_product == 'on') checked @endif>
                                                         <label for="feature_product"
                                                                class="checktoggle">checkbox</label>
                                                     </div>
@@ -446,7 +530,8 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label>Ngày vận chuyển</label>
-                                                <input type="text" name="shipping_day" id="" class="form-control">
+                                                <input type="text" name="shipping_day" id="" class="form-control"
+                                                       value="{{ $product->shipping_day }}">
                                             </div>
 
                                         </div>
@@ -458,13 +543,18 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label>VAT</label>
-                                                <input type="text" name="vat" id="" class="form-control">
+                                                <input type="text" name="vat" id="" class="form-control"
+                                                       value="{{ $product->vat }}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Đơn vị</label>
                                                 <select name="vat_unit" class="form-control" id="">
-                                                    <option value="%">%</option>
-                                                    <option value="money">VND/USD</option>
+                                                    <option value="%" @if($product->vat_unit == '%') selected @endif >
+                                                        %
+                                                    </option>
+                                                    <option value="money"
+                                                            @if($product->vat_unit == 'money') selected @endif >VND/USD
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -482,7 +572,7 @@
                                                     <div class="status-toggle">
                                                         <input type="radio" id="qt_total" name="show_hide_quantity"
                                                                value="qt_total" class="check"
-                                                               checked="">
+                                                               @if($product->show_hide_quantity == 'qt_total') checked @endif>
                                                         <label for="qt_total" class="checktoggle">radio</label>
                                                     </div>
                                                 </li>
@@ -491,7 +581,7 @@
                                                     <div class="status-toggle">
                                                         <input type="radio" id="qt_stock" name="show_hide_quantity"
                                                                value="qt_stock" class="check"
-                                                               checked="">
+                                                               @if($product->show_hide_quantity == 'qt_stock') checked @endif>
                                                         <label for="qt_stock" class="checktoggle">radio</label>
                                                     </div>
                                                 </li>
@@ -501,15 +591,11 @@
                                                         <input type="radio" id="stock_hidden" name="show_hide_quantity"
                                                                value="qt_hidden"
                                                                class="check"
-                                                               checked="">
+                                                               @if($product->show_hide_quantity == 'qt_hidden') checked @endif>
                                                         <label for="stock_hidden" class="checktoggle">radio</label>
                                                     </div>
                                                 </li>
                                             </ul>
-
-
-                                            </ul>
-
                                         </div>
                                     </div>
                                 </div>
@@ -546,6 +632,25 @@
 @endsection
 
 @push('script')
+    @if($product->type_of_category == 'isNotAttribute')
+
+        <script>
+            $('.is__attribute').hide();
+            $('.is__not__attribute').show();
+        </script>
+    @else
+        <script>
+            $('.is__attribute').show();
+            $('.is__not__attribute').hide();
+        </script>
+    @endif
+
+    @if($product->shipping_type == 'flat_rate')
+        <script>$('.flat_rate_shipping_div').show()</script>
+    @else
+        <script>$('.flat_rate_shipping_div').hide()</script>
+    @endif
+
     <script>
         CKEDITOR.replace('meta_description')
         CKEDITOR.replace('short_description');
@@ -555,28 +660,21 @@
         $('input[name="sale_dates"]').daterangepicker();
         $('input[name="expiry"]').daterangepicker();
 
-        if($('input[name="choose__type__category"]').val() == 'isAttribute'){
-            $('.is__attribute').show();
-            $('.is__not__attribute').hide();
-        }else if($('input[name="choose__type__category"]').val() == 'isNotAttribute'){
-            $('.is__attribute').hide();
-            $('.is__not__attribute').show()
-        }
-        $('input[name="choose__type__category"]').on("change", function () {
 
-             if($(this).val() == 'isNotAttribute'){
 
+        $('input[name="type_of_category"]').on("change", function () {
+            if ($(this:checked).val() == 'isNotAttribute') {
                 $('.is__attribute').hide();
                 $('.is__not__attribute').show()
-            }else{
-
-                 $('.is__attribute').show();
-                 $('.is__not__attribute').hide()
-             }
-
-
+            } else {
+                $('.is__attribute').show();
+                $('.is__not__attribute').hide();
+            }
         })
 
+        $.each($('.attribute-value option:selected'), function (index, val) {
+            update_sku()
+        })
 
 
         const add_more_customer_choice_option = (i, name) => {
@@ -604,39 +702,61 @@
             $('.attribute-value').selectpicker();
         });
 
-        $(document).on("change", ".attribute-value", function () {
-            update_sku();
-        });
 
         function update_sku() {
             $.ajax({
                 type: "POST",
-                url: "{{ route('sku_combinations') }}",
+                url: "{{ route('sku_combinations_edit') }}",
                 data: $('#choice-form').serialize(),
                 success: function (response) {
-                    $('#sku_combination').html(response);
-                    // let qtyPro = $('.qty');
-                    // let quantity = 0;
-                    // for(let i = 0; i< qtyPro.length; i++){
-                    //     quantity += Number(qtyPro[i].value);
-                    //     qtyPro[i].addEventListener('keyup', function () {
-                    //         quantity += Number(qtyPro[i].value);
-                    //     })
-                    // }
-                    // console.log(quantity)
-                    // $('#totalquantity').val(quantity)
+                    $('#sku_combination').html(response)
                 }
             });
         }
 
+        $(document).on("change", ".attribute-value", function () {
+            update_sku();
+        });
+
 
         $('#attribute').on('change', function () {
-            $('#attribute_array').val($(this).val())
-            $('#customer_choice_options').html(null);
-            $.each($("#attribute option:selected"), function () {
-                add_more_customer_choice_option($(this).val(), $(this).text())
-            })
-            update_sku()
+            // $('#attribute_array').val($(this).val())
+            // $('#customer_choice_options').html(null);
+            // $.each($("#attribute option:selected"), function () {
+            //     add_more_customer_choice_option($(this).val(), $(this).text())
+            // })
+            //
+            //
+            // update_sku()
+
+
+            $.each($("#attribute option:selected"), function (j, attribute) {
+                flag = false;
+                $('input[name="choice_no[]"]').each(function (i, choice_no) {
+                    if ($(attribute).val() == $(choice_no).val()) {
+                        flag = true;
+                    }
+                });
+                if (!flag) {
+                    add_more_customer_choice_option($(attribute).val(), $(attribute).text());
+                }
+            });
+
+            var str = @php echo $product->product_attribute @endphp;
+
+            $.each(str, function (index, value) {
+                flag = false;
+                $.each($("#choice_attributes option:selected"), function (j, attribute) {
+                    if (value == $(attribute).val()) {
+                        flag = true;
+                    }
+                });
+                if (!flag) {
+                    $('input[name="choice_no[]"][value="' + value + '"]').parent().parent().remove();
+                }
+            });
+
+            update_sku();
         })
 
         $("[name=shipping_type]").on("change", function () {
@@ -647,31 +767,11 @@
             }
         });
 
-
-        const isProductAttribute = (boolean) => {
-
-            if (boolean == 'true') {
-                $('input[name="type_of_category"]').val('isAttribute')
-                $('#show_hide_date_of_manufacture_and_expiry').hide()
-            } else if (boolean == 'false') {
-                $('input[name="type_of_category"]').val('isNotAttribute')
-                $('#show_hide_date_of_manufacture_and_expiry').show()
-            }
-
-        }
-
-
-
+        // $.each($('.js-example-basic-multiple option:selected'), function (j, attribute) {
+        //     add_more_customer_choice_option($(attribute).val(), $(this).text())
+        //     update_sku();
+        // })
 
 
     </script>
-    @if($product->type_of_category == 'isAttribute')
-        <script>
-            isProductAttribute('true')
-        </script>
-    @else
-        <script>
-            isProductAttribute('false')
-        </script>
-    @endif
 @endpush
