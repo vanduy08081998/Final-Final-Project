@@ -583,8 +583,7 @@
 
         // Form on submit
         $('form').on('submit', function (event) {
-
-            
+            event.preventDefault()
             let quantity = $('.qty');
             let total_quantity = 0; 
             for (let index = 0; index < quantity.length; index++) {
@@ -606,6 +605,7 @@
                 }
             }
         });
+
 
         if ($('input[name="type_of_category"]:checked').val() == 'isNotAttribute') {
             $('.is__attribute').hide();

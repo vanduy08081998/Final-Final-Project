@@ -10,9 +10,7 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> <span>Chức vụ</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="{{ route('categories.index') }}">Danh sách</a></li>
-        </ul>
-        <ul style="display: none;">
+            <li><a href="{{ route('list-role') }}">Vai trò</a></li>
             <li><a href="{{ route('categories.index') }}">Phân quyền</a></li>
         </ul>
     </li>
@@ -84,8 +82,8 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-tags" aria-hidden="true"></i> <span> Phiếu giảm giá</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
-            <li><a href="#">Thêm phiếu</a></li>
+            <li><a href="{{route('discount.index')}}">Danh sách</a></li>
+            <li><a href="{{route('discount.create')}}">Thêm phiếu</a></li>
         </ul>
     </li>
     <li class="menu-title">
@@ -94,7 +92,7 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span> Khách hàng</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-
+        <li><a href="{{ route('list_customer') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="menu-title">
@@ -135,12 +133,16 @@
                 file</span></a>
     </li>
     <li class="menu-title">
-        <span>Cấu hình website</span>
+        <span>Website</span>
     </li>
     <li>
         <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> <span>Cấu hình</span><span class="menu-arrow"></span></a>
     </li>
     <li>
         <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Thông tin</span><span class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('informations.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('informations.create') }}">Thêm địa chỉ</a></li>
+        </ul>
     </li>
 </ul>

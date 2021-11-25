@@ -40,7 +40,7 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, AddBlogRequest $validate)
     {
         Blog::create($request->all());
         return redirect()->route('blogs.index');

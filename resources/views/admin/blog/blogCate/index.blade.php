@@ -43,9 +43,9 @@
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                                                         <a class="dropdown-item text-warning"
-                                                            href="#">Sửa</a>
+                                                            href="{{ route('blogCate.edit', $blogCate->id) }}">Sửa</a>
                                                         <form
-                                                            action="#"
+                                                            action="{{ route('blogCate.destroy', $blogCate->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')

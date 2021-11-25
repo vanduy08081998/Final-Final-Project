@@ -52,8 +52,8 @@
                                             <td class="py-2">
                                                 <div style="text-align: center;">
                                                     <div class="position-relative mr-2">
-                                                        <img class="avatar" width="90" height="58"
-                                                            src="{{ url('uploads/Brands/', $brand->brand_image) }}" />
+                                                        <img class="" width="90" height="35"
+                                                            src="{{ asset($brand->brand_image) }}" />
                                                     </div>
                                                 </div>
                                             </td>

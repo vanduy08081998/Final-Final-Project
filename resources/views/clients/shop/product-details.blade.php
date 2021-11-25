@@ -140,6 +140,126 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+                            </div>
+                            <!-- Product details-->
+                            <div class="col-lg-5 pt-4 pt-lg-0">
+                                <div class="product-details ms-auto pb-3">
+                                    <div class="h3 fw-normal text-accent mb-3 me-1">{{ number_format($product->unit_price) }}</div>
+{{--                                    <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span--}}
+{{--                                            class="text-muted" id="colorOption">Dark blue/Orange</span></div>--}}
+                                    <div class="position-relative me-n4 mb-3">
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="color" id="color1"
+                                                data-bs-label="colorOption" value="Dark blue/Orange" checked>
+                                            <label class="form-option-label rounded-circle" for="color1"><span
+                                                    class="form-option-color rounded-circle"
+                                                    style="background-color: #f25540;"></span></label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="color" id="color2"
+                                                data-bs-label="colorOption" value="Dark blue/Green">
+                                            <label class="form-option-label rounded-circle" for="color2"><span
+                                                    class="form-option-color rounded-circle"
+                                                    style="background-color: #65805b;"></span></label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="color" id="color3"
+                                                data-bs-label="colorOption" value="Dark blue/White">
+                                            <label class="form-option-label rounded-circle" for="color3"><span
+                                                    class="form-option-color rounded-circle"
+                                                    style="background-color: #f5f5f5;"></span></label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="color" id="color4"
+                                                data-bs-label="colorOption" value="Dark blue/Black">
+                                            <label class="form-option-label rounded-circle" for="color4"><span
+                                                    class="form-option-color rounded-circle"
+                                                    style="background-color: #333;"></span></label>
+                                        </div>
+                                        <div class="product-badge product-available mt-n1"><i
+                                                class="ci-security-check"></i>Sản phẩm còn hàng
+                                        </div>
+                                    </div>
+                                    <select class="form-select" required id="product-size">
+                                        <option value="">Chọn thông số</option>
+                                        <option value="xs">XS</option>
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                        <option value="l">L</option>
+                                        <option value="xl">XL</option>
+                                    </select>
+                                    <div class="d-flex align-items-center pt-2 pb-4">
+                                        <select class="form-select me-3" style="width: 5rem;">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i
+                                                class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
+                                    </div>
+                                    <div class="d-flex mb-4">
+                                        <div class="w-100 me-3">
+                                            <button class="btn btn-secondary d-block w-100" type="button"><i
+                                                    class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Thêm
+                                                    vào yêu thích</span></button>
+                                        </div>
+                                        <div class="w-100">
+                                            <button class="btn btn-secondary d-block w-100" type="button"><i
+                                                    class="ci-compare fs-lg me-2"></i>So sánh</button>
+                                        </div>
+                                    </div>
+                                    <!-- Product panels-->
+                                    <div class="accordion mb-4" id="productPanels">
+                                        <div class="accordion-item">
+<<<<<<< HEAD
+                                            <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions"
+                                                    role="button" data-bs-toggle="collapse" aria-expanded="true"
+                                                    aria-controls="shippingOptions"><i
+                                                        class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Tùy
+                                                    chọn giao hàng</a>
+=======
+                                            <h3 class="accordion-header"><a class="accordion-button" href="#shippingOptions" role="button"
+                                                    data-bs-toggle="collapse" aria-expanded="true" aria-controls="shippingOptions"><i
+                                                        class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Giao hàng</a>
+>>>>>>> main
+                                            </h3>
+                                            <div class="accordion-collapse collapse show" id="shippingOptions"
+                                                data-bs-parent="#productPanels">
+                                                <div class="accordion-body fs-sm">
+                                                    <div class="d-flex justify-content-between border-bottom pb-2">
+                                                        <div>
+                                                            <div class="fw-semibold text-dark">Ngày vận chuyển ước tính</div>
+                                                            <div class="fs-sm text-muted">{{ $product->shipping_day }} Ngày</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between border-bottom py-2">
+                                                        <div>
+                                                            <div class="fw-semibold text-dark">Phí vận chuyển</div>
+                                                            @if($product->shipping_stock == NULL)
+                                                                <div class="fs-sm text-muted">{{ $product->shipping_type }}</div>
+                                                            @else
+                                                                <div class="fs-sm text-muted">{{ $product->shipping_stock }} VND</div>
+                                                            @endif
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="d-flex justify-content-between pt-2">
+                                                        <div>
+<<<<<<< HEAD
+                                                            <div class="fw-semibold text-dark">Local pickup from store
+                                                            </div>
+                                                            <div class="fs-sm text-muted">&mdash;</div>
+=======
+                                                            <div class="fw-semibold text-dark">VAT</div>
+                                                            <div class="fs-sm text-muted">{{ $product->vat }}{{ $product->vat_unit }}</div>
+>>>>>>> main
+                                                        </div>
+
+=======
 
                                 <!-- Product details-->
                                 <div class="col-lg-5 pt-4 pt-lg-0">
@@ -288,10 +408,43 @@
                                                             <option value="UK">United Kingdom</option>
                                                             <option value="USA">USA</option>
                                                         </select>
+>>>>>>> Product
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+<<<<<<< HEAD
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header"><a class="accordion-button collapsed"
+                                                    href="#localStore" role="button" data-bs-toggle="collapse"
+                                                    aria-expanded="true" aria-controls="localStore"><i
+                                                        class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Tìm
+                                                    cửa hàng gần bạn</a></h3>
+                                            <div class="accordion-collapse collapse" id="localStore"
+                                                data-bs-parent="#productPanels">
+                                                <div class="accordion-body">
+                                                    <select class="form-select">
+                                                        <option value>Select your country</option>
+                                                        <option value="Argentina">Argentina</option>
+                                                        <option value="Belgium">Belgium</option>
+                                                        <option value="France">France</option>
+                                                        <option value="Germany">Germany</option>
+                                                        <option value="Spain">Spain</option>
+                                                        <option value="UK">United Kingdom</option>
+                                                        <option value="USA">USA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Sharing-->
+                                    <label class="form-label d-inline-block align-middle my-2 me-3">Chia sẻ:</label><a
+                                        class="btn-share btn-twitter me-2 my-2" href="#"><i
+                                            class="ci-twitter"></i>Twitter</a><a
+                                        class="btn-share btn-instagram me-2 my-2" href="#"><i
+                                            class="ci-instagram"></i>Instagram</a><a class="btn-share btn-facebook my-2"
+                                        href="#"><i class="ci-facebook"></i>Facebook</a>
+=======
                                         <!-- Sharing-->
                                         <label class="form-label d-inline-block align-middle my-2 me-3">Chia sẻ:</label><a
                                             class="btn-share btn-twitter me-2 my-2" href="#"><i
@@ -301,6 +454,7 @@
                                             class="btn-share btn-facebook my-2" href="#"><i
                                                 class="ci-facebook"></i>Facebook</a>
                                     </div>
+>>>>>>> Product
                                 </div>
                             </div>
                         </form>
@@ -308,6 +462,121 @@
                     <!-- Tech specs tab-->
 
                     <div class="tab-pane fade" id="specs" role="tabpanel">
+<<<<<<< HEAD
+                        <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+                            <div class="d-flex align-items-center me-md-3"><img
+                                    src="{{ asset('frontend/img/shop/single/gallery/th05.jpg') }}" width="90"
+                                    alt="Product thumb">
+                                <div class="ps-3">
+                                    <h6 class="fs-base mb-2">Smartwatch Youth Edition</h6>
+                                    <div class="h4 fw-normal text-accent">$124.<small>99</small></div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center pt-3">
+                                <select class="form-select" required id="product-size" style="margin-right: 10px">
+                                    <option value="">Chọn thông số</option>
+                                    <option value="xs">XS</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                </select>
+                                <select class="form-select me-2" style="width: 5rem;">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <button class="btn btn-primary btn-shadow me-2" type="button"><i
+                                        class="ci-cart fs-lg me-sm-2"></i><span class="d-none d-sm-inline">Thêm vào giỏ
+                                        hàng</span></button>
+                                <div class="me-2">
+                                    <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip"
+                                        title="Thêm vào yêu thích"><i class="ci-heart fs-lg"></i></button>
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary btn-icon" type="button" data-bs-toggle="tooltip"
+                                        title="So sánh"><i class="ci-compare fs-lg"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Specs table-->
+                        <div class="row pt-2">
+                            <div class="col-lg-5 col-sm-6">
+                                <h3 class="h6">General specs</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Model:</span><span>Amazfit Smartwatch</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Gender:</span><span>Unisex</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Smartphone
+                                            app:</span><span>Amazfit Watch</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">OS
+                                            campitibility:</span><span>Android / iOS</span></li>
+                                </ul>
+                                <h3 class="h6">Physical specs</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Shape:</span><span>Rectangular</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Body
+                                            material:</span><span>Plastics / Ceramics</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Band
+                                            material:</span><span>Silicone</span></li>
+                                </ul>
+                                <h3 class="h6">Display</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Display
+                                            type:</span><span>Color</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Display
+                                            size:</span><span>1.28"</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Screen
+                                            resolution:</span><span>176 x 176</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Touch
+                                            screen:</span><span>No</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-5 col-sm-6 offset-lg-1">
+                                <h3 class="h6">Functions</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Phone
+                                            calls:</span><span>Incoming call notification</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Monitoring:</span><span>Heart rate / Physical
+                                            activity</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">GPS
+                                            support:</span><span>Yes</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Sensors:</span><span>Heart rate, Gyroscope, Geomagnetic,
+                                            Light sensor</span>
+                                    </li>
+                                </ul>
+                                <h3 class="h6">Battery</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Battery:</span><span>Li-Pol</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Battery
+                                            capacity:</span><span>190 mAh</span></li>
+                                </ul>
+                                <h3 class="h6">Dimensions</h3>
+                                <ul class="list-unstyled fs-sm pb-2">
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Dimensions:</span><span>195 x 20 mm</span></li>
+                                    <li class="d-flex justify-content-between pb-2 border-bottom"><span
+                                            class="text-muted">Weight:</span><span>32 g</span></li>
+                                </ul>
+=======
                         <!-- Specs table-->
                         <div class="row pt-2">
                             <div class="col-lg-12 col-sm-12">
@@ -318,6 +587,7 @@
                                     </div>
                                 </div>
 
+>>>>>>> Product
                             </div>
 
                         </div>
@@ -626,7 +896,28 @@
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
+<<<<<<< HEAD
+                <h2 class="h3 pb-2">Choose your style</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                    dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure
+                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non
+                    proident.</p><img src="{{ asset('frontend/img/shop/single/prod-img2.jpg') }}"
+                    alt="Product description">
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
+                    rem aperiam, eaque
+                    ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+                    ipsam voluptatem quia
+                    voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                    voluptatem sequi nesciunt.
+                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
+                    non numquam eius modi
+                    tempora.</p>
+=======
                 {!! $product->long_description !!}
+>>>>>>> Product
             </div>
         </div>
     </div>

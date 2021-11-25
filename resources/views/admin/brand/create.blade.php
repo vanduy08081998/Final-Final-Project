@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">

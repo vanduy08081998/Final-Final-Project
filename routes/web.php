@@ -5,19 +5,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
+
+use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-
-use App\Http\Controllers\Auth\LoginController;
 
 
 
@@ -38,6 +41,8 @@ use App\Http\Controllers\Auth\LoginController;
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
     Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
+    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
@@ -96,7 +101,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
-
+    // Discount
+    Route::resource('/discount', DiscountController::class);
 
     Route::resource('/flash-deals', FlashDealController::class);
     //Route prefix function
@@ -107,14 +113,22 @@ Route::group(['prefix' => 'admin'], function(){
 
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
+    Route::resource('informations', InformationsController::class);
+    Route::resource('mail', MailController::class);
 
     //user
+Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
 Route::resource('/users', UserController::class );
-Route::get('/user/trash', [UserController::class, 'trash'])->name('user_trash');
-Route::post('/user/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-Route::post('/user/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-
-
 });
 
 
