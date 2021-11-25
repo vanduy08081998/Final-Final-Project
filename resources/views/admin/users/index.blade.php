@@ -17,7 +17,7 @@ Quản lý tài khoản
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="card-title">
-                        <a href="{{ route('user_trash') }}" class="btn btn-warning">Thùng rác
+                        <a href="{{ route('admin_trash') }}" class="btn btn-warning">Thùng rác
                             ({{ $countTrashed }})</a>
                         <hr />
                     </div>
@@ -37,7 +37,7 @@ Quản lý tài khoản
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($userAll as $user)
+                                @foreach ($adminAll as $user)
                                 <tr>
                                     <td style="text-align: left">{{ $user->name }}</td>
                                     <td style="text-align: left">{{ $user->email }}</td>
