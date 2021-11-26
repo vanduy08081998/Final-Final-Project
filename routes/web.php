@@ -60,7 +60,7 @@ Route::prefix('/')->group(function () {
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
     });
     Route::prefix('/cart')->group(function () {
-        Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');
+        Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
@@ -74,25 +74,26 @@ Route::prefix('/')->group(function () {
 
 
 /* Admin */
-Route::group(['prefix' => 'admin'], function(){
-// Dashboard
-    Route::get('/', [HomeController::class, 'index'] )->name('admin.index');
+Route::group(['prefix' => 'admin'], function () {
+    // Dashboard
+    Route::get('/', [HomeController::class, 'index'])->name('admin.index');
 
     // Categories
     Route::resource('categories', CategoryController::class);
-    Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
+    Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Brand
     Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
     Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
     Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
-    Route::resource('/brand', BrandController::class );
+    Route::resource('/brand', BrandController::class);
 
-    Route::resource('/products', ProductAdmin::class );
-    Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
+    Route::resource('/products', ProductAdmin::class);
+    Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
     Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
     Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
+    Route::get('/edit_product_feature', [ProductAdmin::class, 'editProductFeature'])->name('products.feature');
     //Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
@@ -117,18 +118,18 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('mail', MailController::class);
 
     //user
-Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
-Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
-Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
-route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
-Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
-Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
-Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
-Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
-Route::resource('/users', UserController::class );
+    Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+    Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+    Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+    route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+    route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+    Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+    Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+    Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+    Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+    Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+    Route::resource('/users', UserController::class);
 });
 
 

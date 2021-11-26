@@ -11,7 +11,8 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function shopGrid() {
+    public function shopGrid()
+    {
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
         $product = Product::orderByDESC('id')->get();
         $brands = Brand::orderByDESC('id')->get();
@@ -38,40 +39,51 @@ class ProductController extends Controller
     {
         // $color = \App\Models\Color::where('color_code', $request->input('radio-custom-color'));
         $product = Product::where('id', $request->product_id)->first();
-        $str = '';
-        $specifications = '';
-        $product_quantity = $request->product_quantity;
-        if ($request->has('radio_custom_color')) {
-            $str = $request['radio_custom_color'];
-        }
+        if ($product->type_of_category == 'isNotAttribute') {
 
-        if (json_decode($product->choice_options) != null) {
-            foreach (json_decode($product->choice_options) as $key => $choice) {
-                $specifications .= '
+            $price = $product->unit_price;
+            $product_quantity = $request->product_quantity;
+            $quantity = $product->quantity;
+            return response()->json([
+                'price' => number_format($price * $product_quantity),
+                'product_quantity' => $quantity,
+            ]);
+        } else {
+            $str = '';
+            $specifications = '';
+            $product_quantity = $request->product_quantity;
+            if ($request->has('radio_custom_color')) {
+                $str = $request['radio_custom_color'];
+            }
+
+            if (json_decode($product->choice_options) != null) {
+                foreach (json_decode($product->choice_options) as $key => $choice) {
+                    $specifications .= '
                                         <div class="d-flex">
-                                            <strong>'.\App\Models\Attribute::where('id', $choice->attribute_id)->first()->name.':  </strong>
-                                            <p>&nbsp; '.$request['radio_custom_' . $choice->attribute_id].'</p>
+                                            <strong>' . \App\Models\Attribute::where('id', $choice->attribute_id)->first()->name . ':  </strong>
+                                            <p>&nbsp; ' . $request['radio_custom_' . $choice->attribute_id] . '</p>
                                         </div>
                     ';
-                if ($str != null) {
-                    $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
-                } else {
-                    $str .= str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+                    if ($str != null) {
+                        $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+                    } else {
+                        $str .= str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+                    }
                 }
             }
-        }
 
-        $product_stock = ProductVariant::where('variant', $str)->first();
-        $price = $product_stock->variant_price;
-        $variant_quantity = $product_stock->variant_quantity;
-        $variant_image = $product_stock->variant_image;
-        return response()->json([
-            'price' => number_format($price * $product_quantity),
-            'variant_quantity' => $variant_quantity,
-            'quantity' => $product_quantity,
-            'variant' =>  $product_stock,
-            'specifications' => $specifications,
-            'variant_image' => $variant_image
-        ]);
+            $product_stock = ProductVariant::where('variant', $str)->first();
+            $price = $product_stock->variant_price;
+            $variant_quantity = $product_stock->variant_quantity;
+            $variant_image = $product_stock->variant_image;
+            return response()->json([
+                'price' => number_format($price * $product_quantity),
+                'product_quantity' => $variant_quantity,
+                'quantity' => $product_quantity,
+                'variant' =>  $product_stock,
+                'specifications' => $specifications,
+                'variant_image' => $variant_image
+            ]);
+        }
     }
 }

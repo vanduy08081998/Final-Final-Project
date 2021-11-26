@@ -36,8 +36,11 @@
                             }
                         }
                     }
-
-                    $stock = $product->variants()->where('variant', $str)->first();
+                    
+                    $stock = $product
+                        ->variants()
+                        ->where('variant', $str)
+                        ->first();
                 @endphp
                 @if (strlen($str) > 0)
                     <tr>
@@ -89,8 +92,9 @@
                                 </div>
                                 <input type="hidden" id="image_{{ $str }}"
                                     data-upload="img_{{ $str }}"
-                                    data-preview="image__preview__{{ $str }}">
-                                <input type="hidden" name="img_{{ $str }}">
+                                    data-preview="image__preview__{{ $str }}"
+                                    value="@if ($stock != null){{ asset($stock->variant_image) }}@endif">
+                                <input type="hidden" name="img_{{ $str }}" value="@if ($stock != null){{ asset($stock->variant_image) }}@endif">
                                 <div id="image__preview__{{ $str }}">
                                     @if ($stock != null)
                                         <img src="{{ asset($stock->variant_image) }}" width="80" height="80" alt="">

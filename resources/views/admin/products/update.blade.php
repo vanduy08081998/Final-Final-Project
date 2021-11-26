@@ -18,7 +18,8 @@
 
             <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
 
-                <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data" id="choice-form">
+                <form action="{{ route('products.update', $product->id) }}" method="post" enctype="multipart/form-data"
+                    id="choice-form">
                     @csrf
                     @method('PUT')
 
@@ -53,10 +54,18 @@
                                             @enderror
 
                                             <div class="form-group">
+                                                <label>Đơn vị sản phẩm</label>
+                                                <input class="form-control" name="product_unit" type="text"
+                                                    id="convert_slug" value="{{ $product->product_unit }}" required>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="name">Thương hiệu sản phẩm</label>
                                                 <select name="product_id_brand" class="form-control" id="">
                                                     @foreach ($brands as $brand)
-                                                        <option value="{{ $brand->id }}" {{ $product->product_id_brand == $brand->id ? 'selected' : '' }}>{{ $brand->brand_name }}</option>
+                                                        <option value="{{ $brand->id }}"
+                                                            {{ $product->product_id_brand == $brand->id ? 'selected' : '' }}>
+                                                            {{ $brand->brand_name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -112,7 +121,8 @@
                                                 </div>
                                                 <input type="hidden" id="image" data-upload="product_image"
                                                     data-preview="image__preview">
-                                                <input type="hidden" name="product_image" {{ $product->product_image }}>
+                                                <input type="hidden" name="product_image"
+                                                    value="{{ $product->product_image }}">
                                                 <div id="image__preview">
                                                     <img src="{{ asset($product->product_image) }}" width="80"
                                                         height="80" alt="">
@@ -199,8 +209,8 @@
                                             <div class="form-group">
                                                 <div class="status-toggle">
 
-                                                    <input value="1" type="checkbox" name="colors_active"
-                                                           id="colors_active" class="check">
+                                                    <input value="1" type="checkbox" name="colors_active" id="colors_active"
+                                                        class="check">
                                                     <label for="colors_active" class="checktoggle">checkbox</label>
 
                                                 </div>
@@ -208,10 +218,11 @@
 
 
                                                 <select name="colors[]" id="product_color" class="form-control"
-                                                        multiple="multiple" data-live-search="true" disabled>
-                                                    @foreach(\App\Models\Color::all() as $color)
+                                                    multiple="multiple" data-live-search="true" disabled>
+                                                    @foreach (\App\Models\Color::all() as $color)
                                                         <option value="{{ $color->color_code }}"
-                                                                data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>"></option>
+                                                            data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -298,12 +309,6 @@
                                                                                         {{ $attribute->name }}</option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            @foreach (json_decode($product->product_attribute) as $key => $value)
-                                                                                <input type="hidden" name="attribute[]"
-                                                                                    id="attribute_array"
-                                                                                    value="{{ $value }}">
-                                                                            @endforeach
-
                                                                         </div>
                                                                         @error('attribute')
                                                                             <div class="text-danger">{{ $message }}
@@ -621,9 +626,9 @@
                             <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i
                                     class="fa fa-check"></i>Cập nhật sản phẩm
                             </button>
-                            {{-- <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
+                            <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
                                     class="fa fa-times"></i>Hủy
-                            </button> --}}
+                            </button>
                         </div>
                     </div>
 
