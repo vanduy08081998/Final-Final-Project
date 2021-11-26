@@ -123,7 +123,7 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, AddProductRequest $addProductRequest)
+    public function store(Request $request)
     {
 
         if ($request->shipping_type == 'flat_rate') {

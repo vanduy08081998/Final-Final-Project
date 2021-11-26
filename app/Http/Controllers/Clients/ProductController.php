@@ -64,12 +64,14 @@ class ProductController extends Controller
         $product_stock = ProductVariant::where('variant', $str)->first();
         $price = $product_stock->variant_price;
         $variant_quantity = $product_stock->variant_quantity;
+        $variant_image = $product_stock->variant_image;
         return response()->json([
             'price' => number_format($price * $product_quantity),
             'variant_quantity' => $variant_quantity,
             'quantity' => $product_quantity,
             'variant' =>  $product_stock,
-            'specifications' => $specifications
+            'specifications' => $specifications,
+            'variant_image' => $variant_image
         ]);
     }
 }

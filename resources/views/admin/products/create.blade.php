@@ -550,9 +550,9 @@
                                 class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" type="submit"><i
                                     class="fa fa-check"></i>Thêm sản phẩm
                             </button>
-                            <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
+                            {{-- <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
                                     class="fa fa-times"></i>Hủy
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
 
@@ -583,7 +583,6 @@
 
         // Form on submit
         $('form').on('submit', function (event) {
-            event.preventDefault()
             let quantity = $('.qty');
             let total_quantity = 0; 
             for (let index = 0; index < quantity.length; index++) {
