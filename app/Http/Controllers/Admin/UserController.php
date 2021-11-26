@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Session;
 class UserController extends Controller
 {
     /**
@@ -182,5 +183,49 @@ class UserController extends Controller
         $all_permissions = Permission::latest()->get();
         $permissions_by_role = $role->permissions->pluck('id')->all();
         return view('admin.users.assign_permissions')->with(compact('role','all_permissions','permissions_by_role'));
+    }
+    public function assign_permissions(Request $request, $id)
+    {
+        $role = Role::find($id);
+        if($request->permissions==null){
+            $role->syncPermissions();
+        }else{
+            $role->syncPermissions($request->permissions);
+        }
+        return Redirect()->back()->with('message', 'Cấp quyền thành công');
+    }
+
+    public function add_redirect_permissions($id)
+    {
+       $user = User::find($id);
+       $user_redirect_permissions = $user->getDirectPermissions()->pluck('id')->all();
+       $all_permissions = Permission::all();
+       return view('admin.users.assign_redirect_permissions')->with(compact('user','user_redirect_permissions','all_permissions'));
+    }
+
+    public function assign_redirect_permissions(Request $request, $id)
+    {
+        $user = User::find($id);
+        if($request->permissions==null){
+            $user->syncPermissions();
+        }else{
+            $user->syncPermissions($request->permissions);
+        }
+        return back()->with('message','Cấp quyền thành công');
+    }
+
+    public function impersonate($id)
+    {
+        $user = User::find($id);
+        if($user){
+            Session::put('impersonate',$user->id);
+        }
+        return redirect()->route('admin.index');
+    }
+
+    public function impersonate_destroy()
+    {
+        Session::forget('impersonate');
+        return redirect()->route('users.index');
     }
 }
