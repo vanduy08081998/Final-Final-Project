@@ -1,19 +1,30 @@
+<?php
+use App\Models\Category;
+$categories = Category::where('category_parent_id', null)
+    ->orderBy('id_cate', 'desc')
+    ->get();
+?>
 <header class="shadow-sm">
     <!-- Topbar-->
     <div class="topbar topbar-dark bg-dark">
         <div class="container">
             <div>
-                <div class="topbar-text text-nowrap d-none d-md-inline-block border-light"><span
-                        class="text-muted me-1">Tư vấn 24/7 tại</span><a class="topbar-link"
-                        href="tel:00331697720">(00) 33 169 7720</a></div>
+                <div class="topbar-text text-nowrap d-none d-md-inline-block border-light">
+                    <span class="text-muted me-1">Tư vấn 24/7 tại</span>
+                    <a class="topbar-link" href="tel:00331697720">(00) 33 169 7720</a>
+                </div>
             </div>
             <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#"
                     data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{ route('account.wishlist') }}"><i
-                                class="ci-heart text-muted me-2"></i>Yêu thích (3)</a></li>
-                    <li><a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>So
-                            sánh (3)</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('account.wishlist') }}">
+                            <i class="ci-heart text-muted me-2"></i>Yêu thích (3)</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>So
+                            sánh (3)</a>
+                    </li>
                     <li><a class="dropdown-item" href="{{ route('account.order-tracking') }}"><i
                                 class="ci-location text-muted me-2"></i>Theo dõi đơn hàng</a></li>
                 </ul>
@@ -159,10 +170,75 @@
                                 data-bs-toggle="dropdown" data-bs-auto-close="outside"><i
                                     class="ci-menu align-middle mt-n1 me-2"></i>Danh mục</a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown mega-dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                        data-bs-toggle="dropdown"><i
-                                            class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>Computers &amp;
-                                        Accessories</a>
+                                @foreach ($categories as $cate)
+                                    <li class="dropdown mega-dropdown">
+                                        <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                            <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
+                                            {{ $cate->category_name }}
+                                        </a>
+                                        <div class="dropdown-menu p-0">
+                                            <div class="d-flex flex-wrap flex-sm-nowrap px-2">
+                                                <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
+                                                    <div class="widget widget-links">
+                                                        <h6 class="fs-base mb-3">Thương hiệu</h6>
+                                                        <ul class="widget-list">
+                                                            @foreach ($cate->brands as $brand)
+                                                                <li class="widget-list-item pb-1">
+                                                                    <a class="widget-list-link" href="#">{{ $brand->brand_name }}</a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="mega-dropdown-column py-4 px-3">
+                                                    <div class="widget widget-links">
+                                                        <h6 class="fs-base mb-3">Accessories</h6>
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Batteries</a>
+                                                            </li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Charges &amp;
+                                                                    Adapters</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Cooling Pads</a>
+                                                            </li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Mounts</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Replacement
+                                                                    Screens</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Security
+                                                                    Locks</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Stands</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
+                                                        class="d-block mb-2" href="#"><img
+                                                            src="{{ asset('frontend/img/shop/departments/07.jpg') }}"
+                                                            alt="Computers &amp; Accessories"></a>
+                                                    <div class="fs-sm mb-3">Starting from <span
+                                                            class='fw-medium'>$149.<small>80</small></span></div><a
+                                                        class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
+                                                            class="ci-arrow-right fs-xs ms-1"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                                {{-- <li class="dropdown mega-dropdown">
+                                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                        <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
+                                        Computers &amp; Accessories
+                                    </a>
                                     <div class="dropdown-menu p-0">
                                         <div class="d-flex flex-wrap flex-sm-nowrap px-2">
                                             <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
@@ -766,7 +842,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
                     </ul>
