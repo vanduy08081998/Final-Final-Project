@@ -35,7 +35,8 @@ class Product extends Model
         'expiry',
         'type_of_category',
         'shipping_day',
-        'choice_options'
+        'choice_options',
+        'colors'
     ];
 
     public $timestamps = TRUE;

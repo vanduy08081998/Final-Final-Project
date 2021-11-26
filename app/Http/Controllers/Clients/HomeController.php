@@ -38,6 +38,7 @@ class HomeController extends Controller
         return view('clients.about.blog-single',[
             'blogs' => $blogs,
             'blogs1' => $blogs1,
+            'blogCate' => $blogCate
         ]);
     }
 
@@ -60,12 +61,20 @@ class HomeController extends Controller
     }
 
     public function feedback(Request $request){
+        $infors = Information::all();
         $detail = [
-            'title' => '',
-            'pass' => ''
+            'fullname' => $request->fullname,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'title' => $request->title,
+            'message' => $request->message,
+            'day_send' => date("d/m/Y")
         ];
         Mail::to('nkokkenpro1995@gmail.com')->send(new SendMail($detail));
-
+        return view('clients.about.contact',[
+            'infors' => $infors
+        ]);
+        
     }
 
     public function about(){

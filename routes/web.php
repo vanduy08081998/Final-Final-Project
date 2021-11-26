@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
@@ -44,6 +45,7 @@ Route::prefix('/')->group(function () {
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::post('/contact',[HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
@@ -57,6 +59,7 @@ Route::prefix('/')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
+        Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
     });
     Route::prefix('/cart')->group(function () {
         Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');
@@ -82,15 +85,21 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class,'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Brand
-    Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
-    Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
-    Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
+    
+    Route::prefix('/brand')->group(function () {
+        Route::get('/trash', [BrandController::class, 'trash'])->name('brand.trash');
+        Route::post('/restore/{id}', [BrandController::class, 'restore'])->name('brand.restore');
+        Route::post('/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('brand.forceDelete');
+        Route::post('/handle', [BrandController::class, 'handle'])->name('brand.handle');
+    });
     Route::resource('/brand', BrandController::class );
-
+    
+    // Products
     Route::resource('/products', ProductAdmin::class );
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
     Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
+    Route::post('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
     //Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
@@ -99,6 +108,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    //banner
+    Route::resource('/banners', BannerController::class );
     // Discount
     Route::resource('/discount', DiscountController::class);
 
@@ -112,7 +123,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('informations', InformationsController::class);
-    Route::resource('mail', MailController::class);
 
     //user
 Route::group(['middleware' => ['role:admin']], function () {
