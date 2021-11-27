@@ -25,7 +25,15 @@ class ProductController extends Controller
 
     public function shopList()
     {
-        return view('clients.shop.shop-list-ls');
+        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        $product = Product::orderByDESC('id')->get();
+        $brands = Brand::orderByDESC('id')->get();
+        // dd($product->where('product_id_category', 24)->count());
+        return view('clients.shop.shop-list-ls', [
+            'product' => $product,
+            'category' => $categories,
+            'brands' => $brands,
+        ]);
     }
 
     public function productDetails($slug)
@@ -48,10 +56,10 @@ class ProductController extends Controller
         if (json_decode($product->choice_options) != null) {
             foreach (json_decode($product->choice_options) as $key => $choice) {
                 $specifications .= '
-                                        <div class="d-flex">
-                                            <strong>'.\App\Models\Attribute::where('id', $choice->attribute_id)->first()->name.':  </strong>
-                                            <p>&nbsp; '.$request['radio_custom_' . $choice->attribute_id].'</p>
-                                        </div>
+                    <div class="d-flex">
+                        <strong>'.\App\Models\Attribute::where('id', $choice->attribute_id)->first()->name.':  </strong>
+                        <p>&nbsp; '.$request['radio_custom_' . $choice->attribute_id].'</p>
+                    </div>
                     ';
                 if ($str != null) {
                     $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
