@@ -94,11 +94,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
-<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"></script>
-=======
     @stack('script')
->>>>>>> Product
 </body>
 
 <!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:40 GMT -->
