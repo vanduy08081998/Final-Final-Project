@@ -1,5 +1,5 @@
-<table class="datatable table table-stripped mb-0 table-bordered" style="vertical-align: middle">
-    <thead>
+<table class="datatable table table-stripped table-bordered" style="vertical-align: middle">
+    <thead class="thead-light">
         <tr>
             <th style="text-align: center;">{{ trans('Sản phẩm') }}</th>
             <th style="text-align: center;">{{ trans('Tên SP') }}</th>
@@ -32,7 +32,7 @@
                         @forelse (json_decode($pro->product_attribute) as $key => $attr)
                             @php
                                 foreach (explode(',', $attr) as $key => $attr_id) {
-                                    echo \App\Models\Attribute::find($attr_id)->name . ' ';
+                                    echo \App\Models\Attribute::find($attr_id)->name . '<br>';
                                 }
                             @endphp
                         @empty

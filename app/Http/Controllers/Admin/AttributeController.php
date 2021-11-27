@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Attribute;
 use App\Models\Variant;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
+
 
 class AttributeController extends Controller
 {
@@ -40,7 +42,8 @@ class AttributeController extends Controller
     {
         $data = $request->all();
         Attribute::create($data);
-        return back()->with('message', 'Thêm thuộc tính thành công');
+        $message = Toastr::success('Thêm thuộc tính thành công !', 'Chúc mừng !');
+        return redirect()->route('attribute.index')->with('message', $message);
     }
 
     /**
@@ -93,7 +96,7 @@ class AttributeController extends Controller
         Attribute::find($id)->delete();
         return back()->with('message', 'Xóa thuộc tính thành công');
     }
-    
+
     public function variant($attri_slug)
     {
         $attribute = Attribute::where('slug', $attri_slug)->first();

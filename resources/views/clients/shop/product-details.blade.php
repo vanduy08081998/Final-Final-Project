@@ -131,6 +131,10 @@
                                                         <img srcset="{{ asset($image) }} 2x" />
                                                     </li>
                                                 @endforeach
+
+                                                <li data-thumb="{{ asset($product->product_image) }}">
+                                                    <img srcset="{{ asset($product->product_image) }} 2x" />
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -553,7 +557,6 @@
             thumbItem: 9
         });
 
-
         const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
@@ -562,9 +565,6 @@
                 success: function(response) {
                     console.log(response.quantity)
                     $('#specifications').html(response.specifications)
-                    // $('#lightSlider').prepend(`<li data-thumb="${$('#url_to').val()}/${response.variant_image}">
-                //                                 <img srcset="${$('#url_to').val()}/${response.variant_image} 2x" />
-                //                             </li>`)
                     $('.total_product_price').html(` <small>Tổng tiền: </small>
                                                     ${response.price}`)
 

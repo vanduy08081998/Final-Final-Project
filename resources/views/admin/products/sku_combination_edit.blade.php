@@ -1,5 +1,5 @@
 @if (count($combinations[0]) > 0)
-    <table class="table table-bordered review-table mb-0">
+    <table class="table table-stripped table-bordered">
         <thead class="thead-light">
             <tr>
                 <th scope="col">{{ trans('Biến thể') }}</th>
@@ -20,19 +20,24 @@
                     }
                     
                     $str = '';
+                    $variant = '';
                     
                     foreach ($combination as $key => $item) {
                         if ($key > 0) {
                             $str .= '-' . str_replace(' ', '', $item);
                             $sku .= '-' . str_replace(' ', '', $item);
+                            $variant .= '<br>' . str_replace(' ', '', $item);
                         } else {
                             if ($colors_active == 1) {
-                                $color_name = \App\Models\Color::where('color_code', $item)->first()->color_slug;
-                                $str .= $color_name;
-                                $sku .= '-' . $color_name;
+                                $color_slug = \App\Models\Color::where('color_code', $item)->first()->color_slug;
+                                $name_color = \App\Models\Color::where('color_code', $item)->first()->color_name;
+                                $str .= $color_slug;
+                                $sku .= '-' . $color_slug;
+                                $variant .= $name_color;
                             } else {
                                 $str .= str_replace(' ', '', $item);
                                 $sku .= '-' . str_replace(' ', '', $item);
+                                $variant .= str_replace(' ', '', $item);
                             }
                         }
                     }
@@ -45,7 +50,7 @@
                 @if (strlen($str) > 0)
                     <tr>
                         <td>
-                            <label for="">{{ $str }}</label>
+                            <label for=""><strong>{!! $variant !!}</strong></label>
                         </td>
                         <td>
                             <input type="number" name="price_{{ $str }}" value="@php

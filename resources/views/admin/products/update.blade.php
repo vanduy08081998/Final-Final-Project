@@ -206,26 +206,54 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
 
-                                            <div class="form-group">
-                                                <div class="status-toggle">
+                                            @if ($product->colors != null)
+                                                <div class="form-group">
 
-                                                    <input value="1" type="checkbox" name="colors_active" id="colors_active"
-                                                        class="check">
-                                                    <label for="colors_active" class="checktoggle">checkbox</label>
+                                                    <div class="status-toggle">
 
+                                                        <input value="1" type="checkbox" name="colors_active"
+                                                            id="colors_active" class="check" checked>
+                                                        <label for="colors_active" class="checktoggle">checkbox</label>
+
+                                                    </div>
+                                                    <label class="mt-3">Màu sắc sản phẩm</label>
+
+
+                                                    <select name="colors[]" id="product_color" class="form-control"
+                                                        multiple="multiple" data-live-search="true" disabled>
+                                                        @foreach (\App\Models\Color::all() as $color)
+                                                            @foreach (json_decode($product->colors) as $key => $color_value)
+                                                                <option value="{{ $color->color_code }}"
+                                                                    @if ($color_value == $color->color_code) selected @endif
+                                                                    data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                                                                </option>
+                                                            @endforeach
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <label class="mt-3">Màu sắc sản phẩm</label>
+                                            @else
+                                                <div class="form-group">
+
+                                                    <div class="status-toggle">
+
+                                                        <input value="1" type="checkbox" name="colors_active"
+                                                            id="colors_active" class="check">
+                                                        <label for="colors_active" class="checktoggle">checkbox</label>
+
+                                                    </div>
+                                                    <label class="mt-3">Màu sắc sản phẩm</label>
 
 
-                                                <select name="colors[]" id="product_color" class="form-control"
-                                                    multiple="multiple" data-live-search="true" disabled>
-                                                    @foreach (\App\Models\Color::all() as $color)
-                                                        <option value="{{ $color->color_code }}"
-                                                            data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                                    <select name="colors[]" id="product_color" class="form-control"
+                                                        multiple="multiple" data-live-search="true" disabled>
+                                                        @foreach (\App\Models\Color::all() as $color)
+                                                            <option value="{{ $color->color_code }}"
+                                                                data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -284,11 +312,6 @@
 
                                                                 <div class="form-group mb-3">
                                                                     <label>Liên kết bên ngoài</label>
-                                                                    @php
-                                                                        foreach (json_decode($product->product_attribute) as $key => $val) {
-                                                                            $array_attribute = explode(',', $val);
-                                                                        }
-                                                                    @endphp
                                                                     <input type="text" name="ex_link" id=""
                                                                         class="form-control"
                                                                         value="{{ $product->ex_link }}">
@@ -297,16 +320,21 @@
                                                                     <!-- Category End -->
                                                                     <div id="choiceAttribute">
                                                                         <div class="form-group">
+                                                                            <?php ?>
                                                                             <select
                                                                                 class="js-example-basic-multiple form-control"
                                                                                 id="attribute" name="attribute[]"
                                                                                 multiple="multiple" data-live-search="true">
 
                                                                                 @foreach (App\Models\Attribute::all() as $attribute)
-
-                                                                                    <option value="{{ $attribute->id }}"
-                                                                                        @if (in_array($attribute->id, $array_attribute)) selected @endif>
-                                                                                        {{ $attribute->name }}</option>
+                                                                                    @foreach (json_decode($product->product_attribute) as $key => $val)
+                                                                                        <?php $array_attribute = explode(',', $val); ?>
+                                                                                        <option
+                                                                                            value="{{ $attribute->id }}"
+                                                                                            @if (in_array($attribute->id, $array_attribute)) selected @endif>
+                                                                                            {{ $attribute->name }}
+                                                                                        </option>
+                                                                                    @endforeach
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -799,6 +827,34 @@
                 $(".flat_rate_shipping_div").show();
             }
         });
+
+        if (!$('input[name="colors_active"]').is(':checked')) {
+            $('#product_color').prop('disabled', true);
+            $('#product_color').selectpicker('refresh');
+        } else {
+            $('#product_color').prop('disabled', false);
+            $('#product_color').selectpicker('refresh');
+        }
+
+        $.each($('#product_color option:selected'), function() {
+            update_sku()
+        })
+
+        $('input[name="colors_active"]').on('change', function() {
+            if (!$('input[name="colors_active"]').is(':checked')) {
+                $('#product_color').prop('disabled', true);
+                $('#product_color').selectpicker('refresh');
+            } else {
+                $('#product_color').prop('disabled', false);
+                $('#product_color').selectpicker('refresh');
+            }
+            update_sku();
+        });
+
+
+        $('#product_color').on('change', () => {
+            update_sku();
+        })
 
         // $.each($('.js-example-basic-multiple option:selected'), function (j, attribute) {
         //     add_more_customer_choice_option($(attribute).val(), $(this).text())
