@@ -116,11 +116,12 @@
             <!-- Product-->
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                 <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>So sánh</a>
+                    <div class="product-card-actions d-flex align-items-center">
+                        <a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>So sánh</a>
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
+                    </div>
+                    <a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
                             src="{{ asset('frontend/img/shop/catalog/58.jpg') }}" alt="Product"></a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Headphones</a>
                         <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Wireless Bluetooth
