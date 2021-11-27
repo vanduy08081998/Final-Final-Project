@@ -45,6 +45,7 @@ Route::prefix('/')->group(function () {
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::post('/contact',[HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
@@ -58,6 +59,7 @@ Route::prefix('/')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
+        Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
     });
     Route::prefix('/cart')->group(function () {
         Route::get('/cart-list', [CartController::class,'cartList'])->name('cart.cart-list');
@@ -97,6 +99,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('product__attributes', [ProductAdmin::class , 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
     Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
+    Route::post('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
     //Attributes
     Route::resource('/attribute', AttributeController::class);
     Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
@@ -120,9 +123,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
     Route::resource('informations', InformationsController::class);
-    Route::resource('mail', MailController::class);
 
     //user
+Route::group(['middleware' => ['role:admin']], function () {
 Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
 Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
 Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
@@ -134,7 +137,13 @@ Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role'
 Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
 Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
 Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
+Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
+Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
+Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
 Route::resource('/users', UserController::class );
+});
+Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 });
 
 

@@ -3,6 +3,11 @@
 
 @section('title', $product->product_name)
 
+@section('meta')
+    <meta name="description" content="{!! $product->meta_description !!}">
+    <meta name="keywords" content="{!! $product->meta_keywords !!}">
+    <meta name="author" content="{!! $product->meta_title !!}">
+@endsection
 
 @section('content')
     <!-- Size chart modal-->
@@ -45,38 +50,97 @@
             <div class="px-4 pt-lg-3 pb-3 mb-5">
                 <div class="tab-content px-lg-3">
                     <!-- General info tab-->
-                    <div class="tab-pane fade show active" id="general" role="tabpanel">
-                        <div class="row">
-                            <!-- Product gallery-->
-                            <div class="col-lg-7 pe-lg-0">
-                                <div class="product-gallery">
-                                    <div class="product-gallery-preview order-sm-2">
-                                        <div class="product-gallery-preview-item active" id="1"><img class="image-zoom"
-                                                src="{{ asset($product->product_image) }}"
-                                                data-zoom="{{ asset($product->product_image) }}" alt="Product image">
-                                            <div class="image-zoom-pane"></div>
-                                        </div>
-                                        @foreach(explode(',', $product->product_galley) as $key => $val)
-                                        <div class="product-gallery-preview-item" id="{{ $key }}"><img class="image-zoom"
-                                                src="{{ asset($val) }}"
-                                                data-zoom="{{ asset($val) }}" alt="Product image">
-                                            <div class="image-zoom-pane"></div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="product-gallery-thumblist order-sm-1">
 
-                                        <a class="product-gallery-thumblist-item" href="#1"><img
-                                                src="{{ asset($product->product_image) }}" alt="Product thumb"></a>
-                                        @php
-                                            $gallery = explode(',', $product->product_gallery)
-                                        @endphp
-                                        @foreach($gallery as $key => $value)
-                                            <a class="product-gallery-thumblist-item" href="#{{ $key }}"><img
-                                                    src="{{ asset($value) }}" alt="Product thumb"></a>
-                                        @endforeach
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <form id="choice_attribute_options" onchange="getVariantPrice()">
+                            @csrf
+                            <div class="row">
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <!-- Product gallery -->
+                                <div class="col-lg-7 pe-lg-0">
+                                    <div class="product-gallery">
+                                        <div class="product-gallery-preview order-sm-2">
+                                            <style>
+                                                .demo {
+                                                    width: 100%;
+                                                    overflow: hidden;
+                                                    margin: 0 auto;
+                                                }
+
+                                                ul {
+                                                    list-style: none outside none;
+                                                    padding-left: 0;
+                                                    margin-bottom: 0;
+                                                }
+
+                                                li {
+                                                    display: block;
+                                                    float: left;
+                                                    margin-right: 6px;
+                                                    cursor: pointer;
+                                                }
+
+                                                .demo li img {
+                                                    display: block;
+                                                    height: auto;
+                                                    width: 100%;
+                                                }
+
+                                                #lightSlider li img {
+                                                    width: 60%;
+                                                    height: 400px;
+                                                    /* margin: 0 auto; */
+                                                }
+
+                                                .product-badge.product-available.bg-red {
+                                                    background-color: red;
+                                                }
+
+                                                .product-badge.product-available.bg-red::after {
+                                                    border-color: rgba(66, 214, 151, 0);
+                                                    border-bottom-color: red;
+                                                }
+
+                                                .product-badge.product-available.bg-green {
+                                                    background-color: green;
+                                                }
+
+                                                .product-badge.product-available.bg-green::after {
+                                                    border-color: rgba(66, 214, 151, 0);
+                                                    border-bottom-color: green;
+                                                }
+
+                                                * {
+                                                    box-sizing: border-box;
+                                                }
+
+                                                .input-number {
+                                                    width: 80px;
+                                                    padding: 0 12px;
+                                                    vertical-align: top;
+                                                    text-align: center;
+                                                    outline: none;
+                                                }
+
+                                                
+
+                                            </style>
+                                            <div class="demo">
+                                                <ul id="lightSlider">
+                                                    <li data-thumb="{{ asset($product->product_image) }}">
+                                                        <img srcset="{{ asset($product->product_image) }} 2x" />
+                                                    </li>
+                                                    @foreach (explode(',', $product->product_gallery) as $key => $image)
+                                                        <li data-thumb="{{ asset($image) }}">
+                                                            <img srcset="{{ asset($image) }} 2x" />
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                             </div>
                             <!-- Product details-->
                             <div class="col-lg-5 pt-4 pt-lg-0">
@@ -195,10 +259,161 @@
 >>>>>>> main
                                                         </div>
 
+=======
+
+                                <!-- Product details-->
+                                <div class="col-lg-5 pt-4 pt-lg-0">
+                                    <div class="product-details pb-3">
+                                        <div class="h4 fw-normal mb-3 me-1"> <small>Giá gốc: </small>
+                                            {{ number_format($product->unit_price) }}</div>
+
+                                        @foreach (json_decode($product->choice_options) as $item)
+                                            <div class="fs-sm mb-2"><span
+                                                    class="text-heading fw-medium me-1">{{ \App\Models\Attribute::where('id', $item->attribute_id)->first()->name }}:
+                                            </div>
+                                            <div class="boxed-check-group boxed-check-success boxed-check-sm">
+                                                @foreach ($item->values as $key => $value)
+                                                    <label class="boxed-check">
+                                                        <input class="boxed-check-input" type="radio"
+                                                            name="radio_custom_{{ $item->attribute_id }}"
+                                                            value="{{ $value }}" checked>
+                                                        <div class="boxed-check-label" style="text-align:center;">
+                                                            <span>{{ $value }}</span>
+                                                        </div>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+
+                                        <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span>
+                                        </div>
+
+
+                                        <div class="position-relative me-n4 mb-3">
+                                            <!-- Product color -->
+
+                                            <div class="form-check form-option form-check-inline mb-2">
+
+                                                <div class="boxed-check-group boxed-check-sm">
+                                                    @foreach (json_decode($product->colors) as $key => $value)
+                                                        <label class="boxed-check">
+                                                            <input class="boxed-check-input" type="radio"
+                                                                name="radio_custom_color"
+                                                                value="{{ \App\Models\Color::where('color_code', $value)->first()->color_slug }}"
+                                                                checked>
+                                                            <div class="boxed-check-label"
+                                                                style="text-align:center; background: {{ $value }}; width: 25px; height: 25px; ">
+                                                                <span></span>
+                                                            </div>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+
+                                            </div>
+                                            <!-- End Product Color -->
+                                            <div class="d-flex">
+                                                <span>Số lượng : &nbsp;</span>
+                                                <input class="input-number"
+                                                type="number" name="product_quantity" value="1" min="0" max="10">
+                                            </div>
+                                            <div class="position-relative me-n4 mb-3 mt-3">
+                                                <div class="h5 fw-normal mb-3 me-1 total_product_price"></div>
+                                            </div>
+                                            <div id="product_badge">
+
+                                            </div>
+                                        </div>
+                                        <div class="align-items-center pt-2 pb-4">
+
+                                            
+
+                                            <button class="btn btn-primary btn-shadow d-block w-100 mt-3" type="button"><i
+                                                    class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
+                                        </div>
+
+
+                                        <div class="d-flex mb-4">
+                                            <div class="w-100 me-3">
+                                                <button class="btn btn-secondary d-block w-100" type="button"><i
+                                                        class="ci-heart fs-lg me-2"></i><span
+                                                        class='d-none d-sm-inline'>Thêm vào yêu thích</span></button>
+                                            </div>
+                                            <div class="w-100">
+                                                <button class="btn btn-secondary d-block w-100" type="button"><i
+                                                        class="ci-compare fs-lg me-2"></i>So sánh</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product panels-->
+                                        <div class="accordion mb-4" id="productPanels">
+                                            <div class="accordion-item">
+                                                <h3 class="accordion-header"><a class="accordion-button"
+                                                        href="#shippingOptions" role="button" data-bs-toggle="collapse"
+                                                        aria-expanded="true" aria-controls="shippingOptions"><i
+                                                            class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i>Giao
+                                                        hàng</a>
+                                                </h3>
+                                                <div class="accordion-collapse collapse show" id="shippingOptions"
+                                                    data-bs-parent="#productPanels">
+                                                    <div class="accordion-body fs-sm">
+                                                        <div class="d-flex justify-content-between border-bottom pb-2">
+                                                            <div>
+                                                                <div class="fw-semibold text-dark">Ngày vận chuyển ước tính
+                                                                </div>
+                                                                <div class="fs-sm text-muted">
+                                                                    {{ $product->shipping_day }} Ngày</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between border-bottom py-2">
+                                                            <div>
+                                                                <div class="fw-semibold text-dark">Phí vận chuyển</div>
+                                                                @if ($product->shipping_stock == null)
+                                                                    <div class="fs-sm text-muted">
+                                                                        {{ $product->shipping_type }}</div>
+                                                                @else
+                                                                    <div class="fs-sm text-muted">
+                                                                        {{ $product->shipping_stock }} VND</div>
+                                                                @endif
+
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="d-flex justify-content-between pt-2">
+                                                            <div>
+                                                                <div class="fw-semibold text-dark">VAT</div>
+                                                                <div class="fs-sm text-muted">
+                                                                    {{ $product->vat }}{{ $product->vat_unit }}</div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h3 class="accordion-header"><a class="accordion-button collapsed"
+                                                        href="#localStore" role="button" data-bs-toggle="collapse"
+                                                        aria-expanded="true" aria-controls="localStore"><i
+                                                            class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Tìm
+                                                        cửa hàng gần bạn</a></h3>
+                                                <div class="accordion-collapse collapse" id="localStore"
+                                                    data-bs-parent="#productPanels">
+                                                    <div class="accordion-body">
+                                                        <select class="form-select">
+                                                            <option value>Select your country</option>
+                                                            <option value="Argentina">Argentina</option>
+                                                            <option value="Belgium">Belgium</option>
+                                                            <option value="France">France</option>
+                                                            <option value="Germany">Germany</option>
+                                                            <option value="Spain">Spain</option>
+                                                            <option value="UK">United Kingdom</option>
+                                                            <option value="USA">USA</option>
+                                                        </select>
+>>>>>>> Product
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+<<<<<<< HEAD
                                         <div class="accordion-item">
                                             <h3 class="accordion-header"><a class="accordion-button collapsed"
                                                     href="#localStore" role="button" data-bs-toggle="collapse"
@@ -229,12 +444,25 @@
                                         class="btn-share btn-instagram me-2 my-2" href="#"><i
                                             class="ci-instagram"></i>Instagram</a><a class="btn-share btn-facebook my-2"
                                         href="#"><i class="ci-facebook"></i>Facebook</a>
+=======
+                                        <!-- Sharing-->
+                                        <label class="form-label d-inline-block align-middle my-2 me-3">Chia sẻ:</label><a
+                                            class="btn-share btn-twitter me-2 my-2" href="#"><i
+                                                class="ci-twitter"></i>Twitter</a><a
+                                            class="btn-share btn-instagram me-2 my-2" href="#"><i
+                                                class="ci-instagram"></i>Instagram</a><a
+                                            class="btn-share btn-facebook my-2" href="#"><i
+                                                class="ci-facebook"></i>Facebook</a>
+                                    </div>
+>>>>>>> Product
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <!-- Tech specs tab-->
+
                     <div class="tab-pane fade" id="specs" role="tabpanel">
+<<<<<<< HEAD
                         <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
                             <div class="d-flex align-items-center me-md-3"><img
                                     src="{{ asset('frontend/img/shop/single/gallery/th05.jpg') }}" width="90"
@@ -348,9 +576,25 @@
                                     <li class="d-flex justify-content-between pb-2 border-bottom"><span
                                             class="text-muted">Weight:</span><span>32 g</span></li>
                                 </ul>
+=======
+                        <!-- Specs table-->
+                        <div class="row pt-2">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="card">
+                                    <div class="card-body" id="specifications">
+                                        
+
+                                    </div>
+                                </div>
+
+>>>>>>> Product
                             </div>
+
                         </div>
                     </div>
+
+
+
                     <!-- Reviews tab-->
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
                         <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
@@ -652,6 +896,7 @@
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
+<<<<<<< HEAD
                 <h2 class="h3 pb-2">Choose your style</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqua.
@@ -670,6 +915,9 @@
                     Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia
                     non numquam eius modi
                     tempora.</p>
+=======
+                {!! $product->long_description !!}
+>>>>>>> Product
             </div>
         </div>
     </div>
@@ -884,3 +1132,85 @@
         </div>
     </div>
 @endsection
+@push('script')
+    <script type="text/javascript">
+        (function() {
+
+            window.inputNumber = function(el) {
+
+                var min = el.attr('min') || false;
+                var max = el.attr('max') || false;
+
+                var els = {};
+
+                els.dec = el.prev();
+                els.inc = el.next();
+
+                el.each(function() {
+                    init($(this));
+                });
+
+                function init(el) {
+
+                    els.dec.on('click', decrement);
+                    els.inc.on('click', increment);
+
+                    function decrement() {
+                        var value = el[0].value;
+                        value--;
+                        if (!min || value >= min) {
+                            el[0].value = value;
+                        }
+                    }
+
+                    function increment() {
+                        var value = el[0].value;
+                        value++;
+                        if (!max || value <= max) {
+                            el[0].value = value++;
+                        }
+                    }
+                }
+            }
+        })();
+
+        inputNumber($('.input-number'));
+        $('#lightSlider').lightSlider({
+            gallery: true,
+            item: 1,
+            loop: true,
+            slideMargin: 0,
+            thumbItem: 9
+        });
+
+        $(window).on('load', () => {
+            getVariantPrice()
+        })
+
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    console.log(response.quantity)
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(` <small>Tổng tiền: </small>
+                                                    ${response.price}`)
+
+
+
+                    if (response.variant_quantity > 0) {
+                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green"><i
+                                                    class="ci-security-check"></i>Sản phẩm còn hàng
+                                                </div>`)
+                    } else {
+                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                    class="fas fa-times"></i>Sản phẩm hết hàng
+                                                </div> `)
+                    }
+                }
+            });
+        }
+    </script>
+@endpush
