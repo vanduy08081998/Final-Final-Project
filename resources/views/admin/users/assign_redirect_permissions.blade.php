@@ -7,7 +7,7 @@ Thêm tài khoản
 @section('content')
 
 <div class="content container-fluid">
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'QUẢN LÝ QUYỀN THÔNG QUA VAI TRÒ'])
+    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'QUẢN LÝ QUYỀN TRỰC TIẾP'])
     <div class="row">
         <div class="col-sm-12">
             <div class="card radius-15">
@@ -19,14 +19,14 @@ Thêm tài khoản
                                 {{ session('message') }}
                             </div>
                             @endif
-                            <h3 class="text-primary">Cấp quyền thông qua vai trò:
+                            <h3 class="text-primary">Cấp quyền trực tiếp cho nhân viên:
                                 <button class="btn btn-danger"><strong style="text-transform:uppercase">
                                         <i class="bi bi-person-check"></i>
-                                        {{$role->name}}
+                                        {{$user->name}}
                                     </strong></button>
                             </h3>
 
-                            <form action="{{route('assign_permissions', [$role->id])}}" method="post">
+                            <form action="{{route('assign_redirect_permissions', [$user->id])}}" method="post">
                                 @csrf
                                 <div class="row pl-5">
                                     @foreach($all_permissions as $key => $per)
@@ -37,7 +37,7 @@ Thêm tài khoản
                                             <label class="container mt-2 font-weight-bold"> {{$per->name}}
                                                 <input value="{{$per->id}}" data-id="{{$per->id}}" class="select-all"
                                                     name="permissions[]"
-                                                    {{in_array($per->id,$permissions_by_role) ? 'checked' : '' }}
+                                                    {{in_array($per->id,$user_redirect_permissions) ? 'checked' : '' }}
                                                     type="checkbox">
                                                 <span class="checkmark"></span>
                                             </label>
@@ -50,7 +50,7 @@ Thêm tài khoản
                                                 <label class="container"> {{$perchil->name}}
                                                     <input value="{{$perchil->id}}" class="chil_{{$perchil->parent}}"
                                                         name="permissions[]"
-                                                        {{in_array($perchil->id,$permissions_by_role) ? 'checked' : '' }}
+                                                        {{in_array($perchil->id,$user_redirect_permissions) ? 'checked' : '' }}
                                                         type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>

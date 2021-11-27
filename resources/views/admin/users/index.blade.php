@@ -43,10 +43,11 @@ Quản lý tài khoản
                                     <td style="text-align: left">{{ $user->email }}</td>
                                     <td style="text-align: left">
                                         @foreach($user->roles as $key => $r)
-                                        <button type="button"
-                                            class="btn btn-danger font-weight-bold">
-                                            <span aria-hidden="true" class="bi bi-person-check"></span>
-                                            {{$r->name}}</button>
+                                        <a href="{{route('add_permissions', [$r->id])}}">
+                                            <button type="button" class="btn btn-danger font-weight-bold">
+                                                <span aria-hidden="true" class="bi bi-person-check"></span>
+                                                {{$r->name}}</button>
+                                        </a>
                                         @endforeach
                                     </td>
 
@@ -56,10 +57,14 @@ Quản lý tài khoản
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                     class="bx bx-cog"></i></button>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+                                            <a class="dropdown-item text-success"
+                                                    href="{{ route('impersonate', ['id' => $user->id]) }}">Đăng nhập</a>
                                                 <a class="dropdown-item text-primary"
-                                                    href="{{ route('assign-roles', ['id' => $user->id]) }}">Vai trò</a>
+                                                    href="{{ route('assign-roles', ['id' => $user->id]) }}">Cấp vai trò</a>
+                                                <a class="dropdown-item text-dark" href="{{route('add_redirect_permissions', [$user->id])}}">
+                                                    Cấp quyền trực tiếp</a>
                                                 <a class="dropdown-item text-warning"
-                                                    href="{{ route('users.edit', ['user' => $user->id]) }}">Sửa</a>
+                                                    href="{{ route('users.edit', ['user' => $user->id]) }}">Cập nhật tài khoản</a>
                                                 <form action="{{ route('users.destroy', ['user' => $user->id]) }}"
                                                     method="POST">
                                                     @csrf
