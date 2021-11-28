@@ -140,4 +140,41 @@ class BrandController extends Controller
         $brandId->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
+
+    public function handle(Request $request){
+        $data = $request->all();
+        switch ($data['handle']) {
+            case 'trash':
+                $ids = $data['checkItem'];
+                Brand::whereIn('id', $ids)->delete();
+                return redirect()->back();
+                break;
+            case 'delete':
+                $ids = $data['checkItem'];
+                Brand::whereIn('id', $ids)->forceDelete();
+                return redirect()->back();
+                break;
+                
+            case 'restore':
+                $ids = $data['checkItem'];
+                Brand::whereIn('id', $ids)->restore();
+                return redirect()->back();
+                break;
+            case 'restore-all':
+                $ids = Brand::onlyTrashed()->pluck('id')->all();
+                Brand::whereIn('id', $ids)->restore();
+                break;
+            case 'delete-all':
+                $ids = Brand::onlyTrashed()->pluck('id')->all();
+                Brand::whereIn('id', $ids)->forceDelete();
+                break;  
+            case 'trash-all':
+                $ids = Brand::pluck('id')->all();
+                Brand::whereIn('id', $ids)->delete();
+                break;      
+            default:
+                # code...
+                break;
+        }
+    }
 }

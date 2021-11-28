@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Models\Blog;
+use App\Models\Banner;
 use App\Models\BlogCate;
 use App\Models\Information;
 use Illuminate\Http\Request;
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     public function index(){
-        return view('clients.home');
+        $slide = Banner::orderByDESC('id')->get();
+        return view('clients.home')->with(compact('slide'));
     }
-
+  
     public function blog(){
         $blogs = Blog::all();
         $blogs1 = Blog::all();
@@ -27,6 +29,10 @@ class HomeController extends Controller
             'blogCate' => $blogCate,
             'blogs2' => $blogs2
         ]);
+    }
+    public function homes()
+    {
+        dd('hh');
     }
 
     public function blogSingle($id){
@@ -80,4 +86,5 @@ class HomeController extends Controller
     public function about(){
         return view('clients.about.about');
     }
+   
 }
