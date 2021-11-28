@@ -14,8 +14,10 @@ class Product extends Model
 
     protected $fillable = [
 
-        'product_name','product_slug','product_image','product_gallery','meta_title','meta_description','meta_keywords','product_id_category','product_attribute','unit_price','discount',
-        'shipping_type' ,
+        'product_name', 'product_slug', 'product_image', 'product_gallery', 'meta_title', 'meta_description', 'meta_keywords', 'product_id_category', 'product_attribute', 'unit_price', 'discount',
+        'shipping_type',
+        'product_unit',
+        'product_id_brand',
         'shipping_stock',
         'discount_unit',
         'multiple_stock',
@@ -48,7 +50,7 @@ class Product extends Model
      */
     public function variants()
     {
-        return $this->hasMany(ProductVariant::class,'id_product');
+        return $this->hasMany(ProductVariant::class, 'id_product');
     }
 
     /**
@@ -56,7 +58,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class, 'product_id_category');
     }

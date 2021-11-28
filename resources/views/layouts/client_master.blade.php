@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    <link rel="manifest" href="site.webmanifest">
+    {{-- <link rel="manifest" href="site.webmanifest"> --}}
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -33,7 +33,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
     <!-- Google Tag Manager-->
-    <script>
+    {{-- <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -48,7 +48,7 @@
                 '../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
-    </script>
+    </script> --}}
 </head>
 <!-- Body-->
 
@@ -64,6 +64,7 @@
 
         @yield('content')
     </main>
+    <input type="hidden" name="" id="url_to" value="{{ URL::to('/') }}">
     <!-- Footer-->
     @include('clients.Inc.footer')
     <!-- Toolbar for handheld devices (Default)-->
