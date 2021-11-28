@@ -50,6 +50,7 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-WKV3GT5');
     </script>
+
 </head>
 <!-- Body-->
 
@@ -93,6 +94,7 @@
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"></script>
+    <script src="{{ asset('frontend/js/range.js') }}"></script>
 </body>
 
 <!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:40 GMT -->

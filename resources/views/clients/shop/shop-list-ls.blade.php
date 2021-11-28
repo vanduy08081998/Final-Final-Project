@@ -586,27 +586,24 @@
                             </div>
                         </div>
                         <!-- Price range-->
-                        <div class="widget mb-4 pb-4 border-bottom">
-                            <h3 class="widget-title">Price</h3>
-                            <div class="range-slider" data-start-min="250" data-start-max="680" data-min="0"
-                                data-max="1000" data-step="1">
-                                <div class="range-slider-ui"></div>
-                                <div class="d-flex pb-1">
-                                    <div class="w-50 pe-2 me-2">
-                                        <div class="input-group input-group-sm"><span class="input-group-text">$</span>
-                                            <input class="form-control range-slider-value-min" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="w-50 ps-2">
-                                        <div class="input-group input-group-sm"><span class="input-group-text">$</span>
-                                            <input class="form-control range-slider-value-max" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="widget mb-4 pb-4">
+                            <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
+                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data"
+                                class="border-bottom">
+                                @csrf
+                                @method('POST')
+                                <input type="range" name="range" max="{{ $max }}" min="{{ $min }}"
+                                    id="myRange" value="{{ $min }}" step="1000" style="width: 260px;"><br>
+                                <span style="float: left; margin-left: -5px;"><span>{{ number_format($min) }}
+                                        ₫</span></span>
+                                <span style="float: right; margin-right: -25px;"><span>{{ number_format($max) }}
+                                        ₫</span></span><br>
+                                <button class="btn btn-primary" style="float: right; margin-top: 15px;"
+                                    type="submit">Tìm</button>
+                            </form>
                         </div>
                         <!-- Filter by Brand-->
-                        <div class="widget widget-filter mb-4 pb-4 border-bottom">
+                        <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
                             <h3 class="widget-title">Brand</h3>
                             <div class="input-group input-group-sm mb-2">
                                 <input class="widget-filter-search form-control rounded-end pe-5" type="text"

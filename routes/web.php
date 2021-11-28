@@ -12,12 +12,13 @@ use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Clients\SearchController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
-use App\Http\Controllers\Clients\CheckoutController;
 
+use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
@@ -69,6 +70,10 @@ Route::prefix('/')->group(function () {
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
+    });
+    Route::prefix('/search')->group(function () {
+        Route::post('/searchs/',[SearchController::class, 'searchs'])->name('search.searchs');
+        Route::post('/range', [SearchController::class, 'range'])->name('search.range');
     });
 });
 

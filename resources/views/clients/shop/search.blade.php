@@ -3,7 +3,6 @@
 
 @section('title', 'Danh sách sản phẩm')
 
-
 @section('content')
     <!-- Quick View Modal-->
     <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
@@ -595,8 +594,7 @@
                         <!-- Price range-->
                         <div class="widget mb-4 pb-4">
                             <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
-                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data"
-                                class="border-bottom">
+                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
                                 <input type="range" name="range" max="{{ $max }}" min="{{ $min }}"
@@ -609,6 +607,7 @@
                                     type="submit">Tìm</button>
                             </form>
                         </div>
+                        
                         <!-- Filter by Brand-->
                         <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
                             <h3 class="widget-title">Brand</h3>
@@ -1022,15 +1021,16 @@
                 <!-- Products grid-->
                 <div class="row mx-n2">
                     <!-- Product-->
-                    @foreach ($product as $pro)
+                    @foreach ($search as $pro)
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
                                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Thêm vào yêu thích"><i
                                         class="ci-heart"></i></button>
-                                <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $pro->product_slug) }}">
-                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product"
-                                        width="80%" style="margin: auto; display: block">
+                                <a class="card-img-top d-block overflow-hidden"
+                                    href="{{ route('shop.product-details', $pro->product_slug) }}">
+                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%"
+                                        style="margin: auto; display: block">
                                 </a>
                                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
                                         &amp; Keds</a>
@@ -1038,7 +1038,8 @@
                                             href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
-                                                class="text-accent">$154.<small>00</small></span></div>
+                                                class="text-accent">$154.<small>00</small></span>
+                                        </div>
                                         <div class="star-rating"><i
                                                 class="star-rating-icon ci-star-filled active"></i><i
                                                 class="star-rating-icon ci-star-filled active"></i><i
@@ -1267,8 +1268,8 @@
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Footbed Sandals</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$99.<small>50</small></span></div>
+                                    <div class="product-price"><span class="text-accent">$99.<small>50</small></span>
+                                    </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
@@ -1329,8 +1330,8 @@
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$25.<small>99</small></span></div>
+                                    <div class="product-price"><span class="text-accent">$25.<small>99</small></span>
+                                    </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
@@ -1376,15 +1377,13 @@
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$11.<small>50</small></span>
+                                    <div class="product-price"><span class="text-accent">$11.<small>50</small></span>
                                         <del class="fs-sm text-muted">$13.<small>50</small></del>
                                     </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star"></i><i
-                                            class="star-rating-icon ci-star"></i>
+                                            class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
                                     </div>
                                 </div>
                             </div>
@@ -1429,8 +1428,8 @@
                                 <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Slim Taper Fit Jeans</a>
                                 </h3>
                                 <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$58.<small>99</small></span></div>
+                                    <div class="product-price"><span class="text-accent">$58.<small>99</small></span>
+                                    </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
@@ -1481,7 +1480,8 @@
                                         Trenchcoat</a></h3>
                                 <div class="d-flex justify-content-between">
                                     <div class="product-price"><span
-                                            class="text-accent">$79.<small>99</small></span></div>
+                                            class="text-accent">$79.<small>99</small></span>
+                                    </div>
                                     <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
                                             class="star-rating-icon ci-star-filled active"></i><i
