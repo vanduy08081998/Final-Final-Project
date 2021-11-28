@@ -253,14 +253,13 @@
                     <span class="status online"></span></span>
                 <span>{{Auth::user()->name}}</span>
             </a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="profile.html">My Profile</a>
-                <a class="dropdown-item" href="settings.html">Settings</a>
+            <div class="dropdown-menu" style="width: 100%; text-align: center">
+                <a class="dropdown-item" href="profile.html">Thông tin cá nhân</a>
+                <a class="dropdown-item" href="settings.html">Cài đặt</a>
                 <form action="{{route('logout')}}" method="post">
                     @csrf
-                    <a class="dropdown-item"><button type="submit">Logout</a>
+                    <button class="btn btn-warning dropdown-item" type="submit">Đăng xuất</button>
                 </form>
-
             </div>
         </li>
         @endif

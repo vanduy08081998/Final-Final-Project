@@ -37,6 +37,17 @@ class ProductController extends Controller
         ]);
     }
 
+    public function brands()
+    {
+        // $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        // $product = Product::orderByDESC('id')->get();
+        $brands = Brand::orderByDESC('id')->get();
+        // dd($product->where('product_id_category', 24)->count());
+        return view('clients.shop.brands', [
+            'brands' => $brands,
+        ]);
+    }
+
     public function productDetails($slug)
     {
         $product = Product::where('product_slug', $slug)->first();

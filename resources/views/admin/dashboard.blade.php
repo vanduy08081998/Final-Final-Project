@@ -5,7 +5,7 @@
 @endsection
 
 <!-- Chart CSS -->
-<link rel="stylesheet" href="{{ URL::to('backend/plugins/morris/morris.css') }}">
+{{-- <link rel="stylesheet" href="{{ URL::to('backend/plugins/morris/morris.css') }}"> --}}
 @section('content')
 		<!-- Page Content -->
 		<div class="content container-fluid">
