@@ -24,6 +24,7 @@
             font-size: 22px;
             line-height: 60px;
             padding: 0 10px;
+            margin-top: 15px;
             cursor: pointer;
         }
 

@@ -50,10 +50,10 @@ class CartController extends Controller
                     'quantity' => $cart->quantity + $request->product_quantity
                 ]);
             }
-            return response()->json(['success', 'success']);
+            return response()->json(['success' => 'success']);
         } else {
             $user_id = null;
-            return response()->json(['error', 'error']);
+            return response()->json(['error' => 'error']);
         }
     }
     public function cartList()

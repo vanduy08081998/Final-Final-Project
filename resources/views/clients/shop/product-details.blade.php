@@ -606,13 +606,25 @@
                 url: "{{ route('card.add') }}",
                 data: $('#choice_attribute_options').serializeArray(),
                 success: function(response) {
-                    Swal.fire({
+                    if(response.success){
+                        Swal.fire({
                         imageUrl: 'https://img.icons8.com/ultraviolet/50/000000/shopping-cart-loaded--v2.png',
                         title: 'Chúc mừng',
                         text: 'Thêm giỏ hàng thành công!',
                         confirmButtonText: 'Tiếp tục',
                         confirmButtonColor: 'green'
-                    })
+                        })
+                    }
+
+                    if(response.error){
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Rất tiếc',
+                        text: 'Bạn phải đăng nhập trước khi mua hàng !',
+                        confirmButtonText: 'Tiếp tục',
+                        confirmButtonColor: 'green'
+                        })
+                    }
                 }
             });
         })
