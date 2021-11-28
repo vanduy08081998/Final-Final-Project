@@ -18,7 +18,8 @@
                                         <label>Danh mục</label>
                                         <select name="id_blogCate" class="form-control" id="single__category">
                                             @foreach ($blogCate as $blogCate)
-                                                <option name="id_blogCate" value="{{ $blogCate->id }}">{{ $blogCate->blogCate_name }}
+                                                <option name="id_blogCate" value="{{ $blogCate->id }}">
+                                                    {{ $blogCate->blogCate_name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -83,12 +84,14 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <div class="input-group mb-3" data-type="image">
-                                          <div class="custom-file">
-                                            <a href="{{ asset('rfm/filemanager/dialog.php?field_id=image') }}"  class="custom-file-input iframe-btn" id="customFile"></a>
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                            <input type="hidden" id="image" data-upload="blog_image" data-preview="preview">
-                                            <input type="hidden" name="blog_image">
-                                          </div>
+                                            <div class="custom-file">
+                                                <a href="{{ asset('rfm/filemanager/dialog.php?field_id=image') }}"
+                                                    class="custom-file-input iframe-btn" id="customFile"></a>
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                                <input type="hidden" id="image" data-upload="blog_image"
+                                                    data-preview="preview">
+                                                <input type="hidden" name="blog_image">
+                                            </div>
                                         </div>
                                         <div id="preview">
 
@@ -104,16 +107,13 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-sm-8">
-                            <button class="btn btn-primary" style="float: right;">Thêm sản phẩm</button>
+                            <button class="btn btn-primary" style="float: right;">Thêm bài viết</button>
                         </div>
                     </div>
-
                 </form>
-
             </div>
         </div>
     </div>
-    <!--end page-content-wrapper-->
     </div>
 @endsection
 
@@ -121,17 +121,14 @@
 
     <script>
         $('.iframe-btn').fancybox({
-            'width'		: 900,
-            'height'	: 600,
-            'type'		: 'iframe',
-            'autoScale'    	: false
+            'width': 900,
+            'height': 600,
+            'type': 'iframe',
+            'autoScale': false
         });
-      CKEDITOR.replace( 'blog_content' )
+        CKEDITOR.replace('blog_content')
         $(document).ready(function() {
             $('.js-example-basic-multiple').selectpicker();
         });
-
-
-
     </script>
 @endpush

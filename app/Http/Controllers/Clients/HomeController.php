@@ -70,11 +70,11 @@ class HomeController extends Controller
             'message' => $request->message,
             'day_send' => date("d/m/Y")
         ];
-        Mail::to('nkokkenpro1995@gmail.com')->send(new SendMail($detail));
+        Mail::to('bigdealdn@gmail.com')->send(new SendMail($detail));
         return view('clients.about.contact',[
             'infors' => $infors
         ]);
-        
+
     }
 
     public function about(){
