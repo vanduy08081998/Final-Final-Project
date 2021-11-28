@@ -96,8 +96,8 @@
 
                                     <div class="form-group">
                                         <label for="name">Từ khóa (SEO)</label>
-                                        <input class="form-control" data-role="tagsinput" name="meta_keywords"
-                                            value="{{ old('meta_keywords') }}" type="text">
+                                        <input id="tags" class="form-control" data-role="tagsinput" name="meta_keywords"
+                                            type="text" value="{{ old('meta_keywords') }}">
                                         @error('meta_keywords')
                                             <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
                                         @enderror
@@ -114,6 +114,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
@@ -136,7 +137,7 @@
                                     <div class="form-group">
                                         <label for="name">Thuộc danh mục</label>
                                         <select name="category_id[]" class="js-example-basic-multiple form-control"
-                                            multiple="multiple">
+                                            data-live-search="true">
                                             @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
                                                 @include('admin.Categories.categoryOptions', ['item' => $item])
 
@@ -200,7 +201,9 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-multiple').select2();
+            $('.js-example-basic-multiple').selectpicker();
+
+
         });
 
         $(document).ready(function() {

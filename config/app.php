@@ -177,6 +177,8 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
 
     ],
 
@@ -233,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
 
     ],
 

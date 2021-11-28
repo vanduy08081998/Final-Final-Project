@@ -9,10 +9,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="csrf-token" content="{{csrf_token()}}">
-    <title>Syndash - @yield('title')</title>
+    <title>BigDeal - @yield('title')</title>
 
     <!--favicon-->
-    <link rel="icon" href="{{ URL::to('backend/images/favicon-32x32.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('frontend/img/logo/favicon.png') }}" type="image/png" />
     <!-- loader-->
     <link href="{{ URL::to('backend/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ URL::to('backend/js/pace.min.js') }}"></script>

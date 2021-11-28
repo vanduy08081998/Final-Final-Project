@@ -15,54 +15,24 @@
                     <div class="tns-carousel">
                         <div class="tns-carousel-inner"
                             data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: false, &quot;loop&quot;: false}">
+                            @foreach($slide as $item)
                             <div>
                                 <div class="row align-items-center">
                                     <div class="col-md-6 order-md-2"><img class="d-block mx-auto"
-                                            src="{{ asset('frontend/img/home/hero-slider/05.jpg') }}" alt="VR Collection">
+                                            src="{{ url('uploads/Banner/', $item->banner_img) }}" alt="VR Collection">
                                     </div>
                                     <div
                                         class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start">
-                                        <h2 class="fw-light pb-1 from-bottom">World of music with</h2>
-                                        <h1 class="display-4 from-bottom delay-1">Headphones</h1>
-                                        <h5 class="fw-light pb-3 from-bottom delay-2">Choose between top brands</h5>
+                                        <h2 class="fw-light pb-1 from-bottom">Hãy đến với</h2>
+                                        <h1 class="display-4 from-bottom delay-1">{{$item->banner_name}}</h1>
+                                        <h5 class="fw-light pb-3 from-bottom delay-2">Để có những lựa chọn hàng đầu</h5>
                                         <div class="d-table scale-up delay-4 mx-auto mx-md-0"><a
-                                                class="btn btn-primary btn-shadow" href="shop-grid-ls.html">Shop Now<i
+                                                class="btn btn-primary btn-shadow" href="{{$item->banner_link}}">Xem ngay<i
                                                     class="ci-arrow-right ms-2 me-n1"></i></a></div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 order-md-2"><img class="d-block mx-auto"
-                                            src="{{ asset('frontend/img/home/hero-slider/04.jpg') }}" alt="VR Collection">
-                                    </div>
-                                    <div
-                                        class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start">
-                                        <h2 class="fw-light pb-1 from-start">Explore the best</h2>
-                                        <h1 class="display-4 from-start delay-1">VR Collection</h1>
-                                        <h5 class="fw-light pb-3 from-start delay-2">on the market</h5>
-                                        <div class="d-table scale-up delay-4 mx-auto mx-md-0"><a
-                                                class="btn btn-primary btn-shadow" href="shop-grid-ls.html">Shop Now<i
-                                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 order-md-2"><img class="d-block mx-auto"
-                                            src="{{ asset('frontend/img/home/hero-slider/06.jpg') }}" alt="VR Collection">
-                                    </div>
-                                    <div
-                                        class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start">
-                                        <h2 class="fw-light pb-1 scale-up">Check our huge</h2>
-                                        <h1 class="display-4 scale-up delay-1">Smartphones</h1>
-                                        <h5 class="fw-light pb-3 scale-up delay-2">&amp; Accessories collection</h5>
-                                        <div class="d-table scale-up delay-4 mx-auto mx-md-0"><a
-                                                class="btn btn-primary btn-shadow" href="shop-grid-ls.html">Shop Now<i
-                                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -108,7 +78,7 @@
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm thịnh hành</h2>
-            <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">More products<i
+            <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
                         class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
         <!-- Grid-->
