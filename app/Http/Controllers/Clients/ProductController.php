@@ -32,7 +32,8 @@ class ProductController extends Controller
     public function productDetails($slug)
     {
         $product = Product::where('product_slug', $slug)->first();
-        return view('clients.shop.product-details', compact('product'));
+        $variants = ProductVariant::where('id_product', $product->id)->get();
+        return view('clients.shop.product-details', compact('product', 'variants'));
     }
 
     public function getVariantPrice(Request $request)
@@ -72,21 +73,16 @@ class ProductController extends Controller
                 }
             }
 
-            $product_stock = ProductVariant::where('variant', $str)->first();
+            $product_stock = ProductVariant::where('id_product', $request->product_id)->where('variant', $str)->first();
             $price = $product_stock->variant_price;
             $variant_quantity = $product_stock->variant_quantity;
-            $variant_image = '
-            <li data-thumb="' . url('/') . '/' . $product_stock->variant_image . '">
-                                                 <img srcset="' . url('/') . '/' . $product_stock->variant_image . ' 2x" />
-                                            </li>
-            ';
             return response()->json([
                 'price' => number_format($price * $product_quantity),
                 'product_quantity' => $variant_quantity,
                 'quantity' => $product_quantity,
                 'variant' =>  $product_stock,
                 'specifications' => $specifications,
-                'variant_image' => $variant_image
+                'variant_image' => $product_stock->variant_image
             ]);
         }
     }
