@@ -17,12 +17,15 @@ class HomeController extends Controller
         $slide = Banner::orderByDESC('id')->get();
         return view('clients.home')->with(compact('slide'));
     }
-  
+
     public function blog(){
-        $blogs = Blog::all();
-        $blogs1 = Blog::all();
+        $blogs = Blog::orderByDESC('id')
+        ->where('blog_status', 1)->get();
+        $blogs1 = Blog::orderByDESC('id')
+        ->where('blog_status', 1)->get();
         $blogCate = BlogCate::all();
-        $blogs2 = Blog::orderByDESC('id')->limit(5)->get();
+        $blogs2 = Blog::orderByDESC('id')
+        ->where('blog_status', 1)->limit(5)->get();
         return view('clients.about.blog',[
             'blogs' => $blogs,
             'blogs1' => $blogs1,
@@ -50,6 +53,7 @@ class HomeController extends Controller
 
     public function blogCategory($id){
         $blogCate = Blog::orderByDESC('id')
+        ->where('blog_status', 1)
         ->where('id_blogCate', $id)->get();
         $blogCate1 = BlogCate::orderByDESC('id')
         ->where('id', $id)->first();
@@ -76,15 +80,15 @@ class HomeController extends Controller
             'message' => $request->message,
             'day_send' => date("d/m/Y")
         ];
-        Mail::to('nkokkenpro1995@gmail.com')->send(new SendMail($detail));
+        Mail::to('bigdealdn@gmail.com')->send(new SendMail($detail));
         return view('clients.about.contact',[
             'infors' => $infors
         ]);
-        
+
     }
 
     public function about(){
         return view('clients.about.about');
     }
-   
+
 }

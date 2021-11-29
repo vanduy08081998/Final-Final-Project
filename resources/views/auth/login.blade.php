@@ -6,17 +6,32 @@
 
 @section('content')
 
-<h2 class="mt-4">Thế giới mua sắm trực tuyến Bigdeal</h2>
+<style>
+    .bg-forgot {
+        max-height: 96vh;
+    }
+
+    .social-container a {
+        border: none;
+    }
+</style>
+
+<a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}">
+    <img src="{{ asset('frontend/img/logo/logo.png') }}" width="200px" alt="Cartzilla">
+</a>
+<h2 style="color: orangered">Thế giới mua sắm trực tuyến Bigdeal</h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form class="form_register form-horizontal form " role="form">
             <!-- <form method="POST" action="{{ route('register') }}"> -->
             <h2 class="mt-4">Đăng ký</h2>
             <div class="social-container text-left">
-                <a href="{{route('login.facebook')}}" class="social facebook"><i
-                        class="fa fa-facebook mr-2"></i><strong>Facebook</strong></a>
-                <a href="{{route('login.google')}}" class="social google"><i
-                        class="fa fa-google mr-2"></i><strong>Google</strong></a>
+                <a href="{{route('login.facebook')}}" class="social facebook">
+                    <i class="fa fa-facebook mr-2" style="border: 10px"></i><strong>Facebook</strong>
+                </a>
+                <a href="{{route('login.google')}}" class="social google">
+                    <i class="fa fa-google mr-2"></i><strong>Google</strong>
+                </a>
             </div>
             <span>Hoặc đăng ký bằng tài khoản email của bạn</span>
             <div class="text-left mt-2">
@@ -132,7 +147,6 @@
         </div>
     </div>
 </div>
-
 
 
 @endsection

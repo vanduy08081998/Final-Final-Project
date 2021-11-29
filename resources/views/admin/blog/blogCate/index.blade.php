@@ -34,7 +34,7 @@
                                                 {{ $blogCate->blogCate_name }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {!! $blogCate->meta_title !!}
+                                                {!! Str::limit($blogCate->meta_title, 30, '...') ?? '' !!}
                                             </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">

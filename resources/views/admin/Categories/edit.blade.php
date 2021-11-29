@@ -48,7 +48,16 @@
 																						</div>
 																						<!-- End -->
 																						<!-- INput Group -->
-
+                                                                                        <div class="col-md-12 mb-3">
+                                                                                            <div class="form-group">
+                                                                                                <label for="name">Icon</label>
+                                                                                                <input class="form-control" name="category_icon" type="text"
+                                                                                                    value="{{ $category->category_icon ?? '' }}">
+                                                                                                @error('category_icon')
+                                                                                                    <span class="text-danger">{{ $message }}</span>
+                                                                                                @enderror
+                                                                                            </div>
+                                                                                        </div>
 																						<!-- End -->
 
 																						<!-- INput Group -->

@@ -3,7 +3,6 @@
 
 @section('title', 'Danh sách sản phẩm')
 
-
 @section('content')
     <!-- Quick View Modal-->
     <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
@@ -22,35 +21,41 @@
                             <div class="product-gallery">
                                 <div class="product-gallery-preview order-sm-2">
                                     <div class="product-gallery-preview-item active" id="first"><img class="image-zoom"
-                                            src="img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg"
+                                            src="{{ asset('frontend/img/shop/single/gallery/01.jpg') }}"
+                                            data-zoom="{{ asset('frontend/img/shop/single/gallery/01.jpg') }}"
                                             alt="Product image">
                                         <div class="image-zoom-pane"></div>
                                     </div>
                                     <div class="product-gallery-preview-item" id="second"><img class="image-zoom"
-                                            src="img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg"
+                                            src="{{ asset('frontend/img/shop/single/gallery/02.jpg') }}"
+                                            data-zoom="{{ asset('frontend/img/shop/single/gallery/02.jpg') }}"
                                             alt="Product image">
                                         <div class="image-zoom-pane"></div>
                                     </div>
                                     <div class="product-gallery-preview-item" id="third"><img class="image-zoom"
-                                            src="img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg"
+                                            src="{{ asset('frontend/img/shop/single/gallery/03.jpg') }}"
+                                            data-zoom="{{ asset('frontend/img/shop/single/gallery/03.jpg') }}"
                                             alt="Product image">
                                         <div class="image-zoom-pane"></div>
                                     </div>
                                     <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom"
-                                            src="img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg"
+                                            src="{{ asset('frontend/img/shop/single/gallery/04.jpg') }}"
+                                            data-zoom="{{ asset('frontend/img/shop/single/gallery/04.jpg') }}"
                                             alt="Product image">
                                         <div class="image-zoom-pane"></div>
                                     </div>
                                 </div>
                                 <div class="product-gallery-thumblist order-sm-1"><a
                                         class="product-gallery-thumblist-item active" href="#first"><img
-                                            src="img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a
-                                        class="product-gallery-thumblist-item" href="#second"><img
-                                            src="img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a
-                                        class="product-gallery-thumblist-item" href="#third"><img
-                                            src="img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a
-                                        class="product-gallery-thumblist-item" href="#fourth"><img
-                                            src="img/shop/single/gallery/th04.jpg" alt="Product thumb"></a></div>
+                                            src="{{ asset('frontend/img/shop/single/gallery/th01.jpg') }}"
+                                            alt="Product thumb"></a><a class="product-gallery-thumblist-item"
+                                        href="#second"><img src="{{ asset('frontend/img/shop/single/gallery/th02.jpg') }}"
+                                            alt="Product thumb"></a><a class="product-gallery-thumblist-item"
+                                        href="#third"><img src="{{ asset('frontend/img/shop/single/gallery/th03.jpg') }}"
+                                            alt="Product thumb"></a><a class="product-gallery-thumblist-item"
+                                        href="#fourth"><img
+                                            src="{{ asset('frontend/img/shop/single/gallery/th04.jpg') }}"
+                                            alt="Product thumb"></a></div>
                             </div>
                         </div>
                         <!-- Product details-->
@@ -67,7 +72,7 @@
                                             Reviews</span>
                                     </a>
                                     <button class="btn-wishlist" type="button" data-bs-toggle="tooltip"
-                                        title="Add to wishlist"><i class="ci-heart"></i></button>
+                                        title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
                                 </div>
                                 <div class="mb-3"><span
                                         class="h3 fw-normal text-accent me-1">$18.<small>99</small></span>
@@ -82,21 +87,21 @@
                                             data-bs-label="colorOptionText" value="Red/Dark blue/White" checked>
                                         <label class="form-option-label rounded-circle" for="color1"><span
                                                 class="form-option-color rounded-circle"
-                                                style="background-image: url(img/shop/single/color-opt-1.png)"></span></label>
+                                                style="background-image: url({{ asset('frontend/img/shop/single/color-opt-1.png') }}"></span></label>
                                     </div>
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="color" id="color2"
                                             data-bs-label="colorOptionText" value="Beige/White/Black">
                                         <label class="form-option-label rounded-circle" for="color2"><span
                                                 class="form-option-color rounded-circle"
-                                                style="background-image: url(img/shop/single/color-opt-2.png)"></span></label>
+                                                style="background-image: url({{ asset('frontend/img/shop/single/color-opt-2.png') }}"></span></label>
                                     </div>
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="color" id="color3"
                                             data-bs-label="colorOptionText" value="Dark grey/White/Mustard">
                                         <label class="form-option-label rounded-circle" for="color3"><span
                                                 class="form-option-color rounded-circle"
-                                                style="background-image: url(img/shop/single/color-opt-3.png)"></span></label>
+                                                style="background-image: url({{ asset('frontend/img/shop/single/color-opt-3.png') }}"></span></label>
                                     </div>
                                     <div class="product-badge product-available mt-n1"><i
                                             class="ci-security-check"></i>Product available</div>
@@ -122,7 +127,7 @@
                                             <option value="5">5</option>
                                         </select>
                                         <button class="btn btn-primary btn-shadow d-block w-100" type="submit"><i
-                                                class="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                                                class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
                                     </div>
                                 </form>
                                 <h5 class="h6 mb-3 pb-2 border-bottom"><i
@@ -149,6 +154,7 @@
             </div>
         </div>
     </div>
+    <!-- Navbar 3 Level (Light)-->
     <!-- Page Title-->
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container py-2 py-lg-3">
@@ -172,16 +178,16 @@
             <aside class="col-lg-3">
                 <!-- Sidebar-->
                 <div class="offcanvas offcanvas-collapse bg-white w-100 rounded-3 shadow-lg py-1" id="shop-sidebar"
-                    style="max-width: 23rem;">
+                    style="max-width: 24rem">
                     <div class="offcanvas-header align-items-center shadow-sm">
-                        <h2 class="h5 mb-0">Filters</h2>
+                        <h2 class="h5 mb-0">Bộ lọc</h2>
                         <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
+                            aria-label="Thoát"></button>
                     </div>
                     <div class="offcanvas-body py-grid-gutter px-lg-grid-gutter">
                         <!-- Categories-->
                         <div class="widget widget-categories mb-4 pb-4 border-bottom">
-                            <h3 class="widget-title">Categories</h3>
+                            <h3 class="widget-title">Danh mục</h3>
                             <div class="accordion mt-n1" id="shop-categories">
                                 <!-- Shoes-->
                                 <div class="accordion-item">
@@ -588,8 +594,7 @@
                         <!-- Price range-->
                         <div class="widget mb-4 pb-4">
                             <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
-                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data"
-                                class="border-bottom">
+                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
                                 <input type="range" name="range" max="{{ $max }}" min="{{ $min }}"
@@ -602,6 +607,7 @@
                                     type="submit">Tìm</button>
                             </form>
                         </div>
+                        
                         <!-- Filter by Brand-->
                         <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
                             <h3 class="widget-title">Brand</h3>
@@ -988,7 +994,7 @@
                 </div>
             </aside>
             <!-- Content  -->
-            <section class="col-lg-9 tab-content-shop" style="padding-right: 50px">
+            <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
                 <!-- Toolbar-->
                 <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
                     <div class="d-flex flex-wrap">
@@ -1006,330 +1012,112 @@
                                 sản phẩm</span>
                         </div>
                     </div>
-                    <div class="d-none d-sm-flex pb-3">
-                        <a class="btn btn-icon nav-link-style me-2 nav-link-light"
-                            href="{{ route('shop.shop-grid') }}"><i class="ci-view-grid"></i></a>
-                        <a class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100"
-                            href="{{ route('shop.shop-list') }}"><i class="ci-view-list"></i></a>
-                    </div>
+                    <div class="d-none d-sm-flex pb-3"><a
+                            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2"
+                            href="{{ route('shop.shop-grid') }}"><i class="ci-view-grid"></i></a><a
+                            class="btn btn-icon nav-link-style nav-link-light" href="{{ route('shop.shop-list') }}"><i
+                                class="ci-view-list"></i></a></div>
                 </div>
-                <!-- Products list-->
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/01.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers &amp;
-                                Keds</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Women Colorblock Sneakers</a>
-                            </h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$154.<small>00</small></span>
+                <!-- Products grid-->
+                <div class="row mx-n2">
+                    <!-- Product-->
+                    @foreach ($search as $pro)
+                        <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                            <div class="card product-card">
+                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                        class="ci-heart"></i></button>
+                                <a class="card-img-top d-block overflow-hidden"
+                                    href="{{ route('shop.product-details', $pro->product_slug) }}">
+                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%"
+                                        style="margin: auto; display: block">
+                                </a>
+                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
+                                        &amp; Keds</a>
+                                    <h3 class="product-title fs-sm"><a
+                                            href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="product-price"><span
+                                                class="text-accent">$154.<small>00</small></span>
+                                        </div>
+                                        <div class="star-rating"><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
+                                <div class="card-body card-body-hidden">
+                                    <div class="text-center pb-2">
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="size1" id="s-75">
+                                            <label class="form-option-label" for="s-75">7.5</label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="size1" id="s-80" checked>
+                                            <label class="form-option-label" for="s-80">8</label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="size1" id="s-85">
+                                            <label class="form-option-label" for="s-85">8.5</label>
+                                        </div>
+                                        <div class="form-check form-option form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="size1" id="s-90">
+                                            <label class="form-option-label" for="s-90">9</label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                    <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                            data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-75">
-                                        <label class="form-option-label" for="s-75">7.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-80" checked>
-                                        <label class="form-option-label" for="s-80">8</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-85">
-                                        <label class="form-option-label" for="s-85">8.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-90">
-                                        <label class="form-option-label" for="s-90">9</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
+                            <hr class="d-sm-none">
                         </div>
-                    </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list"><span class="badge bg-danger badge-shadow">Sale</span>
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/02.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women’s
-                                T-shirt</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Cotton Lace Blouse</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$28.<small>50</small></span>
-                                    <del class="fs-sm text-muted">38.<small>50</small></del>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-half active"></i><i
-                                        class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color1" id="white" checked>
-                                        <label class="form-option-label rounded-circle" for="white"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #eaeaeb;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color1" id="blue">
-                                        <label class="form-option-label rounded-circle" for="blue"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #d1dceb;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color1" id="yellow">
-                                        <label class="form-option-label rounded-circle" for="yellow"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #f4e6a2;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color1" id="pink">
-                                        <label class="form-option-label rounded-circle" for="pink"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #f3dcff;"></span></label>
-                                    </div>
-                                </div>
-                                <div class="d-flex mb-2">
-                                    <select class="form-select form-select-sm me-2" style="max-width: 6rem;">
-                                        <option>XS</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                    </select>
-                                    <button class="btn btn-primary btn-sm" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                </div>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/03.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women’s Shorts</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Mom High Waist Shorts</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$39.<small>50</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size2" id="xs">
-                                        <label class="form-option-label" for="xs">XS</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size2" id="s" checked>
-                                        <label class="form-option-label" for="s">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size2" id="m">
-                                        <label class="form-option-label" for="m">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size2" id="l">
-                                        <label class="form-option-label" for="l">L</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/04.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sportswear</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Women Sports Jacket</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$68.<small>40</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size3" id="xs2" checked>
-                                        <label class="form-option-label" for="xs2">XS</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size3" id="s2">
-                                        <label class="form-option-label" for="s2">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size3" id="m2">
-                                        <label class="form-option-label" for="m2">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size3" id="l2">
-                                        <label class="form-option-label" for="l2">L</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"> <a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/05.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                Sunglasses</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Polarized Sunglasses</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-muted fs-sm">Out of stock</span></div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-half active"></i><i
-                                        class="star-rating-icon ci-star"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden"><a class="btn btn-secondary btn-sm mb-2"
-                                    href="shop-single-v1.html">View details</a>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/06.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Backpacks</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$79.<small>50</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color2" id="khaki" checked>
-                                        <label class="form-option-label rounded-circle" for="khaki"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #97947c;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color2" id="jeans">
-                                        <label class="form-option-label rounded-circle" for="jeans"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #99a8be;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color2" id="white2">
-                                        <label class="form-option-label rounded-circle" for="white2"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #eaeaeb;"></span></label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <!-- Banner-->
-                <div
-                    class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden my-4 rounded-3">
-                    <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                        <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-                        <h3 class="mb-4">Make Your Day Comfortable</h3><a
-                            class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-                    </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner') }}.jpg"
-                        alt="Shop Converse">
+                <div class="py-sm-2">
+                    <div
+                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
+                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
+                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
+                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
+                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
+                            alt="Shop Converse">
+                    </div>
                 </div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/07.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women's
-                                Swimwear</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Two-Piece Bikini in Print</a>
-                            </h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$18.<small>99</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
+                <!-- Products grid-->
+                <div class="row mx-n2">
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/07.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women's
+                                    Swimwear</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Two-Piece Bikini in Print</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$18.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <div class="pb-2">
+                                <div class="text-center pb-2">
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="size4" id="xs3" checked>
                                         <label class="form-option-label" for="xs3">XS</label>
@@ -1343,66 +1131,69 @@
                                         <label class="form-option-label" for="m3">M</label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
+                        <hr class="d-sm-none">
                     </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/08.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Kid's Toys</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Soft Panda Teddy Bear</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$14.<small>99</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/08.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Kid's Toys</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Panda Teddy Bear</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$14.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a></div>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                             </div>
                         </div>
+                        <hr class="d-sm-none">
                     </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/09.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Cosmetics</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Metallic Lipstick (Crimson)</a>
-                            </h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$12.<small>99</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/09.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Cosmetics</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Metallic Lipstick
+                                        (Crimson)</a></h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$12.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-half active"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <div class="pb-2">
+                                <div class="text-center pb-2">
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="color3" id="crimson" checked>
                                         <label class="form-option-label rounded-circle" for="crimson"><span
@@ -1422,70 +1213,73 @@
                                                 style="background-color: #ca8799;"></span></label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
+                        <hr class="d-sm-none">
                     </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/10.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                Accessories</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">5-Pack Multicolor
-                                    Bracelets</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$7.<small>99</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/10.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    Accessories</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">5-Pack Multicolor
+                                        Bracelets</a></h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$7.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
+                        <hr class="d-sm-none">
                     </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/11.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                Sandals</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">Soft Footbed Sandals</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$99.<small>50</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/11.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    Sandals</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Footbed Sandals</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$99.<small>50</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <div class="pb-2">
+                                <div class="text-center pb-2">
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="color4" id="blue2" checked>
                                         <label class="form-option-label rounded-circle" for="blue2"><span
@@ -1506,7 +1300,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mb-2">
-                                    <select class="form-select form-select-sm me-2" style="max-width: 6rem;">
+                                    <select class="form-select form-select-sm me-2">
                                         <option>9.5</option>
                                         <option>10</option>
                                         <option>10.5</option>
@@ -1514,37 +1308,40 @@
                                         <option>11.5</option>
                                     </select>
                                     <button class="btn btn-primary btn-sm" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Add to Cart</button>
+                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
                                 </div>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
                                 </div>
                             </div>
                         </div>
+                        <hr class="d-sm-none">
                     </div>
-                </div>
-                <div class="border-top pt-3 mt-3"></div>
-                <!-- Product-->
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                        title="Add to wishlist"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb"
-                            href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/12.jpg') }}"
-                                alt="Product"></a>
-                        <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s Hats</a>
-                            <h3 class="product-title fs-base"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a></h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price"><span class="text-accent">$25.<small>99</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/12.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    Hats</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$25.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-half active"></i>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body card-body-hidden">
-                                <div class="pb-2">
+                                <div class="text-center pb-2">
                                     <div class="form-check form-option form-check-inline mb-2">
                                         <input class="form-check-input" type="radio" name="size5" id="s4" checked>
                                         <label class="form-option-label" for="s4">S</label>
@@ -1558,16 +1355,166 @@
                                         <label class="form-option-label" for="l4">L</label>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Add to Cart</button>
-                                <div class="text-start"><a class="nav-link-style fs-ms" href="#quick-view"
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="d-sm-none">
+                    </div>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/13.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    T-shirts</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$11.<small>50</small></span>
+                                        <del class="fs-sm text-muted">$13.<small>50</small></del>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body card-body-hidden">
+                                <div class="text-center pb-2">
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size6" id="s5">
+                                        <label class="form-option-label" for="s5">S</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size6" id="m5">
+                                        <label class="form-option-label" for="m5">M</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size6" id="l5" checked>
+                                        <label class="form-option-label" for="l5">L</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size6" id="xl5">
+                                        <label class="form-option-label" for="xl5">XL</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="d-sm-none">
+                    </div>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/14.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    Jeans</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Slim Taper Fit Jeans</a>
+                                </h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span class="text-accent">$58.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body card-body-hidden">
+                                <div class="text-center pb-2">
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size7" id="s6">
+                                        <label class="form-option-label" for="s6">S</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size7" id="m6">
+                                        <label class="form-option-label" for="m6">M</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size7" id="l6" checked>
+                                        <label class="form-option-label" for="l6">L</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size7" id="xl6">
+                                        <label class="form-option-label" for="xl6">XL</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
+                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="d-sm-none">
+                    </div>
+                    <!-- Product-->
+                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                        <div class="card product-card">
+                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
+                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/15.jpg') }}"
+                                    alt="Product"></a>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
+                                    Waistcoats</a>
+                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Single-breasted
+                                        Trenchcoat</a></h3>
+                                <div class="d-flex justify-content-between">
+                                    <div class="product-price"><span
+                                            class="text-accent">$79.<small>99</small></span>
+                                    </div>
+                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-filled active"></i><i
+                                            class="star-rating-icon ci-star-half active"></i><i
+                                            class="star-rating-icon ci-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body card-body-hidden">
+                                <div class="text-center pb-2">
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size8" id="m7">
+                                        <label class="form-option-label" for="m7">M</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size8" id="l7" checked>
+                                        <label class="form-option-label" for="l7">L</label>
+                                    </div>
+                                    <div class="form-check form-option form-check-inline mb-2">
+                                        <input class="form-check-input" type="radio" name="size8" id="xl7">
+                                        <label class="form-option-label" for="xl7">XL</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
                                         data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="border-top pt-3 mt-3"></div>
+                <hr class="my-3">
                 <!-- Pagination-->
                 <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
                     <ul class="pagination">

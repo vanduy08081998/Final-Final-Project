@@ -11,28 +11,37 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function shopGrid()
-    {
+    public function shopGrid() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
         $product = Product::orderByDESC('id')->get();
         $brands = Brand::orderByDESC('id')->get();
-        // dd($product->where('product_id_category', 24)->count());
         return view('clients.shop.shop-grid-ls', [
+            'min' => $min,
+            'max' => $max,
             'product' => $product,
             'category' => $categories,
             'brands' => $brands,
         ]);
     }
 
-    public function shopList()
-    {
-        return view('clients.shop.shop-list-ls');
+    public function shopList() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
+        $product = Product::orderByDESC('id')->get();
+        return view('clients.shop.shop-list-ls', [
+            'min' => $min,
+            'max' => $max,
+            'product' => $product,
+        ]);
     }
 
     public function productDetails($slug)
     {
         $product = Product::where('product_slug', $slug)->first();
-        return view('clients.shop.product-details', compact('product'));
+        $variants = ProductVariant::where('id_product', $product->id)->get();
+        return view('clients.shop.product-details', compact('product', 'variants'));
     }
 
     public function getVariantPrice(Request $request)
@@ -72,21 +81,16 @@ class ProductController extends Controller
                 }
             }
 
-            $product_stock = ProductVariant::where('variant', $str)->first();
+            $product_stock = ProductVariant::where('id_product', $request->product_id)->where('variant', $str)->first();
             $price = $product_stock->variant_price;
             $variant_quantity = $product_stock->variant_quantity;
-            $variant_image = '
-            <li data-thumb="' . url('/') . '/' . $product_stock->variant_image . '">
-                                                 <img srcset="' . url('/') . '/' . $product_stock->variant_image . ' 2x" />
-                                            </li>
-            ';
             return response()->json([
                 'price' => number_format($price * $product_quantity),
                 'product_quantity' => $variant_quantity,
                 'quantity' => $product_quantity,
                 'variant' =>  $product_stock,
                 'specifications' => $specifications,
-                'variant_image' => $variant_image
+                'variant_image' => $product_stock->variant_image
             ]);
         }
     }
