@@ -566,11 +566,15 @@
         success: function(response) {
           if (response.success) {
             Swal.fire({
-              imageUrl: 'https://img.icons8.com/ultraviolet/50/000000/shopping-cart-loaded--v2.png',
+              imageUrl: `${$('#url_to').val()}/frontend/img/1103-confetti-outline.gif`,
               title: 'Chúc mừng',
               text: 'Thêm giỏ hàng thành công!',
-              confirmButtonText: 'Tiếp tục',
+              confirmButtonText: 'Nhấn ok để tiếp tục',
               confirmButtonColor: 'green'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cartDropdown()
+              }
             })
           }
 
