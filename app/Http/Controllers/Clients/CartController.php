@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Clients;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Attribute;
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\Attribute;
+use Illuminate\Http\Request;
+use App\Models\ProductVariant;
+use App\Http\Controllers\Controller;
 
 class CartController extends Controller
 {
@@ -16,20 +17,39 @@ class CartController extends Controller
         if (auth()->check()) {
             $product = Product::where('id', $request->product_id)->first();
             $choice_options = array();
+            $str = '';
             if ($request->has('radio_custom_color')) {
                 $colors = $request['radio_custom_color'];
-                $options['colors'] = $colors;
+                $item['colors'] = $colors;
+                $str = $request['radio_custom_color'];
+            } else {
+                $item['colors'] = null;
             }
 
             if (json_decode($product->choice_options) != null) {
                 foreach (json_decode($product->choice_options) as $key => $choice) {
                     $options[Attribute::find($choice->attribute_id)->slug] = $request['radio_custom_' . $choice->attribute_id];
+                    if ($str != null) {
+                        $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+                    } else {
+                        $str .= str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+                    }
                 }
             } else {
                 $options = null;
+                $str = '';
             }
+
+            $product_variant = ProductVariant::where('id_product', $request->product_id)->where('variant', $str)->first();
             $item['product_name'] = $product->product_name;
             $item['specifications'] = $options;
+            if ($product_variant != null) {
+                $item['variant_price'] = $product_variant->variant_price;
+                $item['variant_image'] = $product_variant->variant_image;
+            } else {
+                $item['variant_price'] = $product->unit_price;
+                $item['variant_image'] = $product->product_image;
+            }
 
             array_push($choice_options, $item);
             $user_id = auth()->user()->id;
@@ -58,6 +78,50 @@ class CartController extends Controller
     }
     public function cartList()
     {
-        return view('clients.checkout.shop-cart');
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $carts = Cart::where('user_id', $user_id)->get();
+            return view('clients.checkout.shop-cart', compact('carts'));
+        } else {
+            return '404';
+        }
+    }
+
+    public function cartDelete(Request $request)
+    {
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $cart = Cart::where('user_id', $user_id)->get();
+            foreach ($cart as $index => $item) {
+                if ($index == $request->index) {
+                    $cart[$request->index]->delete();
+                }
+            }
+            return response()->json(['success' => 'Xóa thành công']);
+        } else {
+        }
+    }
+
+    public function cartUpdate(Request $request)
+    {
+
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $cart = Cart::where('user_id', $user_id)->get();
+            foreach ($cart as $index => $item) {
+                if ($index == $request->index) {
+                    $cart[$index]->update([
+                        'quantity' => $request->quantity
+                    ]);
+                    if (json_decode($cart[$index]->specifications) != null) {
+                        foreach (json_decode($cart[$index]->specifications) as $key => $value) {
+                            $price = $value->variant_price;
+                        }
+                    }
+                }
+            }
+            return response()->json(['success' => 'Chỉnh sủa thành công', 'price' => $price]);
+        } else {
+        }
     }
 }

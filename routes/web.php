@@ -64,6 +64,8 @@ Route::prefix('/')->group(function () {
     Route::prefix('/cart')->group(function () {
         Route::post('/card-add', [CartController::class, 'addToCart'])->name('card.add');
         Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
+        Route::get('/cart-delete', [CartController::class, 'cartDelete'])->name('cart.delete');
+        Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
