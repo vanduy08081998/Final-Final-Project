@@ -83,7 +83,18 @@ class CartController extends Controller
             $carts = Cart::where('user_id', $user_id)->get();
             return view('clients.checkout.shop-cart', compact('carts'));
         } else {
-            return '404';
+            return view('clients.errors.404');
+        }
+    }
+
+    public function cartDropdown()
+    {
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $cart = Cart::where('user_id', $user_id)->get();
+            return view('clients.Inc.cart-dropdown', compact('cart'));
+        } else {
+            return response()->json('<h4>Đăng nhập để xem giỏ hàng</h4>');
         }
     }
 
