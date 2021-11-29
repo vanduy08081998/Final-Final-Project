@@ -73,6 +73,8 @@
                                     @error('blog_content')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
+
+                                    <input type="hidden" name="blog_status" value="2">
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class Category extends Model
 
     public $table = 'categories';
 
-    public $fillable = ['category_name', 'category_slug', 'category_parent_id', 'meta_keywords', 'meta_title', 'meta_desc'];
+    public $fillable = ['category_name', 'category_icon', 'category_slug', 'category_parent_id', 'meta_keywords', 'meta_title', 'meta_desc'];
 
     public $timestamp = true;
 

@@ -12,7 +12,7 @@ class Blog extends Model
 
     public $table = 'blogs';
 
-    public $fillable = ['id_blogCate', 'poster', 'blog_title', 'blog_description', 'blog_image', 'blog_content', 'meta_keywords'];
+    public $fillable = ['id_blogCate', 'poster', 'blog_title', 'blog_description', 'blog_image', 'blog_content', 'meta_keywords', 'blog_status'];
 
     public $timestamp = true;
 

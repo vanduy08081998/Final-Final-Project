@@ -17,7 +17,6 @@ class ProductController extends Controller
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
         $product = Product::orderByDESC('id')->get();
         $brands = Brand::orderByDESC('id')->get();
-        // dd($product->where('product_id_category', 24)->count());
         return view('clients.shop.shop-grid-ls', [
             'min' => $min,
             'max' => $max,

@@ -1,7 +1,7 @@
 <?php
 use App\Models\Category;
 $categories = Category::where('category_parent_id', null)
-    ->orderBy('id_cate', 'desc')
+    ->orderBy('id_cate', 'asc')
     ->get();
 ?>
 <header class="shadow-sm">
@@ -181,8 +181,7 @@ $categories = Category::where('category_parent_id', null)
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
                                         <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                            <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
-                                            {{ $cate->category_name }}
+                                            <span style="font-size: 18px;">{!! $cate->category_icon !!}</span> <span>{{ $cate->category_name }}</span>
                                         </a>
                                         <div class="dropdown-menu p-0">
                                             <div class="d-flex flex-wrap flex-sm-nowrap px-2">

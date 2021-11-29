@@ -95,4 +95,20 @@ class BlogController extends Controller
         return redirect()->back();
     }
 
+    public function BlogOn($id)
+    {
+        Blog::find($id)->update([
+            'blog_status' => 1
+        ]);
+        return redirect()->route('blogs.index');
+    }
+
+    public function BlogOff($id)
+    {
+        Blog::find($id)->update([
+            'blog_status' => 2
+        ]);
+        return redirect()->route('blogs.index');
+    }
+
 }

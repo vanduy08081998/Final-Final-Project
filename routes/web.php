@@ -123,6 +123,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('blogCate', BlogCateController::class);
     Route::resource('blogs', BlogController::class);
+    Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
+    Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
     Route::resource('informations', InformationsController::class);
 
     //user

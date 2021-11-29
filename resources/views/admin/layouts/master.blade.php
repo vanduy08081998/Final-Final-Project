@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    {{-- <link  href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 
 <body>
@@ -83,14 +83,11 @@
     <script src="{{ asset('backend/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('backend/js/fancybox.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
-<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <!-- Custom JS -->
     <script src="{{ URL::to('backend/js/app.js') }}"></script>
     {!! Toastr::message() !!}
-=======
->>>>>>> main
     @stack('script')
 </body>
 
