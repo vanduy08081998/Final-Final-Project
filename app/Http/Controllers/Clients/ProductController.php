@@ -11,29 +11,29 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function shopGrid()
-    {
+    public function shopGrid() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
         $product = Product::orderByDESC('id')->get();
         $brands = Brand::orderByDESC('id')->get();
-        // dd($product->where('product_id_category', 24)->count());
         return view('clients.shop.shop-grid-ls', [
+            'min' => $min,
+            'max' => $max,
             'product' => $product,
             'category' => $categories,
             'brands' => $brands,
         ]);
     }
-
-    public function shopList()
-    {
-        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+  
+    public function shopList() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
         $product = Product::orderByDESC('id')->get();
-        $brands = Brand::orderByDESC('id')->get();
-        // dd($product->where('product_id_category', 24)->count());
         return view('clients.shop.shop-list-ls', [
+            'min' => $min,
+            'max' => $max,
             'product' => $product,
-            'category' => $categories,
-            'brands' => $brands,
         ]);
     }
 
