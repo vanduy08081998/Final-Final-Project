@@ -32,19 +32,18 @@
                                     @foreach ($blogs as $blog)
                                         <tr>
                                             <td style="text-align: center;">
-                                                {{ $blog->blog_title }}
+                                                {!! Str::limit($blog->blog_title, 30, '...') ?? '' !!}
                                             </td>
                                             <td style="text-align: center;">
                                                 {{ $blog->blogCate()->first()->blogCate_name }}
                                             </td>
                                             <td style="text-align: center;">
-                                                {{ $blog->blog_description }}
+                                                {!! Str::limit($blog->blog_description, 30, '...') ?? '' !!}
                                             </td>
                                             <td style="text-align: center;">
                                                 @php
-                                                    var_dump($blog->user()->first())
+                                                    var_dump($blog->user()->first());
                                                 @endphp
-                                                {{-- {{ $blog->user->name}} --}}
                                             </td>
                                             <td style="text-align: center;">
                                                 {{ $blog->created_at }}
@@ -55,14 +54,27 @@
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+                                                        @if ($blog->blog_status == 2)
+                                                            <a class="dropdown-item text-success"
+                                                                href="{{ route('blogs.BlogOn', $blog->id) }}"><i
+                                                                    class="fas fa-eye"></i> Duyệt bài
+                                                            </a>
+                                                        @else
+                                                            <a class="dropdown-item text-secondary"
+                                                                href="{{ route('blogs.BlogOff', $blog->id) }}"><i
+                                                                    class="fas fa-eye-slash"></i> Ẩn bài
+                                                            </a>
+                                                        @endif
                                                         <a class="dropdown-item text-warning"
-                                                            href="{{ route('blogs.edit', $blog->id) }}">Sửa</a>
-                                                        <form
-                                                            action="{{ route('blogs.destroy', $blog->id) }}"
+                                                            href="{{ route('blogs.edit', $blog->id) }}"><i
+                                                                class="fas fa-edit"></i> Sửa
+                                                        </a>
+                                                        <form action="{{ route('blogs.destroy', $blog->id) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="dropdown-item text-danger">Xóa</button>
+                                                            <button class="dropdown-item text-danger"><i
+                                                                    class="fas fa-trash-alt"></i> Xóa</button>
                                                         </form>
 
                                                     </div>

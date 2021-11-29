@@ -24,26 +24,21 @@ class AddBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name' => 'required',
-            'product_slug' => 'required',
-            'product_image'=> 'required',
-            'product_gallery' => 'required',
-            'product_id_category' => 'required',
-            'unit_price' => 'required',
-            'short_description' => 'required',
-            'long_description' => 'required',
-            'product_id_category' => 'required',
-
+            'blog_title' => 'required',
+            'blog_description' => 'required',
+            'meta_keywords'=> 'required',
+            'blog_content' => 'required',
+            'blog_image' => 'required'
         ];
     }
 
-    public function messages(){ // Thêm s ở đuôi, (Tưởng tự nhắc)
+    public function messages(){
         return [
-            'blogCate_name.required' => 'Tên danh mục không được để trống',
-            'blogCate_name.unique' => 'Tên danh mục đã tồn tại',
-            'meta_desc.required' => 'Mô tả không được để trống',
-            'meta_title.required' => 'Tiêu đề không được để trống',
-            'meta_keywords.required' => 'Từ khóa không được để trống'
+            'blog_title' => 'Tiêu đề không được để trống',
+            'blog_description' => 'Mô tả không được để trống',
+            'meta_keywords' => 'Từ khóa không được để trống',
+            'blog_content' => 'Nội dung không được để trống',
+            'blog_image' => 'Hình ảnh không được để trống'
         ];
     }
 }

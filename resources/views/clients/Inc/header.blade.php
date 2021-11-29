@@ -1,7 +1,7 @@
 <?php
 use App\Models\Category;
 $categories = Category::where('category_parent_id', null)
-    ->orderBy('id_cate', 'desc')
+    ->orderBy('id_cate', 'asc')
     ->get();
 ?>
 <header class="shadow-sm">
@@ -51,15 +51,20 @@ $categories = Category::where('category_parent_id', null)
                         <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
                 </a>
                 <!-- Search-->
-                <div class="input-group d-none d-lg-flex flex-nowrap mx-4"><i
-                        class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                    <input class="form-control rounded-start w-100" type="text" placeholder="Tìm kiếm sản phẩm">
+                <form class="input-group d-none d-lg-flex flex-nowrap mx-4" action="{{ route('search.searchs') }}"
+                    method="POST" enctype="multipart/form-data" id="choice-form">
+                    @csrf
+                    @method('POST')
+                    <i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
+                    <input class="form-control rounded-start w-100" name="key" id="search" type="text"
+                        placeholder="Tìm kiếm sản phẩm">
                     <select class="form-select flex-shrink-0" style="width: 10.5rem;">
                         <option>Tất cả</option>
+
                         <option>Computers</option>
-                        <option>...</option>
+
                     </select>
-                </div>
+                </form>
                 <!-- Toolbar-->
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -176,8 +181,7 @@ $categories = Category::where('category_parent_id', null)
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
                                         <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                            <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
-                                            {{ $cate->category_name }}
+                                            <span style="font-size: 18px;">{!! $cate->category_icon !!}</span> <span>{{ $cate->category_name }}</span>
                                         </a>
                                         <div class="dropdown-menu p-0">
                                             <div class="d-flex flex-wrap flex-sm-nowrap px-2">
@@ -797,7 +801,8 @@ $categories = Category::where('category_parent_id', null)
                                             </div>
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
                                                     class="d-block mb-2" href="#"><img
-                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}" alt="Speakers &amp; Home Music"></a>
+                                                        src="{{ asset('frontend/img/shop/departments/16.jpg') }}"
+                                                        alt="Speakers &amp; Home Music"></a>
                                                 <div class="fs-sm mb-3">Starting from <span
                                                         class='fw-medium'>$43.<small>00</small></span></div><a
                                                     class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i

@@ -25,6 +25,7 @@ class AddCategoryRequest extends FormRequest
     {
         return [
             'category_name' => 'required|unique:categories,category_name|max:225',
+            'category_icon' => 'required',
             'meta_desc' => 'required',
             'meta_title' => 'required',
             'meta_keywords' => 'required'
@@ -35,6 +36,7 @@ class AddCategoryRequest extends FormRequest
         return [
             'category_name.required' => 'Tên danh mục không được để trống',
             'category_name.unique' => 'Tên danh mục đã tồn tại',
+            'category_icon.required' => 'Icon danh mục không được để trống',
             'meta_desc.required' => 'Mô tả không được để trống',
             'meta_title.required' => 'Tiêu đề không được để trống',
             'meta_keywords.required' => 'Từ khóa không được để trống'
