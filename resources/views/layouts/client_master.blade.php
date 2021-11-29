@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <title>BigDeal | @yield('title')</title>
     <!-- SEO Meta Tags-->
-   @yield('meta')
+    @yield('meta')
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
@@ -21,7 +21,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
@@ -96,6 +96,9 @@
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+    @include('sweetalert::alert')
     @stack('script')
 </body>
 

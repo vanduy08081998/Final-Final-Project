@@ -45,7 +45,7 @@ Route::prefix('/')->group(function () {
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
     Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
-    Route::post('/contact',[HomeClient::class, 'feedback'])->name('clients.feedback');
+    Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
     Route::prefix('/checkout')->group(function () {
@@ -63,6 +63,7 @@ Route::prefix('/')->group(function () {
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
     });
     Route::prefix('/cart')->group(function () {
+        Route::post('/card-add', [CartController::class, 'addToCart'])->name('card.add');
         Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
     });
     Route::prefix('/account')->group(function () {
@@ -106,7 +107,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
     Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
     //banner
-    Route::resource('/banners', BannerController::class );
+    Route::resource('/banners', BannerController::class);
     // Discount
     Route::resource('/discount', DiscountController::class);
 
@@ -114,7 +115,7 @@ Route::group(['prefix' => 'admin'], function () {
     //Route prefix function
 
     Route::get('filemanager', function () {
-        return view('admin.FileManager.index');
+        echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
     })->name('filemanager');
 
     Route::resource('blogCate', BlogCateController::class);
@@ -135,24 +136,24 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
     Route::resource('/users', UserController::class);
     Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
-    Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
-    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-    Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-    route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
-    route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
-    Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
-    Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
-    Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
-    Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-    Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
-    Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
-    Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
-    Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
-    Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
-    Route::resource('/users', UserController::class );
+        Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+        Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+        Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+        Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+        route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+        route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+        Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+        Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+        Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+        Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+        Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+        Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
+        Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
+        Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
+        Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
+        Route::resource('/users', UserController::class);
     });
-Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
+    Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 });
 
 
