@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Clients\CommentController;
 use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -72,6 +73,8 @@ Route::prefix('/')->group(function () {
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
     });
+    // Bình luận
+    Route::resource('/comment', CommentController::class);
 });
 
 
@@ -81,7 +84,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
 
     // Categories
-    Route::resource('categories', CategoryController::class);
+    Route::resource('/categories', CategoryController::class);
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Brand

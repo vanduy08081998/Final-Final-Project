@@ -62,4 +62,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'product_id_category');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'comment_id_product')->latest();
+    }
+
 }
