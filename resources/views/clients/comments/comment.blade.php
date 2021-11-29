@@ -22,5 +22,6 @@
     <div class="clr"></div>
 </div>
 
-
-@include('clients.comments.form-comment-no-reply', ['comment' => $comment])
+<!--Form bình luận-->
+@include('clients.comments.form-comment.form-comment-outside', ['product_id' => $product->id, 'parent_id' =>
+$comment->id, 'comment_id' => $comment->id])

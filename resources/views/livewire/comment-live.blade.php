@@ -3,7 +3,7 @@
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     <div class="container pt-lg-2 pb-5 mb-md-3">
         <!-- Bình luận đầu tiên-->
-        @include('clients.comments.form-parent', ['product' => $product])
+        @include('clients.comments.form-comment.form-parent', ['product' => $product])
         <!-- Comment-->
         <div class="col-lg-12 pt-3">
 

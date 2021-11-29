@@ -33,7 +33,7 @@
                 <div class="row p-1">
                     <div class="col-lg-12">
                         <button class="btn-sm btn-warning"
-                            wire:click="saveRepToReply('{{ $product->id }}', '{{ $reply->id }}', '{{ $reply->id }}')">Gửi</button>
+                            wire:click="saveReply('{{ $product->id }}', '{{ $reply->id }}', '{{ $reply->id }}')">Gửi</button>
                     </div>
                 </div>
             </div>

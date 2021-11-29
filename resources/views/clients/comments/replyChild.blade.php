@@ -22,18 +22,18 @@
         </div>
     </div>
     <div class="clr"></div>
-
-    <div class="d-block" style="padding-left: 30px">
-        <div class="comment-inline d-none reply-comment-{{ $replyChilds->id }}">
-            <div class="col-lg-12 mt-2">
-                <textarea class="form-control body-{{ $replyChilds->id }}" name="comment_content" cols="2" rows="2"
-                    wire:model.defer="comment_content"></textarea>
-                <div class="form-comment">
-                    <div class="row p-1">
-                        <div class="col-lg-12">
-                            <button class="btn-sm btn-warning"
-                                wire:click="saveReplyLast('{{ $product->id }}', '{{ $reply->id }}', '{{ $replyChilds->id }}')">Gửi</button>
-                        </div>
+</div>
+<!--Form gửi bình luận-->
+<div class="d-block" style="padding-left: 30px">
+    <div class="comment-inline d-none reply-comment-{{ $replyChilds->id }}">
+        <div class="col-lg-12 mt-2">
+            <textarea class="form-control body-{{ $replyChilds->id }}" cols="2" rows="2"
+                wire:model.defer="comment_content"></textarea>
+            <div class="form-comment">
+                <div class="row p-1">
+                    <div class="col-lg-12">
+                        <button class="btn-sm btn-warning"
+                            wire:click="saveReply('{{ $product->id }}', '{{ $reply->id }}', '{{ $replyChilds->id }}')">Gửi</button>
                     </div>
                 </div>
             </div>
