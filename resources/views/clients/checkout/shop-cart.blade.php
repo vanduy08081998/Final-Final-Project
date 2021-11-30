@@ -222,6 +222,7 @@
         success: function(response) {
           cart_price.textContent = response.price * quantity;
           cartDropdown()
+          cartTotals()
         }
       });
     }
@@ -254,6 +255,7 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                   $(`#cart_${i}`).remove()
+                  cartTotals()
                   cartDropdown()
                 }
               })
@@ -267,7 +269,20 @@
     }
 
     const cartTotals = () => {
-
+      var _token = $('meta[name="csrf-token"]').attr('content');
+      $.ajax({
+        type: "POST",
+        url: "{{ route('cart.total') }}",
+        data: {
+          _token: _token,
+        },
+        success: function(response) {
+          var formatter = new Intl.NumberFormat('en-US')
+          $('.cart_total_price').html(
+            formatter.format(response.totalprice));
+        }
+      });
     }
+    cartTotals()
   </script>
 @endpush
