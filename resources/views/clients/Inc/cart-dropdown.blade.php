@@ -11,9 +11,9 @@
         @foreach (json_decode($value->specifications) as $index => $item)
           <?php
           $totalprice += $value->quantity * $item->variant_price; ?>
-          <div class="widget-cart-item pb-2 border-bottom">
-            {{-- <button class="btn-close text-danger btn-cart-remove" type="button" data-handle="remove" aria-label="Remove"><span
-                aria-hidden="true">&times;</span></button> --}}
+          <div class="widget-cart-item pb-2 border-bottom" id="cart_dropdown_{{ $key }}">
+            <button class="btn-close text-danger btn-cart-remove" type="button" data-handle="remove" aria-label="Remove"><span
+                aria-hidden="true">&times;</span></button>
             <div class="d-flex align-items-center"><a class="d-block flex-shrink-0" href="shop-single-v2.html">
                 @if ($item->variant_image != null)
                   <img src="{{ asset($item->variant_image) }}" width="64" alt="Product">
@@ -45,3 +45,13 @@
         class="ci-card me-2 fs-base align-middle"></i>Thanh toán</a> --}}
   </div>
 </div>
+<script>
+  const btn_cart_remove = document.querySelectorAll('.btn-cart-remove');
+  for (let i = 0; i < btn_cart_remove.length; i++) {
+
+    btn_cart_remove[i].addEventListener('click', () => {
+      deleteCartDropdown(i)
+    })
+
+  }
+</script>

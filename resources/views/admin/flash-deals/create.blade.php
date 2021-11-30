@@ -16,23 +16,18 @@
                 <input type="text" name="title" id="" class="form-control">
               </div>
               <div class="form-group">
-                <label>Banner (1920 x 500)</label>
-                <div class="input-group mb-3" data-type="image">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text bg-soft-secondary font-weight-medium">
-                      {{ 'Browse' }}
-                    </div>
-                  </div>
-                  <div class="form-control file-amount" onclick="singleModalShow('banner','render__image__single')">
-                    {{ 'Choose File' }}
-                  </div>
-                  <input type="hidden" name="banner" id="banner" value="" class="selected-files">
+                <label for="">Hình ảnh sản phẩm (1 hình 1200 x 400)</label>
+                <div class="file-options">
+                  <a class="btn-file iframe-btn" href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image"
+                    style="color: #1e272e; font-size: 24px;"><input class="upload"><i class="fa fa-upload"></i></a>
                 </div>
-                <div id="render__image__single"></div>
+                <input type="hidden" id="image" data-upload="deal_image" data-preview="image__preview">
+                <input type="hidden" name="deal_image">
+                <div id="image__preview"></div>
               </div>
               <div class="form-group">
                 <label>Ngày tạo chiến dịch</label>
-                <input type="date" name="date" id="" class="form-control">
+                <input type="text" name="date" id="date" class="form-control">
               </div>
               <div class="form-group">
                 <label>Sản phẩm</label>
@@ -58,5 +53,6 @@
 @push('script')
   <script>
     $('#product_picker').selectpicker()
+    $('#date').daterangepicker()
   </script>
 @endpush

@@ -715,7 +715,7 @@
 @endsection
 
 @push('script')
-  <script type="text/javascript">
+  <script>
     $('#lightSlider').lightSlider({
       gallery: true,
       item: 1,
@@ -724,6 +724,9 @@
       thumbItem: 9
     });
 
+    $('#choice_attribute_options').on('change', function() {
+      getVariantPrice()
+    })
     const getVariantPrice = () => {
       $.ajax({
         type: "POST",
@@ -746,6 +749,7 @@
         }
       })
     }
+
 
     document.addEventListener('DOMContentLoaded', function() {
 

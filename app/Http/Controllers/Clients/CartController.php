@@ -108,8 +108,10 @@ class CartController extends Controller
   {
     if (auth()->check()) {
       $user_id = auth()->user()->id;
+      $count = 0;
       $cart = Cart::where('user_id', $user_id)->get();
       foreach ($cart as $index => $item) {
+        $count = count($cart);
         if ($index == $request->index) {
           $cart[$request->index]->delete();
         }

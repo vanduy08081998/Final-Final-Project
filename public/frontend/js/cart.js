@@ -48,8 +48,6 @@ const decButton = [...$('.dec')]
 const incButton = [...$('.inc')]
 const quantity_number = [...$('.quantity_number')]
 const cart_price = [...$('.cart_price')]
-const btn_remove_dropdown = document.querySelectorAll('btn-cart-remove')
-console.log(btn_remove_dropdown)
 for (let i = 0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', () => {
         deleteCart(i)
@@ -61,9 +59,6 @@ for (let i = 0; i < deleteButtons.length; i++) {
         }
         updateQuantity(i, quantity_number[i].value, cart_price[i]);
     })
-
-
-
     incButton[i].addEventListener('click', () => {
         quantity_number[i].value = Number(quantity_number[i].value) + 1
         updateQuantity(i, quantity_number[i].value, cart_price[i]);
@@ -81,11 +76,38 @@ const updateQuantity = (i, quantity, cart_price) => {
             quantity: quantity
         },
         success: function(response) {
-            cart_price.textContent = response.price * quantity;
+            var formatter = new Intl.NumberFormat('en-US')
+            cart_price.textContent = formatter.format(response.price * quantity);
             cartDropdown()
             cartTotals()
         }
     });
+}
+
+const deleteCartDropdown = (i) => {
+
+    $.ajax({
+        type: "GET",
+        url: route('cart.delete'),
+        data: {
+            index: i
+        },
+        success: function(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Chúc mừng !',
+                text: 'Xóa giỏ hàng thành công!',
+                confirmButtonText: 'Nhấn ok để tiếp tục !',
+                confirmButtonColor: 'green',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            })
+        }
+    });
+
 }
 
 const deleteCart = function(i) {
@@ -115,9 +137,10 @@ const deleteCart = function(i) {
                     }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
-                            $(`#cart_${i}`).remove()
-                            cartTotals()
-                            cartDropdown()
+                            window.location.reload();
+                            /* $(`#cart_${i}`).remove()
+                              cartTotals()
+                              cartDropdown() */
                         }
                     })
                 }
