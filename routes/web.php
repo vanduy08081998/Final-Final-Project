@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Clients\CommentController;
 use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -78,12 +79,13 @@ Route::prefix('/')->group(function () {
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
     Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
   });
+  // Bình luận
+  Route::resource('/comment', CommentController::class);
   Route::prefix('/search')->group(function () {
     Route::post('/searchs/', [SearchController::class, 'searchs'])->name('search.searchs');
     Route::post('/range', [SearchController::class, 'range'])->name('search.range');
   });
 });
-
 
 /* Admin */
 Route::group(['prefix' => 'admin'], function () {
@@ -91,7 +93,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/', [HomeController::class, 'index'])->name('admin.index');
 
   // Categories
-  Route::resource('categories', CategoryController::class);
+  Route::resource('/categories', CategoryController::class);
   Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
   Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
   //Brand
@@ -137,34 +139,21 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
   Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
   Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-  Route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+  route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
   route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
   Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
   Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
   Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
   Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
   Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+  Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
+  Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
+  Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
+  Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
   Route::resource('/users', UserController::class);
-  Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
-    Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
-    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-    Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-    route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
-    route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
-    Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
-    Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
-    Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
-    Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-    Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
-    Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
-    Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
-    Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
-    Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
-    Route::resource('/users', UserController::class);
-  });
-  Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 });
+Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
+
 
 
 
