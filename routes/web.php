@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
+use App\Http\Livewire\Users;
+
 
 
 /*
@@ -79,6 +81,7 @@ Route::prefix('/')->group(function () {
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
     Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
   });
+  Route::get('/users', Users::class);
   // Bình luận
   Route::resource('/comment', CommentController::class);
   Route::prefix('/search')->group(function () {
