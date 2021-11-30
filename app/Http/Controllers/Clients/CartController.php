@@ -92,7 +92,7 @@ class CartController extends Controller
     if (auth()->check()) {
       $user_id = auth()->user()->id;
       $cart = Cart::where('user_id', $user_id)->get();
-      return view('clients.Inc.cart-dropdown', compact('cart'));
+      return response()->view('clients.Inc.cart-dropdown', compact('cart'));
     } else {
       return response()->json('<a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><i class="navbar-tool-icon ci-cart"></i></a><a
       href="shop-cart.html"><small style="margin-left: 1rem;">Giỏ hàng</small></a>

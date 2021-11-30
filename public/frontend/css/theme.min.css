@@ -19412,5 +19412,21 @@ input[type=number]::-webkit-outer-spin-button {
     display: none;
 }
 
+.navbar-link-dropdown {
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-left: 1 rem;
+    transition: color .25s ease-in-out;
+    text-decoration: none !important;
+    color: #000;
+    font-size: 16px;
+}
+
+.btn-cart-view-dropdown {
+    background: #d0011b;
+    color: #ffffff;
+    border-radius: 0;
+}
+
 
 /*# sourceMappingURL=theme.min.css.map */

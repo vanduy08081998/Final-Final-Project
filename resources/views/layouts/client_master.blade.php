@@ -36,6 +36,7 @@
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
   @livewireStyles
+  @routes
   <!-- Google Tag Manager-->
   <script>
     (function(w, d, s, l, i) {
@@ -138,19 +139,8 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
   @include('sweetalert::alert')
-  <script>
-    const cartDropdown = () => {
-      $.ajax({
-        type: "GET",
-        url: "{{ route('cart.dropdown') }}",
-        success: function(response) {
-          $('.cart__dropdown').html(response)
-        }
-      });
-    }
-    cartDropdown()
-  </script>
   @stack('script')
+  <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
 </body>
 
 </html>
