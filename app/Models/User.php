@@ -63,5 +63,9 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'comment_user_id');
     }
 
+    public function likeComments(){
+        return $this->belongsToMany(Comment::class, 'comment_user');
+    }
+
 
 }
