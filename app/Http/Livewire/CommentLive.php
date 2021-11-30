@@ -49,7 +49,7 @@ class CommentLive extends Component
 
     public function likeComment($comment_id){
         $commentId = Comment::find($comment_id);
-        $commentId->usersLike()->sync(Auth::user()->id);
+        $commentId->usersLike()->attach(Auth::user()->id);
         $this->emit('render');
     }
 

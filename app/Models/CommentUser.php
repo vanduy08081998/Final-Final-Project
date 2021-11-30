@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class CommentUser extends Model
 {
@@ -13,9 +14,6 @@ class CommentUser extends Model
 
     public $fillable = ['comment_id', 'user_id'];
 
-    public $timestamp = true;
-
-    public $primaryKey = 'id';
 
     
 } 

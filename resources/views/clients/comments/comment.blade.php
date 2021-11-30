@@ -6,19 +6,22 @@
     <div class="infocom_ask">
         {{ $comment->comment_content }}
         <div class="relate_infocom">
-            <span class="reply reply-comment" data-id="{{ $comment->id }}">Trả
-                lời</span>
-            <b class="dot">.</b>
+            @if ($comment->user->id != Auth::user()->id)
+                <span class="reply reply-comment" data-id="{{ $comment->id }}">Trả
+                    lời</span>
+                <b class="dot">.</b>
+            @endif
 
-            @if ($comment->usersLike->count())
-                @foreach ($comment->usersLike as $value)
-                    @if ($value->id == Auth::user()->id)
-                        <span class="numlike isLike">
-                            <i class="fa fa-thumbs-o-up"></i>
-                            <span wire:click="UnLikeComment('{{ $comment->id }}')">Thích</span>
-                        </span>
-                    @endif
-                @endforeach
+            @php
+                $isUser = $comment->usersLike->pluck('id')->all();
+            @endphp
+
+            @if (in_array(Auth::user()->id, $isUser))
+
+                <span class="numlike isLike">
+                    <i class="fa fa-thumbs-o-up"></i>
+                    <span wire:click="UnLikeComment('{{ $comment->id }}')">Bỏ thích</span>
+                </span>
             @else
                 <span class="numlike">
                     <i class="fa fa-thumbs-o-up"></i>

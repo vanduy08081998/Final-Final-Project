@@ -9,15 +9,17 @@
             <span class="reply reply-comment" data-id="{{ $reply->id }}">Trả
                 lời</span>
             <b class="dot">.</b>
-            @if ($reply->usersLike->count())
-                @foreach ($reply->usersLike as $value)
-                    @if ($value->id == Auth::user()->id)
-                        <span class="numlike isLike">
-                            <i class="fa fa-thumbs-o-up"></i>
-                            <span wire:click="UnLikeComment('{{ $reply->id }}')">Thích</span>
-                        </span>
-                    @endif
-                @endforeach
+
+            @php
+                $isUser = $reply->usersLike->pluck('id')->all();
+            @endphp
+
+            @if (in_array(Auth::user()->id, $isUser))
+                <span class="numlike isLike">
+                    <i class="fa fa-thumbs-o-up"></i>
+                    <span wire:click="UnLikeComment('{{ $reply->id }}')">Bỏ thích</span>
+                </span>
+
             @else
                 <span class="numlike">
                     <i class="fa fa-thumbs-o-up"></i>
