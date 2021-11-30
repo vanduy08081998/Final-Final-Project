@@ -47,9 +47,6 @@ Quản lý tài khoản
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                     class="bx bx-cog"></i></button>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-
-                                                <a class="dropdown-item text-warning"
-                                                    href="{{ route('users.edit', ['user' => $customer->id]) }}">Sửa</a>
                                                 <form action="{{ route('users.destroy', ['user' => $customer->id]) }}"
                                                     method="POST">
                                                     @csrf

@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
+use App\Http\Livewire\Users;
+
 
 
 /*
@@ -64,14 +66,18 @@ Route::prefix('/')->group(function () {
     Route::prefix('/cart')->group(function () {
         Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
     });
+
     Route::prefix('/account')->group(function () {
+        Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
         Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
         Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
+
     });
+    Route::get('/users', Users::class);
 });
 
 

@@ -74,7 +74,7 @@
                 <div class="form-group form-register">
                     <div class="input-group">
                         <input type="text" name="name" class="name_regis form-control" value="{{old('name')}}"
-                            placeholder="Tên đăng nhập" />
+                            placeholder="Họ và tên" />
                     </div>
                     <span class="name_error_regis text-danger text-italic"></span>
 

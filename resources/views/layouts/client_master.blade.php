@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:03 GMT -->
-<!-- Added by HTTrack -->
+
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
 <head>
     <meta charset="utf-8">
     <title>BigDeal | @yield('title')</title>
     <!-- SEO Meta Tags-->
-   @yield('meta')
+    @yield('meta')
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->
@@ -21,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
@@ -32,6 +31,10 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Google Tag Manager-->
     {{-- <script>
         (function(w, d, s, l, i) {
@@ -70,13 +73,13 @@
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
         <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-heart"></i></span><span class="handheld-toolbar-label">Yêu thích</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
-                        class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
+                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
+                    class="handheld-toolbar-label">Yêu thích</span></a><a class="d-table-cell handheld-toolbar-item"
+                href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
+                    class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item"
+                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
+                        class="badge bg-primary rounded-pill ms-1">4</span></span><span
                     class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span
@@ -95,10 +98,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js"></script>
-    @stack('script')
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
+    </script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
-<!-- Mirrored from cartzilla.createx.studio/home-electronics-store.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Sep 2021 17:32:40 GMT -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    @livewireScripts
+    @stack('script')
+
+    <script type="text/javascript">
+    window.addEventListener('alert', event => {
+        toastr[event.detail.type](event.detail.message,
+            event.detail.title ?? ''), toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+        };
+    })
+    window.addEventListener('OpenUpdatePhoneModal', function(event) {
+        $('.updatePhone').modal('show');
+    });
+
+    window.addEventListener('CloseUpdatePhoneModal', function(event) {
+        $('.updatePhone').modal('hide');
+    });
+
+    window.addEventListener('OpenUpdateAddressModal', function(event) {
+        $('.updateAddress').modal('show');
+    });
+
+    window.addEventListener('CloseUpdateAddressModal', function(event) {
+        $('.updateAddress').modal('show');
+    });
+    </script>
+</body>
 
 </html>
