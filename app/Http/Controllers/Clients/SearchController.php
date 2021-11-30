@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers\Clients;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\BlogCate;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class SearchController extends Controller
 {
     public function searchs(Request $request) {
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');
-        $search = Product::orderByDESC('id')
-        ->where('product_name','REGEXP', $request->key)->get();
+        if($request->category == 0){
+            $search = Product::orderByDESC('id')
+            ->where('product_name','REGEXP', $request->key)->get();
+        }else {
+            $search = Product::orderByDESC('id')
+            ->where('product_id_category', $request->category)
+            ->where('product_name','REGEXP', $request->key)->get();
+        }
         return view('clients.shop.search', [
             'min' => $min,
             'max' => $max,
@@ -31,4 +39,5 @@ class SearchController extends Controller
             'search' => $search
             ]);
     }
+
 }

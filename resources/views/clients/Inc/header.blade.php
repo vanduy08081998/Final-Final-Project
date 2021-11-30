@@ -3,6 +3,7 @@ use App\Models\Category;
 $categories = Category::where('category_parent_id', null)
     ->orderBy('id_cate', 'asc')
     ->get();
+$category = Category::all();
 ?>
 <header class="shadow-sm">
     <!-- Topbar-->
@@ -45,10 +46,10 @@ $categories = Category::where('category_parent_id', null)
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}">
-                        <img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla">
+                    <img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla">
                 </a>
                 <a class="navbar-brand d-sm-none me-2" href="index.html">
-                        <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
+                    <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
                 </a>
                 <!-- Search-->
                 <form class="input-group d-none d-lg-flex flex-nowrap mx-4" action="{{ route('search.searchs') }}"
@@ -57,12 +58,13 @@ $categories = Category::where('category_parent_id', null)
                     @method('POST')
                     <i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                     <input class="form-control rounded-start w-100" name="key" id="search" type="text"
-                        placeholder="Tìm kiếm sản phẩm">
-                    <select class="form-select flex-shrink-0" style="width: 10.5rem;">
-                        <option>Tất cả</option>
-
-                        <option>Computers</option>
-
+                        placeholder="Tìm kiếm sản phẩm" required>
+                    <select class="form-select flex-shrink-0" style="width: 10.5rem;" name="category">
+                        <option name="category" value="0">Tất cả</option>
+                        @foreach ($category as $cate)
+                            <option name="category" value="{{ $cate->id_cate }}">{{ $cate->category_name }}
+                            </option>
+                        @endforeach
                     </select>
                 </form>
                 <!-- Toolbar-->
@@ -181,7 +183,8 @@ $categories = Category::where('category_parent_id', null)
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
                                         <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                            <span style="font-size: 18px;">{!! $cate->category_icon !!}</span> <span>{{ $cate->category_name }}</span>
+                                            <span style="font-size: 18px;">{!! $cate->category_icon !!}</span>
+                                            <span>{{ $cate->category_name }}</span>
                                         </a>
                                         <div class="dropdown-menu p-0">
                                             <div class="d-flex flex-wrap flex-sm-nowrap px-2">
@@ -191,7 +194,8 @@ $categories = Category::where('category_parent_id', null)
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-1">
-                                                                    <a class="widget-list-link" href="#">{{ $brand->brand_name }}</a>
+                                                                    <a class="widget-list-link"
+                                                                        href="#">{{ $brand->brand_name }}</a>
                                                                 </li>
                                                             @endforeach
                                                         </ul>
