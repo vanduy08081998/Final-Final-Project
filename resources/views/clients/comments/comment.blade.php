@@ -6,7 +6,7 @@
     <div class="infocom_ask">
         {{ $comment->comment_content }}
         <div class="relate_infocom">
-            @if ($comment->user->id != Auth::user()->id)
+            @if ($comment->user->id != $userLoginId)
                 <span class="reply reply-comment" data-id="{{ $comment->id }}">Trả
                     lời</span>
                 <b class="dot">.</b>
@@ -16,7 +16,7 @@
                 $isUser = $comment->usersLike->pluck('id')->all();
             @endphp
 
-            @if (in_array(Auth::user()->id, $isUser))
+            @if (in_array($userLoginId, $isUser))
 
                 <span class="numlike isLike">
                     <i class="fa fa-thumbs-o-up"></i>

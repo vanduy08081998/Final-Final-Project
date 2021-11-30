@@ -7,14 +7,16 @@
     <div class="infocom_ask">
         {{ $replyChilds->comment_content }}
         <div class="relate_infocom">
-            <span class="reply reply-comment" data-id="{{ $replyChilds->id }}">Trả
-                lời</span>
-            <b class="dot">.</b>
+            @if ($replyChilds->user->id != $userLoginId)
+                <span class="reply reply-comment" data-id="{{ $replyChilds->id }}">Trả
+                    lời</span>
+                <b class="dot">.</b>
+            @endif
 
             @php
                 $isUser = $replyChilds->usersLike->pluck('id')->all();
             @endphp
-            @if (in_array(Auth::user()->id, $isUser))
+            @if (in_array($userLoginId, $isUser))
                 <span class="numlike isLike">
                     <i class="fa fa-thumbs-o-up"></i>
                     <span wire:click="UnLikeComment('{{ $replyChilds->id }}')">Bỏ thích</span>
