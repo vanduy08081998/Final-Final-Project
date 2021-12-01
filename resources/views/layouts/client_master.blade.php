@@ -96,7 +96,9 @@
   @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
 
-  @livewireScripts
+
+    @livewireScripts
+    @stack('script')
 
   <script type="text/javascript">
     window.addEventListener('alert', event => {
@@ -119,9 +121,45 @@
     });
 
     window.addEventListener('CloseUpdateAddressModal', function(event) {
-      $('.updateAddress').modal('show');
+        $('.updateAddress').modal('hide');
     });
-  </script>
+
+    window.addEventListener('OpenUpdatePasswordModal', function(event) {
+        $('.updatePassword').modal('show');
+    });
+
+    window.addEventListener('CloseUpdatePasswordModal', function(event) {
+        $('.updatePassword').modal('hide');
+    });
+
+    $(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass("bx-hide");
+            $('#show_hide_password i').removeClass("bx-show");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass("bx-hide");
+            $('#show_hide_password i').addClass("bx-show");
+        }
+    });
+
+    $("#show_hide_password2 a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password2 input').attr("type") == "text") {
+            $('#show_hide_password2 input').attr('type', 'password');
+            $('#show_hide_password2 i').addClass("bx-hide");
+            $('#show_hide_password2 i').removeClass("bx-show");
+        } else if ($('#show_hide_password2 input').attr("type") == "password") {
+            $('#show_hide_password2 input').attr('type', 'text');
+            $('#show_hide_password2 i').removeClass("bx-hide");
+            $('#show_hide_password2 i').addClass("bx-show");
+        }
+    });
+});
+
 </body>
 
 </html>

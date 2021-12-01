@@ -4,20 +4,23 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Session;
 
 class Users extends Component
 {
-    public $name, $birthday, $gender;
+    public $name, $birthday, $gender, $password, $password_confirmation;
     public $phone, $cid;
 
     public function update_profile($id)
     {
         $this->validate([
-              'name'=>['required','string'],
+              'name'=> ['required', 'string', 'max:255'],
         ],
         [
-            'name.required'=>'Họ tên không được bỏ trống',
+            'name.required'=> 'Vui lòng không bỏ trống tên tài khoản! ',
+            'name.string'=> 'Tên tài khoản không hợp lệ! ',
+            'name.max'=> 'Tên tài khoản không quá 255 ký tự! ',
         ]);
         User::find($id)->update([
             'name'=>$this->name,
@@ -78,6 +81,34 @@ class Users extends Component
             $this->dispatchBrowserEvent('CloseUpdateAddressModal');
             $this->alertSuccess('Cập nhật địa chỉ thành công');
         }
+    }
+
+    public function edit_password($id){
+        $user = User::find($id);
+        $this->id_user = $user->id;
+        $this->dispatchBrowserEvent('OpenUpdatePasswordModal',[
+            'id'=>$id
+        ]);
+    }
+
+    public function update_password(){
+        $this->validate([
+            'password'=>['required', 'string', 'min:8', 'confirmed'],
+        ],[
+            'password.required'=> 'Vui lòng không bỏ trống mật khẩu! ',
+            'password.string'=> 'Mật khẩu không hợp lệ! ',
+            'password.min'=> 'Mật khẩu không được nhỏ hơn 8 ký tự! ',
+            'password.confirmed'=> 'Mật khẩu xác nhận không hợp lệ! ',
+        ]);
+
+        $user = User::find($this->id_user)->update([
+          'password'=>Hash::make($this->password),
+        ]);
+
+        if($user){
+          $this->dispatchBrowserEvent('CloseUpdatePasswordModal');
+          $this->alertSuccess('Cập nhật mật khẩu thành công');
+         }
     }
 
     public function render()
