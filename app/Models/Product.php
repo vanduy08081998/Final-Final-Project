@@ -38,7 +38,7 @@ class Product extends Model
         'type_of_category',
         'shipping_day',
         'choice_options',
-        'colors'
+        'colors',
     ];
 
     public $timestamps = TRUE;

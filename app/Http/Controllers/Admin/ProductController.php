@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\AddProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Models\FlashDeal;
 
 class ProductController extends Controller
 {
@@ -51,7 +53,8 @@ class ProductController extends Controller
     public function create()
     {
         $brands = DB::table('brands')->get();
-        return view('admin.products.create', compact('brands'));
+        $flash_deals = FlashDeal::all();
+        return view('admin.products.create', compact('brands','flash_deals'));
     }
 
     public function sku_combinations(Request $request)
@@ -236,6 +239,8 @@ class ProductController extends Controller
         ];
 
         $product = Product::create($data);
+
+        Product::find($product->id)->flash_deals()->attach($request->id_flash_deal);
 
         $options = array();
 

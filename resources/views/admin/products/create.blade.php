@@ -500,6 +500,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="card">
+                                        <div class="card-header">Flash sale</div>
+                                        <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label>Thêm vào chiến dịch</label>
+                                                <select name="id_flash_deal[]" id="id_flash_deal" class="form-control" multiple="multiple" data-live-search="true" >
+                                                    @foreach($flash_deals as $deal)
+                                                        <option value="{{ $deal->id }}">{{ $deal->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -540,6 +557,7 @@
         $('input[name="sale_dates"]').daterangepicker();
         $('input[name="expiry"]').daterangepicker();
         $('#product_color').selectpicker();
+        $('#id_flash_deal').selectpicker();
 
         // Form on submit
         $('form').on('submit', function(event) {

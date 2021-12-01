@@ -84,7 +84,7 @@
   <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
   <!-- Main theme script-->
   <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">

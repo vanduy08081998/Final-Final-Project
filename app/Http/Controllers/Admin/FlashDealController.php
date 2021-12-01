@@ -102,11 +102,11 @@ class FlashDealController extends Controller
             $flash_deal->date_end = strtotime($var_date[1]);
         }
 
-        $flash_deal->update();
+        $flash_deal->save();
 
-        foreach($request->product_id as $key => $item){
-            $flash_deal->products()->attach($item);
-        }
+        
+        $flash_deal->products()->sync($request->product_id);
+       
 
         return redirect()->route('flash-deals.index');
     }
@@ -117,8 +117,10 @@ class FlashDealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FlashDeal $flash_deal)
     {
-        //
+        $flash_deal->products()->detach();
+        $flash_deal->delete();
+        return redirect()->back();
     }
 }

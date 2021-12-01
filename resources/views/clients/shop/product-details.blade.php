@@ -59,100 +59,111 @@
                             @csrf
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <div class="row">
+                                <style>
+                                    #content-wrapper{
+                                        display: flex;
+                                        flex-wrap: wrap;
+                                        justify-content: center;
+                                        align-items: center;
+                                        height: 600px;
+                                    }
+
+
+                                   .column{
+                                        width: 600px;
+                                        padding: 10px;
+
+                                    }
+
+                                    #featured{
+                                        max-width: 500px;
+                                        max-height: 600px;
+                                        object-fit: cover;
+                                        cursor: pointer;
+                                    }
+
+                                    .thumbnail{
+                                        object-fit: cover;
+                                        max-width: 180px;
+                                        max-height: 100px;
+                                        cursor: pointer;
+                                        opacity: 0.5;
+                                        margin: 5px;
+                                    }
+
+                                    .thumbnail:hover{
+                                        opacity:1;
+                                    }
+
+                                    .active{
+                                        opacity: 1;
+                                    }
+
+                                    #slide-wrapper{
+                                        max-width: 500px;
+                                        display: flex;
+                                        min-height: 100px;
+                                        align-items: center;
+                                    }
+
+                                    #slider{
+                                        width: 440px;
+                                        display: flex;
+                                        flex-wrap: nowrap;
+                                        overflow-x: auto;
+
+                                    }
+
+                                    #slider::-webkit-scrollbar {
+                                            width: 8px;
+
+                                    }
+
+                                    #slider::-webkit-scrollbar-track {
+                                        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+                                    }
+                                     
+                                    #slider::-webkit-scrollbar-thumb {
+                                      background-color: #dede2e;
+                                      outline: 1px solid slategrey;
+                                       border-radius: 100px;
+
+                                    }
+
+                                    #slider::-webkit-scrollbar-thumb:hover{
+                                        background-color: #18b5ce;
+                                    }
+
+                                    .arrow{
+                                        width: 30px;
+                                        height: 30px;
+                                        cursor: pointer;
+                                        transition: .3s;
+                                    }
+
+                                    .arrow:hover{
+                                        opacity: .5;
+                                        width: 35px;
+                                        height: 35px;
+                                    }
+
+                                </style>    
                                 <!-- Product gallery-->
-                                <div class="col-lg-7 pe-lg-0">
-                                    <div class="product-gallery">
-                                        <style>
-                                            .demo {
-                                                width: 100%;
-                                                overflow: hidden;
-                                                margin: 0 auto;
-                                            }
+                                <div class="col-lg-7" id="content-wrapper">
+                                    <div class="column">
+                                        <img id="featured" src="{{ asset($product->product_image) }}">
 
-                                            ul {
-                                                list-style: none outside none;
-                                                padding-left: 0;
-                                                margin-bottom: 0;
-                                            }
+                                        <div id="slide-wrapper" >
+                                            <img id="slideLeft" class="arrow" src="{{ asset('frontend/images/arrow-left.png') }}">
 
-                                            li {
-                                                display: block;
-                                                float: left;
-                                                margin-right: 6px;
-                                                cursor: pointer;
-                                            }
-
-                                            .demo li img {
-                                                display: block;
-                                                height: auto;
-                                                width: 100%;
-                                            }
-
-                                            #lightSlider li img {
-                                                width: 60%;
-                                                height: 400px;
-                                                /* margin: 0 auto; */
-                                            }
-
-                                            .product-badge.product-available.bg-red {
-                                                background-color: red;
-                                            }
-
-                                            .product-badge.product-available.bg-red::after {
-                                                border-color: rgba(66, 214, 151, 0);
-                                                border-bottom-color: red;
-                                            }
-
-                                            .product-badge.product-available.bg-green {
-                                                background-color: green;
-                                            }
-
-                                            .product-badge.product-available.bg-green::after {
-                                                border-color: rgba(66, 214, 151, 0);
-                                                border-bottom-color: green;
-                                            }
-
-                                            * {
-                                                box-sizing: border-box;
-                                            }
-
-                                            .input-number {
-                                                width: 80px;
-                                                padding: 0 12px;
-                                                vertical-align: top;
-                                                text-align: center;
-                                                outline: none;
-                                            }
-
-                                        </style>
-                                        <div class="demo">
-                                            <ul id="lightSlider">
-                                                <li data-thumb="{{ asset($product->product_image) }}">
-                                                    <img srcset="{{ asset($product->product_image) }} 2x" />
-                                                </li>
-                                                @foreach (explode(',', $product->product_gallery) as $key => $image)
-                                                    <li data-thumb="{{ asset($image) }}">
-                                                        <img srcset="{{ asset($image) }} 2x" />
-                                                    </li>
+                                            <div id="slider">
+                                                @foreach(explode(',', $product->product_gallery) as $key => $gallery)
+                                                <img class="thumbnail" src="{{ asset($gallery) }}">
                                                 @endforeach
+                                            </div>
 
-                                                @foreach ($variants as $variant_data_image)
-                                                    @if ($variant_data_image->variant_image == null)
-                                                        <li
-                                                            data-thumb="https://vanhoadoanhnghiepvn.vn/wp-content/uploads/2020/08/112815953-stock-vector-no-image-available-icon-flat-vector.jpg">
-                                                            <img
-                                                                srcset="https://vanhoadoanhnghiepvn.vn/wp-content/uploads/2020/08/112815953-stock-vector-no-image-available-icon-flat-vector.jpg 2x" />
-                                                        </li>
-                                                    @else
-                                                        <li data-thumb="{{ asset($variant_data_image->variant_image) }}">
-                                                            <img
-                                                                srcset="{{ asset($variant_data_image->variant_image) }} 2x" />
-                                                        </li>
-                                                    @endif
-
-                                                @endforeach
-
-                                            </ul>
+                                            <img id="slideRight" class="arrow" src="{{ asset('frontend/images/arrow-right.png') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -771,13 +782,38 @@
 
 @push('script')
   <script>
-    $('#lightSlider').lightSlider({
-      gallery: true,
-      item: 1,
-      loop: true,
-      slideMargin: 0,
-      thumbItem: 9
-    });
+        $("#featured").ezPlus();
+        $(".active").ezPlus();
+        let thumbnails = document.getElementsByClassName('thumbnail')
+
+        let activeImages = document.getElementsByClassName('active')
+
+        for (var i=0; i < thumbnails.length; i++){
+
+            thumbnails[i].addEventListener('mouseover', function(){
+                console.log(activeImages)
+                
+                if (activeImages.length > 0){
+                    activeImages[0].classList.remove('active')
+                }
+                
+
+                this.classList.add('active')
+                document.getElementById('featured').src = this.src
+            })
+        }
+
+
+        let buttonRight = document.getElementById('slideRight');
+        let buttonLeft = document.getElementById('slideLeft');
+
+        buttonLeft.addEventListener('click', function(){
+            document.getElementById('slider').scrollLeft -= 180
+        })
+
+        buttonRight.addEventListener('click', function(){
+            document.getElementById('slider').scrollLeft += 180
+        })
 
     $('#choice_attribute_options').on('change', function() {
       getVariantPrice()
