@@ -5,6 +5,12 @@ $categories = Category::where('category_parent_id', null)
     ->get();
 $category = Category::all();
 ?>
+
+<style>
+    .twitter-typeahead{
+        width: 30rem;
+    }
+</style>
 <header class="shadow-sm">
     <!-- Topbar-->
     <div class="topbar topbar-dark bg-dark">
@@ -68,7 +74,7 @@ $category = Category::all();
                             </option>
                         @endforeach
                     </select>
-                    <button class="btn-primary" type="submit" style="border-radius: 0 25px 25px 0;"><i class="fas fa-search"
+                    <button class="btn-primary" type="submit" style="border-radius: 0 25px 25px 0; border: none"><i class="fas fa-search"
                             style="font-size: 23px; margin-left: 10px; margin-right: 10px; margin-top: 3px;"></i>
                     </button>
                 </form>
