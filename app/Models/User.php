@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
+use Illuminate\Database\Eloquent\SoftDeletes; 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;// add soft delete
 
 class User extends Authenticatable
 {
@@ -65,6 +66,10 @@ class User extends Authenticatable
 
     public function comments(){
         return $this->hasMany(Comment::class, 'comment_user_id');
+    }
+
+    public function likeComments(){
+        return $this->belongsToMany(Comment::class, 'comment_user');
     }
 
 
