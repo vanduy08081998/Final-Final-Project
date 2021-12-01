@@ -102,15 +102,7 @@
     </script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+
     @livewireScripts
     @stack('script')
 
@@ -135,8 +127,45 @@
     });
 
     window.addEventListener('CloseUpdateAddressModal', function(event) {
-        $('.updateAddress').modal('show');
+        $('.updateAddress').modal('hide');
     });
+
+    window.addEventListener('OpenUpdatePasswordModal', function(event) {
+        $('.updatePassword').modal('show');
+    });
+
+    window.addEventListener('CloseUpdatePasswordModal', function(event) {
+        $('.updatePassword').modal('hide');
+    });
+
+    $(document).ready(function() {
+    $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass("bx-hide");
+            $('#show_hide_password i').removeClass("bx-show");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass("bx-hide");
+            $('#show_hide_password i').addClass("bx-show");
+        }
+    });
+
+    $("#show_hide_password2 a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password2 input').attr("type") == "text") {
+            $('#show_hide_password2 input').attr('type', 'password');
+            $('#show_hide_password2 i').addClass("bx-hide");
+            $('#show_hide_password2 i').removeClass("bx-show");
+        } else if ($('#show_hide_password2 input').attr("type") == "password") {
+            $('#show_hide_password2 input').attr('type', 'text');
+            $('#show_hide_password2 i').removeClass("bx-hide");
+            $('#show_hide_password2 i').addClass("bx-show");
+        }
+    });
+});
+
     </script>
 </body>
 
