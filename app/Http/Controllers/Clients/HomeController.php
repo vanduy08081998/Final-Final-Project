@@ -9,6 +9,7 @@ use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
+use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller

@@ -52,12 +52,14 @@ $category = Category::all();
                     <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
                 </a>
                 <!-- Search-->
-                <form class="input-group d-none d-lg-flex flex-nowrap mx-4" action="{{ route('search.searchs') }}"
-                    method="POST" enctype="multipart/form-data" id="choice-form">
+                <form class="input-group d-none d-lg-flex flex-nowrap mx-4 typeahead"
+                    action="{{ route('search.searchs') }}" method="POST" enctype="multipart/form-data"
+                    id="choice-form">
                     @csrf
                     @method('POST')
-                    <i class="ci-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
-                    <input class="form-control rounded-start w-100" name="key" id="search" type="text"
+
+                    <input class="form-control rounded-start w-100 search-input"
+                        style="border-radius: 25px 0 0 25px !important;" name="key" id="search" type="text"
                         placeholder="Tìm kiếm sản phẩm" required>
                     <select class="form-select flex-shrink-0" style="width: 10.5rem;" name="category">
                         <option name="category" value="0">Tất cả</option>
@@ -66,7 +68,11 @@ $category = Category::all();
                             </option>
                         @endforeach
                     </select>
+                    <button class="btn-primary" type="submit" style="border-radius: 0 25px 25px 0;"><i class="fas fa-search"
+                            style="font-size: 23px; margin-left: 10px; margin-right: 10px; margin-top: 3px;"></i>
+                    </button>
                 </form>
+
                 <!-- Toolbar-->
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
