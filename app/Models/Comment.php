@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Comment extends Model
 {
     use HasFactory;
     public $table = 'comments';
 
-    public $fillable = ['comment_id_product', 'comment_id_user','comment_content', 'comment_parent_id'];
+    public $fillable = ['comment_id_product', 'comment_id_user','comment_content', 'comment_parent_id', 'comment_reply_id'];
 
     public $timestamp = true;
 
@@ -26,6 +27,10 @@ class Comment extends Model
 
     public function reply(){
         return $this->hasMany(Comment::class, 'comment_parent_id');
+    }
+
+    public function usersLike(){
+        return $this->belongsToMany(User::class, 'comment_user');
     }
 
 }
