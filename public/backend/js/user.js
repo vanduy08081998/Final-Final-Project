@@ -12,7 +12,7 @@ $('.login').on('click', function() {
             password: password
         },
         success: function(data) {
-            window.location.href = 'home';
+            window.location.href = './';
         },
         error: function(jqXHR) {
             // alert(xhr.responseText);
@@ -53,7 +53,7 @@ $('.register').on('click', function() {
             password_confirmation: password_confirmation
         },
         success: function(data) {
-            window.location.href = "home";
+            window.location.href = "./";
         },
         error: function(jqXHR) {
             // alert(xhr.responseText);

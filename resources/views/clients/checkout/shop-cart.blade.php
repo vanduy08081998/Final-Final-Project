@@ -80,7 +80,7 @@
                   @endif
 
                   <div class="fs-lg text-accent pt-2"><span>Tổng giá :
-                    </span><span class="cart_price">{{ $value->variant_price * $cart->quantity }}</span>
+                    </span><span class="cart_price">{{ number_format($value->variant_price * $cart->quantity) }}</span>
                   </div>
                 </div>
               </div>
@@ -183,91 +183,3 @@
     </div>
   </div>
 @endsection
-@push('script')
-  <script>
-    const deleteButtons = [...$('.delete_button')]
-    const decButton = [...$('.dec')]
-    const incButton = [...$('.inc')]
-    const quantity_number = [...$('.quantity_number')]
-    const cart_price = [...$('.cart_price')]
-    for (let i = 0; i < deleteButtons.length; i++) {
-      deleteButtons[i].addEventListener('click', () => {
-        deleteCart(i)
-      })
-
-      decButton[i].addEventListener('click', () => {
-        quantity_number[i].value = Number(quantity_number[i].value) - 1
-        if (quantity_number[i].value < 1) {
-          quantity_number[i].value = 1
-        }
-        updateQuantity(i, quantity_number[i].value, cart_price[i]);
-      })
-
-      incButton[i].addEventListener('click', () => {
-        quantity_number[i].value = Number(quantity_number[i].value) + 1
-        updateQuantity(i, quantity_number[i].value, cart_price[i]);
-      })
-    }
-
-    const updateQuantity = (i, quantity, cart_price) => {
-      var _token = $('meta[name="csrf-token"]').attr('content');
-      $.ajax({
-        type: "POST",
-        url: "{{ route('cart.update') }}",
-        data: {
-          _token: _token,
-          index: i,
-          quantity: quantity
-        },
-        success: function(response) {
-          cart_price.textContent = response.price * quantity;
-          cartDropdown()
-        }
-      });
-    }
-
-    const deleteCart = function(i) {
-      Swal.fire({
-        imageUrl: 'https://img.icons8.com/ultraviolet/50/000000/shopping-cart-loaded--v2.png',
-        text: 'Bạn có chắc chắn muốn xóa giỏ hàng này không',
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: 'Vâng ! Tôi muốn xóa nó !',
-        confirmButtonColor: 'green',
-        denyButtonText: `Tôi không muốn xóa nó`,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            type: "GET",
-            url: "{{ route('cart.delete') }}",
-            data: {
-              index: i
-            },
-            success: function(response) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Chúc mừng !',
-                text: 'Xóa giỏ hàng thành công!',
-                confirmButtonText: 'Nhấn ok để tiếp tục !',
-                confirmButtonColor: 'green',
-              }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                  $(`#cart_${i}`).remove()
-                  cartDropdown()
-                }
-              })
-            }
-          });
-        } else if (result.isDenied) {
-          Swal.fire('Bạn đã hoàn tác hành động của mình !', '', 'info')
-        }
-      })
-
-    }
-
-    const cartTotals = () => {
-
-    }
-  </script>
-@endpush

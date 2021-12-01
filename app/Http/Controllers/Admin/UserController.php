@@ -94,6 +94,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $userId = User::find($id);
+        dd($userId);
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $userId->update($data);
