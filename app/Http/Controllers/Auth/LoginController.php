@@ -50,7 +50,7 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('google')->user();
         $this->_registerOrLoginUser($user);
-        return redirect()->route('home');
+        return redirect()->route('clients.index');
     }
 
 //Login Facebook
@@ -63,7 +63,7 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->user();
         $this->_registerOrLoginUser($user);
-        return redirect()->route('home');
+        return redirect()->route('clients.index');
     }
 
 
