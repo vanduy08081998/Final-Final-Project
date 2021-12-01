@@ -81,7 +81,7 @@ Route::prefix('/')->group(function () {
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
-
+        Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
     });
     // Bình luận
     Route::resource('/comment', CommentController::class);
