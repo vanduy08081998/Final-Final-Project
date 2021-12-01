@@ -6,8 +6,7 @@ use App\Models\Variant;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Brian2694\Toastr\Facades\Toastr;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AttributeController extends Controller
 {
@@ -42,8 +41,8 @@ class AttributeController extends Controller
     {
         $data = $request->all();
         Attribute::create($data);
-        $message = Toastr::success('Thêm thuộc tính thành công !', 'Chúc mừng !');
-        return redirect()->route('attribute.index')->with('message', $message);
+        Alert::success('Thêm thành công');
+        return redirect()->route('attribute.index')->with('message', 'Thanh cong');
     }
 
     /**
@@ -94,7 +93,8 @@ class AttributeController extends Controller
     {
         Variant::where('attribute_id', $id)->delete();
         Attribute::find($id)->delete();
-        return back()->with('message', 'Xóa thuộc tính thành công');
+        Alert::success('Xóa thuộc tính thành công');
+        return back()->with('message');
     }
 
     public function variant($attri_slug)

@@ -99,7 +99,7 @@
                                     data-upload="img_{{ $str }}"
                                     data-preview="image__preview__{{ $str }}"
                                     value="@if ($stock != null){{ asset($stock->variant_image) }}@endif">
-                                <input type="hidden" name="img_{{ $str }}" value="@if ($stock != null){{ asset($stock->variant_image) }}@endif">
+                                <input type="hidden" name="img_{{ $str }}" value="@if ($stock != null){{ $stock->variant_image }}@endif">
                                 <div id="image__preview__{{ $str }}">
                                     @if ($stock != null)
                                         <img src="{{ asset($stock->variant_image) }}" width="80" height="80" alt="">
