@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Clients\CommentController;
 use App\Http\Controllers\Customer\MailController;
 use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -68,6 +69,7 @@ Route::prefix('/')->group(function () {
         Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
         Route::get('/cart-delete', [CartController::class, 'cartDelete'])->name('cart.delete');
         Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
+        Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
     });
     Route::prefix('/account')->group(function () {
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
@@ -77,6 +79,8 @@ Route::prefix('/')->group(function () {
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
     });
+    // Bình luận
+    Route::resource('/comment', CommentController::class);
     Route::prefix('/search')->group(function () {
         Route::post('/searchs/',[SearchController::class, 'searchs'])->name('search.searchs');
         Route::post('/range', [SearchController::class, 'range'])->name('search.range');
@@ -90,7 +94,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
 
     // Categories
-    Route::resource('categories', CategoryController::class);
+    Route::resource('/categories', CategoryController::class);
     Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
     Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
     //Brand

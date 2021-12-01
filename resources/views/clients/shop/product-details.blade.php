@@ -481,6 +481,195 @@
 
       </div>
     </div>
+
+    <!-- Bình luận ở đây nha bà con-->
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
+
+    <style>
+        .form-comment {
+            border: 1px solid #a09797;
+        }
+
+        .line {
+            padding-bottom: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 4px;
+            margin-top: 40px;
+            margin-left: 12px;
+            background: #4a90e2;
+            border-radius: 5px;
+        }
+
+        .infocomment {
+            display: block;
+            clear: both;
+            margin-bottom: 20px;
+        }
+
+        .commentask {
+            display: block;
+            overflow: visible;
+            margin: 10px 0 0;
+        }
+
+        .commentask strong {
+            margin-top: 5px;
+            text-transform: capitalize;
+        }
+
+        .iconcom-user {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-image: none;
+            background-color: rgb(213, 145, 156);
+            margin-right: 3px;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            line-height: 26px;
+            font-style: normal;
+        }
+
+        .relate_infocom .reply {
+            cursor: pointer;
+            color: #4a90e2;
+        }
+
+        .infocom_ask {
+            padding-top: 8px;
+            display: block;
+            font-size: 14px;
+            color: #4a4a4a;
+            line-height: 22px;
+            margin-left: 30px;
+        }
+
+        .relate_infocom {
+            display: flex;
+            align-items: center overflow: visible;
+            height: 18px;
+            padding: 5px 0;
+            font-size: 12px;
+            color: #666;
+            position: relative;
+        }
+
+        .relate_infocom span {
+            float: left;
+        }
+
+        .clr {
+            clear: both;
+        }
+
+        .relate_infocom .dot {
+            float: left;
+            display: inline;
+            font-size: 8px;
+            vertical-align: middle;
+            margin: 2px 5px;
+            color: #babbb8;
+        }
+
+        .relate_infocom .like {
+            float: none;
+            color: #4a90e2;
+        }
+
+        .fa-thumbs-o-up {
+            background-position: -106px -25px;
+            width: 13px;
+            height: 13px;
+            margin-top: 5px;
+        }
+
+
+        /*  Trả lời bình luận */
+
+        .comment_reply {
+            display: block;
+            margin-top: 15px;
+            position: relative;
+            background: #ece9c7;
+            border: 1px solid #e7e7e7;
+            padding: 15px 10px;
+            font-size: 14px;
+            color: #333;
+            margin-left: 30px;
+        }
+
+        .avt-qtv {
+            float: left;
+            width: 27px;
+            height: 27px;
+            margin-right: 5px;
+            text-align: center;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 12px;
+            line-height: 26px;
+            font-weight: 600;
+            text-shadow: 1px 1px 0 rgb(255 255 255 / 20%);
+        }
+
+        .avt-qtv img {
+            margin-top: -5px;
+            height: 100%;
+            width: 100%;
+        }
+
+        .qtv {
+            text-transform: uppercase;
+            margin-right: 10px;
+            color: #000;
+            font-weight: normal;
+            font-size: 10px;
+            background: #eebc49;
+            padding: 2px 6px;
+            border-radius: 3px;
+            line-height: 18px;
+            height: 18px;
+            margin-left: 10px;
+        }
+
+        .comment_reply::before {
+            position: absolute;
+            content: '';
+            background: #ece9c7;
+            height: 30px;
+            width: 30px;
+            transform: rotate(-45deg);
+            top: -8px;
+            left: 5px;
+            z-index: -1;
+        }
+
+        .totalcomment-reply {
+            display: block;
+            padding: 10px 0 0;
+            border-top: 1px solid #b4b4b4;
+            font-size: 12px;
+            color: #4a90e2;
+            cursor: pointer;
+            margin-top: 7px;
+        }
+
+        .numlike span,
+        .numlike i {
+            float: left;
+        }
+
+    </style>
   </div>
   <!-- Product description-->
   <div class="container pt-lg-3 pb-4 pb-sm-5">
@@ -555,6 +744,31 @@
                                                 </div> `)
           }
         }
+<<<<<<< HEAD
+    </script>
+
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+
+            $(document).ready(function() {
+                $(document).on('click', '.reply-comment', function(ev) {
+                    ev.preventDefault();
+                    let id = $(this).data('id')
+                    $('.comment-inline').addClass('d-none');
+                    $('.reply-comment-' + id).removeClass('d-none');
+                    // $('.comment-inline').slideUp();
+                    $('.reply-comment-' + id).slideDown();
+
+                    let tagName = '@' + $('.name-' + id).text() + ': '
+                    $('.body-' + id).val(tagName)
+
+                })
+            })
+        })
+    </script>
+
+=======
       });
     }
 
@@ -566,11 +780,15 @@
         success: function(response) {
           if (response.success) {
             Swal.fire({
-              imageUrl: 'https://img.icons8.com/ultraviolet/50/000000/shopping-cart-loaded--v2.png',
+              imageUrl: `${$('#url_to').val()}/frontend/img/1103-confetti-outline.gif`,
               title: 'Chúc mừng',
               text: 'Thêm giỏ hàng thành công!',
-              confirmButtonText: 'Tiếp tục',
+              confirmButtonText: 'Nhấn ok để tiếp tục',
               confirmButtonColor: 'green'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                cartDropdown()
+              }
             })
           }
 
@@ -589,4 +807,5 @@
       });
     })
   </script>
+>>>>>>> main
 @endpush

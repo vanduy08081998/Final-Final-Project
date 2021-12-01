@@ -32,8 +32,10 @@
           <h2 class="h6 text-light mb-0">Sản phẩm</h2><a class="btn btn-outline-primary btn-sm ps-2" href="shop-grid-ls.html"><i
               class="ci-arrow-left me-2"></i>Tiếp tục mua hàng</a>
         </div>
+        <?php $totalprice = 0; ?>
         @foreach ($carts as $index => $cart)
           @foreach (json_decode($cart->specifications) as $key => $value)
+            <?php $totalprice += $value->variant_price * $cart->quantity; ?>
             <!-- Item-->
             <div class="d-sm-flex justify-content-between align-items-center my-2 pb-3 border-bottom" id="cart_{{ $index }}">
               <input type="hidden" id="product_id" value="{{ $cart->product_id }}">
@@ -106,7 +108,7 @@
           <div class="py-2 px-xl-2">
             <div class="text-center mb-4 pb-3 border-bottom">
               <h2 class="h6 mb-3 pb-1">Tổng tiền</h2>
-              <h3 class="fw-normal">$265.<small>00</small></h3>
+              <h3 class="fw-normal cart_total_price"></h3>
             </div>
             <div class="mb-3 mb-4">
               <label class="form-label mb-3" for="order-comments"><span class="badge bg-info fs-xs me-2">Note</span><span
@@ -219,6 +221,7 @@
         },
         success: function(response) {
           cart_price.textContent = response.price * quantity;
+          cartDropdown()
         }
       });
     }
@@ -251,16 +254,19 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                   $(`#cart_${i}`).remove()
+                  cartDropdown()
                 }
               })
-
-
             }
           });
         } else if (result.isDenied) {
           Swal.fire('Bạn đã hoàn tác hành động của mình !', '', 'info')
         }
       })
+
+    }
+
+    const cartTotals = () => {
 
     }
   </script>
