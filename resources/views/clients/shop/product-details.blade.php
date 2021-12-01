@@ -575,28 +575,257 @@
     <!-- Bình luận ở đây nha bà con-->
     @livewire('comment-live', ['product' => $product])
     <!-- Bình luận ở đây nha bà con-->
+
+    <style>
+      .form-comment {
+        border: 1px solid #a09797;
+      }
+
+      .line {
+        padding-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .line::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        margin-top: 40px;
+        margin-left: 12px;
+        background: #4a90e2;
+        border-radius: 5px;
+      }
+
+      .infocomment {
+        display: block;
+        clear: both;
+        margin-bottom: 20px;
+      }
+
+      .commentask {
+        display: block;
+        overflow: visible;
+        margin: 10px 0 0;
+      }
+
+      .commentask strong {
+        margin-top: 5px;
+        text-transform: capitalize;
+      }
+
+      .iconcom-user {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background-image: none;
+        background-color: rgb(213, 145, 156);
+        margin-right: 3px;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 26px;
+        font-style: normal;
+      }
+
+      .relate_infocom .reply {
+        cursor: pointer;
+        color: #4a90e2;
+      }
+
+      .infocom_ask {
+        padding-top: 8px;
+        display: block;
+        font-size: 14px;
+        color: #4a4a4a;
+        line-height: 22px;
+        margin-left: 30px;
+      }
+
+      .relate_infocom {
+        display: flex;
+        align-items: center overflow: visible;
+        height: 18px;
+        padding: 5px 0;
+        font-size: 12px;
+        color: #666;
+        position: relative;
+      }
+
+      .relate_infocom span {
+        float: left;
+      }
+
+      .clr {
+        clear: both;
+      }
+
+      .relate_infocom .dot {
+        float: left;
+        display: inline;
+        font-size: 8px;
+        vertical-align: middle;
+        margin: 2px 5px;
+        color: #babbb8;
+      }
+
+      .relate_infocom .like {
+        float: none;
+        color: #4a90e2;
+      }
+
+      .fa-thumbs-o-up {
+        background-position: -106px -25px;
+        width: 13px;
+        height: 13px;
+        margin-top: 5px;
+      }
+
+
+      /*  Trả lời bình luận */
+
+      .comment_reply {
+        display: block;
+        margin-top: 15px;
+        position: relative;
+        background: #ece9c7;
+        border: 1px solid #e7e7e7;
+        padding: 15px 10px;
+        font-size: 14px;
+        color: #333;
+        margin-left: 30px;
+      }
+
+      .avt-qtv {
+        float: left;
+        width: 27px;
+        height: 27px;
+        margin-right: 5px;
+        text-align: center;
+        color: #666;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 26px;
+        font-weight: 600;
+        text-shadow: 1px 1px 0 rgb(255 255 255 / 20%);
+      }
+
+      .avt-qtv img {
+        margin-top: -5px;
+        height: 100%;
+        width: 100%;
+      }
+
+      .qtv {
+        text-transform: uppercase;
+        margin-right: 10px;
+        color: #000;
+        font-weight: normal;
+        font-size: 10px;
+        background: #eebc49;
+        padding: 2px 6px;
+        border-radius: 3px;
+        line-height: 18px;
+        height: 18px;
+        margin-left: 10px;
+      }
+
+      .comment_reply::before {
+        position: absolute;
+        content: '';
+        background: #ece9c7;
+        height: 30px;
+        width: 30px;
+        transform: rotate(-45deg);
+        top: -8px;
+        left: 5px;
+        z-index: -1;
+      }
+
+      .totalcomment-reply {
+        display: block;
+        padding: 10px 0 0;
+        border-top: 1px solid #b4b4b4;
+        font-size: 12px;
+        color: #4a90e2;
+        cursor: pointer;
+        margin-top: 7px;
+      }
+
+      .numlike span,
+      .numlike i {
+        float: left;
+      }
+
+    </style>
+  </div>
+  <!-- Product description-->
+  <div class="container pt-lg-3 pb-4 pb-sm-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {!! $product->long_description !!}
+      </div>
+    </div>
+  </div>
+  <hr class="mb-5">
+  <!-- Product carousel (You may also like)-->
+  <div class="container pt-lg-2 pb-5 mb-md-3">
+    <h2 class="h3 text-center pb-4">Sản phẩm liên quan</h2>
+    <div class="tns-carousel tns-controls-static tns-controls-outside">
+      <div class="tns-carousel-inner"
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+        <!-- Product-->
+        @foreach (\App\Models\Product::where('product_id_category', '!=', $product->product_id_category)->get() as $proOther)
+          <div>
+            <div class="card product-card card-static">
+              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i
+                  class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#"><img
+                  src="{{ asset($proOther->product_image) }}" alt="Product"></a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a>
+                <h3 class="product-title fs-sm"><a href="#">{{ trans($proOther->product_name) }}</a>
+                </h3>
+                <div class="d-flex justify-content-between">
+                  <div class="product-price">{{ number_format($proOther->unit_price) }}</span>
+                  </div>
+                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+        @endforeach
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('script')
+  <script>
+    $('#lightSlider').lightSlider({
+      gallery: true,
+      item: 1,
+      loop: true,
+      slideMargin: 0,
+      thumbItem: 9
+    });
 
-    <script type="text/javascript">
-        $('#lightSlider').lightSlider({
-            gallery: true,
-            item: 1,
-            loop: true,
-            slideMargin: 0,
-            thumbItem: 9
-        });
-
-        const getVariantPrice = () => {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('products.get_variant_price') }}",
-                data: $('#choice_attribute_options').serializeArray(),
-                success: function(response) {
-                    console.log(response.quantity)
-                    $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <small>Tổng tiền: </small>
+    $('#choice_attribute_options').on('change', function() {
+      getVariantPrice()
+    })
+    const getVariantPrice = () => {
+      $.ajax({
+        type: "POST",
+        url: "{{ route('products.get_variant_price') }}",
+        data: $('#choice_attribute_options').serializeArray(),
+        success: function(response) {
+          console.log(response.quantity)
+          $('#specifications').html(response.specifications)
+          $('.total_product_price').html(` <small>Tổng tiền: </small>
                                                     ${response.price}`)
                     if (response.product_quantity > 0) {
                         $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
@@ -613,41 +842,7 @@
         }
 
 
-        // Thêm vào giỏ hàng
-        $('.card_add_btn').click(function() {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('card.add') }}",
-                data: $('#choice_attribute_options').serializeArray(),
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            imageUrl: `${$('#url_to').val()}/frontend/img/1103-confetti-outline.gif`,
-                            title: 'Chúc mừng',
-                            text: 'Thêm giỏ hàng thành công!',
-                            confirmButtonText: 'Nhấn ok để tiếp tục',
-                            confirmButtonColor: 'green'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                cartDropdown()
-                            }
-                        })
-                    }
-
-                    if (response.error) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Rất tiếc',
-                            text: 'Bạn phải đăng nhập trước khi mua hàng !',
-                            showConfirmButton: false,
-                            showCancelButton: true,
-                            cancelButtonText: 'Quay lại',
-                            cancelButtonColor: 'red'
-                        })
-                    }
-                }
-            });
-        })
+        
     </script>
 
 
