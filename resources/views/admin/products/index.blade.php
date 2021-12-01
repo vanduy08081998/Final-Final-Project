@@ -31,16 +31,25 @@
 @endsection
 @push('script')
     <script>
-        const productFeature = (id) => {
+        const featureProduct = (id) =>{
+            let val = '';
+
+            if(!$('#feature_product_'+id).is(':checked')){
+                val = '';
+            }else{
+                val = 'on';
+            }
+            let _token = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
-                type: "GET",
-                url: "{{ route('products.feature') }}",
+                type: "POST",
+                url: "{{ route('admin.product-feature') }}",
                 data: {
+                    _token: _token,
                     id: id,
-                    value: $('#feature_product').val()
+                    value: val
                 },
                 success: function(response) {
-                    console.log('success')
+                   toastr.success('Chỉnh sửa thành công', 'Chúc mừng');
                 }
             });
         }

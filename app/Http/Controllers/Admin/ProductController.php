@@ -562,6 +562,5 @@ class ProductController extends Controller
         $product->update([
             'feature_product' => $request->value
         ]);
-        return response()->json($request->all());
     }
 }

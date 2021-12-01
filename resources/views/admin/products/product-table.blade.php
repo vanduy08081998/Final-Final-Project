@@ -6,7 +6,7 @@
             <th style="text-align: center;">{{ trans('Giá gốc') }}</th>
             {{-- <th style="text-align: center;">{{ trans('Khuyến mãi') }}</th> --}}
             <th style="text-align: center;">{{ trans('Thuộc tính') }}</th>
-            {{-- <th style="text-align: center;">{{ trans('Nổi bật') }}</th> --}}
+            <th style="text-align: center;">{{ trans('Nổi bật') }}</th>
             <th style="text-align: center;">{{ trans('Hành động') }}</th>
         </tr>
     </thead>
@@ -41,15 +41,15 @@
                     @endif
 
                 </td>
-                {{-- <td>
+                <td>
                     <div class="status-toggle">
-                        <input type="checkbox" id="feature_product" name="feature_product" class="check"
+                        <input type="checkbox" id="feature_product_{{ $pro->id }}" onchange="featureProduct({{ $pro->id }})" name="feature_product" class="check"
                             value="{{ $pro->feature_product }}"
                             {{ $pro->feature_product == 'on' ? 'checked' : '' }}
                             onchange="productFeature({{ $pro->id }})">
-                        <label for="feature_product" class="checktoggle">checkbox</label>
+                        <label for="feature_product_{{ $pro->id }}" class="checktoggle">checkbox</label>
                     </div>
-                </td> --}}
+                </td>
                 <td style="text-align: center;">
                     <div class="btn-group">
                         <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
