@@ -177,9 +177,6 @@
         <div class="row">
             <!-- Sidebar-->
             <aside class="col-lg-3">
-                @include('Clients.shop.navbar-shop');
-            </aside>
-            {{-- <aside class="col-lg-3">
                 <!-- Sidebar-->
                 <div class="offcanvas offcanvas-collapse bg-white w-100 rounded-3 shadow-lg py-1" id="shop-sidebar"
                     style="max-width: 24rem">
@@ -446,7 +443,7 @@
                         </div>
                     </div>
                 </div>
-            </aside> --}}
+            </aside>
             <!-- Content  -->
             <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
                 <!-- Toolbar-->
@@ -529,69 +526,22 @@
                             </div>
                             <hr class="d-sm-none">
                         </div>
-                        
                     @endforeach
                 </div>
-                <div class="row mx-n2">
-                @foreach ($product as $pro)
-                <div class="card product-card product-list">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Yêu thích"><i class="ci-heart"></i></button>
-                    <div class="d-sm-flex align-items-center"><a class="product-list-thumb" href="shop-single-v1.html">
-                        <img src="{{ URL::to($pro->product_image) }}" alt="Product"></a>
-                        <div class="card-body py-2">
-                            <a class="product-meta d-block fs-xs pb-1" href="#">{{ $pro->Category->category_name }}</a>
-                            <h3 class="product-title fs-base">
-                                <a href="shop-single-v1.html">{{ $pro->product_name }}</a>
-                            </h3>
-                            <div class="d-flex justify-content-between">
-                                <div class="product-price">
-                                    <span class="text-accent">{{ number_format($pro->unit_price) }}<small> VNĐ</small></span>
-                                </div>
-                                <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star-filled active"></i><i
-                                        class="star-rating-icon ci-star"></i>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-75">
-                                        <label class="form-option-label" for="s-75">7.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-80" checked>
-                                        <label class="form-option-label" for="s-80">8</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-85">
-                                        <label class="form-option-label" for="s-85">8.5</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size1" id="s-90">
-                                        <label class="form-option-label" for="s-90">9</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mb-2" type="button">
-                                    <i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng
-                                </button>
-                                <div class="text-start">
-                                    <a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
-                                        <i class="ci-eye align-middle me-1"></i>Xem nhanh
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Banner-->
+                <div class="py-sm-2">
+                    <div
+                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
+                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
+                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
+                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
+                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
+                            alt="Shop Converse">
                     </div>
                 </div>
-                <div class="border-top pt-3 mt-3"></div>
-                @endforeach
-                </div>
-                <!-- Banner-->
-                
                 <!-- Products grid-->
-                {{-- <div class="row mx-n2">
+                <div class="row mx-n2">
                     <!-- Product-->
                     <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
@@ -1013,20 +963,9 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
                 <hr class="my-3">
                 <!-- Pagination-->
-                <div class="py-sm-2">
-                    <div
-                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
-                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
-                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
-                            alt="Shop Converse">
-                    </div>
-                </div>
                 <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
                     <ul class="pagination">
                         <li class="page-item"><a class="page-link" href="#"><i
