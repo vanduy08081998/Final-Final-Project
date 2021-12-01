@@ -68,4 +68,9 @@ class Product extends Model
         return $this->hasMany(Comment::class, 'comment_id_product')->latest();
     }
 
+    public function flash_deals()
+    {
+        return $this->belongsToMany(FlashDeal::class, 'flash_deals_products');
+    }
+
 }

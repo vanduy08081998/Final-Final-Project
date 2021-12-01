@@ -1,9 +1,4 @@
 <div>
-
-    <form action="{{ route('logout') }}" method="post">
-        @csrf
-        <button class="btn btn-primary" type="submit">Đăng xuất</button>
-    </form>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     <div class="container pt-lg-2 pb-5 mb-md-3">
         <!-- Bình luận đầu tiên-->
