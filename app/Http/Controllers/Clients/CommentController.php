@@ -36,9 +36,7 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        Comment::create($data);
-        return back();
+        
     }
 
     /**
@@ -61,6 +59,14 @@ class CommentController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function editComment($id, Request $request)
+    {
+        $commentId = Comment::find($id);
+        $commentId->comment_content = $request->comment_content;
+        $commentId->save();
+        return response('Thành công');
     }
 
     /**

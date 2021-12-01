@@ -659,6 +659,7 @@
                 $(document).on('click', '.reply-comment', function(ev) {
                     ev.preventDefault();
                     let id = $(this).data('id')
+                    $('.all-edit-comment').addClass('d-none');
                     $('.comment-inline').addClass('d-none');
                     $('.reply-comment-' + id).removeClass('d-none');
                     // $('.comment-inline').slideUp();
@@ -669,11 +670,52 @@
 
                 })
 
+                $(document).on('click', '.edit-comment', function(ev) {
+                    ev.preventDefault();
+                    let id = $(this).data('id')
+                    $('.comment-inline').addClass('d-none');
+                    $('.all-edit-comment').addClass('d-none');
+                    $('.comment-content-' + id).addClass('d-none');
+                    $('.edit-comment-' + id).removeClass('d-none');
+                    // $('.comment-inline').slideUp();
+                    $('.edit-comment-' + id).slideDown();
+
+                    // let text = $('.comment-content-' + id).text();
+
+                    // $('.edit-comment-form-' + id).val(text)
+
+                })
+
+                $(document).on('click', '.esc', function(ev) {
+                    ev.preventDefault();
+                    $('.all-edit-comment').addClass('d-none');
+                    $('.comment-content-all').removeClass('d-none');
+                })
+
+                $(document).on('click', '.edit', function(ev) {
+                    let id = $(this).data('id')
+                    let textEdit = $('.edit-comment-form-' + id).val()
+                    let URL = $(this).data('url')
+
+                    // 
+
+                    $.ajax({
+                        url: URL, // gửi ajax đến file result.php
+                        type: "get", // chọn phương thức gửi là get
+                        // dữ liệu trả về dạng text
+                        data: { // Danh sách các thuộc tính sẽ gửi đi
+                            comment_content: textEdit
+                        },
+                        success: function() {
+                            window.livewire.emit('render');
+                        }
+                    });
+                })
 
                 $(document).on('keyup', '.form-comment-text', function() {
                     let text = $(this).val()
                     if (text) {
-                        replaceText(text)
+                        $(this).val(replaceText(text))
                         $('.btn-submit-text').attr('disabled', false)
                     } else {
                         $('.btn-submit-text').attr('disabled', true)
@@ -699,8 +741,10 @@
                     text = text.replace(/tao/gi, "***");
                     text = text.replace(/gớm/gi, "***");
                     text = text.replace(/tởm/gi, "***");
-                    $('.form-comment-text').val(text)
+                    return text;
                 }
+
+
             })
         })
     </script>

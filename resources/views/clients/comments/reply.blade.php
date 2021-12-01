@@ -4,11 +4,28 @@
     </div>
     <strong class="name-{{ $reply->id }}">{{ $reply->user->name }}</strong>
     <div class="infocom_ask">
-        {{ $reply->comment_content }}
+        <div class="all-edit-comment edit-comment-{{ $reply->id }} d-none pb-1">
+            <input type="text" class="form-control edit-comment-form-{{ $reply->id }} form-comment-text"
+                value="{{ $reply->comment_content }}">
+            <div class="handle mt-1">
+                <button type="button" class="edit bg-aqua btn-submit-text" data-id="{{ $reply->id }}"
+                    data-url="{{ url('comment/editComment/' . $reply->id) }}">Sửa</button>
+                <button type="button" class="esc bg-danger text-light"><i class="fa fa-times"
+                        aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="pb-1 comment-content-{{ $reply->id }} comment-content-all">
+            {{ $reply->comment_content }}
+        </div>
         <div class="relate_infocom">
             @if ($reply->user->id != $userLoginId)
                 <span class="reply reply-comment" data-id="{{ $reply->id }}">Trả
                     lời</span>
+                <b class="dot">.</b>
+            @else
+                <span class="edit-comment" data-id="{{ $reply->id }}"><i class="fa fa-pencil-square"
+                        aria-hidden="true"></i>Chỉnh sửa
+                </span>
                 <b class="dot">.</b>
             @endif
 
@@ -38,6 +55,15 @@
                 <span class="list-like">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                     {{ $reply->usersLike->count() }}
+                    <div class="comment-list-like-user">
+                        @foreach ($reply->usersLike as $user)
+                            @if ($userLoginId == $user->id)
+                                <li class="name-user">Bạn</li>
+                            @else
+                                <li class="name-user">{{ $user->name }}</li>
+                            @endif
+                        @endforeach
+                    </div>
                 </span>
             @endif
         </div>
@@ -54,7 +80,7 @@
             <div class="form-comment">
                 <div class="row p-1">
                     <div class="col-lg-12">
-                        <button class="btn-sm btn-warning btn-submit-text"
+                        <button class="btn-submit-text"
                             wire:click="saveReply('{{ $product->id }}', '{{ $reply->id }}', '{{ $reply->id }}')">Trả
                             lời</button>
                     </div>

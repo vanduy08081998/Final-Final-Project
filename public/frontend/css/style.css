@@ -1,22 +1,57 @@
 .form-comment {
-    border: 1px solid #a09797;
+    border: none;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
 }
 
 .line {
     padding-bottom: 10px;
-    overflow: hidden;
     position: relative;
 }
 
-.line::before {
+.form-comment-text {
+    border-radius: 4px 4px 0 0;
+}
+
+.line .connect {
+    position: absolute;
+    left: 12px;
+    width: 3px;
+    height: 100%;
+    overflow-y: hidden;
+    padding-top: 30px;
+}
+
+.btn-submit-text {
+    border: none;
+    outline: none;
+    background: #4a90e2;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.line .connect::before {
     content: '';
     position: absolute;
     height: 100%;
-    width: 3px;
-    margin-top: 40px;
-    margin-left: 12px;
-    background: #fe696a;
-    border-radius: 5px;
+    width: 100%;
+    background-color: #a09797;
+    border-radius: 2px;
+}
+
+.childs-comment-line {
+    position: relative;
+}
+
+.childs-comment-line::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 13px;
+    background: #a09797;
+    left: -15px;
+    top: 18px;
 }
 
 .infocomment {
@@ -93,6 +128,36 @@
     background-color: white;
     border-radius: 4px;
     box-shadow: 2px 2px 2px #a09797;
+    position: relative;
+}
+
+.relate_infocom .list-like:hover .comment-list-like-user {
+    display: block;
+    visibility: visible;
+    pointer-events: none;
+}
+
+.relate_infocom>.list-like>.comment-list-like-user {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 200px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.relate_infocom>.list-like>.comment-list-like-user>.name-user {
+    display: block;
+    padding: 2px 8px;
+    width: 120px;
+    color: #FFF;
 }
 
 .relate_infocom .list-like i {
@@ -209,4 +274,36 @@
 .numlike i {
     float: left;
     cursor: pointer;
+}
+
+.edit-comment {
+    cursor: pointer;
+}
+
+.edit-comment i {
+    margin-right: 3px;
+}
+
+.all-edit-comment {
+    position: relative;
+}
+
+.all-edit-comment .handle {
+    z-index: 1;
+    display: flex;
+    right: 0;
+    position: absolute;
+}
+
+.all-edit-comment>.handle>button {
+    border: none;
+    outline: none;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px;
+    border-radius: 10px;
+    height: 20px;
+    padding: 0px 8px;
+    font-size: 12px;
+    background-color: white;
 }

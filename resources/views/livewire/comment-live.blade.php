@@ -10,7 +10,7 @@
         <div class="form-comment">
             <div class="col-lg-12">
                 <textarea class="form-control form-comment-text" cols="3" rows="3"
-                    wire:model.lazy="comment_content"></textarea>
+                    wire:model.peper="comment_content"></textarea>
                 <div class="form-comment">
                     <div class="row p-1">
                         <div class="col-lg-6 d-flex align-content-center">
@@ -26,7 +26,7 @@
                             <div id="image__preview"></div>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn-sm btn-warning btn-submit-text" style="float: right"
+                            <button class="btn-submit-text" style="float: right"
                                 wire:click="saveParentComment('{{ $product->id }}')" disabled>Bình luận</button>
                         </div>
                     </div>
@@ -55,19 +55,20 @@
                                 <!-- Trả lời bình luận-->
                                 @foreach ($comment->reply as $reply)
 
-                                    <div class="line">
 
+                                    <div class="line">
+                                        <div class="connect">
+                                        </div>
                                         @include('clients.comments.reply', ['comment' => $comment, 'reply' => $reply])
 
                                         <!-- Trả lời bình luận con-->
+
                                         @foreach ($reply->reply as $replyChilds)
 
                                             @include('clients.comments.replyChild', ['replyChilds' => $replyChilds])
 
                                         @endforeach
-
                                     </div>
-
                                 @endforeach
 
                             </div>
