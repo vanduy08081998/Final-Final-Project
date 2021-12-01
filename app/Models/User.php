@@ -72,5 +72,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Comment::class, 'comment_user');
     }
 
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'id_user');
+    }
 
 }

@@ -68,4 +68,8 @@ class Product extends Model
         return $this->hasMany(Comment::class, 'comment_id_product')->latest();
     }
 
+    public function wishlist()
+    {
+        return $this->belongsTo(Wishlist::class, 'id_prod');
+    }
 }

@@ -75,7 +75,7 @@
       class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
     </i></a>
   <!-- Vendor scrits: js libraries and plugins-->
-  <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
+  {{-- <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script> --}}
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
@@ -95,6 +95,7 @@
   @include('sweetalert::alert')
   @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+  <script src="{{ URL::to('frontend/js/wishlist.js') }}"></script>
 
   @livewireScripts
 

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Wishlist;
+
 
 class HomeController extends Controller
 {
@@ -32,10 +34,6 @@ class HomeController extends Controller
             'blogCate' => $blogCate,
             'blogs2' => $blogs2
         ]);
-    }
-    public function homes()
-    {
-        dd('hh');
     }
 
     public function blogSingle($id){

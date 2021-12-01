@@ -30,8 +30,9 @@ $categories = Category::where('category_parent_id', null)
         </ul>
       </div>
       <div class="d-none d-md-block ms-3 text-nowrap">
-        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}"><i class="ci-heart mt-n1"></i>Yêu thích
-          (3)</a>
+        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                <i class="ci-heart mt-n1"></i>Yêu thích ({{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }})
+        </a>
         <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i
             class="ci-compare mt-n1"></i>So sánh (3)</a>
         <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
