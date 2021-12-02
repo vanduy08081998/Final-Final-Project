@@ -41,6 +41,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
     integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="{{ asset('frontend/js/search.js') }}"></script>
   @livewireStyles
   @routes
 </head>
@@ -75,7 +77,7 @@
       class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
     </i></a>
   <!-- Vendor scrits: js libraries and plugins-->
-  {{-- <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script> --}}
+  <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
@@ -95,7 +97,6 @@
   @include('sweetalert::alert')
   @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
-  <script src="{{ URL::to('frontend/js/wishlist.js') }}"></script>
 
   @livewireScripts
 

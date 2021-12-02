@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use ProductTableSeeder;
+
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ProductTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ProductTableSeeder::class);
+        factory(Product::class, 10000)->create();
     }
 }
