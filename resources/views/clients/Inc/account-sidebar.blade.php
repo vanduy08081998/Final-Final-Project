@@ -25,9 +25,12 @@
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                         href="{{ route('account.order-list') }}"><i class="ci-bag opacity-60 me-2"></i>Đơn hàng<span
                             class="fs-sm text-muted ms-auto">1</span></a></li>
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active"
-                        href="{{ route('account.wishlist') }}"><i class="ci-heart opacity-60 me-2"></i>Danh sách yêu
-                        thích<span class="fs-sm text-muted ms-auto">3</span></a></li>
+                <li class="border-bottom mb-0">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{ route('account.wishlist') }}">
+                        <i class="ci-heart opacity-60 me-2"></i>Danh sách yêu thích
+                        <span class="fs-sm text-muted ms-auto">{{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}</span>
+                    </a>
+                </li>
             </ul>
             <div class="bg-secondary px-4 py-3">
                 <h3 class="fs-sm mb-0 text-muted">Cài đặt tài khoản</h3>

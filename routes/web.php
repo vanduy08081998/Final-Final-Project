@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SearchsController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Clients\CommentController;
 use App\Http\Controllers\Customer\MailController;
@@ -15,19 +17,17 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Clients\SearchController;
 use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
-use App\Http\Controllers\Clients\ProductController;
 
+use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-
+use App\Http\Controllers\Clients\WishlistController;
 use App\Http\Livewire\Users;
-
-
+use App\Models\Wishlist;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,7 @@ use App\Http\Livewire\Users;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('/search/{q}', [SearchController::class, 'find']);
     Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
@@ -52,6 +53,7 @@ Route::prefix('/')->group(function () {
     Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
+
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
         Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
@@ -80,9 +82,14 @@ Route::prefix('/')->group(function () {
         Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
         Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
         Route::post('/select-address', [AccountController::class, 'select_address'])->name('select-address');
+    });
+    // wishlist
+    Route::prefix('/wishlist')->group(function () {
+        Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
+        Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
+        Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
     });
     // Bình luận
     Route::resource('/comment', CommentController::class);
