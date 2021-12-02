@@ -18,6 +18,7 @@ Danh sách thuộc tính
                 </div>
             </div>
 
+
             <!--end breadcrumb-->
             <form action="{{ url('admin/add-attr-category/' . $id) }}" method="POST" class="w-100">
                 @csrf

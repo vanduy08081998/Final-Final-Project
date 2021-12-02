@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\SoftDeletes; // add soft delete
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;// add soft delete
 
 class User extends Authenticatable
 {
@@ -25,6 +26,13 @@ class User extends Authenticatable
         'email',
         'provider_id',
         'avatar',
+        'phone',
+        'gender',
+        'birthday',
+        'province_id',
+        'district_id',
+        'ward_id',
+        'neighbor',
         'position',
         'password',
     ];
@@ -59,5 +67,30 @@ class User extends Authenticatable
     ];
 
 
+    public function comments(){
+        return $this->hasMany(Comment::class, 'comment_user_id');
+    }
+
+    public function likeComments(){
+        return $this->belongsToMany(Comment::class, 'comment_user');
+    }
+
+    public function province(){
+        return $this->hasOne(Provinces::class,'id', 'province_id');
+    }
+    public function district(){
+        return $this->hasOne(Districts::class, 'id', 'district_id');
+    }
+    public function ward(){
+        return $this->hasOne(Wards::class, 'id', 'ward_id');
+    }
+
+
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'id_user');
+    }
 
 }
+
+

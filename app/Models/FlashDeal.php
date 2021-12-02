@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class FlashDeal extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'flash_deals';
-    protected $fillable = [
-      'title', 'banner', 'date'
-    ];
+  protected $table = 'flash_deals';
+  protected $fillable = [
+    'title', 'banner', 'date', 'products'
+  ];
 
-    public $timestamps = false;
+  public $timestamps = false;
 }
