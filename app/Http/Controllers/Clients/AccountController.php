@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Provinces;
+use App\Models\Districts;
+use App\Models\Wards;
 use Session;
 
 
@@ -24,7 +27,8 @@ class AccountController extends Controller
     }
 
     public function accountInfo() {
-        return view('clients.account.account-profile');
+        $provinces = Provinces::all();
+        return view('clients.account.account-profile')->with(compact('provinces'));
     }
 
     public function accountAddress() {
@@ -84,5 +88,25 @@ class AccountController extends Controller
                   return response()->json(['status'=>0, 'msg'=>'Vui lòng thử lại!']);
             }
         }
+    }
+
+    public function select_address(Request $request){
+        $data = $request->all();
+        $ma_id = $data['ma_id'];
+        $output = '';
+        if($data['action']=='city'){
+          $select_districts = Districts::where('province_id',$ma_id)->orderby('id','ASC')->get();
+          $output.='<option>---Chọn quận huyện---</option>';
+          foreach($select_districts as $key => $district){
+              $output.='<option value="'.$district->id.'">'.$district->name.'</option>';
+          }
+        }else{
+            $select_wards = Wards::where('district_id', $ma_id)->orderby('id','ASC')->get();
+            $output.='<option>---Chọn xã phường---</option>';
+            foreach($select_wards as $key => $wards){
+              $output.='<option value="'.$wards->id.'">'.$wards->name.'</option>';
+            }
+        }
+        echo $output;
     }
 }

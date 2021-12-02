@@ -9,8 +9,9 @@ use Session;
 
 class Users extends Component
 {
-    public $name, $birthday, $gender, $password, $password_confirmation;
+    public $provinces, $districts, $wards, $name, $birthday, $gender, $password, $password_confirmation;
     public $phone, $cid;
+    public $province;
 
     public function update_profile($id)
     {

@@ -34,27 +34,62 @@
 
 <div class="modal fade updateAddress" wire:ignore.self id="updateAddressModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div style="max-width: 900px" class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-primary" id="exampleModalLabel">Cập nhật địa chỉ</h5>
             </div>
             <form wire:submit.prevent="update_address">
-                <div class="modal-body">
+                <div data-url="{{route('select-address')}}" class="modal-body row route">
                     <div class="text-center">
                         <img src="{{URL::to('frontend/img/shop/account/address.png')}}" alt="" width="200">
                     </div>
                     <input type="hidden" wire:model="id_user">
-                    <label class="form-label mt-2" for="account-email">Địa chỉ</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">A</span>
+                    <div class="form-group col-md-4">
+                        <label class="form-label mt-2" for="account-email">Tỉnh/Thành phố</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">T</span>
+                            </div>
+
+                            <select class="form-control choose province" id="province" required wire:model="province">
+                                <option value="">Chọn tỉnh, thành phố</option>
+                                @foreach ($provinces as $province)
+                                <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <input wire:model="address" type="text" class="form-control" placeholder="Địa chỉ">
                     </div>
-                    @error('address')
-                    <span style="font-size:14px" class="text-danger">{{$message}}</span>
-                    @enderror
+                    <div class="form-group col-md-4">
+                        <label class="form-label mt-2" for="account-email">Quận/huyện</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Q</span>
+                            </div>
+                            <select class="form-control choose district" id="district" required >
+                                <option value="">Chọn quận, huyện</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label mt-2" for="account-email">Xã/Phường/Thị trấn</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Q</span>
+                            </div>
+                            <select class="form-control" id="ward" required wire:model="district">
+                                <option value="">Chọn xã, phường</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 mt-3">
+                        <label class="form-label mt-2" for="account-email">Làng, xóm, số đường, số nhà,...</label>
+                        <textarea class="form-control" id="neighbor" required wire:model="neighbor"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-info">Cập nhật</button>
@@ -118,3 +153,5 @@
         </div>
     </div>
 </div>
+
+

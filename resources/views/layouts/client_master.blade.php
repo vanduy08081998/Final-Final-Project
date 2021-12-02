@@ -48,7 +48,32 @@
     @routes
 </head>
 <!-- Body-->
-
+<script>
+    function fee(){
+    $(document).on('change','.choose',function(){
+        var url = $('.route').data('url');
+        var action = $(this).attr("id");
+        var ma_id = $(this).val();
+        var result = '';
+        if(action=='province'){
+            result = 'district';
+        }else{
+            result = 'ward';
+        }
+        $.ajax({
+            url: url,
+            method: "POST",
+            headers:{
+                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                },
+            data: {action:action,ma_id:ma_id},
+            success: function(data){
+            $('#'+result).html(data);
+            }
+        })
+    })
+}
+</script>
 <body class="handheld-toolbar-enabled">
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
@@ -100,12 +125,10 @@
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     @include('sweetalert::alert')
     @stack('script')
-    <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+    <!-- <script src="{{ URL::to('frontend/js/cart.js') }}"></script> -->
 
 
     @livewireScripts
-    @stack('script')
-
 
 
     <script type="text/javascript">
@@ -186,6 +209,9 @@
             alert(message);
         }
     });
+
+
+
     </script>
 
 </body>
