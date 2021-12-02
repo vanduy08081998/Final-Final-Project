@@ -10,5 +10,3 @@ output.innerHTML = formatter.format(slider.value);
 slider.oninput = function() {
     output.innerHTML = formatter.format(this.value);
 }
-
-
