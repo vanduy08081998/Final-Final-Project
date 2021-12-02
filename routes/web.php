@@ -44,55 +44,54 @@ use App\Http\Livewire\Users;
 /* Clients */
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-    Route::get('/{q}', [SearchController::class, 'find']);
-    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
-    Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
-    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
-    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
-    Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
-    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
+  Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+  Route::get('/search/{q}', [SearchController::class, 'find']);
+  Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+  Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
+  Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
+  Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+  Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
+  Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
 
-    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
+  Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
 
-    Route::prefix('/checkout')->group(function () {
-        Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
-        Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
-        Route::get('/checkout-payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.checkout-payment');
-        Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
-        Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
-    });
-    Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
-        Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
-        Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
-        Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
-    });
-    Route::prefix('/cart')->group(function () {
-        Route::post('/card-add', [CartController::class, 'addToCart'])->name('card.add');
-        Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
-        Route::get('/cart-delete', [CartController::class, 'cartDelete'])->name('cart.delete');
-        Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
-        Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
-    });
+  Route::prefix('/checkout')->group(function () {
+    Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
+    Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
+    Route::get('/checkout-payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.checkout-payment');
+    Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
+    Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
+  });
+  Route::prefix('/shop')->group(function () {
+    Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+    Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
+    Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
+    Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
+  });
+  Route::prefix('/cart')->group(function () {
+    Route::post('/card-add', [CartController::class, 'addToCart'])->name('card.add');
+    Route::get('/cart-list', [CartController::class, 'cartList'])->name('cart.cart-list');
+    Route::get('/cart-delete', [CartController::class, 'cartDelete'])->name('cart.delete');
+    Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
+    Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
+  });
 
-    Route::prefix('/account')->group(function () {
-        Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
-        Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-        Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
-        Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
-        Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
-        Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
-
-    });
-    // Bình luận
-    Route::resource('/comment', CommentController::class);
-    Route::prefix('/search')->group(function () {
-        Route::post('/searchs/',[SearchController::class, 'searchs'])->name('search.searchs');
-        Route::post('/range', [SearchController::class, 'range'])->name('search.range');
-    });
-    Route::get('/users', Users::class);
+  Route::prefix('/account')->group(function () {
+    Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
+    Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
+    Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
+    Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+    Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
+    Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+    Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('account.wishlist');
+  });
+  // Bình luận
+  Route::resource('/comment', CommentController::class);
+  Route::prefix('/search')->group(function () {
+    Route::post('/searchs/', [SearchController::class, 'searchs'])->name('search.searchs');
+    Route::post('/range', [SearchController::class, 'range'])->name('search.range');
+  });
+  Route::get('/users', Users::class);
 });
 
 /* Admin */
