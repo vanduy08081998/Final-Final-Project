@@ -23,16 +23,21 @@
   <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}" />
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
   <!-- Main Theme Styles + Bootstrap-->
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
   <script src="{{ asset('frontend/js/search.js') }}"></script>
   <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
@@ -77,25 +82,26 @@
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
+  <script src="{{ asset('frontend/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
   <script src="{{ asset('frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
+  <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
   <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
   <!-- Main theme script-->
   <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
   </script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
   <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  @include('sweetalert::alert')
-  @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
   <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
   <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
-  <script>
-    $(".owl-carousel").owlCarousel({
-      items: 5
-    });
-  </script>
+  @include('sweetalert::alert')
+  @stack('script')
+  <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+
 
   @livewireScripts
 
