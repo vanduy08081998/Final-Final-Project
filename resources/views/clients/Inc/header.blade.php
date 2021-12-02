@@ -100,8 +100,7 @@ $categories = Category::where('category_parent_id', null)
                 @foreach ($categories as $cate)
                   <li class="dropdown mega-dropdown">
                     <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                      <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
-                      {{ $cate->category_name }}
+                        <a href="{{ route('shop.products_category', $cate->id_cate) }}"><i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>{{ $cate->category_name }}</a>
                     </a>
                     <div class="dropdown-menu p-0">
                       <div class="d-flex flex-wrap flex-sm-nowrap px-2">
@@ -111,7 +110,7 @@ $categories = Category::where('category_parent_id', null)
                             <ul class="widget-list">
                               @foreach ($cate->brands as $brand)
                                 <li class="widget-list-item pb-1">
-                                  <a class="widget-list-link" href="#">{{ $brand->brand_name }}</a>
+                                  <a class="widget-list-link" href="{{ route('shop.products_brand', $brand->id) }}">{{ $brand->brand_name }}</a>
                                 </li>
                               @endforeach
                             </ul>
