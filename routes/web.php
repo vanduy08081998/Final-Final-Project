@@ -86,6 +86,9 @@ Route::prefix('/')->group(function () {
     // Bình luận
     Route::resource('/comment', CommentController::class);
     Route::get('/comment/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+    Route::get('/comment/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
+    Route::get('/comment/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
+
     Route::prefix('/search')->group(function () {
         Route::post('/searchs/',[SearchController::class, 'searchs'])->name('search.searchs');
         Route::post('/range', [SearchController::class, 'range'])->name('search.range');

@@ -8,9 +8,12 @@
             <input type="text" class="form-control edit-comment-form-{{ $reply->id }} form-comment-text"
                 value="{{ $reply->comment_content }}">
             <div class="handle mt-1">
-                <button type="button" class="edit bg-aqua btn-submit-text" data-id="{{ $reply->id }}"
+                <button type="button" class="recall btn-submit-text bg-danger" data-id="{{ $reply->id }}"
+                    data-url="{{ url('comment/recall/' . $reply->id) }}">Thu hồi</button>
+
+                <button type="button" class="edit bg-aqua text-dark btn-submit-text" data-id="{{ $reply->id }}"
                     data-url="{{ url('comment/editComment/' . $reply->id) }}">Sửa</button>
-                <button type="button" class="esc bg-danger text-light"><i class="fa fa-times"
+                <button type="button" class="esc bg-danger text-light"><i class="fa fa-sign-out"
                         aria-hidden="true"></i></button>
             </div>
         </div>
@@ -23,7 +26,7 @@
                     lời</span>
                 <b class="dot">.</b>
             @else
-                <span class="edit-comment" data-id="{{ $reply->id }}"><i class="fa fa-pencil-square"
+                <span class="edit-comment" onclick="editComment({{ $reply->id }})"><i class="fa fa-pencil-square"
                         aria-hidden="true"></i>Chỉnh sửa
                 </span>
                 <b class="dot">.</b>
@@ -76,7 +79,7 @@
     <div class="comment-inline d-none reply-comment-{{ $reply->id }}">
         <div class="col-lg-12 mt-2">
             <textarea class="form-control body-{{ $reply->id }} form-comment-text" cols="2" rows="2"
-                wire:model.defer="comment_content"></textarea>
+                wire:model.lazy="comment_content"></textarea>
             <div class="form-comment">
                 <div class="row p-1">
                     <div class="col-lg-12">

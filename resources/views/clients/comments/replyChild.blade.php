@@ -9,9 +9,12 @@
             <input type="text" class="form-control edit-comment-form-{{ $replyChilds->id }} form-comment-text"
                 value="{{ $replyChilds->comment_content }}">
             <div class="handle mt-1">
-                <button type="button" class="edit bg-aqua btn-submit-text" data-id="{{ $replyChilds->id }}"
+                <button type="button" class="recall btn-submit-text bg-danger" data-id="{{ $replyChilds->id }}"
+                    data-url="{{ url('comment/recall/' . $replyChilds->id) }}">Thu hồi</button>
+
+                <button type="button" class="edit bg-aqua text-dark btn-submit-text" data-id="{{ $replyChilds->id }}"
                     data-url="{{ url('comment/editComment/' . $replyChilds->id) }}">Sửa</button>
-                <button type="button" class="esc bg-danger text-light"><i class="fa fa-times"
+                <button type="button" class="esc bg-danger text-light"><i class="fa fa-sign-out"
                         aria-hidden="true"></i></button>
             </div>
         </div>
@@ -25,8 +28,8 @@
                     lời</span>
                 <b class="dot">.</b>
             @else
-                <span class="edit-comment" data-id="{{ $replyChilds->id }}"><i class="fa fa-pencil-square"
-                        aria-hidden="true"></i>Chỉnh sửa
+                <span class="edit-comment" onclick="editComment({{ $replyChilds->id }})"><i
+                        class="fa fa-pencil-square" aria-hidden="true"></i>Chỉnh sửa
                 </span>
                 <b class="dot">.</b>
             @endif

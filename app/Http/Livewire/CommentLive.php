@@ -7,10 +7,13 @@ use App\Models\CommentUser;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-
+use Livewire\WithPagination;
 class CommentLive extends Component
 {
-    public $product, $comment_content, $userLoginId;
+    use WithPagination;
+ 
+    protected $paginationTheme = 'bootstrap';
+    public $product, $comment_content, $userLoginId, $comments;
     
     protected $listeners = ['render' => 'mount'];
     
@@ -21,21 +24,9 @@ class CommentLive extends Component
         else{
             $this->userLoginId = 0;
         }
-        $this->comment_content = '';
-    }
 
-    public function saveParentComment($comment_id_product){
-        if($this->userLoginId == 0){
-            return redirect('/login');
-        }
-        $data = array(
-            'comment_id_product' => $comment_id_product,
-            'comment_content' => $this->comment_content,
-            'comment_id_user' => $this->userLoginId,
-            'comment_parent_id' => 0,
-        );
-        Comment::create($data);
-        $this->emit('render');
+        $this->comment_content = '';
+       
     }
 
     public function saveReply($comment_id_product, $comment_parent_id, $comment_reply_id){
@@ -75,6 +66,8 @@ class CommentLive extends Component
 
     public function render()
     {
-        return view('livewire.comment-live');
+        $commentAll = Comment::where('comment_id_product', $this->product->id)->where('comment_parent_id', 0)->latest()->paginate(5);
+        
+        return view('livewire.comment-live', compact('commentAll'));
     }
 }
