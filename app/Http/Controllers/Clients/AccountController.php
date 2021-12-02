@@ -28,7 +28,10 @@ class AccountController extends Controller
 
     public function accountInfo() {
         $provinces = Provinces::all();
-        return view('clients.account.account-profile')->with(compact('provinces'));
+        $districts = Districts::all();
+        $wards = Wards::all();
+        $user = User::find(Auth()->user()->id);
+        return view('clients.account.account-profile')->with(compact('provinces','districts','wards','user'));
     }
 
     public function accountAddress() {
@@ -94,15 +97,15 @@ class AccountController extends Controller
         $data = $request->all();
         $ma_id = $data['ma_id'];
         $output = '';
-        if($data['action']=='city'){
+        if($data['action']=='province'){
           $select_districts = Districts::where('province_id',$ma_id)->orderby('id','ASC')->get();
-          $output.='<option>---Chọn quận huyện---</option>';
+          $output.='<option>Chọn quận, huyện</option>';
           foreach($select_districts as $key => $district){
               $output.='<option value="'.$district->id.'">'.$district->name.'</option>';
           }
         }else{
             $select_wards = Wards::where('district_id', $ma_id)->orderby('id','ASC')->get();
-            $output.='<option>---Chọn xã phường---</option>';
+            $output.='<option>Chọn xã, phường</option>';
             foreach($select_wards as $key => $wards){
               $output.='<option value="'.$wards->id.'">'.$wards->name.'</option>';
             }

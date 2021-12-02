@@ -92,7 +92,7 @@
                 <p class="d-flex align-items-center px-2 py-3">
                     <i class="ci-location fa-lg me-2" aria-hidden="true"></i>
                     <span class="title_profile">Địa chỉ: <br>
-                        @if(Auth::user()->address) {{Auth::user()->address}} @else Thêm địa chỉ @endif </span>
+                        @if(Auth::user()->province) {{Auth::user()->neighbor}} - {{Auth::user()->ward->name}} - {{Auth::user()->district->name}} - {{Auth::user()->province->name}} @else Thêm địa chỉ @endif </span>
                     <button type="button" class="ml-2 btn btn-outline-info fs-sm text-muted ms-auto btn"
                         wire:click.prevent="edit_address({{Auth::user()->id}})">Cập
                         nhật</button>
@@ -111,6 +111,6 @@
             </li>
         </ul>
     </div>
-    @include('clients.account.account_udphone_modal')
+    @include('clients.account.account_udphone_modal', ['provinces'=> $provinces])
 </div>
 

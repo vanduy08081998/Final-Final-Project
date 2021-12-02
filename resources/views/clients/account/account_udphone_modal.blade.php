@@ -32,7 +32,7 @@
 </div>
 
 
-<div class="modal fade updateAddress" wire:ignore.self id="updateAddressModal" tabindex="-1" role="dialog"
+<div class="modal fade updateAddress" wire:ignore id="updateAddressModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div style="max-width: 900px" class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -52,7 +52,7 @@
                                 <span class="input-group-text" id="basic-addon1">T</span>
                             </div>
 
-                            <select class="form-control choose province" id="province" required wire:model="province">
+                            <select class="form-control choose province" id="province" required wire:model="province_id">
                                 <option value="">Chọn tỉnh, thành phố</option>
                                 @foreach ($provinces as $province)
                                 <option value="{{ $province->id }}">{{ $province->name }}</option>
@@ -66,7 +66,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Q</span>
                             </div>
-                            <select class="form-control choose district" id="district" required >
+                            <select class="form-control choose district" id="district" required  wire:model="district_id">
                                 <option value="">Chọn quận, huyện</option>
 
                             </select>
@@ -79,7 +79,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Q</span>
                             </div>
-                            <select class="form-control" id="ward" required wire:model="district">
+                            <select class="form-control" id="ward" required wire:model="ward_id">
                                 <option value="">Chọn xã, phường</option>
 
                             </select>
