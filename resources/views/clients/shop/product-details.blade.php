@@ -8,33 +8,7 @@
   <meta name="keywords" content="{!! $product->meta_keywords !!}">
   <meta name="author" content="{!! $product->meta_title !!}">
 @endsection
-@push('script')
-  <script>
-    const getVariantPrice = () => {
-      $.ajax({
-        type: "POST",
-        url: "{{ route('products.get_variant_price') }}",
-        data: $('#choice_attribute_options').serializeArray(),
-        success: function(response) {
-          console.log(response.quantity)
-          $('#specifications').html(response.specifications)
-          $('.total_product_price').html(` <small>Tổng tiền: </small>
-                                                    ${response.price}`)
-          if (response.product_quantity > 0) {
-            $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
-                                                    class="ci-security-check"></i>Sản phẩm còn hàng
-                                                </div>`)
-          } else {
-            $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                    class="fas fa-times"></i>Sản phẩm hết hàng
-                                                </div> `)
-          }
-        }
 
-      })
-    }
-  </script>
-@endpush
 @section('content')
   <div class="page-title-overlap bg-dark pt-4">
     <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
@@ -680,6 +654,37 @@
     $('#choice_attribute_options').on('change', function() {
       getVariantPrice()
     })
+  </script>
+
+  <script>
+    const getVariantPrice = () => {
+      $.ajax({
+        type: "POST",
+        url: "{{ route('products.get_variant_price') }}",
+        data: $('#choice_attribute_options').serializeArray(),
+        success: function(response) {
+          console.log(response.quantity)
+          $('#specifications').html(response.specifications)
+          $('.total_product_price').html(` <small>Tổng tiền: </small>
+                                                  ${response.price}`)
+          $('#main-image').html(`
+            <a data-zoom-id="main" href="${$('#url_to').val()}/${response.variant_image}" class="MagicZoom main_image" id="main"><img
+                          src="${$('#url_to').val()}/${response.variant_image}"></a>
+            `)
+          MagicZoom.refresh();
+          if (response.product_quantity > 0) {
+            $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                                                  class="ci-security-check"></i>Sản phẩm còn hàng
+                                              </div>`)
+          } else {
+            $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                  class="fas fa-times"></i>Sản phẩm hết hàng
+                                              </div> `)
+          }
+        }
+
+      })
+    }
   </script>
 
 
