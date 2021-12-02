@@ -489,6 +489,9 @@ use App\Models\Wishlist;
                                         <i class="ci-heart"></i>
                                     </button>
                                     @elseif ($wishlist == NULL)
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
+                                        <i class="ci-heart"></i>
+                                    </button>
                                     @endif
                                     @else
                                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
