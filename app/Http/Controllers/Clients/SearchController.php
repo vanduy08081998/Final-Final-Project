@@ -44,7 +44,7 @@ class SearchController extends Controller
 
   public function find(Request $request)
   {
-    $product = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->key)->get();
+    $product = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->get('key'))->get();
     return response()->json($product);
   }
 }

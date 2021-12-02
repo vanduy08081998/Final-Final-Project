@@ -45,7 +45,7 @@ use App\Models\Wishlist;
 
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-    Route::get('/search/{q}', [SearchController::class, 'find']);
+    Route::get('search', [SearchController::class,'find']);
     Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
     Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
     Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
