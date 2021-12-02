@@ -50,9 +50,8 @@ class WishlistController extends Controller
                 'icon' => 'warning',
                 'title' => 'Thất bại',
                 'text' => 'Bạn cần đăng nhập trước khi thêm!',
-                'confirm' => true,
-                'cancel' => true,
-                // 'link' => 'http://127.0.0.1:8000/Custommers/login'
+                'confirm' => false,
+                'cancel' => false,
             ]);
         }
     }

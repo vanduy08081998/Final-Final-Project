@@ -43,6 +43,7 @@
     referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="{{ asset('frontend/js/search.js') }}"></script>
+    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
   @livewireStyles
   @routes
 </head>

@@ -480,21 +480,20 @@ use App\Models\Wishlist;
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
                                 @if (Auth::user() != NULL)
-                                <?php
-                                $user = Auth::user()->id;
-                                $wishlist = Wishlist::orderByDESC('id')->where('id_prod', $pro->id)->where('id_user', $user)->first();
-                                ?>
+                                    <?php
+                                    $user = Auth::user()->id;
+                                    $wishlist = Wishlist::orderByDESC('id')->where('id_prod', $pro->id)->where('id_user', $user)->first();
+                                    ?>
                                     @if ($wishlist != NULL)
                                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{$pro->id}})" style="color: red">
                                         <i class="ci-heart"></i>
                                     </button>
                                     @elseif ($wishlist == NULL)
+                                    @endif
+                                    @else
                                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
                                         <i class="ci-heart"></i>
                                     </button>
-                                    @endif
-                                @else
-                                    <a href="">dang nahap</a>
                                 @endif
                                 <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $pro->product_slug) }}">
                                     <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%" style="margin: auto; display: block">
