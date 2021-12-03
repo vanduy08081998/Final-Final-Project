@@ -36,7 +36,7 @@
                   } else {
                       $str .= str_replace(' ', '', $item);
                       $variant .= str_replace(' ', '', $item);
-                      $sku .= '-' . str_replace(' ', '', $item);
+                      $sku .= str_replace(' ', '', $item);
                   }
               }
           }
