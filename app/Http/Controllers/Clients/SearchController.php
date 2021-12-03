@@ -26,6 +26,7 @@ class SearchController extends Controller
         ]);
     }
 
+
     public function range(Request $request){
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');

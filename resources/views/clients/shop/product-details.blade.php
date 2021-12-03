@@ -16,7 +16,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
                         <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
-                                    class="ci-home"></i>{{ trans('Trang chủ') }}</a></li>
+                                    class="ci-home"></i>{{ trans('Trang chủ') }}</a>
+                        </li>
                         <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
                         </li>
                         <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
@@ -48,12 +49,15 @@
                         role="tab">Reviews <span class="fs-sm opacity-60">(74)</span></a></li>
             </ul>
             <div class="px-4 pt-lg-3 pb-3 mb-5">
-                <form id="choice_attribute_options" onchange="getVariantPrice()">
-                    @csrf
-                    <div class="tab-content px-lg-3">
-                        <!-- General info tab-->
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <div class="tab-pane fade show active" id="general" role="tabpanel">
+
+                <div class="tab-content px-lg-3">
+                    <!-- General info tab-->
+
+
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <form id="choice_attribute_options" onchange="getVariantPrice()">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
                             <div class="row">
                                 <!-- Product gallery-->
                                 <div class="col-lg-7 pe-lg-0">
@@ -132,9 +136,22 @@
                                                     </li>
                                                 @endforeach
 
-                                                <li data-thumb="{{ asset($product->product_image) }}">
-                                                    <img srcset="{{ asset($product->product_image) }} 2x" />
-                                                </li>
+                                                @foreach ($variants as $variant_data_image)
+                                                    @if ($variant_data_image->variant_image == null)
+                                                        <li
+                                                            data-thumb="https://vanhoadoanhnghiepvn.vn/wp-content/uploads/2020/08/112815953-stock-vector-no-image-available-icon-flat-vector.jpg">
+                                                            <img
+                                                                srcset="https://vanhoadoanhnghiepvn.vn/wp-content/uploads/2020/08/112815953-stock-vector-no-image-available-icon-flat-vector.jpg 2x" />
+                                                        </li>
+                                                    @else
+                                                        <li data-thumb="{{ asset($variant_data_image->variant_image) }}">
+                                                            <img
+                                                                srcset="{{ asset($variant_data_image->variant_image) }} 2x" />
+                                                        </li>
+                                                    @endif
+
+                                                @endforeach
+
                                             </ul>
                                         </div>
                                     </div>
@@ -198,8 +215,8 @@
 
                                         <div class="d-flex align-items-center pt-2 pb-4">
 
-                                            <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i
-                                                    class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hang</button>
+                                            <button class="btn btn-primary btn-shadow d-block w-100 card_add_btn"
+                                                type="button"><i class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hang</button>
                                         </div>
                                         <div class="d-flex mb-4">
                                             <div class="w-100 me-3">
@@ -290,222 +307,231 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
+
+
+                    <!-- Tech specs tab-->
+                    <div class="tab-pane fade" id="specs" role="tabpanel">
+                        <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+                            <div class="d-flex align-items-center pt-3" id="specifications">
+
+                            </div>
                         </div>
-
-                        <!-- Tech specs tab-->
-                        <div class="tab-pane fade" id="specs" role="tabpanel">
-                            <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                <div class="d-flex align-items-center pt-3" id="specifications">
-
+                    </div>
+                    <!-- Reviews tab-->
+                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                        <!-- Reviews-->
+                        <div class="row pt-2 pb-3">
+                            <div class="col-lg-4 col-md-5">
+                                <h2 class="h3 mb-4">74 Reviews</h2>
+                                <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i
+                                        class="ci-star-filled fs-sm text-accent me-1"></i><i
+                                        class="ci-star-filled fs-sm text-accent me-1"></i><i
+                                        class="ci-star-filled fs-sm text-accent me-1"></i><i
+                                        class="ci-star fs-sm text-muted me-1"></i></div><span
+                                    class="d-inline-block align-middle">4.1 Overall rating</span>
+                                <p class="pt-3 fs-sm text-muted">58 out of 74 (77%)<br>Customers recommended this
+                                    product</p>
+                            </div>
+                            <div class="col-lg-8 col-md-7">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-nowrap me-3"><span
+                                            class="d-inline-block align-middle text-muted">5</span><i
+                                            class="ci-star-filled fs-xs ms-1"></i></div>
+                                    <div class="w-100">
+                                        <div class="progress" style="height: 4px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%;"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div><span class="text-muted ms-3">43</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-nowrap me-3"><span
+                                            class="d-inline-block align-middle text-muted">4</span><i
+                                            class="ci-star-filled fs-xs ms-1"></i></div>
+                                    <div class="w-100">
+                                        <div class="progress" style="height: 4px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: 27%; background-color: #a7e453;" aria-valuenow="27"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div><span class="text-muted ms-3">16</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-nowrap me-3"><span
+                                            class="d-inline-block align-middle text-muted">3</span><i
+                                            class="ci-star-filled fs-xs ms-1"></i></div>
+                                    <div class="w-100">
+                                        <div class="progress" style="height: 4px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: 17%; background-color: #ffda75;" aria-valuenow="17"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div><span class="text-muted ms-3">9</span>
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="text-nowrap me-3"><span
+                                            class="d-inline-block align-middle text-muted">2</span><i
+                                            class="ci-star-filled fs-xs ms-1"></i></div>
+                                    <div class="w-100">
+                                        <div class="progress" style="height: 4px;">
+                                            <div class="progress-bar" role="progressbar"
+                                                style="width: 9%; background-color: #fea569;" aria-valuenow="9"
+                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div><span class="text-muted ms-3">4</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="text-nowrap me-3"><span
+                                            class="d-inline-block align-middle text-muted">1</span><i
+                                            class="ci-star-filled fs-xs ms-1"></i></div>
+                                    <div class="w-100">
+                                        <div class="progress" style="height: 4px;">
+                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 4%;"
+                                                aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div><span class="text-muted ms-3">2</span>
                                 </div>
                             </div>
                         </div>
-                        <!-- Reviews tab-->
-                        <div class="tab-pane fade" id="reviews" role="tabpanel">
-                            <!-- Reviews-->
-                            <div class="row pt-2 pb-3">
-                                <div class="col-lg-4 col-md-5">
-                                    <h2 class="h3 mb-4">74 Reviews</h2>
-                                    <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i
-                                            class="ci-star-filled fs-sm text-accent me-1"></i><i
-                                            class="ci-star-filled fs-sm text-accent me-1"></i><i
-                                            class="ci-star-filled fs-sm text-accent me-1"></i><i
-                                            class="ci-star fs-sm text-muted me-1"></i></div><span
-                                        class="d-inline-block align-middle">4.1 Overall rating</span>
-                                    <p class="pt-3 fs-sm text-muted">58 out of 74 (77%)<br>Customers recommended this
-                                        product</p>
+                        <hr class="mt-4 mb-3">
+                        <div class="row py-4">
+                            <!-- Reviews list-->
+                            <div class="col-md-7">
+                                <div class="d-flex justify-content-end pb-4">
+                                    <div class="d-flex flex-nowrap align-items-center">
+                                        <label class="fs-sm text-muted text-nowrap me-2 d-none d-sm-block"
+                                            for="sort-reviews">Sort by:</label>
+                                        <select class="form-select form-select-sm" id="sort-reviews">
+                                            <option>Newest</option>
+                                            <option>Oldest</option>
+                                            <option>Popular</option>
+                                            <option>High rating</option>
+                                            <option>Low rating</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-lg-8 col-md-7">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="text-nowrap me-3"><span
-                                                class="d-inline-block align-middle text-muted">5</span><i
-                                                class="ci-star-filled fs-xs ms-1"></i></div>
-                                        <div class="w-100">
-                                            <div class="progress" style="height: 4px;">
-                                                <div class="progress-bar bg-success" role="progressbar" style="width: 60%;"
-                                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- Review-->
+                                <div class="product-review pb-4 mb-4 border-bottom">
+                                    <div class="d-flex mb-3">
+                                        <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle"
+                                                src="{{ URL::to('frontend/img/shop/reviews/01.jpg') }}" width="50"
+                                                alt="Rafael Marquez">
+                                            <div class="ps-3">
+                                                <h6 class="fs-sm mb-0">Rafael Marquez</h6><span
+                                                    class="fs-ms text-muted">June 28, 2019</span>
                                             </div>
-                                        </div><span class="text-muted ms-3">43</span>
-                                    </div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="text-nowrap me-3"><span
-                                                class="d-inline-block align-middle text-muted">4</span><i
-                                                class="ci-star-filled fs-xs ms-1"></i></div>
-                                        <div class="w-100">
-                                            <div class="progress" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar"
-                                                    style="width: 27%; background-color: #a7e453;" aria-valuenow="27"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div>
+                                            <div class="star-rating"><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star-filled active"></i><i
+                                                    class="star-rating-icon ci-star"></i>
                                             </div>
-                                        </div><span class="text-muted ms-3">16</span>
+                                            <div class="fs-ms text-muted">83% of users found this review helpful</div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="text-nowrap me-3"><span
-                                                class="d-inline-block align-middle text-muted">3</span><i
-                                                class="ci-star-filled fs-xs ms-1"></i></div>
-                                        <div class="w-100">
-                                            <div class="progress" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar"
-                                                    style="width: 17%; background-color: #ffda75;" aria-valuenow="17"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div><span class="text-muted ms-3">9</span>
+                                    <p class="fs-md mb-2">Nam libero tempore, cum soluta nobis est eligendi optio
+                                        cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis
+                                        voluptas assumenda est...</p>
+                                    <ul class="list-unstyled fs-ms pt-1">
+                                        <li class="mb-1"><span
+                                                class="fw-medium">Pros:&nbsp;</span>Consequuntur
+                                            magni, voluptatem
+                                            sequi, tempora</li>
+                                        <li class="mb-1"><span
+                                                class="fw-medium">Cons:&nbsp;</span>Architecto
+                                            beatae, quis autem
+                                        </li>
+                                    </ul>
+                                    <div class="text-nowrap">
+                                        <button class="btn-like" type="button">15</button>
+                                        <button class="btn-dislike" type="button">3</button>
                                     </div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="text-nowrap me-3"><span
-                                                class="d-inline-block align-middle text-muted">2</span><i
-                                                class="ci-star-filled fs-xs ms-1"></i></div>
-                                        <div class="w-100">
-                                            <div class="progress" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar"
-                                                    style="width: 9%; background-color: #fea569;" aria-valuenow="9"
-                                                    aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div><span class="text-muted ms-3">4</span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="text-nowrap me-3"><span
-                                                class="d-inline-block align-middle text-muted">1</span><i
-                                                class="ci-star-filled fs-xs ms-1"></i></div>
-                                        <div class="w-100">
-                                            <div class="progress" style="height: 4px;">
-                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 4%;"
-                                                    aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div><span class="text-muted ms-3">2</span>
-                                    </div>
+                                </div>
+                                <!-- Review-->
+                                <div class="text-center">
+                                    <button class="btn btn-outline-accent" type="button"><i
+                                            class="ci-reload me-2"></i>Load
+                                        more reviews</button>
                                 </div>
                             </div>
-                            <hr class="mt-4 mb-3">
-                            <div class="row py-4">
-                                <!-- Reviews list-->
-                                <div class="col-md-7">
-                                    <div class="d-flex justify-content-end pb-4">
-                                        <div class="d-flex flex-nowrap align-items-center">
-                                            <label class="fs-sm text-muted text-nowrap me-2 d-none d-sm-block"
-                                                for="sort-reviews">Sort by:</label>
-                                            <select class="form-select form-select-sm" id="sort-reviews">
-                                                <option>Newest</option>
-                                                <option>Oldest</option>
-                                                <option>Popular</option>
-                                                <option>High rating</option>
-                                                <option>Low rating</option>
+                            <!-- Leave review form-->
+                            <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
+                                <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
+                                    <h3 class="h4 pb-2">Write a review</h3>
+                                    <form class="needs-validation" method="post" novalidate>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="review-name">Your name<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" required id="review-name">
+                                            <div class="invalid-feedback">Please enter your name!</div><small
+                                                class="form-text text-muted">Will be displayed on
+                                                the comment.</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="review-email">Your email<span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="email" required id="review-email">
+                                            <div class="invalid-feedback">Please provide valid email address!</div>
+                                            <small class="form-text text-muted">Authentication only - we won't spam
+                                                you.</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="review-rating">Rating<span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select" required id="review-rating">
+                                                <option value="">Choose rating</option>
+                                                <option value="5">5 stars</option>
+                                                <option value="4">4 stars</option>
+                                                <option value="3">3 stars</option>
+                                                <option value="2">2 stars</option>
+                                                <option value="1">1 star</option>
                                             </select>
+                                            <div class="invalid-feedback">Please choose rating!</div>
                                         </div>
-                                    </div>
-                                    <!-- Review-->
-                                    <div class="product-review pb-4 mb-4 border-bottom">
-                                        <div class="d-flex mb-3">
-                                            <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle"
-                                                    src="{{ URL::to('frontend/img/shop/reviews/01.jpg') }}" width="50"
-                                                    alt="Rafael Marquez">
-                                                <div class="ps-3">
-                                                    <h6 class="fs-sm mb-0">Rafael Marquez</h6><span
-                                                        class="fs-ms text-muted">June 28, 2019</span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="star-rating"><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star-filled active"></i><i
-                                                        class="star-rating-icon ci-star"></i>
-                                                </div>
-                                                <div class="fs-ms text-muted">83% of users found this review helpful</div>
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="review-text">Review<span
+                                                    class="text-danger">*</span></label>
+                                            <textarea class="form-control" rows="6" required id="review-text"></textarea>
+                                            <div class="invalid-feedback">Please write a review!</div><small
+                                                class="form-text text-muted">Your review must be at
+                                                least 50
+                                                characters.</small>
                                         </div>
-                                        <p class="fs-md mb-2">Nam libero tempore, cum soluta nobis est eligendi optio
-                                            cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis
-                                            voluptas assumenda est...</p>
-                                        <ul class="list-unstyled fs-ms pt-1">
-                                            <li class="mb-1"><span
-                                                    class="fw-medium">Pros:&nbsp;</span>Consequuntur magni, voluptatem
-                                                sequi, tempora</li>
-                                            <li class="mb-1"><span
-                                                    class="fw-medium">Cons:&nbsp;</span>Architecto beatae, quis autem
-                                            </li>
-                                        </ul>
-                                        <div class="text-nowrap">
-                                            <button class="btn-like" type="button">15</button>
-                                            <button class="btn-dislike" type="button">3</button>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="review-pros">Pros</label>
+                                            <textarea class="form-control" rows="2" placeholder="Separated by commas"
+                                                id="review-pros"></textarea>
                                         </div>
-                                    </div>
-                                    <!-- Review-->
-                                    <div class="text-center">
-                                        <button class="btn btn-outline-accent" type="button"><i
-                                                class="ci-reload me-2"></i>Load more reviews</button>
-                                    </div>
-                                </div>
-                                <!-- Leave review form-->
-                                <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
-                                    <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
-                                        <h3 class="h4 pb-2">Write a review</h3>
-                                        <form class="needs-validation" method="post" novalidate>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="review-name">Your name<span
-                                                        class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" required id="review-name">
-                                                <div class="invalid-feedback">Please enter your name!</div><small
-                                                    class="form-text text-muted">Will be displayed on the comment.</small>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="review-email">Your email<span
-                                                        class="text-danger">*</span></label>
-                                                <input class="form-control" type="email" required id="review-email">
-                                                <div class="invalid-feedback">Please provide valid email address!</div>
-                                                <small class="form-text text-muted">Authentication only - we won't spam
-                                                    you.</small>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="review-rating">Rating<span
-                                                        class="text-danger">*</span></label>
-                                                <select class="form-select" required id="review-rating">
-                                                    <option value="">Choose rating</option>
-                                                    <option value="5">5 stars</option>
-                                                    <option value="4">4 stars</option>
-                                                    <option value="3">3 stars</option>
-                                                    <option value="2">2 stars</option>
-                                                    <option value="1">1 star</option>
-                                                </select>
-                                                <div class="invalid-feedback">Please choose rating!</div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="review-text">Review<span
-                                                        class="text-danger">*</span></label>
-                                                <textarea class="form-control" rows="6" required
-                                                    id="review-text"></textarea>
-                                                <div class="invalid-feedback">Please write a review!</div><small
-                                                    class="form-text text-muted">Your review must be at least 50
-                                                    characters.</small>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label" for="review-pros">Pros</label>
-                                                <textarea class="form-control" rows="2" placeholder="Separated by commas"
-                                                    id="review-pros"></textarea>
-                                            </div>
-                                            <div class="mb-4">
-                                                <label class="form-label" for="review-cons">Cons</label>
-                                                <textarea class="form-control" rows="2" placeholder="Separated by commas"
-                                                    id="review-cons"></textarea>
-                                            </div>
-                                            <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a
-                                                Review</button>
-                                        </form>
-                                    </div>
+                                        <div class="mb-4">
+                                            <label class="form-label" for="review-cons">Cons</label>
+                                            <textarea class="form-control" rows="2" placeholder="Separated by commas"
+                                                id="review-cons"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a
+                                            Review</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+
             </div>
         </div>
+
+
+
     </div>
     <!-- Product description-->
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                {!! $product->long_description !!}
+
             </div>
         </div>
     </div>
@@ -545,31 +571,262 @@
             </div>
         </div>
     </div>
+
+    <!-- Bình luận ở đây nha bà con-->
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
+
+    <style>
+      .form-comment {
+        border: 1px solid #a09797;
+      }
+
+      .line {
+        padding-bottom: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .line::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        margin-top: 40px;
+        margin-left: 12px;
+        background: #4a90e2;
+        border-radius: 5px;
+      }
+
+      .infocomment {
+        display: block;
+        clear: both;
+        margin-bottom: 20px;
+      }
+
+      .commentask {
+        display: block;
+        overflow: visible;
+        margin: 10px 0 0;
+      }
+
+      .commentask strong {
+        margin-top: 5px;
+        text-transform: capitalize;
+      }
+
+      .iconcom-user {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        background-image: none;
+        background-color: rgb(213, 145, 156);
+        margin-right: 3px;
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 26px;
+        font-style: normal;
+      }
+
+      .relate_infocom .reply {
+        cursor: pointer;
+        color: #4a90e2;
+      }
+
+      .infocom_ask {
+        padding-top: 8px;
+        display: block;
+        font-size: 14px;
+        color: #4a4a4a;
+        line-height: 22px;
+        margin-left: 30px;
+      }
+
+      .relate_infocom {
+        display: flex;
+        align-items: center overflow: visible;
+        height: 18px;
+        padding: 5px 0;
+        font-size: 12px;
+        color: #666;
+        position: relative;
+      }
+
+      .relate_infocom span {
+        float: left;
+      }
+
+      .clr {
+        clear: both;
+      }
+
+      .relate_infocom .dot {
+        float: left;
+        display: inline;
+        font-size: 8px;
+        vertical-align: middle;
+        margin: 2px 5px;
+        color: #babbb8;
+      }
+
+      .relate_infocom .like {
+        float: none;
+        color: #4a90e2;
+      }
+
+      .fa-thumbs-o-up {
+        background-position: -106px -25px;
+        width: 13px;
+        height: 13px;
+        margin-top: 5px;
+      }
+
+
+      /*  Trả lời bình luận */
+
+      .comment_reply {
+        display: block;
+        margin-top: 15px;
+        position: relative;
+        background: #ece9c7;
+        border: 1px solid #e7e7e7;
+        padding: 15px 10px;
+        font-size: 14px;
+        color: #333;
+        margin-left: 30px;
+      }
+
+      .avt-qtv {
+        float: left;
+        width: 27px;
+        height: 27px;
+        margin-right: 5px;
+        text-align: center;
+        color: #666;
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 26px;
+        font-weight: 600;
+        text-shadow: 1px 1px 0 rgb(255 255 255 / 20%);
+      }
+
+      .avt-qtv img {
+        margin-top: -5px;
+        height: 100%;
+        width: 100%;
+      }
+
+      .qtv {
+        text-transform: uppercase;
+        margin-right: 10px;
+        color: #000;
+        font-weight: normal;
+        font-size: 10px;
+        background: #eebc49;
+        padding: 2px 6px;
+        border-radius: 3px;
+        line-height: 18px;
+        height: 18px;
+        margin-left: 10px;
+      }
+
+      .comment_reply::before {
+        position: absolute;
+        content: '';
+        background: #ece9c7;
+        height: 30px;
+        width: 30px;
+        transform: rotate(-45deg);
+        top: -8px;
+        left: 5px;
+        z-index: -1;
+      }
+
+      .totalcomment-reply {
+        display: block;
+        padding: 10px 0 0;
+        border-top: 1px solid #b4b4b4;
+        font-size: 12px;
+        color: #4a90e2;
+        cursor: pointer;
+        margin-top: 7px;
+      }
+
+      .numlike span,
+      .numlike i {
+        float: left;
+      }
+
+    </style>
+  </div>
+  <!-- Product description-->
+  <div class="container pt-lg-3 pb-4 pb-sm-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        {!! $product->long_description !!}
+      </div>
+    </div>
+  </div>
+  <hr class="mb-5">
+  <!-- Product carousel (You may also like)-->
+  <div class="container pt-lg-2 pb-5 mb-md-3">
+    <h2 class="h3 text-center pb-4">Sản phẩm liên quan</h2>
+    <div class="tns-carousel tns-controls-static tns-controls-outside">
+      <div class="tns-carousel-inner"
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+        <!-- Product-->
+        @foreach (\App\Models\Product::where('product_id_category', '!=', $product->product_id_category)->get() as $proOther)
+          <div>
+            <div class="card product-card card-static">
+              <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i
+                  class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#"><img
+                  src="{{ asset($proOther->product_image) }}" alt="Product"></a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a>
+                <h3 class="product-title fs-sm"><a href="#">{{ trans($proOther->product_name) }}</a>
+                </h3>
+                <div class="d-flex justify-content-between">
+                  <div class="product-price">{{ number_format($proOther->unit_price) }}</span>
+                  </div>
+                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product-->
+        @endforeach
+      </div>
+    </div>
+  </div>
 @endsection
 
 @push('script')
-    <script type="text/javascript">
-        $('#lightSlider').lightSlider({
-            gallery: true,
-            item: 1,
-            loop: true,
-            slideMargin: 0,
-            thumbItem: 9
-        });
+  <script>
+    $('#lightSlider').lightSlider({
+      gallery: true,
+      item: 1,
+      loop: true,
+      slideMargin: 0,
+      thumbItem: 9
+    });
 
-        const getVariantPrice = () => {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('products.get_variant_price') }}",
-                data: $('#choice_attribute_options').serializeArray(),
-                success: function(response) {
-                    console.log(response.quantity)
-                    $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <small>Tổng tiền: </small>
+    $('#choice_attribute_options').on('change', function() {
+      getVariantPrice()
+    })
+    const getVariantPrice = () => {
+      $.ajax({
+        type: "POST",
+        url: "{{ route('products.get_variant_price') }}",
+        data: $('#choice_attribute_options').serializeArray(),
+        success: function(response) {
+          console.log(response.quantity)
+          $('#specifications').html(response.specifications)
+          $('.total_product_price').html(` <small>Tổng tiền: </small>
                                                     ${response.price}`)
-
-
-
                     if (response.product_quantity > 0) {
                         $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
                                                     class="ci-security-check"></i>Sản phẩm còn hàng
@@ -580,7 +837,66 @@
                                                 </div> `)
                     }
                 }
-            });
+
+            })
         }
+
+
+        
+    </script>
+
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+
+            $(document).ready(function() {
+                // Xử lý bình luận
+                $(document).on('click', '.reply-comment', function(ev) {
+                    ev.preventDefault();
+                    let id = $(this).data('id')
+                    $('.comment-inline').addClass('d-none');
+                    $('.reply-comment-' + id).removeClass('d-none');
+                    // $('.comment-inline').slideUp();
+                    $('.reply-comment-' + id).slideDown();
+
+                    let tagName = '@' + $('.name-' + id).text() + ':'
+                    $('.body-' + id).val(tagName)
+
+                })
+
+
+                $(document).on('keyup', '.form-comment-text', function() {
+                    let text = $(this).val()
+                    if (text) {
+                        replaceText(text)
+                        $('.btn-submit-text').attr('disabled', false)
+                    } else {
+                        $('.btn-submit-text').attr('disabled', true)
+                    }
+                })
+
+                function replaceText(text) {
+                    text = text.replace(/lồn/gi, "***");
+                    text = text.replace(/cặc/gi, "***");
+                    text = text.replace(/dm/gi, "***");
+                    text = text.replace(/vãi/gi, "***");
+                    text = text.replace(/buồi/gi, "***");
+                    text = text.replace(/dái/gi, "***");
+                    text = text.replace(/địt/gi, "***");
+                    text = text.replace(/chịch/gi, "***");
+                    text = text.replace(/xoạc/gi, "***");
+                    text = text.replace(/vếu/gi, "***");
+                    text = text.replace(/vú/gi, "***");
+                    text = text.replace(/bụ/gi, "***");
+                    text = text.replace(/đụ/gi, "***");
+                    text = text.replace(/mé/gi, "***");
+                    text = text.replace(/mày/gi, "***");
+                    text = text.replace(/tao/gi, "***");
+                    text = text.replace(/gớm/gi, "***");
+                    text = text.replace(/tởm/gi, "***");
+                    $('.form-comment-text').val(text)
+                }
+            })
+        })
     </script>
 @endpush

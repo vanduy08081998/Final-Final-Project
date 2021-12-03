@@ -29,6 +29,7 @@ class BrandController extends Controller
     public function index()
     {
         $brandAll = Brand::with('categories')->orderByDESC('id')->get();
+        dd($brandAll);
         $countTrashed = Brand::onlyTrashed()->count();
         return view('admin.brand.index', compact('brandAll', 'countTrashed'));
     }
@@ -154,7 +155,7 @@ class BrandController extends Controller
                 Brand::whereIn('id', $ids)->forceDelete();
                 return redirect()->back();
                 break;
-                
+
             case 'restore':
                 $ids = $data['checkItem'];
                 Brand::whereIn('id', $ids)->restore();
@@ -167,11 +168,11 @@ class BrandController extends Controller
             case 'delete-all':
                 $ids = Brand::onlyTrashed()->pluck('id')->all();
                 Brand::whereIn('id', $ids)->forceDelete();
-                break;  
+                break;
             case 'trash-all':
                 $ids = Brand::pluck('id')->all();
                 Brand::whereIn('id', $ids)->delete();
-                break;      
+                break;
             default:
                 # code...
                 break;
