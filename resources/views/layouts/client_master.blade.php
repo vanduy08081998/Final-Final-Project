@@ -131,9 +131,6 @@
   <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
   @include('sweetalert::alert')
   @stack('script')
-  <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
-
-
   @livewireScripts
 
 
