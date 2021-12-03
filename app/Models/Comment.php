@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     public $table = 'comments';
 
     public $fillable = ['comment_id_product', 'comment_id_user','comment_content', 'comment_parent_id', 'comment_reply_id'];
-
+    
+    protected $dates = ['deleted_at'];
+    
     public $timestamp = true;
 
     public $primaryKey = 'id';
@@ -32,5 +35,7 @@ class Comment extends Model
     public function usersLike(){
         return $this->belongsToMany(User::class, 'comment_user');
     }
+
+    
 
 }
