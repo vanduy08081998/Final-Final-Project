@@ -39,12 +39,17 @@
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-  <script src="{{ asset('frontend/js/search.js') }}"></script>
-  <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
   <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
   <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
   <link rel="stylesheet" href="{{ URL::to('frontend/magiczoom/magiczoom.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="{{ asset('frontend/js/search.js') }}"></script>
+    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
   @livewireStyles
   @routes
 </head>
@@ -132,10 +137,34 @@
   @include('sweetalert::alert')
   @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+  <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 
 
-  @livewireScripts
+    <script type="text/javascript">
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            };
+        })
+        window.addEventListener('OpenUpdatePhoneModal', function(event) {
+            $('.updatePhone').modal('show');
+        });
 
+        window.addEventListener('CloseUpdatePhoneModal', function(event) {
+            $('.updatePhone').modal('hide');
+        });
+
+        window.addEventListener('OpenUpdateAddressModal', function(event) {
+            $('.updateAddress').modal('show');
+        });
+
+        window.addEventListener('CloseUpdateAddressModal', function(event) {
+            $('.updateAddress').modal('show');
+        });
+    </script>
 
   <script type="text/javascript">
     window.addEventListener('alert', event => {

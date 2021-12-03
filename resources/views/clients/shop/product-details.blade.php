@@ -403,8 +403,17 @@
 
       </div>
     </div>
+    <!-- Product description-->
+    <div class="container pt-lg-3 pb-4 pb-sm-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {!! $product->long_description !!}
+            </div>
+        </div>
+    </div>
 
 
+<<<<<<< HEAD
 
   </div>
   <!-- Product description-->
@@ -704,6 +713,181 @@
           let tagName = '@' + $('.name-' + id).text() + ':'
           $('.body-' + id).val(tagName)
 
+=======
+    <hr class="mb-5">
+    <!-- Bình luận ở đây nha bà con-->
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
+
+
+@endsection
+
+@push('script')
+    <script type="text/javascript">
+        $('#lightSlider').lightSlider({
+            gallery: true,
+            item: 1,
+            loop: true,
+            slideMargin: 0,
+            thumbItem: 9
+        });
+
+        $('#choice_attribute_options').on('change', function() {
+            getVariantPrice()
+        })
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    console.log(response.quantity)
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(` <small>Tổng tiền: </small>
+                                                    ${response.price}`)
+                    if (response.product_quantity > 0) {
+                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                                                    class="ci-security-check"></i>Sản phẩm còn hàng
+                                                </div>`)
+                    } else {
+                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                    class="fas fa-times"></i>Sản phẩm hết hàng
+                                                </div> `)
+                    }
+                }
+
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        function editComment(id) {
+            console.log('chỉnh sửa')
+            $('.comment-content-all').removeClass('d-none');
+            $('.comment-inline').addClass('d-none');
+            $('.all-edit-comment').addClass('d-none');
+            $('.comment-content-' + id).addClass('d-none');
+            $('.edit-comment-' + id).removeClass('d-none');
+        }
+
+        $(document).on('keyup', '.form-comment-text', function(ev) {
+            ev.preventDefault();
+            let text = $(this).val()
+            if (text) {
+                $(this).val(replaceText(text))
+                $('.btn-submit-text').attr('disabled', false)
+            } else {
+                $('.btn-submit-text').attr('disabled', true)
+            }
+            console.log('keyup')
+
+            function replaceText(text) {
+                text = text.replace(/lồn/gi, "***");
+                text = text.replace(/cặc/gi, "***");
+                text = text.replace(/dm/gi, "***");
+                text = text.replace(/vãi/gi, "***");
+                text = text.replace(/buồi/gi, "***");
+                text = text.replace(/dái/gi, "***");
+                text = text.replace(/địt/gi, "***");
+                text = text.replace(/chịch/gi, "***");
+                text = text.replace(/xoạc/gi, "***");
+                text = text.replace(/vếu/gi, "***");
+                text = text.replace(/vú/gi, "***");
+                text = text.replace(/bụ/gi, "***");
+                text = text.replace(/đụ/gi, "***");
+                text = text.replace(/mé/gi, "***");
+                text = text.replace(/mày/gi, "***");
+                text = text.replace(/tao/gi, "***");
+                text = text.replace(/gớm/gi, "***");
+                text = text.replace(/tởm/gi, "***");
+                return text;
+            }
+        })
+
+        $(document).on('click', '.reply-comment', function(ev) {
+            ev.preventDefault();
+            console.log('trả lời')
+            let id = $(this).data('id')
+            $('.comment-content-all').removeClass('d-none');
+            $('.all-edit-comment').addClass('d-none');
+            $('.comment-inline').addClass('d-none');
+            $('.reply-comment-' + id).removeClass('d-none');
+            // $('.comment-inline').slideUp();
+            $('.reply-comment-' + id).slideDown();
+            let tagName = '@' + $('.name-' + id).text() + ':'
+            $('.body-' + id).val(tagName)
+        });
+
+        $(document).on('click', '#form-one', function(ev) {
+            ev.preventDefault();
+            $('.comment-content-all').removeClass('d-none');
+            $('.all-edit-comment').addClass('d-none');
+            $('.comment-inline').addClass('d-none');
+            window.livewire.emit('render');
+        })
+
+        $(document).on('click', '.esc', function(ev) {
+            ev.preventDefault();
+            $('.all-edit-comment').addClass('d-none');
+            $('.comment-content-all').removeClass('d-none');
+        })
+
+        $(document).on('click', '.edit', function(ev) {
+            ev.preventDefault();
+
+            let id = $(this).data('id')
+            let textEdit = $('.edit-comment-form-' + id).val()
+            let URL = $(this).data('url')
+
+            $.ajax({
+                url: URL, // gửi ajax đến file result.php
+                type: "get", // chọn phương thức gửi là get
+                // dữ liệu trả về dạng text
+                data: { // Danh sách các thuộc tính sẽ gửi đi
+                    comment_content: textEdit
+                },
+                success: function() {
+                    window.livewire.emit('render');
+                }
+            })
+        });
+
+        $(document).on('click', '.save-comment', function(ev) {
+            ev.preventDefault();
+
+            let id = $(this).data('id')
+            let textEdit = $('#form-one').val()
+            let URL = $(this).data('url')
+
+            $.ajax({
+                url: URL, // gửi ajax đến file result.php
+                type: "get", // chọn phương thức gửi là get
+                // dữ liệu trả về dạng text
+                data: { // Danh sách các thuộc tính sẽ gửi đi
+                    comment_content: textEdit
+                },
+                success: function() {
+                    $('.form-comment-text').val('')
+                    window.livewire.emit('render');
+                }
+            });
+        })
+
+        $(document).on('click', '.recall', function(ev) {
+            ev.preventDefault();
+
+            let id = $(this).data('id')
+
+            let URL = $(this).data('url')
+
+            $.ajax({
+                url: URL, // gửi ajax đến file result.php
+                type: "get", // chọn phương thức gửi là get
+                // dữ liệu trả về dạng text
+                success: function() {
+                    window.livewire.emit('render');
+                }
+            });
+>>>>>>> main
         })
 
 

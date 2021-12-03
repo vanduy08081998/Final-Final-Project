@@ -11,33 +11,65 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-  public function shopGrid()
-  {
-    $min = Product::orderByDESC('id')->min('unit_price');
-    $max = Product::orderByDESC('id')->max('unit_price');
-    $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
-    $product = Product::orderByDESC('id')->get();
-    $brands = Brand::orderByDESC('id')->get();
-    return view('clients.shop.shop-grid-ls', [
-      'min' => $min,
-      'max' => $max,
-      'product' => $product,
-      'category' => $categories,
-      'brands' => $brands,
-    ]);
-  }
-
-  public function shopList()
-  {
-    $min = Product::orderByDESC('id')->min('unit_price');
-    $max = Product::orderByDESC('id')->max('unit_price');
-    $product = Product::orderByDESC('id')->get();
-    return view('clients.shop.shop-list-ls', [
-      'min' => $min,
-      'max' => $max,
-      'product' => $product,
-    ]);
-  }
+    public function productsBrand($id) {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
+        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        $product_brand = Product::where('product_id_brand',$id)->orderByDESC('id')->get();
+        $brand_id = Brand::where('id',$id)->first();
+        $brands = Brand::orderByDESC('id')->get();
+        return view('clients.shop.product-brand', [
+            'min' => $min,
+            'max' => $max,
+            'product_brand' => $product_brand,
+            'category' => $categories,
+            'brands' => $brands,
+            'brand_id'=> $brand_id,
+    
+        ]);
+    }
+    public function productsCategory($id_cate) {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
+        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        $product_category = Product::where('product_id_category',$id_cate)->orderByDESC('id')->get();
+        $category_id = Category::where('id_cate',$id_cate)->first();
+        $brands = Brand::orderByDESC('id')->get();
+        return view('clients.shop.product-category', [
+            'min' => $min,
+            'max' => $max,
+            'product_category' => $product_category,
+            'category' => $categories,
+            'brands' => $brands,
+            'category_id' =>$category_id,
+    
+        ]);
+    }
+    public function shopGrid() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
+        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        $product = Product::orderByDESC('id')->get();
+        $brands = Brand::orderByDESC('id')->get();
+        return view('clients.shop.shop-grid-ls', [
+            'min' => $min,
+            'max' => $max,
+            'product' => $product,
+            'category' => $categories,
+            'brands' => $brands,
+        ]);
+    }
+  
+    public function shopList() {
+        $min = Product::orderByDESC('id')->min('unit_price');
+        $max = Product::orderByDESC('id')->max('unit_price');
+        $product = Product::orderByDESC('id')->get();
+        return view('clients.shop.shop-list-ls', [
+            'min' => $min,
+            'max' => $max,
+            'product' => $product,
+        ]);
+    }
 
   public function brands()
   {
