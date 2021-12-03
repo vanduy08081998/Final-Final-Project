@@ -40,9 +40,13 @@
                 </form>
             </div>
             @livewire('users', ['name'=>Auth::user()->name,'birthday'=>Auth::user()->birthday,
-            'gender'=>Auth::user()->gender,'phone'=>Auth::user()->phone])
+            'gender'=>Auth::user()->gender,'phone'=>Auth::user()->phone, 'provinces' => $provinces, 'districts' => $districts, 'user' => $user])
         </section>
     </div>
 </div>
-
+<script>
+    fee()
+</script>
 @endsection
+
+<!-- 'wards' => $wards -->

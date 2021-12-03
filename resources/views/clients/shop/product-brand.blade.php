@@ -5,9 +5,6 @@
 
 
 @section('content')
-<?php 
-use App\Models\Wishlist;
-?>
     <!-- Quick View Modal-->
     <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
         <div class="modal-dialog modal-xl">
@@ -211,7 +208,7 @@ use App\Models\Wishlist;
                                                     <li class="widget-list-item widget-filter-item">
                                                         <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
                                                             <span class="widget-filter-item-text">View all</span>
-                                                            <span class="fs-xs text-muted ms-3">{{ $product->where('product_id_category', $cate->id_cate)->count() }}</span>
+                                                            <span class="fs-xs text-muted ms-3">{{ $product_brand->where('product_id_category', $cate->id_cate) }}</span>
                                                         </a>
                                                     </li>
                                                     @foreach ($cate->brands as $brand)
@@ -284,102 +281,7 @@ use App\Models\Wishlist;
                                         <label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
                                     </div><span class="fs-xs text-muted">34</span>
                                 </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-s">
-                                        <label class="form-check-label widget-filter-item-text" for="size-s">S</label>
-                                    </div><span class="fs-xs text-muted">57</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-m">
-                                        <label class="form-check-label widget-filter-item-text" for="size-m">M</label>
-                                    </div><span class="fs-xs text-muted">198</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-l">
-                                        <label class="form-check-label widget-filter-item-text" for="size-l">L</label>
-                                    </div><span class="fs-xs text-muted">72</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-xl">
-                                        <label class="form-check-label widget-filter-item-text" for="size-xl">XL</label>
-                                    </div><span class="fs-xs text-muted">46</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-39">
-                                        <label class="form-check-label widget-filter-item-text" for="size-39">39</label>
-                                    </div><span class="fs-xs text-muted">112</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-40">
-                                        <label class="form-check-label widget-filter-item-text" for="size-40">40</label>
-                                    </div><span class="fs-xs text-muted">85</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-41">
-                                        <label class="form-check-label widget-filter-item-text" for="size-40">41</label>
-                                    </div><span class="fs-xs text-muted">210</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-42">
-                                        <label class="form-check-label widget-filter-item-text" for="size-42">42</label>
-                                    </div><span class="fs-xs text-muted">57</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-43">
-                                        <label class="form-check-label widget-filter-item-text" for="size-43">43</label>
-                                    </div><span class="fs-xs text-muted">30</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-44">
-                                        <label class="form-check-label widget-filter-item-text" for="size-44">44</label>
-                                    </div><span class="fs-xs text-muted">61</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-45">
-                                        <label class="form-check-label widget-filter-item-text" for="size-45">45</label>
-                                    </div><span class="fs-xs text-muted">23</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-46">
-                                        <label class="form-check-label widget-filter-item-text" for="size-46">46</label>
-                                    </div><span class="fs-xs text-muted">19</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-47">
-                                        <label class="form-check-label widget-filter-item-text" for="size-47">47</label>
-                                    </div><span class="fs-xs text-muted">15</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-48">
-                                        <label class="form-check-label widget-filter-item-text" for="size-48">48</label>
-                                    </div><span class="fs-xs text-muted">12</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-49">
-                                        <label class="form-check-label widget-filter-item-text" for="size-49">49</label>
-                                    </div><span class="fs-xs text-muted">8</span>
-                                </li>
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-50">
-                                        <label class="form-check-label widget-filter-item-text" for="size-50">50</label>
-                                    </div><span class="fs-xs text-muted">6</span>
-                                </li>
+                                
                             </ul>
                         </div>
                         <!-- Filter by Color-->
@@ -473,46 +375,46 @@ use App\Models\Wishlist;
                                 class="ci-view-list"></i></a></div>
                 </div>
                 <!-- Products grid-->
+                <div class="py-sm-2">
+                    <div
+                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
+                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
+                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
+                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
+                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
+                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
+                            alt="Shop Converse">
+                    </div>
+                </div>
                 <div class="row mx-n2">
+                
+                    <h4>Tất cả sản phẩm thuộc {{$brand_id->brand_name}}</h4>
                     <!-- Product-->
-                    @foreach ($product as $pro)
-                        
+
+                    @foreach ($product_brand as $pro)
+                      
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
-                                @if (Auth::user() != NULL)
-                                    <?php
-                                    $user = Auth::user()->id;
-                                    $wishlist = Wishlist::orderByDESC('id')->where('id_prod', $pro->id)->where('id_user', $user)->first();
-                                    ?>
-                                    @if ($wishlist != NULL)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{$pro->id}})" style="color: red">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                    @elseif ($wishlist == NULL)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                    @endif
-                                    @else
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                @endif
+                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
+                                    data-bs-placement="left" title="Thêm vào yêu thích"><i
+                                        class="ci-heart"></i></button>
                                 <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $pro->product_slug) }}">
-                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%" style="margin: auto; display: block">
+                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product"
+                                        width="80%" style="margin: auto; display: block">
                                 </a>
-                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ $pro->Category->category_name }}</a>
+                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
+                                        &amp; Keds</a>
                                     <h3 class="product-title fs-sm"><a
                                             href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
                                                 class="text-accent">$154.<small>00</small></span></div>
-                                        <div class="star-rating">
-                                            <i class="star-rating-icon ci-star-filled active"></i>
-                                            <i class="star-rating-icon ci-star-filled active"></i>
-                                            <i class="star-rating-icon ci-star-filled active"></i>
-                                            <i class="star-rating-icon ci-star-filled active"></i>
-                                            <i class="star-rating-icon ci-star"></i>
+                                        <div class="star-rating"><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -544,10 +446,11 @@ use App\Models\Wishlist;
                             </div>
                             <hr class="d-sm-none">
                         </div>
+     
                     @endforeach
                 </div>
                 <!-- Banner-->
-                <div class="py-sm-2">
+                <!-- <div class="py-sm-2">
                     <div
                         class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
                         <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
@@ -557,11 +460,11 @@ use App\Models\Wishlist;
                         </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
                             alt="Shop Converse">
                     </div>
-                </div>
+                </div> -->
                 <!-- Products grid-->
                 <div class="row mx-n2">
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -605,9 +508,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -636,9 +539,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -688,9 +591,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -721,9 +624,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -783,9 +686,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -830,9 +733,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -883,9 +786,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -934,9 +837,9 @@ use App\Models\Wishlist;
                             </div>
                         </div>
                         <hr class="d-sm-none">
-                    </div>
+                    </div> -->
                     <!-- Product-->
-                    <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                         <div class="card product-card">
                             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                 data-bs-placement="left" title="Thêm vào yêu thích"><i
@@ -980,7 +883,7 @@ use App\Models\Wishlist;
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <hr class="my-3">
                 <!-- Pagination-->

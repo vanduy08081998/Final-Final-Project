@@ -35,50 +35,22 @@
                 </div>
                 <!-- Wishlist-->
                 <!-- Item-->
+                @foreach ($wishlist as $item)
                 <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                     <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4"
-                            href="shop-single-v1.html" style="width: 10rem;"><img src="{{ asset('frontend/img/shop/cart/02.jpg') }}" alt="Product"></a>
+                            href="shop-single-v1.html" style="width: 10rem;"><img src="{{ URL::to($item->Product->product_image) }}" alt="Product"></a>
                         <div class="pt-2">
-                            <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h3>
-                            <div class="fs-sm"><span class="text-muted me-2">Brand:</span>Tommy Hilfiger</div>
-                            <div class="fs-sm"><span class="text-muted me-2">Color:</span>Khaki</div>
-                            <div class="fs-lg text-accent pt-2">$79.<small>50</small></div>
+                            <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">{{ $item->Product->product_name }}</a></h3>
+                            {{-- <div class="fs-sm"><span class="text-muted me-2">Brand:</span>{{ $item->product->category_name }}</div> --}}
+                            {{-- <div class="fs-sm"><span class="text-muted me-2">Color:</span>Khaki</div> --}}
+                            <div class="fs-lg text-accent pt-2">{{ number_format($item->Product->unit_price) }} <small>VND</small></div>
                         </div>
                     </div>
                     <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                        <button class="btn btn-outline-danger btn-sm" type="button"><i class="ci-trash me-2"></i>Xóa</button>
+                        <button class="btn btn-outline-danger btn-sm" type="button" onclick="delete_wishlist({{ $item->id_prod }})"><i class="ci-trash me-2"></i>Xóa</button>
                     </div>
                 </div>
-                <!-- Item-->
-                <div class="d-sm-flex justify-content-between my-4 pb-3 pb-sm-2 border-bottom">
-                    <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4"
-                            href="shop-single-v1.html" style="width: 10rem;"><img src="{{ asset('frontend/img/shop/cart/03.jpg') }}" alt="Product"></a>
-                        <div class="pt-2">
-                            <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a></h3>
-                            <div class="fs-sm"><span class="text-muted me-2">Brand:</span>The North Face</div>
-                            <div class="fs-sm"><span class="text-muted me-2">Color:</span>Pink / Beige / Dark blue</div>
-                            <div class="fs-lg text-accent pt-2">$22.<small>50</small></div>
-                        </div>
-                    </div>
-                    <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                        <button class="btn btn-outline-danger btn-sm" type="button"><i class="ci-trash me-2"></i>Xóa</button>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="d-sm-flex justify-content-between mt-4">
-                    <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4"
-                            href="shop-single-v1.html" style="width: 10rem;"><img src="{{ asset('frontend/img/shop/cart/04.jpg') }}" alt="Product"></a>
-                        <div class="pt-2">
-                            <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a></h3>
-                            <div class="fs-sm"><span class="text-muted me-2">Size:</span>42</div>
-                            <div class="fs-sm"><span class="text-muted me-2">Color:</span>Light blue</div>
-                            <div class="fs-lg text-accent pt-2">$9.<small>00</small></div>
-                        </div>
-                    </div>
-                    <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
-                        <button class="btn btn-outline-danger btn-sm" type="button"><i class="ci-trash me-2"></i>Xóa</button>
-                    </div>
-                </div>
+                @endforeach
             </section>
         </div>
     </div>

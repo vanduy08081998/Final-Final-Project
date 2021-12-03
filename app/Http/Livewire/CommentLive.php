@@ -16,7 +16,7 @@ class CommentLive extends Component
     public $product, $comment_content, $userLoginId, $comments;
     
     protected $listeners = ['render' => 'mount'];
-    
+
     public function mount(){
         if(Auth::user()){
           $this->userLoginId = Auth::user()->id;
@@ -46,7 +46,7 @@ class CommentLive extends Component
         );
         Comment::create($data);
         $this->emit('render');
-        
+
     }
 
     public function likeComment($comment_id){
