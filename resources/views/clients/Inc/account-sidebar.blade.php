@@ -4,8 +4,14 @@
         <div class="d-md-flex justify-content-between align-items-center text-center text-md-start p-4">
             <div class="d-md-flex align-items-center">
                 <div class="img-thumbnail rounded-circle position-relative flex-shrink-0 mx-auto mb-2 mx-md-0 mb-md-0"
-                    style="width: 6.375rem;"><img class="rounded-circle" src="{{ URL::to (Auth::user()->avatar)}}"
-                        alt="Susan Gardner"></div>
+                    style="width: 6.375rem;">
+
+                    @if (Auth::user()->avatar)
+                    <img class="rounded-circle customer_picture"  src="{{ URL::to('uploads/Users/',Auth::user()->avatar) }}" alt="avatar">
+                    @else
+                    <img class="rounded-circle customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}" alt="avatar">
+                    @endif
+                </div>
                 <div class="ps-md-3">
                     <h3 class="fs-base mb-0">{{Auth::user()->name}}</h3><span
                         class="text-accent fs-sm">{{Auth::user()->email}}</span>

@@ -45,7 +45,7 @@ use App\Models\Wishlist;
 
 Route::prefix('/')->group(function () {
   Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-  Route::get('/search/{q}', [SearchController::class, 'find']);
+  Route::get('search', [SearchController::class, 'find']);
   Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
   Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
   Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
@@ -83,6 +83,8 @@ Route::prefix('/')->group(function () {
     Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
     Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+    Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
+    Route::post('/select-address', [AccountController::class, 'select_address'])->name('select-address');
   });
   // wishlist
   Route::prefix('/wishlist')->group(function () {

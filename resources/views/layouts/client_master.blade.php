@@ -29,6 +29,7 @@
   <!-- Main Theme Styles + Bootstrap-->
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
   <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
@@ -48,6 +49,35 @@
   @routes
 </head>
 <!-- Body-->
+<script>
+  function fee() {
+    $(document).on('change', '.choose', function() {
+      var url = $('.route').data('url');
+      var action = $(this).attr("id");
+      var ma_id = $(this).val();
+      var result = '';
+      if (action == 'province') {
+        result = 'district';
+      } else {
+        result = 'ward';
+      }
+      $.ajax({
+        url: url,
+        method: "POST",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+          action: action,
+          ma_id: ma_id
+        },
+        success: function(data) {
+          $('#' + result).html(data);
+        }
+      })
+    })
+  }
+</script>
 
 <body class="handheld-toolbar-enabled">
   <!-- Sign in / sign up modal-->
@@ -98,12 +128,14 @@
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
   <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
   <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
+  <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
   @include('sweetalert::alert')
   @stack('script')
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
 
 
   @livewireScripts
+
 
   <script type="text/javascript">
     window.addEventListener('alert', event => {
@@ -114,7 +146,7 @@
       };
     })
     window.addEventListener('OpenUpdatePhoneModal', function(event) {
-      $('.updatePhone').modal('show');
+      $('.updatePhone').modal('show')
     });
 
     window.addEventListener('CloseUpdatePhoneModal', function(event) {
@@ -126,9 +158,65 @@
     });
 
     window.addEventListener('CloseUpdateAddressModal', function(event) {
-      $('.updateAddress').modal('show');
+      $('.updateAddress').modal('hide');
+    });
+
+    window.addEventListener('OpenUpdatePasswordModal', function(event) {
+      $('.updatePassword').modal('show');
+    });
+
+    window.addEventListener('CloseUpdatePasswordModal', function(event) {
+      $('.updatePassword').modal('hide');
+    });
+
+    $(document).ready(function() {
+      $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+          $('#show_hide_password input').attr('type', 'password');
+          $('#show_hide_password i').addClass("bx-hide");
+          $('#show_hide_password i').removeClass("bx-show");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+          $('#show_hide_password input').attr('type', 'text');
+          $('#show_hide_password i').removeClass("bx-hide");
+          $('#show_hide_password i').addClass("bx-show");
+        }
+      });
+
+      $("#show_hide_password2 a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password2 input').attr("type") == "text") {
+          $('#show_hide_password2 input').attr('type', 'password');
+          $('#show_hide_password2 i').addClass("bx-hide");
+          $('#show_hide_password2 i').removeClass("bx-show");
+        } else if ($('#show_hide_password2 input').attr("type") == "password") {
+          $('#show_hide_password2 input').attr('type', 'text');
+          $('#show_hide_password2 i').removeClass("bx-hide");
+          $('#show_hide_password2 i').addClass("bx-show");
+        }
+      });
+    });
+
+    $(document).on('click', '#change_avatar', function() {
+      $('#customer_avatar').click();
+    })
+    $('#customer_avatar').ijaboCropTool({
+      preview: '.customer_picture',
+      setRatio: 1,
+      allowedExtensions: ['jpg', 'jpeg', 'png'],
+      buttonsText: ['CẮT VÀ LƯU', 'ĐÓNG'],
+      buttonsColor: ['#30bf7d', '#ee5155', -15],
+      processUrl: '{{ route('crop') }}',
+      withCSRF: ['_token', '{{ csrf_token() }}'],
+      onSuccess: function(message, element, status) {
+        toastr.success(message);
+      },
+      onError: function(message, element, status) {
+        alert(message);
+      }
     });
   </script>
+
 </body>
 
 </html>

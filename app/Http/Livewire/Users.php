@@ -4,13 +4,16 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Provinces;
+use Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
 
 class Users extends Component
 {
-    public $name, $birthday, $gender, $password, $password_confirmation;
-    public $phone, $cid;
+    public $user, $provinces, $districts, $wards;
+    public $province_id, $district_id, $ward_id, $neighbor, $phone, $cid, $name, $birthday, $gender, $password, $password_confirmation;
+
 
     public function update_profile($id)
     {
@@ -58,23 +61,26 @@ class Users extends Component
     }
 
     public function edit_address($id){
+        $provinces = Provinces::all();
         $user = User::find($id);
+        $this->provinces = $provinces;
         $this->id_user = $user->id;
         $this->address = $user->address;
+        $this->province_id = $user->province_id;
+        $this->district_id = $user->district_id;
+        $this->ward_id = $user->ward_id;
+        $this->neighbor = $user->neighbor;
         $this->dispatchBrowserEvent('OpenUpdateAddressModal',[
             'id'=>$id
         ]);
     }
 
     public function update_address(){
-        $this->validate([
-              'address'=>'required',
-        ],[
-            'address.required'=>'Vui lòng nhập địa chỉ!',
-        ]);
-
         $user = User::find($this->id_user)->update([
-            'address'=>$this->address,
+            'province_id'=>$this->province_id,
+            'district_id'=>$this->district_id,
+            'ward_id'=>$this->ward_id,
+            'neighbor'=>$this->neighbor,
         ]);
 
         if($user){
@@ -113,7 +119,7 @@ class Users extends Component
 
     public function render()
     {
-        return view('livewire.users');
+         return view('livewire.users');
     }
 
     public function alertSuccess($message)

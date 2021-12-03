@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     var engine = new Bloodhound({
         remote: {
-            url: 'http://127.0.0.1:8000/search/key=%QUERY%',
+            url: 'http://127.0.0.1:8000/search?key=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('key'),
