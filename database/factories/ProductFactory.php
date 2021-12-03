@@ -1,28 +1,8 @@
 <?php
+use Faker\Generator as Faker;
 
-namespace Database\Factories;
-
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Factories\Factory;
-
-class ProductFactory extends Factory
-{
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Product::class;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            'product_name' => $this->faker->name()
-        ];
-    }
-}
+$factory->define(App\Product::class, function (Faker $faker) {
+    return [
+        'product_name' => $faker->name
+    ];
+});

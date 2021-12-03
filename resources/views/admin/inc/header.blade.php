@@ -32,10 +32,6 @@
     }
 
   </style>
-  <p class="client-btn">
-    <i class="fa fa-globe" onclick="window.open('{{ url('/') }}', '_blank').focus()"></i>
-  </p>
-
   <a id="mobile_btn" class="mobile_btn" href="#sidebar" style="margin-top: 10px"><i class="fa fa-bars"></i></a>
 
   <!-- Header Menu -->
