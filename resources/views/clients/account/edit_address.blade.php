@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-check">
-                                <input class="form-check-input"  {{$shipping->default == 1 ? 'checked disabled' : ''}} type="checkbox" name="default">
+                                <input class="form-check-input" name="default"  {{$shipping->default == 1 ? 'checked disabled' : ''}} type="checkbox" >
                                 <label class="form-check-label" for="address-primary">Đặt làm địa chỉ mặc định</label>
                             </div>
                         </div>

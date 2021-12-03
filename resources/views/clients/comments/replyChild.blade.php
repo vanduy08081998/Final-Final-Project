@@ -1,17 +1,39 @@
-<div class="commentask pt-2" style="margin-left: 30px;">
+<div class="commentask pt-2 childs-comment-line" style="margin-left: 30px;">
     <div class="avt-qtv">
         <img src="{{ $replyChilds->user->avatar }}" alt="">
     </div>
     <strong class="name-{{ $replyChilds->id }}">{{ $replyChilds->user->name }}</strong>
 
     <div class="infocom_ask">
-        {{ $replyChilds->comment_content }}
+        <div class="all-edit-comment edit-comment-{{ $replyChilds->id }} d-none pb-1">
+            <input type="text" class="form-control edit-comment-form-{{ $replyChilds->id }} form-comment-text"
+                value="{{ $replyChilds->comment_content }}">
+            <div class="handle mt-1">
+                <button type="button" class="recall btn-submit-text bg-danger" data-id="{{ $replyChilds->id }}"
+                    data-url="{{ url('comment/recall/' . $replyChilds->id) }}">Thu hồi</button>
+
+                <button type="button" class="edit bg-aqua text-dark btn-submit-text" data-id="{{ $replyChilds->id }}"
+                    data-url="{{ url('comment/editComment/' . $replyChilds->id) }}">Sửa</button>
+                <button type="button" class="esc bg-danger text-light"><i class="fa fa-sign-out"
+                        aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="pb-1 comment-content-{{ $replyChilds->id }} comment-content-all">
+            {{ $replyChilds->comment_content }}
+        </div>
+
         <div class="relate_infocom">
             @if ($replyChilds->user->id != $userLoginId)
                 <span class="reply reply-comment" data-id="{{ $replyChilds->id }}">Trả
                     lời</span>
                 <b class="dot">.</b>
+            @else
+                <span class="edit-comment" onclick="editComment({{ $replyChilds->id }})"><i
+                        class="fa fa-pencil-square" aria-hidden="true"></i>Chỉnh sửa
+                </span>
+                <b class="dot">.</b>
             @endif
+
 
             @php
                 $isUser = $replyChilds->usersLike->pluck('id')->all();
@@ -37,6 +59,15 @@
                 <span class="list-like">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                     {{ $replyChilds->usersLike->count() }}
+                    <div class="comment-list-like-user">
+                        @foreach ($replyChilds->usersLike as $user)
+                            @if ($userLoginId == $user->id)
+                                <li class="name-user">Bạn</li>
+                            @else
+                                <li class="name-user">{{ $user->name }}</li>
+                            @endif
+                        @endforeach
+                    </div>
                 </span>
             @endif
         </div>
@@ -52,7 +83,7 @@
             <div class="form-comment">
                 <div class="row p-1">
                     <div class="col-lg-12">
-                        <button class="btn-sm btn-warning btn-submit-text"
+                        <button class="btn-submit-text"
                             wire:click="saveReply('{{ $product->id }}', '{{ $reply->id }}', '{{ $replyChilds->id }}')">Trả
                             lời</button>
                     </div>

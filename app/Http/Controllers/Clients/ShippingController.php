@@ -125,13 +125,18 @@ class ShippingController extends Controller
         ]);
         $data = $request->all();
         $data['user_id'] = Auth()->user()->id;
-        if($request->default=='on'){
-            Shipping::where('default','1')->update(['default'=>0]);
+        if($id == Shipping::where('default','1')->first()->id){
             $data['default']=1;
+        }else{
+            if($request->default=='on'){
+                Shipping::where('default','1')->update(['default'=>0]);
+                $data['default']=1;
+            }
+            else{
+                $data['default']=0;
+            }
         }
-        else{
-            $data['default']=0;
-        }
+
         Shipping::find($id)->update($data);
         return back()->with('message','Cập nhật địa chỉ thành công !');
     }

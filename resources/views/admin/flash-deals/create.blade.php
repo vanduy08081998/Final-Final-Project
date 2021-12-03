@@ -15,6 +15,14 @@
                 <label>Tiêu đề</label>
                 <input type="text" name="title" id="" class="form-control">
               </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Khuyến mãi (%)</label>
+                    <input type="number" name="discount" id="" class="form-control">
+                </div>   
+                </div>
+              </div>
               <div class="form-group">
                 <label for="">Hình ảnh sản phẩm (1 hình 1200 x 400)</label>
                 <div class="file-options">
@@ -31,7 +39,7 @@
               </div>
               <div class="form-group">
                 <label>Sản phẩm</label>
-                <select class="form-control" id="product_picker" multiple="multiple" data-live-search="true">
+                <select class="form-control" id="product_picker" name="product_id[]" multiple="multiple" data-live-search="true">
                   @foreach ($products as $item)
                     <option value="{{ $item->id }}">{{ $item->product_name }}</option>
                   @endforeach

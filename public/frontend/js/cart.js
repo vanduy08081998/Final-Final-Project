@@ -138,9 +138,6 @@ const deleteCart = function(i) {
                         /* Read more about isConfirmed, isDenied below */
                         if (result.isConfirmed) {
                             window.location.reload();
-                            /* $(`#cart_${i}`).remove()
-                              cartTotals()
-                              cartDropdown() */
                         }
                     })
                 }

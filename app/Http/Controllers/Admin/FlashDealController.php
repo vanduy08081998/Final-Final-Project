@@ -16,7 +16,8 @@ class FlashDealController extends Controller
      */
     public function index()
     {
-        return view('admin.flash-deals.index');
+        $flashdeals = FlashDeal::all(); 
+        return view('admin.flash-deals.index', compact('flashdeals'));
     }
 
     /**
@@ -38,7 +39,25 @@ class FlashDealController extends Controller
      */
     public function store(Request $request)
     {
-      FlashDeal::create($request->all());
+        $flashdeal = new FlashDeal;
+
+        $flashdeal->title = $request->title; // discount, deal_image, date
+        $flashdeal->discount = $request->discount;
+        $flashdeal->banner = $request->deal_image;
+
+        if ($request->has('date')) {
+            $var_date = explode(' - ', $request->date);
+            $flashdeal->date_start = strtotime($var_date[0]);
+            $flashdeal->date_end = strtotime($var_date[1]);
+        }
+
+        $flashdeal->save();
+
+        foreach($request->product_id as $key => $item){
+            FlashDeal::find($flashdeal->id)->products()->attach($item);
+        }
+
+        return redirect()->route('flash-deals.index');
     }
 
     /**
@@ -58,9 +77,10 @@ class FlashDealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(FlashDeal $flash_deal)
     {
-        //
+        $products = Product::all();
+        return view('admin.flash-deals.edit', compact('flash_deal','products'));
     }
 
     /**
@@ -70,9 +90,25 @@ class FlashDealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, FlashDeal $flash_deal)
     {
-        //
+        $flash_deal->title = $request->title; // discount, deal_image, date
+        $flash_deal->discount = $request->discount;
+        $flash_deal->banner = $request->deal_image;
+
+        if ($request->has('date')) {
+            $var_date = explode(' - ', $request->date);
+            $flash_deal->date_start = strtotime($var_date[0]);
+            $flash_deal->date_end = strtotime($var_date[1]);
+        }
+
+        $flash_deal->save();
+
+        
+        $flash_deal->products()->sync($request->product_id);
+       
+
+        return redirect()->route('flash-deals.index');
     }
 
     /**
@@ -81,8 +117,10 @@ class FlashDealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FlashDeal $flash_deal)
     {
-        //
+        $flash_deal->products()->detach();
+        $flash_deal->delete();
+        return redirect()->back();
     }
 }

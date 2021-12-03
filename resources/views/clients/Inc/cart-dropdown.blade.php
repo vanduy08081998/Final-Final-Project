@@ -46,10 +46,9 @@
   </div>
 </div>
 <script>
-  const btn_cart_remove = document.querySelectorAll('.btn-cart-remove');
-  for (let i = 0; i < btn_cart_remove.length; i++) {
+  for (let i = 0; i < document.querySelectorAll('.btn-cart-remove').length; i++) {
 
-    btn_cart_remove[i].addEventListener('click', () => {
+    document.querySelectorAll('.btn-cart-remove')[i].addEventListener('click', () => {
       deleteCartDropdown(i)
     })
 
