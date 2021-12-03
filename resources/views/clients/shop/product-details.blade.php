@@ -132,34 +132,39 @@
           console.log(response.quantity)
           $('#specifications').html(response.specifications)
           $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
-
           // With magic Zoom
-          if (!response.variant_image) {
-
-          } else {
-            $('#main-image').html(`
-            <a data-zoom-id="main" href="${$('#url_to').val()}/${response.variant_image}" class="MagicZoom main_image" id="main"><img
-                          src="${$('#url_to').val()}/${response.variant_image}"></a>
-            `)
-          }
-          MagicZoom.refresh();
-
+          getMagicZoom(response.variant_image)
           // End magic zoom
-
           // Quantity check
-          if (response.product_quantity > 0) {
-            $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
-                                                  class="ci-security-check"></i>Sản phẩm còn hàng
-                                              </div>`)
-          } else {
-            $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                  class="fas fa-times"></i>Sản phẩm hết hàng
-                                              </div> `)
-          }
+          quantityCheck(response.product_quantity)
           // End Quantity check
         }
 
       })
+    }
+
+    const getMagicZoom = (image) => {
+      if (!image) {
+
+      } else {
+        $('#main-image').html(`
+          <a data-zoom-id="main" href="${$('#url_to').val()}/${image}" class="MagicZoom main_image" id="main"><img
+                        src="${$('#url_to').val()}/${image}"></a>
+          `)
+      }
+      MagicZoom.refresh();
+    }
+
+    const quantityCheck = (quantity) => {
+      if (quantity > 0) {
+        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                                                  class="ci-security-check"></i>Sản phẩm còn hàng
+                                              </div>`)
+      } else {
+        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                  class="fas fa-times"></i>Sản phẩm hết hàng
+                                              </div> `)
+      }
     }
   </script>
 

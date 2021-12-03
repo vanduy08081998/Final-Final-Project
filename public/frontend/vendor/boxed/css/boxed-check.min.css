@@ -47,7 +47,25 @@
 }
 
 .boxed-check-group.boxed-check-sm .boxed-check .boxed-check-label {
-    padding: .2em .7em
+    display: inline;
+    cursor: pointer;
+    margin: 8px 10px 0px 0px;
+    padding: 8px;
+    color: rgb(36, 36, 36);
+    font-size: 14px;
+    min-width: 80 px;
+    position: relative;
+    background-color: rgb(242, 242, 242);
+    border: 1px solid transparent;
+    outline: 0px;
+    border-radius: 4px;
+}
+
+.img-selected {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    display: none;
 }
 
 .boxed-check-group.boxed-check-lg .boxed-check .boxed-check-label {
@@ -116,25 +134,31 @@
     border-color: #6c757d
 }
 
-.boxed-check-group label {
-    display: inline;
-}
+.boxed-check-group label {}
 
 .boxed-check-group.boxed-check-success .boxed-check .boxed-check-input:checked+.boxed-check-label * {
-    color: #fff
+    color: #000
+}
+
+.boxed-check-group.boxed-check-success .boxed-check .boxed-check-input:checked+.boxed-check-label .img-selected {
+    display: block
 }
 
 .boxed-check-group.boxed-check-success .boxed-check .boxed-check-input:checked+.boxed-check-label {
-    color: #fff;
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    border: 1px solid rgb(13, 92, 182);
+    background-color: rgb(229, 242, 255);
 }
 
 .boxed-check-group.boxed-check-success .boxed-check .boxed-check-input:checked+.boxed-check-label,
 .boxed-check-group.boxed-check-success .boxed-check .boxed-check-input:not(:disabled)+.boxed-check-label:hover,
 .boxed-check-group.boxed-check-outline-success .boxed-check .boxed-check-input:checked+.boxed-check-label,
 .boxed-check-group.boxed-check-outline-success .boxed-check .boxed-check-input:not(:disabled)+.boxed-check-label:hover {
-    border-color: #fc466b;
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    border: 1px solid rgb(13, 92, 182);
+    background-color: rgb(229, 242, 255);
+}
+
+.boxed-check-label:hover .img-selected {
+    display: block;
 }
 
 .boxed-check-group.boxed-check-danger .boxed-check .boxed-check-input:checked+.boxed-check-label * {
