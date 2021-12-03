@@ -3,15 +3,13 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Models\Product;
-use App\Models\BlogCate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 
 class SearchController extends Controller
 {
     public function searchs(Request $request) {
-        $min = Product::orderByDESC('id')->min('unit_price');
+        $min = Product::orderByDESC('id')->min('unit_price') ;
         $max = Product::orderByDESC('id')->max('unit_price');
         if($request->category == 0){
             $search = Product::orderByDESC('id')
@@ -41,8 +39,8 @@ class SearchController extends Controller
     }
 
     public function find(Request $request) {
-        $product = Product::orderByDESC('id')->where('product_name','REGEXP', $request->key)->get();
-        return response()->json($product);
+        $product = Product::where('product_name', 'LIKE', '%' . $request->get('key') . '%')->get();
+         return response()->json($product);
       }
 
 }
