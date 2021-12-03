@@ -22,6 +22,7 @@ class CreateBlogTable extends Migration
             $table->string('blog_image')->nullable();
             $table->string('blog_content')->nullable();
             $table->text('meta_keywords')->nullable();
+            $table->text('blog_status')->nullable();
         });
     }
 

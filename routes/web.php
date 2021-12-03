@@ -146,6 +146,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
   Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
   Route::resource('informations', InformationsController::class);
+  Route::get('/informations/InforOn/{id}', [InformationsController::class, 'InforOn'])->name('informations.InforOn');
+  Route::get('/informations/InforOff/{id}', [InformationsController::class, 'InforOff'])->name('informations.InforOff');
 
   //user
   Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');

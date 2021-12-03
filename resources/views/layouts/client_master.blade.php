@@ -124,9 +124,10 @@
     <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/range.js') }}"></script>
     @include('sweetalert::alert')
     @stack('script')
-    <!-- <script src="{{ URL::to('frontend/js/cart.js') }}"></script> -->
+    <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
 
   @livewireScripts
 

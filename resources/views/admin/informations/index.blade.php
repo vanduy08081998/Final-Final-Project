@@ -26,6 +26,7 @@
                                         <th style="text-align: center;">Đóng cữa</th>
                                         <th style="text-align: center;">SĐT</th>
                                         <th style="text-align: center;">Email</th>
+                                        <th style="text-align: center;"></th>
                                         <th style="text-align: center;">Công cụ</th>
                                     </tr>
                                 </thead>
@@ -48,13 +49,30 @@
                                                 {{ $infor->email }}
                                             </td>
                                             <td style="text-align: center;">
+                                                @if ($infor->infor_status == 1)
+                                                <div class="status-toggle">
+                                                        <input type="radio" id="infor_on" name="shipping_type"
+                                                            value="infor_on" class="check" checked="">
+                                                        <label for="infor_on" class="checktoggle">checkbox</label>
+                                                    </div>
+                                                @else
+                                                <div class="status-toggle">
+                                                        <input type="radio" id="infor_off{{ $infor->id }}" name="shipping_type"
+                                                            value="infor_off{{ $infor->id }}" class="check">
+                                                        <label for="infor_off{{ $infor->id }}" class="checktoggle">checkbox</label>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td style="text-align: center;">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle radius-30"
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                        <a class="dropdown-item text-warning" href="{{ route('informations.edit', $infor->id) }}">Sửa</a>
-                                                        <form action="{{ route('informations.destroy', $infor->id) }}" method="POST">
+                                                        <a class="dropdown-item text-warning"
+                                                            href="{{ route('informations.edit', $infor->id) }}">Sửa</a>
+                                                        <form action="{{ route('informations.destroy', $infor->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="dropdown-item text-danger">Xóa</button>
@@ -72,7 +90,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- /Page Wrapper -->
 @endsection
