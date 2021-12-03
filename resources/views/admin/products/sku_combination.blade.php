@@ -32,11 +32,11 @@
                       $color_name = \App\Models\Color::where('color_code', $item)->first()->color_name;
                       $str .= $color_slug;
                       $variant .= $color_name;
-                      $sku .= $color_slug;
+                      $sku .= '-' . $color_slug;
                   } else {
                       $str .= str_replace(' ', '', $item);
                       $variant .= str_replace(' ', '', $item);
-                      $sku .= str_replace(' ', '', $item);
+                      $sku .= '-' . str_replace(' ', '', $item);
                   }
               }
           }
@@ -68,10 +68,6 @@
                 <div id="image__preview__{{ $str }}"></div>
               </div>
             </td>
-            {{-- <td>
-                      <button type="button" class="btn btn-icon btn-sm btn-danger"
-                              onclick="delete_variant(this)"><i class="fa fa-trash"></i></button>
-                    </td> --}}
           </tr>
         @endif
       @endforeach

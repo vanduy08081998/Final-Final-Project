@@ -134,7 +134,6 @@
                       <div class="form-group">
                         <label>Loại sản phẩm</label>
                         <select name="product_id_category" class="form-control" id="single__category">
-                          <option value=""> -- Xin mời chọn loại sản phẩm</option>
                           @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
                             @include('admin.Categories.categoryOptions', ['item' => $item])
 
