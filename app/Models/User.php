@@ -68,7 +68,7 @@ class User extends Authenticatable
 
 
     public function comments(){
-        return $this->hasMany(Comment::class, 'comment_user_id');
+        return $this->hasMany(Comment::class, 'comment_user_id')->paginate(5);
     }
 
     public function likeComments(){
