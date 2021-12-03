@@ -134,9 +134,11 @@
   <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
   <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
   <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   @include('sweetalert::alert')
   @stack('script')
   @livewireScripts
+
 
   <script type="text/javascript">
     window.addEventListener('alert', event => {
