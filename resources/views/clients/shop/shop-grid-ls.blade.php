@@ -5,6 +5,9 @@
 
 
 @section('content')
+<?php 
+use App\Models\Wishlist;
+?>
     <!-- Quick View Modal-->
     <div class="modal-quick-view modal fade" id="quick-view" tabindex="-1">
         <div class="modal-dialog modal-xl">
@@ -473,28 +476,43 @@
                 <div class="row mx-n2">
                     <!-- Product-->
                     @foreach ($product as $pro)
+                        
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                        class="ci-heart"></i></button>
+                                @if (Auth::user() != NULL)
+                                    <?php
+                                    $user = Auth::user()->id;
+                                    $wishlist = Wishlist::orderByDESC('id')->where('id_prod', $pro->id)->where('id_user', $user)->first();
+                                    ?>
+                                    @if ($wishlist != NULL)
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{$pro->id}})" style="color: red">
+                                        <i class="ci-heart"></i>
+                                    </button>
+                                    @elseif ($wishlist == NULL)
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
+                                        <i class="ci-heart"></i>
+                                    </button>
+                                    @endif
+                                    @else
+                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích" onclick="add_to_wishlist({{$pro->id}})">
+                                        <i class="ci-heart"></i>
+                                    </button>
+                                @endif
                                 <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $pro->product_slug) }}">
-                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product"
-                                        width="80%" style="margin: auto; display: block">
+                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%" style="margin: auto; display: block">
                                 </a>
-                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
-                                        &amp; Keds</a>
+                                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ $pro->Category->category_name }}</a>
                                     <h3 class="product-title fs-sm"><a
                                             href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
                                                 class="text-accent">$154.<small>00</small></span></div>
-                                        <div class="star-rating"><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star-filled active"></i><i
-                                                class="star-rating-icon ci-star"></i>
+                                        <div class="star-rating">
+                                            <i class="star-rating-icon ci-star-filled active"></i>
+                                            <i class="star-rating-icon ci-star-filled active"></i>
+                                            <i class="star-rating-icon ci-star-filled active"></i>
+                                            <i class="star-rating-icon ci-star-filled active"></i>
+                                            <i class="star-rating-icon ci-star"></i>
                                         </div>
                                     </div>
                                 </div>

@@ -1,11 +1,15 @@
 <div wire:ignore.self class="row gx-4 border">
     <div class="bg-secondary rounded-3 p-4 mb-4 border">
-        <div class="d-flex align-items-center"><img class="rounded" src="{{ URL::to(Auth::user()->avatar) }}" width="90"
-                alt="Susan Gardner">
+        <div class="d-flex align-items-center">
+                @if (Auth::user()->avatar)
+                <img class="customer_picture" src="{{ URL::to('uploads/Users/',Auth::user()->avatar) }}" width="90" alt="avatar">
+                @else
+                <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"width="90" alt="avatar">
+                @endif
             <div class="ps-3">
                 <label class="custom-file-upload btn btn-light btn-shadow btn-sm mb-2">
-                    <input style="display: none" type="file" name="avatar" />
-                    <i class="ci-loading me-2"></i>Thay ảnh đại diện
+                    <input style="display: none" type="file" name="customer_avatar" id="customer_avatar" name="avatar" />
+                   <a class="text-info" href="javascript:void(0)" id="change_avatar"> <i class="ci-loading me-2"></i>Thay ảnh đại diện </a>
                 </label>
             </div>
 
@@ -88,7 +92,7 @@
                 <p class="d-flex align-items-center px-2 py-3">
                     <i class="ci-location fa-lg me-2" aria-hidden="true"></i>
                     <span class="title_profile">Địa chỉ: <br>
-                        @if(Auth::user()->address) {{Auth::user()->address}} @else Thêm địa chỉ @endif </span>
+                        @if(Auth::user()->province) {{Auth::user()->neighbor}} - {{Auth::user()->ward->name}} - {{Auth::user()->district->name}} - {{Auth::user()->province->name}} @else Thêm địa chỉ @endif </span>
                     <button type="button" class="ml-2 btn btn-outline-info fs-sm text-muted ms-auto btn"
                         wire:click.prevent="edit_address({{Auth::user()->id}})">Cập
                         nhật</button>
@@ -107,27 +111,6 @@
             </li>
         </ul>
     </div>
-    <!--
-    <div class="col-sm-6 collapse" id="collapseExample">
-        <label class="form-label" for="account-pass">Mật khẩu mới</label>
-        <div class="password-toggle">
-            <input class="form-control" type="password" name="password">
-            <label class="password-toggle-btn" aria-label="Show/hide password">
-                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-            </label>
-        </div>
-        @error('password')
-        <span style="font-size:14px" class="text-danger">{{$message}}</span>
-        @enderror
-    </div>
-    <div class="col-sm-6 collapse" id="collapseExample">
-        <label class="form-label" for="account-confirm-pass">Xác nhận mật khẩu</label>
-        <div class="password-toggle">
-            <input class="form-control" type="password" name="password_confirmation">
-            <label class="password-toggle-btn" aria-label="Show/hide password">
-                <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
-            </label>
-        </div>
-    </div> -->
-    @include('clients.account.account_udphone_modal')
+    @include('clients.account.account_udphone_modal', ['provinces'=> $provinces])
 </div>
+

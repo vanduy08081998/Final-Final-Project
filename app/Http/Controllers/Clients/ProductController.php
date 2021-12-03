@@ -59,7 +59,7 @@ class ProductController extends Controller
             'brands' => $brands,
         ]);
     }
-
+  
     public function shopList() {
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');
@@ -68,6 +68,17 @@ class ProductController extends Controller
             'min' => $min,
             'max' => $max,
             'product' => $product,
+        ]);
+    }
+
+    public function brands()
+    {
+        // $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+        // $product = Product::orderByDESC('id')->get();
+        $brands = Brand::orderByDESC('id')->get();
+        // dd($product->where('product_id_category', 24)->count());
+        return view('clients.shop.brands', [
+            'brands' => $brands,
         ]);
     }
 
