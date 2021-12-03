@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 use App\Http\Controllers\Clients\WishlistController;
+use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Livewire\Users;
 use App\Models\Wishlist;
 
@@ -83,8 +84,9 @@ Route::prefix('/')->group(function () {
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
         Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
-        Route::post('/select-address', [AccountController::class, 'select_address'])->name('select-address');
+        Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
     });
+    Route::resource('/shippings', ShippingController::class);
     // wishlist
     Route::prefix('/wishlist')->group(function () {
         Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');

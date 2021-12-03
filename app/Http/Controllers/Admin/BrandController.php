@@ -29,7 +29,6 @@ class BrandController extends Controller
     public function index()
     {
         $brandAll = Brand::with('categories')->orderByDESC('id')->get();
-        dd($brandAll);
         $countTrashed = Brand::onlyTrashed()->count();
         return view('admin.brand.index', compact('brandAll', 'countTrashed'));
     }
