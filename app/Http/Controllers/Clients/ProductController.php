@@ -63,11 +63,15 @@ class ProductController extends Controller
     public function shopList() {
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');
+        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
         $product = Product::orderByDESC('id')->get();
+        $brands = Brand::orderByDESC('id')->get();
         return view('clients.shop.shop-list-ls', [
             'min' => $min,
             'max' => $max,
             'product' => $product,
+            'category' => $categories,
+            'brands' => $brands,
         ]);
     }
 

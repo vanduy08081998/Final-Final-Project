@@ -1,10 +1,18 @@
 <div class="commentask">
-    <div class="avt-qtv">
-        <img src="{{ $reply->user->avatar }}" alt="">
-    </div>
-    <strong class="name-{{ $reply->id }}">{{ $reply->user->name }}</strong>
+    @if ($reply->user->position == 'admin')
+        <div class="avt-qtv">
+            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="">
+        </div>
+        <strong class="name-{{ $reply->id }}">{{ $reply->user->name }}</strong>
+        <b class="qtv">Quản trị viên</b>
+    @else
+        <div class="avt-qtv">
+            <img src="{{ $reply->user->avatar }}" alt="">
+        </div>
+        <strong class="name-{{ $reply->id }}">{{ $reply->user->name }}</strong>
+    @endif
     <div class="infocom_ask">
-        <div class="all-edit-comment edit-comment-{{ $reply->id }} d-none pb-1">
+        <div class="form-comment-show edit-comment-{{ $reply->id }} d-none pb-1">
             <input type="text" class="form-control edit-comment-form-{{ $reply->id }} form-comment-text"
                 value="{{ $reply->comment_content }}">
             <div class="handle mt-1">
@@ -17,7 +25,7 @@
                         aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="pb-1 comment-content-{{ $reply->id }} comment-content-all">
+        <div class="pb-1 comment-body-{{ $reply->id }} body-comment">
             {{ $reply->comment_content }}
         </div>
         <div class="relate_infocom">
@@ -76,7 +84,7 @@
 </div>
 
 <div class="d-block" style="padding-left: 30px">
-    <div class="comment-inline d-none reply-comment-{{ $reply->id }}">
+    <div class="form-comment-show d-none reply-comment-{{ $reply->id }}">
         <div class="col-lg-12 mt-2">
             <textarea class="form-control body-{{ $reply->id }} form-comment-text" cols="2" rows="2"
                 wire:model.lazy="comment_content"></textarea>

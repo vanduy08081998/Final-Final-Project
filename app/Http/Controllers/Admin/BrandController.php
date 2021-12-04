@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Brand;
-use Illuminate\Http\Request;
-use App\Models\CategoryBrand;
-use App\Services\GeneralService;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use App\Models\Brand;
+use App\Services\GeneralService;
+use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -52,15 +50,13 @@ class BrandController extends Controller
     public function store(AddBrandRequest $request)
     {
         $data = $request->validated();
-        $data['brand_image'] = $this->generalService->uploadImage($this->path ,$request->brand_image);
+        $data['brand_image'] = $this->generalService->uploadImage($this->path, $request->brand_image);
         $brand = Brand::create($data);
         $brand->categories()->attach($data['category_id']);
-        return back()->with('message','Thêm thương hiệu thành công');
+        return back()->with('message', 'Thêm thương hiệu thành công');
 
     }
 
-
-  
     public function show($id)
     {
         //
@@ -89,10 +85,10 @@ class BrandController extends Controller
     {
         $brandId = Brand::find($id);
         $data = $request->validated();
-        if($request->brand_image){
-           $data['brand_image'] = $this->generalService->uploadImage($this->path, $request->brand_image);
-           // Xóa hình ảnh cũ
-           $this->generalService->deleteImage($this->path, $brandId->brand_image);
+        if ($request->brand_image) {
+            $data['brand_image'] = $this->generalService->uploadImage($this->path, $request->brand_image);
+            // Xóa hình ảnh cũ
+            $this->generalService->deleteImage($this->path, $brandId->brand_image);
         }
         $brandId->categories()->sync($data['category_id']);
         $brandId->update($data);
@@ -111,24 +107,28 @@ class BrandController extends Controller
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
 
-    public function trash(){
+    public function trash()
+    {
         $brandAll = Brand::onlyTrashed()->get();
         return view('admin.brand.trash', compact('brandAll'));
     }
 
-    public function restore($id){
+    public function restore($id)
+    {
         Brand::where('id', $id)->restore();
         return back()->with('message', 'Đã khôi phục dữ liệu');
     }
 
-    public function forceDelete($id){
-        $brandId = Brand::withTrashed()->find($id);
+    public function forceDelete($id)
+    {
+        $brandId = Brand::find($id);
         $this->generalService->deleteImage($this->path, $brandId->brand_image);
         $brandId->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
 
-    public function handle(Request $request){
+    public function handle(Request $request)
+    {
         $data = $request->all();
         switch ($data['handle']) {
             case 'trash':

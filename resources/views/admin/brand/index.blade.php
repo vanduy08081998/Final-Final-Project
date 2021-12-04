@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <form action="{{ route('brand.handle') }}" method="POST">
+                    <form action="#" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
@@ -72,8 +72,8 @@
                                                 <td class="py-2">
                                                     <div class="text-center">
                                                         <div class="position-relative mr-2">
-                                                            <img class="avatar" width="90" height="58"
-                                                                src="{{ url('uploads/Brands/', $brand->brand_image) }}" />
+                                                            <img width="80" height="40"
+                                                                src="{{ url('uploads/files/Brands', $brand->brand_image) }}" />
                                                         </div>
                                                     </div>
                                                 </td>

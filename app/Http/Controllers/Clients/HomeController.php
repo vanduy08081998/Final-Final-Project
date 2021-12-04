@@ -63,7 +63,8 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        $infors = Information::all();
+        $infors = Information::orderByDESC('id')
+        ->where('infor_status', 1)->get();
         return view('clients.about.contact',[
             'infors' => $infors
         ]);

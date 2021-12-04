@@ -1,6 +1,6 @@
-<div>
+<div wire:ignore.self>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
-    <div class="container pt-lg-2 pb-5 mb-md-3">
+    <div class="container pt-lg-2 pb-5 mb-md-3" id="div_id">
         @include('clients.comments.form-comment')
         <!-- Comment-->
         <div class="col-lg-12 pt-3">
@@ -22,7 +22,6 @@
                             <div class="comment_reply">
                                 <!-- Trả lời bình luận-->
                                 @foreach ($comment->reply as $reply)
-
 
                                     <div class="line">
                                         <div class="connect">

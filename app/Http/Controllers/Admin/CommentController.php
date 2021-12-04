@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Information;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AddInforRequest;
+use App\Models\Comment;
+use Illuminate\Http\Request;
 
-class InformationsController extends Controller
+class CommentController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $infors = Information::all();
-        return view('admin.informations.index', compact('infors'));
+        $comments = Comment::where('comment_parent_id', 0)->latest('id')->get();
+        $countTrashed = Comment::onlyTrashed()->count();
+        return view('admin.comments.index', compact('comments', 'countTrashed'));
     }
 
     /**
@@ -27,7 +27,7 @@ class InformationsController extends Controller
      */
     public function create()
     {
-        return view('admin.informations.create');
+
     }
 
     /**
@@ -36,10 +36,9 @@ class InformationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, AddInforRequest $validate)
+    public function store(Request $request)
     {
-        Information::create($request->all());
-        return redirect()->route('informations.index');
+        //
     }
 
     /**
@@ -50,7 +49,7 @@ class InformationsController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -61,8 +60,7 @@ class InformationsController extends Controller
      */
     public function edit($id)
     {
-        $infors = Information::find($id);
-        return view('admin.informations.edit', compact('infors'));
+        //
     }
 
     /**
@@ -74,8 +72,7 @@ class InformationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Information::find($id)->update($request->all());
-        return redirect()->route('informations.index');
+        //
     }
 
     /**
@@ -84,18 +81,9 @@ class InformationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Information $infors)
+    public function destroy($id)
     {
-        $infors->delete();
-        return redirect()->back();
+        Comment::find('id')->delete();
+        return back()->with('Xóa dữ liệu thành công');
     }
-
-    public function statusInfor(Request $request)
-    {
-        $infor = Information::find($request->id);
-        $infor->update([
-            'infor_status' => $request->value
-        ]);
-    }
-
 }
