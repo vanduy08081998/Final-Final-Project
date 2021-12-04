@@ -24,7 +24,9 @@
                 @endif
               </a>
               <div class="ps-2">
-                <h6 class="widget-product-title"><a href="shop-single-v2.html">{{ $item->product_name }}</a></h6>
+                <h6 class="widget-product-title"><a
+                    href="{{ URL::to('/shop/product-details', \App\Models\Product::where('product_name', $item->product_name)->first()->product_slug) }}">{{ $item->product_name }}</a>
+                </h6>
                 <div class="widget-product-meta"><span
                     class="text-accent me-2">{{ number_format($value->quantity * $item->variant_price) }}</small></span><span
                     class="text-muted">x

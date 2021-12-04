@@ -24,15 +24,7 @@
           </ol>
         </nav>
       </div>
-      <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h4 text-light mb-2">{{ trans($product->product_name) }}</h1>
-        <div>
-          <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-              class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
-              class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-          </div><span class="d-inline-block fs-sm text-white opacity-70 align-middle mt-1 ms-1">74 Reviews</span>
-        </div>
-      </div>
+
     </div>
   </div>
   <div class="container">

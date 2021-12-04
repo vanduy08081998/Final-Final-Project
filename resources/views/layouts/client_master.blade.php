@@ -46,17 +46,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
     integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
-  <<<<<<< HEAD <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> ___scripts_3___ ___scripts_4___ <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    =======
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="{{ asset('frontend/js/search.js') }}"></script>
-    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
-    <script src="{{ asset('frontend/js/account.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    >>>>>>> main
-    @livewireStyles
-    @livewireScripts
-    @routes
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+  <script src="{{ asset('frontend/js/search.js') }}"></script>
+  <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+  <script src="{{ asset('frontend/js/account.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+  @livewireStyles
+  @livewireScripts
+  @routes
 </head>
 <!-- Body-->
 
@@ -114,7 +111,6 @@
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
   @include('sweetalert::alert')
   @stack('script')
-  @livewireScripts
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
   <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
