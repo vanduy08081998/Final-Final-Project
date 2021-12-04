@@ -26,6 +26,7 @@
                                         <th style="text-align: center;">Đóng cữa</th>
                                         <th style="text-align: center;">SĐT</th>
                                         <th style="text-align: center;">Email</th>
+                                        <th style="text-align: center;"></th>
                                         <th style="text-align: center;">Công cụ</th>
                                     </tr>
                                 </thead>
@@ -47,14 +48,25 @@
                                             <td style="text-align: center;">
                                                 {{ $infor->email }}
                                             </td>
+                                            <td style="text-align: center;" id="infor_table">
+                                                <div class="status-toggle">
+                                                    <input type="radio" id="infor_on_{{ $infor->id }}" onchange="statusInfor({{ $infor->id }})"
+                                                        name="shipping_type" value="{{ $infor->infor_status }}" class="check"
+                                                        @if ($infor->infor_status == 1) checked @endif>
+                                                    <label for="infor_on_{{ $infor->id }}"
+                                                        class="checktoggle">checkbox</label>
+                                                </div>
+                                            </td>
                                             <td style="text-align: center;">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle radius-30"
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                             class="bx bx-cog"></i></button>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                        <a class="dropdown-item text-warning" href="{{ route('informations.edit', $infor->id) }}">Sửa</a>
-                                                        <form action="{{ route('informations.destroy', $infor->id) }}" method="POST">
+                                                        <a class="dropdown-item text-warning"
+                                                            href="{{ route('informations.edit', $infor->id) }}">Sửa</a>
+                                                        <form action="{{ route('informations.destroy', $infor->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="dropdown-item text-danger">Xóa</button>
@@ -72,7 +84,31 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <!-- /Page Wrapper -->
 @endsection
+@push('script')
+    <script>
+        const statusInfor = (id) => {
+            let val = '';
+
+            if (!$('#infor_on_' + id).is(':checked')) {
+                val = 2;
+            } else {
+                val = 1;
+            }
+            let _token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type: "POST",
+                url: "{{ route('informations.statusInfor') }}",
+                data: {
+                    _token: _token,
+                    id: id,
+                    value: val
+                },
+                success: function(response) {
+                    toastr.success('Chỉnh sửa thành công!', 'Chúc mừng');
+                }
+            });
+        }
+    </script>
+@endpush

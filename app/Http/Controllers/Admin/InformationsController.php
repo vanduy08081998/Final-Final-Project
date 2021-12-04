@@ -90,4 +90,12 @@ class InformationsController extends Controller
         return redirect()->back();
     }
 
+    public function statusInfor(Request $request)
+    {
+        $infor = Information::find($request->id);
+        $infor->update([
+            'infor_status' => $request->value
+        ]);
+    }
+
 }

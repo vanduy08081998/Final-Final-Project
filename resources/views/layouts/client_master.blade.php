@@ -51,21 +51,49 @@
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
   @livewireStyles
   @livewireScripts
   @routes
 </head>
 <!-- Body-->
-
-
+<script>
+  function fee() {
+    $(document).on('change', '.choose', function() {
+      var url = $('.route').data('url');
+      var action = $(this).attr("id");
+      var ma_id = $(this).val();
+      var result = '';
+      if (action == 'province') {
+        result = 'district';
+      } else {
+        result = 'ward';
+      }
+      $.ajax({
+        url: url,
+        method: "POST",
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+          action: action,
+          ma_id: ma_id
+        },
+        success: function(data) {
+          $('#' + result).html(data);
+        }
+      })
+    })
+  }
+</script>
 <body class="handheld-toolbar-enabled">
-  <!-- Sign in / sign up modal-->
-  @include('clients.Inc.modal-login')
-  <main class="page-wrapper">
-    <!-- Quick View Modal-->
-    @include('clients.Inc.quickview')
-    <!-- Navbar Electronics Store-->
-    @include('clients.Inc.header')
+    <!-- Sign in / sign up modal-->
+    @include('clients.Inc.modal-login')
+    <main class="page-wrapper">
+        <!-- Quick View Modal-->
+        @include('clients.Inc.quickview')
+        <!-- Navbar Electronics Store-->
+        @include('clients.Inc.header')
 
 
     @yield('content')
@@ -83,9 +111,16 @@
           class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
           class="handheld-toolbar-label">$265.00</span></a></div>
   </div>
-  <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span
-      class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
-    </i></a>
+  {{-- Chatbox button --}}
+    @include('clients.Inc.chatbox')
+    <!-- GetButton.io widget -->
+
+<!-- /GetButton.io widget -->
+  <!-- Back To Top Button-->
+  <a class="btn-scroll-top" href="#top" data-scroll>
+    <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+    <i class="btn-scroll-top-icon ci-arrow-up"></i>
+  </a>
   <!-- Vendor scrits: js libraries and plugins-->
   <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
