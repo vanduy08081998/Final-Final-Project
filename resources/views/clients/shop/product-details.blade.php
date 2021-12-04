@@ -70,6 +70,14 @@
         </div>
       </div>
     </div>
+    <!-- Product description-->
+    <div class="container pt-lg-3 pb-4 pb-sm-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          {!! $product->long_description !!}
+        </div>
+      </div>
+    </div>
   </div>
   <!-- Product description-->
   <div class="container pt-lg-3 pb-4 pb-sm-5">
@@ -85,14 +93,6 @@
   @include('clients.shop.details.gallery-css')
   @livewire('comment-live', ['product' => $product])
   <!-- Bình luận ở đây nha bà con-->
-  </div>
-  <!-- Product description-->
-  <div class="container pt-lg-3 pb-4 pb-sm-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        {!! $product->long_description !!}
-      </div>
-    </div>
   </div>
   <hr class="mb-5">
   @include('clients.shop.details.related-product')

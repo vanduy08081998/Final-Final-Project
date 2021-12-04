@@ -11,7 +11,7 @@ use Session;
 
 class Users extends Component
 {
-    public $user, $provinces, $districts, $wards;
+    public $user, $provinces;
     public $province_id, $district_id, $ward_id, $neighbor, $phone, $cid, $name, $birthday, $gender, $password, $password_confirmation;
 
 

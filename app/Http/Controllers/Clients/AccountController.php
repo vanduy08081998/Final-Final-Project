@@ -8,8 +8,9 @@ use App\Models\User;
 use App\Models\Provinces;
 use App\Models\Districts;
 use App\Models\Wards;
+use App\Models\Shipping;
 use Session;
-
+use Auth;
 
 class AccountController extends Controller
 {
@@ -35,7 +36,9 @@ class AccountController extends Controller
     }
 
     public function accountAddress() {
-        return view('clients.account.account-address');
+        $shipping_default = Shipping::where([['user_id', Auth::user()->id],['default',1]])->first();
+        $shipping_all = Shipping::where([['user_id', Auth::user()->id],['default',0]])->get();
+        return view('clients.account.account-address')->with(compact('shipping_default','shipping_all'));
     }
 
     public function accountPayment() {
@@ -45,21 +48,11 @@ class AccountController extends Controller
     {
         $this->validate($request, [
            'name' => ['required', 'string', 'max:255'],
-        //    'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //    'phone' => ['regex:/(84|0[3|5|7|8|9])+([0-9]{8})/'],
         ],
         [
             'name.required'=> 'Vui lòng không bỏ trống tên tài khoản!',
             'name.string'=> 'Tên tài khoản không hợp lệ!',
             'name.max'=> 'Tên tài khoản không quá 255 ký tự! ',
-            'phone.required' => 'Vui lòng không bỏ trống số điện thoại!',
-            'phone.regex' => 'Số điện thoại không hợp lệ!',
-            'address.required' => 'Vui lòng không bỏ trống địa chỉ!',
-            'address.string'=>'Địa chỉ không hợp lệ',
-            'password.required'=> 'Vui lòng không bỏ trống mật khẩu!',
-            'password.string'=> 'Mật khẩu không hợp lệ!',
-            'password.min'=> 'Mật khẩu không được nhỏ hơn 8 ký tự!',
-            'password.confirmed'=> 'Mật khẩu xác nhận không hợp lệ!',
         ]);
        $data = $request->all();
        $user = User::find($id);
@@ -93,23 +86,4 @@ class AccountController extends Controller
         }
     }
 
-    public function select_address(Request $request){
-        $data = $request->all();
-        $ma_id = $data['ma_id'];
-        $output = '';
-        if($data['action']=='province'){
-          $select_districts = Districts::where('province_id',$ma_id)->orderby('id','ASC')->get();
-          $output.='<option>Chọn quận, huyện</option>';
-          foreach($select_districts as $key => $district){
-              $output.='<option value="'.$district->id.'">'.$district->name.'</option>';
-          }
-        }else{
-            $select_wards = Wards::where('district_id', $ma_id)->orderby('id','ASC')->get();
-            $output.='<option>Chọn xã, phường</option>';
-            foreach($select_wards as $key => $wards){
-              $output.='<option value="'.$wards->id.'">'.$wards->name.'</option>';
-            }
-        }
-        echo $output;
-    }
 }
