@@ -45,7 +45,7 @@
     <div class="col-lg-5 pt-4 pt-lg-0">
       <div class="product-details ms-auto pb-3">
         <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-          <h1 class="h4 text-dark mb-2">{{ trans($product->product_name) }}</h1>
+          <p class="h4 text-dark mb-2" style="font-weight: 400">{{ trans($product->product_name) }}</h1>
           <div>
             <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
                 class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
@@ -163,16 +163,12 @@
               <p class="label">Số Lượng</p>
               <div class="group-input"><span class="qt-dec"><img
                     src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-remove.svg" alt="remove-icon" width="20"
-                    height="20"></span><input type="number" class="input quantity_number" name="product_quantity" value="1"><span
-                  class="qt-inc"><img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg"
-                    alt="add-icon" width="20" height="20"></span></div>
+                    height="20"></span><input type="text" class="input quantity_number" name="product_quantity" id="product_quantity"
+                  value="1"><span class="qt-inc"><img
+                    src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg" alt="add-icon" width="20"
+                    height="20"></span></div>
             </div>
           </div>
-          {{-- <div class="d-flex text-center mx-auto form-quantity">
-            <span class="qt-dec">-</span>
-            <input type="number" class="form-control quantity_number" name="product_quantity" id="product_quantity" min="1" value="1">
-            <span class="qt-inc">+</span>
-          </div> --}}
         </div>
         <div class="position-relative me-n4 mb-3 mt-3">
           <div class="h5 fw-normal mb-3 me-1 total_product_price"></div>

@@ -34,7 +34,7 @@
         <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab" role="tab">Tổng quan <span
               class='d-none d-sm-inline'>Info</span></a></li>
         <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab" role="tab"><span
-              class='d-none d-sm-inline'>Thông số kĩ thuật</span></a></li>
+              class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
         <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#reviews" data-bs-toggle="tab" role="tab">Bình luận <span
               class="fs-sm opacity-60">(74)</span></a></li>
       </ul>
@@ -52,8 +52,8 @@
           <!-- Tech specs tab-->
           <div class="tab-pane fade" id="specs" role="tabpanel">
             <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-              <div class="d-flex align-items-center pt-3" id="specifications">
-
+              <div class="d-flex align-items-center pt-3">
+                {!! $product->short_description !!}
               </div>
             </div>
           </div>
