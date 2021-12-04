@@ -3,3 +3,70 @@
         padding-left: 50px
     }
 }
+
+/* banner */
+.banner {
+    padding-bottom: 0px !important;
+    padding-top: 15px !important;
+    max-height: 450px;
+
+}
+
+.carousel-control {
+    position: relative;
+}
+
+.carousel-control .carousel-img {
+    width: 100%;
+}
+
+.carousel-control .carousel-img img {
+    width: 915px;
+    height: 390px;
+}
+
+.carousel-control .carousel-text {
+    position: absolute;
+}
+
+.slider {
+    padding-top: 0px !important;
+    max-height: 450px;
+}
+
+.tns-nav {
+    padding: 5px !important;
+}
+
+.nav-slider {
+
+}
+
+.banner-item {
+    max-height: 115px;
+}
+
+.banner-item img {
+    padding-left: 15px !important;
+}
+
+.banner-item-text {
+    padding-top: 15px !important;
+    padding-left: 25px !important;
+}
+
+/* .product-item {
+    margin-right: 40px;
+}
+
+.product-item:last-child{
+    margin-right: 0px;
+} */
+
+.product-container {
+    display: grid;
+    grid-template-columns: 240px 240px 240px 240px 240px;
+    /* grid-template-rows: 500px;  */
+    grid-gap: 14px;
+    margin-bottom: 50px;
+  }

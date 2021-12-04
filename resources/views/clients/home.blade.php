@@ -7,28 +7,26 @@
 @section('content')
 
     <!-- Hero (Banners + Slider)-->
-    <section class="bg-secondary py-4 pt-md-5">
+    <section class="bg-secondary py-4 banner">
         <div class="container py-xl-2">
             <div class="row">
                 <!-- Slider     -->
-                <div class="col-xl-9 pt-xl-4 order-xl-2">
+                <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner"
-                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: false, &quot;loop&quot;: false}">
+                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true}">
                             @foreach($slide as $item)
                             <div>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 order-md-2"><img class="d-block mx-auto"
-                                            src="{{ url('uploads/Banner/', $item->banner_img) }}" alt="VR Collection">
+                                <div class="row align-items-center carousel-control">
+                                    <div class="col-md-6 order-md-2 carousel-img">
+                                        <img class="d-block mx-auto" src="{{ url('uploads/Banner/', $item->banner_img) }}" alt="VR Collection">
                                     </div>
-                                    <div
-                                        class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start">
+                                    <div class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
                                         <h2 class="fw-light pb-1 from-bottom">Hãy đến với</h2>
                                         <h1 class="display-4 from-bottom delay-1">{{$item->banner_name}}</h1>
                                         <h5 class="fw-light pb-3 from-bottom delay-2">Để có những lựa chọn hàng đầu</h5>
-                                        <div class="d-table scale-up delay-4 mx-auto mx-md-0"><a
-                                                class="btn btn-primary btn-shadow" href="{{$item->banner_link}}">Xem ngay<i
-                                                    class="ci-arrow-right ms-2 me-n1"></i></a></div>
+                                        <div class="d-table scale-up delay-4 mx-auto mx-md-0">
+                                            <a class="btn btn-primary btn-shadow" href="{{$item->banner_link}}">Xem ngay<i class="ci-arrow-right ms-2 me-n1"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -37,37 +35,32 @@
                     </div>
                 </div>
                 <!-- Banner group-->
-                <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0">
+                <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0 nav-slider">
                     <div class="table-responsive" data-simplebar>
-                        <div class="d-flex d-xl-block"><a
-                                class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
-                                href="#" style="min-width: 16rem;"><img
-                                    src="{{ asset('frontend/img/home/banners/banner-sm01.png') }}" width="125"
-                                    alt="Banner">
-                                <div class="py-4 px-2">
-                                    <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>Video <span
-                                            class="fw-light">with</span><br>360 Cam</h5>
+                        <div class="d-flex d-xl-block">
+                            <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item" href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm01.png') }}" width="100" alt="Banner">
+                                <div class="py-4 px-2 banner-item-text">
+                                    <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>Video <span class="fw-light">with</span><br>360 Cam</h5>
                                     <div class="text-info fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                                 </div>
-                            </a><a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0"
-                                href="#" style="min-width: 16rem;"><img
-                                    src="{{ asset('frontend/img/home/banners/banner-sm02.png') }}" width="125"
-                                    alt="Banner">
-                                <div class="py-4 px-2">
-                                    <h5 class="mb-2"><span class="fw-light">Top
-                                            Rated</span><br>Gadgets<br><span class="fw-light">are on </span>Sale</h5>
+                            </a>
+                            <a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item" href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm02.png') }}" width="100" alt="Banner">
+                                <div class="py-4 px-2 banner-item-text">
+                                    <h5 class="mb-2"><span class="fw-light">Top Rated</span><br>Gadgets<br><span class="fw-light">are on </span>Sale</h5>
                                     <div class="text-warning fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                                 </div>
-                            </a><a class="d-flex align-items-center bg-faded-success rounded-3 pt-2 ps-2 mb-4" href="#"
-                                style="min-width: 16rem;"><img
-                                    src="{{ asset('frontend/img/home/banners/banner-sm03.png') }}" width="125"
-                                    alt="Banner">
-                                <div class="py-4 px-2">
+                            </a>
+                            <a class="d-flex align-items-center bg-faded-success rounded-3 pt-2 ps-2 mb-4 banner-item" href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm03.png') }}" width="100" alt="Banner">
+                                <div class="py-4 px-2 banner-item-text">
                                     <h5 class="mb-2"><span class="fw-light">Catch Big</span><br>Deals <span
                                             class="fw-light">on</span><br>Earbuds</h5>
                                     <div class="text-success fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                                 </div>
-                            </a></div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,9 +75,9 @@
                         class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
         <!-- Grid-->
-        <div class="row pt-2 mx-n2">
+        <div class="row pt-2 mx-n2 product-container">
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center">
                         <a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>So sánh</a>
@@ -109,14 +102,13 @@
                     <div class="card-body card-body-hidden">
                         <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
                                 class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
+                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                     </div>
                 </div>
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -149,7 +141,7 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -174,9 +166,9 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
+                    <div  class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
@@ -206,7 +198,7 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -237,7 +229,69 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
+                <div class="card product-card">
+                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
+                            href="#"><i class="ci-compare me-1"></i>Compare</a>
+                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
+                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
+                            src="{{ asset('frontend/img/shop/catalog/62.jpg') }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Wearable
+                            Electronics</a>
+                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Fitness GPS Smart
+                                Watch</a></h3>
+                        <div class="d-flex justify-content-between">
+                            <div class="product-price"><span class="text-accent">$317.<small>40</small></span></div>
+                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                    class="star-rating-icon ci-star-filled active"></i><i
+                                    class="star-rating-icon ci-star-half active"></i><i
+                                    class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body card-body-hidden">
+                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
+                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
+                    </div>
+                </div>
+                <hr class="d-sm-none">
+            </div>
+            <!-- Product-->
+            <div class="product-item">
+                <div class="card product-card">
+                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
+                            href="#"><i class="ci-compare me-1"></i>Compare</a>
+                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
+                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
+                            src="{{ asset('frontend/img/shop/catalog/62.jpg') }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Wearable
+                            Electronics</a>
+                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Fitness GPS Smart
+                                Watch</a></h3>
+                        <div class="d-flex justify-content-between">
+                            <div class="product-price"><span class="text-accent">$317.<small>40</small></span></div>
+                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                                    class="star-rating-icon ci-star-filled active"></i><i
+                                    class="star-rating-icon ci-star-half active"></i><i
+                                    class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body card-body-hidden">
+                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
+                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
+                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
+                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
+                    </div>
+                </div>
+                <hr class="d-sm-none">
+            </div>
+            <!-- Product-->
+            <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -268,7 +322,7 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="product-item">
                 <div class="card product-card"><span class="badge bg-info badge-shadow">New</span>
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -301,7 +355,7 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2">
+            <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
@@ -561,5 +615,4 @@
                 </a></div>
         </div>
     </section>
-
 @endsection

@@ -139,6 +139,7 @@
   <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
   <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <link rel="stylesheet" href="">
 
 
     <script type="text/javascript">
