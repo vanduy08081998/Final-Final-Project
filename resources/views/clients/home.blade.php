@@ -102,7 +102,8 @@
                     <div class="card-body card-body-hidden">
                         <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
                                 class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
+                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
+                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
                     </div>
                 </div>
                 <hr class="d-sm-none">
