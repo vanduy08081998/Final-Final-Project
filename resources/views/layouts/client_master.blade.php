@@ -113,6 +113,9 @@
   </div>
   {{-- Chatbox button --}}
     @include('clients.Inc.chatbox')
+    <!-- GetButton.io widget -->
+
+<!-- /GetButton.io widget -->
   <!-- Back To Top Button-->
   <a class="btn-scroll-top" href="#top" data-scroll>
     <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
