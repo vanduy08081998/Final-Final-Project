@@ -70,7 +70,7 @@ Route::prefix('/')->group(function () {
         Route::get('/products-category/{id_cate}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
 
-        
+
     });
 
     Route::prefix('/cart')->group(function () {
@@ -162,8 +162,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
   Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
   Route::resource('informations', InformationsController::class);
-  Route::get('/informations/InforOn/{id}', [InformationsController::class, 'InforOn'])->name('informations.InforOn');
-  Route::get('/informations/InforOff/{id}', [InformationsController::class, 'InforOff'])->name('informations.InforOff');
+  Route::post('informations/statusInfor', [InformationsController::class, 'statusInfor'])->name('informations.statusInfor');
 
   //user
   Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');

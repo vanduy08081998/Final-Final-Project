@@ -51,6 +51,7 @@
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+
   @livewireStyles
   @livewireScripts
   @routes

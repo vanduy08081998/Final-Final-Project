@@ -90,20 +90,12 @@ class InformationsController extends Controller
         return redirect()->back();
     }
 
-    public function InforOn($id)
+    public function statusInfor(Request $request)
     {
-        Information::find($id)->update([
-            'infor_status' => 1
+        $infor = Information::find($request->id);
+        $infor->update([
+            'infor_status' => $request->value
         ]);
-        return redirect()->route('informations.index');
-    }
-
-    public function InforOff($id)
-    {
-        Information::find($id)->update([
-            'infor_status' => 2
-        ]);
-        return redirect()->route('informations.index');
     }
 
 }
