@@ -324,7 +324,7 @@
                           <div class="row">
                             <div class="col-md-12 form-group">
                               <label>Ngày giảm giá</label>
-                              <input type="text" name="sale_dates" class="form-control" value="">
+                              <input type="text" name="sale_dates" id="sale_dates" class="form-control" value="">
                             </div>
                           </div>
                         </li>
@@ -502,9 +502,6 @@
             <div class="col-sm-8">
               <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" type="submit"><i class="fa fa-check"></i>Thêm sản phẩm
               </button>
-              {{-- <button type="reset" class="btn btn-danger btn-flat btn-addon m-b-10 m-l-5"><i
-                                    class="fa fa-times"></i>Hủy
-                            </button> --}}
             </div>
           </div>
 
@@ -529,8 +526,23 @@
     CKEDITOR.replace('long_description');
 
     $('.js-example-basic-multiple').selectpicker();
-    $('input[name="sale_dates"]').daterangepicker();
-    $('input[name="expiry"]').daterangepicker();
+    $('input[name="sale_dates"]').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
+
+    $('input[name="expiry"]').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
     $('#product_color').selectpicker();
     $('#id_flash_deal').selectpicker();
 

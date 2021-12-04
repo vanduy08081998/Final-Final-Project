@@ -21,7 +21,7 @@
                   <div class="form-group">
                     <label>Khuyến mãi (%)</label>
                     <input type="number" name="discount" value="{{ $flash_deal->discount }}" id="" class="form-control">
-                </div>   
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -38,18 +38,18 @@
               </div>
               <div class="form-group">
                 @php
-                  $date_start = date('d/m/Y', $flash_deal->date_start);
-                  $date_end = date('d/m/Y', $flash_deal->date_end);
+                  $date_start = date('d/m/Y h:m:s', $flash_deal->date_start);
+                  $date_end = date('d/m/Y h:m:s', $flash_deal->date_end);
                 @endphp
                 <label>Ngày tạo chiến dịch</label>
-                <input type="text" name="date" value="{{ $date_start.' - '.$date_end }}" id="date" class="form-control">
+                <input type="text" name="date" value="{{ $date_start . ' - ' . $date_end }}" id="date" class="form-control">
               </div>
               <div class="form-group">
                 <label>Sản phẩm</label>
                 <select class="form-control" id="product_picker" name="product_id[]" multiple="multiple" data-live-search="true">
                   @foreach ($products as $product)
-                    @foreach($flash_deal->products as $item)
-                      <option value="{{ $product->id }}" @if($product->id == $item->id) selected @endif>{{ $product->product_name }}</option>
+                    @foreach ($flash_deal->products as $item)
+                      <option value="{{ $product->id }}" @if ($product->id == $item->id) selected @endif>{{ $product->product_name }}</option>
                     @endforeach
                   @endforeach
                 </select>
@@ -70,6 +70,13 @@
 @push('script')
   <script>
     $('#product_picker').selectpicker()
-    $('#date').daterangepicker()
+    $('#date').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
   </script>
 @endpush

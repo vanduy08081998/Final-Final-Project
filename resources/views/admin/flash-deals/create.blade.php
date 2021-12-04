@@ -20,7 +20,7 @@
                   <div class="form-group">
                     <label>Khuyến mãi (%)</label>
                     <input type="number" name="discount" id="" class="form-control">
-                </div>   
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -61,6 +61,13 @@
 @push('script')
   <script>
     $('#product_picker').selectpicker()
-    $('#date').daterangepicker()
+    $('#date').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
   </script>
 @endpush

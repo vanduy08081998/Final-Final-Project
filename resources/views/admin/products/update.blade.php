@@ -366,8 +366,8 @@
                                 <div class="form-group mb-3" id="show_hide_date_of_manufacture_and_expiry">
                                   <label>Ngày sản xuát - Hạn sử dụng</label>
                                   @php
-                                    $date_of_manufacture = date('m/d/Y', $product->date_of_manufacture);
-                                    $expiry = date('m/d/y', $product->expiry);
+                                    $date_of_manufacture = date('m/d/Y h:m:s', $product->date_of_manufacture);
+                                    $expiry = date('m/d/y h:m:s', $product->expiry);
                                   @endphp
                                   <input type="text" name="expiry" class="form-control"
                                     value="{{ $date_of_manufacture . ' - ' . $expiry }}">
@@ -428,8 +428,8 @@
                             <div class="col-md-12 form-group">
                               <label>Ngày giảm giá</label>
                               @php
-                                $start_date = date('m/d/Y', $product->discount_start_date);
-                                $end_date = date('m/d/Y', $product->discount_end_date);
+                                $start_date = date('m/d/Y h:m:s', $product->discount_start_date);
+                                $end_date = date('m/d/Y h:m:s', $product->discount_end_date);
                               @endphp
                               <input type="text" name="sale_dates" class="form-control" value="{{ $start_date . ' - ' . $end_date }}">
                             </div>
@@ -674,8 +674,23 @@
     CKEDITOR.replace('long_description');
 
     $('.js-example-basic-multiple').selectpicker();
-    $('input[name="sale_dates"]').daterangepicker();
-    $('input[name="expiry"]').daterangepicker();
+    $('input[name="sale_dates"]').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
+
+    $('input[name="expiry"]').mobiscroll().datepicker({
+      controls: ['calendar', 'time'],
+      select: 'range',
+      calendarType: 'month',
+      pages: 2,
+      touchUi: true,
+      timeFormat: 'HH:mm:ss'
+    });
     $('#product_color').selectpicker();
 
     $('form').on('submit', function(event) {
