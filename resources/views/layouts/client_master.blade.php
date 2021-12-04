@@ -49,42 +49,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="{{ asset('frontend/js/search.js') }}"></script>
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    <script src="{{ asset('frontend/js/account.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     {{-- <link rel="stylesheet" href="custom-style.scss"> --}}
     <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
   @livewireStyles
+  @livewireScripts
   @routes
 </head>
 <!-- Body-->
-<script>
-  function fee() {
-    $(document).on('change', '.choose', function() {
-      var url = $('.route').data('url');
-      var action = $(this).attr("id");
-      var ma_id = $(this).val();
-      var result = '';
-      if (action == 'province') {
-        result = 'district';
-      } else {
-        result = 'ward';
-      }
-      $.ajax({
-        url: url,
-        method: "POST",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-          action: action,
-          ma_id: ma_id
-        },
-        success: function(data) {
-          $('#' + result).html(data);
-        }
-      })
-    })
-  }
-</script>
+
 
 <body class="handheld-toolbar-enabled">
   <!-- Sign in / sign up modal-->
@@ -149,32 +123,6 @@
   <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 
-
-    <script type="text/javascript">
-        window.addEventListener('alert', event => {
-            toastr[event.detail.type](event.detail.message,
-                event.detail.title ?? ''), toastr.options = {
-                "closeButton": true,
-                "progressBar": true,
-            };
-        })
-        window.addEventListener('OpenUpdatePhoneModal', function(event) {
-            $('.updatePhone').modal('show');
-        });
-
-        window.addEventListener('CloseUpdatePhoneModal', function(event) {
-            $('.updatePhone').modal('hide');
-        });
-
-        window.addEventListener('OpenUpdateAddressModal', function(event) {
-            $('.updateAddress').modal('show');
-        });
-
-        window.addEventListener('CloseUpdateAddressModal', function(event) {
-            $('.updateAddress').modal('show');
-        });
-    </script>
-
   <script type="text/javascript">
     window.addEventListener('alert', event => {
       toastr[event.detail.type](event.detail.message,
@@ -183,57 +131,6 @@
         "progressBar": true,
       };
     })
-    window.addEventListener('OpenUpdatePhoneModal', function(event) {
-      $('.updatePhone').modal('show')
-    });
-
-    window.addEventListener('CloseUpdatePhoneModal', function(event) {
-      $('.updatePhone').modal('hide');
-    });
-
-    window.addEventListener('OpenUpdateAddressModal', function(event) {
-      $('.updateAddress').modal('show');
-    });
-
-    window.addEventListener('CloseUpdateAddressModal', function(event) {
-      $('.updateAddress').modal('hide');
-    });
-
-    window.addEventListener('OpenUpdatePasswordModal', function(event) {
-      $('.updatePassword').modal('show');
-    });
-
-    window.addEventListener('CloseUpdatePasswordModal', function(event) {
-      $('.updatePassword').modal('hide');
-    });
-
-    $(document).ready(function() {
-      $("#show_hide_password a").on('click', function(event) {
-        event.preventDefault();
-        if ($('#show_hide_password input').attr("type") == "text") {
-          $('#show_hide_password input').attr('type', 'password');
-          $('#show_hide_password i').addClass("bx-hide");
-          $('#show_hide_password i').removeClass("bx-show");
-        } else if ($('#show_hide_password input').attr("type") == "password") {
-          $('#show_hide_password input').attr('type', 'text');
-          $('#show_hide_password i').removeClass("bx-hide");
-          $('#show_hide_password i').addClass("bx-show");
-        }
-      });
-
-      $("#show_hide_password2 a").on('click', function(event) {
-        event.preventDefault();
-        if ($('#show_hide_password2 input').attr("type") == "text") {
-          $('#show_hide_password2 input').attr('type', 'password');
-          $('#show_hide_password2 i').addClass("bx-hide");
-          $('#show_hide_password2 i').removeClass("bx-show");
-        } else if ($('#show_hide_password2 input').attr("type") == "password") {
-          $('#show_hide_password2 input').attr('type', 'text');
-          $('#show_hide_password2 i').removeClass("bx-hide");
-          $('#show_hide_password2 i').addClass("bx-show");
-        }
-      });
-    });
 
     $(document).on('click', '#change_avatar', function() {
       $('#customer_avatar').click();

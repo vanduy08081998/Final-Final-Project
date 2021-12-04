@@ -2716,6 +2716,18 @@ textarea.form-control-lg {
     background-color: #fe3b3d
 }
 
+.align-middle.add-ship.mb-3 {
+    height: 60px;
+    text-align: center;
+    border: 2px dashed #c3c7c9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+a.add-shipping {
+    color: #3b58e7;
+    }
+
 .form-range::-moz-range-track {
     width: 100%;
     height: .5rem;

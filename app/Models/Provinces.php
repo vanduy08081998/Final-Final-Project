@@ -13,4 +13,8 @@ class Provinces extends Model
     public $fillable = ['name','gos_id'];
     protected $primary = 'id';
     protected $table = 'provinces';
+
+    public function districts(){
+        return $this->hasMany(Districts::class,'province_id');
+    }
 }
