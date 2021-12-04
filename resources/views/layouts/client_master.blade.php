@@ -51,7 +51,7 @@
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-
+    <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
   @livewireStyles
   @livewireScripts
   @routes
@@ -96,60 +96,6 @@
         @include('clients.Inc.header')
 
 
-        @yield('content')
-    </main>
-    <input type="hidden" name="" id="url_to" value="{{ URL::to('/') }}">
-    <!-- Footer-->
-    @include('clients.Inc.footer')
-    <!-- Toolbar for handheld devices (Default)-->
-    <div class="handheld-toolbar">
-        <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
-                    class="handheld-toolbar-label">Yêu thích</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
-                    class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
-                        class="badge bg-primary rounded-pill ms-1">4</span></span><span
-                    class="handheld-toolbar-label">$265.00</span></a></div>
-    </div>
-    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span
-            class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
-        </i></a>
-    <!-- Vendor scrits: js libraries and plugins-->
-    <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-    <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/js/lightslider.min.js"></script>
-    <!-- Main theme script-->
-    <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
-    </script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/range.js') }}"></script>
-    @include('sweetalert::alert')
-    @stack('script')
-    <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
-
-<body class="handheld-toolbar-enabled">
-  <!-- Sign in / sign up modal-->
-  @include('clients.Inc.modal-login')
-  <main class="page-wrapper">
-    <!-- Quick View Modal-->
-    @include('clients.Inc.quickview')
-    <!-- Navbar Electronics Store-->
-    @include('clients.Inc.header')
-
-
     @yield('content')
   </main>
   <input type="hidden" name="" id="url_to" value="{{ URL::to('/') }}">
@@ -165,9 +111,16 @@
           class="handheld-toolbar-icon"><i class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
           class="handheld-toolbar-label">$265.00</span></a></div>
   </div>
-  <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span
-      class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span><i class="btn-scroll-top-icon ci-arrow-up">
-    </i></a>
+  {{-- Chatbox button --}}
+    @include('clients.Inc.chatbox')
+    <!-- GetButton.io widget -->
+
+<!-- /GetButton.io widget -->
+  <!-- Back To Top Button-->
+  <a class="btn-scroll-top" href="#top" data-scroll>
+    <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+    <i class="btn-scroll-top-icon ci-arrow-up"></i>
+  </a>
   <!-- Vendor scrits: js libraries and plugins-->
   <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
