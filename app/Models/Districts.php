@@ -14,4 +14,7 @@ class Districts extends Model
     protected $primary = 'id';
     protected $table = 'districts';
 
+    public function wards(){
+        return $this->hasMany(Wards::class,'district_id');
+    }
 }
