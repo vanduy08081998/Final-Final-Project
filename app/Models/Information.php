@@ -12,7 +12,7 @@ class Information extends Model
 
     public $table = 'informations';
 
-    public $fillable = ['start_time', 'end_time', 'address', 'phone', 'email', 'gg_map'];
+    public $fillable = ['start_time', 'end_time', 'address', 'phone', 'email', 'gg_map', 'infor_status'];
 
     public $timestamp = false;
 

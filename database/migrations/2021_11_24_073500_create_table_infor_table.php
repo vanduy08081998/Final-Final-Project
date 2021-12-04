@@ -21,6 +21,7 @@ class CreateTableInforTable extends Migration
             $table->string('phone')->nullable();
             $table->text('email')->nullable();
             $table->text('gg_map')->nullable();
+            $table->text('infor_status')->nullable();
         });
     }
 

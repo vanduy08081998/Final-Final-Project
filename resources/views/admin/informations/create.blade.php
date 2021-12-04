@@ -73,6 +73,8 @@
                                     @error('gg_map')
                                         <span class="text-danger"> {{ $message }} </span>
                                     @enderror
+
+                                    <input type="hidden" name="infor_status" value="2">
                                 </div>
                             </div>
                         </div>
