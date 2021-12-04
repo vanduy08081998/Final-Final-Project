@@ -1,11 +1,19 @@
 <div class="commentask pt-2 childs-comment-line" style="margin-left: 30px;">
-    <div class="avt-qtv">
-        <img src="{{ $replyChilds->user->avatar }}" alt="">
-    </div>
-    <strong class="name-{{ $replyChilds->id }}">{{ $replyChilds->user->name }}</strong>
+    @if ($replyChilds->user->position == 'admin')
+        <div class="avt-qtv">
+            <img src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="">
+        </div>
+        <strong class="name-{{ $replyChilds->id }}">{{ $replyChilds->user->name }}</strong>
+        <b class="qtv">Quản trị viên</b>
+    @else
+        <div class="avt-qtv">
+            <img src="{{ $replyChilds->user->avatar }}" alt="">
+        </div>
+        <strong class="name-{{ $replyChilds->id }}">{{ $replyChilds->user->name }}</strong>
 
+    @endif
     <div class="infocom_ask">
-        <div class="all-edit-comment edit-comment-{{ $replyChilds->id }} d-none pb-1">
+        <div class="form-comment-show edit-comment-{{ $replyChilds->id }} d-none pb-1">
             <input type="text" class="form-control edit-comment-form-{{ $replyChilds->id }} form-comment-text"
                 value="{{ $replyChilds->comment_content }}">
             <div class="handle mt-1">
@@ -18,7 +26,7 @@
                         aria-hidden="true"></i></button>
             </div>
         </div>
-        <div class="pb-1 comment-content-{{ $replyChilds->id }} comment-content-all">
+        <div class="pb-1 comment-body-{{ $replyChilds->id }} body-comment">
             {{ $replyChilds->comment_content }}
         </div>
 
@@ -76,7 +84,7 @@
 </div>
 <!--Form gửi bình luận-->
 <div class="d-block" style="padding-left: 60px">
-    <div class="comment-inline d-none reply-comment-{{ $replyChilds->id }}">
+    <div class="form-comment-show d-none reply-comment-{{ $replyChilds->id }}">
         <div class="col-lg-12 mt-2">
             <textarea class="form-control body-{{ $replyChilds->id }} form-comment-text" cols="2" rows="2"
                 wire:model.defer="comment_content"></textarea>

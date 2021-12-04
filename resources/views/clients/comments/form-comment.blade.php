@@ -1,7 +1,7 @@
         <!-- Bình luận đầu tiên-->
         <div class="form-comment">
             <div class="col-lg-12">
-                <textarea class="form-control form-comment-text" id="form-one" cols="3" rows="3"></textarea>
+                <textarea class="form-control form-validated" id="form-one" cols="3" rows="3"></textarea>
                 <div class="form-comment">
                     <div class="row p-1">
                         <div class="col-lg-6 d-flex align-content-center">
@@ -17,7 +17,7 @@
                             <div id="image__preview"></div>
                         </div>
                         <div class="col-lg-6">
-                            <button class="btn-submit-text save-comment" data-id="{{ $product->id }}"
+                            <button class="btn-submit-text save-comment"
                                 data-url="{{ url('/comment/saveComment/' . $product->id) }}" style="float: right"
                                 disabled>Bình luận</button>
                         </div>

@@ -1,34 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SearchsController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\InformationsController;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Clients\CartController;
-use App\Http\Controllers\Clients\CommentController;
-use App\Http\Controllers\Customer\MailController;
-use App\Http\Controllers\Admin\BlogCateController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\Clients\SearchController;
-use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
-
-use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Clients\CartController;
 use App\Http\Controllers\Clients\CheckoutController;
-use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
-use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-use App\Http\Controllers\Clients\WishlistController;
+use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Clients\SearchController;
 use App\Http\Controllers\Clients\ShippingController;
+use App\Http\Controllers\Clients\UserCommentController;
+use App\Http\Controllers\Clients\WishlistController;
 use App\Http\Livewire\Users;
-use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,21 +36,20 @@ use App\Models\Wishlist;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
+ */
 
 /* Clients */
 
 Route::prefix('/')->group(function () {
-  Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-  Route::get('search', [SearchController::class, 'find']);
-  Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
-  Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
-  Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
-  Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
-  Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
-  Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
-  Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
+    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('search', [SearchController::class, 'find']);
+    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
+    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
+    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
+    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
+    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
 
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
@@ -70,7 +66,6 @@ Route::prefix('/')->group(function () {
         Route::get('/products-category/{id_cate}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
 
-        
     });
 
     Route::prefix('/cart')->group(function () {
@@ -99,13 +94,13 @@ Route::prefix('/')->group(function () {
         Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
     });
     // Bình luận
-    Route::resource('/comment', CommentController::class);
-    Route::get('/comment/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
-    Route::get('/comment/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
-    Route::get('/comment/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
-
+    Route::prefix('/comment')->group(function () {
+        Route::get('/editComment/{id}', [UserCommentController::class, 'editComment'])->name('comment.editComment');
+        Route::get('/saveComment/{id}', [UserCommentController::class, 'saveComment'])->name('comment.saveComment');
+        Route::get('/recall/{id}', [UserCommentController::class, 'recall'])->name('comment.recall');
+    });
     Route::prefix('/search')->group(function () {
-        Route::post('/searchs/',[SearchController::class, 'searchs'])->name('search.searchs');
+        Route::post('/searchs/', [SearchController::class, 'searchs'])->name('search.searchs');
         Route::post('/range', [SearchController::class, 'range'])->name('search.range');
     });
     Route::get('/users', Users::class);
@@ -113,83 +108,87 @@ Route::prefix('/')->group(function () {
 
 /* Admin */
 Route::group(['prefix' => 'admin'], function () {
-  // Dashboard
-  Route::get('/', [HomeController::class, 'index'])->name('admin.index');
+    // Dashboard
+    Route::get('/', [HomeController::class, 'index'])->name('admin.index');
 
-  // Categories
-  Route::resource('/categories', CategoryController::class);
-  Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
-  Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
-  //Brand
-  Route::get('/brand/trash', [BrandController::class, 'trash'])->name('trash');
-  Route::post('/brand/restore/{id}', [BrandController::class, 'restore'])->name('restore');
-  Route::post('/brand/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('forceDelete');
-  Route::resource('/brand', BrandController::class);
+    // Categories
+    Route::resource('/categories', CategoryController::class);
+    Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
+    Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
+    //Brand
 
-  Route::resource('/products', ProductAdmin::class);
-  Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
-  Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
-  Route::get('product__warehouse/{product}', [ProductAdmin::class, 'productWarehouse'])->name('products.warehouse');
-  Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
-  Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
-  Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
-  Route::post('deals_today', [ProductAdmin::class, 'editDealsToday'])->name('admin.deals-today');
-  Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
-  Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
-  Route::get('/edit_product_feature', [ProductAdmin::class, 'editProductFeature'])->name('products.feature');
-  //Attributes
-  Route::resource('/attribute', AttributeController::class);
-  Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
-  Route::get('/detach_cate_attr/{attr_id}/{cate_id}', [CategoryController::class, 'detach_cate_attr'])->name('detach_cate_attr');
-  Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
-  Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
-  Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
-  Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
-  //banner
-  Route::resource('/banners', BannerController::class);
-  // Discount
-  Route::resource('/discount', DiscountController::class);
+    Route::prefix('/brand')->group(function () {
+        Route::get('/trash', [BrandController::class, 'trash'])->name('brand.trash');
+        Route::post('/restore/{id}', [BrandController::class, 'restore'])->name('brand.restore');
+        Route::post('/force-delete/{id}', [BrandController::class, 'forceDelete'])->name('brand.forceDelete');
+        Route::post('/handle', [BrandController::class, 'handle'])->name('brand.handle');
+    });
+    Route::resource('/brand', BrandController::class);
 
-  Route::resource('/flash-deals', FlashDealController::class);
-  //Route prefix function
+    // Product
+    Route::resource('/products', ProductAdmin::class);
+    Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
+    Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
+    Route::get('product__warehouse/{product}', [ProductAdmin::class, 'productWarehouse'])->name('products.warehouse');
+    Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
+    Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
+    Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
+    Route::post('deals_today', [ProductAdmin::class, 'editDealsToday'])->name('admin.deals-today');
+    Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
+    Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
+    Route::get('/edit_product_feature', [ProductAdmin::class, 'editProductFeature'])->name('products.feature');
+    //Attributes
+    Route::resource('/attribute', AttributeController::class);
+    Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+    Route::get('/detach_cate_attr/{attr_id}/{cate_id}', [CategoryController::class, 'detach_cate_attr'])->name('detach_cate_attr');
+    Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
+    Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
+    Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
+    Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    //banner
+    Route::resource('/banners', BannerController::class);
+    // Discount
+    Route::resource('/discount', DiscountController::class);
 
-  Route::get('filemanager', function () {
-    echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
-  })->name('filemanager');
+    Route::resource('/flash-deals', FlashDealController::class);
+    //Route prefix function
 
-  Route::resource('blogCate', BlogCateController::class);
-  Route::resource('blogs', BlogController::class);
-  Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
-  Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
-  Route::resource('informations', InformationsController::class);
+    Route::get('filemanager', function () {
+        echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
+    })->name('filemanager');
 
-  //user
-  Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
-  Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
-  Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-  Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-  route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
-  route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
-  Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
-  Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
-  Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
-  Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-  Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
-  Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
-  Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
-  Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
-  Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
-  Route::resource('/users', UserController::class);
+    Route::resource('blogCate', BlogCateController::class);
+    Route::resource('blogs', BlogController::class);
+    Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
+    Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
+    Route::resource('informations', InformationsController::class);
+
+    //user
+    Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+    Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+    Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+    route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+    route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+    Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+    Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+    Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+    Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+    Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+    Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
+    Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
+    Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
+    Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
+    Route::resource('/users', UserController::class);
+
+    // comment
+    Route::resource('/comment', CommentController::class);
 });
 Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
-
-
-
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 
 //Login Google
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');

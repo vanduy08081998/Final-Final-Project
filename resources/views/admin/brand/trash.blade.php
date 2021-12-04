@@ -83,44 +83,39 @@
 
                                                     @endforeach
                                                 </td>
-                                                <td style="text-align: center;">
-                                                    <div class="btn-group">
-                                                        <button type="button"
-                                                            class="btn btn-success dropdown-toggle radius-30"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><i class="bx bx-cog"></i></button>
-                                                        <div
-                                                            class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                            <form action="{{ url('admin/brand/restore/' . $brand->id) }}"
-                                                                method="POST">
-                                                                @csrf
+                    </form>
+                    <td style="text-align: center;">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+                                <form action="{{ url('admin/brand/restore/' . $brand->id) }}" method="POST">
+                                    @csrf
 
-                                                                <button class="dropdown-item text-infor">Khôi phục</button>
-                                                            </form>
+                                    <button class="dropdown-item text-infor">Khôi phục</button>
+                                </form>
 
-                                                            <form
-                                                                action="{{ url('admin/brand/force-delete/' . $brand->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                <button class="dropdown-item text-danger">Xóa vĩnh
-                                                                    viễn</button>
-                                                            </form>
+                                <form action="{{ url('admin/brand/force-delete/' . $brand->id) }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item text-danger">Xóa vĩnh
+                                        viễn</button>
+                                </form>
 
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
-                    </form>
-                    <input type="text" value="{{ url('admin/brand/handle') }}" class="d-none url-handle">
-
+                    </td>
+                    </tr>
+                    @endforeach
+                    </tbody>
+                    </table>
                 </div>
             </div>
+
+            <input type="text" value="{{ url('admin/brand/handle') }}" class="d-none url-handle">
+
         </div>
+    </div>
+    </div>
     </div>
 @endsection
 

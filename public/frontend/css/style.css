@@ -22,15 +22,6 @@
     padding-top: 30px;
 }
 
-.btn-submit-text {
-    border: none;
-    outline: none;
-    background: #4a90e2;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
 .line .connect::before {
     content: '';
     position: absolute;
@@ -38,6 +29,15 @@
     width: 100%;
     background-color: #a09797;
     border-radius: 2px;
+}
+
+.btn-submit-text {
+    border: none;
+    outline: none;
+    background: #4a90e2;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 
 .childs-comment-line {
@@ -235,12 +235,13 @@
 }
 
 .qtv {
+    margin-top: -3px;
     text-transform: uppercase;
     margin-right: 10px;
-    color: #000;
+    color: #fff;
     font-weight: normal;
     font-size: 10px;
-    background: #eebc49;
+    background: #fe696a;
     padding: 2px 6px;
     border-radius: 3px;
     line-height: 18px;
@@ -284,18 +285,18 @@
     margin-right: 3px;
 }
 
-.all-edit-comment {
+.form-comment-show {
     position: relative;
 }
 
-.all-edit-comment .handle {
+.handle {
     z-index: 1;
     display: flex;
     right: 0;
     position: absolute;
 }
 
-.all-edit-comment>.handle>button {
+.handle>button {
     border: none;
     outline: none;
     display: inline-flex;
