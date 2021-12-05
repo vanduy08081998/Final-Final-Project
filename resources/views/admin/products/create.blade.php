@@ -243,16 +243,17 @@
                                                                 <!-- Category End -->
                                                                 <div id="choiceAttribute">
                                                                     <div class="form-group">
-                                                                        <select
-                                                                            class="js-example-basic-multiple form-control"
-                                                                            id="attribute" name="attribute[]"
-                                                                            multiple="multiple" data-live-search="true">
-
-                                                                            @foreach (App\Models\Attribute::all() as
+                                                                        <select name="attribute[]" id="attribute"
+                                                                            class="form-control aiz-select-picker"
+                                                                            data-selected-text-format="count"
+                                                                            data-live-search="true" multiple
+                                                                            data-placeholder="{{ trans('Choose Attributes') }}">
+                                                                            @foreach (\App\Models\Attribute::all() as
+                                                                            $key =>
                                                                             $attribute)
-
                                                                             <option value="{{ $attribute->id }}">
-                                                                                {{ $attribute->name }}</option>
+                                                                                {{ $attribute->name }}
+                                                                            </option>
                                                                             @endforeach
                                                                         </select>
 
@@ -565,7 +566,6 @@
     CKEDITOR.replace('short_description');
     CKEDITOR.replace('long_description');
 
-    $('.js-example-basic-multiple').selectpicker();
     $('input[name="sale_dates"]').mobiscroll().datepicker({
         controls: ['calendar', 'time'],
         select: 'range',
@@ -583,8 +583,8 @@
         touchUi: true,
         timeFormat: 'HH:mm:ss'
     });
-    $('#product_color').selectpicker();
-    $('#id_flash_deal').selectpicker();
+    $('#product_color').select2();
+    $('#id_flash_deal').select2();
 
     // Form on submit
     $('form').on('submit', function (event) {
@@ -641,18 +641,17 @@
                 $('#customer_choice_options').append(`<div class="form-group">
                       <label>${name}</label>
                       <input type="hidden" name="choice_no[]" value="${i}">
-                      <select name="attribute_value_${i}[]" multiple="multiple" data-live-search="true"  class="form-control attribute-value" id="attribute-value">
-                      
+                      <select name="attribute_value_${i}[]" multiple="multiple" class="form-control attribute-value" id="attribute-value-${i}">
+                        ${response}
                       </select>
-                    </div>`)
-                $('.attribute-value').selectpicker('refresh');
-
+                  </div>`)
+                $(`#attribute-value-${i}`).select2();
             }
         });
     }
 
     $(document).ready(function () {
-        $('.attribute-value').selectpicker();
+        $('.aiz-select-picker').select2()
     });
 
     $(document).on("change", ".attribute-value", function () {
