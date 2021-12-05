@@ -323,7 +323,7 @@
                                   @enderror
                                 </div>
                                 <div id="customer_choice_options">
-                                  {{-- @foreach (json_decode($product->choice_options) as $index => $options)
+                                  @foreach (json_decode($product->choice_options) as $index => $options)
                                   <div class="form-group">
                                     <label>{{ \App\Models\Attribute::where('id', $options->attribute_id)->first()->name
                                       }}</label>
@@ -341,7 +341,7 @@
                                     </select>
                                   </div>
 
-                                  @endforeach --}}
+                                  @endforeach
                                 </div>
                                 <input type="hidden" name="total_quantity" id="totalquantity">
                               </div>
@@ -759,22 +759,23 @@
 
     const add_more_customer_choice_option = (i, name) => {
       $.ajax({
-        type: "GET",
-        url: "{{ route('admin.product__variants') }}",
-        data: {
-          id: i
-        },
-        success: function(response) {
-          $('#customer_choice_options').append(`<div class="form-group">
+            type: "GET",
+            url: "{{ route('admin.product__variants') }}",
+            data: {
+                id: i
+            },
+            success: function (response) {
+                // var obj = JSON.parse(response)
+                $('#customer_choice_options').append(`<div class="form-group">
                       <label>${name}</label>
                       <input type="hidden" name="choice_no[]" value="${i}">
-                      <select name="attribute_value_${i}[]" multiple="multiple" data-live-search="true"  class="form-control attribute-value" id="attribute-value-${i}">
+                      <select name="attribute_value_${i}[]" multiple="multiple" class="form-control attribute-value" id="attribute-value-${i}">
                         ${response}
                       </select>
-                    </div>`)
-                    $(`#attribute-value-${i}`).select2();
-        }
-      });
+                  </div>`)
+                $(`#attribute-value-${i}`).select2();
+            }
+        });
     }
 
     $(document).ready(function() {
@@ -814,6 +815,7 @@
       });
 
       var str = @php echo $product->product_attribute @endphp;
+      console.log(str)
 
       $.each(str, function(index, value) {
         flag = false;
@@ -823,10 +825,11 @@
           }
         });
         if (!flag) {
-          $('input[name="choice_no[]"][value="' + value + '"]').parent().parent().remove();
+          // $('input[name="choice_no[]"][value="' + value + '"]').parent().parent().remove();
         }
       });
 
+      
       update_sku();
     })
 
