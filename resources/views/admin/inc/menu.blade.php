@@ -69,7 +69,6 @@
     <ul style="display: none;">
       <li><a href="{{ route('products.index') }}">Danh sách</a></li>
       <li><a href="{{ route('products.create') }}">Thêm sản phẩm</a></li>
-      <li><a href="{{ route('flash-deals.index') }}">Flash Sale</a></li>
     </ul>
   </li>
 
@@ -94,6 +93,12 @@
     <ul style="display: none;">
       <li><a href="{{ route('discount.index') }}">Danh sách</a></li>
       <li><a href="{{ route('discount.create') }}">Thêm phiếu</a></li>
+    </ul>
+  </li>
+  <li class="submenu">
+    <a href="#"><i class="fas fa-bookmark"></i> <span> Flash Sale</span> <span class="menu-arrow"></span></a>
+    <ul style="display: none;">
+      <li><a href="{{ route('flash-deals.index') }}">Danh sách</a></li>
     </ul>
   </li>
   <li class="menu-title">
