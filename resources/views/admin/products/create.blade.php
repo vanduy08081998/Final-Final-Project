@@ -13,7 +13,6 @@
             .text-danger {
                 font-style: italic;
             }
-
         </style>
 
         <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
@@ -178,12 +177,12 @@
                                             </div>
                                             <label class="mt-3">Màu sắc sản phẩm</label>
 
-
                                             <select name="colors[]" id="product_color" class="form-control"
                                                 multiple="multiple" data-live-search="true" disabled>
                                                 @foreach (\App\Models\Color::all() as $color)
-                                                <option value="{{ $color->color_code }}"
-                                                    data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                                                <option value="{{ $color->color_code }}">
+                                                    <span style="color: red">{{
+                                                        $color->color_name }}</span>
                                                 </option>
                                                 @endforeach
                                             </select>

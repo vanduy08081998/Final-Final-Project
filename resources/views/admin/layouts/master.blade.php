@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="{{ URL::to('backend/css/font-awesome.min.css') }}">
     <!-- Lineawesome CSS -->
     <link rel="stylesheet" href="{{ URL::to('backend/css/line-awesome.min.css') }}">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ URL::to('backend/css/style.css') }}">
     <!-- Datatable CSS -->
     <link rel="stylesheet" href="{{ URL::to('Backend/css/dataTables.bootstrap4.min.css') }}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ URL::to('backend/css/style.css') }}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="{{ URL::to('backend/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}">
     <!-- Change -->
@@ -36,10 +36,9 @@
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
-    <link rel="stylesheet" href="{{ asset('backend/css/mobiscroll.jquery.min.cs') }}s">
-
-
+    <link rel="stylesheet" href="{{ asset('backend/css/mobiscroll.jquery.min.css') }}">
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::to('backend/css/select2.css') }}">
 </head>
 
 <body>
@@ -48,8 +47,6 @@
 
         @include('admin.inc.header')
         @include('admin.inc.sidebar')
-
-
 
         <!-- Page Wrapper -->
         <div class="page-wrapper">

@@ -824,9 +824,6 @@
             flag = true;
           }
         });
-        if (!flag) {
-          // $('input[name="choice_no[]"][value="' + value + '"]').parent().parent().remove();
-        }
       });
 
       
