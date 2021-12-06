@@ -1,27 +1,29 @@
-const chatbox = jQuery.noConflict();
-
-chatbox(() => {
-  chatbox(".chatbox-open").click(() =>
-    chatbox(".chatbox-popup, .chatbox-close").fadeIn()
+// const chatbox = jQuery.noConflict();
+jQuery(document).ready(function($){
+$(() => {
+  $(".chatbox-open").click(() =>
+    $(".chatbox-popup, .chatbox-close").fadeIn()
   );
 
-  chatbox(".chatbox-close").click(() =>
-    chatbox(".chatbox-popup, .chatbox-close").fadeOut()
+  $(".chatbox-close").click(() =>
+    $(".chatbox-popup, .chatbox-close").fadeOut()
   );
 
-  chatbox(".chatbox-maximize").click(() => {
-    chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeOut();
-    chatbox(".chatbox-panel").fadeIn();
-    chatbox(".chatbox-panel").css({ display: "flex" });
+  $(".chatbox-maximize").click(() => {
+    $(".chatbox-popup, .chatbox-open, .chatbox-close").fadeOut();
+    $(".chatbox-panel").fadeIn();
+    $(".chatbox-panel").css({ display: "flex" });
   });
 
-  chatbox(".chatbox-minimize").click(() => {
-    chatbox(".chatbox-panel").fadeOut();
-    chatbox(".chatbox-popup, .chatbox-open, .chatbox-close").fadeIn();
+  $(".chatbox-minimize").click(() => {
+    $(".chatbox-panel").fadeOut();
+    $(".chatbox-popup, .chatbox-open, .chatbox-close").fadeIn();
   });
 
-  chatbox(".chatbox-panel-close").click(() => {
-    chatbox(".chatbox-popup, .chatbox-close").fadeOut()
+  $(".chatbox-panel-close").click(() => {
+    $(".chatbox-popup, .chatbox-close").fadeOut()
 
   });
 });
+})
+
