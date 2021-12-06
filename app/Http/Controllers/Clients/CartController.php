@@ -30,9 +30,9 @@ class CartController extends Controller
         foreach (json_decode($product->choice_options) as $key => $choice) {
           $options[Attribute::find($choice->attribute_id)->slug] = $request['radio_custom_' . $choice->attribute_id];
           if ($str != null) {
-            $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= '-' . str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
           } else {
-            $str .= str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
           }
         }
       } else {
@@ -44,10 +44,28 @@ class CartController extends Controller
       $item['product_name'] = $product->product_name;
       $item['specifications'] = $options;
       if ($product_variant != null) {
-        $item['variant_price'] = $product_variant->variant_price;
+        if($product->discount != null){
+          if($product->discount_unit == '%'){
+            $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100 );
+          }else{
+            $price = $product_variant->variant_price - $product->discount;
+          }
+        }else{
+          $price = $product_variant->variant_price;
+        }
+        $item['variant_price'] = $price;
         $item['variant_image'] = $product_variant->variant_image;
       } else {
-        $item['variant_price'] = $product->unit_price;
+        if($product->discount != null){
+          if($product->discount_unit == '%'){
+            $price = $product->unit_price - ($product->unit_price * $product->discount / 100 );
+          }else{
+            $price = $product->unit_price - $product->discount;
+          }
+        }else{
+          $price = $product->unit_price;
+        }
+        $item['variant_price'] = $price;
         $item['variant_image'] = $product->product_image;
       }
 
@@ -70,7 +88,7 @@ class CartController extends Controller
           'quantity' => $cart->quantity + $request->product_quantity
         ]);
       }
-      return response()->json(['success' => 'success']);
+      return response()->json(['success' => 'success', 'str' => $str]);
     } else {
       $user_id = null;
       return response()->json(['error' => 'error']);

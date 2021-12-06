@@ -178,11 +178,11 @@
                                             <label class="mt-3">Màu sắc sản phẩm</label>
 
                                             <select name="colors[]" id="product_color" class="form-control"
-                                                multiple="multiple" data-live-search="true" disabled>
+                                                multiple="multiple" disabled>
                                                 @foreach (\App\Models\Color::all() as $color)
                                                 <option value="{{ $color->color_code }}">
                                                     <span style="color: red">{{
-                                                        $color->color_name }}</span>
+                                                        $color->color_code }}</span>
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -690,18 +690,22 @@
     $('input[name="colors_active"]').on('change', function () {
         if (!$('input[name="colors_active"]').is(':checked')) {
             $('#product_color').prop('disabled', true);
-            $('#product_color').selectpicker('refresh');
         } else {
             $('#product_color').prop('disabled', false);
-            $('#product_color').selectpicker('refresh');
         }
         update_sku();
     });
 
 
     $('#product_color').on('change', () => {
+        // console.log($(this).val())
         update_sku();
     })
 
+
+    $('input[name="product_name"]').on('change', function(){
+      
+        update_sku()
+    })
 </script>
 @endpush

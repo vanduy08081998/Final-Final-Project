@@ -840,10 +840,8 @@
 
     if (!$('input[name="colors_active"]').is(':checked')) {
       $('#product_color').prop('disabled', true);
-      // $('#product_color').selectpicker('refresh');
     } else {
       $('#product_color').prop('disabled', false);
-      // $('#product_color').selectpicker('refresh');
     }
 
     $.each($('#product_color option:selected'), function() {
@@ -853,10 +851,8 @@
     $('input[name="colors_active"]').on('change', function() {
       if (!$('input[name="colors_active"]').is(':checked')) {
         $('#product_color').prop('disabled', true);
-        // $('#product_color').selectpicker('refresh');
       } else {
         $('#product_color').prop('disabled', false);
-        // $('#product_color').selectpicker('refresh');
       }
       update_sku();
     });
