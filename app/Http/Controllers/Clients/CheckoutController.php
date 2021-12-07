@@ -6,6 +6,8 @@ use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -29,23 +31,26 @@ class CheckoutController extends Controller
         return view('Clients.checkout.checkout-review');
     }
 
+    public function checkoutCartCheckout(){
+        if(auth()->check()){
+            $carts = Cart::where('user_id', auth()->user()->id)->get();
+        }
+        return view('clients.checkout.Checkout.cart-checkout', compact('carts'));
+    }
+
     public function getShippingAddress(Request $request){
-        $item = array();
         $options = array();
         $shipping_address = session()->get('shipping_address');
-        $options['name'] = $request->name;
+        $options['name'] = auth()->user()->name;
         $options['email'] = $request->email;
         $options['address'] = $request->address;
 
-        array_push($item, $options);
-
         if($shipping_address != null){
-            $shipping_address = $item;
+            $shipping_address = $options;
             session()->push('shipping_address', $shipping_address);
         }else{
-            session()->push('shipping_address', $item);
+            session()->push('shipping_address', $options);
         }
-        return response()->json($shipping_address);
     }
 
     public function getShippingMethod(Request $request){
@@ -61,5 +66,40 @@ class CheckoutController extends Controller
             session()->push('shipping_method', $options);
         }
         return response()->json($shipping_method_session);
+    }
+
+    public function checkout(Request $request){
+        $order = new Order;
+        $shipping_address = session()->get('shipping_address');
+        $shipping_method_session = session()->get('shipping_method');
+        $user_id = auth()->user()->id;
+
+        $cart = Cart::where('user_id', auth()->user()->id);
+        $total = 0;
+        $product = array();
+
+        foreach($cart as $key => $cart){
+            foreach(json_decode($cart->specifications) as $key => $speciation){
+                $total+= $speciation->variant_price * $cart->quantity;
+            }
+            array_push($product, $cart->product_id);
+        }
+        foreach($shipping_address as $key => $value){
+            $shipping_address = json_encode($value,JSON_UNESCAPED_UNICODE);
+        }
+        
+        $order->user_id = $user_id;
+        
+        foreach($shipping_method_session as $key => $method){
+            $shipping_method = $method[0]->id;
+        } 
+
+        $order->shipping_address = $shipping_address;
+        $order->shipping_status = $shipping_method;
+        $order->payment_type = 'Tiền mặt';
+        $order->grand_total = $total;
+
+        $order->save();
+        return response()->json('success');
     }
 }

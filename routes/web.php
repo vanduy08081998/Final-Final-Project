@@ -56,9 +56,11 @@ Route::prefix('/')->group(function () {
         Route::post('/checkout-shipping-address', [CheckoutController::class, 'getShippingAddress'])->name('checkout.shipping-address');
         Route::post('/checkout-shipping-method', [CheckoutController::class, 'getShippingMethod'])->name('checkout.shipping-method');
         Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
+        Route::get('/checkout-cart-checkout', [CheckoutController::class, 'checkoutCartCheckout'])->name('checkout.cart-checkout');
         Route::get('/checkout-payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.checkout-payment');
         Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
         Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
+        Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
     });
     Route::prefix('/shop')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');

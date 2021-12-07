@@ -26,9 +26,10 @@
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
-        <form id="shipping_methods" method="POST">
-            @csrf
-            <section class="col-lg-8">
+
+        <section class="col-lg-8">
+            <form id="shipping_methods" method="POST">
+                @csrf
                 <!-- Steps-->
                 <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
                         <div class="step-progress"><span class="step-count">1</span></div>
@@ -93,8 +94,13 @@
                                 class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a>
                     </div>
                 </div>
-            </section>
-        </form>
+            </form>
+        </section>
+
+
+        <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5" id="cart_checkout">
+
+        </aside>
     </div>
     <!-- Navigation (mobile)-->
     <div class="row d-lg-none">

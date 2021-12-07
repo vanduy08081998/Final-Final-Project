@@ -7,7 +7,7 @@ const cartDropdown = () => {
         }
     });
 }
-cartDropdown()
+
 $('.card_add_btn').click(function() {
     $.ajax({
         type: "POST",
