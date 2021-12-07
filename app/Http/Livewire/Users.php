@@ -127,4 +127,9 @@ class Users extends Component
         $this->dispatchBrowserEvent('alert',['type' => 'success', 'message' => $message]);
     }
 
+    public function close_modal()
+    {
+        $this->dispatchBrowserEvent('CloseModal');
+    }
+
 }

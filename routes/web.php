@@ -23,6 +23,7 @@ use App\Http\Controllers\Clients\SearchController;
 use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Controllers\Clients\UserCommentController;
 use App\Http\Controllers\Clients\WishlistController;
+use App\Http\Controllers\Clients\ReviewController;
 use App\Http\Livewire\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -125,6 +126,9 @@ Route::prefix('/')->group(function () {
         Route::post('/searchs/', [SearchController::class, 'searchs'])->name('search.searchs');
         Route::post('/range', [SearchController::class, 'range'])->name('search.range');
     });
+
+    //Đánh giá
+    Route::resource('/review', ReviewController::class);
     Route::get('/users', Users::class);
 });
 

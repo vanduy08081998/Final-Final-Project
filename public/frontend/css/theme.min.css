@@ -42023,8 +42023,8 @@ fieldset:disabled .btn {
 
 .btn-primary {
     color: #000;
-    background-color: #fe696a;
-    border-color: #fe696a;
+    background-color: #2f80ed;
+    border-color: #2f80ed;
     box-shadow: unset
 }
 
@@ -47810,7 +47810,7 @@ fieldset:disabled .btn {
 }
 
 .text-primary {
-    color: #fe696a !important
+    color: #2f80ed !important
 }
 
 .text-accent {
@@ -47830,7 +47830,7 @@ fieldset:disabled .btn {
 }
 
 .text-warning {
-    color: #fea569 !important
+    color: #fe8c23 !important
 }
 
 .text-danger {

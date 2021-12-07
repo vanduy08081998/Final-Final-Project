@@ -108,12 +108,11 @@ button.chatbox-close {
     display: none;
     margin: 16px calc(2 * 16px + 52px) 16px 16px;
 }
-textarea {
+.review-content {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    height: calc(16px + 16px / 2);
-    padding: 0 calc(16px / 2);
+    padding: 10px;
     font-family: inherit;
     font-size: 16px;
     line-height: calc(16px + 16px / 2);
@@ -121,8 +120,13 @@ textarea {
     background-color: none;
     border: 0;
     outline: 0 !important;
-    resize: none;
-    overflow: hidden;
+   
+    border-radius:5px;
+    border-bottom: 1px solid #A9A9A9;
+}
+.border-textarea{
+    border: 1px solid #A9A9A9;
+    border-radius:5px;
 }
 textarea::placeholder {
     color: #888;
@@ -236,4 +240,25 @@ textarea::placeholder {
 
 .chatbox-popup__main {
     height: 280px !important;
+}
+
+p.text-rating {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.modal-body-review {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.modal-title-review{
+    margin-left:20px;
+}
+li.text-center.li-rating {
+    width: 60px;
+}
+.textarea-bottom.clearfix.d-flex.justify-content-between {
+    height: 40px;
+}
+.rating-review-product.d-flex.justify-content-between.mt-2 {
+    max-height: 100px;
 }

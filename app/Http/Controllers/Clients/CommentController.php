@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-   
+
 
     public function saveComment($id, Request $request)
     {
@@ -34,8 +34,8 @@ class CommentController extends Controller
         return response('Thành công');
     }
 
-  
-    
+
+
     public function recall($id)
     {
         Comment::find($id)->delete();
