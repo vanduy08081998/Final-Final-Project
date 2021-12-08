@@ -13,7 +13,7 @@
             <div class="col-sm-12">
                 <div class="card mb-0">
                     @include('admin.inc.card-header', ['table_title' => 'Bình luận' , 'table_content' =>
-                    'Danh sách bình luận'])
+                    'Danh sách bình luận chưa phản hồi'])
                     <form action="{{ route('comment.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
@@ -24,19 +24,14 @@
                                         <option value="trash">Thùng rác</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
+                                    <a href="{{ route('comment.index') }}" class="btn-sm btn-success">Tất cả bình luận
+                                    </a>
 
-                                    <a href="{{ url('admin/comment/isfeedback') }}"
-                                        class="btn-sm btn-success float-lg-right mr-1">Đã
-                                        phản hồi
+                                    <a href="{{ route('comment.isfeedback') }}" class="btn-sm btn-info ml-1">Đã phản hồi
                                         ({{ $isFeedback }})</a>
-                                    <a href="{{ url('admin/comment/nonefeedback') }}"
-                                        class="btn-sm btn-info float-lg-right mr-1">Chưa
-                                        phản hồi
-                                        ({{ $noneFeedback }})</a>
 
                                     @if ($countTrashed)
-                                        <a href="{{ asset('admin/comment/trash') }}"
-                                            class="btn-sm btn-warning float-right mr-1">Thùng
+                                        <a href="{{ route('comment.trash') }}" class="btn btn-warning float-right">Thùng
                                             rác
                                             ({{ $countTrashed }})</a>
                                     @endif
@@ -59,14 +54,18 @@
                                             '1'])
 
                                             @foreach ($comment->reply as $reply)
-                                                @include('admin.comments.comment_index_rows', ['value' => $reply, 'prefix'
-                                                =>
-                                                '--', 'parent' => '1'])
+                                                @if ($reply->comment_admin_feedback == 1)
+                                                    @include('admin.comments.comment_index_rows', ['value' => $reply,
+                                                    'prefix'
+                                                    =>
+                                                    '--', 'parent' => '2'])
 
-                                                @foreach ($reply->reply as $replyChilds)
-                                                    @include('admin.comments.comment_index_rows', ['value' =>
-                                                    $replyChilds, 'prefix' => '----', 'parent' => '2'])
-                                                @endforeach
+                                                    @foreach ($reply->reply as $replyChilds)
+                                                        @include('admin.comments.comment_index_rows', ['value' =>
+                                                        $replyChilds, 'prefix' => '----', 'parent' => '3'])
+                                                    @endforeach
+                                                @endif
+
                                             @endforeach
 
                                         @endforeach
@@ -75,14 +74,10 @@
                             </div>
                         </div>
                     </form>
-                    <form method="POST" name="form-trash">
-                        @csrf
-                        @method('DELETE')
-                    </form>
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
+        <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
     </div>
 
     <!-- /Page Wrapper -->
@@ -127,8 +122,7 @@
             // Thùng rác
             $('.trash').click(function() {
                 let id = $(this).data('id')
-                let url = $(this).data('url')
-                formTrash.action = url
+                formTrash.action = '/admin/comment/' + id + 'destroy'
                 formTrash.submit()
             })
 

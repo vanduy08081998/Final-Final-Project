@@ -4,104 +4,106 @@
 @section('title', $product->product_name)
 
 @section('meta')
-<meta name="description" content="{!! $product->meta_description !!}">
-<meta name="keywords" content="{!! $product->meta_keywords !!}">
-<meta name="author" content="{!! $product->meta_title !!}">
+    <meta name="description" content="{!! $product->meta_description !!}">
+    <meta name="keywords" content="{!! $product->meta_keywords !!}">
+    <meta name="author" content="{!! $product->meta_title !!}">
 @endsection
 
 @section('content')
-<div class="page-title-overlap bg-dark pt-4">
-    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                    <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>{{
-                            trans('Trang chủ') }}</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
-                    </li>
-                </ol>
-            </nav>
+    <div class="page-title-overlap bg-dark pt-4">
+        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
+                                    class="ci-home"></i>{{ trans('Trang chủ') }}</a>
+                        </li>
+                        <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
+                        </li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
         </div>
-
     </div>
-</div>
-<div class="container">
-    <div class="bg-light shadow-lg rounded-3">
-        <!-- Tabs-->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
-                    role="tab">Tổng quan <span class='d-none d-sm-inline'>Info</span></a></li>
-            <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab" role="tab"><span
-                        class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
-            <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#reviews" data-bs-toggle="tab" role="tab">Bình
-                    luận <span class="fs-sm opacity-60">(74)</span></a></li>
-        </ul>
-        <div class="px-4 pt-lg-3 pb-3 mb-5">
-            <div class="container">
-                <div class="bg-light shadow-lg rounded-3">
-                    <div class="px-4 pt-lg-3 pb-3 mb-5">
+    <div class="container">
+        <div class="bg-light shadow-lg rounded-3">
+            <!-- Tabs-->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
+                        role="tab">Tổng quan <span class='d-none d-sm-inline'>Info</span></a></li>
+                <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab"
+                        role="tab"><span class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
+                <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#reviews" data-bs-toggle="tab"
+                        role="tab">Bình luận <span class="fs-sm opacity-60">(74)</span></a></li>
+            </ul>
+            <div class="px-4 pt-lg-3 pb-3 mb-5">
+                <div class="container">
+                    <div class="bg-light shadow-lg rounded-3">
+                        <div class="px-4 pt-lg-3 pb-3 mb-5">
 
-                        <div class="tab-content px-lg-3">
-                            <!-- General info tab-->
-
-
-                            <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                @include('clients.shop.details.form-select-attribute')
-                            </div>
+                            <div class="tab-content px-lg-3">
+                                <!-- General info tab-->
 
 
-                            <!-- Tech specs tab-->
-                            <div class="tab-pane fade" id="specs" role="tabpanel">
-                                <div
-                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                    <div class="d-flex align-items-center pt-3">
-                                        {!! $product->short_description !!}
+                                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                                    @include('clients.shop.details.form-select-attribute')
+                                </div>
+
+
+                                <!-- Tech specs tab-->
+                                <div class="tab-pane fade" id="specs" role="tabpanel">
+                                    <div
+                                        class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+                                        <div class="d-flex align-items-center pt-3">
+                                            {!! $product->short_description !!}
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- Reviews tab-->
+                                @include('clients.shop.details.review')
                             </div>
-                            <!-- Reviews tab-->
-                            @include('clients.shop.details.review')
                         </div>
                     </div>
-                </div>
-                <!-- Product description-->
-                <!-- Product description-->
-                <div class="container pt-lg-3 pb-4 pb-sm-5">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            {!! $product->long_description !!}
+                    <!-- Product description-->
+                    <!-- Product description-->
+                    <div class="container pt-lg-3 pb-4 pb-sm-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                {!! $product->long_description !!}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Product description-->
-    <div class="container pt-lg-3 pb-4 pb-sm-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
 
+        <!-- Product description-->
+        <div class="container pt-lg-3 pb-4 pb-sm-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+
+                </div>
             </div>
         </div>
+        <hr class="mb-5">
+        <!-- Product carousel (You may also like)-->
+        <!-- Bình luận ở đây nha bà con-->
+        @include('clients.shop.details.gallery-css')
+
+        @include('clients.shop.details.related-product')
+
+        @livewire('comment-live', ['product' => $product])
+        <!-- Bình luận ở đây nha bà con-->
     </div>
-    <hr class="mb-5">
-    <!-- Product carousel (You may also like)-->
-    <!-- Bình luận ở đây nha bà con-->
-    @include('clients.shop.details.gallery-css')
-
-    @include('clients.shop.details.related-product')
-
-    @livewire('comment-live', ['product' => $product])
-    <!-- Bình luận ở đây nha bà con-->
-</div>
 @endsection
 
 @push('script')
-<script>
-    $('#choice_attribute_options').on('change', function() {
+    <script>
+        $('#choice_attribute_options').on('change', function() {
             getVariantPrice()
         })
 
@@ -126,13 +128,14 @@
 
 
 <script>
-    const getVariantPrice = () => {
+        const getVariantPrice = () => {           
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
                 data: $('#choice_attribute_options').serializeArray(),
                 success: function(response) {
                     console.log(response)
+                    console.log(response.quantity)
                     $('#specifications').html(response.specifications)
                     $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
                     // With magic Zoom
@@ -170,10 +173,46 @@
             }
         }
 </script>
+    <script>
+        $('#choice_attribute_options').on('change', function() {
+            getVariantPrice()
+        })
+    </script>
+
+    <script>
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    console.log(response.quantity)
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(` <small>Tổng tiền: </small>
+                                                  ${response.price}`)
+                    $('#main-image').html(`
+            <a data-zoom-id="main" href="${$('#url_to').val()}/${response.variant_image}" class="MagicZoom main_image" id="main"><img
+                          src="${$('#url_to').val()}/${response.variant_image}"></a>
+            `)
+                    MagicZoom.refresh();
+                    if (response.product_quantity > 0) {
+                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                                                  class="ci-security-check"></i>Sản phẩm còn hàng
+                                              </div>`)
+                    } else {
+                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                  class="fas fa-times"></i>Sản phẩm hết hàng
+                                              </div> `)
+                    }
+                }
+
+            })
+        }
+    </script>
 
 
-<script type="text/javascript">
-    // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
+    <script type="text/javascript">
+        // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
                 $('html, body').animate({
@@ -199,6 +238,7 @@
         // click vào phần bình luận đầu tiên
         $(document).on('click', '#form-one', function() {
             $('.form-comment-show').addClass('d-none')
+            $('.body-comment').removeClass('d-none')
         })
 
         // Mở form trả lời bình luận
@@ -219,11 +259,13 @@
             $('.edit-comment-' + id).removeClass('d-none');
             $('.comment-body-' + id).addClass('d-none')
         }
+
         //Thoát chỉnh sửa
         $(document).on('click', '.esc', function(ev) {
             ev.preventDefault();
-            $('.edit-comment-' + $(this).data('id')).addClass('d-none');
-            $('.comment-body-' + $(this).data('id')).removeClass('d-none')
+            let id = $(this).data('id');
+            $('.edit-comment-' + id).addClass('d-none');
+            $('.comment-body-' + id).removeClass('d-none')
         })
 
         // Chỉnh sửa bình luận
@@ -288,5 +330,5 @@
             text = text.replace(/tởm/gi, "***");
             return text;
         }
-</script>
+    </script>
 @endpush
