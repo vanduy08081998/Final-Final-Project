@@ -77,30 +77,25 @@ Route::prefix('/')->group(function () {
         Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
         Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
         Route::post('/cart-total', [CartController::class, 'cartTotals'])->name('cart.total');
-      });
+    });
 
-  Route::prefix('/account')->group(function () {
-    Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
-    Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-    Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
-    Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
-    Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-    Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
-    Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
-    Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
-  });
-  Route::resource('/shippings', ShippingController::class);
-  // wishlist
-  Route::prefix('/wishlist')->group(function () {
-    Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
-    Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
-    Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
-  });
-  // Bình luận
-  Route::resource('/comment', CommentController::class);
-  Route::get('/comment/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
-  Route::get('/comment/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
-  Route::get('/comment/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
+    Route::prefix('/account')->group(function () {
+        Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
+        Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
+        Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
+        Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+        Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
+        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+        Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
+        Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
+    });
+    Route::resource('/shippings', ShippingController::class);
+    // wishlist
+    Route::prefix('/wishlist')->group(function () {
+        Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
+        Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
+        Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
+    });
 
     Route::prefix('/account')->group(function () {
         Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
@@ -132,7 +127,7 @@ Route::prefix('/')->group(function () {
     Route::get('/users', Users::class);
 });
 
-/* Admin */
+/*****************************************************************  Admin ***********************************************************************/
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
@@ -208,7 +203,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/users', UserController::class);
 
     // comment
+    Route::prefix('/comment')->group(function () {
+        Route::get('/{parent}/feedback/{id}', [CommentController::class, 'feedback'])->name('comment.feedback');
+        Route::post('/feedback/store', [CommentController::class, 'feedbackStore'])->name('comment.feedbackStore');
+        Route::get('/isfeedback', [CommentController::class, 'isfeedback'])->name('comment.isfeedback');
+        Route::get('/nonefeedback', [CommentController::class, 'nonefeedback'])->name('comment.nonefeedback');
+        Route::get('/trash', [CommentController::class, 'trash'])->name('comment.trash');
+        Route::get('/edit-feedback/{id}', [CommentController::class, 'editFeedback'])->name('comment.edit-feedback');
+        Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
+        // Route::get('/feedback-all', [CommentController::class, 'feedbackAll'])->name('comment.feedback-all');
+    });
     Route::resource('/comment', CommentController::class);
+
 });
 Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 

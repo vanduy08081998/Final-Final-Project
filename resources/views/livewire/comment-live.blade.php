@@ -1,7 +1,8 @@
 <div wire:ignore.self>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     <div class="container pt-lg-2 pb-5 mb-md-3" id="div_id">
-        @include('clients.comments.form-comment')
+
+        @include('clients.comments.inc.form-comment')
         <!-- Comment-->
         <div class="col-lg-12 pt-3">
 
@@ -10,43 +11,21 @@
             </div>
 
             <div class="infocomment">
+                <!-- Nếu id đăng nhập tồn tại thì get xem nó có bằng id đã bình luận không! để đưa lên đầu tiên-->
+                @if ($userLogin)
 
-                @foreach ($commentAll as $key => $comment)
+                    @include('clients.comments.inc.first-comment-user', ['commentAll' => $commentAll])
 
-                    @if ($comment->comment_parent_id == 0)
+                @else
 
-                        @include('clients.comments.comment', ['comment' => $comment])
+                    @foreach ($commentAll as $key => $comment)
+                        @include('clients.comments.inc.comment-body', ['comment' => $comment])
+                    @endforeach
 
-                        @if ($comment->reply->count() > 0)
-                            <!-- Dùng form này nếu có bình luận trả lời trước đó-->
-                            <div class="comment_reply">
-                                <!-- Trả lời bình luận-->
-                                @foreach ($comment->reply as $reply)
+                @endif
 
-                                    <div class="line">
-                                        <div class="connect">
-                                        </div>
-                                        @include('clients.comments.reply', ['comment' => $comment, 'reply' => $reply])
-
-                                        <!-- Trả lời bình luận con-->
-
-                                        @foreach ($reply->reply as $replyChilds)
-
-                                            @include('clients.comments.replyChild', ['replyChilds' => $replyChilds])
-
-                                        @endforeach
-                                    </div>
-                                @endforeach
-
-                            </div>
-
-                        @endif
-
-                    @endif
-
-                @endforeach
             </div>
-            {{ $commentAll->links('clients.comments.page-link') }}
+            {{ $commentAll->links('clients.comments.inc.page-link') }}
 
         </div>
     </div>

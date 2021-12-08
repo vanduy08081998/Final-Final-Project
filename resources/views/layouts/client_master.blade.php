@@ -60,33 +60,33 @@
 </head>
 <!-- Body-->
 <script>
-  function fee() {
-    $(document).on('change', '.choose', function() {
-      var url = $('.route').data('url');
-      var action = $(this).attr("id");
-      var ma_id = $(this).val();
-      var result = '';
-      if (action == 'province') {
-        result = 'district';
-      } else {
-        result = 'ward';
-      }
-      $.ajax({
-        url: url,
-        method: "POST",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-          action: action,
-          ma_id: ma_id
-        },
-        success: function(data) {
-          $('#' + result).html(data);
-        }
-      })
-    })
-  }
+    function fee() {
+        $(document).on('change', '.choose', function() {
+            var url = $('.route').data('url');
+            var action = $(this).attr("id");
+            var ma_id = $(this).val();
+            var result = '';
+            if (action == 'province') {
+                result = 'district';
+            } else {
+                result = 'ward';
+            }
+            $.ajax({
+                url: url,
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    action: action,
+                    ma_id: ma_id
+                },
+                success: function(data) {
+                    $('#' + result).html(data);
+                }
+            })
+        })
+    }
 </script>
 
 <body class="handheld-toolbar-enabled">
@@ -169,25 +169,30 @@
       };
     })
 
-    $(document).on('click', '#change_avatar', function() {
-      $('#customer_avatar').click();
-    })
-    $('#customer_avatar').ijaboCropTool({
-      preview: '.customer_picture',
-      setRatio: 1,
-      allowedExtensions: ['jpg', 'jpeg', 'png'],
-      buttonsText: ['CẮT VÀ LƯU', 'ĐÓNG'],
-      buttonsColor: ['#30bf7d', '#ee5155', -15],
-      processUrl: '{{ route('crop') }}',
-      withCSRF: ['_token', '{{ csrf_token() }}'],
-      onSuccess: function(message, element, status) {
-        toastr.success(message);
-      },
-      onError: function(message, element, status) {
-        alert(message);
-      }
-    });
-  </script>
+        $(document).on('click', '#change_avatar', function() {
+            $('#customer_avatar').click();
+        })
+        $('#customer_avatar').ijaboCropTool({
+            preview: '.customer_picture',
+            setRatio: 1,
+            allowedExtensions: ['jpg', 'jpeg', 'png'],
+            buttonsText: ['CẮT VÀ LƯU', 'ĐÓNG'],
+            buttonsColor: ['#30bf7d', '#ee5155', -15],
+            processUrl: '{{ route('crop') }}',
+            withCSRF: ['_token', '{{ csrf_token() }}'],
+            onSuccess: function(message, element, status) {
+                toastr.success(message);
+            },
+            onError: function(message, element, status) {
+                alert(message);
+            }
+        });
+
+        $(document).on('click', '.dropdown-item', function() {
+            var href = $(this).attr('href');
+            window.location.href = href;
+        })
+    </script>
 
 </body>
 
