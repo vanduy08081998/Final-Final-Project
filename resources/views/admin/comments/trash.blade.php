@@ -13,34 +13,22 @@
             <div class="col-sm-12">
                 <div class="card mb-0">
                     @include('admin.inc.card-header', ['table_title' => 'Bình luận' , 'table_content' =>
-                    'Danh sách bình luận'])
+                    'Thùng rác'])
                     <form action="{{ route('comment.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
                                 <div class="d-block mt-2">
-                                    <select name="handle" id="" class="form-select-sm">
+                                    <select name="handle" id="" class="form-select-sm" required>
                                         <option value="">------- Hành động -------</option>
-                                        <option value="trash">Thùng rác</option>
+                                        <option value="delete">Xóa</option>
+                                        <option value="restore">Khôi phục</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-
-                                    <a href="{{ url('admin/comment/isfeedback') }}"
-                                        class="btn-sm btn-success float-lg-right mr-1">Đã
-                                        phản hồi
-                                        ({{ $isFeedback }})</a>
-                                    <a href="{{ url('admin/comment/nonefeedback') }}"
-                                        class="btn-sm btn-info float-lg-right mr-1">Chưa
-                                        phản hồi
-                                        ({{ $noneFeedback }})</a>
-
-                                    @if ($countTrashed)
-                                        <a href="{{ asset('admin/comment/trash') }}"
-                                            class="btn-sm btn-warning float-right mr-1">Thùng
-                                            rác
-                                            ({{ $countTrashed }})</a>
-                                    @endif
-
+                                    <a class="btn btn-info handle-all" data-handle="restore-all">Khôi
+                                        phục tất cả</a>
+                                    <a href="{{ route('comment.index') }}" class="btn btn-success float-lg-right">Danh
+                                        sách</a>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -57,28 +45,13 @@
                                         @foreach ($comments as $comment)
                                             @include('admin.comments.comment_index_rows', ['value' => $comment, 'parent' =>
                                             '1'])
-
-                                            @foreach ($comment->reply as $reply)
-                                                @include('admin.comments.comment_index_rows', ['value' => $reply, 'prefix'
-                                                =>
-                                                '--', 'parent' => '1'])
-
-                                                @foreach ($reply->reply as $replyChilds)
-                                                    @include('admin.comments.comment_index_rows', ['value' =>
-                                                    $replyChilds, 'prefix' => '----', 'parent' => '2'])
-                                                @endforeach
-                                            @endforeach
-
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </form>
-                    <form method="POST" name="form-trash">
-                        @csrf
-                        @method('DELETE')
-                    </form>
+
                     <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
                 </div>
             </div>
@@ -136,8 +109,6 @@
             $('.handle-all').click(function() {
                 let url = $('.url-handle').val()
                 let handle = $(this).data('handle')
-                console.log(handle);
-
                 $.ajax({
                     url: url,
                     type: 'post',

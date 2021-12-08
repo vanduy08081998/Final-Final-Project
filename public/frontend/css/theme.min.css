@@ -2723,10 +2723,11 @@ textarea.form-control-lg {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    }
+}
+
 a.add-shipping {
     color: #3b58e7;
-    }
+}
 
 .form-range::-moz-range-track {
     width: 100%;

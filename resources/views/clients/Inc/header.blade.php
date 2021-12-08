@@ -9,9 +9,10 @@ $category = Category::all();
 ?>
 
 <style>
-.twitter-typeahead {
-    width: 30rem;
-}
+    .twitter-typeahead {
+        width: 30rem;
+    }
+
 </style>
 <header class="shadow-sm">
     <!-- Topbar-->
@@ -41,15 +42,15 @@ $category = Category::all();
                 </ul>
             </div>
             <div class="d-none d-md-block ms-3 text-nowrap">
-                @if ($wishlist == NULL && Auth::user == NULL)
-                <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                    <i class="ci-heart mt-n1"></i>Yêu thích (0)
-                </a>
+                @if ($wishlist == null && Auth::user == null)
+                    <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                        <i class="ci-heart mt-n1"></i>Yêu thích (0)
+                    </a>
                 @elseif ($wishlist != NULL && Auth::user())
-                <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                    <i class="ci-heart mt-n1"></i>Yêu thích
-                    ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }})
-                </a>
+                    <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                        <i class="ci-heart mt-n1"></i>Yêu thích
+                        ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }})
+                    </a>
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                     href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)</a>
@@ -71,7 +72,8 @@ $category = Category::all();
                 </a>
                 <!-- Search-->
                 <form class="input-group d-none d-lg-flex flex-nowrap mx-4 typeahead"
-                    action="{{ route('search.searchs') }}" method="POST" enctype="multipart/form-data" id="choice-form">
+                    action="{{ route('search.searchs') }}" method="POST" enctype="multipart/form-data"
+                    id="choice-form">
                     @csrf
                     @method('POST')
 
@@ -81,8 +83,8 @@ $category = Category::all();
                     <select class="form-select flex-shrink-0" style="width: 10.5rem;" name="category">
                         <option name="category" value="0">Tất cả</option>
                         @foreach ($category as $cate)
-                        <option name="category" value="{{ $cate->id_cate }}">{{ $cate->category_name }}
-                        </option>
+                            <option name="category" value="{{ $cate->id_cate }}">{{ $cate->category_name }}
+                            </option>
                         @endforeach
                     </select>
                     <button class="btn-primary" type="submit" style="border-radius: 0 25px 25px 0; border: none"><i
@@ -93,24 +95,26 @@ $category = Category::all();
                 <!-- Toolbar-->
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     @if (Auth::user())
-                    </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
-                        <div class="navbar-tool-icon-box">
-                            @if (Auth::user()->avatar)
-                            <img class="customer_picture" src="{{ URL::to('uploads/Users/',Auth::user()->avatar) }}"
-                                width="90" alt="avatar">
-                            @else
-                            <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}" width="90"
-                                alt="avatar">
-                            @endif
-                        </div>
-                        <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
-                    </a>
+                        </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2"
+                            href="{{ route('account.account-info') }}">
+                            <div class="navbar-tool-icon-box">
+                                @if (Auth::user()->avatar)
+                                    <img class="customer_picture"
+                                        src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
+                                        alt="avatar">
+                                @else
+                                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                                        width="90" alt="avatar">
+                                @endif
+                            </div>
+                            <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
+                        </a>
                     @else
 
-                    </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                        <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                    </a>
+                        </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                        </a>
                     @endif
                     <div class="navbar-tool dropdown ms-3 cart__dropdown">
 
@@ -133,69 +137,130 @@ $category = Category::all();
                                     class="ci-menu align-middle mt-n1 me-2"></i>Danh mục</a>
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
-                                <li class="dropdown mega-dropdown">
-                                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                        <i class="ci-laptop opacity-60 fs-lg mt-n1 me-2"></i>
-                                        {{ $cate->category_name }}
-                                    </a>
-                                    <div class="dropdown-menu p-0">
-                                        <div class="d-flex flex-wrap flex-sm-nowrap px-2">
-                                            <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
-                                                <div class="widget widget-links">
-                                                    <h6 class="fs-base mb-3">Thương hiệu</h6>
-                                                    <ul class="widget-list">
-                                                        @foreach ($cate->brands as $brand)
-                                                        <li class="widget-list-item pb-1">
-                                                            <a class="widget-list-link"
-                                                                href="#">{{ $brand->brand_name }}</a>
-                                                        </li>
-                                                        @endforeach
-                                                    </ul>
+                                    <li class="dropdown mega-dropdown">
+                                        <a href="{{ url('/' . $cate->category_slug) }}"
+                                            class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
+                                            {!! $cate->category_icon !!}
+                                            {{ $cate->category_name }}
+                                        </a>
+                                        <div class="dropdown-menu p-0" style="width:1000px; height:400px;">
+                                            <div class="d-flex flex-wrap flex-sm-nowrap px-2">
+                                                <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
+                                                    @foreach ($cate->subcategory as $cateChild)
+                                                        <div class="widget widget-links pb-2">
+                                                            <h6 class="fs-base mb-3">
+                                                                {{ $cateChild->category_name }}
+                                                            </h6>
+                                                            <ul class="widget-list">
+                                                                @foreach ($cateChild->brands as $brand)
+                                                                    <li class="widget-list-item pb-1">
+                                                                        <a class="widget-list-link"
+                                                                            href="#">{{ $brand->brand_name }}</a>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <div class="mega-dropdown-column py-4 px-3">
+                                                    <div class="widget widget-links">
+                                                        <h6 class="fs-base mb-3">Accessories</h6>
+                                                        <ul class="widget-list">
+
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mega-dropdown-column py-4 px-3">
+                                                    <div class="widget widget-links">
+                                                        <h6 class="fs-base mb-3">Accessories</h6>
+                                                        <ul class="widget-list">
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Monitors</a></li>
+                                                            <li class="widget-list-item pb-1"><a
+                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
+                                                                    Sleeves</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
+                                                        class="d-block mb-2" href="#"><img
+                                                            src="{{ asset('https://lh3.googleusercontent.com/jSPmSAwSsjO3grPdLl49HYHhDKZwMZHs-Uj8-rcM8g3v_ObfkNkzvsGp5V-Ro4ZuZQWdyycYwU6YLfO6_qMFQ-NOewp3e7MPBw=rw-w400') }}"
+                                                            alt="Computers &amp; Accessories"></a>
+                                                    <div class="fs-sm mb-3">Starting from <span
+                                                            class='fw-medium'>$149.<small>80</small></span></div><a
+                                                        class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
+                                                            class="ci-arrow-right fs-xs ms-1"></i></a>
                                                 </div>
                                             </div>
-                                            <div class="mega-dropdown-column py-4 px-3">
-                                                <div class="widget widget-links">
-                                                    <h6 class="fs-base mb-3">Accessories</h6>
-                                                    <ul class="widget-list">
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Monitors</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Bags, Cases &amp;
-                                                                Sleeves</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Batteries</a>
-                                                        </li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Charges &amp;
-                                                                Adapters</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Cooling Pads</a>
-                                                        </li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Mounts</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Replacement
-                                                                Screens</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Security
-                                                                Locks</a></li>
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                                                href="#">Stands</a></li>
-                                                    </ul>
+                                            {{-- <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-lg-8">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                                <div class="col-lg-4">Điện thoại</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <a href="">
+                                                            <img src="https://lh3.googleusercontent.com/deKE0SCWbnhQl4MG1v1Pw3JzIxpfwXVSisk3L1Tq-pyYg0bflSzAqB7WBQXE40CpjixdpD2o1Pkz3n_pOVY5qklwtAx9MY4=rw-w400"
+                                                                alt="">
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a
-                                                    class="d-block mb-2" href="#"><img
-                                                        src="{{ asset('frontend/img/shop/departments/07.jpg') }}"
-                                                        alt="Computers &amp; Accessories"></a>
-                                                <div class="fs-sm mb-3">Starting from <span
-                                                        class='fw-medium'>$149.<small>80</small></span></div><a
-                                                    class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
-                                                        class="ci-arrow-right fs-xs ms-1"></i></a>
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 @endforeach
                             </ul>
                         </li>
@@ -203,12 +268,13 @@ $category = Category::all();
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown active">
-                            <a class="nav-link" href="{{ route('clients.index') }}"><i class="ci-home"></i> Trang
+                            <a class="nav-link" href="{{ route('clients.index') }}"><i
+                                    class="ci-home"></i> Trang
                                 chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.about') }}" data-bs-auto-close="outside"><i
-                                    class="ci-flag"></i>
+                            <a class="nav-link" href="{{ route('clients.about') }}"
+                                data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
@@ -358,8 +424,8 @@ $category = Category::all();
                                 Bài viết</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.contact') }}" data-bs-auto-close="outside"><i
-                                    class="ci-phone"></i> Liên hệ và Phản hồi</a>
+                            <a class="nav-link" href="{{ route('clients.contact') }}"
+                                data-bs-auto-close="outside"><i class="ci-phone"></i> Liên hệ và Phản hồi</a>
                         </li>
                     </ul>
                 </div>
