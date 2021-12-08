@@ -1,40 +1,64 @@
 function paypalButtons() { 
-    paypal_sdk.Buttons({
-        style: {
-                  color:  'blue',
-                  shape:  'pill',
-                  label:  'pay',
-                  height: 40
-              },
-      // Set up the transaction
-      createOrder: function(data, actions) {
-            return actions.order.create({
-              application_context: {
-              brand_name : 'Laravel Book Store Demo Paypal App',
-              user_action : 'PAY_NOW',
-            },
-              purchase_units: [{
-                  amount: {
-                      value: '88.44'
-                  }
-              }]
-          });
-      },
-    
-      // Finalize the transaction
-      onApprove: function(data, actions) {
-          return actions.order.capture().then(function(orderData) {
-              // Successful capture! For demo purposes:
-              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-              var transaction = orderData.purchase_units[0].payments.captures[0];
-              alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-    
-              // Replace the above to show a success message within this page, e.g.
-              // const element = document.getElementById('paypal-button-container');
-              // element.innerHTML = '';
-              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-              // Or go to another URL:  actions.redirect('thank_you.html');
-          });
-      }
+    paypal.Buttons({
+
+        // Call your server to set up the transaction
+        createOrder: function(data, actions) {
+            return fetch(route('paypal.create'), {
+                headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                method: 'post',
+                body: JSON.stringify({
+                    body: "body"
+                })
+            }).then(function(res) {
+                return res.json();
+            }).then(function(orderData) {
+                return orderData.id;
+            });
+        },
+
+        // Call your server to finalize the transaction
+        onApprove: function(data, actions) {
+            return fetch(urlto+'api/paypal/order/' + data.orderID + '/capture/', {
+                method: 'post'
+            }).then(function(res) {
+                return res.json();
+            }).then(function(orderData) {
+                // Three cases to handle:
+                //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                //   (2) Other non-recoverable errors -> Show a failure message
+                //   (3) Successful transaction -> Show confirmation or thank you
+
+                // This example reads a v2/checkout/orders capture response, propagated from the server
+                // You could use a different API or structure for your 'orderData'
+                var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+
+                if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                    return actions.restart(); // Recoverable state, per:
+                    // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                }
+
+                if (errorDetail) {
+                    var msg = 'Sorry, your transaction could not be processed.';
+                    if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+                    if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
+                    return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+                }
+
+                // Successful capture! For demo purposes:
+                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                var transaction = orderData.purchase_units[0].payments.captures[0];
+                alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                // Replace the above to show a success message within this page, e.g.
+                // const element = document.getElementById('paypal-button-container');
+                // element.innerHTML = '';
+                // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                // Or go to another URL:  actions.redirect('thank_you.html');
+            });
+        }
+
     }).render('#paypal-button-container');
  }

@@ -13,6 +13,7 @@
  */
 
 @import"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&amp;display=swap";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
@@ -57,12 +58,12 @@
     --bs-white-rgb: 255, 255, 255;
     --bs-black-rgb: 0, 0, 0;
     --bs-body-rgb: 75, 86, 107;
-    --bs-font-sans-serif: "Rubik", sans-serif;
+    --bs-font-sans-serif: "Roboto", sans-serif;
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --bs-body-font-family: var(--bs-font-sans-serif);
-    --bs-body-font-size: 1rem;
-    --bs-body-font-weight: 400;
+    --bs-body-font-size: 0.925rem;
+    --bs-body-font-weight: 600;
     --bs-body-line-height: 1.5;
     --bs-body-color: #4b566b;
     --bs-body-bg: #fff

@@ -1,31 +1,32 @@
 <?php
 
-use App\Http\Controllers\Admin\AttributeController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BlogCateController;
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CommentController;
-use App\Http\Controllers\Admin\DiscountController;
-use App\Http\Controllers\Admin\FlashDealController;
-use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\InformationsController;
-use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Clients\AccountController;
-use App\Http\Controllers\Clients\CartController;
-use App\Http\Controllers\Clients\CheckoutController;
-use App\Http\Controllers\Clients\HomeController as HomeClient;
-use App\Http\Controllers\Clients\ProductController;
-use App\Http\Controllers\Clients\SearchController;
-use App\Http\Controllers\Clients\ShippingController;
-use App\Http\Controllers\Clients\UserCommentController;
-use App\Http\Controllers\Clients\WishlistController;
 use App\Http\Livewire\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Clients\CartController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\BlogCateController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Clients\PaypalController;
+use App\Http\Controllers\Clients\SearchController;
+use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\FlashDealController;
+use App\Http\Controllers\Clients\AccountController;
+use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Clients\CheckoutController;
+use App\Http\Controllers\Clients\ShippingController;
+use App\Http\Controllers\Clients\WishlistController;
+use App\Http\Controllers\Admin\InformationsController;
+use App\Http\Controllers\Clients\UserCommentController;
+use App\Http\Controllers\Clients\HomeController as HomeClient;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -210,6 +211,12 @@ Route::group(['prefix' => 'admin'], function () {
     // comment
     Route::resource('/comment', CommentController::class);
 });
+//paypal
+Route::prefix('api/paypal')->group(function(){
+    Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
+    Route::post('/order', [PaypalController::class, 'create']);
+});
+
 Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 
 Auth::routes();
