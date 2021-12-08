@@ -402,6 +402,15 @@
 }
 
 
-/* .infocom_ask:hover>.admin-com {
-    visibility: visible;
-} */
+/* Tìm kiếm */
+
+.tt-menu {
+    margin-left: 15px;
+    width: 670px;
+    border: 0.5px solid #EEEEEE;
+}
+
+.tt-menu img {
+    margin-right: 5px;
+    margin-top: 5px;
+}

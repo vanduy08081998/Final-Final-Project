@@ -12,16 +12,17 @@ class CommentLive extends Component
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
-    public $product, $comment_content, $userLogin, $comments;
+    public $product, $comment_content, $userLogin = [], $comments, $idUser;
 
     protected $listeners = ['render' => 'mount'];
 
     public function mount()
     {
         if (Auth::user()) {
-            $this->userLogin = Auth::user();
+            $this->idUser = Auth::user()->id;
         } else {
-            $this->userLogin = null;
+            
+            $this->idUser = 0;
         }
 
         $this->comment_content = '';
@@ -29,7 +30,7 @@ class CommentLive extends Component
 
     public function saveReply($comment_id_product, $comment_parent_id, $comment_reply_id)
     {
-        if (!$this->userLogin) {
+        if (!Auth::user()) {
             return redirect('/login');
         }
         if ($this->comment_content == "") {
@@ -39,7 +40,7 @@ class CommentLive extends Component
         $data = array(
             'comment_id_product' => $comment_id_product,
             'comment_content' => $this->comment_content,
-            'comment_id_user' => $this->userLogin->id,
+            'comment_id_user' => $this->idUser,
             'comment_parent_id' => $comment_parent_id,
             'comment_reply_id' => $comment_reply_id,
         );
@@ -50,18 +51,18 @@ class CommentLive extends Component
 
     public function likeComment($comment_id)
     {
-        if (!$this->userLogin) {
+        if (!Auth::user()) {
             return redirect('/login');
         }
         $commentId = Comment::find($comment_id);
-        $commentId->usersLike()->attach($this->userLogin->id);
+        $commentId->usersLike()->attach($this->idUser);
         $this->emit('render');
     }
 
     public function UnLikeComment($comment_id)
     {
         $commentId = Comment::find($comment_id);
-        $commentId->usersLike()->detach($this->userLogin->id);
+        $commentId->usersLike()->detach($this->idUser);
         $this->emit('render');
     }
 

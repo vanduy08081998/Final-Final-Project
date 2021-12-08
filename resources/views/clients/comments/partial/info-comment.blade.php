@@ -38,7 +38,7 @@
     </div>
 
     <div class="relate_infocom">
-        @if ($value->user->id != $userLogin->id)
+        @if ($value->user->id != $idUser)
             <span class="reply reply-comment" data-id="{{ $value->id }}">Trả
                 lời</span>
             <b class="dot">.</b>
@@ -51,7 +51,7 @@
 
 
 
-        @if (in_array($userLogin->id, $value->usersLike->pluck('id')->all()))
+        @if (in_array($idUser, $value->usersLike->pluck('id')->all()))
             <span class="numlike isLike">
                 <i class="fa fa-thumbs-o-up"></i>
                 <span wire:click="UnLikeComment('{{ $value->id }}')">Bỏ thích</span>
@@ -74,7 +74,7 @@
                 {{ $value->usersLike->count() }}
                 <div class="comment-list-like-user">
                     @foreach ($value->usersLike as $user)
-                        @if ($userLogin->id == $user->id)
+                        @if ($idUser == $user->id)
                             <li class="name-user">Bạn</li>
                         @else
                             <li class="name-user">{{ $user->name }}</li>
@@ -84,8 +84,9 @@
             </span>
         @endif
     </div>
-    @if ($userLogin->position == 'admin')
-        @if ($value->user->position != 'admin')
+
+    @if (Auth::user())
+        @if (Auth::user()->position == 'admin' && $value->user->position != 'admin')
             <div class="admin-com">
                 <i class="fa fa-th-list" aria-hidden="true"></i>
                 <div class="admin-handle">
@@ -98,6 +99,7 @@
             </div>
         @endif
     @endif
+
 
 </div>
 <div class="clr"></div>

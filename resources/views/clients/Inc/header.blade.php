@@ -140,7 +140,7 @@ $category = Category::all();
                                     <li class="dropdown mega-dropdown">
                                         <a href="{{ url('/' . $cate->category_slug) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
-                                            {!! $cate->category_icon !!}
+                                            <span>{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}
                                         </a>
                                         <div class="dropdown-menu p-0" style="width:1000px; height:400px;">
@@ -213,52 +213,7 @@ $category = Category::all();
                                                             class="ci-arrow-right fs-xs ms-1"></i></a>
                                                 </div>
                                             </div>
-                                            {{-- <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <div class="container-fluid">
-                                                            <div class="row">
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                                <div class="col-lg-4">Điện thoại</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <a href="">
-                                                            <img src="https://lh3.googleusercontent.com/deKE0SCWbnhQl4MG1v1Pw3JzIxpfwXVSisk3L1Tq-pyYg0bflSzAqB7WBQXE40CpjixdpD2o1Pkz3n_pOVY5qklwtAx9MY4=rw-w400"
-                                                                alt="">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
+
                                         </div>
                                     </li>
                                 @endforeach
