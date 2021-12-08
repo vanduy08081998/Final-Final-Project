@@ -78,4 +78,10 @@ class Product extends Model
   {
     return $this->belongsTo(Wishlist::class, 'id_prod');
   }
+  
+  public function orders()
+  {
+    return $this->belongsToMany(Order::class, 'order_details');
+  }
+
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -74,16 +75,23 @@ class CheckoutController extends Controller
         $shipping_method_session = session()->get('shipping_method');
         $user_id = auth()->user()->id;
 
-        $cart = Cart::where('user_id', auth()->user()->id);
+        $cart = Cart::where('user_id', auth()->user()->id)->get();
         $total = 0;
         $product = array();
-
+        $product_details = [];
+        $item = 0;
         foreach($cart as $key => $cart){
             foreach(json_decode($cart->specifications) as $key => $speciation){
                 $total+= $speciation->variant_price * $cart->quantity;
+                $product_details['product_id'] = $cart->product_id;
+                $product_details['quantity'] = $cart->quantity;
+                $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
+                $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
+
             }
-            array_push($product, $cart->product_id);
+            array_push($product, $product_details);
         }
+        
         foreach($shipping_address as $key => $value){
             $shipping_address = json_encode($value,JSON_UNESCAPED_UNICODE);
         }
@@ -100,6 +108,7 @@ class CheckoutController extends Controller
         $order->grand_total = $total;
 
         $order->save();
-        return response()->json('success');
+        $order->products()->attach($product);
+        return response()->json($product);
     }
 }

@@ -11,4 +11,9 @@ class Order extends Model
 
     protected $table = 'orders';
     public $timestamp = true;
+
+    public function products()
+  {
+    return $this->belongsToMany(Product::class, 'order_details');
+  }
 }
