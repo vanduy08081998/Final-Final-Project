@@ -58,7 +58,10 @@
 
                     <div class="textarea border-textarea">
                         <textarea class="review-content content-rating" placeholder="Mời bạn chia sẻ thêm một số cảm nhận ..." id="content_rating" rows="3"></textarea>
-                       <span style="margin-left:78%;font-size:14px"><span id="count-result">0</span> ký tự (tối thiểu 80)</span>
+                       <div style="font-size:14px" class="d-flex error-review">
+                          <span class="ms-sm-2 text-danger review_error"> </span>
+                           <span class="me-sm-2"><span id="count-result">0</span> ký tự (tối thiểu 80)</span>
+                        </div>
                         <div class="input-field">
                             <div class="input-images-1"></div>
                         </div>
@@ -71,11 +74,14 @@
                         <label class="form-check-label" for="exampleCheck1">Tôi sẽ giới thiệu sản phẩm này cho bạn bè
                             người thân</label>
                     </div>
-                    <div class="d-flex justify-content-center mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center mt-3">
                         <button data-url="{{route('review.store')}}" onclick="new_review()" type="button"
                             class="button_save_review btn btn-primary">Gửi đánh giá ngay</button>
+                        <p style="font-size:14px" class="error_review mt-1">Nội dung đánh giá quá ít. Vui lòng nhập thêm nội dung đánh giá về sản phẩm.</p>
                     </div>
-                    <div class="d-flex justify-content-center mt-2 mb-2">
+
+
+                    <div class="d-flex justify-content-center mb-2">
                         <span style="font-size:14px">Để đánh giá được duyệt, quý khách vui lòng tuân thủ <span class="text-primary">Quy định
                                 đánh giá</span></span>
                     </div>

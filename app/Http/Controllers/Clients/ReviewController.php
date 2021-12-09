@@ -45,10 +45,10 @@ class ReviewController extends Controller
              $image->move('uploads/Reviews/',$new_image);
              array_push($array_name_image, $new_image);
             }
+            $array_name_image = implode(',', $array_name_image);
         }else{
-            $image = null;
+            $array_name_image = null;
         }
-        $array_name_image = implode(',', $array_name_image);
         $data = array(
             'product_id'=> $request->product_id,
             'customer_id'=> Auth()->user()->id,

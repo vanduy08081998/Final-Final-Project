@@ -269,10 +269,15 @@ button.btn-comment.text-primary {
 button.btn-time-comment.text-muted {
     font-size: 14px;
 }
-img.review_image {
+.image-review {
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 8px;
     margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 15px;
+    vertical-align: top;
+}
+img.review_image {
     width: 125px;
     height: 125px;
     object-fit: cover;

@@ -77,11 +77,11 @@
                     </div>
                 </div><span wire:click.prevent="close_review()" class="text-muted ms-3">{{$onestar}}%</span>
             </div>
-
+            @if($id_review == 0)
             <button type="button" wire:click.prevent="add_review()" class="btn btn-primary btn-sm mt-4 w-100">
                 Viết đánh giá
             </button>
-
+            @endif
         </div>
 
         <div class="col-lg-4 col-md-5 text-center">
@@ -144,31 +144,37 @@
                     </div>
                 </div>
                 <p class="fs-md mb-2">{{$review->content_rating}}</p>
-                <div class="text-nowrap">
+                @if($review->image)
+                <div class="text-nowrap ">
                     @php
                     $str = $review->image;
                     $image_array = explode(',', $str);
                     @endphp
                     @foreach($image_array as $img)
-                    <img class="review_image" src="{{URL::to('uploads/Reviews', $img)}}" width="100px">
+                    <div class="image-review">
+                        <img class="review_image" src="{{URL::to('uploads/Reviews', $img)}}">
+                    </div>
                     @endforeach
                 </div>
+                @endif
                 <div class="text-nowrap">
                     <button class="btn-like text-primary" type="button">Hữu ích</button>
-                    <button class="btn-comment text-primary" data-id="{{$review->id}}" type="button"><i class="fa fa-comment-o" aria-hidden="true"></i> Thảo luận</button>
+                    <button class="btn-comment text-primary" data-id="{{$review->id}}" type="button"><i
+                            class="fa fa-comment-o" aria-hidden="true"></i> Thảo luận</button>
                     <button class="btn-time-comment text-muted" type="button"><i class="fa fa-comment-o"
                             aria-hidden="true"></i> Đã đánh giá khoảng {{$review->created_at->diffForHumans()}}</button>
                 </div>
-              
-                    <div class="col-lg-12 mt-2 rating_reply d-none form-review-show reply-review-{{ $review->id }}" >
-                        <textarea class="form-control body-{{ $review->id }} form-comment-text" cols="2" rows="2"
-                            wire:model.lazy="comment_content"></textarea>
-                        <div class="form-review d-flex justify-content-end">
-                            <button class="btn-submit-text"
-                                wire:click.prevent="ReplyRating('{{ $review->id }}', '{{ $review->id }}', '{{ $review->id }}')">Gửi <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                        </div>
+
+                <div class="col-lg-12 mt-2 rating_reply d-none form-review-show reply-review-{{ $review->id }}">
+                    <textarea class="form-control body-{{ $review->id }} form-comment-text" cols="2" rows="2"
+                        wire:model.lazy="comment_content"></textarea>
+                    <div class="form-review d-flex justify-content-end">
+                        <button class="btn-submit-text"
+                            wire:click.prevent="ReplyRating('{{ $review->id }}', '{{ $review->id }}', '{{ $review->id }}')">Gửi
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                     </div>
-            
+                </div>
+
             </div>
             @endforeach
 
@@ -204,50 +210,55 @@ function new_review() {
         check_rating = ''
     }
     if (count_rating == 'none') {
-        alert('Bạn cần chọn sao đánh giá!')
+        $('.review_error').html('Bạn chưa đánh giá điểm sao, vui lòng đánh giá.');
     } else {
         let array_image = [];
-        let $form = $('form');
-        let $inputImages = $form.find('input[name^="images"]');
-        if (!$inputImages.length) {
-            $inputImages = $form.find('input[name^="photos"]')
+        let form = $('form');
+        let inputImages = form.find('input[name^="images"]');
+        if (!inputImages.length) {
+            inputImages = form.find('input[name^="photos"]')
         }
-        for (let file of $inputImages.prop('files')) {
+        for (let file of inputImages.prop('files')) {
             array_image.push(file.name)
         }
-        var form_data = new FormData()
-        var totalfiles = document.getElementById('images').files.length;
-        for (var index = 0; index < totalfiles; index++) {
-            form_data.append("images[]", document.getElementById('images').files[index]);
-            form_data.append("count_rating", count_rating);
-            form_data.append("product_id", product_id);
-            form_data.append("content_rating", content_rating);
-            form_data.append("introduce", check_rating);
-        }
-        $.ajax({
-            url: URL,
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            contentType: false,
-            processData: false,
-            data: form_data,
-            success: function() {
-                $('.new_review').modal('hide');
-                window.livewire.emit('render')
-                toastr.success('Đánh giá sản phẩm thành công')
+        let form_data = new FormData()
+        let totalfiles = document.getElementById('images').files.length;
+        if ($('#content_rating').val().length < 80) {
+            $('.review_error').html('Nội dung đánh giá quá ít. Vui lòng nhập thêm nội dung đánh giá về sản phẩm.')
+        } else {
+            if (totalfiles > 4) {
+                $('.review_error').html('Đã upload quá số ảnh quy định (tối đa 4 ảnh)');
+            } else {
+                for (var index = 0; index < totalfiles; index++) {
+                    form_data.append("images[]", document.getElementById('images').files[index]);
+                }
+                form_data.append("count_rating", count_rating);
+                form_data.append("product_id", product_id);
+                form_data.append("content_rating", content_rating);
+                form_data.append("introduce", check_rating);
+                $.ajax({
+                    url: URL,
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    success: function() {
+                        $('.new_review').modal('hide');
+                        window.livewire.emit('render')
+                        toastr.success('Đánh giá sản phẩm thành công')
+                    }
+                })
             }
-        })
+        }
     }
-
-
-
 }
 $('.btn-comment').click(function() {
     var id = $(this).data('id');
     $('.form-review-show').addClass('d-none')
-    $('.reply-review-'+id).removeClass('d-none');
+    $('.reply-review-' + id).removeClass('d-none');
 })
 </script>
 @endpush
