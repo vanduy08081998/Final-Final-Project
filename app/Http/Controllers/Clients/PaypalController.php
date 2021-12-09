@@ -27,22 +27,7 @@ class PaypalController extends Controller
     {
         $provider = new PayPalClient;
         $provider = \PayPal::setProvider();
-        $config = [
-            'mode'    => 'sandbox',
-            'sandbox' => [
-                'client_id'         => env('PAYPAL_SANDBOX_CLIENT_ID', 'AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx'),
-                'client_secret'     => env('PAYPAL_SANDBOX_CLIENT_SECRET', 'EMNELGxc04Y49z47_MoGj6IZahZR_O0ZGQAGymtvICNjpEpPs7vCNGQ3CYAhf73Mq-XQA-7I1PKcut_E'),
-                'app_id'            => 'APP-80W284485P519543T',
-            ],
-        
-            'payment_action' => 'Sale',
-            'currency'       => 'USD',
-            'notify_url'     => 'https://your-app.com/paypal/notify',
-            'locale'         => 'en_US',
-            'validate_ssl'   => true,
-        ];
-        
-        $provider->setApiCredentials($config);
+        $provider->setApiCredentials(config('paypal'));
         $token = $provider->getAccessToken();
         $provider->setAccessToken($token);
         $order = $provider->createOrder([
