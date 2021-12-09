@@ -4,84 +4,84 @@
 @section('title', $product->product_name)
 
 @section('meta')
-<meta name="description" content="{!! $product->meta_description !!}">
-<meta name="keywords" content="{!! $product->meta_keywords !!}">
-<meta name="author" content="{!! $product->meta_title !!}">
+    <meta name="description" content="{!! $product->meta_description !!}">
+    <meta name="keywords" content="{!! $product->meta_keywords !!}">
+    <meta name="author" content="{!! $product->meta_title !!}">
 @endsection
 
 @section('content')
-<div class="page-title-overlap bg-dark pt-4">
-    <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                    <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
-                                class="ci-home"></i>{{ trans('Trang chủ') }}</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
-                    </li>
-                    <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
-                    </li>
-                </ol>
-            </nav>
+    <div class="page-title-overlap bg-dark pt-4">
+        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
+                                    class="ci-home"></i>{{ trans('Trang chủ') }}</a>
+                        </li>
+                        <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
+                        </li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
         </div>
-
     </div>
-</div>
-</div>
-<div class="container">
-    <div class="bg-light shadow-lg rounded-3">
-        <!-- Tabs-->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
-                    role="tab">Tổng quan <span class='d-none d-sm-inline'>Info</span></a></li>
-            <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab" role="tab"><span
-                        class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
-        </ul>
-        <div class="px-4 pt-lg-3 pb-3 mb-5">
-            <div class="container">
-                <div class="bg-light shadow-lg rounded-3">
-                    <div class="px-4 pt-lg-3 pb-3 mb-5">
+    </div>
+    <div class="container">
+        <div class="bg-light shadow-lg rounded-3">
+            <!-- Tabs-->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
+                        role="tab">Tổng quan <span class='d-none d-sm-inline'>Info</span></a></li>
+                <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab"
+                        role="tab"><span class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
+            </ul>
+            <div class="px-4 pt-lg-3 pb-3 mb-5">
+                <div class="container">
+                    <div class="bg-light shadow-lg rounded-3">
+                        <div class="px-4 pt-lg-3 pb-3 mb-5">
 
-                        <div class="tab-content px-lg-3">
-                            <!-- General info tab-->
-
-
-                            <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                @include('clients.shop.details.form-select-attribute')
-                            </div>
+                            <div class="tab-content px-lg-3">
+                                <!-- General info tab-->
 
 
-                            <!-- Tech specs tab-->
-                            <div class="tab-pane fade" id="specs" role="tabpanel">
-                                <div
-                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                    <div class="d-flex align-items-center pt-3">
-                                        {!! $product->short_description !!}
+                                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                                    @include('clients.shop.details.form-select-attribute')
+                                </div>
+
+
+                                <!-- Tech specs tab-->
+                                <div class="tab-pane fade" id="specs" role="tabpanel">
+                                    <div
+                                        class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
+                                        <div class="d-flex align-items-center pt-3">
+                                            {!! $product->short_description !!}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Reviews tab-->
+                                <!-- Reviews tab-->
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Product description-->
-                <!-- Product description-->
-                <div class="container pt-lg-3 pb-4 pb-sm-5">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            {!! $product->long_description !!}
+                    <!-- Product description-->
+                    <!-- Product description-->
+                    <div class="container pt-lg-3 pb-4 pb-sm-5">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                {!! $product->long_description !!}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
     <!-- Product description-->
-   <div class="container pt-lg-3 pb-4 pb-sm-5">
+    <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
 
@@ -89,301 +89,301 @@
         </div>
     </div>
     <hr class="mb-5">
-                <!-- Product carousel (You may also like)-->
-                <!-- Bình luận ở đây nha bà con-->
-                @include('clients.shop.details.gallery-css')
+    <!-- Product carousel (You may also like)-->
+    <!-- Bình luận ở đây nha bà con-->
+    @include('clients.shop.details.gallery-css')
 
-                @livewire('reviews',['product' => $product])
-                @include('clients.shop.details.related-product')
+    @livewire('reviews',['product' => $product])
+    @include('clients.shop.details.related-product')
 
-                @livewire('comment-live', ['product' => $product])
-                <!-- Bình luận ở đây nha bà con-->
-  
-            @endsection
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
 
-            @push('script')
-            <script>
-            $('#choice_attribute_options').on('change', function() {
-                getVariantPrice()
-            })
+@endsection
 
-            let qt_inc = document.querySelector('.qt-inc');
-            let qt_dec = document.querySelector('.qt-dec');
+@push('script')
+    <script>
+        $('#choice_attribute_options').on('change', function() {
+            getVariantPrice()
+        })
 
-            qt_dec.addEventListener('click', function(e) {
-                document.querySelector('#product_quantity').value = Number(document.querySelector(
-                        '#product_quantity')
-                    .value) - 1;
-                if (document.querySelector('.quantity_number').value < 1) {
-                    document.querySelector('.quantity_number').value = 1;
-                }
-                getVariantPrice()
-            })
+        let qt_inc = document.querySelector('.qt-inc');
+        let qt_dec = document.querySelector('.qt-dec');
 
-            qt_inc.addEventListener('click', function(e) {
-                document.querySelector('#product_quantity').value = Number(document.querySelector(
-                        '#product_quantity')
-                    .value) + 1;
-                getVariantPrice()
-            })
-            </script>
-
-
-            <script>
-            const getVariantPrice = () => {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('products.get_variant_price') }}",
-                    data: $('#choice_attribute_options').serializeArray(),
-                    success: function(response) {
-                        console.log(response)
-                        console.log(response.quantity)
-                        $('#specifications').html(response.specifications)
-                        $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
-                        // With magic Zoom
-                        getMagicZoom(response.variant_image)
-                        // End magic zoom
-                        // Quantity check
-                        quantityCheck(response.product_quantity)
-                        // End Quantity check
-                    }
-
-                })
+        qt_dec.addEventListener('click', function(e) {
+            document.querySelector('#product_quantity').value = Number(document.querySelector(
+                    '#product_quantity')
+                .value) - 1;
+            if (document.querySelector('.quantity_number').value < 1) {
+                document.querySelector('.quantity_number').value = 1;
             }
+            getVariantPrice()
+        })
 
-            const getMagicZoom = (image) => {
-                if (!image) {
+        qt_inc.addEventListener('click', function(e) {
+            document.querySelector('#product_quantity').value = Number(document.querySelector(
+                    '#product_quantity')
+                .value) + 1;
+            getVariantPrice()
+        })
+    </script>
 
-                } else {
-                    $('#main-image').html(`
+
+    <script>
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    console.log(response)
+                    console.log(response.quantity)
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
+                    // With magic Zoom
+                    getMagicZoom(response.variant_image)
+                    // End magic zoom
+                    // Quantity check
+                    quantityCheck(response.product_quantity)
+                    // End Quantity check
+                }
+
+            })
+        }
+
+        const getMagicZoom = (image) => {
+            if (!image) {
+
+            } else {
+                $('#main-image').html(`
           <a data-zoom-id="main" href="${$('#url_to').val()}/${image}" class="MagicZoom main_image" id="main"><img
                         src="${$('#url_to').val()}/${image}"></a>
           `)
-                }
-                MagicZoom.refresh();
             }
+            MagicZoom.refresh();
+        }
 
-            const quantityCheck = (quantity) => {
-                if (quantity > 0) {
-                    $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+        const quantityCheck = (quantity) => {
+            if (quantity > 0) {
+                $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
                                                   class="ci-security-check"></i>Sản phẩm còn hàng
                                               </div>`)
-                } else {
-                    $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+            } else {
+                $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
                                                   class="fas fa-times"></i>Sản phẩm hết hàng
                                               </div> `)
-                }
             }
-            </script>
-            <script>
-            $('#choice_attribute_options').on('change', function() {
-                getVariantPrice()
-            })
-            </script>
+        }
+    </script>
+    <script>
+        $('#choice_attribute_options').on('change', function() {
+            getVariantPrice()
+        })
+    </script>
 
-            <script>
-            const getVariantPrice = () => {
-                $.ajax({
-                    type: "POST",
-                    url: "{{ route('products.get_variant_price') }}",
-                    data: $('#choice_attribute_options').serializeArray(),
-                    success: function(response) {
-                        console.log(response.quantity)
-                        $('#specifications').html(response.specifications)
-                        $('.total_product_price').html(` <small>Tổng tiền: </small>
+    <script>
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    console.log(response.quantity)
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(` <small>Tổng tiền: </small>
                                                   ${response.price}`)
-                        $('#main-image').html(`
+                    $('#main-image').html(`
             <a data-zoom-id="main" href="${$('#url_to').val()}/${response.variant_image}" class="MagicZoom main_image" id="main"><img
                           src="${$('#url_to').val()}/${response.variant_image}"></a>
             `)
-                        MagicZoom.refresh();
-                        if (response.product_quantity > 0) {
-                            $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                    MagicZoom.refresh();
+                    if (response.product_quantity > 0) {
+                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
                                                   class="ci-security-check"></i>Sản phẩm còn hàng
                                               </div>`)
-                        } else {
-                            $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                    } else {
+                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
                                                   class="fas fa-times"></i>Sản phẩm hết hàng
                                               </div> `)
-                        }
                     }
+                }
 
-                })
-            }
-            </script>
-
-
-            <script type="text/javascript">
-            // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
-            $(document).on('click', '.move-top', function() {
-                setTimeout(function() {
-                    $('html, body').animate({
-                        scrollTop: $('#div_id').position().top
-                    }, 'slow');
-                }, 1000);
             })
-            //Bình luận ở mục đầu tiên
-            $(document).on('click', '.save-comment', function() {
-                let URL = $(this).data('url')
-                let body = $('#form-one').val()
-                $.ajax({
-                    url: URL,
-                    data: {
-                        comment_content: body
-                    },
-                    success: function() {
-                        $('#form-one').val('')
-                        window.livewire.emit('render')
-                    }
-                })
-            })
-            // click vào phần bình luận đầu tiên
-            $(document).on('click', '#form-one', function() {
-                $('.form-comment-show').addClass('d-none')
-                $('.body-comment').removeClass('d-none')
-            })
-
-            // Mở form trả lời bình luận
-            $(document).on('click', '.reply', function() {
-                $('.form-comment-show').addClass('d-none')
-                let id = $(this).data('id')
-                $('.reply-comment-' + id).removeClass('d-none')
-
-                // Chèn tag name
-                let tagName = '@' + $('.name-' + id).text() + ' '
-                $('.body-' + id).val(tagName)
-            })
-
-            // mở chỉnh sửa bình luận
-            function editComment(id) {
-                $('.body-comment').removeClass('d-none')
-                $('.form-comment-show').addClass('d-none')
-                $('.edit-comment-' + id).removeClass('d-none');
-                $('.comment-body-' + id).addClass('d-none')
-            }
-
-            //Thoát chỉnh sửa
-            $(document).on('click', '.esc', function(ev) {
-                ev.preventDefault();
-                let id = $(this).data('id');
-                $('.edit-comment-' + id).addClass('d-none');
-                $('.comment-body-' + id).removeClass('d-none')
-            })
-
-            // Chỉnh sửa bình luận
-            $(document).on('click', '.edit', function(ev) {
-                ev.preventDefault();
-                let URL = $(this).data('url')
-                let id = $(this).data('id')
-                let body = $('.edit-comment-form-' + id).val()
-                $.ajax({
-                    url: URL,
-                    data: {
-                        comment_content: body
-                    },
-                    success: function() {
-                        window.livewire.emit('render')
-                    }
-                })
-            })
-
-            // Thu hồi bình luận
-            $(document).on('click', '.recall', function(ev) {
-                ev.preventDefault();
-                let URL = $(this).data('url')
-                $.ajax({
-                    url: URL,
-                    success: function() {
-                        window.livewire.emit('render')
-                    }
-                })
-            })
+        }
+    </script>
 
 
-            // Kiểm soát ngôn từ tiêu cực
-            $(document).on('keyup', '.form-validated', function() {
-                let text = $(this).val()
-                if (text) {
-                    $(this).val(replaceText(text))
-                    $('.btn-submit-text').attr('disabled', false)
-                } else {
-                    $('.btn-submit-text').attr('disabled', true)
+    <script type="text/javascript">
+        // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
+        $(document).on('click', '.move-top', function() {
+            setTimeout(function() {
+                $('html, body').animate({
+                    scrollTop: $('#div_id').position().top
+                }, 'slow');
+            }, 1000);
+        })
+        //Bình luận ở mục đầu tiên
+        $(document).on('click', '.save-comment', function() {
+            let URL = $(this).data('url')
+            let body = $('#form-one').val()
+            $.ajax({
+                url: URL,
+                data: {
+                    comment_content: body
+                },
+                success: function() {
+                    $('#form-one').val('')
+                    window.livewire.emit('render')
                 }
             })
+        })
+        // click vào phần bình luận đầu tiên
+        $(document).on('click', '#form-one', function() {
+            $('.form-comment-show').addClass('d-none')
+            $('.body-comment').removeClass('d-none')
+        })
 
-            function replaceText(text) {
-                text = text.replace(/lồn/gi, "");
-                text = text.replace(/cặc/gi, "");
-                text = text.replace(/dm/gi, "");
-                text = text.replace(/vãi/gi, "");
-                text = text.replace(/buồi/gi, "");
-                text = text.replace(/dái/gi, "");
-                text = text.replace(/địt/gi, "");
-                text = text.replace(/chịch/gi, "");
-                text = text.replace(/xoạc/gi, "");
-                text = text.replace(/vếu/gi, "");
-                text = text.replace(/vú/gi, "");
-                text = text.replace(/bụ/gi, "");
-                text = text.replace(/đụ/gi, "");
-                text = text.replace(/mé/gi, "");
-                text = text.replace(/mày/gi, "");
-                text = text.replace(/tao/gi, "");
-                text = text.replace(/gớm/gi, "");
-                text = text.replace(/tởm/gi, "");
-                return text;
-            }
+        // Mở form trả lời bình luận
+        $(document).on('click', '.reply', function() {
+            $('.form-comment-show').addClass('d-none')
+            let id = $(this).data('id')
+            $('.reply-comment-' + id).removeClass('d-none')
 
-            $('.wrap-rating').each(function() {
-                var item = $(this).find('.item-rating');
-                var rated = -1;
+            // Chèn tag name
+            let tagName = '@' + $('.name-' + id).text() + ' '
+            $('.body-' + id).val(tagName)
+        })
 
-                //Lúc di chuột vào tp
-                $(item).on('mouseenter', function() {
-                    var index = item.index(this);
-                    var i = 0;
-                    for (i = 0; i <= index; i++) {
-                        $(item[i]).removeClass('ci-star');
-                        $(item[i]).addClass('ci-star-filled');
-                    }
+        // mở chỉnh sửa bình luận
+        function editComment(id) {
+            $('.body-comment').removeClass('d-none')
+            $('.form-comment-show').addClass('d-none')
+            $('.edit-comment-' + id).removeClass('d-none');
+            $('.comment-body-' + id).addClass('d-none')
+        }
 
-                    for (var j = i; j < item.length; j++) {
-                        $(item[j]).addClass('ci-star');
-                        $(item[j]).removeClass('ci-star-filled');
-                    }
+        //Thoát chỉnh sửa
+        $(document).on('click', '.esc', function(ev) {
+            ev.preventDefault();
+            let id = $(this).data('id');
+            $('.edit-comment-' + id).addClass('d-none');
+            $('.comment-body-' + id).removeClass('d-none')
+        })
 
-                });
-
-                $(item).on('click', function() {
-                    var index = item.index(this);
-                    rated = index;
-                    $('.text-rating_' + [index]).css({
-                        'color': '#fe8c23',
-                        'font-weight': 'bold'
-                    });
-                    for (var t = 0; t <= 4; t++) {
-                        if (t != index) {
-                            $('.text-rating_' + [t]).removeAttr('style');
-                        }
-                    }
-
-                });
-
-
-                //Lúc di chuột ra khỏi tp
-                $(this).on('mouseleave', function() {
-                    var i = 0;
-                    for (i = 0; i <= rated; i++) {
-                        $(item[i]).removeClass('ci-star');
-                        $(item[i]).addClass('ci-star-filled');
-                    }
-                    for (var j = i; j < item.length; j++) {
-                        $(item[j]).addClass('ci-star');
-                        $(item[j]).removeClass('ci-star-filled');
-                    }
-                });
-            });
-            $(document).on('click', '.item-rating', function() {
-                $('.count-rating').val($(this).data('count'));
+        // Chỉnh sửa bình luận
+        $(document).on('click', '.edit', function(ev) {
+            ev.preventDefault();
+            let URL = $(this).data('url')
+            let id = $(this).data('id')
+            let body = $('.edit-comment-form-' + id).val()
+            $.ajax({
+                url: URL,
+                data: {
+                    comment_content: body
+                },
+                success: function() {
+                    window.livewire.emit('render')
+                }
             })
-            </script>
-            @endpush
+        })
+
+        // Thu hồi bình luận
+        $(document).on('click', '.recall', function(ev) {
+            ev.preventDefault();
+            let URL = $(this).data('url')
+            $.ajax({
+                url: URL,
+                success: function() {
+                    window.livewire.emit('render')
+                }
+            })
+        })
+
+
+        // Kiểm soát ngôn từ tiêu cực
+        $(document).on('keyup', '.form-validated', function() {
+            let text = $(this).val()
+            if (text) {
+                $(this).val(replaceText(text))
+                $('.btn-submit-text').attr('disabled', false)
+            } else {
+                $('.btn-submit-text').attr('disabled', true)
+            }
+        })
+
+        function replaceText(text) {
+            text = text.replace(/lồn/gi, "");
+            text = text.replace(/cặc/gi, "");
+            text = text.replace(/dm/gi, "");
+            text = text.replace(/vãi/gi, "");
+            text = text.replace(/buồi/gi, "");
+            text = text.replace(/dái/gi, "");
+            text = text.replace(/địt/gi, "");
+            text = text.replace(/chịch/gi, "");
+            text = text.replace(/xoạc/gi, "");
+            text = text.replace(/vếu/gi, "");
+            text = text.replace(/vú/gi, "");
+            text = text.replace(/bụ/gi, "");
+            text = text.replace(/đụ/gi, "");
+            text = text.replace(/mé/gi, "");
+            text = text.replace(/mày/gi, "");
+            text = text.replace(/tao/gi, "");
+            text = text.replace(/gớm/gi, "");
+            text = text.replace(/tởm/gi, "");
+            return text;
+        }
+
+        $('.wrap-rating').each(function() {
+            var item = $(this).find('.item-rating');
+            var rated = -1;
+
+            //Lúc di chuột vào tp
+            $(item).on('mouseenter', function() {
+                var index = item.index(this);
+                var i = 0;
+                for (i = 0; i <= index; i++) {
+                    $(item[i]).removeClass('ci-star');
+                    $(item[i]).addClass('ci-star-filled');
+                }
+
+                for (var j = i; j < item.length; j++) {
+                    $(item[j]).addClass('ci-star');
+                    $(item[j]).removeClass('ci-star-filled');
+                }
+
+            });
+
+            $(item).on('click', function() {
+                var index = item.index(this);
+                rated = index;
+                $('.text-rating_' + [index]).css({
+                    'color': '#fe8c23',
+                    'font-weight': 'bold'
+                });
+                for (var t = 0; t <= 4; t++) {
+                    if (t != index) {
+                        $('.text-rating_' + [t]).removeAttr('style');
+                    }
+                }
+
+            });
+
+
+            //Lúc di chuột ra khỏi tp
+            $(this).on('mouseleave', function() {
+                var i = 0;
+                for (i = 0; i <= rated; i++) {
+                    $(item[i]).removeClass('ci-star');
+                    $(item[i]).addClass('ci-star-filled');
+                }
+                for (var j = i; j < item.length; j++) {
+                    $(item[j]).addClass('ci-star');
+                    $(item[j]).removeClass('ci-star-filled');
+                }
+            });
+        });
+        $(document).on('click', '.item-rating', function() {
+            $('.count-rating').val($(this).data('count'));
+        })
+    </script>
+@endpush

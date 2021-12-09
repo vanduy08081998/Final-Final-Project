@@ -61,33 +61,33 @@
 </head>
 <!-- Body-->
 <script>
-function fee() {
-    $(document).on('change', '.choose', function() {
-        var url = $('.route').data('url');
-        var action = $(this).attr("id");
-        var ma_id = $(this).val();
-        var result = '';
-        if (action == 'province') {
-            result = 'district';
-        } else {
-            result = 'ward';
-        }
-        $.ajax({
-            url: url,
-            method: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                action: action,
-                ma_id: ma_id
-            },
-            success: function(data) {
-                $('#' + result).html(data);
+    function fee() {
+        $(document).on('change', '.choose', function() {
+            var url = $('.route').data('url');
+            var action = $(this).attr("id");
+            var ma_id = $(this).val();
+            var result = '';
+            if (action == 'province') {
+                result = 'district';
+            } else {
+                result = 'ward';
             }
+            $.ajax({
+                url: url,
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    action: action,
+                    ma_id: ma_id
+                },
+                success: function(data) {
+                    $('#' + result).html(data);
+                }
+            })
         })
-    })
-}
+    }
 </script>
 
 <body class="handheld-toolbar-enabled">
@@ -155,11 +155,15 @@ function fee() {
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ asset('frontend/js/checkout.js') }}"></script>
+    <script src="{{ asset('frontend/js/image-uploader.min.js') }}"></script>
     <!-- Include the PayPal JavaScript SDK -->
     <script
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
     <script src="{{ asset('frontend/js/paypal.js') }}"></script>
+    <script>
+        $('.input-images-1').imageUploader();
+    </script>
     @include('sweetalert::alert')
     @stack('script')
     <script type="text/javascript">
