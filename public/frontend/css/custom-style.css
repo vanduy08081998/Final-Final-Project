@@ -262,3 +262,19 @@ li.text-center.li-rating {
 .rating-review-product.d-flex.justify-content-between.mt-2 {
     max-height: 100px;
 }
+button.btn-comment.text-primary {
+    border-right: 1px solid #d9e1e9;
+    font-size: 14px;
+}
+button.btn-time-comment.text-muted {
+    font-size: 14px;
+}
+img.review_image {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 5px;
+}

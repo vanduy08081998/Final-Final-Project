@@ -90,7 +90,7 @@
     <!-- Bình luận ở đây nha bà con-->
     @include('clients.shop.details.gallery-css')
 
-    @livewire('review',['product' => $product])
+    @livewire('reviews',['product' => $product])
     @include('clients.shop.details.related-product')
 
     @livewire('comment-live', ['product' => $product])

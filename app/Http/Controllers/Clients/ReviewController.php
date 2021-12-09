@@ -34,16 +34,30 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {      
+        $get_image = $request->file('images');
+        if($get_image){
+            $array_name_image = [];
+            foreach($get_image as $image){
+             $get_name_image = $image->getClientOriginalName();
+             $name_image = current(explode('.',$get_name_image));
+             $new_image = $name_image.uniqid().'.'.$image->getClientOriginalExtension();
+             $image->move('uploads/Reviews/',$new_image);
+             array_push($array_name_image, $new_image);
+            }
+        }else{
+            $image = null;
+        }
+        $array_name_image = implode(',', $array_name_image);
         $data = array(
-        'product_id'=> $request->product_id,
-        'customer_id'=> Auth()->user()->id,
-        'count_rating'=> $request->count_rating,
-        'image'=> implode(',', $request->image),
-        'content_rating' => $request->content_rating,
-        'introduce' => $request->introduce,
-
-        );
+            'product_id'=> $request->product_id,
+            'customer_id'=> Auth()->user()->id,
+            'count_rating'=> $request->count_rating,
+            'image'=> $array_name_image,
+            'content_rating' => $request->content_rating,
+            'introduce' => $request->introduce,
+    
+            );
         Review::create($data);
         return response('Thành công');
     }

@@ -77,7 +77,6 @@ Route::prefix('/')->group(function () {
       });
 
   Route::prefix('/account')->group(function () {
-    Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
     Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
     Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
     Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');

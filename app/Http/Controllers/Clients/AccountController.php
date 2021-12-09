@@ -44,21 +44,22 @@ class AccountController extends Controller
     public function accountPayment() {
         return view('clients.account.account-payment');
     }
-    public function update_profile_customer(Request $request, $id)
-    {
-        $this->validate($request, [
-           'name' => ['required', 'string', 'max:255'],
-        ],
-        [
-            'name.required'=> 'Vui lòng không bỏ trống tên tài khoản!',
-            'name.string'=> 'Tên tài khoản không hợp lệ!',
-            'name.max'=> 'Tên tài khoản không quá 255 ký tự! ',
-        ]);
-       $data = $request->all();
-       $user = User::find($id);
-       $user->update($data);
-       return back()->with('message','Cập nhật thành công !');
-    }
+    // public function update_profile_customer(Request $request, $id)
+    // {
+    //     dd($request->all());
+    //     $this->validate($request, [
+    //        'name' => ['required', 'string', 'max:255'],
+    //     ],
+    //     [
+    //         'name.required'=> 'Vui lòng không bỏ trống tên tài khoản!',
+    //         'name.string'=> 'Tên tài khoản không hợp lệ!',
+    //         'name.max'=> 'Tên tài khoản không quá 255 ký tự! ',
+    //     ]);
+    //    $data = $request->all();
+    //    $user = User::find($id);
+    //    $user->update($data);
+    //    return back()->with('message','Cập nhật thành công !');
+    // }
 
     public function crop(Request $request)
     {

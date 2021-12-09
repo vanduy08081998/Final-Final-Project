@@ -308,3 +308,30 @@
     font-size: 12px;
     background-color: white;
 }
+.rating_reply{
+    padding: 10px 8px;
+    display: block;
+    margin-top: 15px;
+    position: relative;
+    background: #ece9c7;
+    border: 1px solid #e7e7e7;
+    font-size: 14px;
+    color: #333;
+    /* margin-left: 30px; */
+}
+.rating_reply::before {
+    position: absolute;
+    content: '';
+    background: #e3e3de;
+    height: 30px;
+    width: 30px;
+    transform: rotate(-45deg);
+    top: -8px;
+    left: 130px;
+    z-index: -1;
+}
+.form-review {
+    border: none;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
+}
