@@ -1,107 +1,95 @@
 <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Thông tin giao hàng</h2>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-fn">Họ</label>
-      <input class="form-control" type="text" id="checkout-fn">
+
+@auth
+<form id="form-infomations" method="POST">
+  {{ csrf_field() }}
+  <div class="container pb-5 mb-2 mb-md-4">
+    <div class="row">
+      <!-- Content  -->
+      <section class="col-lg-12">
+        <!-- Toolbar-->
+        <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+          <h6 class="fs-base text-light mb-0">Danh sách đăng ký địa chỉ giao nhận hàng:</h6><a
+            class="btn btn-primary btn-sm" href="account-signin.html"><i class="ci-sign-out me-2"></i>Đăng
+            xuất</a>
+        </div>
+        <div class="align-middle add-ship mb-3">
+          <a class="add-shipping" href="{{route('shippings.create')}}"><i class="fa fa-plus fa-lg aria-hidden"></i> Thêm
+            địa chỉ mới</a>
+        </div>
+        @if (session('message'))
+        <div class="alert alert-success" role="alert">
+          {{ session('message') }}
+        </div>
+        @endif
+        <!-- Addresses list-->
+        <div class="table-responsive fs-md">
+          <table class="table table-hover mb-0">
+            <tbody>
+              @if($shipping_default)
+              <tr class="table-dark">
+                <td class="py-3 align-middle">
+                  <i class="bi bi-check2-circle"></i>
+                  <p>
+                    <span class="text-white" style="text-transform: uppercase">{{$shipping_default->fullname}}</span>
+                    <span class="align-middle text-success ms-2"><i class="fa fa-check-circle-o"></i>
+                      Địa chỉ mặc định</span>
+                  </p>
+                  <p class="text-white"> Địa chỉ: {{$shipping_default->neighbor}} -
+                    {{$shipping_default->ward->name}} -
+                    {{$shipping_default->district->name}} - {{$shipping_default->province->name}}
+                  </p>
+                  <p class="text-white"> Số điện thoại: {{$shipping_default->phone}}</p>
+                  <input type="hidden" name="name" value="{{$shipping_default->ward->name}}">
+                  <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                  <input type="hidden" name="address" value="{{$shipping_default->neighbor}} -
+                  {{$shipping_default->ward->name}} -
+                  {{$shipping_default->district->name}} - {{$shipping_default->province->name}}">
+                </td>
+                <td class="py-3 align-middle"><a class="btn btn-info btn-sm nav-link-style me-2"
+                    href="{{route('shippings.edit',[$shipping_default->id])}}" title="Sửa"><i class="ci-edit"></i> Chỉnh
+                    sửa</a>
+                </td>
+              </tr>
+              @endif
+              @foreach($shipping_all as $key => $shipping)
+              <tr>
+                <td class="py-3 align-middle">
+                  <p style="text-transform: uppercase">{{$shipping->fullname}}</p>
+                  <p>Địa chỉ: {{$shipping->neighbor}} - {{$shipping->ward->name}} -
+                    {{$shipping->district->name}} - {{$shipping->province->name}} </p>
+                  <p> Số điện thoại: {{$shipping->phone}}</p>
+                </td>
+                <td class="py-3 align-middle">
+                  <a class="btn btn-info btn-sm nav-link-style me-2 mb-2"
+                    href="{{route('shippings.edit',[$shipping->id])}}" data-bs-toggle="tooltip" title="Sửa"><i
+                      class="ci-edit"></i> Chỉnh sửa</a>
+                  <form action="{{ route('shippings.destroy', ['shipping' => $shipping->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger btn-sm nav-link-style text-danger" title="Xóa">
+                      <i class="ci-trash"> Xóa</i>
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mt-3">
+        <button class="btn btn-primary">Chuyển đến bước tiếp theo &rarr;</button>
+      </div>
     </div>
   </div>
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-ln">Tên</label>
-      <input class="form-control" type="text" id="checkout-ln">
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-email">Địa chỉ E-mail</label>
-      <input class="form-control" type="email" id="checkout-email">
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-phone">Số điện thoại</label>
-      <input class="form-control" type="text" id="checkout-phone">
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-company">Công ty (Nếu có)</label>
-      <input class="form-control" type="text" id="checkout-company">
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-country">Tỉnh/Thành phố</label>
-      <select class="form-select" id="checkout-country">
-        <option>Choose country</option>
-        <option>Australia</option>
-        <option>Canada</option>
-        <option>France</option>
-        <option>Germany</option>
-        <option>Switzerland</option>
-        <option>USA</option>
-      </select>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-city">Huyện</label>
-      <select class="form-select" id="checkout-city">
-        <option>Choose city</option>
-        <option>Amsterdam</option>
-        <option>Berlin</option>
-        <option>Geneve</option>
-        <option>New York</option>
-        <option>Paris</option>
-      </select>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-city">Xã</label>
-      <select class="form-select" id="checkout-city">
-        <option>Choose city</option>
-        <option>Amsterdam</option>
-        <option>Berlin</option>
-        <option>Geneve</option>
-        <option>New York</option>
-        <option>Paris</option>
-      </select>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-address-1">Địa chỉ chi tiết</label>
-      <input class="form-control" type="text" id="checkout-address-1">
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="mb-3">
-      <label class="form-label" for="checkout-zip">Mã bưu điện</label>
-      <input class="form-control" type="text" id="checkout-zip">
-    </div>
-  </div>
-</div>
-<h6 class="mb-3 py-3 border-bottom">Billing address</h6>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" checked id="same-address">
-  <label class="form-check-label" for="same-address">Same as shipping address</label>
-</div>
-<!-- Navigation (desktop)-->
-<div class="d-none d-lg-flex pt-4 mt-3">
-  <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="shop-cart.html"><i
-        class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to
-        Cart</span><span class="d-inline d-sm-none">Back</span></a></div>
-  <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="checkout-shipping.html"><span
-        class="d-none d-sm-inline">Proceed to
-        Shipping</span><span class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
-</div>
+
+</form>
+@endauth
+
+@guest
+<h1>Đăng nhập để thanh toán</h1>
+@endguest

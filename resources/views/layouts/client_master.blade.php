@@ -108,13 +108,13 @@ function fee() {
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
         <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
-                    class="handheld-toolbar-label">Yêu thích</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
-                    class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
-                        class="badge bg-primary rounded-pill ms-1">4</span></span><span
+                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i
+                        class="ci-heart"></i></span><span class="handheld-toolbar-label">Yêu thích</span></a><a
+                class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
+                        class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a
+                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i
+                        class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
                     class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
     {{-- Chatbox button --}}
@@ -151,42 +151,50 @@ function fee() {
     <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-    @include('sweetalert::alert')
-    @stack('script')
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-    <script src="{{ URL::to('frontend/js/image-uploader.min.js') }}"></script>
-
+    <script src="{{ asset('frontend/js/checkout.js') }}"></script>
+    <!-- Include the PayPal JavaScript SDK -->
+    <script
+        src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
+    </script>
+    <script src="{{ asset('frontend/js/paypal.js') }}"></script>
+    @include('sweetalert::alert')
+    @stack('script')
     <script type="text/javascript">
-    window.addEventListener('alert', event => {
-        toastr[event.detail.type](event.detail.message,
-            event.detail.title ?? ''), toastr.options = {
-            "closeButton": true,
-            "progressBar": true,
-        };
-    })
+        cartDropdown()
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            };
+        })
 
-    $(document).on('click', '#change_avatar', function() {
-        $('#customer_avatar').click();
-    })
-    $('#customer_avatar').ijaboCropTool({
-        preview: '.customer_picture',
-        setRatio: 1,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
-        buttonsText: ['CẮT VÀ LƯU', 'ĐÓNG'],
-        buttonsColor: ['#30bf7d', '#ee5155', -15],
-        processUrl: '{{ route('crop') }}',
-        withCSRF: ['_token', '{{ csrf_token() }}'],
-        onSuccess: function(message, element, status) {
-            toastr.success(message);
-        },
-        onError: function(message, element, status) {
-            alert(message);
-        }
-    });
+        $(document).on('click', '#change_avatar', function() {
+            $('#customer_avatar').click();
+        })
+        $('#customer_avatar').ijaboCropTool({
+            preview: '.customer_picture',
+            setRatio: 1,
+            allowedExtensions: ['jpg', 'jpeg', 'png'],
+            buttonsText: ['CẮT VÀ LƯU', 'ĐÓNG'],
+            buttonsColor: ['#30bf7d', '#ee5155', -15],
+            processUrl: '{{ route('crop') }}',
+            withCSRF: ['_token', '{{ csrf_token() }}'],
+            onSuccess: function(message, element, status) {
+                toastr.success(message);
+            },
+            onError: function(message, element, status) {
+                alert(message);
+            }
+        });
 
-    $('.input-images-1').imageUploader();
+        $(document).on('click', '.dropdown-item', function() {
+            var href = $(this).attr('href');
+            window.location.href = href;
+        })
     </script>
 
 </body>

@@ -103,7 +103,17 @@ class ProductController extends Controller
     $product = Product::where('id', $request->product_id)->first();
     if ($product->type_of_category == 'isNotAttribute') {
 
-      $price = $product->unit_price;
+
+      if($product->discount != null){
+        if($product->discount_unit == '%'){
+          $price = $product->unit_price - ($product->unit_price * $product->discount / 100 );
+        }else{
+          $price = $product->unit_price - $product->discount;
+        }
+      }else{
+        $price = $product->unit_price;
+      }
+      
       $product_quantity = $request->product_quantity;
       $quantity = $product->quantity;
       return response()->json([
@@ -127,15 +137,23 @@ class ProductController extends Controller
                                         </div>
                     ';
           if ($str != null) {
-            $str .= '-' . str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= '-' . str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
           } else {
-            $str .= str_replace(' ', '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
           }
         }
       }
 
       $product_stock = ProductVariant::where('id_product', $request->product_id)->where('variant', $str)->first();
-      $price = $product_stock->variant_price;
+      if($product->discount != null){
+        if($product->discount_unit == '%'){
+          $price = $product_stock->variant_price - ($product_stock->variant_price * $product->discount / 100 );
+        }else{
+          $price = $product_stock->variant_price - $product->discount;
+        }
+      }else{
+        $price = $product_stock->variant_price;
+      }
       $variant_quantity = $product_stock->variant_quantity;
       $v_image = $product_stock->variant_image;
       return response()->json([
@@ -146,6 +164,7 @@ class ProductController extends Controller
         'specifications' => $specifications,
         'variant_image' => $v_image
       ]);
+        
     }
   }
 }

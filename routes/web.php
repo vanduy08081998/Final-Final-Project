@@ -54,10 +54,14 @@ Route::prefix('/')->group(function () {
 
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
+        Route::post('/checkout-shipping-address', [CheckoutController::class, 'getShippingAddress'])->name('checkout.shipping-address');
+        Route::post('/checkout-shipping-method', [CheckoutController::class, 'getShippingMethod'])->name('checkout.shipping-method');
         Route::get('/checkout-shipping', [CheckoutController::class, 'checkoutShipping'])->name('checkout.checkout-shipping');
+        Route::get('/checkout-cart-checkout', [CheckoutController::class, 'checkoutCartCheckout'])->name('checkout.cart-checkout');
         Route::get('/checkout-payment', [CheckoutController::class, 'checkoutPayment'])->name('checkout.checkout-payment');
         Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
         Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
+        Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
     });
     Route::prefix('/shop')->group(function () {
         Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
@@ -131,7 +135,7 @@ Route::prefix('/')->group(function () {
     Route::get('/users', Users::class);
 });
 
-/* Admin */
+/*****************************************************************  Admin ***********************************************************************/
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
@@ -207,7 +211,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/users', UserController::class);
 
     // comment
+    Route::prefix('/comment')->group(function () {
+        Route::get('/{parent}/feedback/{id}', [CommentController::class, 'feedback'])->name('comment.feedback');
+        Route::post('/feedback/store', [CommentController::class, 'feedbackStore'])->name('comment.feedbackStore');
+        Route::get('/isfeedback', [CommentController::class, 'isfeedback'])->name('comment.isfeedback');
+        Route::get('/nonefeedback', [CommentController::class, 'nonefeedback'])->name('comment.nonefeedback');
+        Route::get('/trash', [CommentController::class, 'trash'])->name('comment.trash');
+        Route::get('/edit-feedback/{id}', [CommentController::class, 'editFeedback'])->name('comment.edit-feedback');
+        Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
+        // Route::get('/feedback-all', [CommentController::class, 'feedbackAll'])->name('comment.feedback-all');
+    });
     Route::resource('/comment', CommentController::class);
+
 });
 Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 

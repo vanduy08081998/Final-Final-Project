@@ -7,13 +7,14 @@ const cartDropdown = () => {
         }
     });
 }
-cartDropdown()
+
 $('.card_add_btn').click(function() {
     $.ajax({
         type: "POST",
         url: route('card.add'),
         data: $('#choice_attribute_options').serializeArray(),
         success: function(response) {
+            console.log(response);
             if (response.success) {
                 Swal.fire({
                     imageUrl: `${$('#url_to').val()}/frontend/img/1103-confetti-outline.gif`,
