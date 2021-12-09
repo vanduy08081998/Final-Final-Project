@@ -22,7 +22,16 @@ const checkoutComplete = () => {
             _token: $('meta[name="csrf-token"]').attr('content')
         },
         success: function (response) {
-            console.log(response)
+            Swal.fire({
+                title: 'Chúc mừng ?',
+                text: "Thanh toán thành công !",
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Tiếp tục!'
+              }).then((result) => {
+                  window.location.href = route('clients.index')
+              })
         }
     });
 

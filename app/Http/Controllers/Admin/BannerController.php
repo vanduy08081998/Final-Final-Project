@@ -84,8 +84,9 @@ class BannerController extends Controller
      */
     public function update(UpdateBannerRequest $request, $id)
     {
-        $bannerId = Banner::find($id);
+        // dd($request->all());
         $data = $request->validated();
+        $bannerId = Banner::find($id);
         if($request->banner_img){
             $data['banner_img'] = $this->generalService->uploadImage($this->path, $request->banner_img);
            // Xóa hình ảnh cũ

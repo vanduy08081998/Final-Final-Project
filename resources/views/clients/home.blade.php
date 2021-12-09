@@ -13,23 +13,29 @@
                 <!-- Slider     -->
                 <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
-                            @foreach($slide as $item)
-                            <div>
-                                <div class="row align-items-center carousel-control">
-                                    <div class="col-md-6 order-md-2 carousel-img">
-                                        <img class="d-block mx-auto" src="{{ url('uploads/Banner/', $item->banner_img) }}" alt="VR Collection">
-                                    </div>
-                                    <div class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
-                                        <h2 class="fw-light pb-1 from-bottom">Hãy đến với</h2>
-                                        <h1 class="display-4 from-bottom delay-1">{{$item->banner_name}}</h1>
-                                        <h5 class="fw-light pb-3 from-bottom delay-2">Để có những lựa chọn hàng đầu</h5>
-                                        <div class="d-table scale-up delay-4 mx-auto mx-md-0">
-                                            <a class="btn btn-primary btn-shadow" href="{{$item->banner_link}}">Xem ngay<i class="ci-arrow-right ms-2 me-n1"></i></a>
+                        <div class="tns-carousel-inner"
+                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
+                            @foreach ($slide as $item)
+                                <div>
+                                    <div class="row align-items-center carousel-control">
+                                        <div class="col-md-6 order-md-2 carousel-img">
+                                            <img class="d-block mx-auto"
+                                                src="{{ url('uploads/Banner/', $item->banner_img) }}" alt="VR Collection">
+                                        </div>
+                                        <div
+                                            class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
+                                            <h2 class="fw-light pb-1 from-bottom" style="color: #fff">Hãy đến với</h2>
+                                            <h1 class="display-4 from-bottom delay-1" style="color: #fff">
+                                                {{ $item->banner_name }}</h1>
+                                            <h5 class="fw-light pb-3 from-bottom delay-2" style="color: #fff">Để có những
+                                                lựa chọn hàng đầu</h5>
+                                            <div class="d-table scale-up delay-4 mx-auto mx-md-0">
+                                                <a class="btn btn-primary btn-shadow" href="{{ $item->banner_link }}">Xem
+                                                    ngay<i class="ci-arrow-right ms-2 me-n1"></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -38,22 +44,30 @@
                 <div class="col-xl-3 order-xl-1 pt-4 mt-3 mt-xl-0 pt-xl-0 nav-slider">
                     <div class="table-responsive" data-simplebar>
                         <div class="d-flex d-xl-block">
-                            <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item" href="#" style="min-width: 16rem;">
-                                <img src="{{ asset('frontend/img/home/banners/banner-sm01.png') }}" width="100" alt="Banner">
+                            <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item"
+                                href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm01.png') }}" width="100"
+                                    alt="Banner">
                                 <div class="py-4 px-2 banner-item-text">
-                                    <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>Video <span class="fw-light">with</span><br>360 Cam</h5>
+                                    <h5 class="mb-2"><span class="fw-light">Next Gen</span><br>Video <span
+                                            class="fw-light">with</span><br>360 Cam</h5>
                                     <div class="text-info fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                                 </div>
                             </a>
-                            <a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item" href="#" style="min-width: 16rem;">
-                                <img src="{{ asset('frontend/img/home/banners/banner-sm02.png') }}" width="100" alt="Banner">
+                            <a class="d-flex align-items-center bg-faded-warning rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item"
+                                href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm02.png') }}" width="100"
+                                    alt="Banner">
                                 <div class="py-4 px-2 banner-item-text">
-                                    <h5 class="mb-2"><span class="fw-light">Top Rated</span><br>Gadgets<br><span class="fw-light">are on </span>Sale</h5>
+                                    <h5 class="mb-2"><span class="fw-light">Top
+                                            Rated</span><br>Gadgets<br><span class="fw-light">are on </span>Sale</h5>
                                     <div class="text-warning fs-sm">Shop now<i class="ci-arrow-right fs-xs ms-1"></i></div>
                                 </div>
                             </a>
-                            <a class="d-flex align-items-center bg-faded-success rounded-3 pt-2 ps-2 mb-4 banner-item" href="#" style="min-width: 16rem;">
-                                <img src="{{ asset('frontend/img/home/banners/banner-sm03.png') }}" width="100" alt="Banner">
+                            <a class="d-flex align-items-center bg-faded-success rounded-3 pt-2 ps-2 mb-4 banner-item"
+                                href="#" style="min-width: 16rem;">
+                                <img src="{{ asset('frontend/img/home/banners/banner-sm03.png') }}" width="100"
+                                    alt="Banner">
                                 <div class="py-4 px-2 banner-item-text">
                                     <h5 class="mb-2"><span class="fw-light">Catch Big</span><br>Deals <span
                                             class="fw-light">on</span><br>Earbuds</h5>
@@ -80,7 +94,8 @@
             <div class="product-item">
                 <div class="card product-card">
                     <div class="product-card-actions d-flex align-items-center">
-                        <a class="btn-action nav-link-style me-2" href="#"><i class="ci-compare me-1"></i>So sánh</a>
+                        <a class="btn-action nav-link-style me-2 compare-product"><i class="ci-compare me-1"></i>So
+                            sánh</a>
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
                     </div>
@@ -169,7 +184,7 @@
             <!-- Product-->
             <div class="product-item">
                 <div class="card product-card">
-                    <div  class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
+                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
                             href="#"><i class="ci-compare me-1"></i>Compare</a>
                         <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
                             title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
