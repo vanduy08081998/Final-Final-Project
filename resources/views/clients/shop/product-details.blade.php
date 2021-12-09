@@ -77,21 +77,18 @@
                 </div>
             </div>
         </div>
+
     </div>
+</div>
     <!-- Product description-->
-    <div class="container pt-lg-3 pb-4 pb-sm-5">
+   <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
 
-                <!-- Product description-->
-                <div class="container pt-lg-3 pb-4 pb-sm-5">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-
-                        </div>
-                    </div>
-                </div>
-                <hr class="mb-5">
+            </div>
+        </div>
+    </div>
+    <hr class="mb-5">
                 <!-- Product carousel (You may also like)-->
                 <!-- Bình luận ở đây nha bà con-->
                 @include('clients.shop.details.gallery-css')
@@ -101,7 +98,7 @@
 
                 @livewire('comment-live', ['product' => $product])
                 <!-- Bình luận ở đây nha bà con-->
-            </div>
+  
             @endsection
 
             @push('script')

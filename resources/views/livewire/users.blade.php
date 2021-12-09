@@ -10,15 +10,8 @@
             @endif
             <div class="ps-3">
                 <label class="custom-file-upload btn btn-light btn-shadow btn-sm mb-2">
-<<<<<<< HEAD
                     <input style="display: none" type="file" name="customer_avatar" id="customer_avatar" name="avatar" />
                    <a class="text-primary" href="javascript:void(0)" id="change_avatar"> <i class="ci-loading me-2"></i>Thay ảnh đại diện </a>
-=======
-                    <input style="display: none" type="file" name="customer_avatar" id="customer_avatar"
-                        name="avatar" />
-                    <a class="text-info" href="javascript:void(0)" id="change_avatar"> <i
-                            class="ci-loading me-2"></i>Thay ảnh đại diện </a>
->>>>>>> main
                 </label>
             </div>
 

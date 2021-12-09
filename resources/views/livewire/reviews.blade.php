@@ -1,4 +1,4 @@
-<div wire:ignore.self>
+<div class="container" wire:ignore.self>
     <!-- Reviews-->
 
     <div class="row pt-2 pb-3">
