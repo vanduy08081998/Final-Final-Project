@@ -81,23 +81,24 @@
         </div>
     </div>
 
-        <!-- Product description-->
-        <div class="container pt-lg-3 pb-4 pb-sm-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
+    <!-- Product description-->
+    <div class="container pt-lg-3 pb-4 pb-sm-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
 
-                </div>
             </div>
         </div>
-        <hr class="mb-5">
-        <!-- Product carousel (You may also like)-->
-        <!-- Bình luận ở đây nha bà con-->
-        @include('clients.shop.details.gallery-css')
+    </div>
+    <hr class="mb-5">
+    <!-- Product carousel (You may also like)-->
 
-        @include('clients.shop.details.related-product')
+    @include('clients.shop.details.gallery-css')
 
-        @livewire('comment-live', ['product' => $product])
-        <!-- Bình luận ở đây nha bà con-->
+    @include('clients.shop.details.related-product')
+
+    <!-- Bình luận ở đây nha bà con-->
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
     </div>
 @endsection
 
@@ -124,11 +125,11 @@
                 .value) + 1;
             getVariantPrice()
         })
-</script>
+    </script>
 
 
-<script>
-        const getVariantPrice = () => {           
+    <script>
+        const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
@@ -172,7 +173,7 @@
                                               </div> `)
             }
         }
-</script>
+    </script>
     <script>
         $('#choice_attribute_options').on('change', function() {
             getVariantPrice()
@@ -310,24 +311,24 @@
         })
 
         function replaceText(text) {
-            text = text.replace(/lồn/gi, "***");
-            text = text.replace(/cặc/gi, "***");
-            text = text.replace(/dm/gi, "***");
-            text = text.replace(/vãi/gi, "***");
-            text = text.replace(/buồi/gi, "***");
-            text = text.replace(/dái/gi, "***");
-            text = text.replace(/địt/gi, "***");
-            text = text.replace(/chịch/gi, "***");
-            text = text.replace(/xoạc/gi, "***");
-            text = text.replace(/vếu/gi, "***");
-            text = text.replace(/vú/gi, "***");
-            text = text.replace(/bụ/gi, "***");
-            text = text.replace(/đụ/gi, "***");
-            text = text.replace(/mé/gi, "***");
-            text = text.replace(/mày/gi, "***");
-            text = text.replace(/tao/gi, "***");
-            text = text.replace(/gớm/gi, "***");
-            text = text.replace(/tởm/gi, "***");
+            text = text.replace(/lồn/gi, "");
+            text = text.replace(/cặc/gi, "");
+            text = text.replace(/dm/gi, "");
+            text = text.replace(/vãi/gi, "");
+            text = text.replace(/buồi/gi, "");
+            text = text.replace(/dái/gi, "");
+            text = text.replace(/địt/gi, "");
+            text = text.replace(/chịch/gi, "");
+            text = text.replace(/xoạc/gi, "");
+            text = text.replace(/vếu/gi, "");
+            text = text.replace(/vú/gi, "");
+            text = text.replace(/bụ/gi, "");
+            text = text.replace(/đụ/gi, "");
+            text = text.replace(/mé/gi, "");
+            text = text.replace(/mày/gi, "");
+            text = text.replace(/tao/gi, "");
+            text = text.replace(/gớm/gi, "");
+            text = text.replace(/tởm/gi, "");
             return text;
         }
     </script>

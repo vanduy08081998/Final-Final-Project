@@ -137,7 +137,7 @@
                                     <div class="form-group">
                                         <label for="name">Thuộc danh mục</label>
                                         <select name="category_id[]" class="js-example-basic-multiple form-control"
-                                            data-live-search="true">
+                                            data-live-search="true" data-live-search="true" multiple>
                                             @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
                                                 @include('admin.Categories.categoryOptions', ['item' => $item])
 
@@ -201,7 +201,7 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            $('.js-example-basic-multiple').selectpicker();
+            $('.js-example-basic-multiple').select2();
 
 
         });

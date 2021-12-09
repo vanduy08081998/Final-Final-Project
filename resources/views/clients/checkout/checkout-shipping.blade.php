@@ -48,15 +48,15 @@
                         <div class="step-label"><i class="ci-check-circle"></i>Review</div>
                     </a></div>
                 <!-- Shipping methods table-->
-                <h2 class="h6 pb-3 mb-2">Choose shipping method</h2>
+                <h2 class="h6 pb-3 mb-2">Chọn phương thức thanh toán</h2>
                 <div class="table-responsive">
-                    <table class="table table-hover fs-sm border-top">
+                    <table class="table table-hover table-bordered fs-sm border-top">
                         <thead>
                             <tr>
-                                <th class="align-middle"></th>
-                                <th class="align-middle">Shipping method</th>
-                                <th class="align-middle">Delivery time</th>
-                                <th class="align-middle">Handling fee</th>
+                                <th class="align-middle">#</th>
+                                <th class="align-middle">Phương thức vận chuyển</th>
+                                <th class="align-middle">Thời gian dự tính</th>
+                                <th class="align-middle">Phí vận chuyển</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -86,11 +86,12 @@
                 </div>
                 <!-- Navigation (desktop)-->
                 <div class="d-none d-lg-flex pt-4">
-                    <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-details.html"><i
-                                class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to
-                                Adresses</span><span class="d-inline d-sm-none">Back</span></a></div>
+                    <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100"
+                            href="{{ route('checkout.checkout-details') }}"><i
+                                class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Quay
+                                lại</span><span class="d-inline d-sm-none">Back</span></a></div>
                     <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100"><button
-                                class="d-none d-sm-inline">Proceed to Payment</button><span
+                                class="d-none d-sm-inline">Tiếp tục</button><span
                                 class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a>
                     </div>
                 </div>
@@ -106,8 +107,9 @@
     <div class="row d-lg-none">
         <div class="col-lg-8">
             <div class="d-flex pt-4 mt-3">
-                <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-details.html"><i
-                            class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to
+                <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100"
+                        href="{{ route('checkout.checkout-details') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span
+                            class="d-none d-sm-inline">Back to
                             Adresses</span><span class="d-inline d-sm-none">Back</span></a></div>
                 <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100"><span class="d-none d-sm-inline">Proceed
                             to Payment</span><span class="d-inline d-sm-none">Next</span><i
