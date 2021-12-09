@@ -1,7 +1,10 @@
-.form-comment {
-    border: none;
-    background: #fff;
-    border-radius: 0 0 4px 4px;
+.form-comment textarea {
+    height: 100px;
+}
+
+.body-comment {
+    width: 800px;
+    line-height: 1.8;
 }
 
 .line {
@@ -34,7 +37,7 @@
 .btn-submit-text {
     border: none;
     outline: none;
-    background: #4a90e2;
+    background: #fe696a;
     color: white;
     padding: 5px 10px;
     border-radius: 4px;
@@ -98,6 +101,7 @@
     color: #4a4a4a;
     line-height: 22px;
     margin-left: 30px;
+    position: relative;
 }
 
 .relate_infocom {
@@ -289,6 +293,36 @@
     position: relative;
 }
 
+.form-reply-show {
+    background: #fff;
+    height: 120px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.form-reply-show .form-footer {
+    display: block;
+    position: relative;
+    height: 40px;
+}
+
+.form-reply-show .form-footer button {
+    position: absolute;
+    background: #fe696a;
+    right: 0;
+    display: inline-block;
+    height: 40px;
+    width: 100px;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.form-reply-show textarea {
+    height: 80px;
+}
+
 .handle {
     z-index: 1;
     display: flex;
@@ -307,4 +341,76 @@
     padding: 0px 8px;
     font-size: 12px;
     background-color: white;
+}
+
+
+/* Admin quản lý commnet clients */
+
+.admin-com {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 0.5px solid #fe696a;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    cursor: pointer;
+    /* visibility: hidden; */
+}
+
+.admin-com i {
+    font-size: 9px;
+    color: #fe696a;
+}
+
+.admin-com .admin-handle {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 100000;
+    display: none;
+    visibility: hidden;
+    padding-top: 10px;
+}
+
+.admin-com .admin-handle ul {
+    background: #FFF;
+    width: 80px;
+    font-size: 12px;
+    border: 0.5px solid #fe696a;
+    border-radius: 5px;
+    padding-left: 0;
+}
+
+.admin-com .admin-handle ul span {
+    display: block;
+    padding: 0 5px;
+}
+
+.admin-com .admin-handle ul span:hover {
+    color: #fe696a;
+    background: #e7e7e7;
+}
+
+.admin-com:hover>.admin-handle {
+    display: block;
+    visibility: visible;
+}
+
+
+/* Tìm kiếm */
+
+.tt-menu {
+    margin-left: 15px;
+    width: 670px;
+    border: 0.5px solid #EEEEEE;
+}
+
+.tt-menu img {
+    margin-right: 5px;
+    margin-top: 5px;
 }
