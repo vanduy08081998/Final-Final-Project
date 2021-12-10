@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Clients;
 
+use App\Models\Cart;
+use App\Models\Order;
+use App\Mail\SendMail;
+use App\Models\Product;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
-use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -79,6 +81,7 @@ class CheckoutController extends Controller
         $total = 0;
         $product = array();
         $product_details = [];
+        $productID = [];
         $item = 0;
         foreach($cart as $key => $cart){
             foreach(json_decode($cart->specifications) as $key => $speciation){
@@ -87,9 +90,9 @@ class CheckoutController extends Controller
                 $product_details['quantity'] = $cart->quantity;
                 $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
                 $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
-
             }
             array_push($product, $product_details);
+            array_push($productID, $cart->product_id);
         }
         
         foreach($shipping_address as $key => $value){
@@ -106,9 +109,12 @@ class CheckoutController extends Controller
         $order->shipping_status = $shipping_method;
         $order->payment_type = 'Tiền mặt';
         $order->grand_total = $total;
-
         $order->save();
         $order->products()->attach($product);
+
+        foreach($productID as $key =>  $pro){
+            Cart::where('product_id', $pro)->where('user_id', auth()->user()->id)->first()->delete();
+        }
         return response()->json($product);
     }
 }

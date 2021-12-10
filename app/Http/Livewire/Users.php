@@ -17,13 +17,16 @@ class Users extends Component
 
     public function update_profile($id)
     {
+        $date = '2005/01/01';
         $this->validate([
               'name'=> ['required', 'string', 'max:255'],
+              'birthday' => ['before:'.$date]
         ],
         [
             'name.required'=> 'Vui lòng không bỏ trống tên tài khoản! ',
             'name.string'=> 'Tên tài khoản không hợp lệ! ',
             'name.max'=> 'Tên tài khoản không quá 255 ký tự! ',
+            'birthday.before' => 'Độ tuổi không phù hợp'
         ]);
         User::find($id)->update([
             'name'=>$this->name,
@@ -125,6 +128,11 @@ class Users extends Component
     public function alertSuccess($message)
     {
         $this->dispatchBrowserEvent('alert',['type' => 'success', 'message' => $message]);
+    }
+
+    public function close_modal()
+    {
+        $this->dispatchBrowserEvent('CloseModal');
     }
 
 }

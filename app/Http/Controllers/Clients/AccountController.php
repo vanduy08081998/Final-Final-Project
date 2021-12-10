@@ -44,6 +44,7 @@ class AccountController extends Controller
     public function accountPayment() {
         return view('clients.account.account-payment');
     }
+
     public function update_profile_customer(Request $request, $id)
     {
         $this->validate($request, [

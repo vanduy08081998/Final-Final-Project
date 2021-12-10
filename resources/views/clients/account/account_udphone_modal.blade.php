@@ -5,6 +5,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-primary" id="exampleModalLabel">Cập nhật số điện thoại</h5>
+                <button type="button" wire:click.prevent="close_modal()">
+                   <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form wire:submit.prevent="update_phone">
                 <div class="modal-body">
@@ -38,6 +41,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-primary" id="exampleModalLabel">Cập nhật địa chỉ</h5>
+                <button type="button" wire:click.prevent="close_modal()">
+                   <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form wire:submit.prevent="update_address">
                 <div data-url="{{route('select-address')}}" class="modal-body row route">
@@ -106,6 +112,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-primary" id="exampleModalLabel">Thay đổi mật khẩu</h5>
+                <button type="button" wire:click.prevent="close_modal()">
+                   <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form wire:submit.prevent="update_password">
                 <div class="modal-body">

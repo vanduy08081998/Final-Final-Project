@@ -110,77 +110,10 @@
       <div class="bg-white rounded-3 shadow-lg p-4">
         <div class="py-2 px-xl-2">
           <div class="text-center mb-4 pb-3 border-bottom">
-            <h2 class="h6 mb-3 pb-1">Tổng tiền</h2>
             <h3 class="fw-normal cart_total_price"></h3>
           </div>
-          <div class="mb-3 mb-4">
-            <label class="form-label mb-3" for="order-comments"><span class="badge bg-info fs-xs me-2">Note</span><span
-                class="fw-medium">Ghi chú giao
-                hàng</span></label>
-            <textarea class="form-control" rows="6" id="order-comments"></textarea>
-          </div>
-          <div class="accordion" id="order-options">
-            <div class="accordion-item">
-              <h3 class="accordion-header"><a class="accordion-button" href="#promo-code" role="button"
-                  data-bs-toggle="collapse" aria-expanded="true" aria-controls="promo-code">Áp dụng mã
-                  giảm giá</a></h3>
-              <div class="accordion-collapse collapse show" id="promo-code" data-bs-parent="#order-options">
-                <form class="accordion-body needs-validation" method="post" novalidate>
-                  <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Mã giảm giá" required>
-                    <div class="invalid-feedback">Vui lòng nhập mã!</div>
-                  </div>
-                  <button class="btn btn-outline-primary d-block w-100" type="submit">Áp dụng</button>
-                </form>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h3 class="accordion-header"><a class="accordion-button collapsed" href="#shipping-estimates"
-                  role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Tính
-                  phí ship</a>
-              </h3>
-              <div class="accordion-collapse collapse" id="shipping-estimates" data-bs-parent="#order-options">
-                <div class="accordion-body">
-                  <form class="needs-validation" novalidate>
-                    <div class="mb-3">
-                      <select class="form-select" required>
-                        <option value="">Choose your country</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Belgium">Belgium</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Finland">Finland</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="United States">United States</option>
-                      </select>
-                      <div class="invalid-feedback">Please choose your country!</div>
-                    </div>
-                    <div class="mb-3">
-                      <select class="form-select" required>
-                        <option value="">Choose your city</option>
-                        <option value="Bern">Bern</option>
-                        <option value="Brussels">Brussels</option>
-                        <option value="Canberra">Canberra</option>
-                        <option value="Helsinki">Helsinki</option>
-                        <option value="Mexico City">Mexico City</option>
-                        <option value="Ottawa">Ottawa</option>
-                        <option value="Washington D.C.">Washington D.C.</option>
-                        <option value="Wellington">Wellington</option>
-                      </select>
-                      <div class="invalid-feedback">Please choose your city!</div>
-                    </div>
-                    <div class="mb-3">
-                      <input class="form-control" type="text" placeholder="ZIP / Postal code" required>
-                      <div class="invalid-feedback">Please provide a valid zip!</div>
-                    </div>
-                    <button class="btn btn-outline-primary d-block w-100" type="submit">Tính</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div><a class="btn btn-primary btn-shadow d-block w-100 mt-4"
-            href="{{ URL::to('checkout/checkout-details') }}"><i class="ci-card fs-lg me-2"></i>Tiến
+          <a class="btn btn-primary btn-shadow d-block w-100 mt-4" href="{{ URL::to('checkout/checkout-details') }}"><i
+              class="ci-card fs-lg me-2"></i>Tiến
             hành thanh toán</a>
         </div>
       </div>
