@@ -180,6 +180,7 @@ return [
         Brian2694\Toastr\ToastrServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class
 
     ],
 

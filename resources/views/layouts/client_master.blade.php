@@ -141,7 +141,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
     <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
@@ -156,18 +155,18 @@
     <script
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
-    <script src="{{ asset('frontend/js/paypal.js') }}"></script>
     @include('sweetalert::alert')
     @stack('script')
     <script type="text/javascript">
         cartDropdown()
-    window.addEventListener('alert', event => {
-      toastr[event.detail.type](event.detail.message,
-        event.detail.title ?? ''), toastr.options = {
-        "closeButton": true,
-        "progressBar": true,
-      };
-    })
+        
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            };
+        })
 
         $(document).on('click', '#change_avatar', function() {
             $('#customer_avatar').click();

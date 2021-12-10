@@ -51,8 +51,6 @@
                     data-bs-toggle="modal" data-bs-target="#editAddressModal" title="Sửa"><i class="ci-edit"></i> Chỉnh
                     sửa</a>
                 </td>
-
-                @include('clients.checkout.Checkout.edit_address_modal',['id' => $shipping_default->id ])
               </tr>
 
 
