@@ -83,6 +83,7 @@
                 }
             })
         })
+        
     }
 </script>
 
@@ -117,43 +118,6 @@
     @include('clients.Inc.chatbox')
     <!-- GetButton.io widget -->
 
-<<<<<<< HEAD
-<!-- /GetButton.io widget -->
-  <!-- Back To Top Button-->
-  <a class="btn-scroll-top" href="#top" data-scroll>
-    <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
-    <i class="btn-scroll-top-icon ci-arrow-up"></i>
-  </a>
-  <!-- Vendor scrits: js libraries and plugins-->
-  <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
-  <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/tiny-slider/dist/min/tiny-slider.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-  <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
-  <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
-  <!-- Main theme script-->
-  <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
-  <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
-  <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
-  <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
-  <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-  @include('sweetalert::alert')
-  @stack('script')
-  <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
-  <script src="{{ URL::to('frontend/js/range.js') }}"></script>
-  <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-=======
     <!-- /GetButton.io widget -->
     <!-- Back To Top Button-->
     <a class="btn-scroll-top" href="#top" data-scroll>
@@ -185,6 +149,7 @@
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+    <script src="{{ asset('frontend/js/range.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ asset('frontend/js/checkout.js') }}"></script>
@@ -202,7 +167,6 @@
                 "progressBar": true,
             };
         })
->>>>>>> main
 
         $(document).on('click', '#change_avatar', function() {
             $('#customer_avatar').click();
