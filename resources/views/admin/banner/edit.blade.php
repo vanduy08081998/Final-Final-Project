@@ -59,26 +59,34 @@
                                         <div class="form-group">
                                             <label for="name">Tên slide</label>
                                             <input class="form-control" name="banner_name" id="banner_name"
-                                                value="{{ $bannerId->banner_name }}" type="text">
+                                                value="{{ $bannerId->banner_name }}" onkeyup="ChangeToSlug();" type="text">
                                             @error('banner_name')
                                                 <span class="text-danger">{{ $errors->first('banner_name') }}</span>
                                             @enderror
                                         </div>
                                     </div>
                                     <!-- End -->
-
                                     <!-- INput Group -->
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label for="name">Link slide</label>
                                             <input class="form-control" name="banner_link" id="banner_link"
                                                 value="{{ $bannerId->banner_link }}" type="text">
-                                            @error('brand_slug')
+                                            @error('banner_slug')
                                                 <span class="text-danger">{{ $errors->first('banner_link') }}</span>
                                             @enderror
                                         </div>
                                     </div>
-
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label for="name">Nội dung slide</label>
+                                            <input class="form-control" name="banner_content" id="banner_content"
+                                                value="{{ $bannerId->banner_content }}" type="text">
+                                            @error('banner_content')
+                                                <span class="text-danger">{{ $errors->first('banner_content') }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

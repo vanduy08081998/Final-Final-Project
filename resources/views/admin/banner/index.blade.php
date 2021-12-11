@@ -29,9 +29,14 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
+                            @if (session('message'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('message') }}
+                                        </div>
+                            @endif
                         <div class="card-title">
+                            
                             <h4 class="mb-0">Liệt kê slide</h4>
-
                         </div>
                         <hr />
                         <div class="table-responsive">
@@ -40,8 +45,9 @@
                                     <tr>
 
                                         <th style="text-align: center;">Ảnh</th>
-                                        <th style="text-align: center;">Link slide</th>
                                         <th style="text-align: center;">Tên slide</th>
+                                        <th style="text-align: center;">Link slide</th>
+                                        <th style="text-align: center;">Nội dung slide</th>
                                         <th style="text-align: center;">Công cụ</th>
 
                                     </tr>
@@ -63,6 +69,10 @@
                                             </td>
                                             <td style="text-align: center;">
                                                 {{ $banner->banner_link }}
+
+                                            </td>
+                                            <td style="text-align: center;">
+                                                {{ $banner->banner_content }}
 
                                             </td>
                                             <td style="text-align: center;">
