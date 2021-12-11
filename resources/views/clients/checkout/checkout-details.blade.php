@@ -99,13 +99,14 @@
     </div>
   </div>
 </div>
+@include('clients.checkout.Checkout.add_address_modal')
+
 @endsection
 
 @push('script')
 <script>
   $('#form-infomations').on('submit', function(event){
     event.preventDefault()
-
     let array = [];
     $.ajax({
       type: "POST",
@@ -115,8 +116,7 @@
         window.location.href="{{ route('checkout.checkout-shipping') }}"
       }
     });
-
-
   })
+  fee()
 </script>
 @endpush
