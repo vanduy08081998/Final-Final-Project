@@ -26,7 +26,7 @@
 
     if ($key > 0) {
 
-    $str .= '-' . str_replace([',', '/','.',' '], '', $item);
+    $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
     $sku .= '-' . str_replace(' ', '', $item);
     $variant .= '<br>' . str_replace(' ', '', $item);
     } else {
@@ -38,7 +38,7 @@
     $variant .= $name_color;
     } else {
 
-    $str .= str_replace([',', '/','.',' '], '', $item);
+    $str .= str_replace([',', '/','.',':',' '], '', $item); // trừ -
     $sku .= '-' . str_replace(' ', '', $item);
     $variant .= str_replace(' ', '', $item);
     }
