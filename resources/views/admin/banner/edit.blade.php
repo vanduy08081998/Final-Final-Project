@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">
@@ -38,8 +38,7 @@
                     </div>
                 </div>
                 <!--end breadcrumb-->
-                <form action="{{ route('banners.update', ['banner' => $bannerId->id]) }}" method="post"
-                    enctype="multipart/form-data">
+                <form action="{{ route('banners.update', $bannerId->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -59,8 +58,8 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group">
                                             <label for="name">Tên slide</label>
-                                            <input class="form-control" name="banner_name" onkeyup="ChangeToSlug();"
-                                                id="banner_name" value="{{ $bannerId->banner_name }}" type="text">
+                                            <input class="form-control" name="banner_name" id="banner_name"
+                                                value="{{ $bannerId->banner_name }}" type="text">
                                             @error('banner_name')
                                                 <span class="text-danger">{{ $errors->first('banner_name') }}</span>
                                             @enderror

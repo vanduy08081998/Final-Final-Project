@@ -29,8 +29,9 @@
 
             <button type="button" class="edit bg-aqua text-dark btn-submit-text" data-id="{{ $value->id }}"
                 data-url="{{ url('comment/editComment/' . $value->id) }}">Sửa</button>
-            <button type="button" class="esc bg-danger text-light" data-id="{{ $value->id }}"><i
-                    class="fa fa-sign-out" aria-hidden="true"></i></button>
+            <button type="button" class="esc bg-danger text-light" data-id="{{ $value->id }}">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
         </div>
     </div>
     <div class="pb-1 comment-body-{{ $value->id }} body-comment">
@@ -43,8 +44,9 @@
                 lời</span>
             <b class="dot">.</b>
         @else
-            <span class="edit-comment" onclick="editComment({{ $value->id }})"><i class="fa fa-pencil-square"
-                    aria-hidden="true"></i>Chỉnh sửa
+            <span class="edit-comment" onclick="editComment({{ $value->id }})">
+                <i class="fas fa-edit"></i>
+                Chỉnh sửa
             </span>
             <b class="dot">.</b>
         @endif
@@ -53,12 +55,12 @@
 
         @if (in_array($idUser, $value->usersLike->pluck('id')->all()))
             <span class="numlike isLike">
-                <i class="fa fa-thumbs-o-up"></i>
+                <i class="fas fa-thumbs-up"></i>
                 <span wire:click="UnLikeComment('{{ $value->id }}')">Bỏ thích</span>
             </span>
         @else
             <span class="numlike">
-                <i class="fa fa-thumbs-o-up"></i>
+                <i class="fas fa-thumbs-up"></i>
                 <span class="like" wire:click="likeComment('{{ $value->id }}')">Thích</span>
             </span>
         @endif

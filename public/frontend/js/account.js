@@ -48,6 +48,10 @@ window.addEventListener('CloseUpdatePasswordModal', function(event) {
     $('.updatePassword').modal('hide');
 });
 
+window.addEventListener('CloseModal', function(event){
+    $('.modal').modal('hide');
+})
+
 $(document).ready(function() {
     $("#show_hide_password a").on('click', function(event) {
         event.preventDefault();

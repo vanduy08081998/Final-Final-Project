@@ -101,7 +101,7 @@ $category = Category::all();
                                 @if (Auth::user()->avatar)
                                     <img class="customer_picture"
                                         src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
-                                        alt="avatar">
+                                        alt="avatar" style="border-radius:50%;">
                                 @else
                                     <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
                                         width="90" alt="avatar">
@@ -138,13 +138,31 @@ $category = Category::all();
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
-                                        <a href="{{ url('/' . $cate->category_slug) }}"
+                                        <a href="{{ route('shop.products_category', $cate->id_cate) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                             <span>{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}
                                         </a>
                                         <div class="dropdown-menu p-0" style="width:1000px; height:400px;">
                                             <div class="d-flex flex-wrap flex-sm-nowrap px-2">
+
+                                                <div class="mega-dropdown-column py-4 px-3">
+                                                    <div class="widget widget-links">
+                                                        <h6 class="fs-base mb-3">Thương hiệu <br>
+                                                            {{ $cate->category_name }}</h6>
+                                                        <ul class="widget-list">
+                                                            @foreach ($cate->brands as $brand)
+                                                                <li class="widget-list-item pb-1"><a
+                                                                        class="widget-list-link"
+                                                                        href="#">{{ $brand->brand_name }}</a>
+                                                                </li>
+
+                                                            @endforeach
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
                                                 <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
                                                     @foreach ($cate->subcategory as $cateChild)
                                                         <div class="widget widget-links pb-2">
@@ -161,34 +179,6 @@ $category = Category::all();
                                                             </ul>
                                                         </div>
                                                     @endforeach
-                                                </div>
-                                                <div class="mega-dropdown-column py-4 px-3">
-                                                    <div class="widget widget-links">
-                                                        <h6 class="fs-base mb-3">Accessories</h6>
-                                                        <ul class="widget-list">
-
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Monitors</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
-                                                                    Sleeves</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Monitors</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
-                                                                    Sleeves</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Monitors</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
-                                                                    Sleeves</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Monitors</a></li>
-                                                            <li class="widget-list-item pb-1"><a
-                                                                    class="widget-list-link" href="#">Bags, Cases &amp;
-                                                                    Sleeves</a></li>
-                                                        </ul>
-                                                    </div>
                                                 </div>
 
                                                 <div class="mega-dropdown-column py-4 px-3">
@@ -250,7 +240,7 @@ $category = Category::all();
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="widget widget-links">
+                                        {{-- <div class="widget widget-links">
                                             <h6 class="fs-base mb-3">Danh mục 2</h6>
                                             <ul class="widget-list">
                                                 <li class="widget-list-item"><a class="widget-list-link"
@@ -265,10 +255,10 @@ $category = Category::all();
                                                         href="{{ route('checkout.checkout-details') }}">Checkout</a>
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links">
+                                        {{-- <div class="widget widget-links">
                                             <h6 class="fs-base mb-3">Danh mục 3</h6>
                                             <ul class="widget-list">
                                                 <li class="widget-list-item"><a class="widget-list-link"
@@ -296,10 +286,10 @@ $category = Category::all();
                                                 <li class="widget-list-item"><a class="widget-list-link"
                                                         href="comparison.html">Product Comparison</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links mb-4">
+                                        {{-- <div class="widget widget-links mb-4">
                                             <h6 class="fs-base mb-3">Danh mục 4</h6>
                                             <ul class="widget-list">
                                                 <li class="widget-list-item"><a class="widget-list-link"
@@ -309,8 +299,8 @@ $category = Category::all();
                                                 <li class="widget-list-item"><a class="widget-list-link"
                                                         href="grocery-checkout.html">Checkout</a></li>
                                             </ul>
-                                        </div>
-                                        <div class="widget widget-links">
+                                        </div> --}}
+                                        {{-- <div class="widget widget-links">
                                             <h6 class="fs-base mb-3">Danh mục 5</h6>
                                             <ul class="widget-list">
                                                 <li class="widget-list-item"><a class="widget-list-link"
@@ -326,7 +316,7 @@ $category = Category::all();
                                                         &amp;
                                                         Payment)</a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

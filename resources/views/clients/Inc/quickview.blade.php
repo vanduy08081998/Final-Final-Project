@@ -114,12 +114,14 @@
                                     <option value="4">4</option>
                                     <option value="5">5</option>
                                 </select>
-                                <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
+                                <button class="btn btn-primary btn-shadow d-block w-100" type="button"><i
+                                        class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng</button>
                             </div>
                             <div class="d-flex mb-4">
                                 <div class="w-100 me-3">
                                     <button class="btn btn-secondary d-block w-100" type="button"><i
-                                            class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Thêm vào yêu thích</span></button>
+                                            class="ci-heart fs-lg me-2"></i><span class='d-none d-sm-inline'>Thêm vào
+                                            yêu thích</span></button>
                                 </div>
                                 <div class="w-100">
                                     <button class="btn btn-secondary d-block w-100" type="button"><i
