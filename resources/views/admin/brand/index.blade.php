@@ -73,7 +73,7 @@
                                                     <div class="text-center">
                                                         <div class="position-relative mr-2">
                                                             <img width="80" height="40"
-                                                                src="{{ url('uploads/files/Brands', $brand->brand_image) }}" />
+                                                                src="{{ url('uploads/Brands', $brand->brand_image) }}" />
                                                         </div>
                                                     </div>
                                                 </td>

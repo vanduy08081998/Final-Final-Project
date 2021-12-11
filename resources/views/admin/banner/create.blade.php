@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">
@@ -38,7 +38,8 @@
                     </div>
                 </div>
                 <!--end breadcrumb-->
-                <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data"
+                    autocomplete="off">
                     @csrf
                     <div class="row">
                         <div class="col-lg-8">
@@ -57,7 +58,7 @@
                                         <div class="form-group">
                                             <label for="name">Tên slide</label>
                                             <input class="form-control" name="banner_name"
-                                                 value="{{ old('banner_name') }}" type="text">
+                                                value="{{ old('banner_name') }}" type="text">
                                             @error('banner_name')
                                                 <span class="text-danger">{{ $errors->first('banner_name') }}</span>
                                             @enderror

@@ -23,6 +23,7 @@ use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Controllers\Clients\WishlistController;
+use App\Http\Controllers\Clients\ReviewController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\UserCommentController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
@@ -78,25 +79,29 @@ Route::prefix('/')->group(function () {
         Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
         Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
         Route::post('/cart-total', [CartController::class, 'cartTotals'])->name('cart.total');
-    });
+      });
 
-    Route::prefix('/account')->group(function () {
-        Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
-        Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-        Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
-        Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
-        Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
-        Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
-        Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
-    });
-    Route::resource('/shippings', ShippingController::class);
-    // wishlist
-    Route::prefix('/wishlist')->group(function () {
-        Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
-        Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
-        Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
-    });
+  Route::prefix('/account')->group(function () {
+    Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
+    Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
+    Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+    Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
+    Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+    Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
+    Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
+  });
+  Route::resource('/shippings', ShippingController::class);
+  // wishlist
+  Route::prefix('/wishlist')->group(function () {
+    Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
+    Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
+    Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
+  });
+  // Bình luận
+  Route::resource('/comment', CommentController::class);
+  Route::get('/comment/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+  Route::get('/comment/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
+  Route::get('/comment/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
 
     Route::prefix('/account')->group(function () {
         Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
@@ -125,6 +130,9 @@ Route::prefix('/')->group(function () {
         Route::post('/searchs/', [SearchController::class, 'searchs'])->name('search.searchs');
         Route::post('/range', [SearchController::class, 'range'])->name('search.range');
     });
+
+    //Đánh giá
+    Route::resource('/review', ReviewController::class);
     Route::get('/users', Users::class);
 });
 

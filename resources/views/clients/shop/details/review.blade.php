@@ -1,172 +1,92 @@
-<div class="tab-pane fade" id="reviews" role="tabpanel">
-  <!-- Reviews-->
-  <div class="row pt-2 pb-3">
-    <div class="col-lg-4 col-md-5">
-      <h2 class="h3 mb-4">74 Reviews</h2>
-      <div class="star-rating me-2"><i class="ci-star-filled fs-sm text-accent me-1"></i><i
-          class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star-filled fs-sm text-accent me-1"></i><i
-          class="ci-star-filled fs-sm text-accent me-1"></i><i class="ci-star fs-sm text-muted me-1"></i></div><span
-        class="d-inline-block align-middle">4.1 Overall rating</span>
-      <p class="pt-3 fs-sm text-muted">58 out of 74 (77%)<br>Customers recommended this
-        product</p>
-    </div>
-    <div class="col-lg-8 col-md-7">
-      <div class="d-flex align-items-center mb-2">
-        <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">5</span><i class="ci-star-filled fs-xs ms-1"></i>
-        </div>
-        <div class="w-100">
-          <div class="progress" style="height: 4px;">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0"
-              aria-valuemax="100"></div>
-          </div>
-        </div><span class="text-muted ms-3">43</span>
-      </div>
-      <div class="d-flex align-items-center mb-2">
-        <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">4</span><i class="ci-star-filled fs-xs ms-1"></i>
-        </div>
-        <div class="w-100">
-          <div class="progress" style="height: 4px;">
-            <div class="progress-bar" role="progressbar" style="width: 27%; background-color: #a7e453;" aria-valuenow="27"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div><span class="text-muted ms-3">16</span>
-      </div>
-      <div class="d-flex align-items-center mb-2">
-        <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">3</span><i class="ci-star-filled fs-xs ms-1"></i>
-        </div>
-        <div class="w-100">
-          <div class="progress" style="height: 4px;">
-            <div class="progress-bar" role="progressbar" style="width: 17%; background-color: #ffda75;" aria-valuenow="17"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div><span class="text-muted ms-3">9</span>
-      </div>
-      <div class="d-flex align-items-center mb-2">
-        <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">2</span><i class="ci-star-filled fs-xs ms-1"></i>
-        </div>
-        <div class="w-100">
-          <div class="progress" style="height: 4px;">
-            <div class="progress-bar" role="progressbar" style="width: 9%; background-color: #fea569;" aria-valuenow="9" aria-valuemin="0"
-              aria-valuemax="100"></div>
-          </div>
-        </div><span class="text-muted ms-3">4</span>
-      </div>
-      <div class="d-flex align-items-center">
-        <div class="text-nowrap me-3"><span class="d-inline-block align-middle text-muted">1</span><i class="ci-star-filled fs-xs ms-1"></i>
-        </div>
-        <div class="w-100">
-          <div class="progress" style="height: 4px;">
-            <div class="progress-bar bg-danger" role="progressbar" style="width: 4%;" aria-valuenow="4" aria-valuemin="0"
-              aria-valuemax="100"></div>
-          </div>
-        </div><span class="text-muted ms-3">2</span>
-      </div>
-    </div>
-  </div>
-  <hr class="mt-4 mb-3">
-  <div class="row py-4">
-    <!-- Reviews list-->
-    <div class="col-md-7">
-      <div class="d-flex justify-content-end pb-4">
-        <div class="d-flex flex-nowrap align-items-center">
-          <label class="fs-sm text-muted text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Sort by:</label>
-          <select class="form-select form-select-sm" id="sort-reviews">
-            <option>Newest</option>
-            <option>Oldest</option>
-            <option>Popular</option>
-            <option>High rating</option>
-            <option>Low rating</option>
-          </select>
-        </div>
-      </div>
-      <!-- Review-->
-      <div class="product-review pb-4 mb-4 border-bottom">
-        <div class="d-flex mb-3">
-          <div class="d-flex align-items-center me-4 pe-2"><img class="rounded-circle"
-              src="{{ URL::to('frontend/img/shop/reviews/01.jpg') }}" width="50" alt="Rafael Marquez">
-            <div class="ps-3">
-              <h6 class="fs-sm mb-0">Rafael Marquez</h6><span class="fs-ms text-muted">June 28, 2019</span>
+<div class="modal fade new_review" wire:ignore.self id="updatePhoneModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div style="max-width: 55%" class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title-review" id="exampleModalLongTitle"> Đánh giá</h5>
+                <button type="button" class="btn btn-outline-danger btn-sm text-dark"
+                    wire:click.prevent="close_review()">
+                    <span aria-hidden="true">X</span> Đóng
+                </button>
             </div>
-          </div>
-          <div>
-            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
-                class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
-            </div>
-            <div class="fs-ms text-muted">83% of users found this review helpful</div>
-          </div>
+            <form style="margin-left:20px">
+                <div class="count-rating-hidden">
+                    <input type="hidden" class="count-rating" name="count-rating" value="none">
+                    <input type="hidden" class="product_id" name="count-rating" value="{{$product->id}}">
+                </div>
+                <div class="modal-body-review">
+                    <div class="product-title">
+                        <img src="{{asset($product->product_image)}}" width="110" height="auto">
+                        <span>{{$product->product_name}}</span>
+                    </div>
+
+                    <div class="rating-review-product d-flex justify-content-between mt-2">
+                        <div class="">Bạn cảm thấy sản phẩm này như thế nào? <br>(chọn sao nhé):</div>
+                        <ul style="list-style-type: none" class="ratting wrap-rating d-flex">
+                            <li class="text-center li-rating">
+                                <i data-count="1" data-product_id="{{$product->id}}"
+                                    class="item-rating ci-star text-warning fa-2x"></i>
+                                <p class="text-rating text-rating_0">Rất tệ
+                                <p>
+                            </li>
+                            <li class="text-center li-rating">
+                                <i data-count="2" data-product_id="{{$product->id}}"
+                                    class="item-rating ci-star text-warning fa-2x"></i>
+                                <p class="text-rating text-rating_1">Tệ
+                                <p>
+                            </li>
+                            <li class="text-center li-rating">
+                                <i data-count="3" data-product_id="{{$product->id}}"
+                                    class="item-rating ci-star text-warning fa-2x"></i>
+                                <p class="text-rating text-rating_2">Bình<br> thường
+                                <p>
+                            </li>
+                            <li class="text-center li-rating">
+                                <i data-count="4" data-product_id="{{$product->id}}"
+                                    class="item-rating ci-star text-warning fa-2x"></i>
+                                <p class="text-rating text-rating_3">Tốt
+                                <p>
+                            </li>
+                            <li class="text-center li-rating">
+                                <i data-count="5" data-product_id="{{$product->id}}"
+                                    class="item-rating ci-star text-warning fa-2x"></i>
+                                <p class="text-rating text-rating_4">Rất tốt
+                                <p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="textarea border-textarea">
+                        <textarea class="review-content content-rating" placeholder="Mời bạn chia sẻ thêm một số cảm nhận ..." id="content_rating" rows="3"></textarea>
+                       <div style="font-size:14px" class="d-flex error-review">
+                          <span class="ms-sm-2 text-danger review_error"> </span>
+                           <span class="me-sm-2"><span id="count-result">0</span> ký tự (tối thiểu 80)</span>
+                        </div>
+                        <div class="input-field">
+                            <div class="input-images-1"></div>
+                        </div>
+
+                        
+                    </div>
+                    <div class="form-check mt-3">
+                        <input type="checkbox" class="check_rating form-check-input" value="Đi chơi"
+                            id="rating_checkbox">
+                        <label class="form-check-label" for="exampleCheck1">Tôi sẽ giới thiệu sản phẩm này cho bạn bè
+                            người thân</label>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center mt-3">
+                        <button data-url="{{route('review.store')}}" onclick="new_review()" type="button"
+                            class="button_save_review btn btn-primary">Gửi đánh giá ngay</button>
+                        <p style="font-size:14px" class="error_review mt-1">Nội dung đánh giá quá ít. Vui lòng nhập thêm nội dung đánh giá về sản phẩm.</p>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center mb-2">
+                        <span style="font-size:14px">Để đánh giá được duyệt, quý khách vui lòng tuân thủ <span class="text-primary">Quy định
+                                đánh giá</span></span>
+                    </div>
+            </form>
         </div>
-        <p class="fs-md mb-2">Nam libero tempore, cum soluta nobis est eligendi optio
-          cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis
-          voluptas assumenda est...</p>
-        <ul class="list-unstyled fs-ms pt-1">
-          <li class="mb-1"><span class="fw-medium">Pros:&nbsp;</span>Consequuntur
-            magni, voluptatem
-            sequi, tempora</li>
-          <li class="mb-1"><span class="fw-medium">Cons:&nbsp;</span>Architecto
-            beatae, quis autem
-          </li>
-        </ul>
-        <div class="text-nowrap">
-          <button class="btn-like" type="button">15</button>
-          <button class="btn-dislike" type="button">3</button>
-        </div>
-      </div>
-      <!-- Review-->
-      <div class="text-center">
-        <button class="btn btn-outline-accent" type="button"><i class="ci-reload me-2"></i>Load
-          more reviews</button>
-      </div>
     </div>
-    <!-- Leave review form-->
-    <div class="col-md-5 mt-2 pt-4 mt-md-0 pt-md-0">
-      <div class="bg-secondary py-grid-gutter px-grid-gutter rounded-3">
-        <h3 class="h4 pb-2">Write a review</h3>
-        <form class="needs-validation" method="post" novalidate>
-          <div class="mb-3">
-            <label class="form-label" for="review-name">Your name<span class="text-danger">*</span></label>
-            <input class="form-control" type="text" required id="review-name">
-            <div class="invalid-feedback">Please enter your name!</div><small class="form-text text-muted">Will be displayed on
-              the comment.</small>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-email">Your email<span class="text-danger">*</span></label>
-            <input class="form-control" type="email" required id="review-email">
-            <div class="invalid-feedback">Please provide valid email address!</div>
-            <small class="form-text text-muted">Authentication only - we won't spam
-              you.</small>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-rating">Rating<span class="text-danger">*</span></label>
-            <select class="form-select" required id="review-rating">
-              <option value="">Choose rating</option>
-              <option value="5">5 stars</option>
-              <option value="4">4 stars</option>
-              <option value="3">3 stars</option>
-              <option value="2">2 stars</option>
-              <option value="1">1 star</option>
-            </select>
-            <div class="invalid-feedback">Please choose rating!</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-text">Review<span class="text-danger">*</span></label>
-            <textarea class="form-control" rows="6" required id="review-text"></textarea>
-            <div class="invalid-feedback">Please write a review!</div><small class="form-text text-muted">Your review must be at
-              least 50
-              characters.</small>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="review-pros">Pros</label>
-            <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-pros"></textarea>
-          </div>
-          <div class="mb-4">
-            <label class="form-label" for="review-cons">Cons</label>
-            <textarea class="form-control" rows="2" placeholder="Separated by commas" id="review-cons"></textarea>
-          </div>
-          <button class="btn btn-primary btn-shadow d-block w-100" type="submit">Submit a
-            Review</button>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
+

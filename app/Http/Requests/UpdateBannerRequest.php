@@ -24,9 +24,8 @@ class UpdateBannerRequest extends FormRequest
     public function rules()
     {
         return [
-            'banner_name' => ['required' , 'unique:banners' , 'max:225'],
-            'banner_link' => ['required', 'unique:banners' , 'max:225'],
-            'banner_img' => 'required'
+            'banner_name' => ['required' , 'max:225'],
+            'banner_link' => ['required','max:225'],
         ];
     }
 
@@ -36,7 +35,6 @@ class UpdateBannerRequest extends FormRequest
             'banner_name.unique' => 'banner_name đã tồn tại!',
             'banner_link.required' => 'banner_link không được để trống!',
             'banner_link.required' => 'banner_link không được để trống!',
-            'banner_img.required' => 'banner_img không được để trống!'
         ];
     }
 }
