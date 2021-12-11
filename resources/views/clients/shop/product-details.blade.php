@@ -29,7 +29,7 @@
         </div>
     </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
             <ul class="nav nav-tabs" role="tablist">
@@ -39,19 +39,15 @@
                         role="tab"><span class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
             </ul>
             <div class="px-4 pt-lg-3 pb-3 mb-5">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="bg-light shadow-lg rounded-3">
                         <div class="px-4 pt-lg-3 pb-3 mb-5">
 
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
-
-
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
                                     @include('clients.shop.details.form-select-attribute')
                                 </div>
-
-
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
                                     <div
@@ -62,7 +58,6 @@
                                     </div>
                                 </div>
                                 <!-- Reviews tab-->
-
                             </div>
                         </div>
                     </div>
@@ -165,12 +160,12 @@
 
         const quantityCheck = (quantity) => {
             if (quantity > 0) {
-                $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
                                                   class="ci-security-check"></i>Sản phẩm còn hàng
                                               </div>`)
             } else {
                 $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                  class="fas fa-times"></i>Sản phẩm hết hàng
+                                                  class="fas fa-times" style="right: 70px; top: 550px"></i>Sản phẩm hết hàng
                                               </div> `)
             }
         }
@@ -198,11 +193,11 @@
             `)
                     MagicZoom.refresh();
                     if (response.product_quantity > 0) {
-                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="top: -200" ><i
+                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
                                                   class="ci-security-check"></i>Sản phẩm còn hàng
                                               </div>`)
                     } else {
-                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red" style="right: 70px; top: 550px"><i
                                                   class="fas fa-times"></i>Sản phẩm hết hàng
                                               </div> `)
                     }
