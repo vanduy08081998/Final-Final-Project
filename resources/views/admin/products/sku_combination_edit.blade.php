@@ -25,8 +25,8 @@
     foreach ($combination as $key => $item) {
 
     if ($key > 0) {
-    $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
-    $str .= '-' . str_replace([',', '/','.',' '], '', $itemAfterConvert);
+
+    $str .= '-' . str_replace([',', '/','.',' '], '', $item);
     $sku .= '-' . str_replace(' ', '', $item);
     $variant .= '<br>' . str_replace(' ', '', $item);
     } else {
@@ -37,8 +37,8 @@
     $sku .= '-' . $color_slug;
     $variant .= $name_color;
     } else {
-    $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
-    $str .= str_replace([',', '/','.',' '], '', $itemAfterConvert);
+
+    $str .= str_replace([',', '/','.',' '], '', $item);
     $sku .= '-' . str_replace(' ', '', $item);
     $variant .= str_replace(' ', '', $item);
     }

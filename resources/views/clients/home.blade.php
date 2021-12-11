@@ -24,14 +24,12 @@
                                         </div>
                                         <div
                                             class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
-                                            <h2 class="fw-light pb-1 from-bottom" style="color: #fff">Hãy đến với</h2>
-                                            <h1 class="display-4 from-bottom delay-1" style="color: #fff">
+                                            <h2 class="fw-light pb-1 from-bottom" style="color: #38ada9;"></h2>
+                                            <h1 class="display-4 from-bottom delay-1" style="color: #38ada9;">
                                                 {{ $item->banner_name }}</h1>
-                                            <h5 class="fw-light pb-3 from-bottom delay-2" style="color: #fff">Để có những
-                                                lựa chọn hàng đầu</h5>
+                                            <h4 class="fw-light pb-3 from-bottom delay-2" style="color: #38ada9; font-weight: 700;">Với Nhiều Ưu Đãi Hấp Dẫn Đang Chờ Bạn</h4>
                                             <div class="d-table scale-up delay-4 mx-auto mx-md-0">
-                                                <a class="btn btn-primary btn-shadow" href="{{ $item->banner_link }}">Xem
-                                                    ngay<i class="ci-arrow-right ms-2 me-n1"></i></a>
+                                                <a class="btn btn-primary btn-shadow" href="{{ $item->banner_link }}"><i class="fas fa-shopping-cart"></i> Mua ngay</a>
                                             </div>
                                         </div>
                                     </div>

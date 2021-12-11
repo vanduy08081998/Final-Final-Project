@@ -87,10 +87,10 @@
         </div>
         <div class="boxed-check-group boxed-check-success boxed-check-sm">
           @foreach ($item->values as $key => $value)
-          <?php $slug = \App\Models\Variant::where('name', $value)->first()->slug ?>
+          <?php $attribure_name_details = \App\Models\Variant::where('name', $value)->first()->name ?>
           <label class="boxed-check">
             <input class="boxed-check-input" type="radio" name="radio_custom_{{ $item->attribute_id }}"
-              value="{{ $slug }}">
+              value="{{ str_replace([',', '/','.',' '],'',$attribure_name_details) }}">
             <div class="boxed-check-label" style="text-align:center;">
               <img class="img-selected"
                 src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg"

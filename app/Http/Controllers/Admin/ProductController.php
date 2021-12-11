@@ -281,9 +281,8 @@ class ProductController extends Controller
         $str = '';
 
         foreach ($combination as $key => $item) {
-          $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $itemAfterConvert);
+            $str .= '-' . str_replace([',', '/','.',' '], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -291,7 +290,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',' '], '', $itemAfterConvert);
+              $str .= str_replace([',', '/','.',' '], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -493,9 +492,9 @@ class ProductController extends Controller
         $str = '';
 
         foreach ($combination as $key => $item) {
-          $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
+
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $itemAfterConvert);
+            $str .= '-' . str_replace([',', '/','.',' '], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -503,7 +502,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',' '], '', $itemAfterConvert);
+              $str .= str_replace([',', '/','.',' '], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
