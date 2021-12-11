@@ -155,6 +155,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
     Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
     Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
+    Route::post('product__specification', [ProductAdmin::class, 'getProductSpecification'])->name('admin.products.specifications');
     Route::post('deals_today', [ProductAdmin::class, 'editDealsToday'])->name('admin.deals-today');
     Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
     Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');

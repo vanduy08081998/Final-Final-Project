@@ -1,0 +1,6 @@
+2021-12-10T07:29:37.419132Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2021-12-10T07:29:37.799443Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2021-12-10T07:29:38.000004Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: ee4c7b68-598a-11ec-965b-98e743181dab.
+2021-12-10T07:29:38.054626Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2021-12-10T07:29:39.101117Z 0 [Warning] CA certificate ca.pem is self signed.
+2021-12-10T07:29:39.424874Z 1 [Warning] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
