@@ -24,14 +24,12 @@
                                         </div>
                                         <div
                                             class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
-                                            <h2 class="fw-light pb-1 from-bottom" style="color: #fff">Hãy đến với</h2>
-                                            <h1 class="display-4 from-bottom delay-1" style="color: #fff">
+                                            <h2 class="fw-light pb-1 from-bottom" style="color: #38ada9;"></h2>
+                                            <h1 class="display-4 from-bottom delay-1" style="color: #38ada9;">
                                                 {{ $item->banner_name }}</h1>
-                                            <h5 class="fw-light pb-3 from-bottom delay-2" style="color: #fff">Để có những
-                                                lựa chọn hàng đầu</h5>
+                                            <h4 class="fw-light pb-3 from-bottom delay-2" style="color: #38ada9; font-weight: 700;">Với Nhiều Ưu Đãi Hấp Dẫn Đang Chờ Bạn</h4>
                                             <div class="d-table scale-up delay-4 mx-auto mx-md-0">
-                                                <a class="btn btn-primary btn-shadow" href="{{ $item->banner_link }}">Xem
-                                                    ngay<i class="ci-arrow-right ms-2 me-n1"></i></a>
+                                                <a class="btn btn-primary btn-shadow" href="{{ $item->banner_link }}"><i class="fas fa-shopping-cart"></i> Mua ngay</a>
                                             </div>
                                         </div>
                                     </div>
@@ -245,155 +243,6 @@
                 <hr class="d-sm-none">
             </div>
             <!-- Product-->
-            <div class="product-item">
-                <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>Compare</a>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
-                            src="{{ asset('frontend/img/shop/catalog/62.jpg') }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Wearable
-                            Electronics</a>
-                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Fitness GPS Smart
-                                Watch</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">$317.<small>40</small></span></div>
-                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-half active"></i><i
-                                    class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body card-body-hidden">
-                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                    </div>
-                </div>
-                <hr class="d-sm-none">
-            </div>
-            <!-- Product-->
-            <div class="product-item">
-                <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>Compare</a>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
-                            src="{{ asset('frontend/img/shop/catalog/62.jpg') }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Wearable
-                            Electronics</a>
-                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Fitness GPS Smart
-                                Watch</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">$317.<small>40</small></span></div>
-                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-half active"></i><i
-                                    class="star-rating-icon ci-star"></i><i class="star-rating-icon ci-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body card-body-hidden">
-                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                    </div>
-                </div>
-                <hr class="d-sm-none">
-            </div>
-            <!-- Product-->
-            <div class="product-item">
-                <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>Compare</a>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
-                            src="{{ asset('frontend/img/shop/catalog/63.jpg') }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Smartphones</a>
-                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Popular Smartphone
-                                128GB</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">$965.<small>00</small></span></div>
-                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body card-body-hidden">
-                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                    </div>
-                </div>
-                <hr class="d-sm-none">
-            </div>
-            <!-- Product-->
-            <div class="product-item">
-                <div class="card product-card"><span class="badge bg-info badge-shadow">New</span>
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>Compare</a>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
-                            src="{{ asset('frontend/img/shop/catalog/64.jpg') }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Wearable
-                            Electronics</a>
-                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Smart Watch Series
-                                5, Aluminium</a>
-                        </h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">$349.<small>99</small></span></div>
-                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-half active"></i><i
-                                    class="star-rating-icon ci-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body card-body-hidden">
-                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                    </div>
-                </div>
-                <hr class="d-sm-none">
-            </div>
-            <!-- Product-->
-            <div class="product-item">
-                <div class="card product-card">
-                    <div class="product-card-actions d-flex align-items-center"><a class="btn-action nav-link-style me-2"
-                            href="#"><i class="ci-compare me-1"></i>Compare</a>
-                        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-                            title="Thêm vào yêu thích"><i class="ci-heart"></i></button>
-                    </div><a class="card-img-top d-block overflow-hidden" href="{{ url('shop/product-details') }}"><img
-                            src="{{ asset('frontend/img/shop/catalog/65.jpg') }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Computers</a>
-                        <h3 class="product-title fs-sm"><a href="{{ url('shop/product-details') }}">Convertible 2-in-1
-                                HD Laptop</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">$412.<small>00</small></span></div>
-                        </div>
-                    </div>
-                    <div class="card-body card-body-hidden">
-                        <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                        <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view-electro"
-                                data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <!-- Promo banner-->

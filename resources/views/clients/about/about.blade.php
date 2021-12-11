@@ -5,7 +5,7 @@
 
 
 @section('content')
-    <main class="container-fluid px-0">
+    <main class="container px-0">
         <!-- Row: Shop online-->
         <section class="row g-0">
             <div class="col-md-6 bg-position-center bg-size-cover bg-secondary"
@@ -25,7 +25,7 @@
             <div class="col-md-6 px-3 px-md-5 py-5 order-md-1">
                 <div class="mx-auto py-lg-5" style="max-width: 35rem;">
                     <h2 class="h3 pb-3">Chính sách giao nhận hàng</h2>
-                    <p class="fs-sm pb-3 text-muted"><b>Khi nhận hàng, quý khách hàng cần lưu ý thực hiện:</b> 
+                    <p class="fs-sm pb-3 text-muted"><b>Khi nhận hàng, quý khách hàng cần lưu ý thực hiện:</b>
                         <p>- Mở gói hàng và đối chiếu hàng hóa với hoá đơn tính tiền</p>
                         <p>- Kiểm tra sản phẩm thực tế có đúng với sản phẩm mà Khách hàng đã đặt mua hay không.</p>
                         <p>- Kiểm tra bao bì và sản phẩm có bị hư hại do quá trình vận chuyển hay không.</p>
@@ -33,7 +33,7 @@
                         Nếu không hài lòng với 1 trong 3 điều trên, khách hàng có thể yêu cầu nhân viên giao hàng xác nhận và trả lại hàng.
                         <p>
                         Bigdeal sẽ không chịu trách nhiệm giải quyết khiếu nại về việc thiếu hàng hoặc giao sai hàng của khách hàng sau khi khách hàng đã ký nhận và thanh toán.</p>
-                     
+
                     </p>
                     <!-- <a class="btn btn-accent btn-shadow" href="#">Shipping details</a> -->
                 </div>
@@ -47,7 +47,7 @@
                 <div class="mx-auto py-lg-5" style="max-width: 35rem;">
                     <h2 class="h3 pb-3">Chính sách bảo mật thông tin</h2>
                     <p class="fs-sm pb-3 text-muted">Chúng tôi cam kết sẽ bảo mật các Thông tin cá nhân của khách hàng, sẽ nỗ lực hết sức và sử dụng các biện pháp thích hợp để các thông tin mà khách hàng cung cấp cho chúng tôi trong quá trình sử dụng website & ứng dụng này được bảo mật và bảo vệ khỏi sự truy cập trái phép. Tuy nhiên, Bigdeal không đảm bảo ngăn chặn được tất cả các truy cập trái phép. Công ty CP Bigdeal không ủy quyền cho bên thứ ba thực hiện việc thu thập, lưu trữ thông tin cá nhân của người tiêu dùng. Trong trường hợp truy cập trái phép nằm ngoài khả năng kiểm soát của chúng tôi, Bigdeal sẽ không chịu trách nhiệm dưới bất kỳ hình thức nào đối với bất kỳ khiếu nại, tranh chấp hoặc thiệt hại nào phát sinh từ hoặc liên quan đến truy cập trái phép đó.</p>
-                           
+
                 </div>
             </div>
         </section>
