@@ -14,7 +14,8 @@
             xuất</a>
         </div>
         <div class="align-middle add-ship mb-3">
-          <a class="add-shipping" href="{{route('shippings.create')}}"><i class="fa fa-plus fa-lg aria-hidden"></i> Thêm
+          <a class="add-shipping" data-bs-toggle="modal" style="cursor: pointer" data-bs-target="#addressModal"><i
+              class="fa fa-plus fa-lg aria-hidden"></i> Thêm
             địa chỉ mới</a>
         </div>
         @if (session('message'))
@@ -46,25 +47,28 @@
                   {{$shipping_default->ward->name}} -
                   {{$shipping_default->district->name}} - {{$shipping_default->province->name}}">
                 </td>
-                <td class="py-3 align-middle"><a class="btn btn-info btn-sm nav-link-style me-2"
-                    href="{{route('shippings.edit',[$shipping_default->id])}}" title="Sửa"><i class="ci-edit"></i> Chỉnh
+                <td class="py-3 align-middle"><a class="btn btn-info btn-sm nav-link-style me-2" href="#"
+                    data-bs-toggle="modal" data-bs-target="#editAddressModal" title="Sửa"><i class="ci-edit"></i> Chỉnh
                     sửa</a>
                 </td>
               </tr>
+
+
               @endif
-              @foreach($shipping_all as $key => $shipping)
+
+              @foreach($shipping_all as $key => $shipping_address)
               <tr>
                 <td class="py-3 align-middle">
-                  <p style="text-transform: uppercase">{{$shipping->fullname}}</p>
-                  <p>Địa chỉ: {{$shipping->neighbor}} - {{$shipping->ward->name}} -
-                    {{$shipping->district->name}} - {{$shipping->province->name}} </p>
-                  <p> Số điện thoại: {{$shipping->phone}}</p>
+                  <p style="text-transform: uppercase">{{$shipping_address->fullname}}</p>
+                  <p>Địa chỉ: {{$shipping_address->neighbor}} - {{$shipping_address->ward->name}} -
+                    {{$shipping_address->district->name}} - {{$shipping_address->province->name}} </p>
+                  <p> Số điện thoại: {{$shipping_address->phone}}</p>
                 </td>
                 <td class="py-3 align-middle">
-                  <a class="btn btn-info btn-sm nav-link-style me-2 mb-2"
-                    href="{{route('shippings.edit',[$shipping->id])}}" data-bs-toggle="tooltip" title="Sửa"><i
-                      class="ci-edit"></i> Chỉnh sửa</a>
-                  <form action="{{ route('shippings.destroy', ['shipping' => $shipping->id]) }}" method="POST">
+                  <a class="btn btn-info btn-sm nav-link-style me-2 mb-2" href="#" data-bs-toggle="modal"
+                    data-bs-target="#editAddressModal{{ $shipping_address->id }}" title="Sửa"><i class="ci-edit"></i>
+                    Chỉnh sửa</a>
+                  <form action="{{ route('shippings.destroy', ['shipping' => $shipping_address->id]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm nav-link-style text-danger" title="Xóa">
@@ -74,6 +78,7 @@
                 </td>
               </tr>
               @endforeach
+
             </tbody>
           </table>
         </div>

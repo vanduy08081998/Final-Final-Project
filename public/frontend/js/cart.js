@@ -16,29 +16,12 @@ $('.card_add_btn').click(function() {
         success: function(response) {
             console.log(response);
             if (response.success) {
-                Swal.fire({
-                    imageUrl: `${$('#url_to').val()}/frontend/img/1103-confetti-outline.gif`,
-                    title: 'Chúc mừng',
-                    text: 'Thêm giỏ hàng thành công!',
-                    confirmButtonText: 'Nhấn ok để tiếp tục',
-                    confirmButtonColor: 'green'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        cartDropdown()
-                    }
-                })
+                toastr.success('Thêm giỏ hàng thành công', 'Chúc mừng')
+                cartDropdown()
             }
 
             if (response.error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Rất tiếc',
-                    text: 'Bạn phải đăng nhập trước khi mua hàng !',
-                    showConfirmButton: false,
-                    showCancelButton: true,
-                    cancelButtonText: 'Quay lại',
-                    cancelButtonColor: 'red'
-                })
+                toastr.error('Bạn phải đăng nhập trước khi mua hàng', 'Cảnh báo')
             }
         }
     });
@@ -112,41 +95,18 @@ const deleteCartDropdown = (i) => {
 }
 
 const deleteCart = function(i) {
-    Swal.fire({
-        imageUrl: 'https://img.icons8.com/ultraviolet/50/000000/shopping-cart-loaded--v2.png',
-        text: 'Bạn có chắc chắn muốn xóa giỏ hàng này không',
-        showDenyButton: true,
-        showCancelButton: false,
-        confirmButtonText: 'Vâng ! Tôi muốn xóa nó !',
-        confirmButtonColor: 'green',
-        denyButtonText: `Tôi không muốn xóa nó`,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: "GET",
-                url: route('cart.delete'),
-                data: {
-                    index: i
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Chúc mừng !',
-                        text: 'Xóa giỏ hàng thành công!',
-                        confirmButtonText: 'Nhấn ok để tiếp tục !',
-                        confirmButtonColor: 'green',
-                    }).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                            window.location.reload();
-                        }
-                    })
-                }
-            });
-        } else if (result.isDenied) {
-            Swal.fire('Bạn đã hoàn tác hành động của mình !', '', 'info')
-        }
-    })
+    
+    $.ajax({
+        type: "GET",
+        url: route('cart.delete'),
+        data: {
+             index: i
+        },
+        success: function(response) {
+            toastr.success('Xóa thành công')
+            window.location.reload();
+         }
+    });
 
 }
 

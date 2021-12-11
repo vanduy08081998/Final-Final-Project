@@ -23,7 +23,7 @@
     </div>
     <!-- Contact detail cards-->
     @foreach ($infors as $infor)
-    <section class="container-fluid pt-grid-gutter">
+    <section class="container pt-grid-gutter">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-grid-gutter"><a class="card h-100" href="#map" data-scroll>
                     <div class="card-body text-center"><i class="ci-location h3 mt-2 mb-4 text-primary"></i>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </section>
-    <div class="container-fluid px-0" id="map">
+    <div class="container px-0" id="map">
         <div class="row g-0">
             <div class="col-lg-6 iframe-full-height-wrap">
                 {!! $infor->gg_map !!}

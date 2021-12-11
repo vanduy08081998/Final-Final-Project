@@ -18,7 +18,11 @@ class HomeController extends Controller
 {
     public function index(){
         $slide = Banner::orderByDESC('id')->get();
-        return view('clients.home')->with(compact('slide'));
+        $product = Product::orderByDESC('id')->get();
+        return view('clients.home')->with([
+            'slide' => $slide,
+            'product' => $product
+        ]);
     }
 
     public function blog(){

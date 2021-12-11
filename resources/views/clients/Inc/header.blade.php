@@ -13,6 +13,22 @@ $category = Category::all();
         width: 30rem;
     }
 
+    .tt-dataset-productList .tt-suggestion {
+        display: flex;
+    }
+
+    .tt-menu {
+        min-width: calc(100% - 20px);
+        margin-left: 20px;
+    }
+
+    .tt-menu .search-name{
+        margin: auto 0;
+    } 
+    .tt-menu .search-price {
+        margin: auto 0;
+    }
+
 </style>
 <header class="shadow-sm">
     <!-- Topbar-->
