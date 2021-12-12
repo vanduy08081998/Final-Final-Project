@@ -10,6 +10,15 @@
 @endsection
 
 @section('content')
+<style>
+    h2, span.title_profile {
+    max-width: 100%;
+    word-wrap: break-word;
+    }
+    .long-desc img{
+        width: 100%;
+    }
+</style>
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -32,16 +41,10 @@
     <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item"><a class="nav-link py-4 px-sm-4 active" href="#general" data-bs-toggle="tab"
-                        role="tab">Tổng quan <span class='d-none d-sm-inline'>Info</span></a></li>
-                <li class="nav-item"><a class="nav-link py-4 px-sm-4" href="#specs" data-bs-toggle="tab"
-                        role="tab"><span class='d-none d-sm-inline'>Mô tả ngắn</span></a></li>
-            </ul>
             <div class="px-4 pt-lg-3 pb-3 mb-5">
                 <div class="container-fluid">
                     <div class="bg-light shadow-lg rounded-3">
-                        <div class="px-4 pt-lg-3 pb-3 mb-5">
+                        <div class="px-4 pt-lg-3 pb-3 mb-5 mt-3">
 
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
@@ -50,12 +53,7 @@
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
-                                    <div
-                                        class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom">
-                                        <div class="d-flex align-items-center pt-3">
-                                            {!! $product->short_description !!}
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <!-- Reviews tab-->
                             </div>
@@ -63,10 +61,16 @@
                     </div>
                     <!-- Product description-->
                     <!-- Product description-->
-                    <div class="container pt-lg-3 pb-4 pb-sm-5">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                {!! $product->long_description !!}
+                    <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
+                        <div class="row justify-content-center" style="text-align: justify">
+                            <div class="col-lg-10">
+                                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                    <div class=" align-items-center pt-3">
+                                        <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
+                                        {!! $product->short_description !!}
+                                    </div>
+                                </div>
+                                    {!! $product->long_description !!}
                             </div>
                         </div>
                     </div>
