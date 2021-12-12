@@ -330,7 +330,8 @@ class ProductController extends Controller
         $specification_value = 'specifications_'.$specification;
         DB::table('specifications')->insert([
           'specifications' => $request[$fixed_attribute],
-          'value' => $request[$specification_value]
+          'value' => $request[$specification_value],
+          'product_id' => $product->id
         ]);
       }
 
