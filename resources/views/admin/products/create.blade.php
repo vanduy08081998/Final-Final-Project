@@ -182,7 +182,7 @@
                                                 @foreach (\App\Models\Color::all() as $color)
                                                 <option value="{{ $color->color_code }}">
                                                     <span style="color: red">{{
-                                                        $color->color_code }}</span>
+                                                        $color->color_name }}</span>
                                                 </option>
                                                 @endforeach
                                             </select>
