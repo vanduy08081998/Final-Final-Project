@@ -26,10 +26,10 @@ jQuery(document).ready(function($) {
                 '<div class="list-group search-results-dropdown"><div class="list-group-item"> Không có kết quả phù hợp! </div></div>'
             ],
             header: [
-                '<div class="list-group search-results-dropdown">'
+                '<div class="list-group search-results-dropdown"><li class="product-suggest">'
             ],
             suggestion: function(data) {
-                return '<a href="http://127.0.0.1:8000/shop/product-details/' + data.product_slug + '" class="list-group-item"><img src="http://127.0.0.1:8000/' + data.product_image + '" height="45" width="40"><span>' + data.product_name + '</span><br><span style="margin-left: 43px;">' + formatter.format(data.unit_price) + '</span></a>'
+                return '<a href="http://127.0.0.1:8000/shop/product-details/' + data.product_slug + '" class="list-group-item"><div class="item-img"><img src="http://127.0.0.1:8000/' + data.product_image + '" height="60" width="50" style="margin-right: 20px"></div><div class="item-info"><span class="search-name">' + data.product_name + '</span><p class="search-price">' + formatter.format(data.unit_price) + '</p></div></a></li></div>'
             }
         }
     });

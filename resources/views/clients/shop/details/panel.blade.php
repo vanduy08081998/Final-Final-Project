@@ -41,8 +41,7 @@
    </div>
    <div class="accordion-item">
      <h3 class="accordion-header"><a class="accordion-button collapsed" href="#localStore" role="button" data-bs-toggle="collapse"
-         aria-expanded="true" aria-controls="localStore"><i class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Find
-         in local store</a></h3>
+         aria-expanded="true" aria-controls="localStore"><i class="ci-location text-muted fs-lg align-middle mt-n1 me-2"></i>Tìm cửa hàng gần nhất</a></h3>
      <div class="accordion-collapse collapse" id="localStore" data-bs-parent="#productPanels">
        <div class="accordion-body">
          <select class="form-select">
