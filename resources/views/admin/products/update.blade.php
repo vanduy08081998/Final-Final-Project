@@ -644,15 +644,24 @@
             </div>
           </div>
         </div>
-
-        <div class="row">
+        <ul class="list-group notification-list mb-3">
+          <li class="list-group-item">
+            Hiển thị thông số kĩ thuật
+            <div class="status-toggle">
+              <input type="checkbox" id="is-specification" name="has_specification" value="isAttribute" class="check"
+                @if(count($product->specifications()->get()) > 0) checked @endif>
+              <label for="is-specification" class="checktoggle">checkbox</label>
+            </div>
+          </li>
+        </ul>
+        <div class="row" id="show-hide-specification">
           <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
             <div class="card">
               <div class="card-header">Thông số kỹ thuật</div>
               <div class="card-body">
                 <div class="form-group">
-                  <select class="form-control" name="choose_specification[]" id="choose_specification"
-                    multiple="multiple">
+                  <select class="form-control" style="width:100%" name="choose_specification[]"
+                    id="choose_specification" multiple="multiple">
                     @foreach (\App\Models\Attribute::all() as $attr)
                     <?php $fix_arr_specification = array(); ?>
                     @foreach (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
@@ -672,7 +681,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
+                      @forelse (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
                       @foreach(\App\Models\Attribute::where('name', $specification->specifications)->get() as
                       $fixed_attribute)
                       <tr>
@@ -691,7 +700,8 @@
                         </td>
                       </tr>
                       @endforeach
-                      @endforeach
+                      @empty
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -748,8 +758,23 @@
   $('.flat_rate_shipping_div').hide()
 </script>
 @endif
-
+@if(count($product->specifications()->get()) > 0)
 <script>
+  $('#show-hide-specification').show()
+</script>
+@else
+<script>
+  $('#show-hide-specification').hide()
+</script>
+@endif
+<script>
+  $('input[name="has_specification"]').on('change', function () {
+        if (!$('input[name="has_specification"]').is(':checked')) {
+            $('#show-hide-specification').hide()
+        } else {
+            $('#show-hide-specification').show()
+        }
+    });
   // CKEDITOR.replace('meta_description')
     CKEDITOR.replace('short_description');
     CKEDITOR.replace('long_description');
@@ -788,22 +813,22 @@
     }
 
     $('.js-example-basic-multiple').select2();
-    $('input[name="sale_dates"]').mobiscroll().datepicker({
-      controls: ['calendar', 'time'],
-      select: 'range',
-      calendarType: 'month',
-      pages: 2,
-      touchUi: true,
-      timeFormat: 'HH:mm:ss'
+    $('input[name="sale_dates"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
 
-    $('input[name="expiry"]').mobiscroll().datepicker({
-      controls: ['calendar', 'time'],
-      select: 'range',
-      calendarType: 'month',
-      pages: 2,
-      touchUi: true,
-      timeFormat: 'HH:mm:ss'
+    $('input[name="expiry"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
     $('#product_color').select2();
 
