@@ -1,3 +1,7 @@
+.col-lg-12.mt-2.rating_reply_content {
+    border-left: 6px solid #dddbdb;
+    padding-left: 10px;
+}
 .form-comment textarea {
     height: 100px;
 }
@@ -242,10 +246,10 @@
     margin-top: -3px;
     text-transform: uppercase;
     margin-right: 10px;
-    color: #fff;
+    color: black;
     font-weight: normal;
     font-size: 10px;
-    background: #fe696a;
+    background: #f1c40f;
     padding: 2px 6px;
     border-radius: 3px;
     line-height: 18px;
@@ -353,7 +357,7 @@
     display: block;
     margin-top: 15px;
     position: relative;
-    background: #ece9c7;
+    background: #f8f8f8;
     border: 1px solid #e7e7e7;
     font-size: 14px;
     color: #333;
@@ -362,13 +366,14 @@
 .rating_reply::before {
     position: absolute;
     content: '';
-    background: #e3e3de;
+    background: #f8f8f8;
     height: 30px;
     width: 30px;
     transform: rotate(-45deg);
     top: -8px;
     left: 130px;
     z-index: -1;
+    border: 1px solid #e7e7e7;
 }
 .form-review {
     border: none;
@@ -378,7 +383,7 @@
 
 .d-flex.error-review {
     justify-content: space-between;
-
+}
 
 /* Admin quản lý commnet clients */
 

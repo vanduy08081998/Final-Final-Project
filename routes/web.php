@@ -133,6 +133,7 @@ Route::prefix('/')->group(function () {
 
     //Đánh giá
     Route::resource('/review', ReviewController::class);
+    Route::get('/show-review/{product}', [ReviewController::class, 'show_review'])->name('review.show-review');
     Route::get('/users', Users::class);
 });
 
