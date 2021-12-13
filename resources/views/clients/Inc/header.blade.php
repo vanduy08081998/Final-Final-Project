@@ -148,15 +148,16 @@ $category = Category::all();
                     </div>
                     <!-- Departments menu-->
                     <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle ps-lg-0" href="#"
-                                data-bs-toggle="dropdown" data-bs-auto-close="outside"><i
-                                    class="ci-menu align-middle mt-n1 me-2"></i>Danh mục</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                                <i class="ci-menu align-middle mt-n1 me-2"></i>Danh mục
+                            </a>
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
                                         <a href="{{ route('shop.products_category', $cate->id_cate) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
-                                            <span>{!! $cate->category_icon !!}</span>
+                                            <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}
                                         </a>
                                         <div class="dropdown-menu p-0" style="width:1000px; height:400px;">

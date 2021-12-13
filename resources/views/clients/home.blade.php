@@ -12,7 +12,10 @@
     }
     @media (min-width: 68.75em){
         #tns2 {
-    width: calc(400%);
+        width: calc(400%);
+    }
+        #tns3 {
+        width: calc(400%);
     }
     } 
 </style>
@@ -136,6 +139,58 @@
             </div>
           </div>
     </section>
+    {{-- Sản phẩm nổi bật --}}
+    <section class="container">
+        <!-- Heading-->
+        <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
+            <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm nổi bật</h2>
+            <div class="pt-3">
+                <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
+                    <i class="ci-arrow-right ms-1 me-n1"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Grid-->
+        <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
+            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1100&quot;:{&quot;items&quot;:4, &quot;gutter&quot;: 30}}}">
+              <!-- Product-->
+              @foreach ($highlight as $product)
+                <div class="product-item" style="height: 375px">
+                  <div class="card product-card">
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích">
+                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#">
+                        <img src="{{ asset($product->product_image) }}" alt="Product"></a>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a>
+                      <h3 class="product-title fs-sm"><a href="#">{{ trans($product->product_name) }}</a></h3>
+                      <div class="d-flex justify-content-between">
+                        <div class="product-price">
+                            <span>{{ number_format($product->unit_price) }} ₫</span>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
+                            class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star-filled active"></i><i
+                            class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body card-body-hidden" style="z-index: 10">
+                      <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
+                          <i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng
+                      </button>
+                      <div class="text-center">
+                          <a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal">
+                              <i class="ci-eye align-middle me-1"></i>Xem nhanh
+                          </a>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+                <!-- Product-->
+              @endforeach
+            </div>
+          </div>
+    </section>
     <!-- Promo banner-->
     <section class="container mt-4 mb-grid-gutter">
         <div class="bg-faded-info rounded-3 py-4">
@@ -163,34 +218,16 @@
         </div>
     </section>
     <!-- Brands carousel-->
-    <section class="container mb-5">
-        <div class="tns-carousel border-end">
-            <div class="tns-carousel-inner"
-                data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: false, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/13.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/14.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/17.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/16.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/15.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/18.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/19.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
-                <div><a class="d-block bg-white border py-4 py-sm-5 px-2" href="#" style="margin-right: -.0625rem;"><img
-                            class="d-block mx-auto" src="{{ asset('frontend/img/shop/brands/20.png') }}"
-                            style="width: 165px;" alt="Brand"></a></div>
+    <section class="container mb-5 mt-5">
+        <div class="tns-carousel">
+            <div class="tns-carousel-inner" data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 3000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
+                @foreach ($brand as $item)
+                <div>
+                    <a class="d-block bg-white py-4 py-sm-4 px-2" href="#" style="margin-right: -.0625rem;">
+                        <img class="d-block mx-auto" src="{{ url( 'uploads/files/Brands/', $item->brand_image ) }}" style="width: 130px; height: 60px" alt="Brand">
+                    </a>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>

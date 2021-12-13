@@ -3,15 +3,16 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Models\Blog;
+use App\Models\Brand;
+use App\Mail\SendMail;
 use App\Models\Banner;
+use App\Models\Product;
 use App\Models\BlogCate;
+use App\Models\Wishlist;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mail\SendMail;
-use App\Models\Product;
 use Illuminate\Support\Facades\Mail;
-use App\Models\Wishlist;
 
 
 class HomeController extends Controller
@@ -19,9 +20,13 @@ class HomeController extends Controller
     public function index(){
         $slide = Banner::orderByDESC('id')->get();
         $product = Product::orderByDESC('id')->get();
+        $highlight = Product::orderByDESC('id')->get();
+        $brand = Brand::orderByDESC('id')->get();
         return view('clients.home')->with([
             'slide' => $slide,
-            'product' => $product
+            'product' => $product,
+            'highlight' => $highlight,
+            'brand' => $brand
         ]);
     }
 
