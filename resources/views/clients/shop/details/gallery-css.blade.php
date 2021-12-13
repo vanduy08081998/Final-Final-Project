@@ -1,66 +1,55 @@
 <style>
-    #thumbnails img,
-    #main {
-        box-shadow: 2px 2px 10px 5px #b8b8b8;
-        border-radius: 10px;
-    }
-
-    * {
-        transition: all 0.5s ease;
-    }
-
-    #content-wrapper {
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #thumbnails {
-        text-align: center;
-    }
-
-    #thumbnails img {
-        width: 100px;
-        min-height: 100px;
-        margin: 10px;
-        cursor: pointer;
-    }
-
-    @media only screen and (max-width: 480px) {
-        #thumbnails img {
-            width: 50px;
-            height: 50px;
-        }
-    }
-
-    #thumbnails img:hover {
-        transform: scale(1.05);
-    }
-
-    .a {
-        width: 100%;
-        min-height: 300px;
-        object-fit: cover;
-        display: block;
+    .box-gallery {
+        width: 90%;
+        height: 75%;
         margin: 0 auto;
+        overflow: hidden;
     }
 
-    #main img {
+    .gallery-slider {
         width: 100%;
-        height: 600px;
-        object-fit: cover;
+        height: auto;
+        margin: 0 0 10px 0;
+        border-radius: 1rem;
+        border: 1px solid #D1D5DB;
+    }
+
+    .gallery-slider .swiper-slide {
+        height: 400px;
+    }
+
+    .gallery-slider .swiper-slide img {
         display: block;
-        margin: 20px auto;
+        width: 90%;
+        height: 90%;
+        margin-top: 5%;
+        margin-left: 5%;
     }
 
-    @media only screen and (max-width: 480px) {
-        #main {
-            width: 100%;
-        }
+    .gallery-thumbs {
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
     }
 
-    .hidden {
-        opacity: 0;
+    .gallery-thumbs .swiper-slide {
+        width: 100px;
+        height: 100px;
+        border-radius: 1rem;
+        border: 1px solid #D1D5DB;
+        text-align: center;
+        overflow: hidden;
     }
 
+    .gallery-thumbs .swiper-slide-active {
+        opacity: 1;
+    }
+
+    .gallery-thumbs .swiper-slide img {
+        width: 90%;
+        height: 90%;
+        margin-top: 5%;
+        margin-left: 5%;
+        border-radius: 1rem;
+    }
 </style>

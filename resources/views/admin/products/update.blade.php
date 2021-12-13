@@ -915,35 +915,36 @@
       update_sku();
     });
 
-
     $('#attribute').on('change', function() {
-      $.each($("#attribute option:selected"), function(j, attribute) {
-        flag = false;
-        $('input[name="choice_no[]"]').each(function(i, choice_no) {
-          if ($(attribute).val() == $(choice_no).val()) {
-            flag = true;
-          }
+        $.each($("#attribute option:selected"), function(j, attribute){
+            flag = false;
+            $('input[name="choice_no[]"]').each(function(i, choice_no) {
+                if($(attribute).val() == $(choice_no).val()){
+                    flag = true;
+                }
+            });
+            if(!flag){
+                add_more_customer_choice_option($(attribute).val(), $(attribute).text());
+            }
         });
-        if (!flag) {
-          add_more_customer_choice_option($(attribute).val(), $(attribute).text());
-        }
-      });
 
-      var str = @php echo $product->product_attribute @endphp;
-      console.log(str)
+        var str = @php echo $product->product_attribute @endphp;
 
-      $.each(str, function(index, value) {
-        flag = false;
-        $.each($("#choice_attributes option:selected"), function(j, attribute) {
-          if (value == $(attribute).val()) {
-            flag = true;
-          }
+        $.each(str, function(index, value){
+            flag = false;
+            $.each($("#attribute option:selected"), function(j, attribute){
+                if(value == $(attribute).val()){
+                    flag = true;
+                }
+            });
+            if(!flag){
+                $('input[name="choice_no[]"][value="'+value+'"]').parent().remove();
+            }
         });
-      });
 
-      
-      update_sku();
-    })
+        update_sku();
+    });
+    
 
     $("[name=shipping_type]").on("change", function() {
       $(".flat_rate_shipping_div").hide();
