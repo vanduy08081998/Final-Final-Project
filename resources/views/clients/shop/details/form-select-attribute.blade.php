@@ -1,95 +1,3 @@
-<style>
-  .hhVFoh .label {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .hhVFoh .group-input {
-    display: inline-flex;
-    -webkit-box-align: center;
-    align-items: center;
-    margin-top: -16px;
-    margin-left: 10px;
-  }
-
-  .hhVFoh .group-input span:first-child {
-    border-right: none;
-    border-radius: 4px 0px 0px 4px;
-    padding: 4px;
-  }
-
-  .hhVFoh .group-input span {
-    cursor: pointer;
-    width: 30px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(236, 236, 236);
-  }
-
-  .hhVFoh .group-input input {
-    width: 40px;
-    border: 1px solid rgb(236, 236, 236);
-  }
-
-  .hhVFoh .group-input span,
-  .hhVFoh .group-input input {
-    height: 30px;
-    color: rgb(36, 36, 36);
-    font-size: 14px;
-    text-align: center;
-    outline: none;
-    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
-  }
-
-  .hhVFoh .disable {
-    pointer-events: none !important;
-  }
-
-  .price-and-icon {
-    display: flex;
-    flex-direction: column;
-    border-radius: 4px;
-    background-color: rgb(250, 250, 250);
-    padding: 0px 0px 12px;
-  }
-
-  .price-and-icon .product-price {
-    padding-top: 12px;
-    display: flex;
-    align-items: flex-end;
-    color: rgb(56, 56, 61);
-  }
-
-  .price-and-icon .product-price__current-price {
-    font-size: 1.5rem;
-    line-height: 40px;
-    margin-right: 8px;
-    font-weight: 700;
-    color: #D70018;
-  }
-
-  #thumbnails img,
-  #main {
-    box-shadow: none !important;
-  }
-
-  .boxed-check .cpslazy {
-    width: 30px;
-    height: auto;
-    margin: 4px 0px;
-  }
-
-  .boxed-check-text {
-    display: flex;
-  }
-
-  .boxed-check-label .boxed-check-text p {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    font-size: 12px;
-    color: #444444;
-  }
-</style>
 <form id="choice_attribute_options" onchange="getVariantPrice()">
   @csrf
   <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -101,25 +9,33 @@
     <!-- Product gallery-->
     <div class="col-lg-4" id="content-wrapper">
       <div class="box-gallery">
-        <div class="swiper-container gallery-slider">
+        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+          class="swiper mySwiper2 gallery-slider ">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="{{ asset($product->product_image) }}" alt=""></div>
-            @foreach (explode(',', $product->product_gallery) as $item)
-            <div class="swiper-slide"><img src="{{ asset($item) }}" alt=""></div>
-            @endforeach
+            <div class="swiper-slide">
+              <img src="{{ URL::to($product->product_image) }}" />
+            </div>
+            @forelse (explode(',', $product->product_gallery) as $item)
+            <div class="swiper-slide">
+              <img src="{{ URL::to($item) }}" />
+            </div>
+            @empty
+            @endforelse
           </div>
-          <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
         </div>
-
-        <div class="swiper-container gallery-thumbs">
+        <div thumbsSlider="" class="swiper mySwiper gallery-thumbs" style="margin-top: 10px;">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="{{ asset($product->product_image) }}" alt=""></div>
-            @foreach (explode(',', $product->product_gallery) as $item)
-            <div class="swiper-slide"><img src="{{ asset($item) }}" alt=""></div>
-            @endforeach
-
-
+            <div class="swiper-slide">
+              <img src="{{ URL::to($product->product_image) }}" />
+            </div>
+            @forelse (explode(',', $product->product_gallery) as $item)
+            <div class="swiper-slide">
+              <img src="{{ URL::to($item) }}" />
+            </div>
+            @empty
+            @endforelse
           </div>
         </div>
       </div>
@@ -153,7 +69,13 @@
               <img class="img-selected"
                 src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg"
                 alt="">
-              <span>{{ $value }}</span>
+              <?php 
+                    $variant_image_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_image;
+                    $variant_price_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_price; ?>
+              <span class="boxed-check-text"> <img class="cpslazy" src="{{ asset($variant_image_with_attr) }}"
+                  alt="hinh anh san pham">
+                <p> <strong>{{ $value}}</strong> <span>{{ number_format($variant_price_with_attr) }}</span></p>
+              </span>
             </div>
           </label>
           @empty
@@ -179,40 +101,45 @@
               <img class="img-selected"
                 src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/selected-variant-indicator.svg"
                 alt="">
-
-              <span class="boxed-check-text"> <img class="cpslazy"
-                  src="https://cdn.cellphones.com.vn/media/catalog/product/cache/7/thumbnail/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone_13-_pro-2_1_5.jpg"
+              <?php 
+              $name_color = \App\Models\Color::where('color_code', $value)->first()->color_name; 
+              $slug_color = \App\Models\Color::where('color_code', $value)->first()->color_slug; 
+              $variant_image = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.$slug_color.'%')->first()->variant_image;
+              $variant_price = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.$slug_color.'%')->first()->variant_price;
+              ?>
+              <span class="boxed-check-text"> <img class="cpslazy" src="{{ asset($variant_image) }}"
                   alt="hinh anh san pham">
-                <p> <strong>{{ \App\Models\Color::where('color_code', $value)->first()->color_name
-                    }}</strong> <span>26.000.000</span></p>
+                <p> <strong>{{ $name_color}}</strong> <span>{{ number_format($variant_price) }}</span></p>
               </span>
             </div>
           </label>
           @endforeach
           @endisset
         </div>
-        <div class="style-sc-11ucdwk-0 jfBwzZ mb-3 mt-4" style="border-radius: 20px; border: 1px solid #D70018">
-          <div class="item mt-3" style="margin-left: 10px">
-            <span>
-              <span class="text-success"><i class="fa fa-money"></i></span> Khuyến mãi :
-              {{ $product->discount }}{{ $product->discount_unit }}
-            </span>
+        <div class="box-promotion">
+          <div class="box-title">
+            <p class="box-title__title"><svg xmlns="http://www.w3.org/2000/svg" width="13.125" height="15"
+                viewBox="0 0 13.125 15">
+                <path id="gift"
+                  d="M14.656,4.693H2.469A.468.468,0,0,0,2,5.161V9.38a.468.468,0,0,0,.469.469h.469v4.687A.468.468,0,0,0,3.406,15H13.719a.468.468,0,0,0,.469-.469V9.849h.469a.468.468,0,0,0,.469-.469V5.161A.468.468,0,0,0,14.656,4.693ZM7.625,13.6a.468.468,0,0,1-.469.469H4.344a.468.468,0,0,1-.469-.469V9.849a.468.468,0,0,1,.469-.469H7.156a.468.468,0,0,1,.469.469Zm0-5.625a.468.468,0,0,1-.469.469H3.406a.468.468,0,0,1-.469-.469V6.1a.468.468,0,0,1,.469-.469h3.75a.468.468,0,0,1,.469.469ZM13.25,13.6a.468.468,0,0,1-.469.469H9.969A.468.468,0,0,1,9.5,13.6V9.849a.468.468,0,0,1,.469-.469h2.812a.468.468,0,0,1,.469.469Zm.937-5.625a.468.468,0,0,1-.469.469H9.969A.468.468,0,0,1,9.5,7.974V6.1a.468.468,0,0,1,.469-.469h3.75a.468.468,0,0,1,.469.469ZM6.481,4.692h4.312A3.266,3.266,0,0,0,12.314,2.72a1.5,1.5,0,0,0-.645-1.383,1.64,1.64,0,0,0-1.013-.4c-1.07,0-1.675,1.312-2,2.483C8.264,1.926,7.509.005,6.213.005A1.7,1.7,0,0,0,5.092.492a1.886,1.886,0,0,0-.725,1.747A4.185,4.185,0,0,0,6.481,4.692Zm4.176-2.631a.686.686,0,0,1,.386.18c.242.19.228.308.225.347-.045.41-.814,1.055-1.711,1.587.264-1.135.7-2.114,1.1-2.114Zm-4.891-.7a.782.782,0,0,1,.447-.228c.58,0,1.177,1.523,1.525,3-1.1-.584-2.229-1.412-2.33-2.077C5.394,1.965,5.357,1.719,5.766,1.357Z"
+                  transform="translate(-2 -0.005)" fill="#d70018"></path>
+              </svg>&nbsp;Khuyến Mãi</p>
           </div>
-          <div class="item mt-3" style="margin-left: 10px">
-            <span>
-              <span class="text-success"><i class="fa fa-money"></i></span>
-              Hoàn tiền 15%, miễn phí phí thường niên !
-            </span>
+          <div class="box-content">
+            <ul class="list-promotions">
+              <li class="item-promotion general-promotion"><a
+                  href="https://cellphones.com.vn/danh-sach-khuyen-mai#gift">Giảm 1 triệu khi thanh toán qua ví Moca,
+                  thẻ tín dụng BIDV, Standard Charter (số lượng có hạn)&nbsp;<span class="color-red">(xem chi
+                    tiết)</span></a></li>
+              <li class="item-promotion general-promotion"><a href="https://cellphones.com.vn/thu-cu-doi-moi">Thu cũ lên
+                  đời - Trợ giá 1 triệu&nbsp;<span class="color-red">(xem chi tiết)</span></a></li>
+            </ul>
+            <div class="cps-additional-note">
+              <p><a data-toggle="modal" data-target="#myModal"><strong><img
+                      src="https://cellphones.com.vn/media/icon/icon_fire.png" style="width: 20px;">&nbsp;DANH SÁCH CỬA
+                    HÀNG ĐÃ CÓ HÀNG TRẢI NGHIỆM</strong></a></p>
+            </div>
           </div>
-          @if ($product->shipping_type == 'free_ship')
-          <div class="item mt-3" style="margin-left: 10px"><span> <span><i
-                  class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i></span> Miễn phí vận
-              chuyển !</span></div>
-          @else
-          <div class="item mt-3" style="margin-left: 10px"><span> <span><i
-                  class="ci-delivery text-muted lead align-middle mt-n1 me-2"></i></span> Phí vận chuyển cơ bản trong
-              tỉnh : {{ number_format($product->shipping_stock) }}</span></div>
-          @endif
         </div>
       </div>
     </div>
@@ -246,7 +173,7 @@
         </div>
       </div>
 
-      <div class="me-n4 mb-3 row" style="text-align: center;">
+      <div class="me-n4 mb-3 row" style="">
         <div class="qty-and-message col-12">
           <div class="QuantityInput__Wrapper-sc-h67rf2-0 hhVFoh" style="margin: auto 0; display: flex">
             <p class="label text-heading fw-medium">Số Lượng: </p>
@@ -268,7 +195,7 @@
         </div>
       </div>
 
-      <div class="position-relative me-n4 mb-3 mt-3 text-center">
+      <div class="position-relative me-n4 mb-3 mt-3">
         <div class="h5 fw-normal mb-3 me-1 total_product_price"></div>
       </div>
 

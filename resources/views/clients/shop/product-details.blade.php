@@ -100,26 +100,22 @@
 
 @push('script')
 <script>
-    var slider = new Swiper ('.gallery-slider', {
-        slidesPerView: 1,
-        centeredSlides: true,
-        loop: true,
-        loopedSlides: 6, 
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 20,
+        slidesPerView: 6,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+      var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 20,
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         },
-    });
-
-    var thumbs = new Swiper ('.gallery-thumbs', {
-        slidesPerView: 'auto',
-        spaceBetween: 10,
-        centeredSlides: true,
-        loop: true,
-        slideToClickedSlide: true,
-    });
-    slider.controller.control = thumbs;
-    thumbs.controller.control = slider;
+        thumbs: {
+          swiper: swiper,
+        },
+      });
     $('#choice_attribute_options').on('change', function() {
             getVariantPrice()
         })
@@ -156,7 +152,7 @@
                     console.log(response)
                     console.log(response.quantity)
                     $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
+                    $('.total_product_price').html(` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
                     // Quantity check
                     quantityCheck(response.product_quantity)
                     // End Quantity check
