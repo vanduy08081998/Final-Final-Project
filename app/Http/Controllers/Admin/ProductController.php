@@ -303,7 +303,7 @@ class ProductController extends Controller
 
         foreach ($combination as $key => $item) {
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
+            $str .= '-' . str_replace([',', '/','.',':',' ','%'], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -311,7 +311,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',':',' '], '', $item);
+              $str .= str_replace([',', '/','.',':',' ','%'], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -330,8 +330,8 @@ class ProductController extends Controller
         $product_variant->save();
       }
     }
-    
-      
+
+
     if ($request->has('choice_fixed_attribute')) {
       foreach($request->choice_fixed_attribute as $specification){
         $fixed_attribute = 'fixed_attribute_'.$specification;
@@ -343,7 +343,7 @@ class ProductController extends Controller
         ]);
       }
     }
-      
+
 
     return redirect()->route('products.index');
   }
@@ -535,7 +535,7 @@ class ProductController extends Controller
 
         foreach ($combination as $key => $item) {
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
+            $str .= '-' . str_replace([',', '/','.',':',' ','%'], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -543,7 +543,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',':',' '], '', $item);
+              $str .= str_replace([',', '/','.',':',' ','%'], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -595,7 +595,7 @@ class ProductController extends Controller
             'value' => $request[$specification_value],
             'product_id' => $product->id
           ]);
-        }  
+        }
         array_push($array_fixed_attr,Attribute::where('id',$specification)->first()->name);
         Specification::whereNotIn('specifications',$array_fixed_attr)->delete();
       }
