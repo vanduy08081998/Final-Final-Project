@@ -30,7 +30,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: #a09797;
+    background-color: #fe696a;
     border-radius: 2px;
 }
 
@@ -45,6 +45,8 @@
 
 .childs-comment-line {
     position: relative;
+    padding-left: 30px;
+    padding-top: 8px;
 }
 
 .childs-comment-line::before {
@@ -52,8 +54,8 @@
     position: absolute;
     height: 2px;
     width: 13px;
-    background: #a09797;
-    left: -15px;
+    background: #fe696a;
+    left: 15px;
     top: 18px;
 }
 
@@ -66,7 +68,7 @@
 .commentask {
     display: block;
     overflow: visible;
-    margin: 10px 0 0;
+    margin: 10px 0;
 }
 
 .commentask strong {
@@ -89,11 +91,6 @@
     font-style: normal;
 }
 
-.relate_infocom .reply {
-    cursor: pointer;
-    color: #4a90e2;
-}
-
 .infocom_ask {
     padding-top: 8px;
     display: block;
@@ -113,6 +110,12 @@
     font-size: 12px;
     color: #666;
     position: relative;
+    margin-top: 5px;
+}
+
+.relate_infocom .reply {
+    cursor: pointer;
+    color: #4a90e2;
 }
 
 .relate_infocom span {
@@ -207,14 +210,13 @@
 
 .comment_reply {
     display: block;
-    margin-top: 15px;
+    margin: 10px 0 0 30px;
     position: relative;
-    background: #ece9c7;
-    border: 1px solid #e7e7e7;
+    background: #f8f8f8;
     padding: 15px 10px;
     font-size: 14px;
     color: #333;
-    margin-left: 30px;
+    border-radius: 10px;
 }
 
 .avt-qtv {
@@ -242,10 +244,10 @@
     margin-top: -3px;
     text-transform: uppercase;
     margin-right: 10px;
-    color: #fff;
+    color: #000;
     font-weight: normal;
     font-size: 10px;
-    background: #fe696a;
+    background: #f1c40f;
     padding: 2px 6px;
     border-radius: 3px;
     line-height: 18px;
@@ -256,7 +258,7 @@
 .comment_reply::before {
     position: absolute;
     content: '';
-    background: #ece9c7;
+    background: #f8f8f8;
     height: 30px;
     width: 30px;
     transform: rotate(-45deg);
@@ -336,6 +338,16 @@
     position: absolute;
 }
 
+.handle .edit {
+    background: #4a90e2;
+    color: #fff;
+}
+
+.handle .esc {
+    background: #FFFF00;
+    color: #000;
+}
+
 .handle>button {
     border: none;
     outline: none;
@@ -348,7 +360,8 @@
     font-size: 12px;
     background-color: white;
 }
-.rating_reply{
+
+.rating_reply {
     padding: 10px 8px;
     display: block;
     margin-top: 15px;
@@ -359,6 +372,7 @@
     color: #333;
     /* margin-left: 30px; */
 }
+
 .rating_reply::before {
     position: absolute;
     content: '';
@@ -370,6 +384,7 @@
     left: 130px;
     z-index: -1;
 }
+
 .form-review {
     border: none;
     background: #fff;
@@ -378,9 +393,7 @@
 
 .d-flex.error-review {
     justify-content: space-between;
-
-
-/* Admin quản lý commnet clients */
+}
 
 .admin-com {
     position: absolute;
@@ -437,6 +450,16 @@
     visibility: visible;
 }
 
+.comment_reply_parent {
+    display: block;
+    padding-left: 30px;
+}
+
+.comment_reply_child {
+    display: block;
+    padding-left: 60px;
+}
+
 
 /* Tìm kiếm */
 
@@ -449,4 +472,42 @@
 .tt-menu img {
     margin-right: 5px;
     margin-top: 5px;
+}
+
+
+/* Style load more */
+
+.comment_reply .out-parent-load:nth-child(n+3) {
+    display: none;
+}
+
+.comment_reply .out-child-load:nth-child(n+8) {
+    display: none;
+}
+
+.content-load-more-child {
+    display: block;
+    position: relative;
+    width: 95%;
+    margin: auto;
+    border-top: 1px solid #4a90e2;
+}
+
+.content-load-more-parent {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.content-load-more-child span,
+.content-load-more-parent span {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #4a90e2;
+    cursor: pointer;
+}
+
+.content-load-more-child span i {
+    margin-left: 5px;
 }

@@ -12,8 +12,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
-                    @include('admin.inc.card-header', ['table_title' => 'Bình luận' , 'table_content' =>
-                    'Thùng rác'])
+                    <div class="card-header">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Bình luận <i
+                                class="mr-2 ml-2 fas fa-caret-right"></i>
+                            <span class="text-warning">Chưa được duyệt</span> <i class="mr-2 ml-2 fas fa-caret-right"></i>
+                            <em>Sản phẩm
+                                {{ trans($product->product_name) }}</em>
+                        </h4>
+                        <p class="card-text">
+                            Danh sách bình luận theo sản phẩm
+                        </p>
+                    </div>
                     <form action="{{ route('comment.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
@@ -22,13 +31,11 @@
                                     <select name="handle" id="" class="form-select-sm" required>
                                         <option value="">------- Hành động -------</option>
                                         <option value="delete">Xóa</option>
-                                        <option value="restore">Khôi phục</option>
+                                        <option value="clearace">Duyệt</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-info handle-all" data-handle="restore-all">Khôi
-                                        phục tất cả</a>
-                                    <a href="{{ route('comment.index') }}" class="btn btn-success float-lg-right">Danh
-                                        sách</a>
+                                    <a href="{{ route('product.comment', $product->id) }}" class="btn btn-primary">Đã
+                                        duyệt</a>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -38,13 +45,35 @@
                                             <td><input type="checkbox" id="checkAll"></td>
                                             <td>{{ trans('Người bình luận') }}</td>
                                             <td>{{ trans('Nội dung') }}</td>
-                                            <td>{{ trans('Phản hồi khách hàng') }}</td>
+                                            <td>{{ trans('Hành động') }}</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($comments as $comment)
-                                            @include('admin.comments.comment_index_rows', ['value' => $comment, 'parent' =>
-                                            '1'])
+                                            <tr>
+                                                <td class="text-left"><input type="checkbox" class="checkItem"
+                                                        name="checkItem[]" value="{{ $comment->id }}"></td>
+                                                <td class="text-left">
+
+                                                    <strong
+                                                        class="text-info">{{ $comment->user->name ?? '' }}</strong>
+                                                    {!! $comment->replyOne ? 'đã trả lời <strong>' . $comment->replyOne->user->name . '</strong>' : '' !!}
+
+                                                </td>
+
+                                                <td class="text-left">
+                                                    <div style="width:400px; text-overflow: ellipsis; overflow: hidden;">
+                                                        {{ $comment->comment_content }}
+                                                    </div>
+                                                </td>
+                                                <td class="text-left">
+                                                    <a href="{{ route('comment.clearance', $comment->id) }}"
+                                                        class="btn btn-warning"><i class="bx bx-edit"></i> Duyệt</a>
+                                                    <a href="{{ route('comment.delete', $comment->id) }}"
+                                                        class="btn btn-danger"><i class="bx bx-edit"></i> Xóa</a>
+                                                </td>
+
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>

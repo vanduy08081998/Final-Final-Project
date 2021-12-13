@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ asset('backend/css/mobiscroll.jquery.min.css') }}">
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::to('backend/css/select2.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -93,7 +94,26 @@
     <script src="{{ URL::to('backend/js/app.js') }}"></script>
     {!! Toastr::message() !!}
     @include('sweetalert::alert')
+    <script>
+        window.addEventListener('OpenEditFeedbackModal', e => {
 
+            $('#EditFeedbackModal').modal('show')
+        })
+
+        window.addEventListener('OpenStoreFeedbackModal', e => {
+
+            $('#StoreFeedbackModal').modal('show')
+        })
+
+        window.addEventListener('reload', e => {
+            location.reload();
+        })
+
+        window.addEventListener('CloseModal', e => {
+            $('#' + e.detail.nameModal).modal('hide')
+        })
+    </script>
+    @livewireScripts
     @stack('script')
 </body>
 

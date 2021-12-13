@@ -214,16 +214,19 @@ Route::group(['prefix' => 'admin'], function () {
 
     // comment
     Route::prefix('/comment')->group(function () {
-        Route::get('/{parent}/feedback/{id}', [CommentController::class, 'feedback'])->name('comment.feedback');
-        Route::post('/feedback/store', [CommentController::class, 'feedbackStore'])->name('comment.feedbackStore');
-        Route::get('/isfeedback', [CommentController::class, 'isfeedback'])->name('comment.isfeedback');
-        Route::get('/nonefeedback', [CommentController::class, 'nonefeedback'])->name('comment.nonefeedback');
-        Route::get('/trash', [CommentController::class, 'trash'])->name('comment.trash');
-        Route::get('/edit-feedback/{id}', [CommentController::class, 'editFeedback'])->name('comment.edit-feedback');
+        Route::get('/trash/{id}', [CommentController::class, 'trash'])->name('comment.trash');
+        Route::get('/restore/{id}', [CommentController::class, 'restore'])->name('comment.restore');
+        Route::get('/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+        Route::get('/force-delete/{id}', [CommentController::class, 'forceDelete'])->name('comment.force-delete');
+        Route::get('/list-clearance/{id}', [CommentController::class, 'listClearance'])->name('comment.list-clearance');
+        Route::get('/clearance/{id}', [CommentController::class, 'clearance'])->name('comment.clearance');
+        Route::get('/answered/{id}', [CommentController::class, 'answered'])->name('comment.answered');
         Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
-        // Route::get('/feedback-all', [CommentController::class, 'feedbackAll'])->name('comment.feedback-all');
     });
     Route::resource('/comment', CommentController::class);
+    Route::get('/comment-review', [CommentController::class, 'commentReview'])->name('comment-review');
+    Route::get('/product/{id}/review', [CommentController::class, 'productReview'])->name('product.review');
+    Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
 
 });
 //paypal

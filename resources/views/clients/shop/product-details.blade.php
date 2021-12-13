@@ -10,15 +10,18 @@
 @endsection
 
 @section('content')
-<style>
-    h2, span.title_profile {
-    max-width: 100%;
-    word-wrap: break-word;
-    }
-    .long-desc img{
-        width: 100%;
-    }
-</style>
+    <style>
+        h2,
+        span.title_profile {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .long-desc img {
+            width: 100%;
+        }
+
+    </style>
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -53,7 +56,7 @@
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
-                                    
+
                                 </div>
                                 <!-- Reviews tab-->
                             </div>
@@ -64,13 +67,14 @@
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
                         <div class="row justify-content-center" style="text-align: justify">
                             <div class="col-lg-10">
-                                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                <div
+                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
                                     <div class=" align-items-center pt-3">
                                         <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
                                         {!! $product->short_description !!}
                                     </div>
                                 </div>
-                                    {!! $product->long_description !!}
+                                {!! $product->long_description !!}
                             </div>
                         </div>
                     </div>
@@ -92,7 +96,7 @@
     <!-- Bình luận ở đây nha bà con-->
     @include('clients.shop.details.gallery-css')
 
-    @livewire('reviews',['product' => $product])
+    {{-- @livewire('reviews',['product' => $product]) --}}
     @include('clients.shop.details.related-product')
 
     @livewire('comment-live', ['product' => $product])
@@ -383,6 +387,18 @@
         });
         $(document).on('click', '.item-rating', function() {
             $('.count-rating').val($(this).data('count'));
+        })
+    </script>
+
+
+    <script>
+        $('.load-more').click(function() {
+            let id = $(this).data('id')
+            let loadMore = $('.load-show-' + id + ':hidden')
+            loadMore.slice(0, 4).slideDown();
+            if (loadMore.length == 0) {
+                $('.content-' + id).fadeOut("slow");
+            }
         })
     </script>
 @endpush
