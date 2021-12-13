@@ -1,16 +1,4 @@
 <div>
-    @if ($value->comment_admin_feedback == 1 && $value->user->position != 'admin')
-        <a class="btn btn-info">Đã phản
-            hồi</a>
-    @elseif($value->user->position == 'admin')
-        <a class="btn btn-secondary" wire:click.prevent="editFeedback({{ $value->id }})">Chỉnh
-            sửa</a>
-    @else
-        <button type="button" wire:click.prevent="feedback({{ $value->id }})" class="btn btn-warning">Phản
-            hồi</button>
-    @endif
-
-
     <div class="modal fade" wire:ignore.self id="StoreFeedbackModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">

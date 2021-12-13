@@ -80,6 +80,7 @@
                                             @endif
                                         @endforeach
                                     </tbody>
+                                    @livewire('admin.admin-comment')
                                 </table>
                             </div>
                         </div>
@@ -155,5 +156,11 @@
                 })
             });
         });
+    </script>
+
+    <script>
+        function feedback(id, parent_id) {
+            window.livewire.emit('feedback', id, parent_id)
+        }
     </script>
 @endpush

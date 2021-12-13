@@ -15,9 +15,17 @@
     </td>
 
     <td class="text-left">
-
-        @livewire('admin.admin-comment', ['value' => $value, 'parent_id' => $parent_id])
-
+        @if ($value->comment_admin_feedback == 1 && $value->user->position != 'admin')
+            <a class="btn btn-info">Đã phản
+                hồi</a>
+        @elseif($value->user->position == 'admin')
+            <a class="btn btn-secondary">Chỉnh
+                sửa</a>
+        @else
+            <button type="button" class="btn btn-warning"
+                onclick="feedback({{ $value->id }}, {{ $parent_id }})">Phản
+                hồi</button>
+        @endif
     </td>
 
 

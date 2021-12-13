@@ -22,9 +22,10 @@ $category = Category::all();
         margin-left: 20px;
     }
 
-    .tt-menu .search-name{
+    .tt-menu .search-name {
         margin: auto 0;
-    } 
+    }
+
     .tt-menu .search-price {
         margin: auto 0;
     }
@@ -109,10 +110,9 @@ $category = Category::all();
                     </button>
                 </form>
                 <!-- Toolbar-->
-                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center" style="position:relative;">
                     @if (Auth::user())
-                        </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2"
-                            href="{{ route('account.account-info') }}">
+                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
                             <div class="navbar-tool-icon-box">
                                 @if (Auth::user()->avatar)
                                     <img class="customer_picture"
@@ -124,10 +124,100 @@ $category = Category::all();
                                 @endif
                             </div>
                             <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
+                            <div class="content-user">
+                                <ul>
+                                    <li><a href="#"><i class="fas fa-truck"></i> Đơn hàng</a></li>
+                                    <li><a href="#"><i class="far fa-bell"></i> Thông báo</a></li>
+                                    <li><a href="{{ route('account.account-info') }}"><i
+                                                class="far fa-user-circle"></i> Tài khoản</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                                        </form>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <style>
+                                .navbar-tool-text {
+                                    width: 100px;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+
+                                }
+
+                                .navbar-toolbar:hover .content-user {
+                                    visibility: visible;
+                                    opacity: 1;
+                                    transform: translateY(120px);
+                                }
+
+                                .content-user {
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    position: absolute;
+                                    padding-top: 10px;
+                                    transform: translateY(140px);
+                                    left: -102px;
+                                    z-index: 1;
+                                    width: 250px;
+                                    transition: transform 0.2s ease-in-out;
+                                }
+
+                                .content-user>ul {
+                                    display: block;
+                                    width: 100%;
+                                    background: #fff;
+                                    padding-left: 0;
+                                    border-radius: 4px;
+                                    -webkit-box-shadow: 0 0 10px #CCCCCC;
+                                    box-shadow: 0 0 10px #CCCCCC;
+                                }
+
+                                .content-user>ul::before {
+                                    content: '';
+                                    position: absolute;
+                                    width: 20px;
+                                    height: 20px;
+                                    background: #fff;
+                                    transform: rotate(45deg);
+                                    top: 0;
+                                    left: 46%;
+                                    z-index: -1;
+                                    -webkit-box-shadow: 0 0 10px #CCCCCC;
+                                    box-shadow: 0 0 10px #CCCCCC;
+                                }
+
+                                .content-user>ul>li {
+                                    display: block;
+                                    padding: 10px 20px;
+                                }
+
+                                .content-user>ul>li>a {
+                                    display: flex;
+                                    width: 100%;
+                                    font-size: 14px;
+                                    color: #000;
+                                    align-items: center
+                                }
+
+                                .content-user>ul>li>a>i {
+                                    color: #fe696a;
+                                    margin-right: 8px;
+                                    font-size: 15px;
+                                }
+
+                                .content-user>ul>li:hover {
+                                    background: #EEEEEE;
+
+                                }
+
+                            </style>
                         </a>
                     @else
 
-                        </a><a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
                             <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
                         </a>
@@ -149,7 +239,8 @@ $category = Category::all();
                     <!-- Departments menu-->
                     <ul class="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+                            <a class="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside">
                                 <i class="ci-menu align-middle mt-n1 me-2"></i>Danh mục
                             </a>
                             <ul class="dropdown-menu">

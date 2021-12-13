@@ -15,10 +15,12 @@ class AdminComment extends Component
     // protected $listeners = ['refreshParent' => '$refresh'];
     protected $listeners = [
         'getModelId',
-        'render' => 'render'
+        'render' => 'render',
+        'feedback',
+        'editFeedback'
     ];
     
-    public function getModelId($id, $action){
+    public function getModelId($id, $action, $parent_id){
        if($action == 'edit'){
         $this->modelId = Comment::find($id);
         $this->comment_content = $this->modelId->comment_content;
@@ -29,14 +31,15 @@ class AdminComment extends Component
         $this->modelId = Comment::find($id);
         $this->comment_content = '@'.$this->modelId->user->name. ' ';
         $this->handle = $action;
+        $this->parent_id = $parent_id;
         $this->dispatchBrowserEvent('OpenStoreFeedbackModal');
        }
        
     }
     
-    public function feedback($id)
+    public function feedback($id, $parent_id)
     {
-        $this->emit('getModelId', $id, 'store');
+        $this->emit('getModelId', $id, 'store', $parent_id);
     }
 
     public function storeFeedback($product_id, $parent_comment_id, $id)

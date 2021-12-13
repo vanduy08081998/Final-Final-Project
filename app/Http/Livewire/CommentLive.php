@@ -98,7 +98,7 @@ class CommentLive extends Component
 
     public function render()
     {
-        $commentAll = Comment::where('comment_id_product', $this->product->id)->where([['comment_parent_id', 0], ['clearance_at', '!=', null]])->latest('id')->paginate(10);
+        $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null]])->latest('id')->paginate(10);
         return view('livewire.comment-live', compact('commentAll'));
     }
 }

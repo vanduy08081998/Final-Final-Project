@@ -113,6 +113,12 @@
             $('#' + e.detail.nameModal).modal('hide')
         })
     </script>
+
+    <script>
+        function feedback(id, parent_id) {
+            window.livewire.emit('feedback', id, parent_id)
+        }
+    </script>
     @livewireScripts
     @stack('script')
 </body>

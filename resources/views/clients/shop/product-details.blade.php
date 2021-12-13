@@ -244,6 +244,7 @@
         $(document).on('click', '#form-one', function() {
             $('.form-comment-show').addClass('d-none')
             $('.body-comment').removeClass('d-none')
+            window.livewire.emit('login')
         })
 
         // Mở form trả lời bình luận

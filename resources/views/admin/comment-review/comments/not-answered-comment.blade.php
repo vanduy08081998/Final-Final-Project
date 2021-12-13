@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-
+    @livewire('admin.admin-comment')
     <!-- /Page Wrapper -->
 @endsection
 @push('script')
@@ -152,4 +152,5 @@
             });
         });
     </script>
+
 @endpush
