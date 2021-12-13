@@ -49,7 +49,7 @@ class BannerController extends Controller
         $data = $request->validated();
         $data['banner_img'] = $this->generalService->uploadImage($this->path ,$request->banner_img);
         Banner::create($data);
-        return redirect()->route('banners.index');
+        return redirect()->route('banners.create');
     }
 
     /**

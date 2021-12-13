@@ -26,6 +26,7 @@ class AddBannerRequest extends FormRequest
         return [
             'banner_name' => ['required' , 'unique:banners' , 'max:225'],
             'banner_link' => ['required', 'unique:banners' , 'max:225'],
+            'banner_content' => ['required', 'unique:banners' , 'max:225'],
             'banner_img' => 'required'
 
         ];
@@ -36,7 +37,8 @@ class AddBannerRequest extends FormRequest
             'banner_name.required' => 'Banner không được để trống!',
             'banner_name.unique' => 'banner_name đã tồn tại!',
             'banner_link.required' => 'banner_link không được để trống!',
-            'banner_link.required' => 'banner_link không được để trống!',
+            'banner_link.unique' => 'banner_link đã tồn tại!',
+            'banner_link.required' => 'banner_content không được để trống!',
             'banner_img.required' => 'banner_img không được để trống!'
         ];
     }

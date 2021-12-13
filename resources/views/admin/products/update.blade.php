@@ -209,12 +209,11 @@
                       <select name="colors[]" id="product_color" class="form-control" multiple="multiple"
                         data-live-search="true" disabled>
                         @foreach (\App\Models\Color::all() as $color)
-                        @foreach (json_decode($product->colors) as $key => $color_value)
-                        <option value="{{ $color->color_code }}" @if ($color_value==$color->color_code) selected @endif
-                          data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i
-                                class='fa fa-square'></i> </span><span>{{ $color->color_name }}</span></span>">
+                        <option value="{{ $color->color_code }}" @if(in_array($color->
+                          color_code,json_decode($product->colors)))
+                          selected @endif>
+                          {{ $color->color_name }}
                         </option>
-                        @endforeach
                         @endforeach
                       </select>
                     </div>
@@ -233,8 +232,8 @@
                       <select name="colors[]" id="product_color" class="form-control" multiple="multiple"
                         data-live-search="true" disabled>
                         @foreach (\App\Models\Color::all() as $color)
-                        <option value="{{ $color->color_code }}"
-                          data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                        <option value="{{ $color->color_code }}">
+                          {{ $color->color_name }}
                         </option>
                         @endforeach
                       </select>

@@ -12,7 +12,7 @@ class Banner extends Model
 
     public $table = 'banners';
 
-    public $fillable = ['banner_name', 'banner_img', 'banner_link'];
+    public $fillable = ['banner_name', 'banner_img', 'banner_link', 'banner_content'];
     public $timestamp = true;
     public $primaryKey = 'id';
 
