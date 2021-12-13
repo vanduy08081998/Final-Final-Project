@@ -16,7 +16,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    {{-- <link rel="manifest" href="site.webmanifest"> --}}
+    {{--
+    <link rel="manifest" href="site.webmanifest"> --}}
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -87,6 +88,7 @@
                 }
             })
         })
+        
     }
 </script>
 
@@ -108,13 +110,13 @@
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
         <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-heart"></i></span><span class="handheld-toolbar-label">Yêu thích</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
-                        class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
+                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
+                    class="handheld-toolbar-label">Yêu thích</span></a><a class="d-table-cell handheld-toolbar-item"
+                href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
+                    class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item"
+                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
+                        class="badge bg-primary rounded-pill ms-1">4</span></span><span
                     class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
     {{-- Chatbox button --}}
@@ -152,6 +154,7 @@
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
+    <script src="{{ asset('frontend/js/range.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ asset('frontend/js/checkout.js') }}"></script>

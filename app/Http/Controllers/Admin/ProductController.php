@@ -3,19 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Brand;
+use App\Models\Color;
 use App\Models\Product;
+use App\Models\Variant;
 use App\Models\Category;
 use App\Models\Attribute;
+use App\Models\FlashDeal;
 use Illuminate\Http\Request;
+use App\Models\Specification;
 use App\Models\ProductVariant;
 use App\Services\Combinations;
 use App\Services\GeneralService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\Product\AddProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
-use Brian2694\Toastr\Facades\Toastr;
-use App\Models\FlashDeal;
 
 class ProductController extends Controller
 {
@@ -118,6 +121,16 @@ class ProductController extends Controller
 
     $combinations = Combinations::makeCombinations($options);
     return view('admin.products.sku_combination_edit', compact('combinations', 'unit_price', 'product_name', 'product', 'colors_active'));
+  }
+
+  public function getProductSpecification(Request $request){
+    $productSpecification = Variant::where('attribute_id', $request->id)->get();
+
+    $output = '';
+    foreach ($productSpecification as $key => $value){
+      $output.= '<option value="'.$value->name.'">'.$value->name.'</option>';
+    }
+    return response()->json($output);
   }
 
   /**
@@ -281,9 +294,8 @@ class ProductController extends Controller
         $str = '';
 
         foreach ($combination as $key => $item) {
-          $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $itemAfterConvert);
+            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -291,7 +303,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',' '], '', $itemAfterConvert);
+              $str .= str_replace([',', '/','.',':',' '], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -310,7 +322,17 @@ class ProductController extends Controller
         $product_variant->save();
       }
     }
+    
+      
 
+      foreach($request->choice_fixed_attribute as $specification){
+        $fixed_attribute = 'fixed_attribute_'.$specification;
+        $specification_value = 'specifications_'.$specification;
+        DB::table('specifications')->insert([
+          'specifications' => $request[$fixed_attribute],
+          'value' => $request[$specification_value]
+        ]);
+      }
 
     return redirect()->route('products.index');
   }
@@ -493,9 +515,8 @@ class ProductController extends Controller
         $str = '';
 
         foreach ($combination as $key => $item) {
-          $itemAfterConvert = \App\Models\Variant::where('name', $item)->first()->slug;
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $itemAfterConvert);
+            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -503,7 +524,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',' '], '', $itemAfterConvert);
+              $str .= str_replace([',', '/','.',':',' '], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -535,6 +556,32 @@ class ProductController extends Controller
       $product_variant->save();
     }
 
+    $array_fixed_attr = [];
+
+
+
+    foreach($request->choice_fixed_attribute as $specification){
+        $specification_tb = Specification::where('product_id', $product->id)->where('specifications', Attribute::where('id',$specification)->first()->name)->first();
+        if($specification_tb != null){
+          $fixed_attribute = 'fixed_attribute_'.$specification;
+          $specification_value = 'specifications_'.$specification;
+          $specification_tb->specifications = $request[$fixed_attribute];
+          $specification_tb->value = $request[$specification_value];
+          $specification_tb->save();
+        }else{
+          $fixed_attribute = 'fixed_attribute_'.$specification;
+          $specification_value = 'specifications_'.$specification;
+          DB::table('specifications')->insert([
+            'specifications' => $request[$fixed_attribute],
+            'value' => $request[$specification_value],
+            'product_id' => $product->id
+          ]);
+        }
+        
+        array_push($array_fixed_attr,Attribute::where('id',$specification)->first()->name);
+        Specification::whereNotIn('specifications',$array_fixed_attr)->delete();
+      
+    }
 
     return redirect()->route('products.index');
   }

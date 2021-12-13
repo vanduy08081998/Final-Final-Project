@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Clients;
 
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Order;
+use App\Models\Wards;
 use App\Mail\SendMail;
 use App\Models\Product;
 use App\Models\Shipping;
+use App\Models\Districts;
+use App\Models\Provinces;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -16,9 +20,13 @@ use Illuminate\Support\Facades\Mail;
 class CheckoutController extends Controller
 {
     public function checkoutDetail() {
+        $provinces = Provinces::all();
+        $districts = Districts::all();
+        $wards = Wards::all();
+        $user = User::find(Auth()->user()->id);
         $shipping_default = Shipping::where([['user_id', Auth::user()->id],['default',1]])->first();
         $shipping_all = Shipping::where([['user_id', Auth::user()->id],['default',0]])->get();
-        return view('Clients.checkout.checkout-details')->with(compact('shipping_default','shipping_all'));
+        return view('Clients.checkout.checkout-details')->with(compact('shipping_default','shipping_all','provinces','districts','wards','user'));
     }
     public function checkoutShipping() {
         $shipping_methods = DB::table('shipping_method')->get();

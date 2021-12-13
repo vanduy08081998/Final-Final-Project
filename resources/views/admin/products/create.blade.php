@@ -191,145 +191,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
-                                <div class="card">
-
-                                    <div class="card-header">
-                                        <ul class="list-group notification-list">
-                                            <li class="list-group-item">
-                                                Hiển thị thuộc tính
-                                                <div class="status-toggle">
-                                                    <input type="radio" id="is__attribute" name="type_of_category"
-                                                        value="isAttribute" class="check" checked>
-                                                    <label for="is__attribute" class="checktoggle">checkbox</label>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Không hiển thị thuộc tính
-                                                <div class="status-toggle">
-                                                    <input type="radio" id="is__not__attribute" name="type_of_category"
-                                                        value="isNotAttribute" class="check">
-                                                    <label for="is__not__attribute" class="checktoggle">checkbox</label>
-                                                </div>
-                                            </li>
-                                        </ul>
-
-
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="is__attribute">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-header">Thuộc tính và biến thể</div>
-                                                        <div class="card-body">
-                                                            <div class="form-group mb-3">
-                                                                <label>Giá gốc (*)</label>
-                                                                <input type="text" name="unit_price" id=""
-                                                                    class="form-control">
-                                                                @error('unit_price')
-                                                                <div class="text-danger">{{ $message }}</div>
-                                                                @enderror
-                                                            </div>
-
-                                                            <div class="form-group mb-3">
-                                                                <label>Liên kết bên ngoài</label>
-                                                                <input type="text" name="ex_link" id=""
-                                                                    class="form-control">
-                                                            </div>
-                                                            <div id="attribute__and__variant">
-                                                                <!-- Category End -->
-                                                                <div id="choiceAttribute">
-                                                                    <div class="form-group">
-                                                                        <select name="attribute[]" id="attribute"
-                                                                            class="form-control aiz-select-picker"
-                                                                            data-selected-text-format="count"
-                                                                            data-live-search="true" multiple
-                                                                            data-placeholder="{{ trans('Choose Attributes') }}">
-                                                                            @foreach (\App\Models\Attribute::all() as
-                                                                            $key =>
-                                                                            $attribute)
-                                                                            <option value="{{ $attribute->id }}">
-                                                                                {{ $attribute->name }}
-                                                                            </option>
-                                                                            @endforeach
-                                                                        </select>
-
-
-                                                                    </div>
-                                                                    @error('attribute')
-                                                                    <div class="text-danger">{{ $message }}
-                                                                    </div>
-                                                                    @enderror
-                                                                </div>
-                                                                <div id="customer_choice_options">
-
-                                                                </div>
-                                                                <input type="hidden" name="total_quantity"
-                                                                    id="totalquantity">
-                                                            </div>
-                                                            <input type="hidden" id="customer_choice_option_values"
-                                                                value="">
-                                                            @error('unit_price')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                            @enderror
-                                                            <div class="sku_combination mb-3" id="sku_combination">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="is__not__attribute">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <div class="form-group mb-3">
-                                                                <label>Giá sản phẩm (*)</label>
-                                                                <input type="text" name="price" id=""
-                                                                    class="form-control">
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label>Số lượng (*)</label>
-
-                                                                <input type="number" name="quantity" id=""
-                                                                    class="form-control">
-
-                                                            </div>
-                                                            <div class="form-group mb-3"
-                                                                id="show_hide_date_of_manufacture_and_expiry">
-                                                                <label>Ngày sản xuát - Hạn sử dụng</label>
-
-                                                                <input type="text" name="expiry" class="form-control">
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label>SKU (*)</label>
-
-                                                                <input type="text" name="sku" id=""
-                                                                    class="form-control">
-
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label>Liên kết bên ngoài</label>
-
-                                                                <input type="text" name="ex_link_not_attr" id=""
-                                                                    class="form-control">
-
-
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-4">
                         <div class="row">
@@ -536,7 +397,166 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
+                        <div class="card">
 
+                            <div class="card-header">
+                                <ul class="list-group notification-list">
+                                    <li class="list-group-item">
+                                        Hiển thị thuộc tính
+                                        <div class="status-toggle">
+                                            <input type="radio" id="is__attribute" name="type_of_category"
+                                                value="isAttribute" class="check" checked>
+                                            <label for="is__attribute" class="checktoggle">checkbox</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Không hiển thị thuộc tính
+                                        <div class="status-toggle">
+                                            <input type="radio" id="is__not__attribute" name="type_of_category"
+                                                value="isNotAttribute" class="check">
+                                            <label for="is__not__attribute" class="checktoggle">checkbox</label>
+                                        </div>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                            <div class="card-body">
+                                <div class="is__attribute">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
+                                            <div class="card">
+                                                <div class="card-header">Thuộc tính và biến thể</div>
+                                                <div class="card-body">
+                                                    <div class="form-group mb-3">
+                                                        <label>Giá gốc (*)</label>
+                                                        <input type="text" name="unit_price" id="" class="form-control">
+                                                        @error('unit_price')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <label>Liên kết bên ngoài</label>
+                                                        <input type="text" name="ex_link" id="" class="form-control">
+                                                    </div>
+                                                    <div id="attribute__and__variant">
+                                                        <!-- Category End -->
+                                                        <div id="choiceAttribute">
+                                                            <div class="form-group">
+                                                                <select name="attribute[]" id="attribute"
+                                                                    class="form-control aiz-select-picker"
+                                                                    data-selected-text-format="count"
+                                                                    data-live-search="true" multiple
+                                                                    data-placeholder="{{ trans('Choose Attributes') }}">
+                                                                    @foreach (\App\Models\Attribute::all() as
+                                                                    $key =>
+                                                                    $attribute)
+                                                                    <option value="{{ $attribute->id }}">
+                                                                        {{ $attribute->name }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+
+
+                                                            </div>
+                                                            @error('attribute')
+                                                            <div class="text-danger">{{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div id="customer_choice_options">
+
+                                                        </div>
+                                                        <input type="hidden" name="total_quantity" id="totalquantity">
+                                                    </div>
+                                                    <input type="hidden" id="customer_choice_option_values" value="">
+                                                    @error('unit_price')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <div class="sku_combination mb-3" id="sku_combination">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="is__not__attribute">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="form-group mb-3">
+                                                        <label>Giá sản phẩm (*)</label>
+                                                        <input type="text" name="price" id="" class="form-control">
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label>Số lượng (*)</label>
+
+                                                        <input type="number" name="quantity" id="" class="form-control">
+
+                                                    </div>
+                                                    <div class="form-group mb-3"
+                                                        id="show_hide_date_of_manufacture_and_expiry">
+                                                        <label>Ngày sản xuát - Hạn sử dụng</label>
+
+                                                        <input type="text" name="expiry" class="form-control">
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label>SKU (*)</label>
+
+                                                        <input type="text" name="sku" id="" class="form-control">
+
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label>Liên kết bên ngoài</label>
+
+                                                        <input type="text" name="ex_link_not_attr" id=""
+                                                            class="form-control">
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
+                        <div class="card">
+                            <div class="card-header">Thông số kỹ thuật</div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select class="form-control" name="choose_specification[]" id="choose_specification"
+                                        multiple="multiple">
+                                        @foreach (\App\Models\Attribute::all() as $attr)
+                                        <option value="{{ $attr->id }}">{{ $attr->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="sp-row">
+                                    <table class="table table-bordered mb-0 table-specifiation">
+                                        <thead class="thead-light text-center">
+                                            <tr>
+                                                <th scope="col">Thộc tính cố định</th>
+                                                <th scope="col">Giá trị</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-8">
                         <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" type="submit"><i
@@ -560,6 +580,38 @@
 
 @push('script')
 <script>
+    $('#choose_specification').select2()
+    $('#choose_specification').on('change', function() {
+        $('.table-specifiation tbody').html(null);
+        $.each($("#choose_specification option:selected"), function () {
+            customer_choice_specification($(this).val(), $(this).text())
+        })
+    })
+    
+    function customer_choice_specification(i, name) { 
+        $.ajax({
+            type: "POST",
+            url: '{{ route('admin.products.specifications') }}',
+            data: {
+                id: i,
+                _token: $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (response) {
+                $('.table-specifiation tbody').append(`
+                    
+                    <tr>
+                        <input type="hidden" name="choice_fixed_attribute[]" value="${i}">
+                        <td>${name} <input type="hidden" name="fixed_attribute_${i}" value="${name}"></td>
+                        <td>
+                            <select name="specifications_${i}" class="form-control">
+                                ${response}
+                            </select>
+                        </td>
+                    </tr>
+                `)     
+            }
+        });
+    }
     // Library //
     // CKEDITOR.replace('meta_description')
     CKEDITOR.replace('short_description');
@@ -586,28 +638,32 @@
     $('#id_flash_deal').select2();
 
     // Form on submit
-    $('form').on('submit', function (event) {
-        let quantity = $('.qty');
-        let total_quantity = 0;
-        for (let index = 0; index < quantity.length; index++) {
-            total_quantity += Number(quantity[index].value)
-        }
-        console.log(total_quantity);
+    // $('form').on('submit', function (event) {
+    //     let quantity = $('.qty');
+    //     let total_quantity = 0;
+    //     for (let index = 0; index < quantity.length; index++) {
+    //         total_quantity += Number(quantity[index].value)
+    //     }
+    //     console.log(total_quantity);
 
-        if ($('input[name="type_of_category"]:checked').val() == 'isAttribute') {
-            if ($('#stock_warning').val() >= total_quantity) {
-                event.preventDefault()
-                $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
-            }
-        }
+    //     if ($('input[name="type_of_category"]:checked').val() == 'isAttribute') {
+    //         if ($('#stock_warning').val() >= total_quantity) {
+    //             event.preventDefault()
+    //             $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
+    //         }else{
 
-        if ($('input[name="type_of_category"]:checked').val() == 'isNotAttribute') {
-            if ($('input[name="quantity"]').val() <= $('#stock_warning').val()) {
-                event.preventDefault()
-                $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
-            }
-        }
-    });
+    //         }
+    //     }else{
+    //         if ($('input[name="quantity"]').val() <= $('#stock_warning').val()) {
+    //             event.preventDefault()
+    //             $('#stock_error').html('Số lượng cảnh báo không được lớn hơn số lượng tổng');
+    //         }else{
+
+    //         }
+    //     }
+
+
+    // });
 
 
     if ($('input[name="type_of_category"]:checked').val() == 'isNotAttribute') {

@@ -333,4 +333,32 @@ input.check-sort-review {
 .check-filterstar.active {
     border: 1px solid #2f80ed;
     color: #2f80ed;
+
+.product-suggest {
+    display: block;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.suggest_search li.product_suggest a .item-img {
+    float: left;
+    width: 60px;
+    height: auto;
+    margin: 0 6px 0 0;
+    margin: auto 0;
+}
+
+/* .product_suggest a .item-img img {
+    width: 60px;
+    height: 60px;
+} */
+
+.suggest_search li.product_suggest a .item-info {
+    float: left;
+    width: calc(100% - 66px);
+    margin: auto 0;
+}
+
+#content-wrapper #thumbnails {
+    padding-top: 25px;
 }

@@ -49,9 +49,9 @@
                                 </div>
                                 <div class="card-body">
                                     @if (session('message'))
-                                        <div class="alert alert-success" role="alert">
-                                            {{ session('message') }}
-                                        </div>
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('message') }}
+                                            </div>
                                     @endif
                                     <!-- INput Group -->
                                     <div class="col-md-12 mb-3">
@@ -75,6 +75,17 @@
                                                 value="{{ old('banner_link') }}" type="text">
                                             @error('banner_link')
                                                 <span class="text-danger">{{ $errors->first('banner_link') }}</span>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label for="name">Nội dung slide</label>
+                                            <input class="form-control" name="banner_content" id=""
+                                                value="{{ old('banner_content') }}" type="text">
+                                            @error('banner_content')
+                                                <span class="text-danger">{{ $errors->first('banner_content') }}</span>
                                             @enderror
                                         </div>
 

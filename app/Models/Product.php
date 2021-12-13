@@ -84,4 +84,10 @@ class Product extends Model
     return $this->belongsToMany(Order::class, 'order_details');
   }
 
+  public function specifications()
+  {
+    return $this->hasMany(Specification::class);
+  }
+  
+
 }

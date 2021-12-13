@@ -120,8 +120,59 @@
 </div>
 @endsection
 
+<?php
+$cart = \App\Models\Cart::where('user_id', auth()->user()->id)->get();
+$total = 0;
+foreach($cart as $key => $cart){
+            foreach(json_decode($cart->specifications) as $key => $speciation){
+                $total+= $speciation->variant_price * $cart->quantity;
+                $product_details['product_id'] = $cart->product_id;
+                $product_details['quantity'] = $cart->quantity;
+                $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
+                $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
+            }
+}
+?>
+<input type="hidden" name="total_price" id="total_price" value="{{ round($total/22000) }}">
 @push('script')
+<script
+  src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
+</script>
 <script>
-  paypalButtons()
+  paypal.Buttons({
+
+    // Call your server to set up the transaction
+    createOrder: function(data, actions) {
+      return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: $('#total_price').val()
+                        }
+                    }]
+                });
+    },
+
+    // Call your server to finalize the transaction
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                  $.ajax({
+                    type: "POST",
+                    url: "{{ route('paypal.create') }}",
+                    data: {
+                      _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                      window.location.href = route('clients.index')
+                    }
+                  });
+      });
+    }
+
+}).render('#paypal-button-container');
 </script>
 @endpush
