@@ -12,8 +12,7 @@
 
         @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'dashboard'])
 
-        <h1 class="alert alert-danger text-center">Chưa có gì để thống kê</h1>
-        {{-- <div class="row">
+         <div class="row">
 						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 								<div class="card dash-widget">
 										<div class="card-body">
@@ -58,9 +57,9 @@
 										</div>
 								</div>
 						</div>
-				</div> --}}
+				</div>
 
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6 text-center">
@@ -793,7 +792,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
     </div>
     <!-- /Page Content -->
