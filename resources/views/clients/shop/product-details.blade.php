@@ -87,7 +87,7 @@
     <!-- Product carousel (You may also like)-->
     <!-- Bình luận ở đây nha bà con-->
     @include('clients.shop.details.gallery-css')
-
+    @livewire('reviews', ['product' => $product])
     {{-- @livewire('reviews',['product' => $product]) --}}
     @include('clients.shop.details.related-product')
 
