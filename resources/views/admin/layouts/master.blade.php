@@ -39,6 +39,7 @@
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::to('backend/css/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -91,7 +92,32 @@
     <script src="{{ URL::to('backend/js/app.js') }}"></script>
     {!! Toastr::message() !!}
     @include('sweetalert::alert')
+    <script>
+        window.addEventListener('OpenEditFeedbackModal', e => {
 
+            $('#EditFeedbackModal').modal('show')
+        })
+
+        window.addEventListener('OpenStoreFeedbackModal', e => {
+
+            $('#StoreFeedbackModal').modal('show')
+        })
+
+        window.addEventListener('reload', e => {
+            location.reload();
+        })
+
+        window.addEventListener('CloseModal', e => {
+            $('#' + e.detail.nameModal).modal('hide')
+        })
+    </script>
+
+    <script>
+        function feedback(id, parent_id) {
+            window.livewire.emit('feedback', id, parent_id)
+        }
+    </script>
+    @livewireScripts
     @stack('script')
 </body>
 

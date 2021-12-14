@@ -12,8 +12,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
-                    @include('admin.inc.card-header', ['table_title' => 'Bình luận' , 'table_content' =>
-                    'Thùng rác'])
+                    <div class="card-header">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Bình luận <i
+                                class="mr-2 ml-2 fas fa-caret-right"></i> <strong class="text-info">Chờ phản hồi</strong>
+                            <i class="mr-2 ml-2 fas fa-caret-right"></i>
+                            <em>Sản phẩm
+                                {{ trans($product->product_name) }}</em>
+                        </h4>
+                        <p class="card-text">
+                            {{ $comments->count() }} bình luận chờ phản hồi
+                        </p>
+                    </div>
                     <form action="{{ route('comment.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
@@ -25,10 +34,9 @@
                                         <option value="restore">Khôi phục</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-info handle-all" data-handle="restore-all">Khôi
-                                        phục tất cả</a>
-                                    <a href="{{ route('comment.index') }}" class="btn btn-success float-lg-right">Danh
-                                        sách</a>
+
+                                    <a href="{{ route('product.comment', $product->id) }}"
+                                        class="btn btn-success float-lg-right">Tất cả</a>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -38,13 +46,34 @@
                                             <td><input type="checkbox" id="checkAll"></td>
                                             <td>{{ trans('Người bình luận') }}</td>
                                             <td>{{ trans('Nội dung') }}</td>
-                                            <td>{{ trans('Phản hồi khách hàng') }}</td>
+                                            <td></td>
+                                            <td>{{ trans('Hành động') }}</td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($comments as $comment)
-                                            @include('admin.comments.comment_index_rows', ['value' => $comment, 'parent' =>
-                                            '1'])
+                                            @if ($comment->comment_admin_feedback != 1)
+                                                @include('admin.comment-review.comments.comment_index_rows', ['value' =>
+                                                $comment, 'parent_id'
+                                                => $comment->id])
+
+                                            @endif
+
+                                            @foreach ($comment->reply as $reply)
+                                                @if ($reply->comment_admin_feedback != 1)
+                                                    @include('admin.comment-review.comments.comment_index_rows', ['value' =>
+                                                    $reply, 'parent_id' =>
+                                                    $reply->id])
+                                                @endif
+                                                @foreach ($reply->reply as $replyChilds)
+                                                    @if ($replyChilds->comment_admin_feedback != 1)
+                                                        @include('admin.comment-review.comments.comment_index_rows',
+                                                        ['value' =>
+                                                        $replyChilds,
+                                                        'parent_id' => $reply->id])
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -57,7 +86,7 @@
             </div>
         </div>
     </div>
-
+    @livewire('admin.admin-comment')
     <!-- /Page Wrapper -->
 @endsection
 @push('script')
@@ -123,4 +152,5 @@
             });
         });
     </script>
+
 @endpush

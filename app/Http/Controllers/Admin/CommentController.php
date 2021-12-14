@@ -4,87 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function commentReview()
     {
-        $comments = Comment::where('comment_parent_id', 0)->latest('id')->get();
-        $isFeedback = Comment::where('comment_admin_feedback', 1)->latest()->get()->count();
-        $noneFeedback = Comment::where('comment_admin_feedback', null)->latest()->get()->count();
-        $countTrashed = Comment::onlyTrashed()->count();
-        return view('admin.comments.index', compact('comments', 'countTrashed', 'isFeedback', 'noneFeedback'));
+       $products = Product::latest()->get();
+       return view('admin.comment-review.index', compact('products'));
     }
 
-    public function feedback($parent, $id)
+    public function productComment($id)
     {
-        $parentId = $parent;
-        $commentId = Comment::find($id);
-        return view('admin.comments.feedback', compact('commentId', 'parentId'));
+       $product = Product::find($id);
+       $countComment = Comment::where([['clearance_at', null], ['comment_id_product', $id]])->get()->count();
+       $countTrashed = Comment::where('comment_id_product', $id)->onlyTrashed()->count();
+       $countA = Comment::where([['clearance_at', '!=', null],['comment_id_product', $id],['comment_admin_feedback', null]])->get()->count();
+       return view('admin.comment-review.comments.index', compact('product', 'countTrashed','countComment', 'countA'));
     }
+    
 
-    public function feedbackStore(Request $request)
-    {
-        $commentId = Comment::find($request->comment_reply_id);
-        $commentId->comment_admin_feedback = 1;
-        $commentId->save();
-        $data = $request->all();
-        Comment::create($data);
-        return redirect()->route('comment.index');
-    }
-
-    public function isfeedback()
-    {
-        $countTrashed = Comment::onlyTrashed()->count();
-        $noneFeedback = Comment::where('comment_admin_feedback', null)->latest()->get()->count();
-        $comments = Comment::where('comment_admin_feedback', 1)->latest()->get();
-        return view('admin.comments.isfeedback', compact('comments', 'noneFeedback', 'countTrashed'));
-    }
-
-    public function nonefeedback()
-    {
-        $countTrashed = Comment::onlyTrashed()->count();
-        $isFeedback = Comment::where('comment_admin_feedback', 1)->latest()->get()->count();
-        $comments = Comment::where('comment_admin_feedback', null)->latest()->get();
-        return view('admin.comments.nonefeedback', compact('comments', 'isFeedback', 'countTrashed'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $commentId = Comment::find($id);
-        return view('admin.comments.edit', compact('commentId'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -93,27 +35,18 @@ class CommentController extends Controller
         return back();
     }
 
-    public function feedbackAll(){
-        $comments = Comment::where('comment_admin_feedback', null)->latest()->get();
-        return view('admin.comments.all-feedback', compact('comments'));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+  
+    public function delete($id)
     {
         Comment::find($id)->delete();
-        return back()->with('Xóa dữ liệu thành công');
+        return back()->with('message', 'Đã chuyển vào thùng rác');
     }
 
-    public function trash()
+    public function trash($id_product)
     {
-        $comments = Comment::onlyTrashed()->get();
-        return view('admin.comments.trash', compact('comments'));
+        $comments = Comment::where('comment_id_product', $id_product)->onlyTrashed()->get();
+        $product = Product::find($id_product);
+        return view('admin.comment-review.comments.trash', compact('comments', 'product'));
     }
 
     public function restore($id)
@@ -124,9 +57,30 @@ class CommentController extends Controller
 
     public function forceDelete($id)
     {
-        $commentId = Comment::find($id);
-        $commentId->forceDelete();
+        Comment::onlyTrashed()->find($id)->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
+    }
+
+    public function listClearance($id_product)
+    {
+       $product = Product::find($id_product);
+       $comments = Comment::where([['clearance_at', null], ['comment_id_product', $id_product]])->get();
+       return view('admin.comment-review.comments.list-clearance', compact('product', 'comments'));
+    }
+
+    public function clearance($id){
+        Comment::find($id)->update([
+            'clearance_at' => Carbon::now()
+        ]);
+        return back()->with('message', 'Đã duyệt bình luận');
+    }
+
+    // danh sách chờ phản hồi
+    public function answered($id_product)
+    {
+       $product = Product::find($id_product);
+       $comments = Comment::where([['clearance_at', '!=', null],['comment_id_product', $id_product],['comment_parent_id', 0]])->get();
+       return view('admin.comment-review.comments.not-answered-comment', compact('product', 'comments'));
     }
 
     public function handle(Request $request)
