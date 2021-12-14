@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Product;
 use Auth;
 class ReviewController extends Controller
 {
@@ -14,7 +15,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -93,7 +94,11 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Review::find($request->review_id)->update([
+            'product_id' => $request->product_id,
+            'customer_id' => Auth::user()->id,
+            'content_rating' => $request->content_rating,
+        ]);
     }
 
     /**
@@ -105,5 +110,9 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function show_review($product_slug){
+        $product = Product::where('product_slug', $product_slug)->first();
+         return view('clients.shop.details.show_review')->with(compact('product'));
     }
 }
