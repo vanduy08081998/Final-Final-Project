@@ -597,7 +597,7 @@ class ProductController extends Controller
           ]);
         }
         array_push($array_fixed_attr,Attribute::where('id',$specification)->first()->name);
-        Specification::whereNotIn('specifications',$array_fixed_attr)->delete();
+        Specification::where('product_id', $product->id)->whereNotIn('specifications',$array_fixed_attr)->delete();
       }
     }
     return redirect()->route('products.index');

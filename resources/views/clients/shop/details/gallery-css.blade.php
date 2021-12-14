@@ -38,10 +38,8 @@
     }
 
     .gallery-thumbs .swiper-slide {
-        width: 60px;
-        height: 60px;
+        width: 100px;
         border-radius: 1rem;
-        border: 1px solid #D1D5DB;
         text-align: center;
         overflow: hidden;
     }
@@ -51,9 +49,8 @@
     }
 
     .gallery-thumbs .swiper-slide img {
-        width: 90%;
-        height: 90%;
-        margin-top: 5%;
+        width: 100%;
+        height: auto;
         margin-left: 5%;
         border-radius: 1rem;
     }

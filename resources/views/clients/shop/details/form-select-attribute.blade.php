@@ -72,8 +72,7 @@
               <?php 
                     $variant_image_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_image;
                     $variant_price_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_price; ?>
-              <span class="boxed-check-text"> <img class="cpslazy" src="{{ asset($variant_image_with_attr) }}"
-                  alt="hinh anh san pham">
+              <span class="boxed-check-text">
                 <p> <strong>{{ $value}}</strong> <span>{{ number_format($variant_price_with_attr) }}</span></p>
               </span>
             </div>
