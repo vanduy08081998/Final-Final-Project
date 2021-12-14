@@ -13,6 +13,7 @@ class Reviews extends Component
     protected $paginationTheme = 'bootstrap';
     public $product, $review_content, $count_rating, $userLoginId, $content_rating, $sort, $introduce, $image;
     public $checkfivestar, $checkfourstar, $checkthreestar, $checktwostar, $checkonestar;
+    public $search;
     protected $listeners = [  'review_introduce','review_filterstar','review_filterstar','review_image','render' => 'mount'];
 
     public function mount()
@@ -37,7 +38,10 @@ class Reviews extends Component
     public function render()
     {
         $check = '';
-        if($this->sort){
+        if($this->search){
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['content_rating','LIKE','%'.$this->search.'%']])->latest('id')->paginate(2);
+        }
+        elseif($this->sort){
             // dd($this->sort);
             switch($this->sort){
                 case 'Mới nhất':

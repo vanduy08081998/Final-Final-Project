@@ -333,7 +333,7 @@ input.check-sort-review {
 .check-filterstar.active {
     border: 1px solid #2f80ed;
     color: #2f80ed;
-
+}
 .product-suggest {
     display: block;
     overflow: hidden;
@@ -361,4 +361,18 @@ input.check-sort-review {
 
 #content-wrapper #thumbnails {
     padding-top: 25px;
+}
+.rating-search input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #666;
+    height: 36px;
+    padding: 8px 10px 8px 35px;
+    width: 100%;
+}
+i.fa.fa-search {
+    position: relative;
+    top: 31px;
+    left: 8px;
+    font-size: 20px;
 }

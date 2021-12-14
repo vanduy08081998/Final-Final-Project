@@ -111,8 +111,8 @@ class ReviewController extends Controller
     {
         //
     }
-    public function show_review($product){
-        $product = Product::find($product);
+    public function show_review($product_slug){
+        $product = Product::where('product_slug', $product_slug)->first();
          return view('clients.shop.details.show_review')->with(compact('product'));
     }
 }
