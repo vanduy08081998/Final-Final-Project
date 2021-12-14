@@ -135,9 +135,9 @@
                   đời - Trợ giá 1 triệu&nbsp;<span class="color-red">(xem chi tiết)</span></a></li>
             </ul>
             <div class="cps-additional-note">
-              <p><a data-toggle="modal" data-target="#myModal"><strong><img
-                      src="https://cellphones.com.vn/media/icon/icon_fire.png" style="width: 20px;">&nbsp;DANH SÁCH CỬA
-                    HÀNG ĐÃ CÓ HÀNG TRẢI NGHIỆM</strong></a></p>
+              <p><a style="text-transform: uppercase"><img src="https://cellphones.com.vn/media/icon/icon_fire.png"
+                    style="width: 20px; ">&nbsp; Giảm thêm tới 1% cho thành viên Smember </a>
+              </p>
             </div>
           </div>
         </div>
