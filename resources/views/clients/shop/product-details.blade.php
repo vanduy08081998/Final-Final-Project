@@ -10,37 +10,30 @@
 @endsection
 
 @section('content')
-    <style>
-        h2,
-        span.title_profile {
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-
-        .long-desc img {
-            width: 100%;
-        }
-
-    </style>
-    <div class="page-title-overlap bg-dark pt-4">
-        <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
-                                    class="ci-home"></i>{{ trans('Trang chủ') }}</a>
-                        </li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">{{ trans('Cửa hàng') }}</a>
-                        </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('Chi tiết sản phẩm') }}
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-
-        </div>
+<style>
+    h2, span.title_profile {
+    max-width: 100%;
+    word-wrap: break-word;
+    }
+    .long-desc img{
+        width: 100%;
+    }
+</style>
+<div class="page-title-overlap bg-dark pt-4">
+    <div class="container py-2 py-lg-3">
+      <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2 pb-2">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
+            <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Trang chủ</a></li>
+            <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng</a></li>
+          </ol>
+        </nav>
+      </div>
+      <div class="order-lg-1 text-center">
+        <h1 class="h3 text-light mb-0">Chi tiết sản phẩm</h1>
+      </div>
     </div>
-    </div>
+  </div>
     <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
@@ -67,9 +60,8 @@
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
                         <div class="row justify-content-center" style="text-align: justify">
                             <div class="col-lg-10">
-                                <div
-                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
-                                    <div class=" align-items-center pt-3">
+                                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                    <div class=" align-items-center pt-3" style="width: 100% !important">
                                         <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
                                         {!! $product->short_description !!}
                                     </div>

@@ -73,7 +73,7 @@
   @csrf
   <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-  <div class="order-lg-1 pe-lg-4 text-center text-lg-start" style="display: inline-flex; padding-bottom: 25px">
+  <div class="order-lg-1 pe-lg-4 text-center text-lg-start" style="display: inline-flex; padding-bottom: 25px; margin-left: 25px;">
         <p class="h2 text-dark mb-2" style="font-weight: 600">{{ trans($product->product_name) }}</h1>
         <div style="margin-left:30px !important; margin: auto 0">
           <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
@@ -85,7 +85,7 @@
       </div>
   <div class="row">
     <!-- Product gallery-->
-    <div class="col-lg-4" id="content-wrapper">
+    <div class="col-lg-4" id="content-wrapper" style="margin-left: 25px;">
       
       <div id="main-image">
         <a data-zoom-id="main" href="{{ asset($product->product_image) }}" class="MagicZoom main_image" id="main"><img
@@ -163,14 +163,14 @@
           <label class="boxed-check" style="">
             <input class="boxed-check-input" type="radio" name="radio_custom_color"
               value="{{ \App\Models\Color::where('color_code', $value)->first()->color_slug }}">
-            <div class="boxed-check-label" style="text-align:center; background: {{ $value }}; width: 50px; height: 33px;">
+            <div class="boxed-check-label border" style="text-align:center; background: {{ $value }}; width: 50px; height: 33px;">
               <span></span>
             </div>
           </label>
           @endforeach
           @endisset
         </div>
-        <div class="style-sc-11ucdwk-0 jfBwzZ mb-3 mt-4" style="border-radius: 20px; border: 1px solid #D70018">
+        <div class="style-sc-11ucdwk-0 jfBwzZ mb-3 mt-4" style="border-radius: 20px; border: 1px solid #D70018; width: 100%">
           <div class="item mt-3" style="margin-left: 10px">
             <span>
               <span class="text-success"><i class="fa fa-money"></i></span> Khuyến mãi :
@@ -208,7 +208,7 @@
           <th scope="row">{{ \App\Models\Attribute::where('id', $item->attribute_id)->first()->name }}:</th>
               @foreach ($item->values as $key => $value)
                 <?php $attribure_name_details = \App\Models\Variant::where('name', $value)->first()->name ?>
-              <td>{{ str_replace([',', '/','.',' '],'',$attribure_name_details) }}</td>
+              <td>{!! $attribure_name_details !!}</td>
               @endforeach
         </tr>
         @endforeach

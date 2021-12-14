@@ -79,8 +79,8 @@ button.chatbox-open {
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 52px;
-    height: 52px;
+    width: 55px;
+    height: 55px;
     color: #fff;
     background-color: #0360a5;
     background-position: center center;
@@ -89,25 +89,9 @@ button.chatbox-open {
     border: 0;
     border-radius: 50%;
     cursor: pointer;
-    margin: 16px;
+    margin: 19px;
 }
-button.chatbox-close {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: 52px;
-    height: 52px;
-    color: #fff;
-    background-color: #0360a5;
-    background-position: center center;
-    background-repeat: no-repeat;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.15);
-    border: 0;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    margin: 16px calc(2 * 16px + 52px) 16px 16px;
-}
+
 .review-content {
     box-sizing: border-box;
     width: 100%;
@@ -230,12 +214,12 @@ textarea::placeholder {
 
 .chatbox-popup {
     position: fixed;
-    margin-bottom: 80px;
+    margin-bottom: 110px;
     height: 400px !important;
 }
 
 .chatbox-open, .chatbox-close {
-    margin-bottom: 80px !important;
+    margin-bottom: 130px !important;
 }
 
 .chatbox-popup__main {
