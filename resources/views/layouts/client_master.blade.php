@@ -93,6 +93,7 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
+    
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -203,7 +204,7 @@
             window.location.href = href;
         })
     </script>
-
+    
 </body>
 
 </html>
