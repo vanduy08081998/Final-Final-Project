@@ -4,18 +4,20 @@
 @section('title', $product->product_name)
 
 @section('meta')
-    <meta name="description" content="{!! $product->meta_description !!}">
-    <meta name="keywords" content="{!! $product->meta_keywords !!}">
-    <meta name="author" content="{!! $product->meta_title !!}">
+<meta name="description" content="{!! $product->meta_description !!}">
+<meta name="keywords" content="{!! $product->meta_keywords !!}">
+<meta name="author" content="{!! $product->meta_title !!}">
 @endsection
 
 @section('content')
 <style>
-    h2, span.title_profile {
-    max-width: 100%;
-    word-wrap: break-word;
+    h2,
+    span.title_profile {
+        max-width: 100%;
+        word-wrap: break-word;
     }
-    .long-desc img{
+
+    .long-desc img {
         width: 100%;
     }
 </style>
@@ -71,34 +73,67 @@
                         </div>
                     </div>
                 </div>
+                <!-- Product description-->
+                <!-- Product description-->
+                <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
+                    <div class="row justify-content-center" style="text-align: justify">
+                        <div class="col-lg-10">
+                            <div
+                                class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                <div class=" align-items-center pt-3">
+                                    <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
+                                    {!! $product->short_description !!}
+                                </div>
+                            </div>
+                            {!! $product->long_description !!}
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+    </div>
+</div>
+<!-- Product description-->
+<div class="container pt-lg-3 pb-4 pb-sm-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
 
         </div>
     </div>
-    <!-- Product description-->
-    <div class="container pt-lg-3 pb-4 pb-sm-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
+</div>
+<hr class="mb-5">
+<!-- Product carousel (You may also like)-->
+<!-- Bình luận ở đây nha bà con-->
+@include('clients.shop.details.gallery-css')
 
-            </div>
-        </div>
-    </div>
-    <hr class="mb-5">
-    <!-- Product carousel (You may also like)-->
-    <!-- Bình luận ở đây nha bà con-->
-    @include('clients.shop.details.gallery-css')
-    @livewire('reviews', ['product' => $product])
-    {{-- @livewire('reviews',['product' => $product]) --}}
-    @include('clients.shop.details.related-product')
+@livewire('reviews',['product' => $product])
+@include('clients.shop.details.related-product')
 
-    @livewire('comment-live', ['product' => $product])
-    <!-- Bình luận ở đây nha bà con-->
+@livewire('comment-live', ['product' => $product])
+<!-- Bình luận ở đây nha bà con-->
 
 @endsection
 
 @push('script')
-    <script>
-        $('#choice_attribute_options').on('change', function() {
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 20,
+        slidesPerView: 6,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+      var swiper2 = new Swiper(".mySwiper2", {
+        spaceBetween: 20,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+          swiper: swiper,
+        },
+      });
+    $('#choice_attribute_options').on('change', function() {
             getVariantPrice()
         })
 
@@ -121,11 +156,11 @@
                 .value) + 1;
             getVariantPrice()
         })
-    </script>
+</script>
 
 
-    <script>
-        const getVariantPrice = () => {
+<script>
+    const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
@@ -134,28 +169,13 @@
                     console.log(response)
                     console.log(response.quantity)
                     $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <small>Tổng tiền: </small>${response.price}`)
-                    // With magic Zoom
-                    getMagicZoom(response.variant_image)
-                    // End magic zoom
+                    $('.total_product_price').html(` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
                     // Quantity check
                     quantityCheck(response.product_quantity)
                     // End Quantity check
                 }
 
             })
-        }
-
-        const getMagicZoom = (image) => {
-            if (!image) {
-
-            } else {
-                $('#main-image').html(`
-          <a data-zoom-id="main" href="${$('#url_to').val()}/${image}" class="MagicZoom main_image" id="main"><img
-                        src="${$('#url_to').val()}/${image}"></a>
-          `)
-            }
-            MagicZoom.refresh();
         }
 
         const quantityCheck = (quantity) => {
@@ -169,47 +189,9 @@
                                               </div> `)
             }
         }
-    </script>
-    <script>
-        $('#choice_attribute_options').on('change', function() {
-            getVariantPrice()
-        })
-    </script>
-
-    <script>
-        const getVariantPrice = () => {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('products.get_variant_price') }}",
-                data: $('#choice_attribute_options').serializeArray(),
-                success: function(response) {
-                    console.log(response.quantity)
-                    $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <small>Tổng tiền: </small>
-                                                  ${response.price}`)
-                    $('#main-image').html(`
-            <a data-zoom-id="main" href="${$('#url_to').val()}/${response.variant_image}" class="MagicZoom main_image" id="main"><img
-                          src="${$('#url_to').val()}/${response.variant_image}"></a>
-            `)
-                    MagicZoom.refresh();
-                    if (response.product_quantity > 0) {
-                        $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
-                                                  class="ci-security-check"></i>Sản phẩm còn hàng
-                                              </div>`)
-                    } else {
-                        $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red" style="right: 70px; top: 550px"><i
-                                                  class="fas fa-times"></i>Sản phẩm hết hàng
-                                              </div> `)
-                    }
-                }
-
-            })
-        }
-    </script>
-
-
-    <script type="text/javascript">
-        // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
+</script>
+<script type="text/javascript">
+    // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
                 $('html, body').animate({

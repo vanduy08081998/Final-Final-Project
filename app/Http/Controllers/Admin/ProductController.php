@@ -170,12 +170,20 @@ class ProductController extends Controller
       $var_date = explode(' - ', $request->sale_dates);
       $discount_start_date = strtotime($var_date[0]);
       $discount_end_date = strtotime($var_date[1]);
+    }else{
+      $discount_start_date = 0;
+      $discount_end_date = 0;
     }
 
     if ($request->type_of_category == 'isNotAttribute') {
-      $date_of_manufacture_expiry = explode(' - ', $request->expiry);
-      $date_of_manufacture = strtotime($date_of_manufacture_expiry[0]);
-      $expiry = strtotime($date_of_manufacture_expiry[1]);
+      if($request->has('expiry')){
+        $date_of_manufacture_expiry = explode(' - ', $request->expiry);
+        $date_of_manufacture = strtotime($date_of_manufacture_expiry[0]);
+        $expiry = strtotime($date_of_manufacture_expiry[1]);
+      }else{
+        $date_of_manufacture = 0;
+        $expiry = 0;
+      }
     } else {
       $date_of_manufacture = 0;
       $expiry = 0;
@@ -295,7 +303,7 @@ class ProductController extends Controller
 
         foreach ($combination as $key => $item) {
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
+            $str .= '-' . str_replace([',', '/','.',':',' ','%'], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -303,7 +311,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',':',' '], '', $item);
+              $str .= str_replace([',', '/','.',':',' ','%'], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -322,17 +330,20 @@ class ProductController extends Controller
         $product_variant->save();
       }
     }
-    
-      
 
+
+    if ($request->has('choice_fixed_attribute')) {
       foreach($request->choice_fixed_attribute as $specification){
         $fixed_attribute = 'fixed_attribute_'.$specification;
         $specification_value = 'specifications_'.$specification;
         DB::table('specifications')->insert([
           'specifications' => $request[$fixed_attribute],
-          'value' => $request[$specification_value]
+          'value' => $request[$specification_value],
+          'product_id' => $product->id
         ]);
       }
+    }
+
 
     return redirect()->route('products.index');
   }
@@ -400,12 +411,20 @@ class ProductController extends Controller
       $var_date = explode(' - ', $request->sale_dates);
       $discount_start_date = strtotime($var_date[0]);
       $discount_end_date = strtotime($var_date[1]);
+    }else{
+      $discount_start_date = 0;
+      $discount_end_date = 0;
     }
 
     if ($request->type_of_category == 'isNotAttribute') {
-      $date_of_manufacture_expiry = explode(' - ', $request->expiry);
-      $date_of_manufacture = strtotime($date_of_manufacture_expiry[0]);
-      $expiry = strtotime($date_of_manufacture_expiry[1]);
+      if($request->has('expiry')){
+        $date_of_manufacture_expiry = explode(' - ', $request->expiry);
+        $date_of_manufacture = strtotime($date_of_manufacture_expiry[0]);
+        $expiry = strtotime($date_of_manufacture_expiry[1]);
+      }else{
+        $date_of_manufacture = 0;
+        $expiry = 0;
+      }
     } else {
       $date_of_manufacture = 0;
       $expiry = 0;
@@ -516,7 +535,7 @@ class ProductController extends Controller
 
         foreach ($combination as $key => $item) {
           if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',':',' '], '', $item);
+            $str .= '-' . str_replace([',', '/','.',':',' ','%'], '', $item);
             $sku .= '-' . str_replace(' ', '', $item);
           } else {
             if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -524,7 +543,7 @@ class ProductController extends Controller
               $str .= $color_name;
               $sku .= '-' . $color_name;
             } else {
-              $str .= str_replace([',', '/','.',':',' '], '', $item);
+              $str .= str_replace([',', '/','.',':',' ','%'], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
             }
           }
@@ -559,8 +578,8 @@ class ProductController extends Controller
     $array_fixed_attr = [];
 
 
-
-    foreach($request->choice_fixed_attribute as $specification){
+    if($request->has('choice_fixed_attribute')){
+      foreach($request->choice_fixed_attribute as $specification){
         $specification_tb = Specification::where('product_id', $product->id)->where('specifications', Attribute::where('id',$specification)->first()->name)->first();
         if($specification_tb != null){
           $fixed_attribute = 'fixed_attribute_'.$specification;
@@ -577,12 +596,10 @@ class ProductController extends Controller
             'product_id' => $product->id
           ]);
         }
-        
         array_push($array_fixed_attr,Attribute::where('id',$specification)->first()->name);
         Specification::whereNotIn('specifications',$array_fixed_attr)->delete();
-      
+      }
     }
-
     return redirect()->route('products.index');
   }
 

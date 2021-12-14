@@ -51,10 +51,10 @@
                 <button class="dropdown-item"> <i class="fa fa-trash"></i> Xóa</button>
               </form>
 
-            </div>
           </div>
-        </td>
-      </tr>
+        </div>
+      </td>
+    </tr>
     @endforeach
   </tbody>
 </table>

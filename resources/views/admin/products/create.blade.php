@@ -182,7 +182,7 @@
                                                 @foreach (\App\Models\Color::all() as $color)
                                                 <option value="{{ $color->color_code }}">
                                                     <span style="color: red">{{
-                                                        $color->color_code }}</span>
+                                                        $color->color_name }}</span>
                                                 </option>
                                                 @endforeach
                                             </select>
@@ -528,30 +528,42 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
-                        <div class="card">
-                            <div class="card-header">Thông số kỹ thuật</div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <select class="form-control" name="choose_specification[]" id="choose_specification"
-                                        multiple="multiple">
-                                        @foreach (\App\Models\Attribute::all() as $attr)
-                                        <option value="{{ $attr->id }}">{{ $attr->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="sp-row">
-                                    <table class="table table-bordered mb-0 table-specifiation">
-                                        <thead class="thead-light text-center">
-                                            <tr>
-                                                <th scope="col">Thộc tính cố định</th>
-                                                <th scope="col">Giá trị</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                <ul class="list-group notification-list mb-3">
+                    <li class="list-group-item">
+                        Hiển thị thông số kĩ thuật
+                        <div class="status-toggle">
+                            <input type="checkbox" id="is-specification" name="has_specification" value="isAttribute"
+                                class="check">
+                            <label for="is-specification" class="checktoggle">checkbox</label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="show-hide-specification">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <select name="choose_specification[]" style="width:100%"
+                                            id="choose_specification" class="form-control" multiple
+                                            data-placeholder="{{ trans('Chọn thông số kỹ thuật') }}">
+                                            @foreach (\App\Models\Attribute::all() as $attr)
+                                            <option value="{{ $attr->id }}">{{ $attr->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="sp-row">
+                                        <table class="table table-bordered mb-0 table-specifiation">
+                                            <thead class="thead-light text-center">
+                                                <tr>
+                                                    <th scope="col">Thộc tính cố định</th>
+                                                    <th scope="col">Giá trị</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -580,6 +592,15 @@
 
 @push('script')
 <script>
+    $('.show-hide-specification').hide()
+    $('input[name="has_specification"]').on('change', function () {
+        if (!$('input[name="has_specification"]').is(':checked')) {
+            $('.show-hide-specification').hide()
+        } else {
+            $('.show-hide-specification').show()
+        }
+    });
+
     $('#choose_specification').select2()
     $('#choose_specification').on('change', function() {
         $('.table-specifiation tbody').html(null);
@@ -617,22 +638,22 @@
     CKEDITOR.replace('short_description');
     CKEDITOR.replace('long_description');
 
-    $('input[name="sale_dates"]').mobiscroll().datepicker({
-        controls: ['calendar', 'time'],
-        select: 'range',
-        calendarType: 'month',
-        pages: 2,
-        touchUi: true,
-        timeFormat: 'HH:mm:ss'
+    $('input[name="sale_dates"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
 
-    $('input[name="expiry"]').mobiscroll().datepicker({
-        controls: ['calendar', 'time'],
-        select: 'range',
-        calendarType: 'month',
-        pages: 2,
-        touchUi: true,
-        timeFormat: 'HH:mm:ss'
+    $('input[name="expiry"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
     $('#product_color').select2();
     $('#id_flash_deal').select2();
