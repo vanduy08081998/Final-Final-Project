@@ -56,6 +56,7 @@
     <script src="{{ asset('frontend/js/review.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
     @livewireStyles
     @livewireScripts
     @routes
@@ -93,6 +94,7 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
+    
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -150,14 +152,13 @@
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
     <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
-    <script src="{{ URL::to('frontend/magiczoom/magiczoom.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
     <script src="{{ asset('frontend/js/range.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="{{ asset('frontend/js/checkout.js') }}"></script>
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script src="{{ asset('frontend/js/image-uploader.min.js') }}"></script>
     <!-- Include the PayPal JavaScript SDK -->
     <script
@@ -203,7 +204,7 @@
             window.location.href = href;
         })
     </script>
-
+    
 </body>
 
 </html>

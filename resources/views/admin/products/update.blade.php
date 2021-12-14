@@ -209,12 +209,11 @@
                       <select name="colors[]" id="product_color" class="form-control" multiple="multiple"
                         data-live-search="true" disabled>
                         @foreach (\App\Models\Color::all() as $color)
-                        @foreach (json_decode($product->colors) as $key => $color_value)
-                        <option value="{{ $color->color_code }}" @if ($color_value==$color->color_code) selected @endif
-                          data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i
-                                class='fa fa-square'></i> </span><span>{{ $color->color_name }}</span></span>">
+                        <option value="{{ $color->color_code }}" @if(in_array($color->
+                          color_code,json_decode($product->colors)))
+                          selected @endif>
+                          {{ $color->color_name }}
                         </option>
-                        @endforeach
                         @endforeach
                       </select>
                     </div>
@@ -233,8 +232,8 @@
                       <select name="colors[]" id="product_color" class="form-control" multiple="multiple"
                         data-live-search="true" disabled>
                         @foreach (\App\Models\Color::all() as $color)
-                        <option value="{{ $color->color_code }}"
-                          data-content="<span><span style='color:{{ $color->color_code }}; font-size: 15px'><i class='fa fa-square' ></i> </span><span>{{ $color->color_name }}</span></span>">
+                        <option value="{{ $color->color_code }}">
+                          {{ $color->color_name }}
                         </option>
                         @endforeach
                       </select>
@@ -644,15 +643,24 @@
             </div>
           </div>
         </div>
-
-        <div class="row">
+        <ul class="list-group notification-list mb-3">
+          <li class="list-group-item">
+            Hiển thị thông số kĩ thuật
+            <div class="status-toggle">
+              <input type="checkbox" id="is-specification" name="has_specification" value="isAttribute" class="check"
+                @if(count($product->specifications()->get()) > 0) checked @endif>
+              <label for="is-specification" class="checktoggle">checkbox</label>
+            </div>
+          </li>
+        </ul>
+        <div class="row" id="show-hide-specification">
           <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
             <div class="card">
               <div class="card-header">Thông số kỹ thuật</div>
               <div class="card-body">
                 <div class="form-group">
-                  <select class="form-control" name="choose_specification[]" id="choose_specification"
-                    multiple="multiple">
+                  <select class="form-control" style="width:100%" name="choose_specification[]"
+                    id="choose_specification" multiple="multiple">
                     @foreach (\App\Models\Attribute::all() as $attr)
                     <?php $fix_arr_specification = array(); ?>
                     @foreach (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
@@ -672,7 +680,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
+                      @forelse (\App\Models\Specification::where('product_id', $product->id)->get() as $specification)
                       @foreach(\App\Models\Attribute::where('name', $specification->specifications)->get() as
                       $fixed_attribute)
                       <tr>
@@ -691,7 +699,8 @@
                         </td>
                       </tr>
                       @endforeach
-                      @endforeach
+                      @empty
+                      @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -748,8 +757,23 @@
   $('.flat_rate_shipping_div').hide()
 </script>
 @endif
-
+@if(count($product->specifications()->get()) > 0)
 <script>
+  $('#show-hide-specification').show()
+</script>
+@else
+<script>
+  $('#show-hide-specification').hide()
+</script>
+@endif
+<script>
+  $('input[name="has_specification"]').on('change', function () {
+        if (!$('input[name="has_specification"]').is(':checked')) {
+            $('#show-hide-specification').hide()
+        } else {
+            $('#show-hide-specification').show()
+        }
+    });
   // CKEDITOR.replace('meta_description')
     CKEDITOR.replace('short_description');
     CKEDITOR.replace('long_description');
@@ -788,22 +812,22 @@
     }
 
     $('.js-example-basic-multiple').select2();
-    $('input[name="sale_dates"]').mobiscroll().datepicker({
-      controls: ['calendar', 'time'],
-      select: 'range',
-      calendarType: 'month',
-      pages: 2,
-      touchUi: true,
-      timeFormat: 'HH:mm:ss'
+    $('input[name="sale_dates"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
 
-    $('input[name="expiry"]').mobiscroll().datepicker({
-      controls: ['calendar', 'time'],
-      select: 'range',
-      calendarType: 'month',
-      pages: 2,
-      touchUi: true,
-      timeFormat: 'HH:mm:ss'
+    $('input[name="expiry"]').daterangepicker({
+        timePicker: true,
+        startDate: moment().startOf('hour'),
+        endDate: moment().startOf('hour').add(32, 'hour'),
+        locale: {
+        format: 'M/DD/YYYY hh:mm:ss'
+        }
     });
     $('#product_color').select2();
 
@@ -891,35 +915,36 @@
       update_sku();
     });
 
-
     $('#attribute').on('change', function() {
-      $.each($("#attribute option:selected"), function(j, attribute) {
-        flag = false;
-        $('input[name="choice_no[]"]').each(function(i, choice_no) {
-          if ($(attribute).val() == $(choice_no).val()) {
-            flag = true;
-          }
+        $.each($("#attribute option:selected"), function(j, attribute){
+            flag = false;
+            $('input[name="choice_no[]"]').each(function(i, choice_no) {
+                if($(attribute).val() == $(choice_no).val()){
+                    flag = true;
+                }
+            });
+            if(!flag){
+                add_more_customer_choice_option($(attribute).val(), $(attribute).text());
+            }
         });
-        if (!flag) {
-          add_more_customer_choice_option($(attribute).val(), $(attribute).text());
-        }
-      });
 
-      var str = @php echo $product->product_attribute @endphp;
-      console.log(str)
+        var str = @php echo $product->product_attribute @endphp;
 
-      $.each(str, function(index, value) {
-        flag = false;
-        $.each($("#choice_attributes option:selected"), function(j, attribute) {
-          if (value == $(attribute).val()) {
-            flag = true;
-          }
+        $.each(str, function(index, value){
+            flag = false;
+            $.each($("#attribute option:selected"), function(j, attribute){
+                if(value == $(attribute).val()){
+                    flag = true;
+                }
+            });
+            if(!flag){
+                $('input[name="choice_no[]"][value="'+value+'"]').parent().remove();
+            }
         });
-      });
 
-      
-      update_sku();
-    })
+        update_sku();
+    });
+    
 
     $("[name=shipping_type]").on("change", function() {
       $(".flat_rate_shipping_div").hide();

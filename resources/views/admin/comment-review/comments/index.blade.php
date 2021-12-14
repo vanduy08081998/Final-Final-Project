@@ -12,8 +12,17 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
-                    @include('admin.inc.card-header', ['table_title' => 'Bình luận' , 'table_content' =>
-                    'Danh sách bình luận chưa phản hồi'])
+                    <div class="card-header">
+                        <h4 class="card-title mb-0 d-flex align-items-center">Bình luận <i
+                                class="mr-2 ml-2 fas fa-caret-right"></i>
+                            <span class="text-success">Đã duyệt</span> <i class="mr-2 ml-2 fas fa-caret-right"></i>
+                            <em>Sản phẩm
+                                {{ trans($product->product_name) }}</em>
+                        </h4>
+                        <p class="card-text">
+                            Danh sách bình luận theo sản phẩm
+                        </p>
+                    </div>
                     <form action="{{ route('comment.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
@@ -24,14 +33,14 @@
                                         <option value="trash">Thùng rác</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a href="{{ route('comment.index') }}" class="btn-sm btn-success">Tất cả bình luận
-                                    </a>
-
-                                    <a href="{{ route('comment.isfeedback') }}" class="btn-sm btn-info ml-1">Đã phản hồi
-                                        ({{ $isFeedback }})</a>
-
+                                    <a class="btn btn-primary"
+                                        href="{{ route('comment.list-clearance', $product->id) }}">Chờ duyệt <span
+                                            class="badge badge-light">{{ $countComment }}</span></a>
+                                    <a class="btn btn-primary" href="{{ route('comment.answered', $product->id) }}">Chờ
+                                        phản hồi <span class="badge badge-light">{{ $countA }}</span></a>
                                     @if ($countTrashed)
-                                        <a href="{{ route('comment.trash') }}" class="btn btn-warning float-right">Thùng
+                                        <a href="{{ route('comment.trash', $product->id) }}"
+                                            class="btn-sm btn-warning float-right mr-1">Thùng
                                             rác
                                             ({{ $countTrashed }})</a>
                                     @endif
@@ -46,41 +55,42 @@
                                             <td>{{ trans('Người bình luận') }}</td>
                                             <td>{{ trans('Nội dung') }}</td>
                                             <td>{{ trans('Phản hồi khách hàng') }}</td>
+                                            <td>{{ trans('Hành động') }}</td>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($comments as $comment)
-                                            @include('admin.comments.comment_index_rows', ['value' => $comment, 'parent' =>
-                                            '1'])
+                                        @foreach ($product->comments as $comment)
+                                            @if ($comment->comment_parent_id == 0 && $comment->clearance_at)
+                                                @include('admin.comment-review.comments.comment_index_rows', ['value' =>
+                                                $comment, 'parent_id'
+                                                => $comment->id])
 
-                                            @foreach ($comment->reply as $reply)
-                                                @if ($reply->comment_admin_feedback == 1)
-                                                    @include('admin.comments.comment_index_rows', ['value' => $reply,
-                                                    'prefix'
-                                                    =>
-                                                    '--', 'parent' => '2'])
+                                                @foreach ($comment->reply as $reply)
+                                                    @include('admin.comment-review.comments.comment_index_rows', ['value' =>
+                                                    $reply, 'parent_id' =>
+                                                    $reply->id])
 
                                                     @foreach ($reply->reply as $replyChilds)
-                                                        @include('admin.comments.comment_index_rows', ['value' =>
-                                                        $replyChilds, 'prefix' => '----', 'parent' => '3'])
+                                                        @include('admin.comment-review.comments.comment_index_rows',
+                                                        ['value' =>
+                                                        $replyChilds,
+                                                        'parent_id' => $reply->id])
                                                     @endforeach
-                                                @endif
-
-                                            @endforeach
-
+                                                @endforeach
+                                            @endif
                                         @endforeach
                                     </tbody>
+                                    @livewire('admin.admin-comment')
                                 </table>
                             </div>
                         </div>
                     </form>
+                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
-        <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
     </div>
 
-    <!-- /Page Wrapper -->
 @endsection
 @push('script')
     @if (Session::has('message'))
@@ -122,7 +132,8 @@
             // Thùng rác
             $('.trash').click(function() {
                 let id = $(this).data('id')
-                formTrash.action = '/admin/comment/' + id + 'destroy'
+                let url = $(this).data('url')
+                formTrash.action = url
                 formTrash.submit()
             })
 
@@ -145,5 +156,11 @@
                 })
             });
         });
+    </script>
+
+    <script>
+        function feedback(id, parent_id) {
+            window.livewire.emit('feedback', id, parent_id)
+        }
     </script>
 @endpush

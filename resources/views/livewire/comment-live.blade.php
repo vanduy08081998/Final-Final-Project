@@ -7,7 +7,7 @@
         <div class="col-lg-12 pt-3">
 
             <div class="b-block pb-1">
-                <h5>{{ $product->comments->count() }} bình luận</h5>
+                <h5>{{ $commentAll->count() }} bình luận</h5>
             </div>
 
             <div class="infocomment">

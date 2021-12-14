@@ -10,7 +10,7 @@
                     </span>
                 </li>
             @else
-                <li class="page-item move-top">
+                <li class="page-item">
                     <button type="button" class="page-link" wire:click="previousPage" rel="prev"
                         aria-label="@lang('pagination.previous')">
                         <span aria-hidden="true">&laquo;</span>
