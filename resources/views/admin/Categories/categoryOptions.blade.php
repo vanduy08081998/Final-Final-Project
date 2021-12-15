@@ -7,7 +7,7 @@
 
 @empty($categories)
 @isset($category)
-<option value="{{ $item->id_cate }}" {{ $category->category_parent_id == $item->id_cate ? 'selected' : ''}}>{{ $prefix
+<option value="{{ $item->id_cate }}" {{ $category == $item->id_cate ? 'selected' : ''}}>{{ $prefix
   ?? '' }} {{ $item->category_name ?? 'Chọn danh mục' }}</option>
 @endisset
 
