@@ -478,3 +478,16 @@ button.carousel-control-next.show-next {
     height: 80px;
     top: 35%;
 }
+
+.text-description{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 500px;
+}
+
+.product-title {
+    font-weight: bold;
+    padding-bottom: 15px;
+    /* text-align: center; */
+}
+
