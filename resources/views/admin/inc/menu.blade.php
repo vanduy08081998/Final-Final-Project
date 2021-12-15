@@ -13,25 +13,25 @@
     </li>
 
     @role('admin')
-        <li class="menu-title">
-            <span>Nhân viên</span>
-        </li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> <span>Chức vụ</span> <span
-                    class="menu-arrow"></span></a>
-            <ul style="display: none;">
-                <li><a href="{{ route('list-role') }}">Vai trò</a></li>
+    <li class="menu-title">
+        <span>Nhân viên</span>
+    </li>
+    <li class="submenu">
+        <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> <span>Chức vụ</span> <span
+                class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('list-role') }}">Vai trò</a></li>
 
-            </ul>
-        </li>
-        <li class="submenu">
-            <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> <span>Nhân viên</span> <span
-                    class="menu-arrow"></span></a>
-            <ul style="display: none;">
-                <li><a href="{{ route('users.index') }}">Danh sách</a></li>
-                <li><a href="{{ route('users.create') }}">Thêm nhân viên</a></li>
-            </ul>
-        </li>
+        </ul>
+    </li>
+    <li class="submenu">
+        <a href="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> <span>Nhân viên</span> <span
+                class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('users.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('users.create') }}">Thêm nhân viên</a></li>
+        </ul>
+    </li>
     @endrole
     <li class="menu-title">
         <span>Bài viết</span>
@@ -135,7 +135,7 @@
     <li class="submenu">
         <a href="#"><i class="fa fa-shopping-cart"></i> <span>Hóa đơn</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
+            <li><a href="{{ route('orders.index') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="submenu">

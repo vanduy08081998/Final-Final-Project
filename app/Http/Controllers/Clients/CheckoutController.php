@@ -95,6 +95,7 @@ class CheckoutController extends Controller
             foreach(json_decode($cart->specifications) as $key => $speciation){
                 $total+= $speciation->variant_price * $cart->quantity;
                 $product_details['product_id'] = $cart->product_id;
+                $product_details['specification'] = $cart->specifications;
                 $product_details['quantity'] = $cart->quantity;
                 $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
                 $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
@@ -116,6 +117,9 @@ class CheckoutController extends Controller
         $order->shipping_address = $shipping_address;
         $order->shipping_status = $shipping_method;
         $order->payment_type = 'Tiền mặt';
+        $order->payment_status = 'NotConfirm';
+        $order->payment_details = '';
+        $order->date = strtotime(date('Y-m-d H:i:s'));
         $order->grand_total = $total;
         $order->save();
         $order->products()->attach($product);

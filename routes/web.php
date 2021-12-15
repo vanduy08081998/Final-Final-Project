@@ -3,6 +3,7 @@
 use App\Http\Livewire\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Admin\BlogCateController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Clients\PaypalController;
+use App\Http\Controllers\Clients\ReviewController;
 use App\Http\Controllers\Clients\SearchController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
@@ -23,7 +25,6 @@ use App\Http\Controllers\Clients\ProductController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Controllers\Clients\WishlistController;
-use App\Http\Controllers\Clients\ReviewController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\UserCommentController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
@@ -228,7 +229,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/comment-review', [CommentController::class, 'commentReview'])->name('comment-review');
     Route::get('/product/{id}/review', [CommentController::class, 'productReview'])->name('product.review');
     Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
-
+    Route::resource('/orders', OrderController::class);
+    Route::post('/orders/paymentstatus', [OrderController::class, 'paymentStatus'])->name('admin.orders.paymentstatus');
+    Route::post('/orders/delivery', [OrderController::class, 'delivery'])->name('admin.orders.delivery');
 });
 //paypal
 Route::prefix('api/paypal')->group(function(){
