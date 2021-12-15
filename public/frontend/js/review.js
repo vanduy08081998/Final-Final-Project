@@ -4,7 +4,6 @@ window.addEventListener('OpenNewReviewModal', function(event) {
 })
 
 window.addEventListener('CloseNewReviewModal', function(event) {
-    alert('ok');
     $('.new_review').modal('hide');
 })
 
