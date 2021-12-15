@@ -2,9 +2,6 @@
 
 namespace App\Http\Livewire;
 use App\Models\Review;
-use App\Models\Product;
-use App\Models\Order;
-use App\Models\OrderDetail;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -28,16 +25,7 @@ class Reviews extends Component
         }
         $this->content_rating = '';
     }
-    public function add_review(){
-      $this->dispatchBrowserEvent('OpenNewReviewModal', [
 
-      ]);
-    }
-
-    // public function close_review(){
-    //     dd('kk');
-    //     $this->dispatchBrowserEvent('CloseNewReviewModal');
-    // }
     public function render()
     {
         $all_list_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['image','!=',null]])->latest('id')->get();
@@ -156,46 +144,6 @@ class Reviews extends Component
             'content_rating' => $this->content_rating,
             'review_parent' => $review_id,
         ]);
-        $this->emit('render');
-    }
-    public function useful($review_id){
-        if(!Auth::user()){
-            return redirect('/login');
-        }
-        $review = Review::find($review_id);
-        $review->update([
-            'useful' => $review->useful.','.Auth::user()->id
-        ]);
-        $this->emit('render');
-    }
-    public function un_useful($review_id){
-        if(!Auth::user()){
-            return redirect('/login');
-        }
-        $review = Review::find($review_id);
-        $useful_array = explode(',', $review->useful);
-        $useful_array = array_diff($useful_array, array(Auth::user()->id));
-        $useful_array = implode(',', $useful_array);
-        $review->update([
-            'useful' => $useful_array
-        ]);
-        $this->emit('render');
-    }
-    public function sort_review($product_id){
-        switch($this->sort){
-            case 'Mới nhất':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->latest('id')->get();
-                break;
-            case 'Hữu ích':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('created_at', 'DESC')->get();
-                break;
-            case 'Đánh giá cao':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'DESC')->get();
-                break;
-            default :
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'ASC')->paginate(2);
-                break;
-        }
         $this->emit('render');
     }
     public function discussion($review_id){

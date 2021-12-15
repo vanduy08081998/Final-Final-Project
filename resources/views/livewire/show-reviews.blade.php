@@ -95,11 +95,11 @@
                 </div><span wire:click.prevent="close_review()"
                     class="text-primary fw-bold ms-3">{{ $onestar }}%</span>
             </div>
-            {{-- @if ($bought == 0) --}}
+            @if ($bought == 1)
             <button type="button" wire:click.prevent="add_review()" class="btn btn-primary btn-sm mt-4 w-100">
                 Viết đánh giá
             </button>
-            {{-- @endif --}}
+            @endif
 
         </div>
 
@@ -179,11 +179,11 @@
 
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block me-4" for="sort-reviews"> <input
                                 class="form-check-input check-sort-review me-1" wire:model="image" value="review_image"
-                                type="checkbox"><span class="sort-review move-top"> Có hình ảnh (5)</span></label>
+                                type="checkbox"><span class="sort-review move-top"> Có hình ảnh ({{$count_review_image}})</span></label>
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block" for="sort-reviews"><input
                                 class="form-check-input check-sort-review me-1" wire:model="introduce"
                                 value="review_introduce" type="checkbox"> <span class="sort-review">Giới thiệu bạn
-                                bè, người thân (5)<span></label>
+                                bè, người thân ({{$count_review_introduce}})<span></label>
 
 
                     </div>
@@ -539,7 +539,7 @@
         $('.show-full-image').click(function() {
             var key = $(this).data('id');
             $('.show-image-review').removeClass('active');
-            if(!key){
+            if(key==undefined){
                 $('.show-slider-image-5').addClass('active');
             }else{
                 $('.show-slider-image-'+key).addClass('active');

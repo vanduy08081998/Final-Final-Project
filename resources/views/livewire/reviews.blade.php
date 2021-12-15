@@ -315,7 +315,7 @@
             </div>
 
             <div class="comment-btn d-flex justify-content-center">
-                @if($bought == 0)
+                @if($bought == 1)
                 <button type="button" wire:click.prevent="add_review()" class="comment-btn__item blue"><i class="fas fa-star-of-david me-1"></i>
                     Viết đánh giá
                 </button>
@@ -448,7 +448,7 @@
         $('.review_image_detail').click(function() {
             var key = $(this).data('id');
             $('.show-image-review').removeClass('active');
-            if(!key){
+            if(key==undefined){
                 $('.show-slider-image-7').addClass('active');
             }else{
                 $('.show-slider-image-'+key).addClass('active');
@@ -458,6 +458,9 @@
 
         $('.close_review').click(function(){
             $('.new_review').modal('hide');
+        })
+        $('.close-image-review').click(function(){
+            $('.show_image_review').modal('hide');
         })
     </script>
 @endpush

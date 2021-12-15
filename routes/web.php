@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\UserCommentController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
+use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,8 +134,22 @@ Route::prefix('/')->group(function () {
 
     //Đánh giá
     Route::resource('/review', ReviewController::class);
+    Route::resource('/review-admin', ReviewAdmin::class);
     Route::get('/show-review/{product}', [ReviewController::class, 'show_review'])->name('review.show-review');
     Route::get('/users', Users::class);
+
+    Route::prefix('/review')->group(function () {
+        Route::get('/trash/{id}', [ReviewAdmin::class, 'trash'])->name('review-admin.trash');
+        Route::get('/restore/{id}', [ReviewAdmin::class, 'restore'])->name('review-admin.restore');
+        Route::get('/delete/{id}', [ReviewAdmin::class, 'delete'])->name('review-admin.delete');
+        Route::get('/force-delete/{id}', [ReviewAdmin::class, 'forceDelete'])->name('review-admin.force-delete');
+        Route::get('/list-browse/{id}', [ReviewAdmin::class, 'listBrowse'])->name('review-admin.list-browse');
+        Route::get('/list-browse/{id}', [ReviewAdmin::class, 'listBrowse'])->name('review-admin.list-browse');
+        Route::get('/feedback/{id}', [ReviewAdmin::class, 'feedback'])->name('review-admin.feedback');
+        Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
+        Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');
+        Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
+    });
 });
 
 /*****************************************************************  Admin ***********************************************************************/
@@ -226,7 +241,6 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::resource('/comment', CommentController::class);
     Route::get('/comment-review', [CommentController::class, 'commentReview'])->name('comment-review');
-    Route::get('/product/{id}/review', [CommentController::class, 'productReview'])->name('product.review');
     Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
 
 });
