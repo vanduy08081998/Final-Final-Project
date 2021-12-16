@@ -4,8 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title-review" id="exampleModalLongTitle"> Đánh giá</h5>
-                <button type="button" class="btn btn-outline-danger btn-sm text-dark"
-                    wire:click.prevent="close_review()">
+                <button type="button" class="btn btn-outline-danger btn-sm text-dark close_review">
                     <span aria-hidden="true">X</span> Đóng
                 </button>
             </div>
@@ -62,7 +61,7 @@
                             rows="3"></textarea>
                         <div style="font-size:14px" class="d-flex error-review">
                             <span class="ms-sm-2 text-danger review_error"> </span>
-                            <span class="me-sm-2"><span id="count-result">0</span> ký tự (tối thiểu 80)</span>
+                            <span class="me-sm-2"><span id="count-result">0</span> ký tự (tối thiểu 50)</span>
                         </div>
                         <div class="input-field">
                             <div class="input-images-1"></div>

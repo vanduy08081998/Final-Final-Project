@@ -63,9 +63,14 @@
                     <!-- Product description-->
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
                         <div class="row justify-content-center" style="text-align: justify">
+<<<<<<< HEAD
                             <div class="col-lg-10">
                                 <div
                                     class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+=======
+                            <div class="col-lg-10 text-description" id="point">
+                                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+>>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
                                     <div class=" align-items-center pt-3" style="width: 100% !important">
                                         <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
                                         {!! $product->short_description !!}
@@ -74,33 +79,28 @@
                                 {!! $product->long_description !!}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- Product description-->
-                <!-- Product description-->
-                <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
-                    <div class="row justify-content-center" style="text-align: justify">
-                        <div class="col-lg-10">
-                            <div
-                                class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
-                                <div class=" align-items-center pt-3">
-                                    <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
-                                    {!! $product->short_description !!}
-                                </div>
-                            </div>
-                            {!! $product->long_description !!}
+                        <div class="btn-show">
+                            <button class="btn btn-danger justify-items-center show-more" style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
                         </div>
                     </div>
                 </div>
+               
+                <!-- Product description-->
             </div>
         </div>
-
     </div>
+<<<<<<< HEAD
     </div>
     <!-- Product description-->
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
+=======
+<!-- Product description-->
+<div class="container pt-lg-3 pb-4 pb-sm-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+>>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
 
             </div>
         </div>
@@ -379,5 +379,15 @@
                 $('.content-' + id).fadeOut("slow");
             }
         })
+    </script>
+     {{-- Xử lý long description --}}
+     <script>
+        $(".show-more").click(function () {
+            if($("#point").hasClass("text-description")) {
+                $(this).text("Xem thêm");
+            }
+        $("#point").removeClass("text-description");
+        $(".show-more").remove();
+    });
     </script>
 @endpush
