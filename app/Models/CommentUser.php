@@ -14,6 +14,8 @@ class CommentUser extends Model
 
     public $fillable = ['comment_id', 'user_id'];
 
-
+   public function comments(){
+       return $this->hasOne(Comment::class, 'comment_id');
+   }
     
 } 

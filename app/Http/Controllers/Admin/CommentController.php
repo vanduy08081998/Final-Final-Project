@@ -11,7 +11,7 @@ use Carbon\Carbon;
 class CommentController extends Controller
 {
 
-    public function commentReview()
+    public function index()
     {
        $products = Product::latest()->get();
        return view('admin.comment-review.index', compact('products'));
@@ -87,6 +87,13 @@ class CommentController extends Controller
     {
         $data = $request->all();
         switch ($data['handle']) {
+            case 'clearance':
+                $ids = $data['checkItem'];
+                Comment::whereIn('id', $ids)->update([
+                    'clearance_at' => Carbon::now('Asia/Ho_Chi_Minh')
+                ]);
+                return redirect()->back();
+                break;
             case 'trash':
                 $ids = $data['checkItem'];
                 Comment::whereIn('id', $ids)->delete();

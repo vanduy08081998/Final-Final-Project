@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 use App\Models\Review;
 use App\Models\Product;
+
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
@@ -32,7 +33,6 @@ class Reviews extends Component
     }
 
     public function close_review(){
-        dd('kk');
         $this->dispatchBrowserEvent('CloseNewReviewModal');
     }
     public function render()

@@ -7,14 +7,16 @@
                     style="width: 6.375rem;">
 
                     @if (Auth::user()->avatar)
-                    <img class="rounded-circle customer_picture"  src="{{ URL::to('uploads/Users/',Auth::user()->avatar) }}" alt="avatar">
+                        <img class="rounded-circle customer_picture"
+                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" alt="avatar">
                     @else
-                    <img class="rounded-circle customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}" alt="avatar">
+                        <img class="rounded-circle customer_picture"
+                            src="{{ URL::to('backend/img/profiles/avt.png') }}" alt="avatar">
                     @endif
                 </div>
                 <div class="ps-md-3">
-                    <h3 class="fs-base mb-0">{{Auth::user()->name}}</h3><span
-                        class="text-accent fs-sm">{{Auth::user()->email}}</span>
+                    <h3 class="fs-base mb-0">{{ Auth::user()->name }}</h3><span
+                        class="text-accent fs-sm">{{ Auth::user()->email }}</span>
                 </div>
             </div><a class="btn btn-primary d-lg-none mb-2 mt-3 mt-md-0" href="#account-menu" data-bs-toggle="collapse"
                 aria-expanded="false"><i class="ci-menu me-2"></i>Danh mục tài khoản</a>
@@ -26,9 +28,20 @@
                         href="{{ route('account.order-list') }}"><i class="ci-bag opacity-60 me-2"></i>Đơn hàng<span
                             class="fs-sm text-muted ms-auto">1</span></a></li>
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{ route('account.wishlist') }}">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 active"
+                        href="{{ route('account.wishlist') }}">
                         <i class="ci-heart opacity-60 me-2"></i>Danh sách yêu thích
-                        <span class="fs-sm text-muted ms-auto">{{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}</span>
+                        <span
+                            class="fs-sm text-muted ms-auto">{{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}</span>
+                    </a>
+                </li>
+
+                <li class="border-bottom mb-0">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3"
+                        href="{{ route('account.notification') }}">
+                        <i class="far fa-bell opacity-60 me-2"></i>Thông báo
+                        <span
+                            class="fs-sm text-muted ms-auto">{{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}</span>
                     </a>
                 </li>
             </ul>
@@ -40,10 +53,12 @@
                         href="{{ route('account.account-info') }}"><i class="ci-user opacity-60 me-2"></i>Thông tin cá
                         nhân</a></li>
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                        href="{{ route('account.account-address') }}"><i class="ci-location opacity-60 me-2"></i>Địa chỉ
+                        href="{{ route('account.account-address') }}"><i class="ci-location opacity-60 me-2"></i>Địa
+                        chỉ
                         giao nhận</a></li>
                 <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                        href="{{ route('account.account-payment') }}"><i class="ci-card opacity-60 me-2"></i>Phương thức
+                        href="{{ route('account.account-payment') }}"><i class="ci-card opacity-60 me-2"></i>Phương
+                        thức
                         thanh toán</a></li>
                 <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                         href="account-signin.html"><i class="ci-sign-out opacity-60 me-2"></i>Đăng xuất</a></li>

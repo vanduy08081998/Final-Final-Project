@@ -85,6 +85,7 @@ Route::prefix('/')->group(function () {
     Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
     Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
     Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+    Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
     Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
     Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
@@ -225,8 +226,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
     });
     Route::resource('/comment', CommentController::class);
-    Route::get('/comment-review', [CommentController::class, 'commentReview'])->name('comment-review');
-    Route::get('/product/{id}/review', [CommentController::class, 'productReview'])->name('product.review');
     Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
 
 });
