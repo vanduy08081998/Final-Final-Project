@@ -3,17 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\Comment;
+use App\Models\CommentUser;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Carbon\Carbon;
+use DB;
+use App\Services\NotificationService;
 
 class CommentLive extends Component
 {
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
-    public $product, $comment_content, $userLogin = [], $comments, $idUser;
+    public $product, $comment_content, $idUser, $search, $userLogin, $selectComment;
 
     protected $listeners = [
         'render' => 'mount',
@@ -57,6 +60,10 @@ class CommentLive extends Component
             'clearance_at' => Carbon::now()
         );
         Comment::create($data);
+        // Gửi thông báo đến người được trả lời
+        $service = new NotificationService();
+        $service->store(Comment::find($comment_reply_id)->comment_id_user, $this->product->id, 'comment', Auth::user()->name);
+        // Nếu người phản hồi là admin thì chuyển trạng thái của comment này thành đã được phản hồi.
         if(Auth::user()->position == 'admin'){
             Comment::find($comment_reply_id)->update([
                 'comment_admin_feedback' => 1
@@ -82,13 +89,16 @@ class CommentLive extends Component
         $this->emit('render');
     }
 
-    public function recall($id){
+    // Thu hồi bình luận
+    public function recall($id)
+    {
        Comment::find($id)->delete();
        $this->emit('render');
     }
 
     // Phản hồi không hài lòng
-    public function unsatisfied($comment_id){
+    public function unsatisfied($comment_id)
+    {
         $this->emit('login');
         $commentId = Comment::find($comment_id);
         $commentId->usersLike()->detach($this->idUser);
@@ -98,7 +108,54 @@ class CommentLive extends Component
 
     public function render()
     {
-        $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null]])->latest('id')->paginate(10);
+        if($this->search)
+        {
+            if($this->selectComment){
+                switch ($this->selectComment) {
+                    case 'lastComment':
+                        $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null],  ['comment_content','LIKE','%'.$this->search.'%']])->orderBy('id', 'ASC')->paginate(10);
+                        break;
+                    case 'likeComment':
+                        $like = DB::table('comment_user')
+                                    ->select('comment_id', DB::raw('count(*) as total'))
+                                    ->groupBy('comment_id')
+                                    ->orderBy('total', 'DESC')
+                                    ->pluck('comment_id')
+                                    ->all();
+                        $commentAll = Comment::whereIn('id', $like)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$like).")"))->where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null],  ['comment_content','LIKE','%'.$this->search.'%']])->paginate(10);
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }else{
+                $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null], ['comment_content','LIKE','%'.$this->search.'%']])->latest('id')->paginate(10);
+            }
+        }
+        elseif($this->selectComment)
+        {
+            switch ($this->selectComment) {
+                case 'lastComment':
+                    $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null]])->orderBy('id', 'ASC')->paginate(10);
+                    break;
+                case 'likeComment':
+                    $like = DB::table('comment_user')
+                                ->select('comment_id', DB::raw('count(*) as total'))
+                                ->groupBy('comment_id')
+                                ->orderBy('total', 'DESC')
+                                ->pluck('comment_id')
+                                ->all();
+                    $commentAll = Comment::whereIn('id', $like)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$like).")"))->where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null]])->paginate(10);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        }
+        else
+        {
+            $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null]])->latest('id')->paginate(10);
+        }
         return view('livewire.comment-live', compact('commentAll'));
     }
 }

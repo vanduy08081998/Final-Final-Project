@@ -41,7 +41,6 @@ class ShippingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $this->validate($request, [
             'fullname' => ['string', 'max:255'],
             'phone' => ['numeric', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})/'],

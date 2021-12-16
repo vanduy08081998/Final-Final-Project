@@ -25,7 +25,7 @@
                 @endforeach
                 @if (count($reply->reply) > 2)
                     <div class="content-load-more-child content-{{ $reply->id }}">
-                        <span class="load-more" data-id="{{ $reply->id }}"> Xem thêm bình luận <i
+                        <span class="load-more" onclick="loadMore({{ $reply->id }})"> Xem thêm bình luận <i
                                 class="far fa-comments"></i></span>
                     </div>
                 @endif
@@ -34,7 +34,8 @@
         @endforeach
         @if ($comment->reply->count() > 2)
             <div class="mt-2 content-load-more-parent content-{{ $comment->id }}">
-                <span class="load-more" data-id="{{ $comment->id }}"><i class="far fa-comments"></i>... Xem thêm
+                <span class="load-more" onclick="loadMore({{ $reply->id }})"><i class="far fa-comments"></i>...
+                    Xem thêm
                     ... <i class="far fa-comments"></i></span>
             </div>
         @endif

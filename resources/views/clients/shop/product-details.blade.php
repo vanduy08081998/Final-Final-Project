@@ -4,38 +4,40 @@
 @section('title', $product->product_name)
 
 @section('meta')
-<meta name="description" content="{!! $product->meta_description !!}">
-<meta name="keywords" content="{!! $product->meta_keywords !!}">
-<meta name="author" content="{!! $product->meta_title !!}">
+    <meta name="description" content="{!! $product->meta_description !!}">
+    <meta name="keywords" content="{!! $product->meta_keywords !!}">
+    <meta name="author" content="{!! $product->meta_title !!}">
 @endsection
 
 @section('content')
-<style>
-    h2,
-    span.title_profile {
-        max-width: 100%;
-        word-wrap: break-word;
-    }
+    <style>
+        h2,
+        span.title_profile {
+            max-width: 100%;
+            word-wrap: break-word;
+        }
 
-    .long-desc img {
-        width: 100%;
-    }
-</style>
-<div class="page-title-overlap bg-dark pt-4">
-    <div class="container py-2 py-lg-3">
-      <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2 pb-2">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
-            <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Trang chủ</a></li>
-            <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng</a></li>
-          </ol>
-        </nav>
-      </div>
-      <div class="order-lg-1 text-center">
-        <h1 class="h3 text-light mb-0">Chi tiết sản phẩm</h1>
-      </div>
+        .long-desc img {
+            width: 100%;
+        }
+
+    </style>
+    <div class="page-title-overlap bg-dark pt-4">
+        <div class="container py-2 py-lg-3">
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2 pb-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
+                                    class="ci-home"></i>Trang chủ</a></li>
+                        <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="order-lg-1 text-center">
+                <h1 class="h3 text-light mb-0">Chi tiết sản phẩm</h1>
+            </div>
+        </div>
     </div>
-  </div>
     <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
@@ -62,7 +64,8 @@
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
                         <div class="row justify-content-center" style="text-align: justify">
                             <div class="col-lg-10 text-description" id="point">
-                                <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                <div
+                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
                                     <div class=" align-items-center pt-3" style="width: 100% !important">
                                         <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
                                         {!! $product->short_description !!}
@@ -72,7 +75,8 @@
                             </div>
                         </div>
                         <div class="btn-show">
-                            <button class="btn btn-danger justify-items-center show-more" style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                            <button class="btn btn-danger justify-items-center show-more"
+                                style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
                         </div>
                     </div>
                 </div>
@@ -81,46 +85,47 @@
             </div>
         </div>
     </div>
-<!-- Product description-->
-<div class="container pt-lg-3 pb-4 pb-sm-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
+    </div>
+    <!-- Product description-->
+    <div class="container pt-lg-3 pb-4 pb-sm-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
 
+            </div>
         </div>
     </div>
-</div>
-<hr class="mb-5">
-<!-- Product carousel (You may also like)-->
-<!-- Bình luận ở đây nha bà con-->
-@include('clients.shop.details.gallery-css')
+    <hr class="mb-5">
+    <!-- Product carousel (You may also like)-->
+    <!-- Bình luận ở đây nha bà con-->
+    @include('clients.shop.details.gallery-css')
 
-@livewire('reviews',['product' => $product])
-@include('clients.shop.details.related-product')
+    @livewire('reviews',['product' => $product])
+    @include('clients.shop.details.related-product')
 
-@livewire('comment-live', ['product' => $product])
-<!-- Bình luận ở đây nha bà con-->
+    @livewire('comment-live', ['product' => $product])
+    <!-- Bình luận ở đây nha bà con-->
 
 @endsection
 
 @push('script')
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 20,
-        slidesPerView: 6,
-        freeMode: true,
-        watchSlidesProgress: true,
-      });
-      var swiper2 = new Swiper(".mySwiper2", {
-        spaceBetween: 20,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        thumbs: {
-          swiper: swiper,
-        },
-      });
-    $('#choice_attribute_options').on('change', function() {
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 20,
+            slidesPerView: 6,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+        $('#choice_attribute_options').on('change', function() {
             getVariantPrice()
         })
 
@@ -143,11 +148,11 @@
                 .value) + 1;
             getVariantPrice()
         })
-</script>
+    </script>
 
 
-<script>
-    const getVariantPrice = () => {
+    <script>
+        const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
@@ -156,7 +161,8 @@
                     console.log(response)
                     console.log(response.quantity)
                     $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
+                    $('.total_product_price').html(
+                        ` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
                     // Quantity check
                     quantityCheck(response.product_quantity)
                     // End Quantity check
@@ -176,9 +182,9 @@
                                               </div> `)
             }
         }
-</script>
-<script type="text/javascript">
-    // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
+    </script>
+    <script type="text/javascript">
+        // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
                 $('html, body').animate({
@@ -354,23 +360,22 @@
 
 
     <script>
-        $('.load-more').click(function() {
-            let id = $(this).data('id')
+        function loadMore(id) {
             let loadMore = $('.load-show-' + id + ':hidden')
             loadMore.slice(0, 4).slideDown();
             if (loadMore.length == 0) {
                 $('.content-' + id).fadeOut("slow");
             }
-        })
+        }
     </script>
-     {{-- Xử lý long description --}}
-     <script>
-        $(".show-more").click(function () {
-            if($("#point").hasClass("text-description")) {
+    {{-- Xử lý long description --}}
+    <script>
+        $(".show-more").click(function() {
+            if ($("#point").hasClass("text-description")) {
                 $(this).text("Xem thêm");
             }
-        $("#point").removeClass("text-description");
-        $(".show-more").remove();
-    });
+            $("#point").removeClass("text-description");
+            $(".show-more").remove();
+        });
     </script>
 @endpush

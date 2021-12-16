@@ -4,8 +4,10 @@ window.addEventListener('OpenNewReviewModal', function(event) {
 })
 
 window.addEventListener('CloseNewReviewModal', function(event) {
-    alert('ok');
     $('.new_review').modal('hide');
+})
+window.addEventListener('OpenSuccess', function(event) {
+    toastr.success('Thảo luận của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
 })
 
  $(document).on('click', '#upload_content_image', function() {

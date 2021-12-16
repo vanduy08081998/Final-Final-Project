@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Comment;
+use App\Models\Notification;
 use Livewire\Component;
 use Auth;
 use Carbon\Carbon;
+use App\Services\NotificationService;
 
 class AdminComment extends Component
 {
@@ -19,6 +21,8 @@ class AdminComment extends Component
         'feedback',
         'editFeedback'
     ];
+
+    
     
     public function getModelId($id, $action, $parent_id){
        if($action == 'edit'){
@@ -62,6 +66,10 @@ class AdminComment extends Component
         $this->dispatchBrowserEvent('CloseModal', [
             'nameModal' => 'StoreFeedbackModal'
         ]);
+        
+        $service = new NotificationService();
+        $service->store(Comment::find($id)->comment_id_user, $product_id, 'comment', Auth::user()->name);
+        
         $this->dispatchBrowserEvent('reload');
     }
 

@@ -3,7 +3,10 @@
 namespace App\Http\Livewire;
 use App\Models\Review;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Livewire\Component;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
@@ -11,10 +14,10 @@ class Reviews extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $product, $review_content, $count_rating, $userLoginId, $content_rating, $sort, $introduce, $image;
+    public $product, $count_rating, $userLoginId, $content_rating, $sort, $introduce, $image;
     public $checkfivestar, $checkfourstar, $checkthreestar, $checktwostar, $checkonestar;
-    public $search;
-    protected $listeners = [  'review_introduce','review_filterstar','review_filterstar','review_image','render' => 'mount'];
+    public $search,$view;
+    protected $listeners = ['render' => 'mount'];
 
     public function mount()
     {
@@ -32,35 +35,48 @@ class Reviews extends Component
     }
 
     public function close_review(){
-        dd('kk');
         $this->dispatchBrowserEvent('CloseNewReviewModal');
     }
     public function render()
     {
+        $all_list_review = 
+        Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['image','!=',null]])->latest('id')->get();
+        $list_image_array = [];
+        foreach($all_list_review as $key => $review){
+                    $str = $review->image;
+                    $image_array = explode(',', $str);
+                    array_push($list_image_array, $image_array[0]);         
+        }
+
+        if($this->view){
+            $view = $this->view;
+        }else{
+            $view = 'livewire.reviews';
+        }
         $check = '';
         if($this->search){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['content_rating','LIKE','%'.$this->search.'%']])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['content_rating','LIKE','%'.$this->search.'%']])->latest('id')->paginate(5);
         }
         elseif($this->sort){
             // dd($this->sort);
             switch($this->sort){
                 case 'Mới nhất':
-                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->latest('id')->paginate(2);
+                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->latest('id')->paginate(5);
                     break;
                 case 'Hữu ích':
-                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('useful', 'DESC')->paginate(2);
+                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('useful', 'DESC')->paginate(5);
                     break;
                 case 'Đánh giá cao':
-                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'DESC')->paginate(2);
+                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'DESC')->paginate(5);
                     break;
                 case 'Đánh giá thấp':
-                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'ASC')->paginate(2);
+                    $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'ASC')->paginate(5);
                 break;
                 case 'review_image':
                     if($this->introduce){
-                        $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(2);
+                        $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(5);
                     }else{
-                        $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->paginate(2);
+                        $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->paginate(5);
                     }
                 break;
 
@@ -69,32 +85,32 @@ class Reviews extends Component
                     break;
             }
         }elseif($this->checkfivestar){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 5],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 5],['review_status',1]])->latest('id')->paginate(5);
             $check = 'fivestar';
         }elseif($this->checkfourstar){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 4],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 4],['review_status',1]])->latest('id')->paginate(5);
             $check = 'fourstar';
         }elseif($this->checkthreestar){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 3],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 3],['review_status',1]])->latest('id')->paginate(5);
             $check = 'threestar';
         }elseif($this->checktwostar){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 2],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 2],['review_status',1]])->latest('id')->paginate(5);
             $check = 'twostar';
         }elseif($this->checkonestar){
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 1],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['count_rating', 1],['review_status',1]])->latest('id')->paginate(5);
             $check = 'onestar';
         }elseif($this->image){
             if($this->introduce){
-                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(2);
+                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(5);
             }else{
-                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->paginate(2);
+                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->paginate(5);
             }
         }
         elseif($this->introduce){
-                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(2);
+                $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['introduce', '!=', null],['review_status',1]])->latest('id')->paginate(5);
         }
         else{
-            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->latest('id')->paginate(2);
+            $all_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1]])->latest('id')->paginate(5);
         };
         $avg = round(Review::where([['product_id', $this->product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'),1);
         $rating_avg = round(Review::where([['product_id', $this->product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'));
@@ -103,8 +119,22 @@ class Reviews extends Component
         if($all_count_review==0){
             $all_count_review = 1;
         }
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d h:i:s');
+        $order =  Order::where([['user_id', $this->userLoginId],['shipping_status',2]])->get();
+        $bought = 0;
+        foreach($order as $key => $or){
+            if($or->created_at->adddays(30) > $now){
+                foreach($or->products as $pro){
+                    if($this->product->id == $pro->id){
+                        $reviews  = Review::where([['product_id',$this->product->id],['customer_id', $this->userLoginId],['review_parent',null]])->get();
+                        if(count($reviews)==0){
+                            $bought++;
+                         }
+                    }
+                } 
+            }
+        }
         
-        $id_review = count(Review::where([['product_id', $this->product->id],['review_parent', null],['customer_id', $this->userLoginId]])->get());
         $id_user = $this->userLoginId;
         $fivestar = round(count(Review::where([['product_id', $this->product->id],['review_status',1],['review_parent', null],['count_rating',5]])->get())/$all_count_review*100);
         $fourstar = round(count(Review::where([['product_id', $this->product->id],['review_status',1],['review_parent', null],['count_rating',4]])->get())/$all_count_review*100);
@@ -112,18 +142,30 @@ class Reviews extends Component
         $twostar = round(count(Review::where([['product_id', $this->product->id],['review_status',1],['review_parent', null],['count_rating',2]])->get())/$all_count_review*100);
         $onestar = round(count(Review::where([['product_id', $this->product->id],['review_status',1],['review_parent', null],['count_rating',1]])->get())/$all_count_review*100);
         $all_count_review = count(Review::where([['product_id', $this->product->id],['review_status',1], ['review_parent',null]])->get());
-        return view('livewire.reviews')->with(compact('avg','rating_avg','all_count_review','all_review','check','id_review','id_user','introduce_review','fivestar','fourstar','threestar','twostar','onestar'));
+        $count_review_image = count(Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->get());
+        $count_review_introduce = count(Review::where([['product_id', $this->product->id],['review_parent', null],['introduce', '!=', null],['review_status',1]])->latest('id')->get());
+        return view($view)->with(compact('count_review_image','count_review_introduce','all_list_review','list_image_array','avg','rating_avg','all_count_review','all_review','check','bought','id_user','introduce_review','fivestar','fourstar','threestar','twostar','onestar'));
     }
     public function ReplyRating ($review_id, $product_id){
         if(!Auth::user()){
             return redirect('/login');
+        }
+        if(Auth::user()->position == 'admin'){
+            Review::find($review_id)->update(['admin_feedback' => 1]);
+            $review_status = 1;
+        }else{
+            $review_status = null;
         }
         Review::create([
             'product_id' => $product_id,
             'customer_id' => Auth::user()->id,
             'content_rating' => $this->content_rating,
             'review_parent' => $review_id,
+            'review_status' => $review_status
         ]);
+        if(Auth::user()->position != 'admin'){
+        $this->dispatchBrowserEvent('OpenSuccess', []);
+        }
         $this->emit('render');
     }
     public function useful($review_id){
@@ -149,73 +191,13 @@ class Reviews extends Component
         ]);
         $this->emit('render');
     }
-    public function sort_review($product_id){
-        switch($this->sort){
-            case 'Mới nhất':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->latest('id')->get();
-                break;
-            case 'Hữu ích':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('created_at', 'DESC')->get();
-                break;
-            case 'Đánh giá cao':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'DESC')->get();
-                break;
-            default :
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'ASC')->paginate(2);
-                break;
-        }
-        $this->emit('render');
-    }
     public function discussion($review_id){
         $this->dispatchBrowserEvent('show_text');
         $this->class = $review_id;
         $this->emit('render');
     }
     public function remove_review_child($review_id){
-        Review::find($review_id)->delete();
+        Review::find($review_id)->forceDelete();
         $this->emit('render');
-    }
-    public function review_image($product_id, $sort_image){
-        if($sort_image == 'on'){
-            $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->get();
-        }else{
-            $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['image', null],['review_status',1]])->latest('id')->get();
-        }
-        $this->emit('render');
-    }
-    public function review_introduce($product_id, $sort_introduce){
-        if($sort_introduce == 'on'){
-            $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['introduce', '!=', null],['review_status',1]])->latest('id')->get();
-        }else{
-            $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['introduce', null],['review_status',1]])->latest('id')->get();
-        }
-        $this->emit('render');
-    }
-    public function review_filterstar($product_id, $sort_filterstar){
-       switch ($sort_filterstar) {
-              case 'all':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->latest('id')->get();
-              break;
-              case '5':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['count_rating', 5],['review_status',1]])->latest('id')->get();
-              break;
-              case '4':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['count_rating', 4],['review_status',1]])->latest('id')->get();
-              break;
-              case '3':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['count_rating', 3],['review_status',1]])->latest('id')->get();
-              break;
-              case '2':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['count_rating', 2],['review_status',1]])->latest('id')->get();
-              break;
-              case '1':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['count_rating', 1],['review_status',1]])->latest('id')->get();
-              break;
-           
-           default:
-               # code...
-               break;
-       }
-    //    $this->emit('render');
     }
 }

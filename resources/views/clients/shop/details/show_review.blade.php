@@ -11,7 +11,7 @@
 
 @section('content')
     <hr class="mb-5">
-    @livewire('reviews',['product' => $product])
+    @livewire('reviews',['product' => $product, 'view' => 'livewire.show-reviews']);
 @endsection
 
 @push('script')

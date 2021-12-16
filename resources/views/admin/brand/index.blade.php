@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <form action="#" method="POST">
+                    <form action="{{ route('brand.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
@@ -39,8 +39,6 @@
                                         <option value="trash">Thùng rác</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-danger handle-all" data-handle="trash-all">Xóa tất cả</a>
-
                                     @if ($countTrashed)
                                         <a href="{{ asset('admin/brand/trash') }}"
                                             class="btn btn-warning float-right">Thùng
@@ -48,7 +46,6 @@
                                             ({{ $countTrashed }})</a>
 
                                     @endif
-
                                 </div>
                             </div>
                             <hr />
@@ -73,7 +70,7 @@
                                                     <div class="text-center">
                                                         <div class="position-relative mr-2">
                                                             <img width="80" height="40"
-                                                                src="{{ url('uploads/Brands', $brand->brand_image) }}" />
+                                                                src="{{ asset($brand->brand_image) }}" />
                                                         </div>
                                                     </div>
                                                 </td>
