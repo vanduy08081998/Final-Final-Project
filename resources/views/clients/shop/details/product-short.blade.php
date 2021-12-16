@@ -1,4 +1,7 @@
-@foreach ($products as $pro)
+ <?php
+  use App\Models\Wishlist;
+  ?>
+ @foreach ($products as $pro)
 
         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
           <div class="card product-card">
@@ -11,18 +14,22 @@
                       ->first();
                   ?>
             @if ($wishlist != null)
-            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-              title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})" style="color: red">
+            <button class="btn-wishlist_{{$pro->id}} btn-sm text-danger type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+              title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
               <i class="ci-heart"></i>
             </button>
             @elseif ($wishlist == NULL)
-            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+            <button class="btn-wishlist_{{$pro->id}} btn-sm text-muted" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
               title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
               <i class="ci-heart"></i>
             </button>
             @endif
+            {{-- <button class="btn-wishlist_{{$pro->id}} btn-sm text-muted" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+            title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
+            <i class="ci-heart"></i>
+          </button> --}}
             @else
-            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+            <button class="btn-wishlist_{{$pro->id}} btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
               title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
               <i class="ci-heart"></i>
             </button>
