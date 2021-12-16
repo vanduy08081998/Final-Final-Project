@@ -172,19 +172,18 @@
                     <div class="form-group">
                       <label>Loại sản phẩm</label>
                       <select name="product_id_category" class="form-control" id="single__category">
-                        {{-- <option value=""> -- Xin mời chọn loại sản phẩm</option> --}}
                         @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
-                        @include('admin.Categories.categoryOptions', ['item' => $item])
+                        @include('admin.Categories.categoryOptions', ['item' => $item,'category' => $product->product_id_category])
 
                         @foreach ($item->subcategory()->get() as $childCategory)
                         @include('admin.Categories.categoryOptions', ['item' =>
                         $childCategory,
-                        'prefix' => '--'])
+                        'prefix' => '--','category' => $product->product_id_category])
 
                         @foreach ($childCategory->subcategory()->get() as $childCategory2)
                         @include('admin.Categories.categoryOptions', ['item' =>
                         $childCategory2,
-                        'prefix' => '----'])
+                        'prefix' => '----','category' => $product->product_id_category])
                         @endforeach
                         @endforeach
                         @endforeach
@@ -531,18 +530,25 @@
                                 <?php $array_attribute = array() ?>
                                 <select class="js-example-basic-multiple form-control" id="attribute" name="attribute[]"
                                   multiple="multiple" data-live-search="true">
-
+                                  @if ($product->product_attribute != null)
                                   @foreach (App\Models\Attribute::all() as $attribute)
-                                  @foreach (json_decode($product->product_attribute) as $key => $val)
-                                  <?php array_push($array_attribute,$val) ?>
+                                  
+                                    @foreach (json_decode($product->product_attribute) as $key => $val)
+                                    <?php array_push($array_attribute,$val); ?>
+                                    @endforeach
+
+                                    <option value="{{ $attribute->id }}" @if (in_array($attribute->id,
+                                      $array_attribute)) selected @endif>
+                                      {{ $attribute->name }}
+                                    </option>
                                   @endforeach
-                                  {{-- <option value="">{{ print_r($array_attribute) }}</option> --}}
-                                  <option value="{{ $attribute->id }}" @if (in_array($attribute->id,
-                                    $array_attribute)) selected @endif>
+                                  @else
+                                  @foreach (App\Models\Attribute::all() as $attribute)
+                                  <option value="{{ $attribute->id }}">
                                     {{ $attribute->name }}
                                   </option>
-
                                   @endforeach
+                                  @endif
                                 </select>
                               </div>
                               @error('attribute')
@@ -928,8 +934,11 @@
             }
         });
 
+        @if($product->product_attribute != null)
         var str = @php echo $product->product_attribute @endphp;
-
+        @else
+        var str = '';
+        @endif
         $.each(str, function(index, value){
             flag = false;
             $.each($("#attribute option:selected"), function(j, attribute){

@@ -72,9 +72,8 @@
               <?php 
                     $variant_image_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_image;
                     $variant_price_with_attr = \App\Models\ProductVariant::where('id_product', $product->id)->where('variant', 'like', '%'.str_replace([',', '/','.',':',' '], '', $value).'%')->first()->variant_price; ?>
-              <span class="boxed-check-text"> <img class="cpslazy" src="{{ asset($variant_image_with_attr) }}"
-                  alt="hinh anh san pham">
-                <p> <strong>{{ $value}}</strong> <span>{{ number_format($variant_price_with_attr) }}</span></p>
+              <span class="boxed-check-text">
+                <p> <strong>{{ $value}}</strong></p>
               </span>
             </div>
           </label>
@@ -109,7 +108,7 @@
               ?>
               <span class="boxed-check-text"> <img class="cpslazy" src="{{ asset($variant_image) }}"
                   alt="hinh anh san pham">
-                <p> <strong>{{ $name_color}}</strong> <span>{{ number_format($variant_price) }}</span></p>
+                <p style="margin-top: 6px;"> <strong>{{ $name_color}}</strong></p>
               </span>
             </div>
           </label>
@@ -139,6 +138,28 @@
                     style="width: 20px; ">&nbsp; Giảm thêm tới 1% cho thành viên Smember </a>
               </p>
             </div>
+          </div>
+        </div>
+        <div class="box-promotion-more">
+          <div class="box-title">
+            <p class="box-title__title">Ưu đãi thêm</p>
+          </div>
+          <div class="box-content">
+            <ul class="list-promotions">
+              <ul>
+                <li class="item-promotion"><a href="https://cellphones.com.vn/smember" target="_blank">Giảm thêm tới 1%
+                    cho thành viên Smember</a></li>
+                <li class="item-promotion"><a href="https://cellphones.com.vn/uu-dai-doi-tac/moca" target="_blank">Giảm
+                    5% tối đa 500k khi thanh toán bằng ví Moca trên ứng dụng Grab (áp dụng đơn
+                    hàng từ 500k)</a></li>
+                <li class="item-promotion"><a href="https://cellphones.com.vn/uu-dai-doi-tac/fe-credit"
+                    target="_blank">Giảm 500.000đ khi thanh toán hoặc trả góp từ 5 triệu trở lên bằng thẻ tín dụng
+                    FE Credit</a></li>
+              </ul>
+              <div id="gtx-trans" style="position: absolute; left: 12px; top: 41px;">
+                <div class="gtx-trans-icon"></div>
+              </div>
+            </ul>
           </div>
         </div>
       </div>
@@ -217,8 +238,6 @@
           </button>
         </div>
       </div>
-      {{-- @include('clients.shop.details.panel') --}}
     </div>
   </div>
-  {{-- </div> --}}
 </form>

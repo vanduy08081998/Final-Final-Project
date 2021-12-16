@@ -34,10 +34,9 @@ class Reviews extends Component
       ]);
     }
 
-    // public function close_review(){
-    //     dd('kk');
-    //     $this->dispatchBrowserEvent('CloseNewReviewModal');
-    // }
+    public function close_review(){
+        $this->dispatchBrowserEvent('CloseNewReviewModal');
+    }
     public function render()
     {
         $all_list_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['image','!=',null]])->latest('id')->get();

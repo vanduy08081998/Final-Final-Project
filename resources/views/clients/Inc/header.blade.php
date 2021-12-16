@@ -110,8 +110,9 @@ $category = Category::all();
                     </button>
                 </form>
                 <!-- Toolbar-->
-                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center" style="position:relative;">
-                    @if (Auth::user())
+
+                @if (Auth::user())
+                    <div class="user-ct" style="position: relative">
                         <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
                             <div class="navbar-tool-icon-box">
                                 @if (Auth::user()->avatar)
@@ -124,104 +125,37 @@ $category = Category::all();
                                 @endif
                             </div>
                             <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
-                            <div class="content-user">
-                                <ul>
-                                    <li><a href="#"><i class="fas fa-truck"></i> Đơn hàng</a></li>
-                                    <li><a href="#"><i class="far fa-bell"></i> Thông báo</a></li>
-                                    <li><a href="{{ route('account.account-info') }}"><i
-                                                class="far fa-user-circle"></i> Tài khoản</a></li>
-                                    <li>
-                                        <form action="{{ route('logout') }}" method="POST">
-                                            @csrf
-                                            <button type="submit"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-                                        </form>
 
-                                    </li>
-                                </ul>
-                            </div>
-                            <style>
-                                .navbar-tool-text {
-                                    width: 100px;
-                                    text-overflow: ellipsis;
-                                    overflow: hidden;
-
-                                }
-
-                                .navbar-toolbar:hover .content-user {
-                                    visibility: visible;
-                                    opacity: 1;
-                                    transform: translateY(120px);
-                                }
-
-                                .content-user {
-                                    visibility: hidden;
-                                    opacity: 0;
-                                    position: absolute;
-                                    padding-top: 10px;
-                                    transform: translateY(140px);
-                                    left: -102px;
-                                    z-index: 1;
-                                    width: 250px;
-                                    transition: transform 0.2s ease-in-out;
-                                }
-
-                                .content-user>ul {
-                                    display: block;
-                                    width: 100%;
-                                    background: #fff;
-                                    padding-left: 0;
-                                    border-radius: 4px;
-                                    -webkit-box-shadow: 0 0 10px #CCCCCC;
-                                    box-shadow: 0 0 10px #CCCCCC;
-                                }
-
-                                .content-user>ul::before {
-                                    content: '';
-                                    position: absolute;
-                                    width: 20px;
-                                    height: 20px;
-                                    background: #fff;
-                                    transform: rotate(45deg);
-                                    top: 0;
-                                    left: 46%;
-                                    z-index: -1;
-                                    -webkit-box-shadow: 0 0 10px #CCCCCC;
-                                    box-shadow: 0 0 10px #CCCCCC;
-                                }
-
-                                .content-user>ul>li {
-                                    display: block;
-                                    padding: 10px 20px;
-                                }
-
-                                .content-user>ul>li>a {
-                                    display: flex;
-                                    width: 100%;
-                                    font-size: 14px;
-                                    color: #000;
-                                    align-items: center
-                                }
-
-                                .content-user>ul>li>a>i {
-                                    color: #fe696a;
-                                    margin-right: 8px;
-                                    font-size: 15px;
-                                }
-
-                                .content-user>ul>li:hover {
-                                    background: #EEEEEE;
-
-                                }
-
-                            </style>
                         </a>
-                    @else
+                        <div class="content-user">
+                            <ul>
+                                <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Đơn hàng</a></li>
+                                <li>
+                                    <a href="{{ route('account.notification') }}">
+                                        <i class="far fa-bell"></i>
+                                        Thông báo <span>{{ Auth::user()->notification->count() }}</span></a>
 
-                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                        </a>
-                    @endif
+                                </li>
+                                <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
+                                        Tài khoản</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                                    </form>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                @else
+
+                    <a class="ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                        <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                    </a>
+                @endif
+                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <div class="navbar-tool dropdown ms-3 cart__dropdown">
 
                     </div>
@@ -330,104 +264,8 @@ $category = Category::all();
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                                data-bs-toggle="dropdown"><i class="ci-lable"></i> Cửa hàng</a>
-                            <div class="dropdown-menu p-0">
-                                <div class="d-flex flex-wrap flex-sm-nowrap px-2">
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        <div class="widget widget-links mb-4">
-                                            <h6 class="fs-base mb-3">Danh mục 1</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="{{ route('shop.shop-grid') }}">Cửa hàng dạng
-                                                        luới</a>
-                                                </li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="{{ route('shop.shop-list') }}">Cửa hàng dạng
-                                                        list</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        {{-- <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Danh mục 2</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="marketplace-category.html">Category Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="marketplace-single.html">Single Item Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="marketplace-vendor.html">Vendor Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="marketplace-cart.html">Cart</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="{{ route('checkout.checkout-details') }}">Checkout</a>
-                                                </li>
-                                            </ul>
-                                        </div> --}}
-                                    </div>
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        {{-- <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Danh mục 3</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="shop-categories.html">Shop Categories</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="shop-single-v1.html">Product Page v.1</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="shop-single-v2.html">Product Page v.2</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="shop-cart.html">Cart</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="checkout-details.html">Checkout - Details</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="checkout-shipping.html">Checkout - Shipping</a>
-                                                </li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="checkout-payment.html">Checkout - Payment</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="checkout-review.html">Checkout - Review</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="checkout-complete.html">Checkout - Complete</a>
-                                                </li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="order-tracking.html">Order Tracking</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="comparison.html">Product Comparison</a></li>
-                                            </ul>
-                                        </div> --}}
-                                    </div>
-                                    <div class="mega-dropdown-column pt-1 pt-lg-4 pb-4 px-2 px-lg-3">
-                                        {{-- <div class="widget widget-links mb-4">
-                                            <h6 class="fs-base mb-3">Danh mục 4</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="grocery-catalog.html">Product Catalog</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="grocery-single.html">Single Product Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="grocery-checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </div> --}}
-                                        {{-- <div class="widget widget-links">
-                                            <h6 class="fs-base mb-3">Danh mục 5</h6>
-                                            <ul class="widget-list">
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="food-delivery-category.html">Category Page</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="food-delivery-single.html">Single Item
-                                                        (Restaurant)</a>
-                                                </li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="food-delivery-cart.html">Cart (Your Order)</a></li>
-                                                <li class="widget-list-item"><a class="widget-list-link"
-                                                        href="food-delivery-checkout.html">Checkout (Address
-                                                        &amp;
-                                                        Payment)</a></li>
-                                            </ul>
-                                        </div> --}}
-                                    </div>
-                                </div>
-                            </div>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('shop.shop-grid') }}"><i
+                                    class="ci-lable"></i> Cửa hàng</a>
                         </li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
                                 data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-store"></i>

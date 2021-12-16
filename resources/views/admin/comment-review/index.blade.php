@@ -32,7 +32,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Liệt kê thương hiệu</h4>
+                                <h4 class="mb-0">Liệt kê sản phẩm theo bình luận</h4>
                             </div>
                             <hr />
                             {{-- <div class="table-responsive"> --}}
@@ -41,6 +41,7 @@
                                     <tr>
                                         <th class="text-center">Hình ảnh</th>
                                         <th class="text-center">Sản phẩm</th>
+                                        <th>Số lượng bình luận</th>
                                         <th class="text-center">Đánh giá và bình luận</th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,9 @@
                                                 <td class="text-center">
                                                     {{ $product->product_name }}
                                                 </td>
+                                                <td>
+                                                    <button class="btn btn-success"></button>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <button type="button"
@@ -67,9 +71,7 @@
                                                             aria-expanded="false"><i class="bx bx-cog"></i></button>
                                                         <div
                                                             class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                            <a class="dropdown-item text-warning"
-                                                                href="{{ route('product.review', $product->id) }}">Đánh
-                                                                giá</a>
+
                                                             <a class="dropdown-item text-primary"
                                                                 href="{{ route('product.comment', $product->id) }}">Bình
                                                                 luận</a>

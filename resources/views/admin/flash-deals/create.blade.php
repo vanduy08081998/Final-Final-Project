@@ -60,7 +60,7 @@
 @endsection
 @push('script')
 <script>
-  $('#product_picker').selectpicker()
+  $('#product_picker').select2()
     $('#date').daterangepicker({
         timePicker: true,
         startDate: moment().startOf('hour'),
