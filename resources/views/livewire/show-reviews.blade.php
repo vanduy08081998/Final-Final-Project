@@ -480,7 +480,7 @@
                             success: function() {
                                 $('.new_review').modal('hide');
                                 window.livewire.emit('render')
-                                toastr.success('Đánh giá sản phẩm thành công')
+                                toastr.success('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
                             }
                         })
                     }
@@ -519,6 +519,7 @@
                 },
                 success: function() {
                     window.livewire.emit('render');
+                    toastr.success('Thảo luận của bạn sẽ được gửi. Xin cám ơn.')
                 }
             })
         }

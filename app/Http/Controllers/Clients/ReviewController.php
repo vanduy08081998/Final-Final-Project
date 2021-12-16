@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Product;
 use Auth;
+use Brian2694\Toastr\Facades\Toastr;
 class ReviewController extends Controller
 {
     /**
@@ -94,12 +95,19 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(Auth::user()->position == 'admin'){
+            $review_status = 1;
+        }else{
+            $review_status = null;
+        }
         Review::find($request->review_id)->update([
             'product_id' => $request->product_id,
             'customer_id' => Auth::user()->id,
             'content_rating' => $request->content_rating,
-            'review_status' => null
+            'review_status' => $review_status
         ]);
+     
+
     }
 
     /**

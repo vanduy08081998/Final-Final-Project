@@ -122,18 +122,6 @@
             <li><a href="{{ route('list_customer') }}">Danh sách</a></li>
         </ul>
     </li>
-<<<<<<< HEAD
-
-=======
-    <li class="submenu">
-        <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Đánh giá và bình luận</span> <span
-                class="menu-arrow"></span></a>
-        <ul style="display: none;">
-            <li><a href="{{ route('comment-review') }}">Danh sách</a></li>
-            <li><a href="{{ route('review-admin.index') }}">Đánh giá</a></li>
-        </ul>
-    </li>
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
     <li class="menu-title">
         <span>Hóa đơn</span>
     </li>

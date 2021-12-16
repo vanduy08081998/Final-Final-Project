@@ -14,8 +14,14 @@
                             <img class="rounded-1" src="{{ URL::to('backend/img/profiles/avt.png') }}" width="40"
                                 alt="{{ $review->user->name }}">
                         @else
-                            <img class="rounded-1" src="{{ URL::to('uploads/Users/', $review->user->avatar) }}"
-                                width="40" alt="{{ $review->user->name }}">
+                            @if ($review->user->provider_id == null)
+                                <img class="rounded-1"
+                                    src="{{ URL::to('uploads/Users/', $review->user->avatar) }}" width="40"
+                                    alt="{{ $review->user->name }}">
+                            @else
+                                <img class="rounded-1" src="{{ URL::to($review->user->avatar) }}" width="40"
+                                    alt="{{ $review->user->name }}">
+                            @endif
                         @endif
                         <div class="ps-3">
                             <h5 class="fs-md mb-0 fw-bold">{{ $review->user->name }}</h5>
@@ -107,9 +113,15 @@
                                                 src="{{ URL::to('backend/img/profiles/avt.png') }}" width="35"
                                                 alt="{{ $review->user->name }}">
                                         @else
-                                            <img style="z-index:1" class="rounded-circle"
-                                                src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
-                                                width="35" alt="{{ $review->user->name }}">
+                                            @if ($review_child->user->provider_id == null)
+                                                <img style="z-index:1" class="rounded-circle"
+                                                    src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
+                                                    width="35" alt="{{ $review->user->name }}">
+                                            @else
+                                                <img style="z-index:1" class="rounded-circle"
+                                                    src="{{ URL::to($review_child->user->avatar) }}"
+                                                    width="35" alt="{{ $review->user->name }}">
+                                            @endif
                                         @endif
                                         <div class="ps-2">
                                             <h6 class="fs-md mb-0 fw-bold">{{ $review_child->user->name }}
@@ -132,7 +144,7 @@
                                             wire:click.prevent="useful({{ $review_child->id }})"><i
                                                 class="far fa-thumbs-up"></i>
                                             Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif </button>
-                                        <button class="btn btn-dark btn-time-review review-child text-muted me-1"
+                                        <button class="btn btn-dark btn-time-review review-child me-1"
                                             type="button"><i class="far fa-clock"></i> Đã thảo luận
                                             khoảng
                                             {{ $review_child->created_at->diffForHumans() }} </button>

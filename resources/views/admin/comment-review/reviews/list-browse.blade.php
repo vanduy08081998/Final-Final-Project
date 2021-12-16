@@ -34,7 +34,7 @@ Quản lý đánh giá
                                         <option value="clearace">Duyệt</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a href="{{ route('product.review', $product->id) }}" class="btn btn-primary">Đã
+                                    <a href="{{ route('product.review', $product->id) }}" class="btn btn-success">Đã
                                         duyệt</a>
                                 </div>
                             </div>

@@ -168,6 +168,7 @@
     <script>
         $('.input-images-1').imageUploader();
     </script>
+    {!! Toastr::message() !!}
     @include('sweetalert::alert')
     @stack('script')
     <script type="text/javascript">

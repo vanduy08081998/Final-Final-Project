@@ -90,13 +90,15 @@
                             @if ($key < 8)
                                 <div class="image-review">
                                     @if ($key == 7)
-                                        <p class="rating-img-rd review_image_detail"> Xem {{ count($list_image_array) - 8 }} ảnh từ KH</p>
+                                        <p class="rating-img-rd review_image_detail"> Xem
+                                            {{ count($list_image_array) - 8 }} ảnh từ KH</p>
                                     @endif
-                                    <img class="review_image_detail review_image_show" data-id="{{$key}}" src="{{ URL::to('uploads/Reviews', $img) }}">
+                                    <img class="review_image_detail review_image_show" data-id="{{ $key }}"
+                                        src="{{ URL::to('uploads/Reviews', $img) }}">
                                 </div>
                             @endif
                         @empty
-        
+
                         @endforelse
                     </div>
                 </div>
@@ -104,10 +106,11 @@
             <hr>
 
             <div class="row">
-                    <!-- Review-->
-                    <div class="list-review mt-3">
-                        @if (count($all_review) != 0)
-                            @foreach ($all_review as $key => $review)
+                <!-- Review-->
+                <div class="list-review mt-3">
+                    @if (count($all_review) != 0)
+                        @foreach ($all_review as $key => $review)
+                            @if ($key < 2)
                                 <div class="product-review pb-4 mb-4 border-bottom">
                                     <div class="d-flex mb-3">
                                         <div class="d-flex align-items-center me-4">
@@ -116,9 +119,15 @@
                                                     src="{{ URL::to('backend/img/profiles/avt.png') }}" width="45"
                                                     alt="{{ $review->user->name }}">
                                             @else
-                                                <img class="rounded-1"
-                                                    src="{{ URL::to('uploads/Users/', $review->user->avatar) }}"
-                                                    width="45" alt="{{ $review->user->name }}">
+                                                @if ($review->user->provider_id == null)
+                                                    <img class="rounded-1"
+                                                        src="{{ URL::to('uploads/Users/', $review->user->avatar) }}"
+                                                        width="45" alt="{{ $review->user->name }}">
+                                                @else
+                                                    <img class="rounded-1"
+                                                        src="{{ URL::to($review->user->avatar) }}" width="45"
+                                                        alt="{{ $review->user->name }}">
+                                                @endif
                                             @endif
                                             <div class="ps-3">
                                                 <h6 class="fs-md mb-0 fw-bold">{{ $review->user->name }}</h6>
@@ -164,9 +173,9 @@
                                         $count_useful = count($useful_array) - 1;
                                         $review_child = $review->review_child;
                                         $count_review = 0;
-                                        foreach($review_child as $rv){
-                                            if($rv->review_status != null){
-                                                $count_review ++;
+                                        foreach ($review_child as $rv) {
+                                            if ($rv->review_status != null) {
+                                                $count_review++;
                                             }
                                         }
                                     @endphp
@@ -212,121 +221,134 @@
 
                                         @if (count($review->review_child) > 0)
                                             @foreach ($review->review_child as $key => $review_child)
-                                            @if($review_child->review_status != null)
-                                                @php
-                                                    $useful_child = $review_child->useful;
-                                                    $useful_child_array = explode(',', $useful_child);
-                                                    $count_child_useful = count($useful_child_array) - 1;
-                                                @endphp
-                                                <div
-                                                    class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom">
-                                                    <div class="d-flex mb-2">
-                                                        <div class="d-flex align-items-center me-4">
-                                                            @if (!$review_child->user->avatar)
-                                                                <img style="z-index:1" class="rounded-circle"
-                                                                    src="{{ URL::to('backend/img/profiles/avt.png') }}"
-                                                                    width="35" alt="{{ $review->user->name }}">
-                                                            @else
-                                                                <img style="z-index:1" class="rounded-circle"
-                                                                    src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
-                                                                    width="35" alt="{{ $review->user->name }}">
-                                                            @endif
-                                                            <div class="ps-2">
-                                                                <h6 class="fs-md mb-0">
-                                                                    {{ $review_child->user->name }}
-                                                                </h6>
-                                                            </div>
-                                                            @if ($review_child->user->position == 'admin')
-                                                                <div class="fs-sm mt-1 ms-sm-1  text-success">
-                                                                    <b class="qtv"> Quản trị viên </b>
+                                                @if ($review_child->review_status != null)
+                                                    @php
+                                                        $useful_child = $review_child->useful;
+                                                        $useful_child_array = explode(',', $useful_child);
+                                                        $count_child_useful = count($useful_child_array) - 1;
+                                                    @endphp
+                                                    <div
+                                                        class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom">
+                                                        <div class="d-flex mb-2">
+                                                            <div class="d-flex align-items-center me-4">
+                                                                @if (!$review_child->user->avatar)
+                                                                    <img style="z-index:1" class="rounded-circle"
+                                                                        src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                                                                        width="35" alt="{{ $review->user->name }}">
+                                                                @else
+                                                                    @if ($review_child->user->provider_id == null)
+                                                                        <img style="z-index:1" class="rounded-circle"
+                                                                            src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
+                                                                            width="35"
+                                                                            alt="{{ $review->user->name }}">
+                                                                    @else
+                                                                        <img style="z-index:1" class="rounded-circle"
+                                                                            src="{{ URL::to($review_child->user->avatar) }}"
+                                                                            width="35"
+                                                                            alt="{{ $review->user->name }}">
+                                                                    @endif
+                                                                @endif
+                                                                <div class="ps-2">
+                                                                    <h6 class="fs-md mb-0 fw-bold">
+                                                                        {{ $review_child->user->name }}
+                                                                    </h6>
                                                                 </div>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-reply-content">
-                                                        <p
-                                                            class="fs-md mb-2 review ms-1 text-review text-review-child-{{ $review_child->id }}">
-                                                            {{ $review_child->content_rating }}</p>
-                                                        <form
-                                                            class="edit-review form-edit-review-{{ $review_child->id }} d-none">
-                                                            <textarea
-                                                                data-url="{{ route('review.update', ['review' => $review_child->id]) }}"
-                                                                class="form-control edit-text-review edit-child-review-{{ $review_child->id }}"
-                                                                rows="2">{{ $review_child->content_rating }}</textarea>
-                                                            <div class="form-review d-flex justify-content-end">
-                                                                <button type="button" class="btn-submit-text"
-                                                                    onclick="update_content_review({{ $review_child->id }},{{ $product->id }})">Cập
-                                                                    nhật <i class="fa fa-paper-plane"
-                                                                        aria-hidden="true"></i></button>
-                                                            </div>
-                                                            </textarea>
-                                                        </form>
-                                                        <div class="text-nowrap d-flex flex-wrap">
-                                                            @if (in_array($id_user, $useful_child_array))
-                                                                <button class="btn-review text-primary"
-                                                                    wire:click.prevent="un_useful({{ $review_child->id }})"><i
-                                                                        class="fas fa-thumbs-up"></i>
-                                                                    Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif</button>
-                                                            @else
-                                                                <button class="btn-review text-primary"
-                                                                    wire:click.prevent="useful({{ $review_child->id }})"><i
-                                                                        class="far fa-thumbs-up"></i>
-                                                                    Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif </button>
-                                                            @endif
-                                                            <button class="btn-time-review review-child text-muted"
-                                                                type="button"><i class="far fa-clock"></i> Đã thảo
-                                                                luận
-                                                                khoảng
-                                                                {{ $review->created_at->diffForHumans() }} </button>
-                                                            @if ($review_child->customer_id == $id_user)
-                                                                <div class="update-remove-review">
-                                                                    <button
-                                                                        onclick="remove_review({{ $review_child->id }})"
-                                                                        class="ms-sm-4"><i
-                                                                            class="fas fa-ellipsis-h"></i></button>
-                                                                    <div
-                                                                        class="update-review upd_review_{{ $review_child->id }} d-none">
-                                                                        <button class="mb-1 w-100"
-                                                                            onclick="update_review({{ $review_child->id }})">Chỉnh
-                                                                            sửa</button><br>
-                                                                        <hr>
-                                                                        <button
-                                                                            wire:click.prevent="remove_review_child({{ $review_child->id }})"
-                                                                            class="mt-2 w-100">Xóa thảo
-                                                                            luận</button>
+                                                                @if ($review_child->user->position == 'admin')
+                                                                    <div class="fs-sm mt-1 ms-sm-1  text-success">
+                                                                        <b class="qtv"> Quản trị viên </b>
                                                                     </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="review-reply-content">
+                                                            <p
+                                                                class="fs-md mb-2 review ms-1 text-review text-review-child-{{ $review_child->id }}">
+                                                                {{ $review_child->content_rating }}</p>
+                                                            <form
+                                                                class="edit-review form-edit-review-{{ $review_child->id }} d-none">
+                                                                <textarea
+                                                                    data-url="{{ route('review.update', ['review' => $review_child->id]) }}"
+                                                                    class="form-control edit-text-review edit-child-review-{{ $review_child->id }}"
+                                                                    rows="2">{{ $review_child->content_rating }}</textarea>
+                                                                <div class="form-review d-flex justify-content-end">
+                                                                    <button type="button" class="btn-submit-text"
+                                                                        onclick="update_content_review({{ $review_child->id }},{{ $product->id }})">Cập
+                                                                        nhật <i class="fa fa-paper-plane"
+                                                                            aria-hidden="true"></i></button>
                                                                 </div>
-                                                            @endif
+                                                                </textarea>
+                                                            </form>
+                                                            <div class="text-nowrap d-flex flex-wrap">
+                                                                @if (in_array($id_user, $useful_child_array))
+                                                                    <button class="btn-review text-primary"
+                                                                        wire:click.prevent="un_useful({{ $review_child->id }})"><i
+                                                                            class="fas fa-thumbs-up"></i>
+                                                                        Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif</button>
+                                                                @else
+                                                                    <button class="btn-review text-primary"
+                                                                        wire:click.prevent="useful({{ $review_child->id }})"><i
+                                                                            class="far fa-thumbs-up"></i>
+                                                                        Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif </button>
+                                                                @endif
+                                                                <button class="btn-time-review review-child text-muted"
+                                                                    type="button"><i class="far fa-clock"></i> Đã
+                                                                    thảo
+                                                                    luận
+                                                                    khoảng
+                                                                    {{ $review->created_at->diffForHumans() }}
+                                                                </button>
+                                                                @if ($review_child->customer_id == $id_user)
+                                                                    <div class="update-remove-review">
+                                                                        <button
+                                                                            onclick="remove_review({{ $review_child->id }})"
+                                                                            class="ms-sm-4"><i
+                                                                                class="fas fa-ellipsis-h"></i></button>
+                                                                        <div
+                                                                            class="update-review upd_review_{{ $review_child->id }} d-none">
+                                                                            <button class="mb-1 w-100"
+                                                                                onclick="update_review({{ $review_child->id }})">Chỉnh
+                                                                                sửa</button><br>
+                                                                            <hr>
+                                                                            <button
+                                                                                wire:click.prevent="remove_review_child({{ $review_child->id }})"
+                                                                                class="mt-2 w-100">Xóa thảo
+                                                                                luận</button>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                                 @endif
                                             @endforeach
                                         @endif
 
                                     </div>
                                 </div>
-                            @endforeach
-                        @else
-                            <p>Chưa có đánh giá nào </p>
-                        @endif
+                            @endif
+                        @endforeach
+                    @else
+                        <p>Chưa có đánh giá nào </p>
+                    @endif
 
-                    </div>
+                </div>
 
- 
+
 
             </div>
 
             <div class="comment-btn d-flex justify-content-center">
-                @if($bought == 1)
-                <button type="button" wire:click.prevent="add_review()" class="comment-btn__item blue"><i class="fas fa-star-of-david me-1"></i>
+                {{-- @if ($bought == 1) --}}
+                <button type="button" wire:click.prevent="add_review()" class="comment-btn__item blue"><i
+                        class="fas fa-star-of-david me-1"></i>
                     Viết đánh giá
                 </button>
-                @endif
-                <a class="comment-btn__item" href="{{ route('review.show-review', $product->product_slug) }}">Xem đánh giá chi tiết  <i class="fas fa-caret-right ms-md-1"></i></a>
-              
+                {{-- @endif --}}
+                <a class="comment-btn__item" href="{{ route('review.show-review', $product->product_slug) }}">Xem
+                    đánh giá chi tiết <i class="fas fa-caret-right ms-md-1"></i></a>
+
             </div>
-            
+
         </div>
     </div>
 
@@ -393,7 +415,7 @@
                             success: function() {
                                 $('.new_review').modal('hide');
                                 window.livewire.emit('render')
-                                toastr.success('Đánh giá sản phẩm thành công')
+                                toastr.success('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
                             }
                         })
                     }
@@ -432,6 +454,7 @@
                 },
                 success: function() {
                     window.livewire.emit('render');
+                    toastr.success('Thảo luận của bạn sẽ được gửi. Xin cám ơn.')
                 }
             })
         }
@@ -451,18 +474,18 @@
         $('.review_image_detail').click(function() {
             var key = $(this).data('id');
             $('.show-image-review').removeClass('active');
-            if(key==undefined){
+            if (key == undefined) {
                 $('.show-slider-image-7').addClass('active');
-            }else{
-                $('.show-slider-image-'+key).addClass('active');
+            } else {
+                $('.show-slider-image-' + key).addClass('active');
             }
             $('.show_image_review').modal('show');
         })
 
-        $('.close_review').click(function(){
+        $('.close_review').click(function() {
             $('.new_review').modal('hide');
         })
-        $('.close-image-review').click(function(){
+        $('.close-image-review').click(function() {
             $('.show_image_review').modal('hide');
         })
     </script>
