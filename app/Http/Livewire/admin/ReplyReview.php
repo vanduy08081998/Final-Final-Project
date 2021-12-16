@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Livewire;
+use Carbon\Carbon;
+use App\Models\Order;
 use App\Models\Review;
 use Livewire\Component;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
-class Reviews extends Component
+class ReplyReview extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';

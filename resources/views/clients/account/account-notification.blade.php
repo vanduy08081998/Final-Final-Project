@@ -197,17 +197,6 @@
 @endsection
 
 @push('script')
-    // $('.contact-not').click(function() {
-    // let contact = $(this).data('type')
-    // window.livewire.emit(contact)
-    // $('.content-loader').removeClass('d-none')
-    // setTimeout(function() {
-    // $('.content-loader').addClass('d-none')
-    // }, 700);
-
-    // })
-
-
     <script>
         $('.contact-not').click(function() {
             let type = $(this).data('type')

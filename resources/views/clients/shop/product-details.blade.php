@@ -63,14 +63,8 @@
                     <!-- Product description-->
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
                         <div class="row justify-content-center" style="text-align: justify">
-<<<<<<< HEAD
-                            <div class="col-lg-10">
-                                <div
-                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
-=======
                             <div class="col-lg-10 text-description" id="point">
                                 <div class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
                                     <div class=" align-items-center pt-3" style="width: 100% !important">
                                         <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
                                         {!! $product->short_description !!}
@@ -89,18 +83,11 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
     </div>
     <!-- Product description-->
     <div class="container pt-lg-3 pb-4 pb-sm-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-=======
-<!-- Product description-->
-<div class="container pt-lg-3 pb-4 pb-sm-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
 
             </div>
         </div>

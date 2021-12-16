@@ -3,12 +3,8 @@
 namespace App\Http\Livewire;
 use App\Models\Review;
 use App\Models\Product;
-<<<<<<< HEAD
-
-=======
 use App\Models\Order;
 use App\Models\OrderDetail;
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -38,16 +34,9 @@ class Reviews extends Component
       ]);
     }
 
-<<<<<<< HEAD
     public function close_review(){
         $this->dispatchBrowserEvent('CloseNewReviewModal');
     }
-=======
-    // public function close_review(){
-    //     dd('kk');
-    //     $this->dispatchBrowserEvent('CloseNewReviewModal');
-    // }
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
     public function render()
     {
         $all_list_review = Review::where([['product_id', $this->product->id],['review_parent', null],['review_status',1],['image','!=',null]])->latest('id')->get();

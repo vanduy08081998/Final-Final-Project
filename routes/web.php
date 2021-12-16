@@ -242,10 +242,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
     });
     Route::resource('/comment', CommentController::class);
-<<<<<<< HEAD
-=======
     Route::get('/comment-review', [CommentController::class, 'commentReview'])->name('comment-review');
->>>>>>> d2243ed54fd08928e726e9f5ad74d475ab90ecc2
     Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
     Route::resource('/orders', OrderController::class);
     Route::post('/orders/paymentstatus', [OrderController::class, 'paymentStatus'])->name('admin.orders.paymentstatus');
