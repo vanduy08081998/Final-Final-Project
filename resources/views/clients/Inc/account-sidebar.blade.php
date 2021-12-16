@@ -7,8 +7,13 @@
                     style="width: 6.375rem;">
 
                     @if (Auth::user()->avatar)
-                        <img class="rounded-circle customer_picture"
-                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" alt="avatar">
+                        @if (Auth::user()->provider_id == null)
+                            <img class="rounded-circle customer_picture"
+                                src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90" alt="avatar">
+                        @else
+                            <img class="rounded-circle customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                                width="90" alt="avatar">
+                        @endif
                     @else
                         <img class="rounded-circle customer_picture"
                             src="{{ URL::to('backend/img/profiles/avt.png') }}" alt="avatar">
@@ -49,7 +54,8 @@
             </div>
             <ul class="list-unstyled mb-0">
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                        href="{{ route('account.account-info') }}"><i class="ci-user opacity-60 me-2"></i>Thông tin cá
+                        href="{{ route('account.account-info') }}"><i class="ci-user opacity-60 me-2"></i>Thông tin
+                        cá
                         nhân</a></li>
                 <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
                         href="{{ route('account.account-address') }}"><i class="ci-location opacity-60 me-2"></i>Địa

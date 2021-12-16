@@ -40,10 +40,7 @@
                                         <option value="restore">Khôi phục</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-info handle-all" data-handle="restore-all">Khôi
-                                        phục tất cả</a>
-                                    <a class="btn btn-danger handle-all" data-handle="delete-all">Xóa tất
-                                        cả</a>
+
                                 </div>
                             </div>
                             <hr />
@@ -83,31 +80,25 @@
 
                                                     @endforeach
                                                 </td>
+
+                                                <td style="text-align: center;">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-success dropdown-toggle radius-30"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false"><i class="bx bx-cog"></i></button>
+                                                        <div
+                                                            class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        @endforeach
+                                    </tbody>
+                                </table>
                     </form>
-                    <td style="text-align: center;">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                <form action="{{ url('admin/brand/restore/' . $brand->id) }}" method="POST">
-                                    @csrf
-
-                                    <button class="dropdown-item text-infor">Khôi phục</button>
-                                </form>
-
-                                <form action="{{ url('admin/brand/force-delete/' . $brand->id) }}" method="POST">
-                                    @csrf
-                                    <button class="dropdown-item text-danger">Xóa vĩnh
-                                        viễn</button>
-                                </form>
-
-                            </div>
-                        </div>
-                    </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                    </table>
                 </div>
             </div>
 

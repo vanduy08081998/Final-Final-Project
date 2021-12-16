@@ -110,7 +110,27 @@ class CommentLive extends Component
     {
         if($this->search)
         {
-            $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null], ['comment_content','LIKE','%'.$this->search.'%']])->latest('id')->paginate(10);
+            if($this->selectComment){
+                switch ($this->selectComment) {
+                    case 'lastComment':
+                        $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null],  ['comment_content','LIKE','%'.$this->search.'%']])->orderBy('id', 'ASC')->paginate(10);
+                        break;
+                    case 'likeComment':
+                        $like = DB::table('comment_user')
+                                    ->select('comment_id', DB::raw('count(*) as total'))
+                                    ->groupBy('comment_id')
+                                    ->orderBy('total', 'DESC')
+                                    ->pluck('comment_id')
+                                    ->all();
+                        $commentAll = Comment::whereIn('id', $like)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$like).")"))->where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null],  ['comment_content','LIKE','%'.$this->search.'%']])->paginate(10);
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+            }else{
+                $commentAll = Comment::where([['comment_id_product', $this->product->id], ['comment_parent_id', 0], ['clearance_at', '!=', null], ['comment_content','LIKE','%'.$this->search.'%']])->latest('id')->paginate(10);
+            }
         }
         elseif($this->selectComment)
         {

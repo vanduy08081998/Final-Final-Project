@@ -33,7 +33,7 @@
                                         <option value="trash">Thùng rác</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-success"
                                         href="{{ route('review-admin.list-browse', $product->id) }}">Chờ duyệt <span
                                             class="badge badge-light">{{ $count_not_browse }}</span></a>
                                     <a class="btn btn-primary"
@@ -41,7 +41,7 @@
                                         phản hồi <span class="badge badge-light">{{ $count_not_feedback }}</span></a>
                                     @if ($countTrashed)
                                         <a href="{{ route('review-admin.trash', $product->id) }}"
-                                            class="btn-sm btn-warning float-right mr-1">Thùng
+                                            class="btn-sm btn-danger float-right mr-1">Thùng
                                             rác
                                             ({{ $countTrashed }})</a>
                                     @endif
@@ -85,9 +85,10 @@
                                                 </td>
 
                                                 <td class="text-left">
-                                                    @if ($value->comment_admin_feedback == 1)
-                                                        <a class="btn btn-info">Đã phản
-                                                            hồi</a>
+                                                    @if ($value->admin_feedback == 1)
+                                                        <a href="{{ route('review-admin.reply', $value->id) }}"> <button
+                                                                type="button" class="btn btn-info">Đã phản hồi</button>
+                                                        </a>
                                                     @else
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button
                                                                 type="button" class="btn btn-warning">Phản hồi</button>

@@ -116,9 +116,14 @@ $category = Category::all();
                         <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
                             <div class="navbar-tool-icon-box">
                                 @if (Auth::user()->avatar)
-                                    <img class="customer_picture"
-                                        src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
-                                        alt="avatar" style="border-radius:50%;">
+                                    @if (Auth::user()->provider_id == null)
+                                        <img class="customer_picture"
+                                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
+                                            alt="avatar" style="border-radius:50%;">
+                                    @else
+                                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                                            width="90" alt="avatar" style="border-radius:50%;">
+                                    @endif
                                 @else
                                     <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
                                         width="90" alt="avatar">
@@ -138,6 +143,11 @@ $category = Category::all();
                                 </li>
                                 <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
                                         Tài khoản</a></li>
+                                @if (Auth::user()->position == 'admin')
+                                    <li><a href="{{ route('admin.index') }}"><i
+                                                class="fas fa-user-shield"></i>
+                                            Quản trị admin</a></li>
+                                @endif
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -265,8 +275,8 @@ $category = Category::all();
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('shop.shop-grid') }}"><i
-                                    class="ci-lable"></i> Cửa hàng</a>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid') }}"><i class="ci-lable"></i> Cửa hàng</a>
                         </li>
 
                         <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i

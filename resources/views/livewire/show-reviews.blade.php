@@ -96,15 +96,15 @@
                     class="text-primary fw-bold ms-3">{{ $onestar }}%</span>
             </div>
             @if ($bought == 1)
-            <button type="button" wire:click.prevent="add_review()" class="btn btn-primary btn-sm mt-4 w-100">
-                Viết đánh giá
-            </button>
+                <button type="button" wire:click.prevent="add_review()" class="btn btn-primary btn-sm mt-4 w-100">
+                    Viết đánh giá
+                </button>
             @endif
 
         </div>
 
     </div>
- 
+
 
     <div class="row py-4">
         <!-- Reviews list-->
@@ -118,7 +118,7 @@
                                 <p class="rating-img-rd show-full-image"> Xem {{ count($list_image_array) - 6 }} ảnh
                                     từ KH</p>
                             @endif
-                            <img class="review_image_show show-full-image" data-id="{{$key}}"
+                            <img class="review_image_show show-full-image" data-id="{{ $key }}"
                                 src="{{ URL::to('uploads/Reviews', $img) }}">
                         </div>
                     @endif
@@ -179,11 +179,12 @@
 
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block me-4" for="sort-reviews"> <input
                                 class="form-check-input check-sort-review me-1" wire:model="image" value="review_image"
-                                type="checkbox"><span class="sort-review move-top"> Có hình ảnh ({{$count_review_image}})</span></label>
+                                type="checkbox"><span class="sort-review move-top"> Có hình ảnh
+                                ({{ $count_review_image }})</span></label>
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block" for="sort-reviews"><input
                                 class="form-check-input check-sort-review me-1" wire:model="introduce"
                                 value="review_introduce" type="checkbox"> <span class="sort-review">Giới thiệu bạn
-                                bè, người thân ({{$count_review_introduce}})<span></label>
+                                bè, người thân ({{ $count_review_introduce }})<span></label>
 
 
                     </div>
@@ -245,11 +246,6 @@
                                     @php
                                         $str = $review->image;
                                         $image_array = explode(',', $str);
-                                        
-                                        $useful = $review->useful;
-                                        $useful_array = explode(',', $useful);
-                                        $count_useful = count($useful_array) - 1;
-                                        $count_review = $review->review_child->count();
                                     @endphp
                                     @foreach ($image_array as $img)
                                         <div class="image-review">
@@ -263,7 +259,13 @@
                                 $useful = $review->useful;
                                 $useful_array = explode(',', $useful);
                                 $count_useful = count($useful_array) - 1;
-                                $count_review = $review->review_child->count();
+                                $review_child = $review->review_child;
+                                $count_review = 0;
+                                foreach ($review_child as $rv) {
+                                    if ($rv->review_status != null) {
+                                        $count_review++;
+                                    }
+                                }
                             @endphp
                             <div class="text-nowrap">
                                 @if (in_array($id_user, $useful_array))
@@ -304,9 +306,9 @@
                                     </textarea>
                                 </form>
 
-
                                 @if (count($review->review_child) > 0)
                                     @foreach ($review->review_child as $key => $review_child)
+                                    @if($review_child->review_status != null)
                                         @php
                                             $useful_child = $review_child->useful;
                                             $useful_child_array = explode(',', $useful_child);
@@ -389,6 +391,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     @endforeach
                                 @endif
 
@@ -477,7 +480,7 @@
                             success: function() {
                                 $('.new_review').modal('hide');
                                 window.livewire.emit('render')
-                                toastr.success('Đánh giá sản phẩm thành công')
+                                toastr.success('Đánh giá của bạn sẽ được hệ thống kiểm duyệt. Xin cám ơn.')
                             }
                         })
                     }
@@ -516,9 +519,7 @@
                 },
                 success: function() {
                     window.livewire.emit('render');
-                    // $('.text-review-child-' + review_id).removeClass('d-none');
-                    // $('.edit-review').addClass('d-none');
-                    // $('.form-edit-review-' + review_id).removeClass('d-none');
+                    toastr.success('Thảo luận của bạn sẽ được gửi. Xin cám ơn.')
                 }
             })
         }
@@ -539,17 +540,17 @@
         $('.show-full-image').click(function() {
             var key = $(this).data('id');
             $('.show-image-review').removeClass('active');
-            if(key==undefined){
+            if (key == undefined) {
                 $('.show-slider-image-5').addClass('active');
-            }else{
-                $('.show-slider-image-'+key).addClass('active');
+            } else {
+                $('.show-slider-image-' + key).addClass('active');
             }
             $('.show_image_review').modal('show');
         })
-        $('.close_review').click(function(){
+        $('.close_review').click(function() {
             $('.new_review').modal('hide');
         })
-        $('.close-image-review').click(function(){
+        $('.close-image-review').click(function() {
             $('.show_image_review').modal('hide');
         })
     </script>

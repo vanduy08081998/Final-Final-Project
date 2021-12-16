@@ -751,6 +751,7 @@
 
 .search-comment input {
     border: none;
+    width: 300px;
     -webkit-box-shadow: 0 0 10px #CCCCCC;
     box-shadow: 0 0 10px #CCCCCC;
     border-radius: 10px;

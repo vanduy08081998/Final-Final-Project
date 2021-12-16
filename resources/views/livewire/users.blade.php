@@ -2,16 +2,22 @@
     <div class="bg-secondary rounded-3 p-4 mb-4 border">
         <div class="d-flex align-items-center">
             @if (Auth::user()->avatar)
-                <img class="customer_picture" src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
-                    alt="avatar">
+                @if (Auth::user()->provider_id == null)
+                    <img class="customer_picture" src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}"
+                        width="90" alt="avatar">
+                @else
+                    <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}" width="90" alt="avatar">
+                @endif
             @else
                 <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}" width="90"
                     alt="avatar">
             @endif
             <div class="ps-3">
                 <label class="custom-file-upload btn btn-light btn-shadow btn-sm mb-2">
-                    <input style="display: none" type="file" name="customer_avatar" id="customer_avatar" name="avatar" />
-                   <a class="text-primary" href="javascript:void(0)" id="change_avatar"> <i class="ci-loading me-2"></i>Thay ảnh đại diện </a>
+                    <input style="display: none" type="file" name="customer_avatar" id="customer_avatar"
+                        name="avatar" />
+                    <a class="text-primary" href="javascript:void(0)" id="change_avatar"> <i
+                            class="ci-loading me-2"></i>Thay ảnh đại diện </a>
                 </label>
             </div>
 
