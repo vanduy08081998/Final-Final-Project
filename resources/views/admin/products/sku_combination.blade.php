@@ -51,7 +51,7 @@
                 <input type="number" name="price_{{ $str }}" value="" class="form-control">
             </td>
             <td>
-                <input type="text" name="sku_{{ $str }}" value="{{ $sku }}" class="form-control">
+                <input type="text" name="sku_{{ $str }}" value="{{ $str }}" class="form-control">
             </td>
             <td>
                 <input type="number" name="qty_{{ $str }}" class="form-control qty" value="10" min="0" step="1">

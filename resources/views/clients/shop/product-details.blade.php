@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <!-- Product description-->
             </div>
         </div>
