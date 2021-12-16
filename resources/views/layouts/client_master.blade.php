@@ -51,7 +51,7 @@
     <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="{{ asset('frontend/js/search.js') }}"></script>
-    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/wishlist.js') }}"></script> --}}
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <script src="{{ asset('frontend/js/review.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -165,6 +165,7 @@
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
     <script src="{{ asset('frontend/js/paypal.js') }}"></script>
+    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script>
         $('.input-images-1').imageUploader();
     </script>

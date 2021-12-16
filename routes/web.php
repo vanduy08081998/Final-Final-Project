@@ -99,6 +99,7 @@ Route::prefix('/')->group(function () {
     Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
     Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
     Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
+    Route::get('deleteWishlist', [WishlistController::class, 'show_icon_wishlist'])->name('wishlist.show_icon_wishlist');
   });
   // Bình luận
   Route::resource('/comment', CommentController::class);

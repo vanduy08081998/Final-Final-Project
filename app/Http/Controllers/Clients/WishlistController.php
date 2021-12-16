@@ -68,4 +68,9 @@ class WishlistController extends Controller
             'cancel' => false,
         ]);
     }
+
+    public function show_icon_wishlist(){
+        $count = Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count();
+        echo $count;
+    }
 }

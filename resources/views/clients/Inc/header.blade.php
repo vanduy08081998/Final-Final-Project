@@ -58,15 +58,15 @@ $category = Category::all();
                             đơn hàng</a></li>
                 </ul>
             </div>
-            <div class="d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{route('wishlist.show_icon_wishlist')}}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
                     </a>
                 @elseif ($wishlist != NULL && Auth::user())
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                        <i class="ci-heart mt-n1"></i>Yêu thích
-                        ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }})
+                        <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+                        {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
                     </a>
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"

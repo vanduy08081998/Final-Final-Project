@@ -24,12 +24,20 @@ function add_to_wishlist(id) {
                 confirmButtonText: 'Đăng nhập',
 
             }).then((result) => {
-                location.reload();
+          
+           
                 if (result.isCancel) {
                     // window.location.href = 'http://127.0.0.1:8000/Custommers/login';
                 }
             })
-            // console.log(response)
+            show_icon_wishlist();
+            if(response.icon == 'success'){
+                $('.btn-wishlist_'+id).removeClass('text-muted');
+                $('.btn-wishlist_'+id).addClass('text-danger');
+            }else{
+                $('.btn-wishlist_'+id).removeClass('text-danger');
+                $('.btn-wishlist_'+id).addClass('text-muted'); 
+            }
         }
     });
 }
@@ -67,5 +75,18 @@ function delete_wishlist(id) {
         }
     });
 }
+
+function show_icon_wishlist(){
+    let url = $('.count-wishlist').data('url');
+    $.ajax({
+        url: url,
+        method: 'GET',
+        success: function (data){
+           $('.count_wishlist').html('('+data+')');
+        }
+
+    })
+}
+show_icon_wishlist();
 
 
