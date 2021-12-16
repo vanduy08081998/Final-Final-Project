@@ -44,7 +44,6 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
       'category_id' => $category_id,
-
     ]);
   }
   public function shopGrid()
@@ -61,6 +60,18 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
     ]);
+  }
+
+  public function searchByCate(Request $request){
+    if($request->key == ''){
+      $products = Product::all();
+    }else{
+      $products = Product::orderByDESC('id')
+        ->where('product_name', 'REGEXP', $request->key)->where('product_id_category', $request->id)->get();
+    }
+
+
+    return view('clients.shop.details.search', compact('products'));
   }
 
   public function shopList()

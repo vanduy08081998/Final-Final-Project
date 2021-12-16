@@ -22,7 +22,7 @@
                             <div class="accordion-body">
                                 <div class="widget widget-links widget-filter">
                                     <div class="input-group input-group-sm mb-2">
-                                        <input class="widget-filter-search form-control rounded-end" type="text"
+                                        <input class="widget-filter-search form-control rounded-end" onkeyup="search_by_cate({{ $cate->id_cate }})" onfocusout="focusout({{ $cate->id_cate }})" id="category_search_{{ $cate->id_cate }}" type="text"
                                             placeholder="Tìm kiếm">
                                         <i
                                             class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
