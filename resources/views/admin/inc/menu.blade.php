@@ -127,6 +127,7 @@
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('comment-review') }}">Danh sách</a></li>
+            <li><a href="{{ route('review-admin.index') }}">Đánh giá</a></li>
         </ul>
     </li>
     <li class="menu-title">
@@ -152,7 +153,7 @@
         <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i> <span>Đánh giá</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
+            <li><a href="{{ route('review-admin.index') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="submenu">
