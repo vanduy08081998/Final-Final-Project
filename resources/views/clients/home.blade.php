@@ -17,6 +17,9 @@
         #tns3 {
         width: calc(400%);
     }
+    }
+    .product-item {
+        height: 400px !important;
     } 
 </style>
 
@@ -106,15 +109,27 @@
               @foreach ($product as $product)
                 <div class="product-item" style="height: 375px">
                   <div class="card product-card">
+                    @if ($product->discount_unit == '%')
+                    <span class="badge bg-danger badge-shadow">Sale</span>
+                    @endif
                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích">
-                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#">
+                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
                         <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a>
-                      <h3 class="product-title fs-sm"><a href="#">{{ trans($product->product_name) }}</a></h3>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('shop.product-details', $product->product_slug) }}"></a>
+                      <h3 class="product-title fs-sm"><a href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a></h3>
                       <div class="d-flex justify-content-between">
+                        @if ($product->discount_unit == '%')
                         <div class="product-price">
-                            <span>{{ number_format($product->unit_price) }} ₫</span>
+                            <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }} ₫</span>
                         </div>
+                        <div class="product-price" style="font-size: 12px">
+                            <span style="text-decoration: line-through">{{ number_format($product->unit_price) }} ₫</span>
+                        </div>
+                        @else
+                        <div class="product-price" style="font-size: 12px">
+                            <span style="text-decoration: line-through">{{ number_format($product->unit_price) }} ₫</span>
+                        </div>
+                        @endif
                       </div>
                       <div class="d-flex justify-content-between">
                         <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
@@ -159,14 +174,23 @@
                 <div class="product-item" style="height: 375px">
                   <div class="card product-card">
                     <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích">
-                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#">
+                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
                         <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a>
-                      <h3 class="product-title fs-sm"><a href="#">{{ trans($product->product_name) }}</a></h3>
+                    <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('shop.product-details', $product->product_slug) }}"></a>
+                      <h3 class="product-title fs-sm"><a href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a></h3>
                       <div class="d-flex justify-content-between">
+                        @if ($product->discount_unit == '%')
                         <div class="product-price">
-                            <span>{{ number_format($product->unit_price) }} ₫</span>
+                            <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }} ₫</span>
                         </div>
+                        <div class="product-price" style="font-size: 12px">
+                            <span style="text-decoration: line-through">{{ number_format($product->unit_price) }} ₫</span>
+                        </div>
+                        @else
+                        <div class="product-price" style="font-size: 12px">
+                            <span style="text-decoration: line-through">{{ number_format($product->unit_price) }} ₫</span>
+                        </div>
+                        @endif
                       </div>
                       <div class="d-flex justify-content-between">
                         <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i

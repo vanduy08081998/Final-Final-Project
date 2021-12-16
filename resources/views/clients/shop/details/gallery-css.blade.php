@@ -38,10 +38,8 @@
     }
 
     .gallery-thumbs .swiper-slide {
-        width: 60px;
-        height: 60px;
+        width: 100px;
         border-radius: 1rem;
-        border: 1px solid #D1D5DB;
         text-align: center;
         overflow: hidden;
     }
@@ -51,9 +49,8 @@
     }
 
     .gallery-thumbs .swiper-slide img {
-        width: 90%;
-        height: 90%;
-        margin-top: 5%;
+        width: 100%;
+        height: auto;
         margin-left: 5%;
         border-radius: 1rem;
     }
@@ -312,5 +309,142 @@
         margin-top: 8px;
         margin-bottom: 8px;
         margin-right: 5px;
+    }
+
+
+
+
+    .box-promotion-more {
+        width: 100%;
+        margin-bottom: 20px !important;
+        border: 1px solid #D1D5DB;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .box-promotion-more .box-title {
+        width: 100%;
+        padding: 8px 10px;
+        background: #D1D5DB;
+    }
+
+    .box-promotion-more .box-title .box-title__title {
+        margin-bottom: 0;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #444444;
+    }
+
+    .box-promotion-more .box-content {
+        padding: 10px;
+    }
+
+    .box-promotion-more .box-content .list-promotions {
+        width: 100%;
+        display: inline-block;
+        counter-reset: item;
+        margin: 0;
+        padding: 0 0 0 20px;
+        list-style: none;
+    }
+
+    .box-promotion-more .box-content .list-promotions .item-promotion {
+        counter-increment: item;
+        margin-bottom: 0;
+        font-size: 12px;
+        color: #444444;
+        position: relative;
+    }
+
+    .box-promotion-more .box-content .list-promotions .item-promotion>a {
+        color: #444444;
+        cursor: pointer;
+    }
+
+    .box-promotion-more .box-content .list-promotions .item-promotion:not(:last-child) {
+        margin-bottom: 5px;
+    }
+
+    .box-promotion-more .box-content .list-promotions .item-promotion:before {
+        content: "";
+        width: 12px;
+        height: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5px;
+        padding: 2px 0 0 0;
+        border-radius: 50px;
+        background: #2BA832;
+        background-image: url(https://cdn.cellphones.com.vn/media/icons/checkmark.svg);
+        background-size: 63%;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: #ffffff;
+        position: absolute;
+        top: 4px;
+        left: calc(-12px + -5px);
+    }
+
+    .egheYC {
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        background: linear-gradient(100deg, rgb(255, 66, 78), rgb(253, 130, 10));
+        color: rgb(255, 255, 255);
+        padding: 4px 16px 6px;
+        /* margin: 0px -16px; */
+        border-radius: 4px;
+        width: 500px;
+    }
+
+    .egheYC>.flash-sale-price>span {
+        font-size: 32px;
+        font-weight: bold;
+        line-height: 40px;
+    }
+
+    .egheYC>.flash-sale-price .list-price {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: line-through;
+        margin-right: 8px;
+    }
+
+    .egheYC .sale>span {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .egheYC>.flash-sale-countdown {
+        margin-top: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .egheYC>.flash-sale-countdown {
+        margin-top: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .egheYC>.flash-sale-countdown>span {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .egheYC>.flash-sale-countdown .time {
+        color: rgb(255, 66, 78);
+        display: flex;
+    }
+
+    .egheYC>.flash-sale-countdown .status {
+        margin-top: 6px;
+    }
+
+    .egheYC>.flash-sale-countdown>span {
+        font-size: 13px;
+        line-height: 20px;
     }
 </style>

@@ -91,6 +91,9 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class, 'id_user');
     }
 
+
+    public function notification(){
+        return $this->hasMany(Notification::class, 'id_user');
+    }
+
 }
-
-

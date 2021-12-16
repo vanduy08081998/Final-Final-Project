@@ -87,4 +87,8 @@ class AccountController extends Controller
         }
     }
 
+    public function notification(){
+        return view('clients.account.account-notification');
+    }
+
 }

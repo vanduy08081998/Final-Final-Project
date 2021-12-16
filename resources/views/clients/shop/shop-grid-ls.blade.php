@@ -94,8 +94,7 @@
               <img srcset="{{ URL::to($pro->product_image) }} 2x" alt="Product" width="200px"
                 style="margin: auto; display: block">
             </a>
-            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{
-                $pro->Category->category_name }}</a>
+            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name" href="#">{{ $pro->Category->category_name }}</a>
               <h3 class="product-title fs-sm"><a href="shop-single-v1.html">{{ Str::limit($pro->product_name,30,'...')
                   }}</a></h3>
               <div class="d-flex justify-content-between">
