@@ -144,7 +144,7 @@ Route::prefix('/')->group(function () {
         Route::get('/delete/{id}', [ReviewAdmin::class, 'delete'])->name('review-admin.delete');
         Route::get('/force-delete/{id}', [ReviewAdmin::class, 'forceDelete'])->name('review-admin.force-delete');
         Route::get('/list-browse/{id}', [ReviewAdmin::class, 'listBrowse'])->name('review-admin.list-browse');
-        Route::get('/list-browse/{id}', [ReviewAdmin::class, 'listBrowse'])->name('review-admin.list-browse');
+        Route::get('/browse/{id}', [ReviewAdmin::class, 'Browse'])->name('review-admin.browse');
         Route::get('/feedback/{id}', [ReviewAdmin::class, 'feedback'])->name('review-admin.feedback');
         Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
         Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');

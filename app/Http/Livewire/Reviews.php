@@ -17,7 +17,7 @@ class Reviews extends Component
     public $product, $count_rating, $userLoginId, $content_rating, $sort, $introduce, $image;
     public $checkfivestar, $checkfourstar, $checkthreestar, $checktwostar, $checkonestar;
     public $search,$view;
-    protected $listeners = [  'review_introduce','review_filterstar','review_filterstar','review_image','render' => 'mount'];
+    protected $listeners = ['render' => 'mount'];
 
     public function mount()
     {
@@ -179,23 +179,6 @@ class Reviews extends Component
         $review->update([
             'useful' => $useful_array
         ]);
-        $this->emit('render');
-    }
-    public function sort_review($product_id){
-        switch($this->sort){
-            case 'Mới nhất':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->latest('id')->get();
-                break;
-            case 'Hữu ích':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('created_at', 'DESC')->get();
-                break;
-            case 'Đánh giá cao':
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'DESC')->get();
-                break;
-            default :
-                $this->all_review = Review::where([['product_id', $product_id],['review_parent', null],['review_status',1]])->orderby('count_rating', 'ASC')->paginate(2);
-                break;
-        }
         $this->emit('render');
     }
     public function discussion($review_id){

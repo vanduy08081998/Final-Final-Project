@@ -149,11 +149,6 @@
                                             @php
                                                 $str = $review->image;
                                                 $image_array = explode(',', $str);
-                                                
-                                                $useful = $review->useful;
-                                                $useful_array = explode(',', $useful);
-                                                $count_useful = count($useful_array) - 1;
-                                                $count_review = $review->review_child->count();
                                             @endphp
                                             @foreach ($image_array as $img)
                                                 <div class="image-review ps-2">
@@ -167,7 +162,13 @@
                                         $useful = $review->useful;
                                         $useful_array = explode(',', $useful);
                                         $count_useful = count($useful_array) - 1;
-                                        $count_review = $review->review_child->count();
+                                        $review_child = $review->review_child;
+                                        $count_review = 0;
+                                        foreach($review_child as $rv){
+                                            if($rv->review_status != null){
+                                                $count_review ++;
+                                            }
+                                        }
                                     @endphp
                                     <div class="text-nowrap">
                                         @if (in_array($id_user, $useful_array))
@@ -211,6 +212,7 @@
 
                                         @if (count($review->review_child) > 0)
                                             @foreach ($review->review_child as $key => $review_child)
+                                            @if($review_child->review_status != null)
                                                 @php
                                                     $useful_child = $review_child->useful;
                                                     $useful_child_array = explode(',', $useful_child);
@@ -298,6 +300,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                             @endforeach
                                         @endif
 

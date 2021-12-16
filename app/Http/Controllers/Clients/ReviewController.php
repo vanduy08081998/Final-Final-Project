@@ -98,6 +98,7 @@ class ReviewController extends Controller
             'product_id' => $request->product_id,
             'customer_id' => Auth::user()->id,
             'content_rating' => $request->content_rating,
+            'review_status' => null
         ]);
     }
 

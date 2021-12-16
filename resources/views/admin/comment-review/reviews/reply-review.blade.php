@@ -17,18 +17,15 @@ Quản lý đánh giá
                                 class="mr-2 ml-2 fas fa-caret-right"></i> <strong class="text-info">Phản hồi đánh giá</strong>
                         </h4>
                     </div>
-                    <form action="" method="POST">
-                        @csrf
                         <div class="card-body">
-                       
+                            @livewire('admin.reply-review',['review' => $review])
                         </div>
-                    </form>
-
+   
                 </div>
             </div>
         </div>
     </div>
-    @livewire('admin.admin-comment')
+
     <!-- /Page Wrapper -->
 @endsection
 @push('script')
