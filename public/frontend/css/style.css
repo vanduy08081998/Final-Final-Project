@@ -556,23 +556,24 @@
     width: 10%;
 }
 
-.content-body {
+.content-not .content-body {
+    display: block;
     color: #333333;
     padding: 0 10px;
     width: 80%;
 }
 
-.content-body>.time {
+.content-not .content-body>.time {
     display: block;
     padding: 5px 0;
     font-size: 12px;
 }
 
-.content-handle {
+.content-not .content-handle {
     width: 10%;
 }
 
-.content-handle>span {
+.content-not .content-handle>span {
     position: absolute;
     right: 4px;
     top: 0;
@@ -772,8 +773,8 @@
 .form-comment {
     display: block;
     background: #DDDDDD;
-    height: 200px;
-    padding: 30px 20px;
+    height: 210px;
+    padding: 40px 20px 20px 20px;
     position: relative;
 }
 
@@ -787,8 +788,58 @@
     padding: 10px 0;
     margin: auto;
     top: -30px;
-    border: 1px solid #DDDD;
+    border: 2px solid #DDDD;
     /* -webkit-box-shadow: 0 0 10px #CCCCCC;
     box-shadow: 0 0 10px #CCCCCC; */
-    box-shadow: 4px 4px 2px 1px #fe696a;
+}
+
+.nullable {
+    padding-top: 50px;
+    display: flex;
+    width: 300px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nullable .icon-null {
+    padding: 10px 0;
+}
+
+.nullable .icon-null i {
+    font-size: 10rem;
+    color: yellow;
+}
+
+.nullable .text-null {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+.nullable>a {
+    background: #fe696a;
+    padding: 8px 15px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.delete-notifica {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background: #fe696a;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.delete-notifica>i {
+    font-size: 1rem;
+    color: #fff;
 }

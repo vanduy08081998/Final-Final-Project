@@ -40,8 +40,7 @@
                     <a class="nav-link-style d-flex align-items-center px-4 py-3"
                         href="{{ route('account.notification') }}">
                         <i class="far fa-bell opacity-60 me-2"></i>Thông báo
-                        <span
-                            class="fs-sm text-muted ms-auto">{{ App\Models\Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}</span>
+                        <span class="fs-sm text-muted ms-auto">{{ Auth::user()->notification->count() }}</span>
                     </a>
                 </li>
             </ul>
