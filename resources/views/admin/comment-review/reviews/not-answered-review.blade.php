@@ -111,7 +111,7 @@
                         </div>
                     </form>
 
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>

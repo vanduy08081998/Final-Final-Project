@@ -274,14 +274,13 @@
                     </span>
                     <span>{{ Auth::user()->name }}</span>
                 </a>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu dropdown-user-admin">
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <a class="dropdown-item"><button type="submit">Logout</a>
+                        <button class="dropdown-item" type="submit">Đăng xuất</button>
                     </form>
-
                 </div>
             </li>
         @endif

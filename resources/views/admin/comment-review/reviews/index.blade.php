@@ -36,7 +36,7 @@
                                     <a class="btn btn-success"
                                         href="{{ route('review-admin.list-browse', $product->id) }}">Chờ duyệt <span
                                             class="badge badge-light">{{ $count_not_browse }}</span></a>
-                                    <a class="btn btn-info"
+                                    <a class="btn btn-primary"
                                         href="{{ route('review-admin.feedback', $product->id) }}">Chờ
                                         phản hồi <span class="badge badge-light">{{ $count_not_feedback }}</span></a>
                                     @if ($countTrashed)
@@ -86,7 +86,6 @@
 
                                                 <td class="text-left">
                                                     @if ($value->admin_feedback == 1)
-
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button
                                                                 type="button" class="btn btn-info">Đã phản hồi</button>
                                                         </a>
@@ -120,7 +119,7 @@
                             </div>
                         </div>
                     </form>
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
@@ -187,7 +186,6 @@
                     },
                     success: function() {
                         window.location.reload();
-                        // window.location.href = 'http://127.0.0.1:8000/admin/comment/';
                     }
                 })
             });
