@@ -139,17 +139,17 @@
                                         <select name="category_id[]" class="js-example-basic-multiple form-control"
                                             data-live-search="true" data-live-search="true" multiple>
                                             @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
-                                                @include('admin.Categories.categoryOptions', ['item' => $item])
+                                                @include('admin.Categories.categoryOptions', ['item' => $item,'category' => ''])
 
                                                 @foreach ($item->subcategory()->get() as $childCategory)
                                                     @include('admin.Categories.categoryOptions', ['item' =>
                                                     $childCategory,
-                                                    'prefix' => '--'])
+                                                    'prefix' => '--','category' => ''])
 
                                                     @foreach ($childCategory->subcategory()->get() as $childCategory2)
                                                         @include('admin.Categories.categoryOptions', ['item' =>
                                                         $childCategory2,
-                                                        'prefix' => '----'])
+                                                        'prefix' => '----','category' => ''])
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
