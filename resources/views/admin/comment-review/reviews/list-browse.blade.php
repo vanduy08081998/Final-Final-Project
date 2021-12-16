@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-Quản lý đánh giá
+    Quản lý đánh giá
 @endsection
 
 @section('content')
@@ -34,7 +34,7 @@ Quản lý đánh giá
                                         <option value="clearace">Duyệt</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a href="{{ route('product.review', $product->id) }}" class="btn btn-primary">Đã
+                                    <a href="{{ route('product.review', $product->id) }}" class="btn btn-success">Đã
                                         duyệt</a>
                                 </div>
                             </div>
@@ -57,7 +57,8 @@ Quản lý đánh giá
                                                 <td class="text-left"><input type="checkbox" class="checkItem"
                                                         name="checkItem[]" value="{{ $review->id }}"></td>
                                                 <td class="text-left">
-                                                    <strong class="text-info">{{ $review->user->name ?? '' }}</strong>
+                                                    <strong
+                                                        class="text-info">{{ $review->user->name ?? '' }}</strong>
                                                 </td>
                                                 <td class="text-left">
                                                     @for ($count = 1; $count <= round($review->count_rating); $count++)
@@ -87,7 +88,7 @@ Quản lý đánh giá
                         </div>
                     </form>
 
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>

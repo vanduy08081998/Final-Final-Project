@@ -10,24 +10,24 @@ class Notifica extends Component
     public $comment, $review, $order;
     protected $listeners = [
         'render' => 'render',
+        'delete',
+        'deleteAll'
     ];
-
-    // public function mount(){
-    //     $this->models = Notification::where('id_user', Auth::user()->id)->latest()->get();
-    // }
-
-    // public function comment(){
-    //     $this->models = Notification::where('type', 'comment')->latest()->get();
-    // }
-
-    // public function order(){
-    //     $this->models = Notification::where('type', 'order')->latest()->get();
-    // }
 
     public function delete($id){
         $model = Notification::find($id);
         $model->delete();
         $this->emit('render');
+    }
+
+    public function deleteAll($type)
+    {
+         if($type){
+            Notification::where([['id_user', Auth::user()->id],['type', $type]])->delete();
+         }else{
+            Notification::where('id_user', Auth::user()->id)->delete();
+         }
+         $this->emit('render');
     }
     
     public function render()

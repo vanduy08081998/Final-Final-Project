@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-Quản lý đánh giá
+    Quản lý đánh giá
 @endsection
 
 @section('content')
@@ -14,21 +14,19 @@ Quản lý đánh giá
                 <div class="card mb-0">
                     <div class="card-header">
                         <h4 class="card-title mb-0 d-flex align-items-center">Đánh giá <i
-                                class="mr-2 ml-2 fas fa-caret-right"></i> <strong class="text-info">Phản hồi đánh giá</strong>
+                                class="mr-2 ml-2 fas fa-caret-right"></i> <strong class="text-info">Phản hồi đánh
+                                giá</strong>
                         </h4>
                     </div>
-                    <form action="" method="POST">
-                        @csrf
-                        <div class="card-body">
-                       
-                        </div>
-                    </form>
+                    <div class="card-body">
+                        @livewire('admin.reply-review',['review' => $review])
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
-    @livewire('admin.admin-comment')
+
     <!-- /Page Wrapper -->
 @endsection
 @push('script')
@@ -88,7 +86,7 @@ Quản lý đánh giá
                         _token: _token
                     },
                     success: function() {
-                        window.location.href = 'http://127.0.0.1:8000/admin/comment/';
+                        window.location.href = 'http://127.0.0.1:8000/admin/review/';
                     }
                 })
             });

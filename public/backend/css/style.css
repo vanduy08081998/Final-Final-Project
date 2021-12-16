@@ -10078,3 +10078,11 @@ ul.comment-list li ul.children {
     float: right;
     margin-top: 5px;
 }
+
+.dropdown-user-admin {
+    width: 100%;
+}
+
+.dropdown-user-admin>a {
+    font-size: 14px;
+}
