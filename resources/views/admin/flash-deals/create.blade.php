@@ -7,6 +7,12 @@
 <div class="content container-fluid">
   <div class="row">
     <div class="col-sm-12">
+      @if (session()->has('message'))
+      @foreach (session()->get('message') as $item)
+        <div class="alert alert-danger">Sản phẩm {{ $item }} Đã tồn tại trong một chiến dịch khác</div>
+      @endforeach
+          
+      @endif
       <div class="card">
         <div class="card-body">
           <form action="{{ route('flash-deals.store') }}" method="POST">

@@ -113,7 +113,7 @@ class ProductController extends Controller
       }else{
         $price = $product->unit_price;
       }
-      
+
       $product_quantity = $request->product_quantity;
       $quantity = $product->quantity;
       return response()->json([
@@ -164,7 +164,16 @@ class ProductController extends Controller
         'specifications' => $specifications,
         'variant_image' => $v_image
       ]);
-        
+
     }
+  }
+
+  public function productShort(Request $request){
+    if($request->value == 'all'){
+      $products = Product::orderBy('id', 'DESC')->get();
+    }else{
+      $products = Product::orderBy($request->value, $request->orderby)->get();
+    }
+    return view('clients.shop.details.product-short', compact('products'));
   }
 }

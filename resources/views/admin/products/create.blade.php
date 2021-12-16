@@ -148,17 +148,17 @@
                                                 id="single__category">
                                                 @foreach (App\Models\Category::where('category_parent_id', null)->get()
                                                 as $item)
-                                                @include('admin.Categories.categoryOptions', ['item' => $item])
+                                                @include('admin.Categories.categoryOptions', ['item' => $item,'category' => ''])
 
                                                 @foreach ($item->subcategory()->get() as $childCategory)
                                                 @include('admin.Categories.categoryOptions', ['item' =>
                                                 $childCategory,
-                                                'prefix' => '--'])
+                                                'prefix' => '--','category' => ''])
 
                                                 @foreach ($childCategory->subcategory()->get() as $childCategory2)
                                                 @include('admin.Categories.categoryOptions', ['item' =>
                                                 $childCategory2,
-                                                'prefix' => '----'])
+                                                'prefix' => '----','category' => ''])
                                                 @endforeach
                                                 @endforeach
                                                 @endforeach
@@ -608,8 +608,8 @@
             customer_choice_specification($(this).val(), $(this).text())
         })
     })
-    
-    function customer_choice_specification(i, name) { 
+
+    function customer_choice_specification(i, name) {
         $.ajax({
             type: "POST",
             url: '{{ route('admin.products.specifications') }}',
@@ -619,7 +619,7 @@
             },
             success: function (response) {
                 $('.table-specifiation tbody').append(`
-                    
+
                     <tr>
                         <input type="hidden" name="choice_fixed_attribute[]" value="${i}">
                         <td>${name} <input type="hidden" name="fixed_attribute_${i}" value="${name}"></td>
@@ -629,7 +629,7 @@
                             </select>
                         </td>
                     </tr>
-                `)     
+                `)
             }
         });
     }
@@ -781,7 +781,7 @@
 
 
     $('input[name="product_name"]').on('change', function(){
-      
+
         update_sku()
     })
 </script>
