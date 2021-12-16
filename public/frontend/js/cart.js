@@ -1,4 +1,4 @@
-const cartDropdown = () => {
+function cartDropdown(){
     $.ajax({
         type: "GET",
         url: route('cart.dropdown'),
@@ -7,6 +7,8 @@ const cartDropdown = () => {
         }
     });
 }
+
+cartDropdown()
 
 $('.card_add_btn').click(function() {
     $.ajax({
@@ -69,7 +71,6 @@ const updateQuantity = (i, quantity, cart_price) => {
 }
 
 const deleteCartDropdown = (i) => {
-
     $.ajax({
         type: "GET",
         url: route('cart.delete'),
@@ -77,25 +78,12 @@ const deleteCartDropdown = (i) => {
             index: i
         },
         success: function(response) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Chúc mừng !',
-                text: 'Xóa giỏ hàng thành công!',
-                confirmButtonText: 'Nhấn ok để tiếp tục !',
-                confirmButtonColor: 'green',
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    window.location.reload();
-                }
-            })
+            window.location.reload()
         }
     });
-
 }
 
 const deleteCart = function(i) {
-    
     $.ajax({
         type: "GET",
         url: route('cart.delete'),
@@ -107,7 +95,6 @@ const deleteCart = function(i) {
             window.location.reload();
          }
     });
-
 }
 
 const cartTotals = () => {

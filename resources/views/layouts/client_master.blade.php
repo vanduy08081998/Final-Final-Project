@@ -89,12 +89,12 @@
                 }
             })
         })
-        
+
     }
 </script>
 
 <body class="handheld-toolbar-enabled">
-    
+
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -150,7 +150,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ URL::to('frontend/js/cart.js') }}"></script>
     <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
@@ -164,7 +163,6 @@
     <script
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
-    <script src="{{ asset('frontend/js/paypal.js') }}"></script>
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script>
         $('.input-images-1').imageUploader();
@@ -173,7 +171,6 @@
     @include('sweetalert::alert')
     @stack('script')
     <script type="text/javascript">
-        cartDropdown()
         window.addEventListener('alert', event => {
             toastr[event.detail.type](event.detail.message,
                 event.detail.title ?? ''), toastr.options = {
@@ -206,7 +203,7 @@
             window.location.href = href;
         })
     </script>
-    
+
 </body>
 
 </html>

@@ -130,9 +130,6 @@
             <li><a href="{{ route('review-admin.index') }}">Đánh giá</a></li>
         </ul>
     </li> --}}
-    <li class="menu-title">
-        <span>Hóa đơn</span>
-    </li>
     <li class="submenu">
         <a href="#"><i class="fa fa-shopping-cart"></i> <span>Hóa đơn</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
