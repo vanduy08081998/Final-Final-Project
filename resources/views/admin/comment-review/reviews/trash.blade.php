@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-Quản lý đánh giá
+    Quản lý đánh giá
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@ Quản lý đánh giá
                             Thùng rác theo sản phẩm
                         </p>
                     </div>
-                    <form action="{{ route('comment.handle') }}" method="POST">
+                    <form action="{{ route('review-admin.handle') }}" method="POST">
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
@@ -56,7 +56,8 @@ Quản lý đánh giá
                                                 <td class="text-left"><input type="checkbox" class="checkItem"
                                                         name="checkItem[]" value="{{ $review->id }}"></td>
                                                 <td class="text-left">
-                                                    <strong class="text-info">{{ $review->user->name ?? '' }}</strong>
+                                                    <strong
+                                                        class="text-info">{{ $review->user->name ?? '' }}</strong>
                                                 </td>
                                                 <td class="text-left">
                                                     @for ($count = 1; $count <= round($review->count_rating); $count++)
@@ -96,7 +97,7 @@ Quản lý đánh giá
                         </div>
                     </form>
 
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
@@ -141,30 +142,6 @@ Quản lý đánh giá
                     $('.handle').attr('disabled', false)
                 }
             }
-            // Thùng rác
-            $('.trash').click(function() {
-                let id = $(this).data('id')
-                let url = $(this).data('url')
-                formTrash.action = url
-                formTrash.submit()
-            })
-
-            // Hành động chung
-            $('.handle-all').click(function() {
-                let url = $('.url-handle').val()
-                let handle = $(this).data('handle')
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    data: {
-                        handle: handle,
-                        _token: _token
-                    },
-                    success: function() {
-                        window.location.href = 'http://127.0.0.1:8000/admin/comment/';
-                    }
-                })
-            });
         });
     </script>
 @endpush

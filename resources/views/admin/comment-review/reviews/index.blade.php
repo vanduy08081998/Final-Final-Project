@@ -33,14 +33,15 @@
                                         <option value="trash">Thùng rác</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-success"
                                         href="{{ route('review-admin.list-browse', $product->id) }}">Chờ duyệt <span
                                             class="badge badge-light">{{ $count_not_browse }}</span></a>
-                                    <a class="btn btn-primary" href="{{ route('review-admin.feedback', $product->id) }}">Chờ
+                                    <a class="btn btn-primary"
+                                        href="{{ route('review-admin.feedback', $product->id) }}">Chờ
                                         phản hồi <span class="badge badge-light">{{ $count_not_feedback }}</span></a>
                                     @if ($countTrashed)
                                         <a href="{{ route('review-admin.trash', $product->id) }}"
-                                            class="btn-sm btn-warning float-right mr-1">Thùng
+                                            class="btn-sm btn-danger float-right mr-1">Thùng
                                             rác
                                             ({{ $countTrashed }})</a>
                                     @endif
@@ -60,51 +61,57 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($reviews as $key => $value)
-                                        <tr>
-                                            <td class="text-left"><input type="checkbox" class="checkItem" name="checkItem[]"
-                                                    value="{{ $value->id }}"></td>
-                                            <td class="text-left">
-                                                <strong class="text-info">{{ $value->user->name ?? '' }}</strong>    
-                                            </td>
-                                            <td class="text-left">                                 
-                                                @for ($count = 1; $count <= round($value->count_rating); $count++)
-                                                    <i class="fa fa-star fs-ms text-danger me-1"></i>
-                                                @endfor
-                                                @for ($count = 1; $count <= 5 - round($value->count_rating); $count++)
-                                                    <i class="fa fa-star-o fs-ms text-danger me-1"></i>
-                                                @endfor    
-                                            </td>
-                                        
-                                            <td class="text-left">
-                                                <div style="width:400px; text-overflow: ellipsis; overflow: hidden;">
-                                                    {{ $value->content_rating }}
-                                                </div>
-                                            </td>
-                                        
-                                            <td class="text-left">
-                                                @if ($value->comment_admin_feedback == 1)
-                                                    <a class="btn btn-info">Đã phản
-                                                        hồi</a>
-                                                @else
-                                                <a href="{{ route('review-admin.reply', $value->id) }}"> <button type="button" class="btn btn-warning">Phản hồi</button>
-                                                </a>
-                                                @endif
-                                            </td>
-                                        
-                                        
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
-                                                        aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a href="{{ route('review-admin.delete', $value->id) }}" class="text-danger radius-30 dropdown-item"><i
-                                                                class="bx bx-edit"></i> Thùng rác</a>
+                                        @foreach ($reviews as $key => $value)
+                                            <tr>
+                                                <td class="text-left"><input type="checkbox" class="checkItem"
+                                                        name="checkItem[]" value="{{ $value->id }}"></td>
+                                                <td class="text-left">
+                                                    <strong
+                                                        class="text-info">{{ $value->user->name ?? '' }}</strong>
+                                                </td>
+                                                <td class="text-left">
+                                                    @for ($count = 1; $count <= round($value->count_rating); $count++)
+                                                        <i class="fa fa-star fs-ms text-danger me-1"></i>
+                                                    @endfor
+                                                    @for ($count = 1; $count <= 5 - round($value->count_rating); $count++)
+                                                        <i class="fa fa-star-o fs-ms text-danger me-1"></i>
+                                                    @endfor
+                                                </td>
+
+                                                <td class="text-left">
+                                                    <div style="width:400px; text-overflow: ellipsis; overflow: hidden;">
+                                                        {{ $value->content_rating }}
                                                     </div>
-                                                </div>
-                                            </td>
-                                        
-                                        </tr>
+                                                </td>
+
+                                                <td class="text-left">
+                                                    @if ($value->admin_feedback == 1)
+                                                        <a href="{{ route('review-admin.reply', $value->id) }}"> <button
+                                                                type="button" class="btn btn-info">Đã phản hồi</button>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('review-admin.reply', $value->id) }}"> <button
+                                                                type="button" class="btn btn-warning">Phản hồi</button>
+                                                        </a>
+                                                    @endif
+                                                </td>
+
+
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-success dropdown-toggle radius-30"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false"><i class="bx bx-cog"></i></button>
+                                                        <div class="dropdown-menu" style="">
+                                                            <a href="{{ route('review-admin.delete', $value->id) }}"
+                                                                class="text-danger radius-30 dropdown-item"><i
+                                                                    class="bx bx-edit"></i> Thùng rác</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                     @livewire('admin.admin-comment')
@@ -112,7 +119,7 @@
                             </div>
                         </div>
                     </form>
-                    <input type="text" value="{{ url('admin/comment/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
@@ -179,7 +186,6 @@
                     },
                     success: function() {
                         window.location.reload();
-                        // window.location.href = 'http://127.0.0.1:8000/admin/comment/';
                     }
                 })
             });

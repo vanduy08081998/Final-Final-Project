@@ -76,11 +76,7 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Review::find($request->review_id)->update([
-            'product_id' => $request->product_id,
-            'customer_id' => Auth::user()->id,
-            'content_rating' => $request->content_rating,
-        ]);
+    
     }
 
     /**
@@ -98,7 +94,7 @@ class ReviewController extends Controller
         $reviews = Review::where([['product_id', $product_id],['review_status',1], ['review_parent',null]])->latest()->get();
         $countTrashed = Review::where([['product_id', $product_id], ['review_parent',null]])->onlyTrashed()->count();
         $count_not_browse = Review::where([['product_id', $product_id],['review_status',null],['review_parent',null]])->get()->count();
-        $count_not_feedback = Review::where([['product_id', $product_id],['admin_feedback', null],['review_parent',null]])->get()->count();
+        $count_not_feedback = Review::where([['product_id', $product_id],['admin_feedback', null],['review_status',1],['review_parent',null]])->get()->count();
          return view('admin.comment-review.reviews.index')->with(compact('product','reviews','countTrashed','count_not_browse','count_not_feedback'));
     }
     public function delete($id)
@@ -111,6 +107,10 @@ class ReviewController extends Controller
         $product = Product::find($product_id);
         $reviews = Review::where([['review_status', null], ['product_id', $product_id], ['review_parent',null]])->get();
         return view('admin.comment-review.reviews.list-browse', compact('product', 'reviews'));
+    }
+    public function Browse($id){
+        Review::find($id)->update(['review_status' => 1]);
+        return back()->with('message', 'Duyệt đánh giá thành công');
     }
     public function feedback($product_id){
         $product = Product::find($product_id);

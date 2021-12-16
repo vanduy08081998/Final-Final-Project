@@ -165,23 +165,19 @@
                                 <div class="card-header">
                                     Logo thương hiệu
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <div class="preview hide mb-3">
-                                        <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
-                                            alt="" height="100px" width="100px">
-                                    </div>
+                                <div class="card-body">
+                                    <div id="image__preview"></div>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="brand_image" onchange="readURL(this);"
-                                                class="custom-file-input" id="inputGroupFile04"
-                                                aria-describedby="inputGroupFileAddon04">
-                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-
-
-                                        </div>
+                                    <div class="file-options">
+                                        <a class="btn-file iframe-btn"
+                                            href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image"
+                                            style="color: #1e272e; font-size: 24px;"><input class="upload"><i
+                                                class="fa fa-upload"></i></a>
                                     </div>
+                                    <input type="hidden" id="image" data-upload="brand_image" data-preview="image__preview">
+                                    <input type="hidden" name="brand_image">
+
                                     @error('brand_image')
                                         <span class="text-danger">{{ $errors->first('brand_image') }}</span>
                                     @enderror

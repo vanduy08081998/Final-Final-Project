@@ -146,50 +146,7 @@
                 </div>
                 <!-- Orders list-->
                 @livewire('notifica')
-                {{-- <div class="container-fluid" style="position:relative;">
-                    <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                        <li class="nav-item contact-not" data-type="mount">
-                            <a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab"
-                                aria-selected="true">Tất cả</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item contact-not" data-type="order">
-                            <a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile"
-                                role="tab" aria-selected="false">Đơn hàng</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item contact-not" data-type="comment">
-                            <a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact"
-                                role="tab" aria-selected="false">Bình luận</a>
-                            <div class="material-border"></div>
-                        </li>
-                        <li class="nav-item contact-not" data-type="discount">
-                            <a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review"
-                                role="tab" aria-selected="false">Mã giảm giá</a>
-                            <div class="material-border"></div>
-                        </li>
-                    </ul>
 
-                    <div class="content-loader d-none">
-                        <div class="loader"></div>
-                    </div>
-                    <div class="tab-content nav-material" id="top-tabContent">
-                        <div class="tab-pane fade show active" id="top-home" role="tabpanel"
-                            aria-labelledby="top-home-tab">
-                            @livewire('notifica')
-                        </div>
-                        <div class="tab-pane fade" id="top-profile" role="tabpanel" aria-labelledby="profile-top-tab">
-                            @livewire('notifica')
-                        </div>
-                        <div class="tab-pane fade" id="top-contact" role="tabpanel" aria-labelledby="contact-top-tab">
-                            @livewire('notifica')
-                        </div>
-                        <div class="tab-pane fade" id="top-review" role="tabpanel" aria-labelledby="review-top-tab">
-                            @livewire('notifica')
-                        </div>
-                    </div>
-
-                </div> --}}
             </section>
         </div>
     </div>
@@ -210,6 +167,16 @@
             if (type == 'review') {
                 $('.review-check').click()
             }
+        })
+
+        $('.content-not').click(function() {
+            let id = $(this).data('id');
+            window.livewire.emit('delete', id)
+        })
+
+        $('.delete-notifica').click(function() {
+            let type = $(this).data('type')
+            window.livewire.emit('deleteAll', type)
         })
     </script>
 @endpush
