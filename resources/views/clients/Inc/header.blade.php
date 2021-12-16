@@ -58,15 +58,15 @@ $category = Category::all();
                             đơn hàng</a></li>
                 </ul>
             </div>
-            <div class="d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{route('wishlist.show_icon_wishlist')}}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
                     </a>
                 @elseif ($wishlist != NULL && Auth::user())
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                        <i class="ci-heart mt-n1"></i>Yêu thích
-                        ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }})
+                        <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+                        {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
                     </a>
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
@@ -116,9 +116,14 @@ $category = Category::all();
                         <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
                             <div class="navbar-tool-icon-box">
                                 @if (Auth::user()->avatar)
-                                    <img class="customer_picture"
-                                        src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
-                                        alt="avatar" style="border-radius:50%;">
+                                    @if (Auth::user()->provider_id == null)
+                                        <img class="customer_picture"
+                                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
+                                            alt="avatar" style="border-radius:50%;">
+                                    @else
+                                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                                            width="90" alt="avatar" style="border-radius:50%;">
+                                    @endif
                                 @else
                                     <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
                                         width="90" alt="avatar">
@@ -138,6 +143,11 @@ $category = Category::all();
                                 </li>
                                 <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
                                         Tài khoản</a></li>
+                                @if (Auth::user()->position == 'admin')
+                                    <li><a href="{{ route('admin.index') }}"><i
+                                                class="fas fa-user-shield"></i>
+                                            Quản trị admin</a></li>
+                                @endif
                                 <li>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
@@ -149,11 +159,12 @@ $category = Category::all();
                         </div>
                     </div>
                 @else
-
-                    <a class="ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                        <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                    </a>
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                        </a>
+                    </div>
                 @endif
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                     <div class="navbar-tool dropdown ms-3 cart__dropdown">
@@ -264,52 +275,10 @@ $category = Category::all();
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('shop.shop-grid') }}"><i
-                                    class="ci-lable"></i> Cửa hàng</a>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid') }}"><i class="ci-lable"></i> Cửa hàng</a>
                         </li>
-                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                                data-bs-toggle="dropdown" data-bs-auto-close="outside"><i class="ci-store"></i>
-                                Nhãn hiệu</a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                        data-bs-toggle="dropdown">Shop User
-                                        Account</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="account-orders.html">Orders History</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="account-profile.html">Profile Settings</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="account-address.html">Account Addresses</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="account-payment.html">Payment Methods</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="account-wishlist.html">Wishlist</a></li>
-                                        <li><a class="dropdown-item" href="account-tickets.html">My Tickets</a></li>
-                                        <li><a class="dropdown-item" href="account-single-ticket.html">Single
-                                                Ticket</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#"
-                                        data-bs-toggle="dropdown">Vendor
-                                        Dashboard</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="dashboard-settings.html">Settings</a></li>
-                                        <li><a class="dropdown-item" href="dashboard-purchases.html">Purchases</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="dashboard-favorites.html">Favorites</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="dashboard-sales.html">Sales</a></li>
-                                        <li><a class="dropdown-item" href="dashboard-products.html">Products</a></li>
-                                        <li><a class="dropdown-item" href="dashboard-add-new-product.html">Add New
-                                                Product</a></li>
-                                        <li><a class="dropdown-item" href="dashboard-payouts.html">Payouts</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="account-signin.html">Sign In / Sign Up</a></li>
-                                <li><a class="dropdown-item" href="account-password-recovery.html">Password
-                                        Recovery</a></li>
-                            </ul>
-                        </li>
+
                         <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
                                     class="ci-store"></i>
                                 Bài viết</a>

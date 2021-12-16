@@ -20,6 +20,9 @@
                     aria-selected="false">Mã giảm giá</a>
                 <div class="material-border"></div>
             </li> --}}
+            <span class="delete-notifica" data-type="{{ $check ?? '' }}">
+                <i class="far fa-trash-alt"></i>
+            </span>
         </ul>
         <form class="d-none" wire:submit.prevent="render()">
             <input type="checkbox" wire:model="comment" value="comment"
@@ -32,62 +35,75 @@
         </form>
 
         <div class="tab-content nav-material" id="top-tabContent">
-            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                @foreach ($models as $item)
-                    @if ($item->type == 'comment')
-                        <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                            class="content-not">
-                            <div class="icon-ct">
-                                <div class="content-icon">
-                                    <i class="far fa-comments"></i>
+            @if ($models->count() > 0)
+                <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                    @foreach ($models as $item)
+                        @if ($item->type == 'comment')
+                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
+                                class="content-not" data-id="{{ $item->id }}">
+                                <div class="icon-ct">
+                                    <div class="content-icon">
+                                        <i class="far fa-comments"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content-body">
-                                {!! $item->content !!}
-                                <div class="moving">
-                                    Tại sản phẩm {{ $item->product->product_name }}
+                                <div class="content-body">
+                                    {!! $item->content !!}
+                                    <div class="moving">
+                                        Tại sản phẩm {{ $item->product->product_name }}
+                                    </div>
+                                    <div class="time">
+                                        <em> {{ $item->created_at->diffForHumans() }}</em>
+                                    </div>
                                 </div>
-                                <div class="time">
-                                    <em> {{ $item->created_at->diffForHumans() }}</em>
+                                <div class="content-handle">
+                                    <span>
+                                        <i class="fas fa-times"
+                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                    </span>
                                 </div>
-                            </div>
-                            <div class="content-handle">
-                                <span>
-                                    <i class="fas fa-times" wire:click.prevent="delete('{{ $item->id }}')"></i>
-                                </span>
-                            </div>
-                        </a>
-                    @elseif($item->type == 'order')
-                        <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                            class="content-not">
-                            <div class="icon-ct">
-                                <div class="content-icon">
-                                    <i class="fas fa-money-bill-wave"></i>
+                            </a>
+                        @elseif($item->type == 'order')
+                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
+                                class="content-not">
+                                <div class="icon-ct">
+                                    <div class="content-icon">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content-body">
-                                {!! $item->content !!}
-                                {{-- <div class="moving">
+                                <div class="content-body">
+                                    {!! $item->content !!}
+                                    {{-- <div class="moving">
                         Tại sản phẩm {{ $item->product->product_name }}
                     </div> --}}
-                                <div class="time">
-                                    <em> {{ $item->created_at->diffForHumans() }}</em>
+                                    <div class="time">
+                                        <em> {{ $item->created_at->diffForHumans() }}</em>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content-handle">
-                                <span>
-                                    <i class="fas fa-times" wire:click.prevent="delete('{{ $item->id }}')"></i>
-                                </span>
-                            </div>
-                        </a>
+                                <div class="content-handle">
+                                    <span>
+                                        <i class="fas fa-times"
+                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                    </span>
+                                </div>
+                            </a>
 
-                    @endif
-                @endforeach
-            </div>
-
+                        @endif
+                    @endforeach
+                </div>
+            @else
+                <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                    <div class="nullable">
+                        <div class="icon-null">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                        <div class="text-null">
+                            Bạn chưa có thông báo nào!
+                        </div>
+                        <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+            @endif
         </div>
 
     </div>
-
-
 </div>

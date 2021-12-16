@@ -16,13 +16,6 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    protected $generalService, $path;
-
-    public function __construct(GeneralService $generalService)
-    {
-        $this->path = 'uploads/Brands/';
-        $this->generalService = $generalService;
-    }
 
     public function index()
     {
@@ -50,7 +43,6 @@ class BrandController extends Controller
     public function store(AddBrandRequest $request)
     {
         $data = $request->validated();
-        $data['brand_image'] = $this->generalService->uploadImage($this->path, $request->brand_image);
         $brand = Brand::create($data);
         $brand->categories()->attach($data['category_id']);
         return back()->with('message', 'Thêm thương hiệu thành công');
@@ -85,11 +77,6 @@ class BrandController extends Controller
     {
         $brandId = Brand::find($id);
         $data = $request->validated();
-        if ($request->brand_image) {
-            $data['brand_image'] = $this->generalService->uploadImage($this->path, $request->brand_image);
-            // Xóa hình ảnh cũ
-            $this->generalService->deleteImage($this->path, $brandId->brand_image);
-        }
         $brandId->categories()->sync($data['category_id']);
         $brandId->update($data);
         return back()->with('message', 'Cập nhật dữ liệu thành công');
@@ -122,8 +109,6 @@ class BrandController extends Controller
     public function forceDelete($id)
     {
         $brandId = Brand::find($id);
-        $this->generalService->deleteImage($this->path, $brandId->brand_image);
-        $brandId->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
 

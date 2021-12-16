@@ -56,14 +56,14 @@
                                                 <td class="text-center">
                                                     {{ $product->product_name }}
                                                 </td>
-                                                <td class="text-center">                                                                              
-                                                        @for ($count = 1; $count <= round($product->rating); $count++)
-                                                            <i class="fa fa-star fs-ms text-danger me-1"></i>
-                                                        @endfor
-                                                        @for ($count = 1; $count <= 5 - round($product->rating); $count++)
-                                                            <i class="fa fa-star-o fs-ms text-danger me-1"></i>
-                                                        @endfor
-                                                        <strong class="text-danger">({{ $product->rating }})</strong>     
+                                                <td class="text-center">
+                                                    @for ($count = 1; $count <= round($product->rating); $count++)
+                                                        <i class="fa fa-star fs-ms text-danger me-1"></i>
+                                                    @endfor
+                                                    @for ($count = 1; $count <= 5 - round($product->rating); $count++)
+                                                        <i class="fa fa-star-o fs-ms text-danger me-1"></i>
+                                                    @endfor
+                                                    <strong class="text-danger">({{ $product->rating }})</strong>
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $product->count_review }} lượt đánh giá
@@ -77,7 +77,8 @@
                                                         <div
                                                             class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
                                                             <a class="dropdown-item text-warning"
-                                                                href="{{ route('product.review', $product->id) }}">Xem đánh
+                                                                href="{{ route('product.review', $product->id) }}">Xem
+                                                                đánh
                                                                 giá</a>
                                                         </div>
                                                     </div>
@@ -94,11 +95,11 @@
                         @csrf
                         @method('DELETE')
                     </form>
-                    <input type="text" value="{{ url('admin/brand/handle') }}" class="d-none url-handle">
+                    <input type="text" value="{{ url('admin/review/handle') }}" class="d-none url-handle">
                 </div>
             </div>
         </div>
-       
+
     </div>
 @endsection
 
