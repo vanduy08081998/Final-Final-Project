@@ -5,6 +5,9 @@
 
 
 @section('content')
+<?php
+  use App\Models\Wishlist;
+  ?>
 <style>
     .card-body .product-title {
         min-height: 28px;
@@ -96,14 +99,14 @@
     </section>
     <section class="container-fluid banner-main">
         <div class="banner-left col-md-1">
-            <a href="#">
-                <img src="{{ asset ('frontend/images/bannerQC.jpg') }}" alt="">
+            <a href="{{ $banner[0]->banner_link }}">
+                <img src="{{ url('uploads/Banner/', $banner[0]->banner_img) }}" alt="">
             </a>
         </div>
-        <div class="banner-center col-md-10"></div>
+        <div class="col-md-10"></div>
         <div class="banner-right col-md-1">
-            <a href="#">
-                <img src="{{ asset ('frontend/images/bannerQC.jpg') }}" alt="">
+            <a href="{{ $banner[1]->banner_link }}">
+                <img src="{{ url('uploads/Banner/', $banner[1]->banner_img) }}" alt="">
             </a>
         </div>
     </section>
@@ -126,9 +129,33 @@
                     @if ($product->discount_unit == '%')
                     <span class="badge bg-danger badge-shadow">Sale</span>
                     @endif
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích">
-                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
-                        <img src="{{ asset($product->product_image) }}" alt="Product"></a>
+                    @if (Auth::user() != null)
+                    <?php
+                          $user = Auth::user()->id;
+                          $wishlist = Wishlist::orderByDESC('id')
+                              ->where('id_prod', $product->id)
+                              ->where('id_user', $user)
+                              ->first();
+                          ?>
+                    @if ($wishlist != null)
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                      title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $product->id }})" style="color: red">
+                      <i class="ci-heart"></i>
+                    </button>
+                    @elseif ($wishlist == NULL)
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                      title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $product->id }})">
+                      <i class="ci-heart"></i>
+                    </button>
+                    @endif
+                    @else
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                    title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $product->id }})">
+                    <i class="ci-heart"></i>
+                    </button>
+                    @endif
+                    <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
+                    <img src="{{ asset($product->product_image) }}" alt="Product"></a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('shop.product-details', $product->product_slug) }}"></a>
                       <h3 class="product-title fs-sm"><a href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a></h3>
                       <div class="d-flex justify-content-between">
@@ -187,9 +214,36 @@
               @foreach ($highlight as $product)
                 <div class="product-item" style="height: 375px">
                   <div class="card product-card">
-                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích">
-                        <i class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
-                        <img src="{{ asset($product->product_image) }}" alt="Product"></a>
+                    @if ($product->discount_unit == '%')
+                    <span class="badge bg-danger badge-shadow">Sale</span>
+                    @endif
+                    @if (Auth::user() != null)
+                    <?php
+                          $user = Auth::user()->id;
+                          $wishlist = Wishlist::orderByDESC('id')
+                              ->where('id_prod', $product->id)
+                              ->where('id_user', $user)
+                              ->first();
+                          ?>
+                    @if ($wishlist != null)
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                      title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $product->id }})" style="color: red">
+                      <i class="ci-heart"></i>
+                    </button>
+                    @elseif ($wishlist == NULL)
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                      title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $product->id }})">
+                      <i class="ci-heart"></i>
+                    </button>
+                    @endif
+                    @else
+                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                    title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $product->id }})">
+                    <i class="ci-heart"></i>
+                    </button>
+                    @endif
+                    <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $product->product_slug) }}">
+                    <img src="{{ asset($product->product_image) }}" alt="Product"></a>
                     <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="{{ route('shop.product-details', $product->product_slug) }}"></a>
                       <h3 class="product-title fs-sm"><a href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a></h3>
                       <div class="d-flex justify-content-between">
