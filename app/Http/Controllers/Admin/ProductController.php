@@ -213,6 +213,12 @@ class ProductController extends Controller
       }
     }
 
+    if($request->has('attribute')){
+      $attribute_column = json_encode($request->attribute);
+    }else{
+      $attribute_column = NULL;
+    }
+
     if ($request->has('colors')) {
       $colors = json_encode($request->colors);
     } else {
@@ -237,7 +243,7 @@ class ProductController extends Controller
       'meta_title' => $request->meta_title,
       'meta_description' => $request->meta_description,
       'meta_keywords' => $request->meta_keywords,
-      'product_attribute' => json_encode($request->attribute),
+      'product_attribute' =>$attribute_column,
       'unit_price' => $single_price,
       'discount' => $request->discount,
       'choice_options' => json_encode($choice_options, JSON_UNESCAPED_UNICODE),
@@ -454,6 +460,12 @@ class ProductController extends Controller
       }
     }
 
+    if ($request->has('attribute')) {
+      $attribute_column = json_encode($request->attribute);
+    } else {
+      $attribute_column = NULL;
+    }
+
     if ($request->has('colors')) {
       $colors = json_encode($request->colors);
     } else {
@@ -472,7 +484,7 @@ class ProductController extends Controller
       'meta_title' => $request->meta_title,
       'meta_description' => $request->meta_description,
       'meta_keywords' => $request->meta_keywords,
-      'product_attribute' => json_encode($request->attribute),
+      'product_attribute' => $attribute_column,
       'unit_price' => $single_price,
       'discount' => $request->discount,
       'choice_options' => json_encode($choice_options, JSON_UNESCAPED_UNICODE),

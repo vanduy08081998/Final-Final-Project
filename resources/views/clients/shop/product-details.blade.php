@@ -49,7 +49,8 @@
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                    @include('clients.shop.details.form-select-attribute')
+                                    {{-- @include('clients.shop.details.form-select-attribute') --}}
+                                    @include('clients.shop.details.form-select-none-attri')
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
@@ -61,7 +62,7 @@
                     </div>
                     <!-- Product description-->
                     <!-- Product description-->
-                    <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc">
+                    <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc" style="position: relative">
                         <div class="row justify-content-center" style="text-align: justify">
                             <div class="col-lg-10 text-description" id="point">
                                 <div
@@ -74,13 +75,11 @@
                                 {!! $product->long_description !!}
                             </div>
                         </div>
-                        <div class="btn-show">
-                            <button class="btn btn-danger justify-items-center show-more"
-                                style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                        <div class="btn-show fade-desc" id="point1">
+                            <button class="btn btn-danger justify-items-center show-more" style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
                         </div>
                     </div>
                 </div>
-
                 <!-- Product description-->
             </div>
         </div>
@@ -368,14 +367,16 @@
             }
         }
     </script>
-    {{-- Xử lý long description --}}
+   {{-- Xử lý long description --}}
     <script>
-        $(".show-more").click(function() {
-            if ($("#point").hasClass("text-description")) {
-                $(this).text("Xem thêm");
-            }
-            $("#point").removeClass("text-description");
-            $(".show-more").remove();
-        });
+       $(".show-more").click(function () {
+           if($("#point").hasClass("text-description")) {
+               $(this).text("Ẩn bớt");
+           } else {
+               $(this).text("Xem thêm");
+           }
+           $("#point").toggleClass("text-description");
+           $("#point1").toggleClass("fade-desc");
+       });
     </script>
 @endpush

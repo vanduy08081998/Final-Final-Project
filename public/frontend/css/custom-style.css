@@ -482,7 +482,7 @@ button.carousel-control-next.show-next {
 .text-description{
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 500px;
+    height: 600px;
 }
 
 .product-title {
@@ -491,3 +491,68 @@ button.carousel-control-next.show-next {
     /* text-align: center; */
 }
 
+#content-wrapper .box-gallery{
+    height: 100%;
+}
+
+.banner-main {
+    position: absolute;
+    display: flex;
+    margin-top: 130px;
+}
+
+.banner-main .banner-left {
+    z-index: 100;
+}
+
+.banner-main .banner-left img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-main .banner-center {
+    z-index: -1;
+}
+
+.banner-main .banner-right {
+    z-index: 100;
+}
+
+.banner-main .banner-right img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-fixed {
+    position: fixed;
+    top: 75px;
+}
+
+.btn-show {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding-top: 320px;
+}
+
+.fade-desc {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.91) 50%, #fff 100%);
+}
+
+.btn-show button {
+    /* width: 100%; */
+    max-width: 335px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    font-size: 14px;
+    color: #212529;
+    text-decoration: none!important;
+    cursor: pointer;
+}
