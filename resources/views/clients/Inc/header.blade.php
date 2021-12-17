@@ -3,7 +3,7 @@ use App\Models\Category;
 use App\Models\Wishlist;
 $wishlist = Wishlist::all();
 $categories = Category::where('category_parent_id', null)
-    ->orderBy('id_cate', 'desc')
+    ->orderBy('id_cate', 'asc')
     ->get();
 $category = Category::all();
 ?>
@@ -58,7 +58,8 @@ $category = Category::all();
                             đơn hàng</a></li>
                 </ul>
             </div>
-            <div data-url="{{route('wishlist.show_icon_wishlist')}}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
+                class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
@@ -144,8 +145,7 @@ $category = Category::all();
                                 <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
                                         Tài khoản</a></li>
                                 @if (Auth::user()->position == 'admin')
-                                    <li><a href="{{ route('admin.index') }}"><i
-                                                class="fas fa-user-shield"></i>
+                                    <li><a href="{{ route('admin.index') }}"><i class="fas fa-user-shield"></i>
                                             Quản trị admin</a></li>
                                 @endif
                                 <li>
@@ -191,7 +191,7 @@ $category = Category::all();
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
-                                        <a href="{{ route('shop.products_category', $cate->category_slug) }}"
+                                        <a href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                             <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}
@@ -201,17 +201,17 @@ $category = Category::all();
 
                                                 <div class="mega-dropdown-column py-4 px-3">
                                                     <div class="widget widget-links">
-                                                        <h6 class="fs-base mb-3">Thương hiệu <br>
-                                                            {{ $cate->category_name }}</h6>
+                                                        <h4 class="fs-base mb-3">Thương hiệu <i class="fas fa-angle-down"></i></h4>
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-1"><a
-                                                                        class="widget-list-link"
-                                                                        href="#">{{ $brand->brand_name }}</a>
+                                                                        class="widget-list-link" href="#"><img
+                                                                            src="{{ url($brand->brand_image) }}"
+                                                                            height="100" width="55">
+                                                                        <sppan>{{ $brand->brand_name }}</sppan>
+                                                                    </a>
                                                                 </li>
-
                                                             @endforeach
-
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -275,9 +275,9 @@ $category = Category::all();
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid') }}"><i class="ci-lable"></i> Cửa hàng</a>
-                        </li>
+                        {{-- <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid', 0) }}"><i class="ci-lable"></i> Cửa hàng</a>
+                        </li> --}}
 
                         <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
                                     class="ci-store"></i>

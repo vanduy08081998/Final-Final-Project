@@ -68,7 +68,7 @@ Route::prefix('/')->group(function () {
         Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
     });
     Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+        Route::get('/shop-grid/{id}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
@@ -76,6 +76,7 @@ Route::prefix('/')->group(function () {
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
         Route::post('/short', [ProductController::class, 'productShort'])->name('clients.products.short');
         Route::post('/searchByCate', [ProductController::class, 'searchByCate'])->name('clients.products.searchbycate');
+        Route::post('/searchByBrand', [ProductController::class, 'searchByBrand'])->name('clients.products.searchbybrand');
     });
     Route::prefix('/cart')->group(function () {
         Route::post('/card-add', [CartController::class, 'addToCart'])->name('card.add');
@@ -90,6 +91,7 @@ Route::prefix('/')->group(function () {
     Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
     Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
     Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+    Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
     Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
     Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');

@@ -16,25 +16,9 @@
                             <ol class="breadcrumb mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
+                                <li class="breadcrumb-item active" aria-current="page">Thêm mới thương hiệu</li>
                             </ol>
                         </nav>
-                    </div>
-                    <div class="ml-auto">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary">Settings</button>
-                            <button type="button"
-                                class="btn btn-primary bg-split-primary dropdown-toggle dropdown-toggle-split"
-                                data-toggle="dropdown"> <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left"> <a class="dropdown-item"
-                                    href="javascript:;">Action</a>
-                                <a class="dropdown-item" href="javascript:;">Another action</a>
-                                <a class="dropdown-item" href="javascript:;">Something else here</a>
-                                <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                    link</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!--end breadcrumb-->
@@ -44,7 +28,7 @@
                         <div class="col-lg-8">
                             <div class="card radius-5">
                                 <div class="card-header">
-                                    Thêm mới
+                                    Thêm mới thương hiệu
                                 </div>
                                 <div class="card-body">
                                     @if (session('message'))
@@ -78,12 +62,22 @@
                                         </div>
 
                                     </div>
+
                                 </div>
                             </div>
 
                             <div class="card">
                                 <div class="card-header">SEO</div>
                                 <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="name">Từ khóa (SEO)</label>
+                                        <input id="tags" class="form-control" data-role="tagsinput" name="meta_keywords"
+                                            type="text" value="{{ old('meta_keywords') }}">
+                                        @error('meta_keywords')
+                                            <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
+                                        @enderror
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="name">Tiêu đề (SEO)</label>
                                         <input class="form-control" name="meta_title" value="{{ old('meta_title') }}"
@@ -92,15 +86,6 @@
                                             <span class="text-danger">{{ $errors->first('meta_title') }}</span>
                                         @enderror
 
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="name">Từ khóa (SEO)</label>
-                                        <input id="tags" class="form-control" data-role="tagsinput" name="meta_keywords"
-                                            type="text" value="{{ old('meta_keywords') }}">
-                                        @error('meta_keywords')
-                                            <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
-                                        @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -116,18 +101,6 @@
                         </div>
 
                         <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    Hành động
-                                </div>
-                                <div class="card-body">
-
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary radius-5 float-right">Thêm
-                                        mới</button>
-                                </div>
-                            </div>
 
                             <div class="card">
                                 <div class="card-header">
@@ -165,9 +138,6 @@
                                 <div class="card-header">
                                     Logo thương hiệu
                                 </div>
-                                <div class="card-body">
-                                    <div id="image__preview"></div>
-                                </div>
                                 <div class="card-footer">
                                     <div class="file-options">
                                         <a class="btn-file iframe-btn"
@@ -181,6 +151,13 @@
                                     @error('brand_image')
                                         <span class="text-danger">{{ $errors->first('brand_image') }}</span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary radius-5 float-right">Thêm
+                                        mới</button>
                                 </div>
                             </div>
 

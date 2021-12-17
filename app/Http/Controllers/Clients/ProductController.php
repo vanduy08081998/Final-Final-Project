@@ -46,12 +46,18 @@ class ProductController extends Controller
       'category_id' => $category_id,
     ]);
   }
-  public function shopGrid()
+  public function shopGrid($id)
   {
+
+    if($id == 0){
+      $product = Product::simplePaginate(12);
+    }else{
+      $product = Product::where('product_id_category', $id)->simplePaginate(12);
+    }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
     $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
-    $product = Product::all();
+    // print_r($product);
     $brands = Brand::orderByDESC('id')->get();
     return view('clients.shop.shop-grid-ls', [
       'min' => $min,
@@ -59,19 +65,32 @@ class ProductController extends Controller
       'product' => $product,
       'category' => $categories,
       'brands' => $brands,
+      'id_cate' => $id
     ]);
   }
 
   public function searchByCate(Request $request){
     if($request->key == ''){
-      $products = Product::all();
+      $products = Product::simplePaginate(12);
     }else{
       $products = Product::orderByDESC('id')
         ->where('product_name', 'REGEXP', $request->key)->where('product_id_category', $request->id)->get();
     }
-
-
     return view('clients.shop.details.search', compact('products'));
+  }
+
+  public function searchByBrand(Request $request){
+
+    if ($request->brand_key == null) {
+      $products = Product::all();
+    } else {
+      if($request->brandbox == null){
+        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->get();
+      }else{
+        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->whereIn('product_id_brand', $request->brandbox)->get();
+      }
+    }
+    return response()->json($products);
   }
 
   public function shopList()
@@ -181,9 +200,17 @@ class ProductController extends Controller
 
   public function productShort(Request $request){
     if($request->value == 'all'){
-      $products = Product::orderBy('id', 'DESC')->get();
+      if($request->id_cate == 0){
+        $products = Product::orderBy('id', 'DESC')->simplePaginate(12);
+      }else{
+        $products = Product::orderBy('id', 'DESC')->where('product_id_category', $request->id_cate)->simplePaginate(12);
+      }
     }else{
-      $products = Product::orderBy($request->value, $request->orderby)->get();
+      if ($request->id_cate == 0) {
+        $products = Product::orderBy($request->value, $request->orderby)->simplePaginate(12);
+      } else {
+        $products = Product::orderBy($request->value, $request->orderby)->where('product_id_category', $request->id_cate)->simplePaginate(12);
+      }
     }
     return view('clients.shop.details.product-short', compact('products'));
   }
