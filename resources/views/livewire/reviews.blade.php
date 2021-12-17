@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 <div class="container pb-5">
     <!-- Reviews-->
     <div class="row">
@@ -198,18 +201,52 @@
                                                 {{ $count_review }}
                                             @endif Thảo luận
                                         </button>
-                                        <button class="btn-time-review text-muted" type="button"><i
-                                                class="far fa-clock"></i> Đã
-                                            đánh
-                                            giá
-                                            khoảng
-                                            {{ $review->created_at->diffForHumans() }}</button>
+
+                                        <?php
+                                        $timebuy = Carbon::createFromFormat('Y-m-d H:i:s', $review->time_buy)->format('d/m/Y');
+                                        $timereview = Carbon::createFromFormat('Y-m-d H:i:s', $review->created_at)->format('d/m/Y');
+                                        $first_date = strtotime($review->time_buy);
+                                        $second_date = strtotime($review->created_at);
+                                        $time = abs($second_date - $first_date);
+                                        $time = floor($time / (60*60*24));
+                                        ?>
+
+                                        <button data-id="{{$review->id}}" class="btn-time-review fs-ms text-muted" type="button"><i
+                                                class="far fa-clock"></i> Đã dùng khoảng
+                                            {{ $time }} ngày</button>
+                                        <div class="info-buying info_buy_{{$review->id}} d-none">
+                                            <div class="info-buying-close"></div>
+                                            <div class="info-buying-text">
+
+                                                <div class="txtitem">
+                                                    <p class="txt01">Mua ngày</p>
+                                                    <p class="txtdate">{{ $timebuy }}
+                                                    </p>
+                                                </div>
+                                                <div class="txtitem">
+                                                    <p class="txt01">Viết đánh giá</p>
+                                                    <p class="txtdate">{{ $timereview }}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="length-using">
+                                                <div class="length-percent" style="width:70%"></div>
+                                            </div>
+                                            <p class="timeline-txt"> Đã dùng <span>Khoảng {{$time}} ngày</span></p>
+
+                                            <ul style="list-style: none;" class="info-buying-list">
+                                                <li><span></span>Ở thời điểm đánh giá, khách đã mua sản <br> phẩm khoảng
+                                                    {{$time}} ngày</li>
+                                                <li><span></span>Thời gian sử dụng thực tế có thể bằng hoặc <br>ít hơn
+                                                    khoảng thời gian này.</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div
                                         class="col-lg-12 mt-2 rating_reply {{ isset($class) && $class == $review->id ? 'down' : 'd-none' }}">
                                         <form class="form-discussion"
                                             wire:submit.prevent="ReplyRating('{{ $review->id }}', '{{ $product->id }}')">
-                                            <textarea class="form-control text_review" cols="2" rows="2"
+                                            <textarea class="form-control text_review form-validated" cols="2" rows="2"
                                                 wire:model.defer="content_rating"> </textarea>
                                             <div class="form-review d-flex justify-content-end border">
                                                 <button type="submit" class="btn-submit-text">Gửi <i
@@ -268,7 +305,7 @@
                                                                 class="edit-review form-edit-review-{{ $review_child->id }} d-none">
                                                                 <textarea
                                                                     data-url="{{ route('review.update', ['review' => $review_child->id]) }}"
-                                                                    class="form-control edit-text-review edit-child-review-{{ $review_child->id }}"
+                                                                    class="form-validated form-control edit-text-review edit-child-review-{{ $review_child->id }}"
                                                                     rows="2">{{ $review_child->content_rating }}</textarea>
                                                                 <div class="form-review d-flex justify-content-end">
                                                                     <button type="button" class="btn-submit-text"
@@ -290,7 +327,8 @@
                                                                             class="far fa-thumbs-up"></i>
                                                                         Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif </button>
                                                                 @endif
-                                                                <button class="btn-time-review review-child text-muted"
+                                                                <button
+                                                                    class="btn-time-review fs-ms review-child text-muted"
                                                                     type="button"><i class="far fa-clock"></i> Đã
                                                                     thảo
                                                                     luận
@@ -338,12 +376,12 @@
             </div>
 
             <div class="comment-btn d-flex justify-content-center">
-                {{-- @if ($bought == 1) --}}
-                <button type="button" wire:click.prevent="add_review()" class="comment-btn__item blue"><i
-                        class="fas fa-star-of-david me-1"></i>
-                    Viết đánh giá
-                </button>
-                {{-- @endif --}}
+                @if ($bought == 1 || $new_purchase == 1)
+                    <button type="button" wire:click.prevent="add_review()" class="comment-btn__item blue"><i
+                            class="fas fa-star-of-david me-1"></i>
+                        Viết đánh giá
+                    </button>
+                @endif
                 <a class="comment-btn__item" href="{{ route('review.show-review', $product->product_slug) }}">Xem
                     đánh giá chi tiết <i class="fas fa-caret-right ms-md-1"></i></a>
 
@@ -358,6 +396,14 @@
 
 @push('script')
     <script>
+        $('.btn-time-review').mouseover(function(){
+            let id = $(this).data('id');
+            $('.info_buy_'+id).removeClass('d-none');
+        })
+        $('.btn-time-review').mouseout(function(){
+            let id = $(this).data('id');
+            $('.info_buy_'+id).addClass('d-none');
+        })
         let myContent = document.getElementById("content_rating");
         myContent.addEventListener("input", () => {
             let count = (myContent.value).length;
@@ -370,6 +416,8 @@
             let count_rating = $('.count-rating').val();
             let product_id = $('.product_id').val();
             let content_rating = $('.content-rating').val();
+            let count_buy = $('.count_buy').val();
+            let time_buy = $('.time_buy').val();
             let check_rating = document.getElementById('rating_checkbox');
             if (check_rating.checked) {
                 check_rating = '1'
@@ -403,6 +451,8 @@
                         form_data.append("product_id", product_id);
                         form_data.append("content_rating", content_rating);
                         form_data.append("introduce", check_rating);
+                        form_data.append("count_buy", count_buy);
+                        form_data.append("time_buy", time_buy);
                         $.ajax({
                             url: URL,
                             method: 'POST',
@@ -488,5 +538,38 @@
         $('.close-image-review').click(function() {
             $('.show_image_review').modal('hide');
         })
+
+        // Kiểm soát ngôn từ tiêu cực
+        $(document).on('keyup', '.form-validated', function() {
+            let text = $(this).val()
+            if (text) {
+                $(this).val(replaceText(text))
+                $('.btn-submit-text').attr('disabled', false)
+            } else {
+                $('.btn-submit-text').attr('disabled', true)
+            }
+        })
+
+        function replaceText(text) {
+            text = text.replace(/lồn/gi, "");
+            text = text.replace(/cặc/gi, "");
+            text = text.replace(/dm/gi, "");
+            text = text.replace(/vãi/gi, "");
+            text = text.replace(/buồi/gi, "");
+            text = text.replace(/dái/gi, "");
+            text = text.replace(/địt/gi, "");
+            text = text.replace(/chịch/gi, "");
+            text = text.replace(/xoạc/gi, "");
+            text = text.replace(/vếu/gi, "");
+            text = text.replace(/vú/gi, "");
+            text = text.replace(/bụ/gi, "");
+            text = text.replace(/đụ/gi, "");
+            text = text.replace(/mé/gi, "");
+            text = text.replace(/mày/gi, "");
+            text = text.replace(/tao/gi, "");
+            text = text.replace(/gớm/gi, "");
+            text = text.replace(/tởm/gi, "");
+            return text;
+        }
     </script>
 @endpush

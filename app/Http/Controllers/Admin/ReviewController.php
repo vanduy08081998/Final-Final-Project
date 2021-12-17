@@ -90,7 +90,8 @@ class ReviewController extends Controller
         //
     }
     public function productReview($product_id){
-        $product = Product::find($product_id)->first();
+        // dd($product_id);
+        $product = Product::find($product_id);
         $reviews = Review::where([['product_id', $product_id],['review_status',1], ['review_parent',null]])->latest()->get();
         $countTrashed = Review::where([['product_id', $product_id], ['review_parent',null]])->onlyTrashed()->count();
         $count_not_browse = Review::where([['product_id', $product_id],['review_status',null],['review_parent',null]])->get()->count();
@@ -132,6 +133,7 @@ class ReviewController extends Controller
 
     public function forceDelete($id)
     {
+        Review::where('review_parent', $id)->forceDelete();
         Review::onlyTrashed()->find($id)->forceDelete();
         return back()->with('message', 'Xóa dữ liệu thành công');
     }
@@ -146,6 +148,7 @@ class ReviewController extends Controller
                 break;
             case 'delete':
                 $ids = $data['checkItem'];
+                Review::whereIn('review_parent', $ids)->forceDelete();
                 Review::whereIn('id', $ids)->forceDelete();
                 return redirect()->back();
                 break;
@@ -161,6 +164,7 @@ class ReviewController extends Controller
                 break;
             case 'delete-all':
                 $ids = Review::onlyTrashed()->pluck('id')->all();
+                Review::whereIn('review_parent', $ids)->forceDelete();
                 Review::whereIn('id', $ids)->forceDelete();
                 break;
             case 'trash-all':

@@ -482,7 +482,7 @@ button.carousel-control-next.show-next {
 .text-description{
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 500px;
+    height: 600px;
 }
 
 .product-title {
@@ -490,4 +490,224 @@ button.carousel-control-next.show-next {
     padding-bottom: 15px;
     /* text-align: center; */
 }
+.product-review.pb-4.mb-4.border-bottom {
+    position: relative;
+}
+.info-buying {
+    background-color: #ebebeb;
+    bottom: 60px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+    border-radius: 4px;
+    color: #333;
+    /* display: none; */
+    padding: 20px 0px 0px;
+    position: absolute;
+    transition: .3s;
+    left: 90px;
+    width: 320px;
+}
+.info-buying-close {
+    background-color: #333;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+    height: 25px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 25px;
+}
+.info-buying-txt {
+    display: flex;
+    justify-content: center;
+}
+.info-buying .txtitem:first-child {
+    margin-right: 80px;
+}
+.info-buying .txtitem {
+    text-align: center;
+}
+.txtitem .txt01 {
+    color: #666;
+}
+.txtitem .txt01, .txtitem .txtdate {
+    font-size: 12px;
+    line-height: 16px;
+}
+.txtitem .txtdate {
+    font-weight: bold;
+}
+.txtitem .txt01, .txtitem .txtdate {
+    font-size: 12px;
+    line-height: 5px;
+}
+.length-using {
+    background-color: #c4c4c4;
+    height: 1px;
+    margin: 10px auto 0;
+    position: relative;
+    width: 190px;
+}
+.length-percent {
+    background-color: #999;
+    height: 3px;
+    position: relative;
+    top: -1px;
+}
+.info-buying .timeline-txt {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+.info-buying .timeline-txt span {
+    font-weight: bold;
+}
+.info-buying-list {
+    margin-top: 15px;
+}
+.info-buying-list li {
+    color: #666;
+    font-size: 12px;
+    line-height: 17px;
+    margin-bottom: 5px;
+}
+.info-buying-list li span {
+    background-color: #666;
+    border-radius: 50%;
+    display: inline-block;
+    height: 4px;
+    margin: 6px 6px 0 0;
+    vertical-align: top;
+    width: 4px;
+}
+.info-buying-text {
+    display: flex;
+    justify-content: center;
+}
 
+.length-percent::before {
+    left: 0;
+}
+.length-percent::before, .length-percent::after {
+    background-color: #53b859;
+    border-radius: 50%;
+    content: '';
+    height: 8px;
+    position: absolute;
+    top: -3px;
+    width: 8px;
+}
+.length-percent::after {
+    right: 0;
+}
+.length-percent::before, .length-percent::after {
+    background-color: #53b859;
+    border-radius: 50%;
+    content: '';
+    height: 8px;
+    position: absolute;
+    top: -3px;
+    width: 8px;
+}
+.length-using::before {
+    border-top: 1px solid #c4c4c4;
+    border-right: 1px solid #c4c4c4;
+    content: '';
+    height: 6px;
+    position: absolute;
+    transform: rotate(45deg);
+    top: -2px;
+    right: 0;
+    width: 6px;
+}
+
+.info-buying-close::before {
+    transform: rotate(45deg);
+}
+.info-buying-close::before, .info-buying-close:after {
+    background-color: #fff;
+    content: '';
+    height: 13px;
+    left: 9px;
+    position: absolute;
+    top: 4px;
+    width: 2px;
+}
+.info-buying-close::after {
+    transform: rotate(-45deg);
+}
+.info-buying-close::before, .info-buying-close:after {
+    background-color: #fff;
+    content: '';
+    height: 13px;
+    left: 9px;
+    position: absolute;
+    top: 4px;
+    width: 2px;
+}
+#content-wrapper .box-gallery{
+    height: 100%;
+}
+
+.banner-main {
+    position: absolute;
+    display: flex;
+    margin-top: 130px;
+}
+
+.banner-main .banner-left {
+    z-index: 100;
+}
+
+.banner-main .banner-left img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-main .banner-center {
+    z-index: -1;
+}
+
+.banner-main .banner-right {
+    z-index: 100;
+}
+
+.banner-main .banner-right img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-fixed {
+    position: fixed;
+    top: 75px;
+}
+
+.btn-show {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding-top: 320px;
+}
+
+.fade-desc {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.91) 50%, #fff 100%);
+}
+
+.btn-show button {
+    /* width: 100%; */
+    max-width: 335px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    font-size: 14px;
+    color: #212529;
+    text-decoration: none!important;
+    cursor: pointer;
+}

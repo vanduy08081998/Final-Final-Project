@@ -9,7 +9,7 @@
                     <div class="card radius-15 col-md-5 mr-4">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0 text-primary">Thêm mới biển thể</h4>
+                                <h4 class="mb-0 text-primary">Thêm mới thông số</h4>
                             </div>
                             @if (session('message'))
                                 <div class="alert alert-success" role="alert">
@@ -20,7 +20,7 @@
                             <form>
                                 <!-- INput Group -->
                                 <div class="form-group">
-                                    <label for="name">Tên biến thể</label>
+                                    <label for="name">Thông số</label>
                                     <input class="form-control name" name="name" onkeyup="ChangeToSlug();" id="slug"
                                         value="{{ old('name') }}" type="text">
                                 </div>
@@ -32,7 +32,7 @@
                                 </div>
 
                                 <!-- End -->
-                                <button type="reset" data-url="{{ route('add_variants') }}"
+                                <button type="reset" data-url="{{ route('add_variants') }}" style="float: right;"
                                     class="add_variants btn btn-primary radius-30"> <i class="bx bx-cog"></i> Thêm
                                 </button>
 
@@ -46,7 +46,7 @@
                         data-id="{{ $id }}" class="route card radius-15 col-md-6">
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0 text-danger">Danh sách biển thể</h4>
+                                <h4 class="mb-0 text-danger">Thông số thuộc tính</h4>
                             </div>
                             @if (session('message'))
                                 <div class="alert alert-success" role="alert">
@@ -56,10 +56,9 @@
                             <table class="table table-bordered" style="width:100%; text-align: center">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>Tên biến thể</th>
+                                        <th>Tthông số</th>
                                         <th>Slug</th>
-                                        <th>Action</th>
-
+                                        <th>Công cụ</th>
                                     </tr>
                                 </thead>
                                 <tbody id="list_variants">

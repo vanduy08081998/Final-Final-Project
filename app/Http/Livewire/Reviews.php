@@ -123,18 +123,43 @@ class Reviews extends Component
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d h:i:s');
         $order =  Order::where([['user_id', $this->userLoginId],['shipping_status',2]])->get();
         $bought = 0;
+        $count_buy = 0;
+        $new_purchase = 0;
+        $order_buy = '';
         foreach($order as $key => $or){
             if($or->created_at->adddays(30) > $now){
+            $count_product_buy = count(OrderDetail::where([['product_id',$this->product->id],['order_id', $or->id]])->get());
                 foreach($or->products as $pro){
                     if($this->product->id == $pro->id){
+                        $order_details = OrderDetail::where([['product_id',$this->product->id],['order_id', $or->id]])->first();
+                        $order_buy = Order::find($order_details->order_id);
                         $reviews  = Review::where([['product_id',$this->product->id],['customer_id', $this->userLoginId],['review_parent',null]])->get();
                         if(count($reviews)==0){
-                            $bought++;
+                            $bought = 1;
                          }
                     }
                 } 
+                $count_buy += $count_product_buy;
+                
             }
+      
         }
+        $count_old =  Review::where([['product_id',$this->product->id],['customer_id', $this->userLoginId],['review_parent',null]])->first();
+        if($count_old){
+           $count_buy_old = $count_old->count_buy_product;
+        }else{
+            $count_buy_old = 0;
+        }
+        if($count_buy > $count_buy_old){
+            $new_purchase = 1;
+        }
+        if($order_buy != ''){
+            $time_buy = $order_buy->created_at;
+        }else{
+            $time_buy = '';
+        }
+     
+        
         
         $id_user = $this->userLoginId;
         $fivestar = round(count(Review::where([['product_id', $this->product->id],['review_status',1],['review_parent', null],['count_rating',5]])->get())/$all_count_review*100);
@@ -145,7 +170,7 @@ class Reviews extends Component
         $all_count_review = count(Review::where([['product_id', $this->product->id],['review_status',1], ['review_parent',null]])->get());
         $count_review_image = count(Review::where([['product_id', $this->product->id],['review_parent', null],['image', '!=', null],['review_status',1]])->latest('id')->get());
         $count_review_introduce = count(Review::where([['product_id', $this->product->id],['review_parent', null],['introduce', '!=', null],['review_status',1]])->latest('id')->get());
-        return view($view)->with(compact('count_review_image','count_review_introduce','all_list_review','list_image_array','avg','rating_avg','all_count_review','all_review','check','bought','id_user','introduce_review','fivestar','fourstar','threestar','twostar','onestar'));
+        return view($view)->with(compact('count_review_image','count_review_introduce','all_list_review','list_image_array','avg','rating_avg','all_count_review','all_review','check','time_buy','count_buy','new_purchase','bought','id_user','introduce_review','fivestar','fourstar','threestar','twostar','onestar'));
     }
     public function ReplyRating ($review_id, $product_id){
         if(!Auth::user()){
@@ -203,5 +228,13 @@ class Reviews extends Component
     public function remove_review_child($review_id){
         Review::find($review_id)->forceDelete();
         $this->emit('render');
+    }
+    public function info_buy($id){
+        $this->dispatchBrowserEvent('info_buy', [
+            'id' => $id,
+        ]);
+    }
+    public function none_info_buy(){
+        $this->dispatchBrowserEvent('none_info_buy');
     }
 }
