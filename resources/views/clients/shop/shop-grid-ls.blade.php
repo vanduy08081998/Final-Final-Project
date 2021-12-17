@@ -198,5 +198,19 @@
             })
       }
 
+      function searchBrand(){
+
+        $.ajax({
+              type: "POST",
+              url: "{{ route('clients.products.searchbybrand') }}",
+              data: $('#form-search-brand').serialize(),
+              success: function (response) {
+                  console.log(response)
+              }
+          });
+
+
+      }
+
     </script>
 @endpush

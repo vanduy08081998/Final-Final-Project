@@ -69,9 +69,21 @@ class ProductController extends Controller
       $products = Product::orderByDESC('id')
         ->where('product_name', 'REGEXP', $request->key)->where('product_id_category', $request->id)->get();
     }
-
-
     return view('clients.shop.details.search', compact('products'));
+  }
+
+  public function searchByBrand(Request $request){
+
+    if ($request->brand_key == null) {
+      $products = Product::all();
+    } else {
+      if($request->brandbox == null){
+        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->get();
+      }else{
+        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->whereIn('product_id_brand', $request->brandbox)->get();
+      }
+    }
+    return response()->json($products);
   }
 
   public function shopList()

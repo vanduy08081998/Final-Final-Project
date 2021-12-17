@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="editAddressModal{{ $id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="editAddressDefaultModal{{ $id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <?php $shipping = \App\Models\Shipping::where('id', $id)->first() ?>
     <div class="modal-dialog">
@@ -8,7 +8,6 @@
                 <form action="{{route('shippings.update', ['shipping' => $shipping->id])}}" method="post">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="id_address_edit" class="id_address_edit" value="{{ $id }}">
                     <div class="align-middle add-ship mb-3">
                         <a class="add-shipping" href="{{route('account.account-address')}}"><i
                                 class="fa fa-list fa-lg aria-hidden"></i> Danh sách địa chỉ</a>
@@ -38,7 +37,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label">Tỉnh/thành phố</label>
-                                <select class="form-control choose-edit-{{ $id }} province" data-edit="province"  id="province-edit-{{ $id }}" name="province_id" required>
+                                <select class="form-control choose-default-edit province" data-edit="province" id="province-default-edit" name="province_id" required>
                                     <option value="">Chọn tỉnh, thành phố</option>
                                     @foreach ($provinces as $province)
                                     <option {{ $province->id == $shipping->province_id ? 'selected' : ''}} value="{{
@@ -48,7 +47,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label">Quận/huyện</label>
-                                <select class="form-control choose-edit-{{ $id }} district" data-edit="district"  id="district-edit-{{ $id }}" name="district_id" required>
+                                <select class="form-control choose-default-edit district" data-edit="district"  id="district-default-edit" name="district_id" required>
                                     <option value="">Chọn quận, huyện</option>
                                     @foreach ($districts as $district)
                                     <option {{ $district->id == $shipping->district_id ? 'selected' : ''}} value="{{
@@ -58,7 +57,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label class="form-label">Xã/Phường/Thị trấn</label>
-                                <select class="form-control" id="ward-edit-{{ $id }}" name="ward_id" required>
+                                <select class="form-control" id="ward-default-edit" name="ward_id" required>
                                     <option value="">Chọn xã, phường</option>
                                     @foreach ($wards as $ward)
                                     <option {{ $ward->id == $shipping->ward_id ? 'selected' : ''}} value="{{ $ward->id
@@ -102,3 +101,4 @@
         </div>
     </div>
 </div>
+

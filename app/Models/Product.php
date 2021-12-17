@@ -14,16 +14,16 @@ class Product extends Model
 
   protected $fillable = [
 
-    'product_name', 
-    'product_slug', 
-    'product_image', 
-    'product_gallery', 
-    'meta_title', 
-    'meta_description', 
-    'meta_keywords', 
-    'product_id_category', 
-    'product_attribute', 
-    'unit_price', 
+    'product_name',
+    'product_slug',
+    'product_image',
+    'product_gallery',
+    'meta_title',
+    'meta_description',
+    'meta_keywords',
+    'product_id_category',
+    'product_attribute',
+    'unit_price',
     'discount',
     'shipping_type',
     'product_unit',
@@ -88,7 +88,7 @@ class Product extends Model
   {
     return $this->belongsTo(Wishlist::class, 'id_prod');
   }
-  
+
   public function orders()
   {
     return $this->belongsToMany(Order::class, 'order_details');
@@ -103,5 +103,13 @@ class Product extends Model
     return $this->hasMany(Review::class, 'product_id')->latest();
   }
 
-
+  /**
+   * Get the brand that owns the Product
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+  public function brand()
+  {
+      return $this->belongsTo(Brand::class, 'product_id_brand');
+  }
 }
