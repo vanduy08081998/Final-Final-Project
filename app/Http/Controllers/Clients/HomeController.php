@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     public function index(){
-        $slide = Banner::orderByDESC('id')->get();
+        $slide = Banner::orderByDESC('id')->where('banner_type', '0')->get();
+        $banner = Banner::orderByDESC('id')->where('banner_type', '1')->get();
         $product = Product::orderByDESC('id')->get();
         $highlight = Product::orderByDESC('id')->get();
         $brand = Brand::orderByDESC('id')->get();
@@ -26,7 +27,8 @@ class HomeController extends Controller
             'slide' => $slide,
             'product' => $product,
             'highlight' => $highlight,
-            'brand' => $brand
+            'brand' => $brand,
+            'banner' => $banner
         ]);
     }
 

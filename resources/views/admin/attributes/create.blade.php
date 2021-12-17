@@ -6,8 +6,8 @@
 @section('content')
     <div class="content container-fluid">
 
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row justify-content-center">
+            <div class="col-sm-7">
                 <div class="card radius-15">
                     <div class="card-body">
 
@@ -37,7 +37,7 @@
                             </div>
                             <!-- End -->
                             <div class="col-md-12 mb-3">
-                                <button type="submit" class="btn btn-primary radius-30"> <i class="bx bx-cog"></i> Thêm
+                                <button type="submit" style="float: right;" class="btn btn-primary radius-30"> <i class="bx bx-cog"></i> Thêm
                                 </button>
                             </div>
                         </form>
