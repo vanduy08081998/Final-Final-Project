@@ -6,7 +6,7 @@
             </a>
         </li>
     </td>
-    <td>{!! Str::limit($value->meta_desc, 30, '...') ?? '' !!}</td>
+    <td>{!! Str::limit($value->meta_desc, 60, '...') ?? '' !!}</td>
     <td>
         <div class="btn-group">
             <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
