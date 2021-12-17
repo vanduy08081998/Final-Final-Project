@@ -191,7 +191,7 @@ $category = Category::all();
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
-                                        <a href="{{ route('shop.products_category', $cate->id_cate) }}"
+                                        <a href="{{ route('shop.products_category', $cate->category_slug) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                             <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}

@@ -129,7 +129,7 @@
             <li><a href="{{ route('list_customer') }}">Danh sách</a></li>
         </ul>
     </li>
-     <li class="submenu">
+    <li class="submenu">
         <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Đánh giá và bình luận</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
@@ -144,6 +144,22 @@
         <a href="#"><i class="fa fa-shopping-cart"></i> <span>Hóa đơn</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('orders.index') }}">Danh sách</a></li>
+        </ul>
+    </li>
+    <li class="submenu">
+        <a href="#"><i class="fa fa-truck" aria-hidden="true"></i> <span>Vận đơn</span> <span
+                class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="#">Danh sách</a></li>
+        </ul>
+    </li>
+    <li class="menu-title">
+        <span>Thống kê</span>
+    </li>
+    <li class="submenu">
+        <a href="#"><i class="fa fa-shopping-cart"></i> <span>Doanh thu</span> <span class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('StatisticsController') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="submenu">

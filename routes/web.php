@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BannerController;
@@ -71,7 +72,7 @@ Route::prefix('/')->group(function () {
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
-        Route::get('/products-category/{id_cate}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
+        Route::get('/products-category/{category_slug}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
         Route::post('/short', [ProductController::class, 'productShort'])->name('clients.products.short');
         Route::post('/searchByCate', [ProductController::class, 'searchByCate'])->name('clients.products.searchbycate');
@@ -149,6 +150,9 @@ Route::prefix('/')->group(function () {
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
+    //
+    Route::get('/StatisticsController', [StatisticsController::class, 'revenue'])->name('StatisticsController');
+    Route::post('/list_statistics_date', [StatisticsController::class, 'revenue'])->name('list_statistics_date');
 
     // Categories
     Route::resource('/categories', CategoryController::class);
