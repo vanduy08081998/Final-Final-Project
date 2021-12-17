@@ -157,7 +157,7 @@
         </ul>
     </li>
     <li class="menu-title">
-        <span>Đánh giá</span>
+        <span>Đánh giá và bình luận</span>
     </li>
     <li class="submenu">
         <a href="#"
