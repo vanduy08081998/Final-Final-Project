@@ -58,7 +58,8 @@ $category = Category::all();
                             đơn hàng</a></li>
                 </ul>
             </div>
-            <div data-url="{{route('wishlist.show_icon_wishlist')}}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
+                class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
@@ -144,8 +145,7 @@ $category = Category::all();
                                 <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
                                         Tài khoản</a></li>
                                 @if (Auth::user()->position == 'admin')
-                                    <li><a href="{{ route('admin.index') }}"><i
-                                                class="fas fa-user-shield"></i>
+                                    <li><a href="{{ route('admin.index') }}"><i class="fas fa-user-shield"></i>
                                             Quản trị admin</a></li>
                                 @endif
                                 <li>
@@ -265,25 +265,26 @@ $category = Category::all();
                     </ul>
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown active">
-                            <a class="nav-link" href="{{ route('clients.index') }}"><i
+                        <li class="nav-item dropdown {{ request()->is('/') ? 'active' : '' }}">
+                            <a class="nav-link " href="{{ route('clients.index') }}"><i
                                     class="ci-home"></i> Trang
                                 chủ</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.about') }}"
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid') }}"><i class="ci-lable"></i> Cửa hàng</a>
+                        <li class="nav-item {{ request()->is('shop/shop-grid') ? 'active' : '' }}"><a
+                                class="nav-link" href="{{ route('shop.shop-grid') }}"><i
+                                    class="ci-lable"></i> Cửa hàng</a>
                         </li>
 
-                        <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
-                                    class="ci-store"></i>
+                        <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}"><a class="nav-link"
+                                href="{{ route('clients.blog') }}"><i class="ci-store"></i>
                                 Bài viết</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.contact') }}"
                                 data-bs-auto-close="outside"><i class="ci-phone"></i> Liên hệ và Phản hồi</a>
                         </li>

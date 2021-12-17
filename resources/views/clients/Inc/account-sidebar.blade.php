@@ -29,11 +29,12 @@
 
         <div class="d-lg-block collapse" id="account-menu">
             <ul class="list-unstyled mb-0">
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 {{ request()->is('account/order-list') ? 'active' : '' }}"
                         href="{{ route('account.order-list') }}"><i class="ci-bag opacity-60 me-2"></i>Đơn hàng<span
                             class="fs-sm text-muted ms-auto">1</span></a></li>
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3 active"
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ request()->is('wishlist/list') ? 'active' : '' }}"
                         href="{{ route('account.wishlist') }}">
                         <i class="ci-heart opacity-60 me-2"></i>Danh sách yêu thích
                         <span
@@ -42,7 +43,7 @@
                 </li>
 
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3"
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ request()->is('account/account-notification') ? 'active' : '' }}"
                         href="{{ route('account.notification') }}">
                         <i class="far fa-bell opacity-60 me-2"></i>Thông báo
                         <span class="fs-sm text-muted ms-auto">{{ Auth::user()->notification->count() }}</span>
@@ -53,20 +54,22 @@
                 <h3 class="fs-sm mb-0 text-muted">Cài đặt tài khoản</h3>
             </div>
             <ul class="list-unstyled mb-0">
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 {{ request()->is('account/account-info') ? 'active' : '' }}"
                         href="{{ route('account.account-info') }}"><i class="ci-user opacity-60 me-2"></i>Thông tin
                         cá
                         nhân</a></li>
-                <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                <li class="border-bottom mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3  {{ request()->is('account/account-address') ? 'active' : '' }}"
                         href="{{ route('account.account-address') }}"><i class="ci-location opacity-60 me-2"></i>Địa
                         chỉ
                         giao nhận</a></li>
-                <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
+                <li class="mb-0"><a
+                        class="nav-link-style d-flex align-items-center px-4 py-3 {{ request()->is('account/account-payment') ? 'active' : '' }}"
                         href="{{ route('account.account-payment') }}"><i class="ci-card opacity-60 me-2"></i>Phương
                         thức
                         thanh toán</a></li>
-                <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3"
-                        href="account-signin.html"><i class="ci-sign-out opacity-60 me-2"></i>Đăng xuất</a></li>
+
             </ul>
         </div>
     </div>
