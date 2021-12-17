@@ -90,6 +90,26 @@
                                         </div>
 
                                     </div>
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label for="name">Loại banner</label>
+                                            <select name="banner_type" class="form-control">
+                                                <option value="">
+                                                    <span>Loại banner</span>
+                                                </option>
+                                                <option value="0">
+                                                    <span>Banner chính</span>
+                                                </option>
+                                                <option value="1">
+                                                    <span>Banner Quảng cáo</span>
+                                                </option>
+                                            </select>
+                                            @error('banner_type')
+                                                <span class="text-danger">{{ $errors->first('banner_type') }}</span>
+                                            @enderror
+                                        </div>
+                                        <input class="form-control" name="status" value="0" value="{{ old('status') }}" type="hidden">
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -45,7 +45,6 @@ class BannerController extends Controller
      */
     public function store(AddBannerRequest $request)
     {
-
         $data = $request->validated();
         $data['banner_img'] = $this->generalService->uploadImage($this->path ,$request->banner_img);
         Banner::create($data);

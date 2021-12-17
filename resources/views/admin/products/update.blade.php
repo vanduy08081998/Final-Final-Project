@@ -494,8 +494,6 @@
                     </div>
                   </li>
                 </ul>
-
-
               </div>
               <div class="card-body">
                 <div class="is__attribute">

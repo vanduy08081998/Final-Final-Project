@@ -281,7 +281,7 @@
                                         <label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
                                     </div><span class="fs-xs text-muted">34</span>
                                 </li>
-                                
+
                             </ul>
                         </div>
                         <!-- Filter by Color-->
@@ -375,19 +375,9 @@
                                 class="ci-view-list"></i></a></div>
                 </div>
                 <!-- Products grid-->
-                <div class="py-sm-2">
-                    <div
-                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
-                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
-                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
-                            alt="Shop Converse">
-                    </div>
-                </div>
+
                 <div class="row mx-n2">
-                <h4>Tất cả sản phẩm thuộc {{$category_id->category_name}}</h4>
+                <h4>{{$category_id->category_name}}</h4>
                     <!-- Product-->
                     @foreach ($product_category as $pro)
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
@@ -402,7 +392,7 @@
                             <input type="hidden" id="wishlist_productimg{{$pro->id}}" value="{{ url( $pro->product_image) }}">
 
                                 <a type="hidden" id="wishlist_producturl{{$pro->id}}" href="{{ route('shop.product-details', $pro->product_slug) }}">
-                                
+
                                 </a>
                                 <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;" onclick="add_compare({{ $pro->id }})">
                                 <i class="ci-compare me-1"></i>So sánh
@@ -917,7 +907,7 @@
                                     class="ci-arrow-right ms-2"></i></a></li>
                     </ul>
                 </nav>
-                @include('clients.Inc.compare');
+                @include('clients.Inc.compare')
             </section>
         </div>
     </div>
@@ -960,14 +950,14 @@
 
         if(matches.length){
               alert('Sản phẩm đã có trong so sánh');
-            
+
               localStorage.setItem('compare', JSON.stringify(old_data));
-         $('#sosanh').modal('show');    
+         $('#sosanh').modal('show');
         }else{
-           
+
             if(old_data.length<=2){
                 old_data.push(newItem);
-              
+
                 $('#row_compare').find('.anh').append(`
                     <div class="col-sm-4" id="row_compare`+newItem.id+`">
                         <span><img width="200px" style="padding: 10px;" src="`+newItem.img+`"></span>
@@ -978,17 +968,17 @@
                             <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(`+id+`)">Xóa so sánh</a>
                         </div>
                         <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
-                        <div> 
+                        <div>
                         <ul>
                         <li>`+newItem.content+`</li>
                         </ul>
                         </div>
                     </div>
                 `);
-            
+
             }
          localStorage.setItem('compare', JSON.stringify(old_data));
-         $('#sosanh').modal('show');     
+         $('#sosanh').modal('show');
         }}
     </script>
 @endpush

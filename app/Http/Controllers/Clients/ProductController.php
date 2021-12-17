@@ -44,7 +44,6 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
       'category_id' => $category_id,
-
     ]);
   }
   public function shopGrid()
@@ -61,6 +60,18 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
     ]);
+  }
+
+  public function searchByCate(Request $request){
+    if($request->key == ''){
+      $products = Product::all();
+    }else{
+      $products = Product::orderByDESC('id')
+        ->where('product_name', 'REGEXP', $request->key)->where('product_id_category', $request->id)->get();
+    }
+
+
+    return view('clients.shop.details.search', compact('products'));
   }
 
   public function shopList()
@@ -113,7 +124,7 @@ class ProductController extends Controller
       }else{
         $price = $product->unit_price;
       }
-      
+
       $product_quantity = $request->product_quantity;
       $quantity = $product->quantity;
       return response()->json([
@@ -164,7 +175,16 @@ class ProductController extends Controller
         'specifications' => $specifications,
         'variant_image' => $v_image
       ]);
-        
+
     }
+  }
+
+  public function productShort(Request $request){
+    if($request->value == 'all'){
+      $products = Product::orderBy('id', 'DESC')->get();
+    }else{
+      $products = Product::orderBy($request->value, $request->orderby)->get();
+    }
+    return view('clients.shop.details.product-short', compact('products'));
   }
 }

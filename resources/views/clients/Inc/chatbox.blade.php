@@ -1,10 +1,7 @@
-<section class="chatbox-custom">
+{{-- <section class="chatbox-custom">
     <button class="chatbox-open">
         <i class="fa fa-comment fa-2x" aria-hidden="true"></i>
       </button>
-    {{-- <button class="chatbox-close">
-        <i class="fa fa-close fa-2x" aria-hidden="true"></i>
-      </button> --}}
     <section class="chatbox-popup">
       <header class="chatbox-popup__header">
         <aside style="flex:2">
@@ -18,7 +15,6 @@
         </aside>
       </header>
       <main class="chatbox-popup__main">
-        {{-- messeges --}}
       </main>
       <footer class="chatbox-popup__footer">
         <aside style="flex:1;color:#888;text-align:center;">
@@ -32,5 +28,5 @@
         </aside>
       </footer>
     </section>
-</section>
-<script type="text/javascript">!function(){var e={"buttons":[{"type":"messenger","token":"https://www.facebook.com/BigDeal-106183301182718"}],"color":"#F0645A","position":"right","bottomSpacing":"50","callToActionMessage":"BigDeal Xin chào !","displayOn":"everywhere","lang":"en"},t=document.location.protocol+"//bothelp.io",o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=t+"/widget-folder/widget-page.js",o.onload=function(){new BhWidgetPage.init(e)};var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(o,n)}();</script>
+</section> --}}
+<script type="text/javascript">!function(){var e={"buttons":[{"type":"messenger","token":"https://www.facebook.com/BigDeal-106183301182718"}],"color":"#F0645A","position":"right","bottomSpacing":"60","callToActionMessage":"BigDeal Xin chào !","displayOn":"everywhere","lang":"en"},t=document.location.protocol+"//bothelp.io",o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=t+"/widget-folder/widget-page.js",o.onload=function(){new BhWidgetPage.init(e)};var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(o,n)}();</script>
