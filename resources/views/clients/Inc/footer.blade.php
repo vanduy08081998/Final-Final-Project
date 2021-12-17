@@ -7,7 +7,7 @@
                     <ul class="widget-list">
                         @foreach ($category as $cate)
                             <li class="widget-list-item"><a class="widget-list-link"
-                                    href="{{ route('shop.products_category', $cate->category_slug) }}">{{ $cate->category_name }}</a>
+                                    href="{{ route('shop.shop-grid', $cate->category_slug) }}">{{ $cate->category_name }}</a>
                             </li>
                         @endforeach
 

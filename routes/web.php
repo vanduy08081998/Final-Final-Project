@@ -67,11 +67,10 @@ Route::prefix('/')->group(function () {
         Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
     });
     Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+        Route::get('/shop-grid/{id}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
-        Route::get('/products-category/{id_cate}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
         Route::post('/short', [ProductController::class, 'productShort'])->name('clients.products.short');
         Route::post('/searchByCate', [ProductController::class, 'searchByCate'])->name('clients.products.searchbycate');
