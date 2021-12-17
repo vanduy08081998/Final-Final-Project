@@ -491,3 +491,39 @@ button.carousel-control-next.show-next {
     /* text-align: center; */
 }
 
+#content-wrapper .box-gallery{
+    height: 100%;
+}
+
+.banner-main {
+    position: absolute;
+    display: flex;
+    margin-top: 130px;
+}
+
+.banner-main .banner-left {
+    z-index: 100;
+}
+
+.banner-main .banner-left img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-main .banner-center {
+    z-index: -1;
+}
+
+.banner-main .banner-right {
+    z-index: 100;
+}
+
+.banner-main .banner-right img:hover{
+    transform: scale(1.1);
+    transition: 0.3s
+}
+
+.banner-fixed {
+    position: fixed;
+    top: 75px;
+}
