@@ -10,6 +10,8 @@
             </div>
             <form style="margin-left:20px">
                 <div class="count-rating-hidden">
+                    <input type="hidden" class="count_buy" name="count_buy" value="{{ $count_buy }}">
+                    <input type="hidden" class="time_buy" name="time_buy" value="{{ $time_buy }}">
                     <input type="hidden" class="count-rating" name="count-rating" value="none">
                     <input type="hidden" class="product_id" name="count-rating" value="{{ $product->id }}">
                 </div>
@@ -56,7 +58,7 @@
                     </div>
 
                     <div class="textarea border-textarea">
-                        <textarea class="review-content content-rating"
+                        <textarea class="review-content content-rating form-validated"
                             placeholder="Mời bạn chia sẻ thêm một số cảm nhận ..." id="content_rating"
                             rows="3"></textarea>
                         <div style="font-size:14px" class="d-flex error-review">
@@ -82,7 +84,7 @@
 
 
                     <div class="d-flex justify-content-center mb-2">
-                        <span style="font-size:14px">Để đánh giá được duyệt, quý khách vui lòng tuân thủ 
+                        <span style="font-size:14px">Để đánh giá được duyệt, quý khách vui lòng tuân thủ
                             <span class="text-primary">Quy định đánh giá</span></span>
                     </div>
                 </div>
@@ -90,4 +92,3 @@
         </div>
     </div>
 </div>
-

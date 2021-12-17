@@ -89,6 +89,7 @@ Route::prefix('/')->group(function () {
     Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
     Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
     Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+    Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
     Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
     Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
     Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
