@@ -116,7 +116,7 @@ class Users extends Component
 
         if($user){
           $this->dispatchBrowserEvent('CloseUpdatePasswordModal');
-          $this->alertSuccess('Cập nhật mật khẩu thành công');
+          $this->alertSuccess('Cập nhật mật khẩu thành công. Vui lòng đăng nhập lại');
          }
     }
 

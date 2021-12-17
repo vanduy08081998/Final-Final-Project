@@ -46,6 +46,7 @@ window.addEventListener('OpenUpdatePasswordModal', function(event) {
 
 window.addEventListener('CloseUpdatePasswordModal', function(event) {
     $('.updatePassword').modal('hide');
+    $('.user_logout').submit();
 });
 
 window.addEventListener('CloseModal', function(event){

@@ -18,6 +18,13 @@ window.addEventListener('show_text', function(event) {
    $('.text_review').focus();
 })
 
+window.addEventListener('info_buy', function(event) {
+    let id = event.detail.id;
+     $('.info_buy_'+id).removeClass('d-none');
+ })
+ window.addEventListener('none_info_buy', function(event) {
+     $('.info-buying').addClass('d-none');
+ })
 
 
 

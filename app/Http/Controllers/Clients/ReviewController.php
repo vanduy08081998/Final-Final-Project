@@ -58,8 +58,14 @@ class ReviewController extends Controller
             'image'=> $array_name_image,
             'content_rating' => $request->content_rating,
             'introduce' => $request->introduce,
+            'count_buy_product' => $request->count_buy,
+            'time_buy' => $request->time_buy,
     
             );
+        $review_old = Review::where([['product_id',$request->product_id],['customer_id', Auth::user()->id],['review_parent',null]])->first();
+        if($review_old){
+            $review_old->forceDelete();
+        };
         Review::create($data);
         return response('Thành công');
     }
