@@ -9,6 +9,7 @@ use App\Models\Provinces;
 use App\Models\Districts;
 use App\Models\Wards;
 use App\Models\Shipping;
+use App\Models\Review;
 use Session;
 use Auth;
 
@@ -33,6 +34,10 @@ class AccountController extends Controller
         $wards = Wards::all();
         $user = User::find(Auth()->user()->id);
         return view('clients.account.account-profile')->with(compact('provinces','districts','wards','user'));
+    }
+    public function accountReview(){
+        $reviews  = Review::where('customer_id', Auth::user()->id)->get();
+        return view('clients.account.account-review')->with(compact('reviews'));
     }
 
     public function accountAddress() {

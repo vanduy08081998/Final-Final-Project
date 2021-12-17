@@ -1,6 +1,6 @@
 <div class="modal fade show_image_review" wire:ignore.self id="updatePhoneModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div style="max-width: 65%" class="modal-dialog" role="document">
+    <div style="max-width: 70%" class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title-review text-primary mt-2" id="exampleModalLongTitle"><i class="fas fa-th-list"></i> Xem tất cả ảnh</h6>
