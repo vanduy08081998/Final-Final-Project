@@ -29,13 +29,13 @@ class ProductController extends Controller
 
     ]);
   }
-  public function productsCategory($id_cate)
+  public function productsCategory($category_slug)
   {
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
     $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
-    $product_category = Product::where('product_id_category', $id_cate)->orderByDESC('id')->get();
-    $category_id = Category::where('id_cate', $id_cate)->first();
+    $product_category = Product::join('categories', 'product_id_category', '=', 'categories.id_cate')->where('category_slug', $category_slug)->orderByDESC('id')->get();
+    $category_id = Category::where('category_slug', $category_slug)->first();
     $brands = Brand::orderByDESC('id')->get();
     return view('clients.shop.product-category', [
       'min' => $min,

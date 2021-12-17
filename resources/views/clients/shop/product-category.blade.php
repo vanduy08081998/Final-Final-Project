@@ -396,7 +396,6 @@
                                 @foreach ($pro->variants as $pr)
                                     <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
                                         value="{{ $pr->SKU }}">
-
                                 @endforeach
                                 <input type="hidden" value="{{ $pro->id }}">
                                 <input type="hidden" id="wishlist_productname{{ $pro->id }}"
@@ -494,75 +493,81 @@
     </div>
 @endsection
 @push('script')
-
-    <script>
-        function delete_compare(id) {
-            if (localStorage.getItem('compare') != null) {
-                var data = JSON.parse(localStorage.getItem('compare'));
-                var index = data.filter(item => item.id != id);
-                localStorage.setItem('compare', JSON.stringify(index));
-                document.getElementById("row_compare" + id).remove();
-            }
+<script>
+    function delete_compare(id) {
+        if(localStorage.getItem('compare')!=null){
+            var data =JSON.parse(localStorage.getItem('compare'));
+            var index = data.filter(item => item.id != id);
+               localStorage.setItem('compare', JSON.stringify(index));
+               document.getElementById("row_compare"+id).remove();
         }
+    }
+    function add_compare(product_id){
+        $('#title-compare').innerText='Chỉ cho phép so sánh 3 sản phẩm';
+        var id = product_id;
+        var name = document.getElementById('wishlist_productname'+id).value;
+        var content = document.getElementById('wishlist_productsku'+id).value;
+       //  var value = document.getElementById('wishlist_skuvalue'+id).value;
+        var price = document.getElementById('wishlist_productprice'+id).value;
+        var img = document.getElementById('wishlist_productimg'+id).value;
+        var url = document.getElementById('wishlist_producturl'+id).href;
+        var newItem = {
+           'url':url,
+           'id':id,
+           'name':name,
+           'price':price,
+           'img':img,
+           'content':content
+       }
+       if(localStorage.getItem('compare')==null){
+           localStorage.setItem('compare', '[]');
+       }
+       var old_data = JSON.parse(localStorage.getItem('compare'));
+       var matches = $.grep(old_data, function(obj){
+           return obj.id == id;
+       })
 
-        function add_compare(product_id) {
-            $('#title-compare').innerText = 'Chỉ cho phép so sánh 3 sản phẩm';
-            var id = product_id;
-            var name = document.getElementById('wishlist_productname' + id).value;
-            var content = document.getElementById('wishlist_productsku' + id).value;
-            var price = document.getElementById('wishlist_productprice' + id).value;
-            var img = document.getElementById('wishlist_productimg' + id).value;
-            var url = document.getElementById('wishlist_producturl' + id).href;
-            var newItem = {
-                'url': url,
-                'id': id,
-                'content': content,
-                'name': name,
-                'price': price,
-                'img': img
+       if(matches.length){
+             swal("Sản phẩm đã có trong so sánh!", "Xin mời bạn chọn sản phẩm khác");
+           //   alert('Sản phẩm đã có trong so sánh');
+             localStorage.setItem('compare', JSON.stringify(old_data));
+        $('#sosanh').modal('show');
+       }
+       else{
+           if(old_data.length<=2){
+               old_data.push(newItem);
+              var html = ''; // newItem.content
+               let list_compare = '';
 
-            }
-            if (localStorage.getItem('compare') == null) {
-                localStorage.setItem('compare', '[]');
-            }
-            var old_data = JSON.parse(localStorage.getItem('compare'));
-            var matches = $.grep(old_data, function(obj) {
-                return obj.id == id;
-            })
+              html+=   `<div class="col-sm-4" id="row_compare`+newItem.id+`">
+                       <span><img width="200px" style="padding: 10px;" src="`+newItem.img+`"></span>
+                       <div style="padding: 10px;">
+                           <span><a href="`+newItem.url+`" style="color:black;">`+newItem.name+`</a></span>
+                           <p> <b style="text-align:center">`+newItem.price+`VNĐ</b> </p>
+                           <a href="`+newItem.url+`" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
+                           <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(`+id+`)">Xóa so sánh</a>
+                       </div>
+                       <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
+                       <div>
+                       <ul class="compare-list-attribute-${newItem.id}">
 
-            if (matches.length) {
-                alert('Sản phẩm đã có trong so sánh');
-
-                localStorage.setItem('compare', JSON.stringify(old_data));
-                $('#sosanh').modal('show');
-            } else {
-
-                if (old_data.length <= 2) {
-                    old_data.push(newItem);
-
-                    $('#row_compare').find('.anh').append(`
-                    <div class="col-sm-4" id="row_compare` + newItem.id + `">
-                        <span><img width="200px" style="padding: 10px;" src="` + newItem.img + `"></span>
-                        <div style="padding: 10px;">
-                            <span><a href="` + newItem.url + `" style="color:black;">` + newItem.name + `</a></span>
-                            <p> <b style="text-align:center">` + newItem.price + `VNĐ</b> </p>
-                            <a href="` + newItem.url +
-                        `" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
-                            <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(` + id + `)">Xóa so sánh</a>
-                        </div>
-                        <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
-                        <div>
-                        <ul>
-                        <li>` + newItem.content + `</li>
-                        </ul>
-                        </div>
-                    </div>
-                `);
-
-                }
-                localStorage.setItem('compare', JSON.stringify(old_data));
-                $('#sosanh').modal('show');
-            }
-        }
-    </script>
+                       </ul>
+                       </div>
+                   </div>`
+               //foreach item conten ra gắn vào list_compare
+               $.each(JSON.parse(newItem.content), function(index, value){
+                   list_compare += `<li>${value.specifications}: ${value.value}</li>`
+              })
+               $('#row_compare').find('.anh').append(html);
+              //gắn list compare vào html
+              $(`.compare-list-attribute-${newItem.id}`).html(list_compare)
+           }
+           else{
+               swal("Chỉ có thể so sánh tối đa 3 sản phẩm");
+           }
+        localStorage.setItem('compare', JSON.stringify(old_data));
+        $('#sosanh').modal('show');
+       }}
+   </script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush

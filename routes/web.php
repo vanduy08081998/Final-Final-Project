@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BannerController;
@@ -149,6 +150,9 @@ Route::prefix('/')->group(function () {
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
     Route::get('/', [HomeController::class, 'index'])->name('admin.index');
+    //
+    Route::get('/StatisticsController', [StatisticsController::class, 'revenue'])->name('StatisticsController');
+    Route::post('/list_statistics_date', [StatisticsController::class, 'revenue'])->name('list_statistics_date');
 
     // Categories
     Route::resource('/categories', CategoryController::class);
