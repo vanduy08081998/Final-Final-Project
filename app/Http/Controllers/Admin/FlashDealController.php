@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use App\Models\FlashDeal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 
 class FlashDealController extends Controller
 {
@@ -51,13 +53,32 @@ class FlashDealController extends Controller
             $flashdeal->date_end = strtotime($var_date[1]);
         }
 
-        $flashdeal->save();
-
-        foreach($request->product_id as $key => $item){
-            FlashDeal::find($flashdeal->id)->products()->attach($item);
+        $flash_deal_array = array();
+        $items = array();
+        foreach(DB::table('flash_deals_products')->get() as $key => $val) {
+            array_push($flash_deal_array, $val->product_id);
         }
 
-        return redirect()->route('flash-deals.index');
+   
+        $flag = true;
+        foreach($request->product_id as $key => $item){
+            if(in_array($item, $flash_deal_array)){
+                $flag = false;
+                array_push($items,$item);
+            }else{
+                $flag = true;
+                $flashdeal->save();
+                FlashDeal::find($flashdeal->id)->products()->attach($item);
+            }
+            
+        }
+
+        if($flag == false){
+            return redirect()->back()->with('message',$items);
+        }else{
+            Toastr::success('Thêm thành công', 'Chúc mừng');
+            return redirect()->route('flash-deals.index');
+        }      
     }
 
     /**
@@ -101,14 +122,30 @@ class FlashDealController extends Controller
             $flash_deal->date_start = strtotime($var_date[0]);
             $flash_deal->date_end = strtotime($var_date[1]);
         }
+        $flash_deal_array = array();
+        $items = array();
+        foreach(DB::table('flash_deals_products')->where('flash_deal_id','!=', $flash_deal->id)->get() as $key => $val) {
+            array_push($flash_deal_array, $val->product_id);
+        }
 
-        $flash_deal->save();
-
-        
-        $flash_deal->products()->sync($request->product_id);
-       
-
-        return redirect()->route('flash-deals.index');
+   
+        $flag = true;
+        foreach($request->product_id as $key => $item){
+            if(in_array($item, $flash_deal_array)){
+                $flag = false;
+                array_push($items,$item);
+            }else{
+                $flag = true;
+                $flash_deal->save();
+                $flash_deal->products()->sync($request->product_id);
+            }
+        }
+        if($flag == false){
+            return redirect()->back()->with('message',$items);
+        }else{
+            Toastr::success('Sửa thành công', 'Chúc mừng');
+            return redirect()->route('flash-deals.index');
+        }   
     }
 
     /**

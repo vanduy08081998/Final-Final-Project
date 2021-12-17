@@ -49,7 +49,7 @@
         <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span> Bài viết</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="{{ route('blogs.index') }}"">Bài viết</a></li>
+            <li><a href="{{ route('blogs.index') }}">Bài viết</a></li>
             <li><a href=" {{ route('blogs.create') }}">Viết bài</a></li>
 
         </ul>
@@ -129,11 +129,11 @@
             <li><a href="{{ route('list_customer') }}">Danh sách</a></li>
         </ul>
     </li>
-    <li class="submenu">
+     <li class="submenu">
         <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Đánh giá và bình luận</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="{{ route('comment-review') }}">Danh sách</a></li>
+            <li><a href="#">Danh sách</a></li>
             <li><a href="{{ route('review-admin.index') }}">Đánh giá</a></li>
         </ul>
     </li>

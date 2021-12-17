@@ -49,15 +49,15 @@
               <label>Sản phẩm</label>
               <select class="form-control" id="product_picker" name="product_id[]" multiple="multiple"
                 data-live-search="true">
-                @foreach ($products as $product)
+                <?php $array = array(); ?>
                 @foreach ($flash_deal->products as $item)
-                <option value="{{ $product->id }}" @if ($product->id == $item->id) selected @endif>{{
+                  <?php array_push($array, $item->id); ?>
+                @endforeach
+                @foreach ($products as $product)
+                <option value="{{ $product->id }}" @if (in_array($product->id, $array)) selected @endif>{{
                   $product->product_name }}</option>
                 @endforeach
-                @endforeach
               </select>
-            </div>
-
 
             <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"><i class="fa fa-check"></i>Cập
               nhật chiến

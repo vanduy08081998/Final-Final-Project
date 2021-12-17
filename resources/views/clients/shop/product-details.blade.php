@@ -49,7 +49,8 @@
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                    @include('clients.shop.details.form-select-attribute')
+                                    {{-- @include('clients.shop.details.form-select-attribute') --}}
+                                    @include('clients.shop.details.form-select-none-attri')
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
