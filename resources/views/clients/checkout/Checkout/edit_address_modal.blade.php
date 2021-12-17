@@ -50,7 +50,7 @@
                                 <label class="form-label">Quận/huyện</label>
                                 <select class="form-control choose-edit-{{ $id }} district" data-edit="district"  id="district-edit-{{ $id }}" name="district_id" required>
                                     <option value="">Chọn quận, huyện</option>
-                                    @foreach ($districts as $district)
+                                    @foreach (\App\Models\Provinces::find($shipping->province_id)->districts as $district)
                                     <option {{ $district->id == $shipping->district_id ? 'selected' : ''}} value="{{
                                         $district->id }}">{{ $district->name }}</option>
                                     @endforeach
@@ -60,7 +60,7 @@
                                 <label class="form-label">Xã/Phường/Thị trấn</label>
                                 <select class="form-control" id="ward-edit-{{ $id }}" name="ward_id" required>
                                     <option value="">Chọn xã, phường</option>
-                                    @foreach ($wards as $ward)
+                                    @foreach (\App\Models\Districts::find($shipping->district_id)->wards as $ward)
                                     <option {{ $ward->id == $shipping->ward_id ? 'selected' : ''}} value="{{ $ward->id
                                         }}">{{ $ward->name }}</option>
                                     @endforeach
