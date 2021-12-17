@@ -5,7 +5,7 @@ use Carbon\Carbon;
     <!-- Reviews-->
     <h4 class="row mb-4 fw-bold"> {{ $all_count_review }} đánh giá {{ $product->product_name }}
     </h4>
-    <div class="row pt-2 pb-3 pt-4 border" id="div_id">
+    <div class="row pt-2 pb-3 pt-4 border">
         <div style="line-height: 2" class="col-lg-4 col-md-3 text-center border-end">
             <div class="product-image">
                 <img src="{{ URL::to($product->product_image) }}" width="190" height="auto">
@@ -109,7 +109,7 @@ use Carbon\Carbon;
     </div>
 
 
-    <div class="row py-4">
+    <div class="row py-4" id="div_id">
         <!-- Reviews list-->
         <div class="col-md-9">
             <div class="show-image-review">
@@ -142,38 +142,38 @@ use Carbon\Carbon;
                         <label class="fs-sm fw-medium text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Lọc
                             theo:</label>
                         <button data-id="all"
-                            class="filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}">Tất
+                            class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}">Tất
                             cả</button>
 
                         <input
                             class="form-check-input d-none check-star-5 {{ $check == 'fivestar' ? 'check-star-active' : '' }}"
                             wire:model="checkfivestar" value="5star" type="checkbox" id="review_image_5">
                         <button data-id="5"
-                            class="filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}">5
+                            class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}">5
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-4 {{ $check == 'fourstar' ? 'check-star-active' : '' }}"
                             wire:model="checkfourstar" value="4star" type="checkbox" id="review_image_4">
                         <button data-id="4"
-                            class="filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}">4
+                            class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}">4
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-3 {{ $check == 'threestar' ? 'check-star-active' : '' }}"
                             wire:model="checkthreestar" value="3star" type="checkbox" id="review_image_3">
                         <button data-id="3"
-                            class="filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}">3
+                            class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}">3
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-2 {{ $check == 'twostar' ? 'check-star-active' : '' }}"
                             wire:model="checktwostar" value="2star" type="checkbox" id="review_image_2">
                         <button data-id="2"
-                            class="filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}">2
+                            class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}">2
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-1 {{ $check == 'onestar' ? 'check-star-active' : '' }}"
                             wire:model="checkonestar" value="1star" type="checkbox" id="review_image_1">
                         <button data-id="1"
-                            class="filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}">1
+                            class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}">1
                             sao</button>
                     </div>
                 </div>
@@ -181,11 +181,11 @@ use Carbon\Carbon;
                     <div class="d-flex flex-nowrap align-items-center sort-review">
 
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block me-4" for="sort-reviews"> <input
-                                class="form-check-input check-sort-review me-1" wire:model="image" value="review_image"
+                                class="move-top form-check-input check-sort-review me-1" wire:model="image" value="review_image"
                                 type="checkbox"><span class="sort-review move-top"> Có hình ảnh
                                 ({{ $count_review_image }})</span></label>
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block" for="sort-reviews"><input
-                                class="form-check-input check-sort-review me-1" wire:model="introduce"
+                                class="move-top form-check-input check-sort-review me-1" wire:model="introduce"
                                 value="review_introduce" type="checkbox"> <span class="sort-review">Giới thiệu bạn
                                 bè, người thân ({{ $count_review_introduce }})<span></label>
 
@@ -194,7 +194,7 @@ use Carbon\Carbon;
                     <div class="d-flex flex-nowrap align-items-center">
                         <label class="fs-sm fw-medium text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Sắp
                             xếp:</label>
-                        <select class="form-select form-select-sort" wire:model="sort" id="sort-reviews">
+                        <select class="form-select form-select-sort move-top" wire:model="sort" id="sort-reviews">
                             <option>Mới nhất</option>
                             <option>Hữu ích</option>
                             <option>Đánh giá cao</option>
@@ -573,12 +573,16 @@ use Carbon\Carbon;
             $('.check-star-active').click();
             $("#review_image_" + sort_filterstar).click();
             $(".check-star-" + sort_filterstar).addClass('check-star-active');
+            
         })
-        //     setTimeout(function() {
-        //         $('html, body').animate({
-        //             scrollTop: $('#div_id').position().top
-        //         }, 'slow');
-        //     }, 1000);
+        $('.move-top').click(function(){
+            setTimeout(function() {
+                $('html, body').animate({
+                    scrollTop: $('#div_id').position().top
+                }, 'slow');
+            }, 1000);
+        })
+    
 
         $('.show-full-image').click(function() {
             var key = $(this).data('id');

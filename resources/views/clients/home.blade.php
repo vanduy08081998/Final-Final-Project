@@ -23,7 +23,7 @@
     } */
     .product-item {
         height: 400px !important;
-    } 
+    }
 </style>
 
     <!-- Hero (Banners + Slider)-->
@@ -110,7 +110,7 @@
             </a>
         </div>
     </section>
-        
+
     <!-- Products grid (Trending products)-->
     <section class="container pt-5">
         <!-- Heading-->
@@ -317,7 +317,7 @@
                 @foreach ($brand as $item)
                 <div>
                     <a class="d-block bg-white py-4 py-sm-4 px-2" href="#" style="margin-right: -.0625rem;">
-                        <img class="d-block mx-auto" src="{{ url( 'uploads/files/Brands/', $item->brand_image ) }}" style="width: 130px; height: 60px" alt="Brand">
+                        <img class="d-block mx-auto" src="{{ url($item->brand_image ) }}" style="width: 130px; height: 60px" alt="Brand">
                     </a>
                 </div>
                 @endforeach

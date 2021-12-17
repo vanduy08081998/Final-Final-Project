@@ -3,7 +3,7 @@ use App\Models\Category;
 use App\Models\Wishlist;
 $wishlist = Wishlist::all();
 $categories = Category::where('category_parent_id', null)
-    ->orderBy('id_cate', 'desc')
+    ->orderBy('id_cate', 'asc')
     ->get();
 $category = Category::all();
 ?>
@@ -191,7 +191,7 @@ $category = Category::all();
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $cate)
                                     <li class="dropdown mega-dropdown">
-                                        <a href="{{ route('shop.products_category', $cate->id_cate) }}"
+                                        <a href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"
                                             class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                                             <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                                             {{ $cate->category_name }}
@@ -201,17 +201,17 @@ $category = Category::all();
 
                                                 <div class="mega-dropdown-column py-4 px-3">
                                                     <div class="widget widget-links">
-                                                        <h6 class="fs-base mb-3">Thương hiệu <br>
-                                                            {{ $cate->category_name }}</h6>
+                                                        <h4 class="fs-base mb-3">Thương hiệu <i class="fas fa-angle-down"></i></h4>
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-1"><a
-                                                                        class="widget-list-link"
-                                                                        href="#">{{ $brand->brand_name }}</a>
+                                                                        class="widget-list-link" href="#"><img
+                                                                            src="{{ url($brand->brand_image) }}"
+                                                                            height="100" width="55">
+                                                                        <sppan>{{ $brand->brand_name }}</sppan>
+                                                                    </a>
                                                                 </li>
-
                                                             @endforeach
-
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -279,6 +279,9 @@ $category = Category::all();
                                 class="nav-link" href="{{ route('shop.shop-grid') }}"><i
                                     class="ci-lable"></i> Cửa hàng</a>
                         </li>
+                        {{-- <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid', 0) }}"><i class="ci-lable"></i> Cửa hàng</a>
+                        </li> --}}
 
                         <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}"><a class="nav-link"
                                 href="{{ route('clients.blog') }}"><i class="ci-store"></i>

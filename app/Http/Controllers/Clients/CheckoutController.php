@@ -103,16 +103,16 @@ class CheckoutController extends Controller
             array_push($product, $product_details);
             array_push($productID, $cart->product_id);
         }
-        
+
         foreach($shipping_address as $key => $value){
             $shipping_address = json_encode($value,JSON_UNESCAPED_UNICODE);
         }
-        
+
         $order->user_id = $user_id;
-        
+
         foreach($shipping_method_session as $key => $method){
             $shipping_method = $method[0]->id;
-        } 
+        }
 
         $order->shipping_address = $shipping_address;
         $order->shipping_status = $shipping_method;

@@ -17,7 +17,7 @@
                             <ol class="breadcrumb mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
+                                <li class="breadcrumb-item" aria-current="page">Danh sách thương hiệu</li>
                             </ol>
                         </nav>
                     </div>
@@ -35,8 +35,8 @@
                                 <h4 class="mb-0">Liệt kê thương hiệu</h4>
                                 <div class="d-block mt-2">
                                     <select name="handle" id="" class="form-select-sm">
-                                        <option value="">------- Hành động -------</option>
-                                        <option value="trash">Thùng rác</option>
+                                        <option value="">------- Hành động ------</option>
+                                        <option value="trash">------- Thùng rác ------</option>
                                     </select>
                                     <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
                                     @if ($countTrashed)
@@ -50,7 +50,7 @@
                             </div>
                             <hr />
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <table id="example" class="table table-striped table-bordered datatable" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center"><input type="checkbox" id="checkAll"></th>
@@ -69,8 +69,8 @@
                                                 <td class="py-2">
                                                     <div class="text-center">
                                                         <div class="position-relative mr-2">
-                                                            <img width="80" height="40"
-                                                                src="{{ asset($brand->brand_image) }}" />
+                                                            <img width="80" height="47"
+                                                                src="{{ url($brand->brand_image) }}" />
                                                         </div>
                                                     </div>
                                                 </td>

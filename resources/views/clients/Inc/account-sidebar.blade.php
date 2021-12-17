@@ -63,8 +63,12 @@
                     </a>
                 </li>
                 <li class="border-bottom mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account.account-address') ? 'active' : '' }}"
-                        href="{{ route('account.account-address') }}">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account.account-review') ? 'active' : '' }}" href="{{ route('account.account-review') }}">
+                        <i class="ci-star opacity-60 me-2"></i>Đánh giá của tôi
+                    </a>
+                </li>
+                <li class="border-bottom mb-0">
+                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account.account-address') ? 'active' : '' }}" href="{{ route('account.account-address') }}">
                         <i class="ci-location opacity-60 me-2"></i>Địa chỉ giao nhận
                     </a>
                 </li>
