@@ -49,7 +49,7 @@
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                        @include('clients.shop.details.form-select-attribute')
+                                    @include('clients.shop.details.form-select-attribute')
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
@@ -75,7 +75,8 @@
                             </div>
                         </div>
                         <div class="btn-show fade-desc" id="point1">
-                            <button class="btn btn-danger justify-items-center show-more" style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                            <button class="btn btn-danger justify-items-center show-more"
+                                style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
                         </div>
                     </div>
                 </div>
@@ -106,7 +107,7 @@
 @endsection
 
 @push('script')
-    <script>
+    <script type="text/javascript">
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 20,
             slidesPerView: 6,
@@ -130,34 +131,27 @@
         let qt_inc = document.querySelector('.qt-inc');
         let qt_dec = document.querySelector('.qt-dec');
 
+
         qt_dec.addEventListener('click', function(e) {
             document.querySelector('#product_quantity').value = Number(document.querySelector(
-                    '#product_quantity')
-                .value) - 1;
+                '#product_quantity').value) - 1;
             if (document.querySelector('.quantity_number').value < 1) {
                 document.querySelector('.quantity_number').value = 1;
             }
             getVariantPrice()
         })
-
         qt_inc.addEventListener('click', function(e) {
             document.querySelector('#product_quantity').value = Number(document.querySelector(
-                    '#product_quantity')
-                .value) + 1;
+                '#product_quantity').value) + 1;
             getVariantPrice()
         })
-    </script>
 
-
-    <script>
         const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
                 data: $('#choice_attribute_options').serializeArray(),
                 success: function(response) {
-                    console.log(response)
-                    console.log(response.quantity)
                     $('#specifications').html(response.specifications)
                     $('.total_product_price').html(
                         ` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
@@ -180,8 +174,6 @@
                                               </div> `)
             }
         }
-    </script>
-    <script type="text/javascript">
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
@@ -366,16 +358,16 @@
             }
         }
     </script>
-   {{-- Xử lý long description --}}
+    {{-- Xử lý long description --}}
     <script>
-       $(".show-more").click(function () {
-           if($("#point").hasClass("text-description")) {
-               $(this).text("Ẩn bớt");
-           } else {
-               $(this).text("Xem thêm");
-           }
-           $("#point").toggleClass("text-description");
-           $("#point1").toggleClass("fade-desc");
-       });
+        $(".show-more").click(function() {
+            if ($("#point").hasClass("text-description")) {
+                $(this).text("Ẩn bớt");
+            } else {
+                $(this).text("Xem thêm");
+            }
+            $("#point").toggleClass("text-description");
+            $("#point1").toggleClass("fade-desc");
+        });
     </script>
 @endpush

@@ -52,6 +52,7 @@
                                     </td>
                                 </tr>
                                 @include('clients.checkout.Checkout.edit-default',['id' => $shipping_default->id])
+                            @else
                             @endif
                         </tbody>
                     </table>
@@ -66,12 +67,19 @@
             <section class="col-lg-12">
                 <form id="form-infomations" method="POST">
                     {{ csrf_field() }}
-                    <input type="hidden" name="name" value="{{ $shipping_default->ward->name }}">
-                    <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                    <input type="hidden" name="address"
-                        value="{{ $shipping_default->neighbor }} -
-                                                  {{ $shipping_default->ward->name }} -
-                                                  {{ $shipping_default->district->name }} - {{ $shipping_default->province->name }}">
+                    @isset($shipping_default)
+                        <input type="hidden" name="name" value="{{ $shipping_default->ward->name }}">
+                        <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                        <input type="hidden" name="address"
+                            value="{{ $shipping_default->neighbor }} -
+                                                    {{ $shipping_default->ward->name }} -
+                                                    {{ $shipping_default->district->name }} - {{ $shipping_default->province->name }}">
+                    @endisset
+
+                    @empty($shipping_default)
+                        <h5 style="font-style: italic; color: red">Bạn chưa có địa chỉ mặc định</h5>
+                    @endempty
+
                     <div class="row">
                         <div class="col-md-6 mt-3">
                             <button class="btn btn-primary">Chuyển đến bước tiếp theo &rarr;</button>
