@@ -121,7 +121,7 @@
         </div>
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
-            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
               <!-- Product-->
               @foreach ($product as $product)
                 <div class="product-item">
@@ -209,7 +209,7 @@
         </div>
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
-            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+            <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
               <!-- Product-->
               @foreach ($highlight as $product)
                 <div class="product-item" style="height: 375px">
