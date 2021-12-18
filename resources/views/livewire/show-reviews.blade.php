@@ -142,38 +142,38 @@ use Carbon\Carbon;
                         <label class="fs-sm fw-medium text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Lọc
                             theo:</label>
                         <button data-id="all"
-                            class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}">Tất
+                            class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>Tất
                             cả</button>
 
                         <input
                             class="form-check-input d-none check-star-5 {{ $check == 'fivestar' ? 'check-star-active' : '' }}"
                             wire:model="checkfivestar" value="5star" type="checkbox" id="review_image_5">
                         <button data-id="5"
-                            class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}">5
+                            class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>5
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-4 {{ $check == 'fourstar' ? 'check-star-active' : '' }}"
                             wire:model="checkfourstar" value="4star" type="checkbox" id="review_image_4">
                         <button data-id="4"
-                            class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}">4
+                            class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>4
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-3 {{ $check == 'threestar' ? 'check-star-active' : '' }}"
                             wire:model="checkthreestar" value="3star" type="checkbox" id="review_image_3">
                         <button data-id="3"
-                            class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}">3
+                            class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>3
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-2 {{ $check == 'twostar' ? 'check-star-active' : '' }}"
                             wire:model="checktwostar" value="2star" type="checkbox" id="review_image_2">
                         <button data-id="2"
-                            class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}">2
+                            class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>2
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-1 {{ $check == 'onestar' ? 'check-star-active' : '' }}"
                             wire:model="checkonestar" value="1star" type="checkbox" id="review_image_1">
                         <button data-id="1"
-                            class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}">1
+                            class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>1
                             sao</button>
                     </div>
                 </div>
@@ -270,7 +270,7 @@ use Carbon\Carbon;
                                     }
                                 }
                             @endphp
-                            <div class="text-nowrap">
+                            <div style="position: relative" class="text-nowrap">
                                 @if (in_array($id_user, $useful_array))
                                     <button class="btn-review text-primary"
                                         wire:click.prevent="un_useful({{ $review->id }})"><i
@@ -364,12 +364,12 @@ use Carbon\Carbon;
                                                                 width="35" alt="{{ $review->user->name }}">
                                                         @endif
                                                         <div class="ps-2">
-                                                            <h6 class="fs-md mb-0">
+                                                            <h6 class="fs-md mb-0 fw-bold">
                                                                 {{ $review_child->user->name }}
                                                             </h6>
                                                         </div>
                                                         @if ($review_child->user->position == 'admin')
-                                                            <div class="fs-sm mt-1 ms-sm-1  text-success">
+                                                            <div class="fs-sm ms-sm-1  text-success">
                                                                 <b class="qtv"> Quản trị viên </b>
                                                             </div>
                                                         @endif

@@ -36,7 +36,7 @@ class ReplyReview extends Component
             'customer_id' => Auth::user()->id,
             'content_rating' => $this->content_rating,
             'review_parent' => $review_id,
-            'review_status' => 1
+            'review_status' => 1,
         ]);
         $this->emit('render');
     }
