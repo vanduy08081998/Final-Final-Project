@@ -86,7 +86,30 @@
                                     </span>
                                 </div>
                             </a>
-
+                        @else
+                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
+                                class="content-not" data-id="{{ $item->id }}">
+                                <div class="icon-ct">
+                                    <div class="content-icon">
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="content-body">
+                                    {!! $item->content !!}
+                                    <div class="moving">
+                                        Tại sản phẩm {{ $item->product->product_name }}
+                                    </div>
+                                    <div class="time">
+                                        <em> {{ $item->created_at->diffForHumans() }}</em>
+                                    </div>
+                                </div>
+                                <div class="content-handle">
+                                    <span>
+                                        <i class="fas fa-times"
+                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                    </span>
+                                </div>
+                            </a>
                         @endif
                     @endforeach
                 </div>

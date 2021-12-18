@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    @php
+    use App\Models\Comment;
+    @endphp
     <div class="content container-fluid">
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
@@ -17,13 +20,13 @@
                             <ol class="breadcrumb mb-0 p-0">
                                 <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Đánh giá và bình luận</li>
+                                <li class="breadcrumb-item active" aria-current="page">Bình luận</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="ml-auto">
                         <div class="btn-group">
-                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Đánh giá bình luận</a>
+                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Bình luận</a>
                         </div>
                     </div>
                 </div>
@@ -39,9 +42,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Hình ảnh</th>
-                                        <th class="text-center">Sản phẩm</th>
-                                        <th>Số lượng bình luận</th>
+                                        <th class="text-center" colspan="2">Sản phẩm được bình luận</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Chờ phản hồi</th>
                                         <th class="text-center">Đánh giá và bình luận</th>
                                     </tr>
                                 </thead>
@@ -49,19 +52,24 @@
                                     @foreach ($products as $product)
                                         @if ($product->comments->count())
                                             <tr>
-                                                <td class="py-2">
-                                                    <div class="text-center">
-                                                        <div class="position-relative mr-2">
-                                                            <img width="60" height="80"
-                                                                src="{{ asset($product->product_image) }}" />
-                                                        </div>
+                                                <td>
+                                                    <div class="position-relative mr-2">
+                                                        <img width="40" height="60"
+                                                            src="{{ asset($product->product_image) }}" />
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
+
                                                     {{ $product->product_name }}
+
                                                 </td>
-                                                <td>
-                                                    <button class="btn btn-success"></button>
+                                                <td class="text-center">
+                                                    <button
+                                                        class="btn btn-success">{{ $product->comments->count() }}</button>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button
+                                                        class="btn btn-warning">{{ Comment::where([['comment_id_product', $product->id], ['comment_admin_feedback', null]])->count() }}</button>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
