@@ -266,10 +266,6 @@ $category = Category::all();
                     </ul>
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> main
                         <li class="nav-item dropdown active">
                             <a class="nav-link" href="{{ route('clients.index') }}"><i
                                     class="ci-home"></i> Trang
@@ -281,34 +277,18 @@ $category = Category::all();
                                 Giới thiệu</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"
-<<<<<<< HEAD
                                 href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
                                     class="ci-lable"></i> Cửa hàng</a>
-=======
-                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i class="ci-lable"></i> Cửa hàng</a>
->>>>>>> main
-                        </li>
-
-                        <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
-                                    class="ci-store"></i>
-<<<<<<< HEAD
-=======
-=======
-                        <li class="nav-item dropdown {{ request()->is('/') ? 'active' : '' }}">
-                            <a class="nav-link " href="{{ route('clients.index') }}">
-                                <i class="ci-home"></i> Trang chủ
-                            </a>
                         </li>
                         <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('clients.about') }}" data-bs-auto-close="outside">
+                            <a class="nav-link" href="{{ route('clients.about') }}"
+                                data-bs-auto-close="outside">
                                 <i class="ci-flag"></i>Giới thiệu
                             </a>
                         </li>
                         <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.blog') }}">
                                 <i class="ci-store"></i>
->>>>>>> main
->>>>>>> main
                                 Bài viết</a>
                         </li>
                         <li class="nav-item">
