@@ -10,11 +10,11 @@ class Notifica extends Component
     public $comment, $review, $order;
     protected $listeners = [
         'render' => 'render',
-        'delete',
+        'deleted',
         'deleteAll'
     ];
 
-    public function delete($id){
+    public function deleted($id){
         $model = Notification::find($id);
         $model->delete();
         $this->emit('render');

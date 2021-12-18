@@ -201,7 +201,8 @@ $category = Category::all();
 
                                                 <div class="mega-dropdown-column py-4 px-3">
                                                     <div class="widget widget-links">
-                                                        <h4 class="fs-base mb-3">Thương hiệu <i class="fas fa-angle-down"></i></h4>
+                                                        <h4 class="fs-base mb-3">Thương hiệu <i
+                                                                class="fas fa-angle-down"></i></h4>
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-1"><a
@@ -265,29 +266,26 @@ $category = Category::all();
                     </ul>
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown {{ request()->is('/') ? 'active' : '' }}">
-                            <a class="nav-link " href="{{ route('clients.index') }}"><i
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link" href="{{ route('clients.index') }}"><i
                                     class="ci-home"></i> Trang
                                 chủ</a>
                         </li>
-                        <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.about') }}"
                                 data-bs-auto-close="outside"><i class="ci-flag"></i>
                                 Giới thiệu</a>
                         </li>
-                        <li class="nav-item {{ request()->is('shop/shop-grid') ? 'active' : '' }}"><a
-                                class="nav-link" href="{{ route('shop.shop-grid') }}"><i
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
                                     class="ci-lable"></i> Cửa hàng</a>
                         </li>
-                        {{-- <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid', 0) }}"><i class="ci-lable"></i> Cửa hàng</a>
-                        </li> --}}
 
-                        <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}"><a class="nav-link"
-                                href="{{ route('clients.blog') }}"><i class="ci-store"></i>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('clients.blog') }}"><i
+                                    class="ci-store"></i>
                                 Bài viết</a>
                         </li>
-                        <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('clients.contact') }}"
                                 data-bs-auto-close="outside"><i class="ci-phone"></i> Liên hệ và Phản hồi</a>
                         </li>

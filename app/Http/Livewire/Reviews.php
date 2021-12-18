@@ -191,7 +191,11 @@ class Reviews extends Component
         ]);
 
         $service = new NotificationService();
-        $service->store(Comment::find($review_id)->customer_id , $product_id, 'review', Auth::user()->name);
+        if(Auth::user()->position == 'admin'){
+            $service->store(Review::find($review_id)->customer_id , $product_id, 'review', 'BigDeal');
+        }
+        
+        
         if(Auth::user()->position != 'admin'){
         $this->dispatchBrowserEvent('OpenSuccess', []);
         }

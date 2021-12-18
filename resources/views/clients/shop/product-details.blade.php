@@ -49,7 +49,7 @@
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
-                                        @include('clients.shop.details.form-select-attribute')
+                                    @include('clients.shop.details.form-select-attribute')
                                 </div>
                                 <!-- Tech specs tab-->
                                 <div class="tab-pane fade" id="specs" role="tabpanel">
@@ -202,7 +202,7 @@
                 },
                 success: function() {
                     $('#form-one').val('')
-                    toastr.success('Bình luận của bạn sẽ được duyệt.')
+                    toastr.success('Bình luận của đang được duyệt!')
                     window.livewire.emit('render')
                 }
             })
@@ -364,8 +364,16 @@
             let loadMore = $('.load-show-' + id + ':hidden')
             loadMore.slice(0, 4).slideDown();
             if (loadMore.length == 0) {
-                $('.content-' + id).fadeOut("slow");
+                $('.content-' + id).addClass('d-none')
+                $('.content-none-' + id).removeClass('d-none')
             }
+        }
+
+        function upMore(id) {
+            let loadMore = $('.load-show-' + id)
+            loadMore.slice(2, 20).slideUp();
+            $('.content-' + id).removeClass('d-none')
+            $('.content-none-' + id).addClass('d-none')
         }
     </script>
     {{-- Xử lý long description --}}

@@ -15,6 +15,12 @@
                     luận</a>
                 <div class="material-border"></div>
             </li>
+
+            <li class="nav-item contact-not" data-type="review">
+                <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}" aria-selected="false">Đánh
+                    giá</a>
+                <div class="material-border"></div>
+            </li>
             {{-- <li class="nav-item contact-not" data-type="discount">
                 <a class="nav-link" id="review-top-tab" data-bs-toggle="tab" href="#top-review" role="tab"
                     aria-selected="false">Mã giảm giá</a>
@@ -39,29 +45,33 @@
                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                     @foreach ($models as $item)
                         @if ($item->type == 'comment')
-                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                                class="content-not" data-id="{{ $item->id }}">
+                            <div class="content-not" data-id="{{ $item->id }}">
                                 <div class="icon-ct">
                                     <div class="content-icon">
                                         <i class="far fa-comments"></i>
                                     </div>
                                 </div>
                                 <div class="content-body">
-                                    {!! $item->content !!}
-                                    <div class="moving">
-                                        Tại sản phẩm {{ $item->product->product_name }}
-                                    </div>
+                                    <a wire:click="deleted({{ $item->id }})"
+                                        href="{{ route('shop.product-details', $item->product->product_slug) }}">
+                                        {!! $item->content !!}
+                                        <div class="moving">
+                                            Tại
+                                            sản phẩm {{ $item->product->product_name }}
+
+                                        </div>
+                                    </a>
                                     <div class="time">
                                         <em> {{ $item->created_at->diffForHumans() }}</em>
                                     </div>
                                 </div>
                                 <div class="content-handle">
-                                    <span>
-                                        <i class="fas fa-times"
-                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                    <span title="Xóa" wire:click.prevent="deleted({{ $item->id }})">
+                                        <i class="fas fa-times"></i>
                                     </span>
+
                                 </div>
-                            </a>
+                            </div>
                         @elseif($item->type == 'order')
                             <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
                                 class="content-not">
@@ -82,34 +92,38 @@
                                 <div class="content-handle">
                                     <span>
                                         <i class="fas fa-times"
-                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                            wire:click.prevent="deleted('{{ $item->id }}')"></i>
                                     </span>
                                 </div>
                             </a>
                         @else
-                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                                class="content-not" data-id="{{ $item->id }}">
+                            <div class="content-not" data-id="{{ $item->id }}">
                                 <div class="icon-ct">
                                     <div class="content-icon">
                                         <i class="fas fa-star-half-alt"></i>
                                     </div>
                                 </div>
                                 <div class="content-body">
-                                    {!! $item->content !!}
-                                    <div class="moving">
-                                        Tại sản phẩm {{ $item->product->product_name }}
-                                    </div>
+                                    <a wire:click="deleted({{ $item->id }})"
+                                        href="{{ route('shop.product-details', $item->product->product_slug) }}">
+                                        {!! $item->content !!}
+                                        <div class="moving">
+                                            Tại
+                                            sản phẩm {{ $item->product->product_name }}
+
+                                        </div>
+                                    </a>
                                     <div class="time">
                                         <em> {{ $item->created_at->diffForHumans() }}</em>
                                     </div>
                                 </div>
                                 <div class="content-handle">
-                                    <span>
-                                        <i class="fas fa-times"
-                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
+                                    <span title="Xóa" wire:click.prevent="deleted({{ $item->id }})">
+                                        <i class="fas fa-times"></i>
                                     </span>
+
                                 </div>
-                            </a>
+                            </div>
                         @endif
                     @endforeach
                 </div>

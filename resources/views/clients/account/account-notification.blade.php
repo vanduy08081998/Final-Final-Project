@@ -169,14 +169,18 @@
             }
         })
 
-        $('.content-not').click(function() {
-            let id = $(this).data('id');
-            window.livewire.emit('delete', id)
-        })
+        // $('.content-not').click(function() {
+        //     let id = $(this).data('id');
+        //     window.livewire.emit('deleted', id)
+        // })
 
         $('.delete-notifica').click(function() {
             let type = $(this).data('type')
             window.livewire.emit('deleteAll', type)
+        })
+        $('.delete-not').click(function() {
+            let id = $(this).data('id')
+            window.livewire.emit('deleted', id)
         })
     </script>
 @endpush

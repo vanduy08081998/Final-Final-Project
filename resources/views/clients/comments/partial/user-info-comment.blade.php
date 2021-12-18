@@ -18,10 +18,10 @@
 
         <div class="handle mt-1">
             <button type="button" class="recall btn-submit-text bg-danger"
-                wire:click.prevent="recall('{{ $value->id }}')">Thu hồi</button>
+                wire:click.prevent="recall('{{ $value->id }}')"><i class="fas fa-redo"></i> Thu hồi</button>
 
             <button type="button" class="edit btn-submit-text" data-id="{{ $value->id }}"
-                data-url="{{ url('comment/editComment/' . $value->id) }}">Sửa</button>
+                data-url="{{ url('comment/editComment/' . $value->id) }}"><i class="far fa-edit"></i> Sửa</button>
             <button type="button" class="esc" data-id="{{ $value->id }}">
                 <i class="fas fa-sign-out-alt"></i>
             </button>
@@ -87,7 +87,6 @@
                     <ul>
                         <span class="recall" data-id="{{ $value->id }}"
                             data-url="{{ url('comment/recall/' . $value->id) }}">Xóa</span>
-                        <span>Chặn</span>
                     </ul>
                 </div>
             </div>
