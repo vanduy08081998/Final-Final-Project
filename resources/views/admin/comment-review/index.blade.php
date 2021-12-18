@@ -45,6 +45,7 @@
                                         <th class="text-center" colspan="2">Sản phẩm được bình luận</th>
                                         <th class="text-center">Số lượng</th>
                                         <th class="text-center">Chờ phản hồi</th>
+                                        <th class="text-center">Chờ duyệt</th>
                                         <th class="text-center">Đánh giá và bình luận</th>
                                     </tr>
                                 </thead>
@@ -69,7 +70,11 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <button
-                                                        class="btn btn-warning">{{ Comment::where([['comment_id_product', $product->id], ['comment_admin_feedback', null]])->count() }}</button>
+                                                        class="btn btn-warning">{{ Comment::where([['comment_id_product', $product->id], ['comment_admin_feedback', null], ['clearance_at', '!=', null]])->count() }}</button>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button
+                                                        class="btn btn-info">{{ Comment::where([['comment_id_product', $product->id], ['clearance_at', null]])->count() }}</button>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
@@ -81,7 +86,8 @@
                                                             class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
 
                                                             <a class="dropdown-item text-primary"
-                                                                href="{{ route('product.comment', $product->id) }}">Bình
+                                                                href="{{ route('product.comment', $product->id) }}">Xem
+                                                                bình
                                                                 luận</a>
                                                         </div>
                                                     </div>

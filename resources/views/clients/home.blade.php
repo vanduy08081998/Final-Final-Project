@@ -5,28 +5,18 @@
 
 
 @section('content')
-    <?php
-    use App\Models\Wishlist;
-    ?>
-    <style>
-        .card-body .product-title {
-            min-height: 28px;
-            margin-bottom: 0px !important;
-        }
-
-        /* @media (min-width: 68.75em){
-                                                    #tns2 {
-                                                    width: calc(400%);
-                                                }
-                                                    #tns3 {
-                                                    width: calc(400%);
-                                                }
-                                                } */
-        .product-item {
-            height: 400px !important;
-        }
-
-    </style>
+<?php
+  use App\Models\Wishlist;
+  ?>
+<style>
+    .card-body .product-title {
+        min-height: 28px;
+        margin-bottom: 0px !important;
+    }
+    .product-item {
+        height: 400px !important;
+    }
+</style>
 
     <!-- Hero (Banners + Slider)-->
     <section class="bg-secondary py-4 banner">
@@ -118,7 +108,7 @@
     </section>
 
     <!-- Products grid (Trending products)-->
-    <section class="container pt-5">
+    <section class="container pt-5 trending-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <p style="font-size: 20px"><strong>Sản phẩm mới nhất</strong></p>
@@ -227,7 +217,7 @@
         </div>
     </section>
     {{-- Sản phẩm nổi bật --}}
-    <section class="container mt-5">
+    <section class="container mt-5 highlight-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <p style="font-size: 20px"><strong>Sản phẩm nổi bật</strong></p>

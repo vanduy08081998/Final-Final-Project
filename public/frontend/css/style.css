@@ -356,7 +356,7 @@
 .handle>button {
     border: none;
     outline: none;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     margin-right: 4px;
     border-radius: 10px;
@@ -364,6 +364,11 @@
     padding: 0px 8px;
     font-size: 12px;
     background-color: white;
+}
+
+.handle>button>i {
+    font-size: 11px;
+    margin-right: 5px;
 }
 
 .rating_reply {
@@ -577,9 +582,10 @@
     position: absolute;
     right: 4px;
     top: 0;
-    z-index: 2;
+    z-index: 4;
     color: #fff;
     display: inline-block;
+    cursor: pointer;
 }
 
 .content-not .content-icon {

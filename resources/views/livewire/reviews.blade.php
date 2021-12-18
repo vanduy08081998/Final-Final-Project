@@ -3,8 +3,8 @@ use Carbon\Carbon;
 ?>
 <div class="container pb-5">
     <!-- Reviews-->
-    <div class="row">
-        <div class="col-md-8 review-border">
+    <div class="container row">
+        <div class="col-md-12 col-sm-12 review-border">
             <h4 class="col-lg-12 mb-2 fw-bold "> Đánh giá {{ $product->product_name }}
             </h4>
             <div class="row pt-2 pb-3" id="div_id">
@@ -182,7 +182,7 @@ use Carbon\Carbon;
                                             }
                                         }
                                     @endphp
-                                    <div class="text-nowrap">
+                                    <div  style="position: relative" class="text-nowrap">
                                         @if (in_array($id_user, $useful_array))
                                             <button class="btn-review text-primary"
                                                 wire:click.prevent="un_useful({{ $review->id }})"><i
@@ -291,7 +291,7 @@ use Carbon\Carbon;
                                                                     </h6>
                                                                 </div>
                                                                 @if ($review_child->user->position == 'admin')
-                                                                    <div class="fs-sm mt-1 ms-sm-1  text-success">
+                                                                    <div class="fs-sm ms-sm-1  text-success">
                                                                         <b class="qtv"> Quản trị viên </b>
                                                                     </div>
                                                                 @endif

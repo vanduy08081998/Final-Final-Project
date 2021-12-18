@@ -1,3 +1,6 @@
+@php
+use App\Models\Category;
+@endphp
 <footer class="footer bg-dark pt-5">
     <div class="container">
         <div class="row pb-2">
@@ -28,11 +31,13 @@
                 <div class="widget widget-links widget-light pb-2 mb-4">
                     <h3 class="widget-title text-light">Thông tin cửa hàng</h3>
                     <ul class="widget-list">
-                        <li class="widget-list-item"><a class="widget-list-link" href="{{ route('clients.about') }}">Về
+                        <li class="widget-list-item"><a class="widget-list-link"
+                                href="{{ route('clients.about') }}">Về
                                 Công ty</a></li>
                         <li class="widget-list-item"><a class="widget-list-link" href="#">Về nhóm</a></li>
                         <li class="widget-list-item"><a class="widget-list-link" href="#">Chăm sóc khách hàng</a></li>
-                        <li class="widget-list-item"><a class="widget-list-link" href="{{ route('clients.blog') }}">Tin
+                        <li class="widget-list-item"><a class="widget-list-link"
+                                href="{{ route('clients.blog') }}">Tin
                                 tức</a></li>
                     </ul>
                 </div>
