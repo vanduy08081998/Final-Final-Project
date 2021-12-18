@@ -76,7 +76,8 @@
                             </div>
                         </div>
                         <div class="btn-show fade-desc" id="point1">
-                            <button class="btn btn-danger justify-items-center show-more" style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                            <button class="btn btn-danger justify-items-center show-more"
+                                style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
                         </div>
                     </div>
                 </div>
@@ -202,6 +203,7 @@
                 },
                 success: function() {
                     $('#form-one').val('')
+                    toastr.success('Bình luận của bạn sẽ được duyệt.')
                     window.livewire.emit('render')
                 }
             })
@@ -367,16 +369,16 @@
             }
         }
     </script>
-   {{-- Xử lý long description --}}
+    {{-- Xử lý long description --}}
     <script>
-       $(".show-more").click(function () {
-           if($("#point").hasClass("text-description")) {
-               $(this).text("Ẩn bớt");
-           } else {
-               $(this).text("Xem thêm");
-           }
-           $("#point").toggleClass("text-description");
-           $("#point1").toggleClass("fade-desc");
-       });
+        $(".show-more").click(function() {
+            if ($("#point").hasClass("text-description")) {
+                $(this).text("Ẩn bớt");
+            } else {
+                $(this).text("Xem thêm");
+            }
+            $("#point").toggleClass("text-description");
+            $("#point1").toggleClass("fade-desc");
+        });
     </script>
 @endpush
