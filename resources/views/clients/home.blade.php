@@ -5,6 +5,7 @@
 
 
 @section('content')
+<<<<<<< HEAD
     <?php
     use App\Models\Wishlist;
     ?>
@@ -27,6 +28,20 @@
         }
 
     </style>
+=======
+<?php
+  use App\Models\Wishlist;
+  ?>
+<style>
+    .card-body .product-title {
+        min-height: 28px;
+        margin-bottom: 0px !important;
+    }
+    .product-item {
+        height: 400px !important;
+    }
+</style>
+>>>>>>> main
 
     <!-- Hero (Banners + Slider)-->
     <section class="bg-secondary py-4 banner">
@@ -118,21 +133,26 @@
     </section>
 
     <!-- Products grid (Trending products)-->
-    <section class="container pt-5">
+    <section class="container pt-5 trending-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-            <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm thịnh hành</h2>
+            <p style="font-size: 20px"><strong>Sản phẩm mới nhất</strong></p>
             <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
                         class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
             <div class="tns-carousel-inner"
+<<<<<<< HEAD
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+=======
+                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+>>>>>>> main
                 <!-- Product-->
                 @foreach ($product as $product)
                     <div class="product-item">
                         <div class="card product-card">
+<<<<<<< HEAD
                             @if ($product->discount_unit == '%')
                                 <span class="badge bg-danger badge-shadow">Sale</span>
                             @endif
@@ -163,6 +183,12 @@
                                     onclick="add_to_wishlist({{ $product->id }})">
                                     <i class="ci-heart"></i>
                                 </button>
+=======
+                            @if ($product->discount == 0)
+                            @else
+                                <span class="badge bg-danger badge-shadow">Giảm giá
+                                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+>>>>>>> main
                             @endif
                             <a class="card-img-top d-block overflow-hidden"
                                 href="{{ route('shop.product-details', $product->product_slug) }}">
@@ -200,15 +226,50 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body card-body-hidden" style="z-index: 10">
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
-                                    <i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng
-                                </button>
-                                <div class="text-center">
-                                    <a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal">
-                                        <i class="ci-eye align-middle me-1"></i>Xem nhanh
+                            <div class="card-body card-body-hidden text-center"
+                                style="z-index: 10; display: inline; padding: 15px">
+                                @if (Auth::user() != null)
+                                    <input type="hidden" id="wishlist_productsku{{ $product->id }}"
+                                        value="{{ $product->specifications }}">
+                                    <input type="hidden" value="{{ $product->id }}">
+                                    <input type="hidden" id="wishlist_productname{{ $product->id }}"
+                                        value="{{ $product->product_name }}">
+                                    <input type="hidden" id="wishlist_productprice{{ $product->id }}"
+                                        value="{{ number_format($product->unit_price) }}">
+                                    <input type="hidden" id="wishlist_productimg{{ $product->id }}"
+                                        value="{{ url($product->product_image) }}">
+
+                                    <a type="hidden" id="wishlist_producturl{{ $product->id }}"
+                                        href="{{ route('shop.product-details', $product->product_slug) }}">
                                     </a>
-                                </div>
+
+                                    <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
+                                        onclick="add_compare({{ $product->id }})">
+                                        <i class="ci-compare me-1"></i>
+                                    </a>
+                                    <?php
+                                    $user = Auth::user()->id;
+                                    $wishlist = Wishlist::orderByDESC('id')
+                                        ->where('id_prod', $product->id)
+                                        ->where('id_user', $user)
+                                        ->first();
+                                    ?>
+                                    @if ($wishlist != null)
+                                        <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                            style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                            <i class="ci-heart"></i>
+                                        </a>
+                                    @elseif ($wishlist == NULL)
+                                        <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                            style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                            <i class="ci-heart"></i>
+                                        </a>
+                                    @endif
+                                @else
+                                @endif
+                                <a class="nav-link-style me-3" href="#quick-view-electro" data-bs-toggle="modal">
+                                    <i class="ci-eye"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -218,10 +279,10 @@
         </div>
     </section>
     {{-- Sản phẩm nổi bật --}}
-    <section class="container">
+    <section class="container mt-5 highlight-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-            <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm nổi bật</h2>
+            <p style="font-size: 20px"><strong>Sản phẩm nổi bật</strong></p>
             <div class="pt-3">
                 <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
                     <i class="ci-arrow-right ms-1 me-n1"></i>
@@ -231,6 +292,7 @@
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
             <div class="tns-carousel-inner"
+<<<<<<< HEAD
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
                 <!-- Product-->
                 @foreach ($highlight as $product)
@@ -267,6 +329,18 @@
                                     <i class="ci-heart"></i>
                                 </button>
                             @endif
+=======
+                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+                <!-- Product-->
+                @foreach ($highlight as $product)
+                    <div class="product-item" style="height: 375px">
+                        @if ($product->discount == 0)
+                        @else
+                            <span class="badge bg-danger badge-shadow">Giảm giá
+                                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+                        @endif
+                        <div class="card product-card">
+>>>>>>> main
                             <a class="card-img-top d-block overflow-hidden"
                                 href="{{ route('shop.product-details', $product->product_slug) }}">
                                 <img src="{{ asset($product->product_image) }}" alt="Product"></a>
@@ -303,6 +377,7 @@
                                     </div>
                                 </div>
                             </div>
+<<<<<<< HEAD
                             <div class="card-body card-body-hidden" style="z-index: 10">
                                 <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
                                     <i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng
@@ -312,6 +387,52 @@
                                         <i class="ci-eye align-middle me-1"></i>Xem nhanh
                                     </a>
                                 </div>
+=======
+                            <div class="card-body card-body-hidden text-center"
+                                style="z-index: 10; display: inline; padding: 15px">
+                                @if (Auth::user() != null)
+                                    <input type="hidden" id="wishlist_productsku{{ $product->id }}"
+                                        value="{{ $product->specifications }}">
+                                    <input type="hidden" value="{{ $product->id }}">
+                                    <input type="hidden" id="wishlist_productname{{ $product->id }}"
+                                        value="{{ $product->product_name }}">
+                                    <input type="hidden" id="wishlist_productprice{{ $product->id }}"
+                                        value="{{ number_format($product->unit_price) }}">
+                                    <input type="hidden" id="wishlist_productimg{{ $product->id }}"
+                                        value="{{ url($product->product_image) }}">
+
+                                    <a type="hidden" id="wishlist_producturl{{ $product->id }}"
+                                        href="{{ route('shop.product-details', $product->product_slug) }}">
+                                    </a>
+
+                                    <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
+                                        onclick="add_compare({{ $product->id }})">
+                                        <i class="ci-compare me-1"></i>
+                                    </a>
+                                    <?php
+                                    $user = Auth::user()->id;
+                                    $wishlist = Wishlist::orderByDESC('id')
+                                        ->where('id_prod', $product->id)
+                                        ->where('id_user', $user)
+                                        ->first();
+                                    ?>
+                                    @if ($wishlist != null)
+                                        <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                            style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                            <i class="ci-heart"></i>
+                                        </a>
+                                    @elseif ($wishlist == NULL)
+                                        <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                            style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                            <i class="ci-heart"></i>
+                                        </a>
+                                    @endif
+                                @else
+                                @endif
+                                <a class="nav-link-style me-3" href="#quick-view-electro" data-bs-toggle="modal">
+                                    <i class="ci-eye"></i>
+                                </a>
+>>>>>>> main
                             </div>
                         </div>
                     </div>
@@ -360,154 +481,106 @@
             <!-- Bestsellers-->
             <div class="col-md-4 col-sm-6 mb-2 py-3">
                 <div class="widget">
-                    <h3 class="widget-title">Bán chạy nhất</h3>
-                    <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/cart/widget/05.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Wireless
-                                    Bluetooth
-                                    Headphones</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$259.<small>00</small></span>
+                    <h3 class="widget-title">Đánh giá cao</h3>
+                    @foreach ($productRating as $product)
+                        <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                                href="{{ url('shop/product-details') }}"><img
+                                    src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
+                            <div class="ps-2">
+                                <h6 class="widget-product-title"><a
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                @if ($product->discount_unit == '%')
+                                    <div class="product-price">
+                                        <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                                            ₫</span>
+                                    </div>
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @else
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/cart/widget/06.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Cloud Security
-                                    Camera</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$122.<small>00</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/cart/widget/07.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Android
-                                    Smartphone S10</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$799.<small>00</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/cart/widget/08.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Android Smart
-                                    TV Box</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$67.<small>00</small></span>
-                                <del class="text-muted fs-xs">$90.<small>43</small></del>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
-                            class="ci-arrow-right fs-xs ms-1"></i></a>
+                    @endforeach
+                    {{-- <a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
+                            class="ci-arrow-right fs-xs ms-1"></i></a> --}}
                 </div>
             </div>
             <!-- New arrivals-->
             <div class="col-md-4 col-sm-6 mb-2 py-3">
                 <div class="widget">
                     <h3 class="widget-title">Sản phẩm mới</h3>
-                    <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/06.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Monoblock
-                                    Desktop PC</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$1,949.<small>00</small></span>
+                    @foreach ($newProduct as $product)
+                        <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                                href="{{ url('shop/product-details') }}"><img
+                                    src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
+                            <div class="ps-2">
+                                <h6 class="widget-product-title"><a
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                @if ($product->discount_unit == '%')
+                                    <div class="product-price">
+                                        <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                                            ₫</span>
+                                    </div>
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @else
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/07.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Laserjet
-                                    Printer All-in-One</a>
-                            </h6>
-                            <div class="widget-product-meta"><span class="text-accent">$428.<small>60</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/08.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Console
-                                    Controller Charger</a>
-                            </h6>
-                            <div class="widget-product-meta"><span class="text-accent">$14.<small>97</small></span>
-                                <del class="text-muted fs-xs">$16.<small>47</small></del>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/09.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Smart Watch
-                                    Series 5,
-                                    Aluminium</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$349.<small>99</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
-                            class="ci-arrow-right fs-xs ms-1"></i></a>
+                    @endforeach
+                    {{-- <a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
+                            class="ci-arrow-right fs-xs ms-1"></i></a> --}}
                 </div>
             </div>
             <!-- Top rated-->
             <div class="col-md-4 col-sm-6 mb-2 py-3">
                 <div class="widget">
-                    <h3 class="widget-title">Đánh giá cao</h3>
-                    <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/10.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Android
-                                    Smartphone S9</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$749.<small>99</small></span>
-                                <del class="text-muted fs-xs">$859.<small>99</small></del>
+                    <h3 class="widget-title">Bán chạy nhất</h3>
+                     @foreach ($sellingProducts as $product)
+                        <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
+                                href="{{ url('shop/product-details') }}"><img
+                                    src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
+                            <div class="ps-2">
+                                <h6 class="widget-product-title"><a
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                @if ($product->discount_unit == '%')
+                                    <div class="product-price">
+                                        <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                                            ₫</span>
+                                    </div>
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @else
+                                    <div class="product-price" style="font-size: 12px">
+                                        <span
+                                            style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                                            ₫</span>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/11.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Wireless
-                                    Bluetooth
-                                    Headphones</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$428.<small>60</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2 border-bottom"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/12.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">360 Degrees
-                                    Camera</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$98.<small>75</small></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center py-2"><a class="d-block flex-shrink-0"
-                            href="{{ url('shop/product-details') }}"><img
-                                src="{{ asset('frontend/img/shop/widget/13.jpg') }}" width="64" alt="Product"></a>
-                        <div class="ps-2">
-                            <h6 class="widget-product-title"><a href="{{ url('shop/product-details') }}">Digital Camera
-                                    40MP</a></h6>
-                            <div class="widget-product-meta"><span class="text-accent">$210.<small>00</small></span>
-                                <del class="text-muted fs-xs">$249.<small>00</small></del>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mb-0">...</p><a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
-                            class="ci-arrow-right fs-xs ms-1"></i></a>
+                    @endforeach
+                    {{-- <a class="fs-sm" href="shop-grid-ls.html">Xem thêm...<i
+                            class="ci-arrow-right fs-xs ms-1"></i></a> --}}
                 </div>
             </div>
         </div>
