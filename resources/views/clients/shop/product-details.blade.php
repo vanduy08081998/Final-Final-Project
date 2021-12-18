@@ -41,10 +41,10 @@
     <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
-            <div class="px-4 pt-lg-3 pb-3 mb-5">
+            <div class="px-4 pt-lg-3 pb-3 mb-5 detail-tab">
                 <div class="container-fluid">
                     <div class="bg-light shadow-lg rounded-3">
-                        <div class="px-4 pt-lg-3 pb-3 mb-5 mt-3">
+                        <div class="px-4 pt-lg-3 pb-3 mb-5 mt-3 detail-content">
 
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
@@ -84,14 +84,6 @@
             </div>
         </div>
     </div>
-    </div>
-    <!-- Product description-->
-    <div class="container pt-lg-3 pb-4 pb-sm-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-
-            </div>
-        </div>
     </div>
     <hr class="mb-5">
     <!-- Product carousel (You may also like)-->
