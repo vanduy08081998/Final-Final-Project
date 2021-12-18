@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-4 col-xl-4">
         @if (count($product->specifications) == 0)
 
         @else
@@ -255,7 +255,7 @@
                 <i class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng
             </button>
         </div>
-        <div class="d-flex mb-4">
+        <div class="d-flex mb-4 btn-wishcom">
             <div class="w-100 me-3">
                 <button class="btn btn-secondary d-block w-100" type="button"><i class="ci-heart fs-lg me-2"></i>
                     <span class='d-none d-sm-inline'>Thêm vào yêu thích</span>

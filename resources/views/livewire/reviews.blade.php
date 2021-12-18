@@ -3,8 +3,8 @@ use Carbon\Carbon;
 ?>
 <div class="container pb-5">
     <!-- Reviews-->
-    <div class="row">
-        <div class="col-md-8 review-border">
+    <div class="container row">
+        <div class="col-md-12 col-sm-12 review-border">
             <h4 class="col-lg-12 mb-2 fw-bold "> Đánh giá {{ $product->product_name }}
             </h4>
             <div class="row pt-2 pb-3" id="div_id">

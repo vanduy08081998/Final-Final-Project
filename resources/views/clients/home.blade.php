@@ -13,14 +13,6 @@
         min-height: 28px;
         margin-bottom: 0px !important;
     }
-    /* @media (min-width: 68.75em){
-        #tns2 {
-        width: calc(400%);
-    }
-        #tns3 {
-        width: calc(400%);
-    }
-    } */
     .product-item {
         height: 400px !important;
     }
@@ -112,7 +104,7 @@
     </section>
 
     <!-- Products grid (Trending products)-->
-    <section class="container pt-5">
+    <section class="container pt-5 trending-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm thịnh hành</h2>
@@ -197,7 +189,7 @@
           </div>
     </section>
     {{-- Sản phẩm nổi bật --}}
-    <section class="container">
+    <section class="container highlight-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
             <h2 class="h3 mb-0 pt-3 me-2">Sản phẩm nổi bật</h2>
