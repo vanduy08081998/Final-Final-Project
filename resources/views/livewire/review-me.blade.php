@@ -3,6 +3,7 @@
         <h3> Đánh giá của bạn </h3>
         <div class="d-flex pb-4">
             <div class="d-flex flex-nowrap align-items-center sort-star">
+                <form wire:submit.prevent="render()">
                 <button data-id="all"
                     class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}">Tất
                     cả</button>
@@ -37,88 +38,11 @@
                 <button data-id="1"
                     class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}">1
                     sao</button>
+                </form>
             </div>
         </div>
-        <form class="d-none" wire:submit.prevent="render()">
-            <input type="checkbox" wire:model="comment" value="comment"
-                class="comment-check {{ $check == 'comment' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="order" value="order"
-                class="order-check {{ $check == 'order' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="review" value="review"
-                class="review-check {{ $check == 'review' ? 'checked-input' : '' }}">
-
-        </form>
-
-        <div class="tab-content nav-material" id="top-tabContent">
-            @if ($models->count() > 0)
-                <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                    @foreach ($models as $item)
-                        @if ($item->type == 'comment')
-                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                                class="content-not" data-id="{{ $item->id }}">
-                                <div class="icon-ct">
-                                    <div class="content-icon">
-                                        <i class="far fa-comments"></i>
-                                    </div>
-                                </div>
-                                <div class="content-body">
-                                    {!! $item->content !!}
-                                    <div class="moving">
-                                        Tại sản phẩm {{ $item->product->product_name }}
-                                    </div>
-                                    <div class="time">
-                                        <em> {{ $item->created_at->diffForHumans() }}</em>
-                                    </div>
-                                </div>
-                                <div class="content-handle">
-                                    <span>
-                                        <i class="fas fa-times"
-                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
-                                    </span>
-                                </div>
-                            </a>
-                        @elseif($item->type == 'order')
-                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                                class="content-not">
-                                <div class="icon-ct">
-                                    <div class="content-icon">
-                                        <i class="fas fa-money-bill-wave"></i>
-                                    </div>
-                                </div>
-                                <div class="content-body">
-                                    {!! $item->content !!}
-                                    {{-- <div class="moving">
-                        Tại sản phẩm {{ $item->product->product_name }}
-                    </div> --}}
-                                    <div class="time">
-                                        <em> {{ $item->created_at->diffForHumans() }}</em>
-                                    </div>
-                                </div>
-                                <div class="content-handle">
-                                    <span>
-                                        <i class="fas fa-times"
-                                            wire:click.prevent="delete('{{ $item->id }}')"></i>
-                                    </span>
-                                </div>
-                            </a>
-
-                        @endif
-                    @endforeach
-                </div>
-            @else
-                <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
-                    <div class="nullable">
-                        <div class="icon-null">
-                            <i class="far fa-question-circle"></i>
-                        </div>
-                        <div class="text-null">
-                            Bạn chưa có thông báo nào!
-                        </div>
-                        <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
-                    </div>
-                </div>
-            @endif
-        </div>
+      
+  
 
     </div>
 </div>
@@ -132,6 +56,7 @@
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
         background: #0bc589 !important;
     }
+
     a.nav-link.btn-review {
         color: white;
         background: #aaadac !important;
@@ -142,3 +67,12 @@
     }
 
 </style>
+<script>
+    $('.check-filterstar').click(function() {
+        var sort_filterstar = $(this).data('id');
+        $('.check-star-active').click();
+        $("#review_image_" + sort_filterstar).click();
+        $(".check-star-" + sort_filterstar).addClass('check-star-active');
+
+    })
+</script>
