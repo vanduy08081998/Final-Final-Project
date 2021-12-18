@@ -48,7 +48,7 @@ class SearchController extends Controller
         $cate = null;
         $pro = Product::where('unit_price','>=',$min)
         ->where('unit_price', '<=', $request->range)->count();
-        $products= Product::orderBy('id', 'asc')->get();
+        $products = Product::orderBy('id', 'asc')->get();
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
         $brands = Brand::orderBy('id', 'asc')->get();
         return view('clients.shop.shop-grid-ls', [
