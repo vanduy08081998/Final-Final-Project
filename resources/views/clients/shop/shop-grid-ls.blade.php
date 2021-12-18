@@ -23,16 +23,8 @@
                 </nav>
             </div>
             <div class="order-lg-1 text-center">
-<<<<<<< HEAD
-                <h1 class="h3 text-light mb-0">
-                    @if ($cate != null)
-                        {{ $cate->category_name }}
-                    @endif
-                </h1>
-=======
                 <h1 class="h5 text-light mb-0">
                     {{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</h1>
->>>>>>> main
             </div>
         </div>
     </div>

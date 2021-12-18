@@ -5,30 +5,6 @@
 
 
 @section('content')
-<<<<<<< HEAD
-    <?php
-    use App\Models\Wishlist;
-    ?>
-    <style>
-        .card-body .product-title {
-            min-height: 28px;
-            margin-bottom: 0px !important;
-        }
-
-        /* @media (min-width: 68.75em){
-            #tns2 {
-            width: calc(400%);
-        }
-            #tns3 {
-            width: calc(400%);
-        }
-        } */
-        .product-item {
-            height: 400px !important;
-        }
-
-    </style>
-=======
 <?php
   use App\Models\Wishlist;
   ?>
@@ -41,7 +17,6 @@
         height: 400px !important;
     }
 </style>
->>>>>>> main
 
     <!-- Hero (Banners + Slider)-->
     <section class="bg-secondary py-4 banner">
@@ -143,52 +118,15 @@
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
             <div class="tns-carousel-inner"
-<<<<<<< HEAD
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
-=======
-                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
->>>>>>> main
                 <!-- Product-->
                 @foreach ($product as $product)
                     <div class="product-item">
                         <div class="card product-card">
-<<<<<<< HEAD
-                            @if ($product->discount_unit == '%')
-                                <span class="badge bg-danger badge-shadow">Sale</span>
-                            @endif
-                            @if (Auth::user() != null)
-                                <?php
-                                $user = Auth::user()->id;
-                                $wishlist = Wishlist::orderByDESC('id')
-                                    ->where('id_prod', $product->id)
-                                    ->where('id_user', $user)
-                                    ->first();
-                                ?>
-                                @if ($wishlist != null)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="Xóa khỏi yêu thích"
-                                        onclick="add_to_wishlist({{ $product->id }})" style="color: red">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                @elseif ($wishlist == NULL)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="Thêm vào yêu thích"
-                                        onclick="add_to_wishlist({{ $product->id }})">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                @endif
-                            @else
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Thêm vào yêu thích"
-                                    onclick="add_to_wishlist({{ $product->id }})">
-                                    <i class="ci-heart"></i>
-                                </button>
-=======
                             @if ($product->discount == 0)
                             @else
                                 <span class="badge bg-danger badge-shadow">Giảm giá
                                     {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
->>>>>>> main
                             @endif
                             <a class="card-img-top d-block overflow-hidden"
                                 href="{{ route('shop.product-details', $product->product_slug) }}">
@@ -292,45 +230,7 @@
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
             <div class="tns-carousel-inner"
-<<<<<<< HEAD
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
-                <!-- Product-->
-                @foreach ($highlight as $product)
-                    <div class="product-item" style="height: 375px">
-                        <div class="card product-card">
-                            @if ($product->discount_unit == '%')
-                                <span class="badge bg-danger badge-shadow">Sale</span>
-                            @endif
-                            @if (Auth::user() != null)
-                                <?php
-                                $user = Auth::user()->id;
-                                $wishlist = Wishlist::orderByDESC('id')
-                                    ->where('id_prod', $product->id)
-                                    ->where('id_user', $user)
-                                    ->first();
-                                ?>
-                                @if ($wishlist != null)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="Xóa khỏi yêu thích"
-                                        onclick="add_to_wishlist({{ $product->id }})" style="color: red">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                @elseif ($wishlist == NULL)
-                                    <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                        data-bs-placement="left" title="Thêm vào yêu thích"
-                                        onclick="add_to_wishlist({{ $product->id }})">
-                                        <i class="ci-heart"></i>
-                                    </button>
-                                @endif
-                            @else
-                                <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                    data-bs-placement="left" title="Thêm vào yêu thích"
-                                    onclick="add_to_wishlist({{ $product->id }})">
-                                    <i class="ci-heart"></i>
-                                </button>
-                            @endif
-=======
-                data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
                 <!-- Product-->
                 @foreach ($highlight as $product)
                     <div class="product-item" style="height: 375px">
@@ -340,7 +240,6 @@
                                 {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
                         @endif
                         <div class="card product-card">
->>>>>>> main
                             <a class="card-img-top d-block overflow-hidden"
                                 href="{{ route('shop.product-details', $product->product_slug) }}">
                                 <img src="{{ asset($product->product_image) }}" alt="Product"></a>
@@ -377,17 +276,6 @@
                                     </div>
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            <div class="card-body card-body-hidden" style="z-index: 10">
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button">
-                                    <i class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng
-                                </button>
-                                <div class="text-center">
-                                    <a class="nav-link-style fs-ms" href="#quick-view-electro" data-bs-toggle="modal">
-                                        <i class="ci-eye align-middle me-1"></i>Xem nhanh
-                                    </a>
-                                </div>
-=======
                             <div class="card-body card-body-hidden text-center"
                                 style="z-index: 10; display: inline; padding: 15px">
                                 @if (Auth::user() != null)
@@ -432,7 +320,6 @@
                                 <a class="nav-link-style me-3" href="#quick-view-electro" data-bs-toggle="modal">
                                     <i class="ci-eye"></i>
                                 </a>
->>>>>>> main
                             </div>
                         </div>
                     </div>
