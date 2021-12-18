@@ -48,24 +48,30 @@ class ProductController extends Controller
   }
   public function shopGrid($id)
   {
-
     if($id == 0){
-      $product = Product::simplePaginate(12);
+        $product = Product::simplePaginate(12);
+        $cate = null;
+        $pro = Product::orderByDESC('id')->count();
     }else{
-      $product = Product::where('product_id_category', $id)->simplePaginate(12);
+        $product = Product::where('product_id_category', $id)->simplePaginate(12);
+        $cate = Category::where('id_cate', $id)->first();
+        $pro = Product::orderByDESC('id')->where('product_id_category', $id)->count();
     }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
-    $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
-    // print_r($product);
-    $brands = Brand::orderByDESC('id')->get();
+    $products= Product::orderBy('id', 'asc')->get();
+    $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
+    $brands = Brand::orderBy('id', 'asc')->get();
     return view('clients.shop.shop-grid-ls', [
-      'min' => $min,
-      'max' => $max,
-      'product' => $product,
-      'category' => $categories,
-      'brands' => $brands,
-      'id_cate' => $id
+        'min' => $min,
+        'max' => $max,
+        'product' => $product,
+        'products' => $products,
+        'cate' => $cate,
+        'pro' => $pro,
+        'category' => $categories,
+        'brands' => $brands,
+        'id_cate' => $id
     ]);
   }
 
@@ -111,10 +117,7 @@ class ProductController extends Controller
 
   public function brands()
   {
-    // $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
-    // $product = Product::orderByDESC('id')->get();
     $brands = Brand::orderByDESC('id')->get();
-    // dd($product->where('product_id_category', 24)->count());
     return view('clients.shop.brands', [
       'brands' => $brands,
     ]);

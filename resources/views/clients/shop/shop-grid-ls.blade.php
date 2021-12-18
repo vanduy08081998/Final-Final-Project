@@ -21,7 +21,11 @@
                 </nav>
             </div>
             <div class="order-lg-1 text-center">
-                <h1 class="h3 text-light mb-0">Cửa hàng</h1>
+                <h1 class="h3 text-light mb-0">
+                    @if ($cate != null)
+                        {{ $cate->category_name }}
+                    @endif
+                </h1>
             </div>
         </div>
     </div>
@@ -34,29 +38,24 @@
             </aside>
             <!-- Content  -->
             <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
-                <!-- Toolbar-->
-                <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
-                    <div class="d-flex flex-wrap">
-                        <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-                            <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sắp
-                                xếp theo:</label>
-                            <select class="form-select" name="shorting" onchange="shorting()" id="sorting">
-                                <option value="all">Tất cả</option>
-                                <option value="unit_price" data-short="ASC">Giá tăng dần</option>
-                                <option value="unit_price" data-short="DESC">Giá giảm dần</option>
-                                <option value="product_name" data-short="ASC">Từ A - Z</option>
-                                <option value="product_name" data-short="DESC">Từ Z - A</option>
-                            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">của 287
-                                sản phẩm</span>
+            <!-- Toolbar-->
+                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
+                        <div class="d-flex flex-wrap">
+                            <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
+                                    <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sắp
+                                        xếp theo:</label>
+                                    <select class="form-select" name="shorting" onchange="shorting()" id="sorting">
+                                        <option value="all">Tất cả</option>
+                                        <option value="unit_price" data-short="ASC">Giá tăng dần</option>
+                                        <option value="unit_price" data-short="DESC">Giá giảm dần</option>
+                                        <option value="product_name" data-short="ASC">Từ A - Z</option>
+                                        <option value="product_name" data-short="DESC">Từ Z - A</option>
+                                    </select>
+                                    <span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">của <span
+                                            style="color: yellow; font-weight: 800;">{{ $pro }}</span> sản phẩm</span>
+                            </div>
                         </div>
                     </div>
-                    {{-- <div class="d-none d-sm-flex pb-3"><a
-            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2"
-            href="{{ route('shop.shop-grid') }}"><i class="ci-view-grid"></i></a><a
-            class="btn btn-icon nav-link-style nav-link-light" href="{{ route('shop.shop-list') }}"><i
-              class="ci-view-list"></i></a>
-        </div> --}}
-                </div>
                 <!-- Products grid-->
                 <div class="row mx-n2" id="product-short">
                     <!-- Product-->
@@ -124,7 +123,8 @@
                                     </h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
-                                                class="text-accent">{{ number_format($pro->unit_price) }}</span></div>
+                                                class="text-accent">{{ number_format($pro->unit_price) }} ₫</span>
+                                        </div>
                                         <div class="star-rating">
                                             <i class="star-rating-icon ci-star-filled active"></i>
                                             <i class="star-rating-icon ci-star-filled active"></i>
@@ -141,7 +141,7 @@
                 </div>
                 @include('clients.Inc.compare')
                 <!-- Pagination-->
-                <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
+                <nav class="d-flex justify-content-center pt-2" aria-label="Page navigation">
                     {{ $product->links() }}
                 </nav>
             </section>
