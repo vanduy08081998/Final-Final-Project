@@ -15,7 +15,7 @@ class Brand extends Model
     public $fillable = ['brand_name', 'brand_slug', 'brand_image','meta_keywords','meta_title','meta_desc'];
 
     protected $dates = ['deleted_at'];
-    
+
     public $timestamps = false;
 
     public $primaryKey = 'id';
@@ -30,5 +30,13 @@ class Brand extends Model
        return $this->belongsToMany(Category::class, 'category_brand');
    }
 
-
+   /**
+    * Get all of the products for the Brand
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    */
+   public function products()
+   {
+       return $this->hasMany(Product::class, 'product_id_brand');
+   }
 }

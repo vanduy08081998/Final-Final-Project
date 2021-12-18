@@ -191,39 +191,49 @@
                             <h3 class="widget-title">Danh mục</h3>
                             <div class="accordion mt-n1" id="shop-categories">
                                 @foreach ($category as $key => $cate)
-                                <div class="accordion-item">
-                                    <h3 class="accordion-header">
-                                        <a class="accordion-button collapsed" href="#collapseSection-{{ $key }}" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                                            {{ $cate->category_name }}
-                                        </a>
-                                    </h3>
-                                    <div class="accordion-collapse collapse" id="collapseSection-{{ $key }}">
-                                        <div class="accordion-body">
-                                            <div class="widget widget-links widget-filter">
-                                                <div class="input-group input-group-sm mb-2">
-                                                    <input class="widget-filter-search form-control rounded-end" type="text" placeholder="Tìm kiếm">
-                                                    <i class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                                    <div class="accordion-item">
+                                        <h3 class="accordion-header">
+                                            <a class="accordion-button collapsed"
+                                                href="#collapseSection-{{ $key }}" role="button"
+                                                data-bs-toggle="collapse" aria-expanded="false"
+                                                aria-controls="collapseExample">
+                                                {{ $cate->category_name }}
+                                            </a>
+                                        </h3>
+                                        <div class="accordion-collapse collapse" id="collapseSection-{{ $key }}">
+                                            <div class="accordion-body">
+                                                <div class="widget widget-links widget-filter">
+                                                    <div class="input-group input-group-sm mb-2">
+                                                        <input class="widget-filter-search form-control rounded-end"
+                                                            type="text" placeholder="Tìm kiếm">
+                                                        <i
+                                                            class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+                                                    </div>
+                                                    <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;"
+                                                        data-simplebar data-simplebar-auto-hide="false">
+                                                        <li class="widget-list-item widget-filter-item">
+                                                            <a class="widget-list-link d-flex justify-content-between align-items-center"
+                                                                href="#">
+                                                                <span class="widget-filter-item-text">View all</span>
+                                                                <span
+                                                                    class="fs-xs text-muted ms-3">{{ $product_category->where('product_id_category', $cate->id_cate)->count() }}</span>
+                                                            </a>
+                                                        </li>
+                                                        @foreach ($cate->brands as $brand)
+                                                            <li class="widget-list-item widget-filter-item">
+                                                                <a class="widget-list-link d-flex justify-content-between align-items-center"
+                                                                    href="#">
+                                                                    <span
+                                                                        class="widget-filter-item-text">{{ $brand->brand_name }}</span>
+                                                                    <span class="fs-xs text-muted ms-3">247</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </div>
-                                                <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
-                                                    <li class="widget-list-item widget-filter-item">
-                                                        <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                            <span class="widget-filter-item-text">View all</span>
-                                                            <span class="fs-xs text-muted ms-3">{{ $product_category->where('product_id_category', $cate->id_cate)->count() }}</span>
-                                                        </a>
-                                                    </li>
-                                                    @foreach ($cate->brands as $brand)
-                                                    <li class="widget-list-item widget-filter-item">
-                                                        <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                            <span class="widget-filter-item-text">{{ $brand->brand_name }}</span>
-                                                            <span class="fs-xs text-muted ms-3">247</span>
-                                                        </a>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -255,13 +265,14 @@
                             <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
                                 data-simplebar data-simplebar-auto-hide="false">
                                 @foreach ($brands as $brand)
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="adidas">
-                                        <label class="form-check-label widget-filter-item-text" for="adidas">{{ $brand->brand_name }}</label>
-                                    </div>
-                                    <span class="fs-xs text-muted">123</span>
-                                </li>
+                                    <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="adidas">
+                                            <label class="form-check-label widget-filter-item-text"
+                                                for="adidas">{{ $brand->brand_name }}</label>
+                                        </div>
+                                        <span class="fs-xs text-muted">123</span>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -377,32 +388,38 @@
                 <!-- Products grid-->
 
                 <div class="row mx-n2">
-                <h4>{{$category_id->category_name}}</h4>
+                    <h4>{{ $category_id->category_name }}</h4>
                     <!-- Product-->
                     @foreach ($product_category as $pro)
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
-                            @foreach ($pro->variants as $pr )
-                            <input type="hidden" id="wishlist_productsku{{$pro->id}}" value="{{$pr->SKU}}">
+                                @foreach ($pro->variants as $pr)
+                                    <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
+                                        value="{{ $pr->SKU }}">
 
-                            @endforeach
-                            <input type="hidden" value="{{$pro->id}}">
-                            <input type="hidden" id="wishlist_productname{{$pro->id}}" value="{{$pro->product_name}}">
-                            <input type="hidden" id="wishlist_productprice{{$pro->id}}" value="{{number_format($pro->unit_price)}}">
-                            <input type="hidden" id="wishlist_productimg{{$pro->id}}" value="{{ url( $pro->product_image) }}">
+                                @endforeach
+                                <input type="hidden" value="{{ $pro->id }}">
+                                <input type="hidden" id="wishlist_productname{{ $pro->id }}"
+                                    value="{{ $pro->product_name }}">
+                                <input type="hidden" id="wishlist_productprice{{ $pro->id }}"
+                                    value="{{ number_format($pro->unit_price) }}">
+                                <input type="hidden" id="wishlist_productimg{{ $pro->id }}"
+                                    value="{{ url($pro->product_image) }}">
 
-                                <a type="hidden" id="wishlist_producturl{{$pro->id}}" href="{{ route('shop.product-details', $pro->product_slug) }}">
-
+                                <a type="hidden" id="wishlist_producturl{{ $pro->id }}"
+                                    href="{{ route('shop.product-details', $pro->product_slug) }}">
                                 </a>
-                                <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;" onclick="add_compare({{ $pro->id }})">
-                                <i class="ci-compare me-1"></i>So sánh
+                                <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;"
+                                    onclick="add_compare({{ $pro->id }})">
+                                    <i class="ci-compare me-1"></i>So sánh
                                 </a>
                                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
                                     data-bs-placement="left" title="Thêm vào yêu thích"><i
                                         class="ci-heart"></i></button>
-                                <a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $pro->product_slug) }}">
-                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product"
-                                        width="80%" style="margin: auto; display: block">
+                                <a class="card-img-top d-block overflow-hidden"
+                                    href="{{ route('shop.product-details', $pro->product_slug) }}">
+                                    <img src="{{ URL::to($pro->product_image) }}" alt="Product" width="80%"
+                                        style="margin: auto; display: block">
                                 </a>
                                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Sneakers
                                         &amp; Keds</a>
@@ -450,442 +467,6 @@
                         </div>
                     @endforeach
                 </div>
-                <!-- Banner-->
-                <!-- <div class="py-sm-2">
-                    <div
-                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
-                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
-                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
-                            alt="Shop Converse">
-                    </div>
-                </div> -->
-                <!-- Products grid-->
-                <div class="row mx-n2">
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/07.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Women's
-                                    Swimwear</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Two-Piece Bikini in Print</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span class="text-accent">$18.<small>99</small></span>
-                                    </div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size4" id="xs3" checked>
-                                        <label class="form-option-label" for="xs3">XS</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size4" id="s3">
-                                        <label class="form-option-label" for="s3">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size4" id="m3">
-                                        <label class="form-option-label" for="m3">M</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/08.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Kid's Toys</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Panda Teddy Bear</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span class="text-accent">$14.<small>99</small></span>
-                                    </div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a></div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/09.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Cosmetics</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Metallic Lipstick
-                                        (Crimson)</a></h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span class="text-accent">$12.<small>99</small></span>
-                                    </div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-half active"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color3" id="crimson" checked>
-                                        <label class="form-option-label rounded-circle" for="crimson"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #bd3c82;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color3" id="creamy">
-                                        <label class="form-option-label rounded-circle" for="creamy"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #ebae81;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color3" id="palm">
-                                        <label class="form-option-label rounded-circle" for="palm"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #ca8799;"></span></label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/10.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    Accessories</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">5-Pack Multicolor
-                                        Bracelets</a></h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span class="text-accent">$7.<small>99</small></span>
-                                    </div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/11.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    Sandals</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Soft Footbed Sandals</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$99.<small>50</small></span></div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color4" id="blue2" checked>
-                                        <label class="form-option-label rounded-circle" for="blue2"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #879fb3;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color4" id="brown">
-                                        <label class="form-option-label rounded-circle" for="brown"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #9c6d4a;"></span></label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="color4" id="black">
-                                        <label class="form-option-label rounded-circle" for="black"><span
-                                                class="form-option-color rounded-circle"
-                                                style="background-color: #333333;"></span></label>
-                                    </div>
-                                </div>
-                                <div class="d-flex mb-2">
-                                    <select class="form-select form-select-sm me-2">
-                                        <option>9.5</option>
-                                        <option>10</option>
-                                        <option>10.5</option>
-                                        <option>11</option>
-                                        <option>11.5</option>
-                                    </select>
-                                    <button class="btn btn-primary btn-sm" type="button"><i
-                                            class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                </div>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/12.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    Hats</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$25.<small>99</small></span></div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-half active"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size5" id="s4" checked>
-                                        <label class="form-option-label" for="s4">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size5" id="m4">
-                                        <label class="form-option-label" for="m4">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size5" id="l4">
-                                        <label class="form-option-label" for="l4">L</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card"><span class="badge bg-danger badge-shadow">Sale</span>
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/13.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    T-shirts</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$11.<small>50</small></span>
-                                        <del class="fs-sm text-muted">$13.<small>50</small></del>
-                                    </div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size6" id="s5">
-                                        <label class="form-option-label" for="s5">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size6" id="m5">
-                                        <label class="form-option-label" for="m5">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size6" id="l5" checked>
-                                        <label class="form-option-label" for="l5">L</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size6" id="xl5">
-                                        <label class="form-option-label" for="xl5">XL</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/14.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    Jeans</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Slim Taper Fit Jeans</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$58.<small>99</small></span></div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size7" id="s6">
-                                        <label class="form-option-label" for="s6">S</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size7" id="m6">
-                                        <label class="form-option-label" for="m6">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size7" id="l6" checked>
-                                        <label class="form-option-label" for="l6">L</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size7" id="xl6">
-                                        <label class="form-option-label" for="xl6">XL</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Xem nhanh</a>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="d-sm-none">
-                    </div> -->
-                    <!-- Product-->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
-                                data-bs-placement="left" title="Thêm vào yêu thích"><i
-                                    class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden"
-                                href="shop-single-v1.html"><img src="{{ asset('frontend/img/shop/catalog/15.jpg') }}"
-                                    alt="Product"></a>
-                            <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">Men’s
-                                    Waistcoats</a>
-                                <h3 class="product-title fs-sm"><a href="shop-single-v1.html">Single-breasted
-                                        Trenchcoat</a></h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price"><span
-                                            class="text-accent">$79.<small>99</small></span></div>
-                                    <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-filled active"></i><i
-                                            class="star-rating-icon ci-star-half active"></i><i
-                                            class="star-rating-icon ci-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <div class="text-center pb-2">
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size8" id="m7">
-                                        <label class="form-option-label" for="m7">M</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size8" id="l7" checked>
-                                        <label class="form-option-label" for="l7">L</label>
-                                    </div>
-                                    <div class="form-check form-option form-check-inline mb-2">
-                                        <input class="form-check-input" type="radio" name="size8" id="xl7">
-                                        <label class="form-option-label" for="xl7">XL</label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                                        class="ci-cart fs-sm me-1"></i>Thêm vào giỏ hàng</button>
-                                <div class="text-center"><a class="nav-link-style fs-ms" href="#quick-view"
-                                        data-bs-toggle="modal"><i class="ci-eye align-middle me-1"></i>Quick view</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
                 <hr class="my-3">
                 <!-- Pagination-->
                 <nav class="d-flex justify-content-between pt-2" aria-label="Page navigation">
@@ -913,72 +494,155 @@
     </div>
 @endsection
 @push('script')
+<<<<<<< HEAD
+<script>
+    function delete_compare(id) {
+        if(localStorage.getItem('compare')!=null){
+            var data =JSON.parse(localStorage.getItem('compare'));
+            var index = data.filter(item => item.id != id);
+               localStorage.setItem('compare', JSON.stringify(index));
+               document.getElementById("row_compare"+id).remove();
+        }
+    }
+    function add_compare(product_id){
+        $('#title-compare').innerText='Chỉ cho phép so sánh 3 sản phẩm';
+        var id = product_id;
+        var name = document.getElementById('wishlist_productname'+id).value;
+        var content = document.getElementById('wishlist_productsku'+id).value;
+       //  var value = document.getElementById('wishlist_skuvalue'+id).value;
+        var price = document.getElementById('wishlist_productprice'+id).value;
+        var img = document.getElementById('wishlist_productimg'+id).value;
+        var url = document.getElementById('wishlist_producturl'+id).href;
+        var newItem = {
+           'url':url,
+           'id':id,
+           'name':name,
+           'price':price,
+           'img':img,
+           'content':content
+       }
+       if(localStorage.getItem('compare')==null){
+           localStorage.setItem('compare', '[]');
+       }
+       var old_data = JSON.parse(localStorage.getItem('compare'));
+       var matches = $.grep(old_data, function(obj){
+           return obj.id == id;
+       })
 
-     <script>
-     function delete_compare(id) {
-         if(localStorage.getItem('compare')!=null){
-             var data =JSON.parse(localStorage.getItem('compare'));
-             var index = data.filter(item => item.id != id);
+       if(matches.length){
+             swal("Sản phẩm đã có trong so sánh!", "Xin mời bạn chọn sản phẩm khác");
+           //   alert('Sản phẩm đã có trong so sánh');
+             localStorage.setItem('compare', JSON.stringify(old_data));
+        $('#sosanh').modal('show');
+       }
+       else{
+           if(old_data.length<=2){
+               old_data.push(newItem);
+              var html = ''; // newItem.content
+               let list_compare = '';
+
+              html+=   `<div class="col-sm-4" id="row_compare`+newItem.id+`">
+                       <span><img width="200px" style="padding: 10px;" src="`+newItem.img+`"></span>
+                       <div style="padding: 10px;">
+                           <span><a href="`+newItem.url+`" style="color:black;">`+newItem.name+`</a></span>
+                           <p> <b style="text-align:center">`+newItem.price+`VNĐ</b> </p>
+                           <a href="`+newItem.url+`" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
+                           <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(`+id+`)">Xóa so sánh</a>
+                       </div>
+                       <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
+                       <div>
+                       <ul class="compare-list-attribute-${newItem.id}">
+
+                       </ul>
+                       </div>
+                   </div>`
+               //foreach item conten ra gắn vào list_compare
+               $.each(JSON.parse(newItem.content), function(index, value){
+                   list_compare += `<li>${value.specifications}: ${value.value}</li>`
+              })
+               $('#row_compare').find('.anh').append(html);
+              //gắn list compare vào html
+              $(`.compare-list-attribute-${newItem.id}`).html(list_compare)
+           }
+           else{
+               swal("Chỉ có thể so sánh tối đa 3 sản phẩm");
+           }
+        localStorage.setItem('compare', JSON.stringify(old_data));
+        $('#sosanh').modal('show');
+       }}
+   </script>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+=======
+
+    <script>
+        function delete_compare(id) {
+            if (localStorage.getItem('compare') != null) {
+                var data = JSON.parse(localStorage.getItem('compare'));
+                var index = data.filter(item => item.id != id);
                 localStorage.setItem('compare', JSON.stringify(index));
-                document.getElementById("row_compare"+id).remove();
-         }
-     }
-     function add_compare(product_id){
-         $('#title-compare').innerText='Chỉ cho phép so sánh 3 sản phẩm';
-         var id = product_id;
-         var name = document.getElementById('wishlist_productname'+id).value;
-         var content = document.getElementById('wishlist_productsku'+id).value;
-         var price = document.getElementById('wishlist_productprice'+id).value;
-         var img = document.getElementById('wishlist_productimg'+id).value;
-         var url = document.getElementById('wishlist_producturl'+id).href;
-         var newItem = {
-            'url':url,
-            'id':id,
-            'content':content,
-            'name':name,
-            'price':price,
-            'img':img
-
+                document.getElementById("row_compare" + id).remove();
+            }
         }
-        if(localStorage.getItem('compare')==null){
-            localStorage.setItem('compare', '[]');
-        }
-        var old_data = JSON.parse(localStorage.getItem('compare'));
-        var matches = $.grep(old_data, function(obj){
-            return obj.id == id;
-        })
 
-        if(matches.length){
-              alert('Sản phẩm đã có trong so sánh');
+        function add_compare(product_id) {
+            $('#title-compare').innerText = 'Chỉ cho phép so sánh 3 sản phẩm';
+            var id = product_id;
+            var name = document.getElementById('wishlist_productname' + id).value;
+            var content = document.getElementById('wishlist_productsku' + id).value;
+            var price = document.getElementById('wishlist_productprice' + id).value;
+            var img = document.getElementById('wishlist_productimg' + id).value;
+            var url = document.getElementById('wishlist_producturl' + id).href;
+            var newItem = {
+                'url': url,
+                'id': id,
+                'content': content,
+                'name': name,
+                'price': price,
+                'img': img
 
-              localStorage.setItem('compare', JSON.stringify(old_data));
-         $('#sosanh').modal('show');
-        }else{
+            }
+            if (localStorage.getItem('compare') == null) {
+                localStorage.setItem('compare', '[]');
+            }
+            var old_data = JSON.parse(localStorage.getItem('compare'));
+            var matches = $.grep(old_data, function(obj) {
+                return obj.id == id;
+            })
 
-            if(old_data.length<=2){
-                old_data.push(newItem);
+            if (matches.length) {
+                alert('Sản phẩm đã có trong so sánh');
 
-                $('#row_compare').find('.anh').append(`
-                    <div class="col-sm-4" id="row_compare`+newItem.id+`">
-                        <span><img width="200px" style="padding: 10px;" src="`+newItem.img+`"></span>
+                localStorage.setItem('compare', JSON.stringify(old_data));
+                $('#sosanh').modal('show');
+            } else {
+
+                if (old_data.length <= 2) {
+                    old_data.push(newItem);
+
+                    $('#row_compare').find('.anh').append(`
+                    <div class="col-sm-4" id="row_compare` + newItem.id + `">
+                        <span><img width="200px" style="padding: 10px;" src="` + newItem.img + `"></span>
                         <div style="padding: 10px;">
-                            <span><a href="`+newItem.url+`" style="color:black;">`+newItem.name+`</a></span>
-                            <p> <b style="text-align:center">`+newItem.price+`VNĐ</b> </p>
-                            <a href="`+newItem.url+`" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
-                            <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(`+id+`)">Xóa so sánh</a>
+                            <span><a href="` + newItem.url + `" style="color:black;">` + newItem.name + `</a></span>
+                            <p> <b style="text-align:center">` + newItem.price + `VNĐ</b> </p>
+                            <a href="` + newItem.url +
+                        `" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
+                            <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(` + id + `)">Xóa so sánh</a>
                         </div>
                         <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
                         <div>
                         <ul>
-                        <li>`+newItem.content+`</li>
+                        <li>` + newItem.content + `</li>
                         </ul>
                         </div>
                     </div>
                 `);
 
+                }
+                localStorage.setItem('compare', JSON.stringify(old_data));
+                $('#sosanh').modal('show');
             }
-         localStorage.setItem('compare', JSON.stringify(old_data));
-         $('#sosanh').modal('show');
-        }}
+        }
     </script>
+>>>>>>> main
 @endpush

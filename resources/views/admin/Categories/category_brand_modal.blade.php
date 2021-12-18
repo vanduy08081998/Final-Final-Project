@@ -7,8 +7,7 @@
                 <table id="example2" class="table table-striped table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Tên</th>
-                            <th>Hình ảnh</th>
+                            <th>Thương hiệu</th>
                             <th>Hành động</th>
 
                         </tr>
@@ -16,9 +15,7 @@
                     <tbody>
                         @forelse ($value->brands as $brand)
                             <tr>
-                                <td>{{ $brand->brand_name }}</td>
-                                <td><img src="{{ url('public/uploads/brand/' . $brand->brand_image) }}" alt="" height="40px">
-                                </td>
+                                <td><img src="{{ url($brand->brand_image) }}" alt="" height="40px"><br>{{ $brand->brand_name }}</td>
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-success dropdown-toggle radius-30"

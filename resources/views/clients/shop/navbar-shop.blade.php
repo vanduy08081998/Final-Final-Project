@@ -70,25 +70,27 @@
         </div>
         <div class="border-bottom" style="margin-top: 60px"></div>
         <!-- Filter by Brand-->
-        <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
-            <h3 class="widget-title">Thương hiệu</h3>
-            <div class="input-group input-group-sm mb-2">
-                <input class="widget-filter-search form-control rounded-end pe-5" type="text" placeholder="Search"><i
-                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
+        <form id="form-search-brand" action="#" onchange="searchBrand()">
+            @csrf
+            <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
+                <h3 class="widget-title">Thương hiệu</h3>
+                <div class="input-group input-group-sm mb-2">
+                    <input class="form-control rounded-end pe-5" type="text" name="brand_key" placeholder="Search">
+                </div>
+                <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;" data-simplebar
+                    data-simplebar-auto-hide="false">
+                    @foreach ($brands as $key => $brand)
+                        <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="brandbox[]" value="{{ $brand->id }}" class="brand-box">
+                                <label class="form-check-label widget-filter-item-text"
+                                    for="adidas">{{ $brand->brand_name }}</label>
+                            </div>
+                            <span class="fs-xs text-muted">{{ count($brand->products) }}</span>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-            <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;" data-simplebar
-                data-simplebar-auto-hide="false">
-                @foreach ($brands as $brand)
-                    <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="adidas">
-                            <label class="form-check-label widget-filter-item-text"
-                                for="adidas">{{ $brand->brand_name }}</label>
-                        </div>
-                        <span class="fs-xs text-muted">123</span>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+        </form>
     </div>
 </div>

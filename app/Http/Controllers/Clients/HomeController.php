@@ -20,8 +20,8 @@ class HomeController extends Controller
     public function index(){
         $slide = Banner::orderByDESC('id')->where('banner_type', '0')->get();
         $banner = Banner::orderByDESC('id')->where('banner_type', '1')->get();
-        $product = Product::orderByDESC('id')->get();
-        $highlight = Product::orderByDESC('id')->get();
+        $product = Product::orderBy('id', 'ASC')->get();
+        $highlight = Product::orderBy('id', 'ASC')->get();
         $brand = Brand::orderByDESC('id')->get();
         return view('clients.home')->with([
             'slide' => $slide,

@@ -16,22 +16,9 @@
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
+                            <li class="breadcrumb-item active" aria-current="page">Cập nhật thương hiệu</li>
                         </ol>
                     </nav>
-                </div>
-                <div class="ml-auto">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Settings</button>
-                        <button type="button" class="btn btn-primary bg-split-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"> <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left"> <a class="dropdown-item" href="javascript:;">Action</a>
-                            <a class="dropdown-item" href="javascript:;">Another action</a>
-                            <a class="dropdown-item" href="javascript:;">Something else here</a>
-                            <div class="dropdown-divider"></div> <a class="dropdown-item" href="javascript:;">Separated
-                                link</a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -42,7 +29,7 @@
                     <div class="col-lg-8">
                         <div class="card radius-5">
                             <div class="card-header">
-                                Cập nhật
+                                Cập nhật thương hiệu
                             </div>
                             <div class="card-body">
 
@@ -89,11 +76,9 @@
                                     <span class="text-danger">{{ $errors->first('meta_keywords') }}</span>
                                     @enderror
                                 </div>
-
                                 <!-- End -->
 
                                 <!-- INput Group -->
-
                                 <div class="form-group">
                                     <label for="name">Tiêu đề (SEO)</label>
                                     <input class="form-control" name="meta_title" value="{{ $brandId->meta_title }}" type="text">
@@ -104,7 +89,6 @@
                                 <!-- End -->
 
                                 <!-- INput Group -->
-
                                 <div class="form-group">
                                     <label for="name">Mô tả (SEO)</label>
                                     <input class="form-control" name="meta_desc" value="{{ $brandId->meta_desc }}" type="text">
@@ -117,14 +101,6 @@
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">Hành động</div>
-                            <div class="card-body"></div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary radius-5 float-right">Cập
-                                    nhật</button>
-                            </div>
-                        </div>
                         <div class="card">
                             <div class="card-header">Danh mục</div>
                             <div class="card-body">
@@ -158,7 +134,7 @@
                             <div class="card-header">Logo thương hiệu</div>
                             <div class="card-body d-flex justify-content-center">
                                 <div class="preview hide mb-3">
-                                    <img src="{{ url('uploads/Brands/' . $brandId->brand_image) }}" alt="" height="100px" width="100px">
+                                    <img src="{{ url($brandId->brand_image) }}" alt="" height="60px" width="100px">
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -171,6 +147,15 @@
                                 @error('brand_image')
                                 <span class="text-danger">{{ $errors->first('brand_image') }}</span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">Hành động</div>
+                            <div class="card-body"></div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary radius-5 float-right">Cập
+                                    nhật</button>
                             </div>
                         </div>
                     </div>
