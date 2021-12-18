@@ -26,8 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $category = Category::orderBy('id_cate', 'ASC')->get();
-        View::share(compact('category'));
         Schema::defaultStringLength(191); // add: default varchar(191)
     }
 }

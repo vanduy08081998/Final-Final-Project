@@ -9,6 +9,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use App\Services\NotificationService;
 
 class Reviews extends Component
 {
@@ -188,6 +189,9 @@ class Reviews extends Component
             'review_parent' => $review_id,
             'review_status' => $review_status
         ]);
+
+        $service = new NotificationService();
+        $service->store(Comment::find($review_id)->customer_id , $product_id, 'review', Auth::user()->name);
         if(Auth::user()->position != 'admin'){
         $this->dispatchBrowserEvent('OpenSuccess', []);
         }

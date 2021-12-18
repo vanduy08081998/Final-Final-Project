@@ -37,8 +37,12 @@
         <span>Bài viết</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-bookmark" aria-hidden="true"></i> <span> Thể loại</span> <span
-                class="menu-arrow"></span></a>
+        <a href="#"
+            class="{{ request()->is('admin/blogCate') || request()->is('admin/blogCate/*') ? 'active' : '' }}">
+            <i class="fa fa-bookmark" aria-hidden="true"></i>
+            <span> Thể loại</span>
+            <span class="menu-arrow"></span>
+        </a>
         <ul style="display: none;">
             <li><a href="{{ route('blogCate.index') }}">Danh sách</a></li>
             <li><a href="{{ route('blogCate.create') }}">Thêm danh mục</a></li>
@@ -46,7 +50,8 @@
         </ul>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span> Bài viết</span> <span
+        <a href="#" class="{{ request()->is('admin/blogs') || request()->is('admin/blogs/*') ? 'active' : '' }}"><i
+                class="fa fa-newspaper-o" aria-hidden="true"></i> <span> Bài viết</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('blogs.index') }}">Bài viết</a></li>
@@ -58,10 +63,13 @@
         <span>Sản phẩm</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i> <span>Danh mục</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/categories') || request()->is('admin/categories/*') ? 'active' : '' }}"><i
+                class="fa fa-list-ul" aria-hidden="true"></i> <span>Danh mục</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('categories.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('categories.create') }}">Thêm mới</a></li>
         </ul>
     </li>
     <li class="submenu">
@@ -69,10 +77,13 @@
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('brand.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('brand.create') }}">Thêm mới</a></li>
         </ul>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-dropbox" aria-hidden="true"></i> <span> Sản phẩm</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}"><i
+                class="fa fa-dropbox" aria-hidden="true"></i> <span> Sản phẩm</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('products.index') }}">Danh sách</a></li>
@@ -98,7 +109,9 @@
         <span>Chiến lược</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-object-ungroup" aria-hidden="true"></i> <span> Slide</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/banners') || request()->is('admin/banners/*') ? 'active' : '' }}"><i
+                class="fa fa-object-ungroup" aria-hidden="true"></i> <span> Slide</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('banners.index') }}">Danh sách</a></li>
@@ -106,7 +119,9 @@
         </ul>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-tags" aria-hidden="true"></i> <span> Phiếu giảm giá</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/discount') || request()->is('admin/discount/*') ? 'active' : '' }}"><i
+                class="fa fa-tags" aria-hidden="true"></i> <span> Phiếu giảm giá</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('discount.index') }}">Danh sách</a></li>
@@ -114,7 +129,9 @@
         </ul>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fas fa-bookmark"></i> <span> Flash Sale</span> <span class="menu-arrow"></span></a>
+        <a href="#"
+            class="{{ request()->is('admin/flash-deals') || request()->is('admin/flash-deals/*') ? 'active' : '' }}"><i
+                class="fas fa-bookmark"></i> <span> Flash Sale</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('flash-deals.index') }}">Danh sách</a></li>
         </ul>
@@ -123,25 +140,18 @@
         <span>Khách hàng</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span> Khách hàng</span> <span
-                class="menu-arrow"></span></a>
+        <a href="#" class="{{ request()->is('admin/list_customer') ? 'active' : '' }}"><i class="fa fa-users"
+                aria-hidden="true"></i> <span> Khách hàng</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('list_customer') }}">Danh sách</a></li>
-        </ul>
-    </li>
-    <li class="submenu">
-        <a href="#"><i class="fa fa-users" aria-hidden="true"></i> <span>Đánh giá và bình luận</span> <span
-                class="menu-arrow"></span></a>
-        <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
-            <li><a href="{{ route('review-admin.index') }}">Đánh giá</a></li>
         </ul>
     </li>
     <li class="menu-title">
         <span>Hóa đơn</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-shopping-cart"></i> <span>Hóa đơn</span> <span class="menu-arrow"></span></a>
+        <a href="#" class="{{ request()->is('admin/orders') ? 'active' : '' }}"><i class="fa fa-shopping-cart"></i>
+            <span>Hóa đơn</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('orders.index') }}">Danh sách</a></li>
         </ul>
@@ -173,14 +183,18 @@
         <span>Đánh giá</span>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i> <span>Đánh giá</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/review-admin') || request()->is('admin/review-admin/*') ? 'active' : '' }}"><i
+                class="fa fa-star-half-o" aria-hidden="true"></i> <span>Đánh giá</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('review-admin.index') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="submenu">
-        <a href="#"><i class="fa fa-commenting" aria-hidden="true"></i> <span>Bình luận</span> <span
+        <a href="#"
+            class="{{ request()->is('admin/comment') || request()->is('admin/comment/*') ? 'active' : '' }}"><i
+                class="fa fa-commenting" aria-hidden="true"></i> <span>Bình luận</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('comment.index') }}">Danh sách</a></li>
@@ -201,7 +215,9 @@
                 class="menu-arrow"></span></a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-file-text" aria-hidden="true"></i> <span>Thông tin</span><span
+        <a href="#"
+            class="{{ request()->is('admin/informations') || request()->is('admin/informations/*') ? 'active' : '' }}"><i
+                class="fa fa-file-text" aria-hidden="true"></i> <span>Thông tin</span><span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('informations.index') }}">Danh sách</a></li>
