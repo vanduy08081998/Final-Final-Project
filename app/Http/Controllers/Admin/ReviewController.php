@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Product;
 use Auth;
+
 class ReviewController extends Controller
 {
     /**
@@ -92,7 +93,7 @@ class ReviewController extends Controller
     public function productReview($product_id){
         // dd($product_id);
         $product = Product::find($product_id);
-        $reviews = Review::where([['product_id', $product_id],['review_status',1], ['review_parent',null]])->latest()->get();
+        $reviews = Review::where([['product_id', $product_id],['review_status',1], ['review_parent',null],['admin_feedback',1]])->latest()->get();
         $countTrashed = Review::where([['product_id', $product_id], ['review_parent',null]])->onlyTrashed()->count();
         $count_not_browse = Review::where([['product_id', $product_id],['review_status',null],['review_parent',null]])->get()->count();
         $count_not_feedback = Review::where([['product_id', $product_id],['admin_feedback', null],['review_status',1],['review_parent',null]])->get()->count();

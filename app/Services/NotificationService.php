@@ -18,10 +18,10 @@ class NotificationService
                 'id_user' => $user_id, // Người nhận bình luận
                 'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận
                 'type' => $type, // Thể loại
-                'content' => '<strong>'.$content_name.'</strong> đã phản hồi bình luận của bạn trong Đánh Giá' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
+                'content' => '<strong>'.$content_name.'</strong> đã phản hồi đánh giá của bạn!' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
             );
         }
-        elseif($type == 'review'){
+        elseif($type == 'discount'){
             $data = array(
                 'id_user' => $user_id, // Người nhận bình luận
                 'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận

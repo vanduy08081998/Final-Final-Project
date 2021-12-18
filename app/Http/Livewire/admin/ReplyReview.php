@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use App\Services\NotificationService;
+
 
 class ReplyReview extends Component
 {
@@ -36,8 +38,13 @@ class ReplyReview extends Component
             'customer_id' => Auth::user()->id,
             'content_rating' => $this->content_rating,
             'review_parent' => $review_id,
-            'review_status' => 1
+            'review_status' => 1,
         ]);
+
+        $reviewId = Review::find($review_id);
+        
+        $service = new NotificationService();
+        $service->store($reviewId->customer_id , $product_id, 'review', 'BigDeal');
         $this->emit('render');
     }
     public function discussion($review_id){
@@ -50,6 +57,10 @@ class ReplyReview extends Component
         $this->emit('render');
     }
     public function browse($review_id){
+        $reviewId = Review::find($review_id);
+        $service = new NotificationService();
+        $reviewParent = Review::find($reviewId->review_parent);
+        $service->store($reviewParent->customer_id , $reviewId->product_id, 'review', $reviewId->user->name);
         Review::find($review_id)->update(['review_status' => 1]);
         $this->emit('render');
     }

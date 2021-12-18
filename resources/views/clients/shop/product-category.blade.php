@@ -396,7 +396,6 @@
                                 @foreach ($pro->variants as $pr)
                                     <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
                                         value="{{ $pr->SKU }}">
-
                                 @endforeach
                                 <input type="hidden" value="{{ $pro->id }}">
                                 <input type="hidden" id="wishlist_productname{{ $pro->id }}"
@@ -494,7 +493,6 @@
     </div>
 @endsection
 @push('script')
-<<<<<<< HEAD
 <script>
     function delete_compare(id) {
         if(localStorage.getItem('compare')!=null){
@@ -572,8 +570,6 @@
        }}
    </script>
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-=======
-
     <script>
         function delete_compare(id) {
             if (localStorage.getItem('compare') != null) {
