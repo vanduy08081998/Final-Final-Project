@@ -128,7 +128,7 @@
                                             </h6>
                                         </div>
                                         @if ($review_child->user->position == 'admin')
-                                            <div class="fs-sm mt-1 ms-sm-1  text-success">
+                                            <div class="fs-md ms-sm-1  text-success">
                                                 <b class="qtv"> Quản trị viên </b>
                                             </div>
                                         @endif
