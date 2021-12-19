@@ -145,7 +145,7 @@ class BrandController extends Controller
                 Brand::whereIn('id', $ids)->delete();
                 break;
             default:
-                # code...
+               return back();
                 break;
         }
     }

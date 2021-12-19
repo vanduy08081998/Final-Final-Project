@@ -198,6 +198,7 @@
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('comment.index') }}">Danh sách</a></li>
+            <li><a href="{{ route('comment.unsatisfied') }}">Mức độ hài lòng</a></li>
         </ul>
     </li>
     <li class="menu-title">
