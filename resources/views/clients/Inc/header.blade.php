@@ -41,25 +41,33 @@ $category = Category::all();
                     <a class="topbar-link" href="tel:00331697720">(+84) 987654321</a>
                 </div>
             </div>
-            <div class="topbar-text dropdown d-md-none ms-auto"><a class="topbar-link dropdown-toggle" href="#"
-                    data-bs-toggle="dropdown">Yêu thích
-                    / So sánh / Đơn hàng</a>
+            <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="topbar-text dropdown d-md-none ms-auto">
+                <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="{{ route('account.wishlist') }}">
-                            <i class="ci-heart text-muted me-2"></i>Yêu thích (3)</a>
+                        @if ($wishlist == null && Auth::user == null)
+                        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                            <i class="ci-heart mt-n1"></i>Yêu thích (0)
+                        </a>
+                        @elseif ($wishlist != NULL && Auth::user())
+                        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                            <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+                        {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
+                        </a>
+                        @endif
                     </li>
                     <li>
-                        <a class="dropdown-item" href="comparison.html"><i class="ci-compare text-muted me-2"></i>So
-                            sánh (3)</a>
+                        <a class="dropdown-item" href="comparison.html">
+                            <i class="ci-compare text-muted me-2"></i>So sánh</a>
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('account.order-tracking') }}"><i
-                                class="ci-location text-muted me-2"></i>Theo dõi
-                            đơn hàng</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('account.order-tracking') }}">
+                            <i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
-                class="count-wishlist d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
@@ -71,10 +79,11 @@ $category = Category::all();
                     </a>
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
-                    href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)</a>
+                    href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)
+                </a>
                 <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
-                    href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn
-                    hàng</a>
+                    href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
+                </a>
             </div>
         </div>
     </div>
@@ -85,11 +94,11 @@ $category = Category::all();
                 <a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}">
                     <img src="{{ asset('frontend/img/logo/logo.png') }}" width="142" alt="Cartzilla">
                 </a>
-                <a class="navbar-brand d-sm-none me-2" href="index.html">
+                <a class="navbar-brand d-sm-none me-2" href="{{ route('clients.index') }}">
                     <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
                 </a>
                 <!-- Search-->
-                <form class="input-group d-none d-lg-flex flex-nowrap mx-4 typeahead"
+                <form class="input-group d-none d-lg-flex flex-nowrap mx-4 typeahead search-form-header"
                     action="{{ route('search.searchs') }}" method="POST" enctype="multipart/form-data"
                     id="choice-form">
                     @csrf
@@ -111,7 +120,7 @@ $category = Category::all();
                     </button>
                 </form>
                 <!-- Toolbar-->
-
+                <div class="user-space">
                 @if (Auth::user())
                     <div class="user-ct" style="position: relative">
                         <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
@@ -159,7 +168,7 @@ $category = Category::all();
                         </div>
                     </div>
                 @else
-                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
                         <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
                             <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
@@ -171,6 +180,8 @@ $category = Category::all();
 
                     </div>
                 </div>
+            </div>
+
             </div>
         </div>
         <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">

@@ -16,16 +16,23 @@
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
                         <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
                                     class="ci-home"></i>Trang chủ</a></li>
-                        <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng</a></li>
+                        <li class="breadcrumb-item text-nowrap"><a
+                                href="#">{{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</a>
+                        </li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 text-center">
+<<<<<<< HEAD
                 <h1 class="h3 text-light mb-0">
                     @if ($cate != null)
                         {{ $cate->category_name }}
                     @endif
                 </h1>
+=======
+                <h1 class="h5 text-light mb-0">
+                    {{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</h1>
+>>>>>>> main
             </div>
         </div>
     </div>
@@ -38,58 +45,40 @@
             </aside>
             <!-- Content  -->
             <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
-            <!-- Toolbar-->
-                    <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
-                        <div class="d-flex flex-wrap">
-                            <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-                                    <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sắp
-                                        xếp theo:</label>
-                                    <select class="form-select" name="shorting" onchange="shorting()" id="sorting">
-                                        <option value="all">Tất cả</option>
-                                        <option value="unit_price" data-short="ASC">Giá tăng dần</option>
-                                        <option value="unit_price" data-short="DESC">Giá giảm dần</option>
-                                        <option value="product_name" data-short="ASC">Từ A - Z</option>
-                                        <option value="product_name" data-short="DESC">Từ Z - A</option>
-                                    </select>
-                                    <span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">của <span
-                                            style="color: yellow; font-weight: 800;">{{ $pro }}</span> sản phẩm</span>
-                            </div>
+                <!-- Toolbar-->
+                <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
+                    <div class="d-flex flex-wrap">
+                        <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
+                            <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sắp
+                                xếp theo:</label>
+                            <select class="form-select" name="shorting" onchange="shorting()" id="sorting">
+                                <option value="all">Tất cả</option>
+                                <option value="unit_price" data-short="ASC">Giá tăng dần</option>
+                                <option value="unit_price" data-short="DESC">Giá giảm dần</option>
+                                <option value="product_name" data-short="ASC">Từ A - Z</option>
+                                <option value="product_name" data-short="DESC">Từ Z - A</option>
+                            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">của
+                                {{ count($product) }}
+                                sản phẩm</span>
                         </div>
                     </div>
+                    {{-- <div class="d-none d-sm-flex pb-3"><a
+                            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2"
+                            href="{{ route('shop.shop-grid',['id', $id_cate]) }}"><i class="ci-view-grid"></i></a><a
+                            class="btn btn-icon nav-link-style nav-link-light" href="{{ route('shop.shop-list') }}"><i
+                                class="ci-view-list"></i></a>
+                    </div> --}}
+                </div>
                 <!-- Products grid-->
                 <div class="row mx-n2" id="product-short">
                     <!-- Product-->
-                    @foreach ($product as $pro)
 
+                    @foreach ($product as $pro)
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
                                 @if (Auth::user() != null)
-                                    <?php
-                                    $user = Auth::user()->id;
-                                    $wishlist = Wishlist::orderByDESC('id')
-                                        ->where('id_prod', $pro->id)
-                                        ->where('id_user', $user)
-                                        ->first();
-                                    ?>
-                                    @if ($wishlist != null)
-                                        <button class="btn-wishlist_{{ $pro->id }} btn-sm text-danger type=" button"
-                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Xóa khỏi yêu thích"
-                                            onclick="add_to_wishlist({{ $pro->id }})">
-                                            <i class="ci-heart"></i>
-                                        </button>
-                                    @elseif ($wishlist == NULL)
-                                        <button class="btn-wishlist_{{ $pro->id }} btn-sm text-muted" type="button"
-                                            data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích"
-                                            onclick="add_to_wishlist({{ $pro->id }})">
-                                            <i class="ci-heart"></i>
-                                        </button>
-                                    @endif
-
-                                @else
-                                    @foreach ($pro->variants as $pr)
-                                        <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
-                                            value="{{ $pr->SKU }}">
-                                    @endforeach
+                                    <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
+                                        value="{{ $pro->specifications }}">
                                     <input type="hidden" value="{{ $pro->id }}">
                                     <input type="hidden" id="wishlist_productname{{ $pro->id }}"
                                         value="{{ $pro->product_name }}">
@@ -101,15 +90,34 @@
                                     <a type="hidden" id="wishlist_producturl{{ $pro->id }}"
                                         href="{{ route('shop.product-details', $pro->product_slug) }}">
                                     </a>
-                                    <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;"
-                                        onclick="add_compare({{ $pro->id }})">
-                                        <i class="ci-compare me-1"></i>So sánh
-                                    </a>
-                                    <button class="btn-wishlist_{{ $pro->id }} btn-sm" type="button"
-                                        data-bs-toggle="tooltip" data-bs-placement="left" title="Thêm vào yêu thích"
-                                        onclick="add_to_wishlist({{ $pro->id }})">
-                                        <i class="ci-heart"></i>
-                                    </button>
+                                    <div style="display: inline; padding: 1.5rem">
+                                        <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;"
+                                            onclick="add_compare({{ $pro->id }})">
+                                            <i class="ci-compare me-1"></i>So sánh
+                                        </a>
+                                        <?php
+                                        $user = Auth::user()->id;
+                                        $wishlist = Wishlist::orderByDESC('id')
+                                            ->where('id_prod', $pro->id)
+                                            ->where('id_user', $user)
+                                            ->first();
+                                        ?>
+                                        @if ($wishlist != null)
+                                            <button class="btn-wishlist_{{ $pro->id }} btn-sm float-end text-danger type="
+                                                button" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
+                                                <i class="ci-heart"></i>
+                                            </button>
+                                        @elseif ($wishlist == NULL)
+                                            <button class="btn-wishlist_{{ $pro->id }} btn-sm float-end text-muted"
+                                                type="button" data-bs-toggle="tooltip" data-bs-placement="left"
+                                                title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
+                                                <i class="ci-heart"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+
+                                @else
                                 @endif
                                 <a class="card-img-top d-block overflow-hidden"
                                     href="{{ route('shop.product-details', $pro->product_slug) }}">
@@ -134,9 +142,20 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="card-body card-body-hidden">
+                                    <div class="text-center">
+                                        <a class="nav-link-style fs-ms"
+                                            data-bs-target="#modal-quickview-{{ $pro->id }}" data-bs-toggle="modal">
+                                            <i class="ci-eye align-middle me-1"></i>Xem nhanh
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Quick View Modal-->
                             </div>
                         </div>
                         <hr class="d-sm-none">
+                        @include('clients.Inc.quickview',['id' => $pro->id])
                     @endforeach
                 </div>
                 @include('clients.Inc.compare')
@@ -150,6 +169,77 @@
 @endsection
 
 @push('script')
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 20,
+            slidesPerView: 6,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            spaceBetween: 20,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+        $('#choice_attribute_options').on('change', function() {
+            getVariantPrice()
+        })
+
+        let qt_inc = document.querySelector('.qt-inc');
+        let qt_dec = document.querySelector('.qt-dec');
+
+        for (let i = 0; i < qt_dec.length; i++) {
+            qt_dec[i].addEventListener('click', function(e) {
+                document.querySelector('#product_quantity').value = Number(document.querySelector(
+                    '#product_quantity').value) - 1;
+                if (document.querySelector('.quantity_number').value < 1) {
+                    document.querySelector('.quantity_number').value = 1;
+                }
+                getVariantPrice()
+            })
+            qt_inc[i].addEventListener('click', function(e) {
+                document.querySelector('#product_quantity').value = Number(document.querySelector(
+                    '#product_quantity').value) + 1;
+                getVariantPrice()
+            })
+        }
+    </script>
+    <script>
+        const getVariantPrice = () => {
+            $.ajax({
+                type: "POST",
+                url: "{{ route('products.get_variant_price') }}",
+                data: $('#choice_attribute_options').serializeArray(),
+                success: function(response) {
+                    $('#specifications').html(response.specifications)
+                    $('.total_product_price').html(
+                        ` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
+                    // Quantity check
+                    quantityCheck(response.product_quantity)
+                    // End Quantity check
+                }
+
+            })
+        }
+
+        const quantityCheck = (quantity) => {
+            if (quantity > 0) {
+                $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
+                                                  class="ci-security-check"></i>Sản phẩm còn hàng
+                                              </div>`)
+            } else {
+                $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
+                                                  class="fas fa-times" style="right: 70px; top: 550px"></i>Sản phẩm hết hàng
+                                              </div> `)
+            }
+        }
+    </script>
     <script>
         function shorting() {
             var value = $('select[name="shorting"] option:selected').val()
@@ -240,17 +330,17 @@
             var id = product_id;
             var name = document.getElementById('wishlist_productname' + id).value;
             var content = document.getElementById('wishlist_productsku' + id).value;
+            //  var value = document.getElementById('wishlist_skuvalue'+id).value;
             var price = document.getElementById('wishlist_productprice' + id).value;
             var img = document.getElementById('wishlist_productimg' + id).value;
             var url = document.getElementById('wishlist_producturl' + id).href;
             var newItem = {
                 'url': url,
                 'id': id,
-                'content': content,
                 'name': name,
                 'price': price,
-                'img': img
-
+                'img': img,
+                'content': content
             }
             if (localStorage.getItem('compare') == null) {
                 localStorage.setItem('compare', '[]');
@@ -261,39 +351,48 @@
             })
 
             if (matches.length) {
-                alert('Sản phẩm đã có trong so sánh');
-
+                toastr.error('Sản phẩm đã có trong so sánh','Xin mời chọn sản phẩm khác')
+                //   alert('Sản phẩm đã có trong so sánh');
                 localStorage.setItem('compare', JSON.stringify(old_data));
-                $('#sosanh').modal('show');
+                // $('#sosanh').modal('show');
             } else {
-
                 if (old_data.length <= 2) {
                     old_data.push(newItem);
+                    var html = '';
+                    let list_compare = '';
 
-                    $('#row_compare').find('.anh').append(`
-                    <div class="col-sm-4" id="row_compare` + newItem.id + `">
-                        <span><img width="200px" style="padding: 10px;" src="` + newItem.img + `"></span>
-                        <div style="padding: 10px;">
-                            <span><a href="` + newItem.url + `" style="color:black;">` + newItem.name + `</a></span>
-                            <p> <b style="text-align:center">` + newItem.price + `VNĐ</b> </p>
-                            <a href="` + newItem.url +
+                    html += `<div class="col-sm-4" id="row_compare` + newItem.id + `">
+                       <span><img width="200px" style="padding: 10px;" src="` + newItem.img + `"></span>
+                       <div style="padding: 10px;">
+                           <span><a href="` + newItem.url + `" style="color:black;">` + newItem.name + `</a></span>
+                           <p> <b style="text-align:center">` + newItem.price + `VNĐ</b> </p>
+                           <a href="` + newItem.url +
                         `" style="color:green;cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" >Xem chi tiết</a> &nbsp;|&nbsp;
-                            <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(` +
+                           <a style="cursor:pointer";position: absolute;top: 3px;right: 60px; class="deleteProduct" onclick="delete_compare(` +
                         id + `)">Xóa so sánh</a>
-                        </div>
-                        <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
-                        <div>
-                        <ul>
-                        <li>` + newItem.content + `</li>
-                        </ul>
-                        </div>
-                    </div>
-                `);
+                       </div>
+                       <strong style="background-color: #f1f1f1;text-transform: uppercase;padding: 8px;display: block;"> Thông số kỹ thuật</strong>
+                       <div>
+                       <ul class="compare-list-attribute-${newItem.id}">
 
+                       </ul>
+                       </div>
+                   </div>`
+                    //foreach item conten ra gắn vào list_compare
+                    $.each(JSON.parse(newItem.content), function(index, value) {
+                        list_compare += `<li>${value.specifications}: ${value.value}</li>`
+                    })
+                    $('#row_compare').find('.anh').append(html);
+                    //gắn list compare vào html
+                    $(`.compare-list-attribute-${newItem.id}`).html(list_compare)
+                    $('#sosanh').modal('show');
+                } else {
+                    toastr.error("Chỉ có thể so sánh tối đa 3 sản phẩm",'Rất tiếc');
                 }
                 localStorage.setItem('compare', JSON.stringify(old_data));
-                $('#sosanh').modal('show');
+
             }
         }
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush

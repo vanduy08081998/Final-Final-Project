@@ -75,6 +75,8 @@
     box-sizing: border-box
 }
 
+
+
 body {
     margin: 0;
     font-family: var(--bs-body-font-family);
@@ -6404,7 +6406,7 @@ fieldset:disabled .btn {
 
 @media(min-width: 1280px) {
     .modal-xl {
-        max-width: 1140px
+        min-width: 90%;
     }
 }
 

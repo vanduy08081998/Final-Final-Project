@@ -90,9 +90,8 @@
                             href="{{ route('checkout.checkout-details') }}"><i
                                 class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Quay
                                 lại</span><span class="d-inline d-sm-none">Back</span></a></div>
-                    <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100"><button
-                                class="d-none d-sm-inline">Tiếp tục</button><span
-                                class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a>
+                    <div class="w-50 ps-2"><button
+                                class="d-none d-sm-inline btn btn-primary d-block w-100">Tiếp tục</button>
                     </div>
                 </div>
             </form>
@@ -124,7 +123,7 @@
 @push('script')
 <script>
     $('#shipping_methods').on('submit', function (event) {
-        event.preventDefault() 
+        event.preventDefault()
         $.ajax({
         type: "POST",
         url: route('checkout.shipping-method'),
