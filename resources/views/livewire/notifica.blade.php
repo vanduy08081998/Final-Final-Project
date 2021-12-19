@@ -2,22 +2,22 @@
     <div class="container-fluid" style="position:relative;">
         <ul class="nav nav-tabs nav-material">
             <li class="nav-item contact-not">
-                <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}" aria-selected="true">Tất cả</a>
+                <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}">Tất cả</a>
                 <div class="material-border"></div>
             </li>
             <li class="nav-item contact-not" data-type="order">
-                <a class="nav-link {{ $check == 'order' ? 'active checkedNot' : '' }}" aria-selected="false">Đơn
+                <a class="nav-link {{ $check == 'order' ? 'active checkedNot' : '' }}">Đơn
                     hàng</a>
                 <div class="material-border"></div>
             </li>
             <li class="nav-item contact-not" data-type="comment">
-                <a class="nav-link {{ $check == 'comment' ? 'active checkedNot' : '' }}" aria-selected="false">Bình
+                <a class="nav-link {{ $check == 'comment' ? 'active checkedNot' : '' }}">Bình
                     luận</a>
                 <div class="material-border"></div>
             </li>
 
             <li class="nav-item contact-not" data-type="review">
-                <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}" aria-selected="false">Đánh
+                <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}">Đánh
                     giá</a>
                 <div class="material-border"></div>
             </li>
@@ -30,14 +30,13 @@
                 <i class="far fa-trash-alt"></i>
             </span>
         </ul>
-        <form class="d-none" wire:submit.prevent="render()">
-            <input type="checkbox" wire:model="comment" value="comment"
+        <form class="" wire:submit.prevent="render()">
+            <input type="checkbox" wire:model.lazy="comment" value="comment"
                 class="comment-check {{ $check == 'comment' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="order" value="order"
+            <input type="checkbox" wire:model.lazy="order" value="order"
                 class="order-check {{ $check == 'order' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="review" value="review"
+            <input type="checkbox" wire:model.lazy="review" value="review"
                 class="review-check {{ $check == 'review' ? 'checked-input' : '' }}">
-
         </form>
 
         <div class="tab-content nav-material" id="top-tabContent">
