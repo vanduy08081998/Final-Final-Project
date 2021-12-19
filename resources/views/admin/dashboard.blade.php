@@ -62,18 +62,43 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6 text-center">
-                        <div class="card">
+                    <div class="col-md-12">
+                        <div style="background: #e8e8e8" class="card">
                             <div class="card-body">
-                                <h3 class="card-title">Total Revenue</h3>
-                                <div id="bar-charts"></div>
+                                <h3 class="text-primary text-center mb-3">Thống kê doanh số và số lượng bán ra</h3>
+                                <form class="row" autocomplete="off">
+                                    @csrf
+                                    <div class="col-md-3">
+                                        <p>Từ ngày: <input type="text" class="date date_start form-control">
+                                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm mt-1"
+                                                value="Lọc kết quả">
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Đến ngày: <input type="text" class="date date_end form-control"></p>
+                                    </div>
+                
+                                    <div class="col-md-3">
+                                        <p>
+                                            Lọc theo:
+                                            <select class="dashboard-filter form-control">
+                                                <option>--Chọn--</option>
+                                                <option value="homnay">Hôm nay</option>
+                                                <option value="tuannay">Tuần này</option>
+                                                <option value="thangnay">Tháng này</option>
+                                                <option value="namnay">365 ngày qua</option>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </form>
+                                <div id="chart"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-12 text-center">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="card-title">Sales Overview</h3>
+                                <h3 class="text-primary">Thống kê đăng nhập</h3>
                                 <div id="line-charts"></div>
                             </div>
                         </div>
@@ -797,9 +822,24 @@
     </div>
     <!-- /Page Content -->
 @endsection
+<link rel="stylesheet" href="{{ asset('backend/plugins/morris/morris.css') }}">
+<link rel="stylesheet"
+href="{{asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.css')}}" />
 @push('script')
     <!-- Chart JS -->
     <script src="{{ URL::to('backend/plugins/morris/morris.min.js') }}"></script>
     <script src="{{ URL::to('backend/plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ URL::to('backend/js/chart.js') }}"></script>
+
+    <script src="{{asset('backend/plugins/material-datetimepicker/moment-with-locales.min.js')}}">
+    </script>
+    <script
+        src="{{asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.js')}}">
+    </script>
+    <script src="{{asset('backend/plugins/material-datetimepicker/datetimepicker.js')}}"></script>
+
+    <script>
+        charts()
+    </script>
+    
 @endpush

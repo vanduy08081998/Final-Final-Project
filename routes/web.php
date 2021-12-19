@@ -32,6 +32,8 @@ use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
 
+use Spatie\Analytics\Period;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -257,8 +259,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
         Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');
     });
-    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
+    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');  
 });
+//Thống kê
+Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
+Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date']);
+Route::post('/dashboard-filter',  [HomeController::class, 'dashboard_filter']);
 //paypal
 Route::prefix('api/paypal')->group(function(){
     Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
@@ -278,3 +284,9 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 //Login Facebook
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
+
+Route::get('/test', function(){
+    $d = Analytics::fetchVisitorsAndPageViews(Period::days(15));
+    echo "<pre>"; print_r($d); die();
+});

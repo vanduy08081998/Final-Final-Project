@@ -16,8 +16,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    {{--
-    <link rel="manifest" href="site.webmanifest"> --}}
+    {{-- <link rel="manifest" href="site.webmanifest"> --}}
     <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -61,6 +60,17 @@
     @livewireScripts
     @routes
 </head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFSNQ4FS84"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CFSNQ4FS84');
+</script>
+
 <!-- Body-->
 <script>
     function fee() {
@@ -112,13 +122,13 @@
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
         <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i class="ci-heart"></i></span><span
-                    class="handheld-toolbar-label">Yêu thích</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i class="ci-menu"></i></span><span
-                    class="handheld-toolbar-label">Menu</span></a><a class="d-table-cell handheld-toolbar-item"
-                href="shop-cart.html"><span class="handheld-toolbar-icon"><i class="ci-cart"></i><span
-                        class="badge bg-primary rounded-pill ms-1">4</span></span><span
+                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i
+                        class="ci-heart"></i></span><span class="handheld-toolbar-label">Yêu thích</span></a><a
+                class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
+                        class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a
+                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i
+                        class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
                     class="handheld-toolbar-label">$265.00</span></a></div>
     </div>
     {{-- Chatbox button --}}
@@ -164,6 +174,17 @@
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+
+    {{-- Chart --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-cartesian-3d.min.js"></script>
+    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+
     <script>
         $('.input-images-1').imageUploader();
     </script>
