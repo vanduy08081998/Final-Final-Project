@@ -1,5 +1,5 @@
 <!-- Product carousel (You may also like)-->
-<div class="container pt-lg-2 pb-5 mb-md-3">
+<div class="container pt-lg-2 pb-5 mb-md-3 other-product">
   <h2 class="h3 text-center pb-4">Sản phẩm liên quan</h2>
   <div class="tns-carousel tns-controls-static tns-controls-outside">
     <div class="tns-carousel-inner"

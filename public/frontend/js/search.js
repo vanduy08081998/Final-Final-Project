@@ -1,3 +1,4 @@
+let url_to = $('meta[name="url-to"]').attr('content')
 const formatter = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',
@@ -7,7 +8,7 @@ const formatter = new Intl.NumberFormat('vi-VN', {
 jQuery(document).ready(function($) {
     var engine = new Bloodhound({
         remote: {
-            url: 'http://127.0.0.1:8000/search?key=%QUERY%',
+            url: url_to+'/search?key=%QUERY%',
             wildcard: '%QUERY%'
         },
         datumTokenizer: Bloodhound.tokenizers.whitespace('key'),
@@ -29,7 +30,7 @@ jQuery(document).ready(function($) {
                 '<div class="list-group search-results-dropdown"><li class="product-suggest">'
             ],
             suggestion: function(data) {
-                return '<a href="http://127.0.0.1:8000/shop/product-details/' + data.product_slug + '" class="list-group-item"><div class="item-img"><img src="http://127.0.0.1:8000/' + data.product_image + '" height="60" width="50" style="margin-right: 20px"></div><div class="item-info"><span class="search-name">' + data.product_name + '</span><p class="search-price">' + formatter.format(data.unit_price) + '</p></div></a></li></div>'
+                return '<a href="' + url_to + '/shop/product-details/' + data.product_slug + '" class="list-group-item"><div class="item-img"><img src="'+url_to+'/'+ data.product_image + '" height="60" width="50" style="margin-right: 20px"></div><div class="item-info"><span class="search-name">' + data.product_name + '</span><p class="search-price">' + formatter.format(data.unit_price) + '</p></div></a></li></div>'
             }
         }
     });

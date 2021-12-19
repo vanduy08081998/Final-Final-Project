@@ -6,11 +6,13 @@ use App\Models\Blog;
 use App\Models\Brand;
 use App\Mail\SendMail;
 use App\Models\Banner;
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\BlogCate;
 use App\Models\Wishlist;
 use App\Models\Information;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,12 +25,29 @@ class HomeController extends Controller
         $product = Product::orderBy('id', 'ASC')->get();
         $highlight = Product::orderBy('id', 'ASC')->get();
         $brand = Brand::orderByDESC('id')->get();
+        $newProduct = Product::orderByDESC('id')->limit(4)->get();
+        // $sellingProducts GROUP BY `product_id` ,`count_rating`
+        $rating_array = [];
+        $ratingProduct = Review::select('product_id','count_rating')->groupBy('product_id', 'count_rating')->orderByDESC('count_rating')->get();
+        foreach ($ratingProduct as $key => $value) {
+           array_push($rating_array, $value->product_id);
+        }
+        $productRating = Product::whereIn('id', $rating_array)->limit(4)->get();
+        $orderDeatilsDescQuantity = DB::table('order_details')->select('product_id', 'quantity')->groupBy('product_id', 'quantity')->orderBy('quantity','DESC')->get();
+        $selling_array = [];
+        foreach ($orderDeatilsDescQuantity as $key => $value) {
+            array_push($selling_array, $value->product_id);
+        }
+        $sellingProducts = Product::whereIn('id', $selling_array)->limit(4)->get();
         return view('clients.home')->with([
             'slide' => $slide,
             'product' => $product,
             'highlight' => $highlight,
             'brand' => $brand,
-            'banner' => $banner
+            'banner' => $banner,
+            'newProduct' => $newProduct,
+            'productRating' => $productRating,
+            'sellingProducts' => $sellingProducts
         ]);
     }
 

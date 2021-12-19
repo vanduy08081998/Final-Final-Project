@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="url-to" content="{{ URL::to('/') }}">
     <title>BigDeal | @yield('title')</title>
     <!-- SEO Meta Tags-->
     @yield('meta')
@@ -50,7 +51,7 @@
     <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script src="{{ asset('frontend/js/search.js') }}"></script>
-    {{-- <script src="{{ asset('frontend/js/wishlist.js') }}"></script> --}}
+    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <script src="{{ asset('frontend/js/review.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
@@ -104,12 +105,15 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
-
+    {{-- <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div> --}}
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
-        <!-- Quick View Modal-->
-        @include('clients.Inc.quickview')
         <!-- Navbar Electronics Store-->
         @include('clients.Inc.header')
 
@@ -121,15 +125,22 @@
     @include('clients.Inc.footer')
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
-        <div class="d-table table-layout-fixed w-100"><a class="d-table-cell handheld-toolbar-item"
-                href="account-wishlist.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-heart"></i></span><span class="handheld-toolbar-label">Yêu thích</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)"><span class="handheld-toolbar-icon"><i
-                        class="ci-menu"></i></span><span class="handheld-toolbar-label">Menu</span></a><a
-                class="d-table-cell handheld-toolbar-item" href="shop-cart.html"><span class="handheld-toolbar-icon"><i
-                        class="ci-cart"></i><span class="badge bg-primary rounded-pill ms-1">4</span></span><span
-                    class="handheld-toolbar-label">$265.00</span></a></div>
+        <div class="d-table table-layout-fixed w-100">
+            <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)">
+                <span class="handheld-toolbar-icon"><i class="ci-menu"></i></span>
+                <span class="handheld-toolbar-label">Menu</span>
+            </a>
+            <a class="d-table-cell handheld-toolbar-item" href="shop-cart.html">
+                <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                    <span class="badge bg-primary rounded-pill ms-1">4</span>
+                </span>
+                <span class="handheld-toolbar-label">$265.00</span>
+            </a>
+            <a class="d-table-cell handheld-toolbar-item" href="#">
+                <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+        </div>
     </div>
     {{-- Chatbox button --}}
     @include('clients.Inc.chatbox')
@@ -175,15 +186,6 @@
     </script>
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
 
-    {{-- Chart --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
-    <script src="https://cdn.anychart.com/releases/v8/js/anychart-cartesian-3d.min.js"></script>
-    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
-    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
 
     <script>
         $('.input-images-1').imageUploader();
@@ -224,7 +226,9 @@
             window.location.href = href;
         })
     </script>
-
+    <script>
+        $(".preloader").fadeOut(600);
+    </script>
 </body>
 
 </html>
