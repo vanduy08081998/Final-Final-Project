@@ -282,20 +282,15 @@ $category = Category::all();
                                     class="ci-home"></i> Trang
                                 chủ</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.about') }}"
-                                data-bs-auto-close="outside"><i class="ci-flag"></i>
-                                Giới thiệu</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
-                                    class="ci-lable"></i> Cửa hàng</a>
-                        </li>
                         <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.about') }}"
                                 data-bs-auto-close="outside">
                                 <i class="ci-flag"></i>Giới thiệu
                             </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
+                                    class="ci-lable"></i> Cửa hàng</a>
                         </li>
                         <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.blog') }}">

@@ -40,7 +40,6 @@ Quản lý tài khoản
                                 <tr>
                                     <td style="text-align: left">{{ $customer->name }}</td>
                                     <td style="text-align: left">{{ $customer->email }}</td>
-
                                     <td style="text-align: left">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-success dropdown-toggle radius-30"
