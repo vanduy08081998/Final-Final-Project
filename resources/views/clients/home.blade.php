@@ -5,18 +5,20 @@
 
 
 @section('content')
-<?php
-  use App\Models\Wishlist;
-  ?>
-<style>
-    .card-body .product-title {
-        min-height: 28px;
-        margin-bottom: 0px !important;
-    }
-    .product-item {
-        height: 400px !important;
-    }
-</style>
+    <?php
+    use App\Models\Wishlist;
+    ?>
+    <style>
+        .card-body .product-title {
+            min-height: 28px;
+            margin-bottom: 0px !important;
+        }
+
+        .product-item {
+            height: 400px !important;
+        }
+
+    </style>
 
     <!-- Hero (Banners + Slider)-->
     <section class="bg-secondary py-4 banner">
@@ -375,7 +377,8 @@
                                     src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
                             <div class="ps-2">
                                 <h6 class="widget-product-title"><a
-                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                                </h6>
                                 @if ($product->discount_unit == '%')
                                     <div class="product-price">
                                         <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -410,7 +413,8 @@
                                     src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
                             <div class="ps-2">
                                 <h6 class="widget-product-title"><a
-                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                                </h6>
                                 @if ($product->discount_unit == '%')
                                     <div class="product-price">
                                         <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -439,13 +443,14 @@
             <div class="col-md-4 col-sm-6 mb-2 py-3">
                 <div class="widget">
                     <h3 class="widget-title">Bán chạy nhất</h3>
-                     @foreach ($sellingProducts as $product)
+                    @foreach ($sellingProducts as $product)
                         <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
                                 href="{{ url('shop/product-details') }}"><img
                                     src="{{ asset($product->product_image) }}" width="64" alt="Product"></a>
                             <div class="ps-2">
                                 <h6 class="widget-product-title"><a
-                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a></h6>
+                                        href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                                </h6>
                                 @if ($product->discount_unit == '%')
                                     <div class="product-price">
                                         <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -491,6 +496,8 @@
                 </a></div>
         </div>
     </section>
+@endsection
+@push('script')
     <script>
         $(document).ready(function() {
             $(window).scroll(function(event) {
@@ -505,4 +512,4 @@
             });
         });
     </script>
-@endsection
+@endpush

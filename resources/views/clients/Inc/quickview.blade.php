@@ -1,4 +1,4 @@
-@php
+{{-- @php
 use App\Models\Product;
 $product = Product::find($id);
 @endphp
@@ -291,4 +291,4 @@ $product = Product::find($id);
 </div>
 </div>
 
-@include('clients.shop.details.gallery-css')
+@include('clients.shop.details.gallery-css') --}}
