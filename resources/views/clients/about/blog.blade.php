@@ -105,13 +105,15 @@
                         data-simplebar-auto-hide="true">
                         <!-- Categories-->
                         <div class="widget widget-links mb-grid-gutter pb-grid-gutter border-bottom mx-lg-2">
-                            <h2 class="widget-title" style="text-align: center;">Danh mục bài viết </h2>
+                            <h4>Danh mục bài viết </h4>
                             <ul class="widget-list">
                                 @foreach ($blogCate as $blogCate)
                                     <li class="widget-list-item">
-                                        <a class="widget-list-link d-flex justify-content-center"
-                                        href="{{ route('clients.blog-category', $blogCate->id) }}">
-                                            <span style="text-align: center;"> {{ $blogCate->blogCate_name }} </span>
+                                        <a class="widget-list-link"
+                                            href="{{ route('clients.blog-category', $blogCate->id) }}">
+                                            <h6 style="color:#e67e22;">{{ $blogCate->blogCate_name }}<span style="float: right;">(
+                                                    {{ $blogs->where('id_blogCate', $blogCate->id)->count() }}
+                                                    )</span></h6>
                                         </a>
                                     </li>
                                 @endforeach
@@ -141,4 +143,3 @@
         </div>
     </div>
 @endsection
-

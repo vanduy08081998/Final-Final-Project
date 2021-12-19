@@ -7,7 +7,7 @@
     <div class="offcanvas-body py-grid-gutter px-lg-grid-gutter">
         <!-- Categories-->
         <div class="widget widget-categories mb-4 pb-4 border-bottom">
-            <h3 class="widget-title">Danh mục</h3>
+            <h4>Danh mục sản phẩm</h4>
             <div class="accordion mt-n1" id="shop-categories">
                 @foreach ($category as $key => $cate)
                     <div class="accordion-item">
@@ -22,8 +22,11 @@
                             <div class="accordion-body">
                                 <div class="widget widget-links widget-filter">
                                     <div class="input-group input-group-sm mb-2">
-                                        <input class="widget-filter-search form-control rounded-end" onkeyup="search_by_cate({{ $cate->id_cate }})" onfocusout="focusout({{ $cate->id_cate }})" id="category_search_{{ $cate->id_cate }}" type="text"
-                                            placeholder="Tìm kiếm">
+                                        <input class="widget-filter-search form-control rounded-end"
+                                            onkeyup="search_by_cate({{ $cate->id_cate }})"
+                                            onfocusout="focusout({{ $cate->id_cate }})"
+                                            id="category_search_{{ $cate->id_cate }}" type="text"
+                                            placeholder="Nhập thương hiệu cần tìm ?">
                                         <i
                                             class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
                                     </div>
@@ -32,9 +35,9 @@
                                         <li class="widget-list-item widget-filter-item">
                                             <a class="widget-list-link d-flex justify-content-between align-items-center"
                                                 href="#">
-                                                <span class="widget-filter-item-text">View all</span>
+                                                <h6 class="widget-filter-item-text">Tất cả</h6>
                                                 <span
-                                                    class="fs-xs text-muted ms-3">{{ $product->where('product_id_category', $cate->id_cate)->count() }}</span>
+                                                    class="fs-xs text-muted ms-3">{{ $products->where('product_id_category', $cate->id_cate)->count() }}</span>
                                             </a>
                                         </li>
                                         @foreach ($cate->brands as $brand)
@@ -43,7 +46,8 @@
                                                     href="#">
                                                     <span
                                                         class="widget-filter-item-text">{{ $brand->brand_name }}</span>
-                                                    <span class="fs-xs text-muted ms-3">247</span>
+                                                    <span
+                                                        class="fs-xs text-muted ms-3">{{ $products->where('product_id_category', $cate->id_cate)->where('product_id_brand', $brand->id)->count() }}</span>
                                                 </a>
                                             </li>
                                         @endforeach
@@ -55,6 +59,20 @@
                 @endforeach
             </div>
         </div>
+        <script>
+            const formatter = new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND',
+                minimumFractionDigits: 0
+            })
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = formatter.format(slider.value);
+
+            slider.oninput = function() {
+                output.innerHTML = formatter.format(this.value);
+            }
+        </script>
         <!-- Price range-->
         <div class="widget mb-4 pb-4">
             <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
@@ -68,6 +86,7 @@
                 <button class="btn btn-primary" style="float: right; margin-top: 20px" type="submit">Tìm</button>
             </form>
         </div>
+
         <div class="border-bottom" style="margin-top: 60px"></div>
         <!-- Filter by Brand-->
         <form id="form-search-brand" action="#" onchange="searchBrand()">
@@ -82,7 +101,8 @@
                     @foreach ($brands as $key => $brand)
                         <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="brandbox[]" value="{{ $brand->id }}" class="brand-box">
+                                <input class="form-check-input" type="checkbox" name="brandbox[]"
+                                    value="{{ $brand->id }}" class="brand-box">
                                 <label class="form-check-label widget-filter-item-text"
                                     for="adidas">{{ $brand->brand_name }}</label>
                             </div>
