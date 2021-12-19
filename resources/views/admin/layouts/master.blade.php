@@ -116,6 +116,10 @@
         function feedback(id, parent_id) {
             window.livewire.emit('feedback', id, parent_id)
         }
+
+        function editFeedback(id) {
+            window.livewire.emit('editFeedback', id)
+        }
     </script>
     @livewireScripts
     @stack('script')

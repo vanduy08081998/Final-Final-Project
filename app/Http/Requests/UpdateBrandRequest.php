@@ -29,7 +29,6 @@ class UpdateBrandRequest extends FormRequest
         return [
             'brand_name' => ['required', Rule::unique('brands', 'brand_name')->ignore($id, 'id'), 'max:255'],
             'brand_slug'=> ['required', Rule::unique('brands', 'brand_slug')->ignore($id, 'id'), 'max:255'],
-            'brand_image'=> 'nullable',
             'category_id'=> 'required',
             'meta_keywords'=> 'required',
             'meta_title'=> 'required',

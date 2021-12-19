@@ -1,22 +1,22 @@
 <div>
     <div class="container-fluid" style="position:relative;">
         <ul class="nav nav-tabs nav-material">
-            <li class="nav-item contact-not">
+            <li class="nav-item contact-not" onclick="checkbox('')">
                 <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}">Tất cả</a>
                 <div class="material-border"></div>
             </li>
-            <li class="nav-item contact-not" data-type="order">
+            <li class="nav-item contact-not" data-type="order" onclick="checkbox('order')">
                 <a class="nav-link {{ $check == 'order' ? 'active checkedNot' : '' }}">Đơn
                     hàng</a>
                 <div class="material-border"></div>
             </li>
-            <li class="nav-item contact-not" data-type="comment">
+            <li class="nav-item contact-not" data-type="comment" onclick="checkbox('comment')">
                 <a class="nav-link {{ $check == 'comment' ? 'active checkedNot' : '' }}">Bình
                     luận</a>
                 <div class="material-border"></div>
             </li>
 
-            <li class="nav-item contact-not" data-type="review">
+            <li class="nav-item contact-not" data-type="review" onclick="checkbox('review')">
                 <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}">Đánh
                     giá</a>
                 <div class="material-border"></div>
@@ -26,7 +26,7 @@
                     aria-selected="false">Mã giảm giá</a>
                 <div class="material-border"></div>
             </li> --}}
-            <span class="delete-notifica" data-type="{{ $check ?? '' }}">
+            <span class="delete-notifica" wire:click.prevent="deleteAll('{{ $check }}')">
                 <i class="far fa-trash-alt"></i>
             </span>
         </ul>
