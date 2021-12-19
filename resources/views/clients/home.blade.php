@@ -25,8 +25,7 @@
                 <!-- Slider     -->
                 <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner"
-                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
+                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
                             @foreach ($slide as $item)
                                 <div>
                                     <div class="row align-items-center carousel-control">
