@@ -111,10 +111,6 @@
                 </div>
             </aside>
             <!-- Sidebar-->
-
-
-
-
         </div>
 
     </div>
@@ -168,7 +164,7 @@ foreach ($cart as $key => $cart) {
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(response) {
-                            window.location.href = route('clients.index')
+                            window.location.href = route('checkout.checkout-review')
                         }
                     });
                 });

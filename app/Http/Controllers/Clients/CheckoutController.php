@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\Wards;
 use App\Mail\SendMail;
+use App\Mail\OrderMail;
 use App\Models\Product;
 use App\Models\Shipping;
 use App\Models\Districts;
@@ -140,6 +141,8 @@ class CheckoutController extends Controller
         foreach ($productID as $key =>  $pro) {
             Cart::where('product_id', $pro)->where('user_id', auth()->user()->id)->first()->delete();
         }
+
+        Mail::to(auth()->user()->email)->send(new OrderMail($order));
         return response()->json($product);
     }
 

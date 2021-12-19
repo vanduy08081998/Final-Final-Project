@@ -1,5 +1,5 @@
-const dec = [...$(".qt-dec")];
-const inc = [...$(".qt-inc")];
+const dec = [...$(".qt-dec-qk")];
+const inc = [...$(".qt-inc-qk")];
 for (let index = 0; index < [...$(".product_id")].length; index++) {
     var swiper = new Swiper(".mySwiper" + [...$(".product_id")][index].value, {
         spaceBetween: 20,

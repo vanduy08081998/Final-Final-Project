@@ -41,9 +41,10 @@ const getVariantPrice = () => {
         url: route("products.get_variant_price"),
         data: $("#choice_attribute_options").serializeArray(),
         success: function (response) {
-            $("#specifications").html(response.specifications);
-            $(".total_product_price").html(
-                ` <strong>Tổng tiền: </strong><span>${response.price}</span>`
+            $(".product-price__current-price").html(
+                `<h5>Tổng tiền: </h5>
+                <span>${response.price}
+                  ₫</span>`
             );
             // Quantity check
             quantityCheck(response.product_quantity);

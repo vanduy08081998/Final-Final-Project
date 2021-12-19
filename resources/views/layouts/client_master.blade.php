@@ -101,12 +101,47 @@
                 <span class="handheld-toolbar-icon"><i class="ci-menu"></i></span>
                 <span class="handheld-toolbar-label">Menu</span>
             </a>
-            <a class="d-table-cell handheld-toolbar-item" href="shop-cart.html">
-                <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
-                    <span class="badge bg-primary rounded-pill ms-1">4</span>
-                </span>
-                <span class="handheld-toolbar-label">$265.00</span>
-            </a>
+            @php
+                use App\Models\Cart;
+                if (auth()->check()) {
+                    $cart = Cart::where('user_id', auth()->user()->id)->get();
+                    $totalprice = 0;
+                    foreach ($cart as $key => $value) {
+                        foreach (json_decode($value->specifications) as $index => $item) {
+                            $totalprice += $value->quantity * $item->variant_price;
+                        }
+                    }
+                } else {
+                    $cart = null;
+                }
+            @endphp
+            @auth
+                @if (count($cart) > 0)
+                    <a class="d-table-cell handheld-toolbar-item" href="{{ route('cart.cart-list') }}">
+                        <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                            <span class="badge bg-primary rounded-pill ms-1">{{ count($cart) }}</span>
+                        </span>
+
+                        <span class="handheld-toolbar-label">{{ number_format($totalprice) }}</span>
+                    </a>
+                @else
+                    <a class="d-table-cell handheld-toolbar-item" href="{{ url('/') }}">
+                        <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                            <span class="badge bg-primary rounded-pill ms-1">0</span>
+                        </span>
+
+                        <span class="handheld-toolbar-label">Chưa có gì trong giỏ hàng</span>
+                    </a>
+                @endif
+
+            @endauth
+            @guest
+                <a class="d-table-cell handheld-toolbar-item" href="{{ url('login') }}">
+                    <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                    </span>
+                    <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
+                </a>
+            @endguest
             <a class="d-table-cell handheld-toolbar-item" href="#">
                 <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
                 <span class="handheld-toolbar-label">Tài khoản</span>

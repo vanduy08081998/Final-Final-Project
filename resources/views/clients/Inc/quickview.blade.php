@@ -247,13 +247,13 @@ $product = Product::find($id);
                                     style="margin: auto 0; display: flex">
                                     <p class="label text-heading fw-medium">Số Lượng: </p>
                                     <div class="group-input" style="">
-                                        <span class="qt-dec">
+                                        <span class="qt-dec-qk">
                                             <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-remove.svg"
                                                 alt="remove-icon" width="20" height="20">
                                         </span>
                                         <input type="text" class="input quantity_number" name="product_quantity"
                                             id="product_quantity_{{ $product->id }}" value="1">
-                                        <span class="qt-inc">
+                                        <span class="qt-inc-qk">
                                             <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg"
                                                 alt="add-icon" width="20" height="20">
                                         </span>

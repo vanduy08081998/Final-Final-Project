@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Clients;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Mail\OrderMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class PaypalController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -37,27 +39,32 @@ class PaypalController extends Controller
         $product_details = [];
         $productID = [];
         $item = 0;
-        foreach($cart as $key => $cart){
-            foreach(json_decode($cart->specifications) as $key => $speciation){
-                $total+= $speciation->variant_price * $cart->quantity;
+        foreach ($cart as $key => $cart) {
+            foreach (json_decode($cart->specifications) as $key => $speciation) {
+                $total += $speciation->variant_price * $cart->quantity;
                 $product_details['product_id'] = $cart->product_id;
                 $product_details['quantity'] = $cart->quantity;
                 $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
                 $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
+                if (\App\Models\Product::where('id', $cart->product_id)->first()->discount == null) {
+                    $product_details['discount'] = 0;
+                } else {
+                    $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
+                }
             }
             array_push($product, $product_details);
             array_push($productID, $cart->product_id);
         }
-        
-        foreach($shipping_address as $key => $value){
-            $shipping_address = json_encode($value,JSON_UNESCAPED_UNICODE);
+
+        foreach ($shipping_address as $key => $value) {
+            $shipping_address = json_encode($value, JSON_UNESCAPED_UNICODE);
         }
-        
+
         $order->user_id = $user_id;
-        
-        foreach($shipping_method_session as $key => $method){
+
+        foreach ($shipping_method_session as $key => $method) {
             $shipping_method = $method[0]->id;
-        } 
+        }
 
         $order->shipping_address = $shipping_address;
         $order->shipping_status = $shipping_method;
@@ -70,9 +77,11 @@ class PaypalController extends Controller
         $order->save();
         $order->products()->attach($product);
 
-        foreach($productID as $key =>  $pro){
+        foreach ($productID as $key =>  $pro) {
             Cart::where('product_id', $pro)->where('user_id', auth()->user()->id)->first()->delete();
         }
+
+        Mail::to(auth()->user()->email)->send(new OrderMail($order));
         return response()->json($product);
     }
 
