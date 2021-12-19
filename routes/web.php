@@ -218,6 +218,9 @@ Route::group(['prefix' => 'admin'], function () {
     route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
     route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
     Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+    Route::get('/history/{id}', [UserController::class, 'history'])->name('history');
+    Route::post('/lockAccount', [UserController::class, 'lockAccount'])->name('lockAccount');
+    Route::post('/lockComment', [UserController::class, 'lockComment'])->name('lockComment');
     Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
     Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
     Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');

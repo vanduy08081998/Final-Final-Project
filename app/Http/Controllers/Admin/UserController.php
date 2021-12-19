@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\AddUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AddUserRequest;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\UpdateUserRequest;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
-use Session;
+
 class UserController extends Controller
 {
     /**
@@ -224,9 +227,28 @@ class UserController extends Controller
         return redirect()->route('admin.index');
     }
 
+    public function history($id)
+    {
+        $orders = Order::where('user_id', $id)->get();
+        $delivery_viewed = DB::table('delivery_viewed')->get();
+        return view('admin.users.history', compact('orders', 'delivery_viewed'));
+    }
+
     public function impersonate_destroy()
     {
         Session::forget('impersonate');
         return redirect()->route('users.index');
+    }
+
+    public function lockAccount(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->update(['user_status' => $request->val]);
+    }
+
+    public function lockComment(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->update(['user_status' => $request->val]);
     }
 }
