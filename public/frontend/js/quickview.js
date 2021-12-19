@@ -74,4 +74,29 @@ for (let index = 0; index < [...$(".product_id")].length; index++) {
                                               </div> `);
         }
     };
+
+    $(".card_add_btn_" + [...$(".product_id")][index].value).click(function () {
+        $.ajax({
+            type: "POST",
+            url: route("card.add"),
+            data: $(
+                "#choice_attribute_options_" +
+                    [...$(".product_id")][index].value
+            ).serializeArray(),
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    toastr.success("Thêm giỏ hàng thành công", "Chúc mừng");
+                    cartDropdown();
+                }
+
+                if (response.error) {
+                    toastr.error(
+                        "Bạn phải đăng nhập trước khi mua hàng",
+                        "Cảnh báo"
+                    );
+                }
+            },
+        });
+    });
 }

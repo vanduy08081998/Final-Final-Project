@@ -14,7 +14,7 @@ $(".card_add_btn").click(function () {
     $.ajax({
         type: "POST",
         url: route("card.add"),
-        data: $("#choice_attribute_options").serializeArray(),
+        data: $(".choice_attribute_options").serializeArray(),
         success: function (response) {
             console.log(response);
             if (response.success) {

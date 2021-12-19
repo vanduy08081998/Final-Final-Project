@@ -11,7 +11,7 @@ $product = Product::find($id);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="choice_attribute_options_{{ $product->id }}">
+                <form id="choice_attribute_options_{{ $product->id }}" class="choice_attribute_options">
                     @csrf
                     <input type="hidden" name="product_id" class="product_id" value="{{ $product->id }}">
                     <div class="row">
@@ -270,7 +270,7 @@ $product = Product::find($id);
                         </div>
 
                         <div class="d-flex align-items-center pt-2 pb-4">
-                            <button class="btn btn-primary btn-shadow d-block w-100 card_add_btn"
+                            <button class="btn btn-primary btn-shadow d-block w-100 card_add_btn_{{ $product->id }}"
                                 style="border-radius: 40px; background-color:#EA2027" type="button">
                                 <i class="ci-cart fs-lg me-2"></i>Thêm vào giỏ hàng
                             </button>

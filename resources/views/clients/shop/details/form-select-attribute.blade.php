@@ -1,4 +1,4 @@
-<form id="choice_attribute_options" onchange="getVariantPrice()">
+<form id="choice_attribute_options" class="choice_attribute_options" onchange="getVariantPrice()">
   @csrf
   <input type="hidden" name="product_id" value="{{ $product->id }}">
 
