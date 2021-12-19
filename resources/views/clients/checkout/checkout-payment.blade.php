@@ -99,13 +99,13 @@
           <div class="widget mb-3">
 
             <div class="button-checkout-default mt-3">
-              {{-- <form class="needs-validation" method="post">
+              <form class="needs-validation" method="post">
                 <div class="mb-3">
                   <input class="form-control" type="text" placeholder="Promo code" required>
                   <div class="invalid-feedback">Please provide promo code.</div>
                 </div>
                 <button class="btn btn-outline-primary d-block w-100" type="submit">Apply promo code</button>
-              </form> --}}
+              </form>
 
               <button class="btn btn-primary d-block w-100 mt-3" id="checkout-complete" onclick="checkoutComplete()"
                 type="submit">Tiến hành thanh
@@ -174,5 +174,8 @@ foreach($cart as $key => $cart){
     }
 
 }).render('#paypal-button-container');
+
+
+
 </script>
 @endpush

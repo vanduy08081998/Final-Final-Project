@@ -141,6 +141,6 @@
                 </div>
             @endif
         </div>
-
+        {{ $models->links('clients.comments.inc.page-link') }}
     </div>
 </div>

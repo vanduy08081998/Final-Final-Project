@@ -137,12 +137,14 @@
             <!-- Content  -->
             <section class="col-lg-8">
                 <!-- Toolbar-->
-                <div class="d-flex justify-content-between align-items-center pt-lg-2 pb-4 pb-lg-5 mb-lg-3">
-                    <div class="d-flex align-items-center">
-
-                    </div>
-                    <a class="btn btn-primary btn-sm d-none d-lg-inline-block" href="account-signin.html"><i
-                            class="ci-sign-out me-2"></i>Đăng xuất</a>
+                <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3 ">
+                    <h6 class="fs-base text-light mb-0">Bạn có
+                        {{ App\Models\Notification::where('id_user', Auth::user()->id)->count() }} thông máo chưa xem</h6>
+                    <form class="user_logout" action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="ci-sign-out me-2"></i>Đăng
+                            xuất</button>
+                    </form>
                 </div>
                 <!-- Orders list-->
                 @livewire('notifica')

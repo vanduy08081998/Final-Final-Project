@@ -41,10 +41,10 @@
     <div class="container-fluid">
         <div class="bg-light shadow-lg rounded-3">
             <!-- Tabs-->
-            <div class="px-4 pt-lg-3 pb-3 mb-5">
+            <div class="px-4 pt-lg-3 pb-3 mb-5 detail-tab">
                 <div class="container-fluid">
                     <div class="bg-light shadow-lg rounded-3">
-                        <div class="px-4 pt-lg-3 pb-3 mb-5 mt-3">
+                        <div class="px-4 pt-lg-3 pb-3 mb-5 mt-3 detail-content">
 
                             <div class="tab-content px-lg-3">
                                 <!-- General info tab-->
@@ -85,14 +85,6 @@
         </div>
     </div>
     </div>
-    <!-- Product description-->
-    <div class="container pt-lg-3 pb-4 pb-sm-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-
-            </div>
-        </div>
-    </div>
     <hr class="mb-5">
     <!-- Product carousel (You may also like)-->
     <!-- Bình luận ở đây nha bà con-->
@@ -107,7 +99,7 @@
 @endsection
 
 @push('script')
-    <script>
+    <script type="text/javascript">
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 20,
             slidesPerView: 6,
@@ -131,34 +123,27 @@
         let qt_inc = document.querySelector('.qt-inc');
         let qt_dec = document.querySelector('.qt-dec');
 
+
         qt_dec.addEventListener('click', function(e) {
             document.querySelector('#product_quantity').value = Number(document.querySelector(
-                    '#product_quantity')
-                .value) - 1;
+                '#product_quantity').value) - 1;
             if (document.querySelector('.quantity_number').value < 1) {
                 document.querySelector('.quantity_number').value = 1;
             }
             getVariantPrice()
         })
-
         qt_inc.addEventListener('click', function(e) {
             document.querySelector('#product_quantity').value = Number(document.querySelector(
-                    '#product_quantity')
-                .value) + 1;
+                '#product_quantity').value) + 1;
             getVariantPrice()
         })
-    </script>
 
-
-    <script>
         const getVariantPrice = () => {
             $.ajax({
                 type: "POST",
                 url: "{{ route('products.get_variant_price') }}",
                 data: $('#choice_attribute_options').serializeArray(),
                 success: function(response) {
-                    console.log(response)
-                    console.log(response.quantity)
                     $('#specifications').html(response.specifications)
                     $('.total_product_price').html(
                         ` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
@@ -181,8 +166,6 @@
                                               </div> `)
             }
         }
-    </script>
-    <script type="text/javascript">
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
