@@ -94,12 +94,12 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div>
+    </div> --}}
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
