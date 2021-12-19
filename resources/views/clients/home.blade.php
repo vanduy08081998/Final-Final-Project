@@ -25,8 +25,7 @@
                 <!-- Slider     -->
                 <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner"
-                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
+                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
                             @foreach ($slide as $item)
                                 <div>
                                     <div class="row align-items-center carousel-control">
@@ -111,7 +110,7 @@
     <section class="container pt-5 trending-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-            <p style="font-size: 20px"><strong>Sản phẩm mới nhất</strong></p>
+            <h2><strong>Sản phẩm mới nhất</strong></h2>
             <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
                         class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
@@ -217,15 +216,12 @@
         </div>
     </section>
     {{-- Sản phẩm nổi bật --}}
-    <section class="container mt-5 highlight-product">
+    <section class="container pt-5 trending-product">
         <!-- Heading-->
         <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-            <p style="font-size: 20px"><strong>Sản phẩm nổi bật</strong></p>
-            <div class="pt-3">
-                <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
-                    <i class="ci-arrow-right ms-1 me-n1"></i>
-                </a>
-            </div>
+            <h2><strong>Sản phẩm nổi bật</strong></h2>
+            <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
+                        class="ci-arrow-right ms-1 me-n1"></i></a></div>
         </div>
         <!-- Grid-->
         <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
@@ -233,13 +229,13 @@
                 data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
                 <!-- Product-->
                 @foreach ($highlight as $product)
-                    <div class="product-item" style="height: 375px">
-                        @if ($product->discount == 0)
-                        @else
-                            <span class="badge bg-danger badge-shadow">Giảm giá
-                                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-                        @endif
+                    <div class="product-item">
                         <div class="card product-card">
+                            @if ($product->discount == 0)
+                            @else
+                                <span class="badge bg-danger badge-shadow">Giảm giá
+                                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+                            @endif
                             <a class="card-img-top d-block overflow-hidden"
                                 href="{{ route('shop.product-details', $product->product_slug) }}">
                                 <img src="{{ asset($product->product_image) }}" alt="Product"></a>

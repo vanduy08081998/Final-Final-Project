@@ -30,7 +30,7 @@
                 <i class="far fa-trash-alt"></i>
             </span>
         </ul>
-        <form class="" wire:submit.prevent="render()">
+        <form class="d-none" wire:submit.prevent="render()">
             <input type="checkbox" wire:model.lazy="comment" value="comment"
                 class="comment-check {{ $check == 'comment' ? 'checked-input' : '' }}">
             <input type="checkbox" wire:model.lazy="order" value="order"

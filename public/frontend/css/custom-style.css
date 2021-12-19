@@ -703,7 +703,15 @@ button.carousel-control-next.show-next {
     text-decoration: none!important;
     cursor: pointer;
 }
+.trending-product h2 {
+    margin-bottom: 0px !important;
+    margin: auto 0;
+}
 
+.highlight-product h2 {
+    margin-bottom: 0px !important;
+    margin: auto 0;
+}
 .user-space {
     display: flex;
 }
@@ -746,7 +754,7 @@ button.carousel-control-next.show-next {
     }
 
     .topbar {
-        width: 375px;
+        width: 375px !important;
     }
 
     .topbar-text {
@@ -771,7 +779,7 @@ button.carousel-control-next.show-next {
    }
 
    .navbar-sticky {
-       width: 375px
+       width: 375px;
    }
 
    .carousel-control .carousel-img img {
