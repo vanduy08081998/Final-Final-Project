@@ -33,10 +33,11 @@
                                         <option value="delete">Xóa</option>
                                         <option value="restore">Khôi phục</option>
                                     </select>
-                                    <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
+                                    <button class="btn-sm btn-primary handle rounded-0" type="submit" disabled>Hành
+                                        động</button>
 
                                     <a href="{{ route('product.comment', $product->id) }}"
-                                        class="btn btn-success float-lg-right">Tất cả</a>
+                                        class="btn btn-success float-lg-right rounded-0">Tất cả</a>
                                 </div>
                             </div>
                             <div class="table-responsive">

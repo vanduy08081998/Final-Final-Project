@@ -33,8 +33,10 @@
                                         <option value="trash">Thùng rác</option>
                                         <option value="clearance">Duyệt</option>
                                     </select>
-                                    <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a href="{{ route('product.comment', $product->id) }}" class="btn btn-primary">Đã
+                                    <button class="btn-sm btn-primary handle rounded-0" type="submit" disabled>Hành
+                                        động</button>
+                                    <a href="{{ route('product.comment', $product->id) }}"
+                                        class="btn btn-primary rounded-0">Đã
                                         duyệt</a>
                                 </div>
                             </div>
