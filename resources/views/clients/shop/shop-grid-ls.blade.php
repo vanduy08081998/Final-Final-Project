@@ -16,15 +16,25 @@
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center">
                         <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
                                     class="ci-home"></i>Trang chủ</a></li>
-                        <li class="breadcrumb-item text-nowrap"><a
-                                href="#">{{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</a>
+                        @if ($id_cate == 0)
+                            <li class="breadcrumb-item text-nowrap"><a href="#">Cửa hàng của tôi</a>
+                            @else
+                            <li class="breadcrumb-item text-nowrap"><a
+                                    href="#">{{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</a>
+                        @endif
                         </li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 text-center">
-                <h1 class="h5 text-light mb-0">
-                    {{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</h1>
+                @if ($id_cate == 0)
+                    <h1 class="h5 text-light mb-0">
+                        Cửa hàng của tôi</h1>
+                @else
+                    <h1 class="h5 text-light mb-0">
+                        {{ \App\Models\Category::where('id_cate', $id_cate)->first()->category_name }}</h1>
+                @endif
+
             </div>
         </div>
     </div>
@@ -95,7 +105,8 @@
                                             ->first();
                                         ?>
                                         @if ($wishlist != null)
-                                            <button class="btn-wishlist_{{ $pro->id }} btn-sm float-end text-danger type="
+                                            <button
+                                                class="btn-wishlist_{{ $pro->id }} btn-sm float-end text-danger type="
                                                 button" data-bs-toggle="tooltip" data-bs-placement="left"
                                                 title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
                                                 <i class="ci-heart"></i>
@@ -228,7 +239,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{ route('clients.products.searchbybrand') }}",
-                data: $('#form-search-brand').serialize(),
+                data: $('#form-search-brand').serializeArray(),
                 success: function(response) {
                     console.log(response)
                 }
@@ -272,7 +283,7 @@
             })
 
             if (matches.length) {
-                toastr.error('Sản phẩm đã có trong so sánh','Xin mời chọn sản phẩm khác')
+                toastr.error('Sản phẩm đã có trong so sánh', 'Xin mời chọn sản phẩm khác')
                 //   alert('Sản phẩm đã có trong so sánh');
                 localStorage.setItem('compare', JSON.stringify(old_data));
                 // $('#sosanh').modal('show');
@@ -308,12 +319,31 @@
                     $(`.compare-list-attribute-${newItem.id}`).html(list_compare)
                     $('#sosanh').modal('show');
                 } else {
-                    toastr.error("Chỉ có thể so sánh tối đa 3 sản phẩm",'Rất tiếc');
+                    toastr.error("Chỉ có thể so sánh tối đa 3 sản phẩm", 'Rất tiếc');
                 }
                 localStorage.setItem('compare', JSON.stringify(old_data));
 
             }
         }
+        $(".js-range-slider").ionRangeSlider({
+            type: "double",
+            min: @php echo $min @endphp,
+            max: @php echo $max @endphp,
+            from: 200,
+            to: 500,
+            grid: true
+        });
+        $('#search-by-price').on('change', function(event) {
+            event.preventDefault()
+            $.ajax({
+                type: "POST",
+                url: "{{ route('search.range') }}",
+                data: $(this).serializeArray(),
+                success: function(response) {
+                    $('#product-short').html(response)
+                }
+            });
+        })
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush

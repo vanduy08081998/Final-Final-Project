@@ -41,27 +41,9 @@ class SearchController extends Controller
 
 
     public function range(Request $request){
-        $min = Product::orderByDESC('id')->min('unit_price') ;
-        $max = Product::orderByDESC('id')->max('unit_price');
-        $product = Product::where('unit_price','>=',$min)
-        ->where('unit_price', '<=', $request->range)->simplePaginate(12);
-        $cate = null;
-        $pro = Product::where('unit_price','>=',$min)
-        ->where('unit_price', '<=', $request->range)->count();
-        $products = Product::orderBy('id', 'asc')->get();
-        $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
-        $brands = Brand::orderBy('id', 'asc')->get();
-        return view('clients.shop.shop-grid-ls', [
-            'min' => $min,
-            'max' => $max,
-            'product' => $product,
-            'products' => $products,
-            'cate' => $cate,
-            'pro' => $pro,
-            'category' => $categories,
-            'brands' => $brands,
-            'id_cate' => 0
-        ]);
+        $array_range = explode(';', $request->my_range);
+        $products = Product::where('unit_price','>=',$array_range[0])->where('unit_price', '<=', $array_range[1])->paginate(12);
+        return view('clients.shop.details.range', compact('products'));
     }
 
     public function find(Request $request) {

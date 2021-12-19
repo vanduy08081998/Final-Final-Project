@@ -27,7 +27,8 @@
                 <!-- Slider     -->
                 <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
                     <div class="tns-carousel">
-                        <div class="tns-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
+                        <div class="tns-carousel-inner"
+                            data-carousel-options="{&quot;items&quot;: 1, &quot;controls&quot;: true, &quot;loop&quot;: true, &quot;autoplay&quot;: true}">
                             @foreach ($slide as $item)
                                 <div>
                                     <div class="row align-items-center carousel-control">
@@ -168,24 +169,6 @@
                             <div class="card-body card-body-hidden text-center"
                                 style="z-index: 10; display: inline; padding: 15px">
                                 @if (Auth::user() != null)
-                                    <input type="hidden" id="wishlist_productsku{{ $product->id }}"
-                                        value="{{ $product->specifications }}">
-                                    <input type="hidden" value="{{ $product->id }}">
-                                    <input type="hidden" id="wishlist_productname{{ $product->id }}"
-                                        value="{{ $product->product_name }}">
-                                    <input type="hidden" id="wishlist_productprice{{ $product->id }}"
-                                        value="{{ number_format($product->unit_price) }}">
-                                    <input type="hidden" id="wishlist_productimg{{ $product->id }}"
-                                        value="{{ url($product->product_image) }}">
-
-                                    <a type="hidden" id="wishlist_producturl{{ $product->id }}"
-                                        href="{{ route('shop.product-details', $product->product_slug) }}">
-                                    </a>
-
-                                    <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                                        onclick="add_compare({{ $product->id }})">
-                                        <i class="ci-compare me-1"></i>
-                                    </a>
                                     <?php
                                     $user = Auth::user()->id;
                                     $wishlist = Wishlist::orderByDESC('id')
@@ -205,8 +188,30 @@
                                         </a>
                                     @endif
                                 @else
+                                    <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                        style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                        <i class="ci-heart"></i>
+                                    </a>
                                 @endif
-                                <a class="nav-link-style me-3" href="#quick-view-electro" data-bs-toggle="modal">
+                                <input type="hidden" id="wishlist_productsku{{ $product->id }}"
+                                    value="{{ $product->specifications }}">
+                                <input type="hidden" value="{{ $product->id }}">
+                                <input type="hidden" id="wishlist_productname{{ $product->id }}"
+                                    value="{{ $product->product_name }}">
+                                <input type="hidden" id="wishlist_productprice{{ $product->id }}"
+                                    value="{{ number_format($product->unit_price) }}">
+                                <input type="hidden" id="wishlist_productimg{{ $product->id }}"
+                                    value="{{ url($product->product_image) }}">
+
+                                <a type="hidden" id="wishlist_producturl{{ $product->id }}"
+                                    href="{{ route('shop.product-details', $product->product_slug) }}">
+                                </a>
+                                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
+                                    onclick="add_compare({{ $product->id }})">
+                                    <i class="ci-compare me-1"></i>
+                                </a>
+                                <a class="nav-link-style me-3" data-bs-target="#modal-quick-view-{{ $product->id }}"
+                                    data-bs-toggle="modal">
                                     <i class="ci-eye"></i>
                                 </a>
                             </div>
@@ -280,24 +285,6 @@
                             <div class="card-body card-body-hidden text-center"
                                 style="z-index: 10; display: inline; padding: 15px">
                                 @if (Auth::user() != null)
-                                    <input type="hidden" id="wishlist_productsku{{ $product->id }}"
-                                        value="{{ $product->specifications }}">
-                                    <input type="hidden" value="{{ $product->id }}">
-                                    <input type="hidden" id="wishlist_productname{{ $product->id }}"
-                                        value="{{ $product->product_name }}">
-                                    <input type="hidden" id="wishlist_productprice{{ $product->id }}"
-                                        value="{{ number_format($product->unit_price) }}">
-                                    <input type="hidden" id="wishlist_productimg{{ $product->id }}"
-                                        value="{{ url($product->product_image) }}">
-
-                                    <a type="hidden" id="wishlist_producturl{{ $product->id }}"
-                                        href="{{ route('shop.product-details', $product->product_slug) }}">
-                                    </a>
-
-                                    <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                                        onclick="add_compare({{ $product->id }})">
-                                        <i class="ci-compare me-1"></i>
-                                    </a>
                                     <?php
                                     $user = Auth::user()->id;
                                     $wishlist = Wishlist::orderByDESC('id')
@@ -317,8 +304,29 @@
                                         </a>
                                     @endif
                                 @else
+                                    <a class="btn-wishlist_{{ $product->id }} nav-link-style me-3"
+                                        style="cursor: pointer" onclick="add_to_wishlist({{ $product->id }})">
+                                        <i class="ci-heart"></i>
+                                    </a>
                                 @endif
-                                <a class="nav-link-style me-3" href="#quick-view-electro" data-bs-toggle="modal">
+                                <input type="hidden" id="wishlist_productsku{{ $product->id }}"
+                                    value="{{ $product->specifications }}">
+                                <input type="hidden" value="{{ $product->id }}">
+                                <input type="hidden" id="wishlist_productname{{ $product->id }}"
+                                    value="{{ $product->product_name }}">
+                                <input type="hidden" id="wishlist_productprice{{ $product->id }}"
+                                    value="{{ number_format($product->unit_price) }}">
+                                <input type="hidden" id="wishlist_productimg{{ $product->id }}"
+                                    value="{{ url($product->product_image) }}">
+                                <a type="hidden" id="wishlist_producturl{{ $product->id }}"
+                                    href="{{ route('shop.product-details', $product->product_slug) }}">
+                                </a>
+                                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
+                                    onclick="add_compare({{ $product->id }})">
+                                    <i class="ci-compare me-1"></i>
+                                </a>
+                                <a class="nav-link-style me-3" href="#modal-quick-view-{{ $product->id }}"
+                                    data-bs-toggle="modal">
                                     <i class="ci-eye"></i>
                                 </a>
                             </div>

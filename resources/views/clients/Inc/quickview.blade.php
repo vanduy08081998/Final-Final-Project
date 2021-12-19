@@ -1,4 +1,4 @@
-{{-- @php
+@php
 use App\Models\Product;
 $product = Product::find($id);
 @endphp
@@ -11,15 +11,15 @@ $product = Product::find($id);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="choice_attribute_options" onchange="getVariantPrice()">
+                <form id="choice_attribute_options_{{ $product->id }}">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="product_id" class="product_id" value="{{ $product->id }}">
                     <div class="row">
                         <!-- Product gallery-->
                         <div class="col-lg-4" id="content-wrapper">
                             <div class="box-gallery">
                                 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-                                    class="swiper mySwiper2 gallery-slider ">
+                                    class="swiper mySwiper2{{ $product->id }} gallery-slider ">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="{{ URL::to($product->product_image) }}" />
@@ -31,10 +31,11 @@ $product = Product::find($id);
                                         @empty
                                         @endforelse
                                     </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next" id="swiper-button-next-{{ $product->id }}"></div>
+                                    <div class="swiper-button-prev" id="swiper-button-prev-{{ $product->id }}"></div>
                                 </div>
-                                <div thumbsSlider="" class="swiper mySwiper gallery-thumbs" style="margin-top: 10px;">
+                                <div thumbsSlider="" class="swiper mySwiper{{ $product->id }} gallery-thumbs"
+                                    style="margin-top: 10px;">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
                                             <img src="{{ URL::to($product->product_image) }}" />
@@ -251,13 +252,13 @@ $product = Product::find($id);
                                                 alt="remove-icon" width="20" height="20">
                                         </span>
                                         <input type="text" class="input quantity_number" name="product_quantity"
-                                            id="product_quantity" value="1">
+                                            id="product_quantity_{{ $product->id }}" value="1">
                                         <span class="qt-inc">
                                             <img src="https://frontend.tikicdn.com/_desktop-next/static/img/pdp_revamp_v2/icons-add.svg"
                                                 alt="add-icon" width="20" height="20">
                                         </span>
                                     </div>
-                                    <div id="product_badge">
+                                    <div id="product_badge_{{ $product->id }}">
 
                                     </div>
                                 </div>
@@ -265,7 +266,7 @@ $product = Product::find($id);
                         </div>
 
                         <div class="position-relative me-n4 mb-3 mt-3">
-                            <div class="h5 fw-normal mb-3 me-1 total_product_price"></div>
+                            <div class="h5 fw-normal mb-3 me-1 total_product_price_{{ $product->id }}"></div>
                         </div>
 
                         <div class="d-flex align-items-center pt-2 pb-4">
@@ -291,4 +292,6 @@ $product = Product::find($id);
 </div>
 </div>
 
-@include('clients.shop.details.gallery-css') --}}
+@include('clients.shop.details.gallery-css')
+
+

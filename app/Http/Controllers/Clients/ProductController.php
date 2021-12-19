@@ -26,7 +26,6 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
       'brand_id' => $brand_id,
-
     ]);
   }
   public function productsCategory($category_slug)

@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
     @livewireStyles
     @livewireScripts
@@ -74,12 +75,12 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
-    <div class="preloader">
+    {{-- <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div>
+    </div> --}}
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -158,6 +159,7 @@
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <script src="{{ asset('frontend/js/review.js') }}"></script>
     <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
+    <script src="{{ asset('frontend/js/quickview.js') }}"></script>
     <script>
         $('.input-images-1').imageUploader();
     </script>
@@ -196,9 +198,6 @@
             var href = $(this).attr('href');
             window.location.href = href;
         })
-
-        //clear console warning
-       console.clear();
     </script>
     <script>
         $(".preloader").fadeOut(600);

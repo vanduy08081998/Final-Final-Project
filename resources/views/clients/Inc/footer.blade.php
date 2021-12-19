@@ -13,7 +13,6 @@ use App\Models\Category;
                                     href="{{ route('shop.shop-grid', $cate->category_slug) }}">{{ $cate->category_name }}</a>
                             </li>
                         @endforeach
-
                     </ul>
                 </div>
             </div>
