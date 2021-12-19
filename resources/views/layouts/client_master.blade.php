@@ -54,6 +54,7 @@
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
     <script src="{{ asset('frontend/js/account.js') }}"></script>
     <script src="{{ asset('frontend/js/review.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
@@ -94,12 +95,12 @@
 </script>
 
 <body class="handheld-toolbar-enabled">
-    {{-- <div class="preloader">
+    <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
-    </div> --}}
+    </div>
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -119,16 +120,35 @@
                 <span class="handheld-toolbar-icon"><i class="ci-menu"></i></span>
                 <span class="handheld-toolbar-label">Menu</span>
             </a>
-            <a class="d-table-cell handheld-toolbar-item" href="shop-cart.html">
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route('cart.cart-list') }}">
                 <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
                     <span class="badge bg-primary rounded-pill ms-1">4</span>
                 </span>
                 <span class="handheld-toolbar-label">$265.00</span>
             </a>
-            <a class="d-table-cell handheld-toolbar-item" href="#">
+            @if (Auth::user())
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route ('account.account-info') }}">
+                <span class="handheld-toolbar-icon">@if (Auth::user()->avatar)
+                    @if (Auth::user()->provider_id == null)
+                        <img class="customer_picture"
+                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                            alt="avatar" style="border-radius:50%;">
+                    @else
+                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                            width="90" alt="avatar" style="border-radius:50%;">
+                    @endif
+                @else
+                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                        width="25" alt="avatar">
+                @endif</span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+            @else
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
                 <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
                 <span class="handheld-toolbar-label">Tài khoản</span>
             </a>
+            @endif
         </div>
     </div>
     {{-- Chatbox button --}}

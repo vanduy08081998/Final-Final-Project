@@ -16,10 +16,10 @@
     }
 </style>
 
-<a class="navbar-brand d-none d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}">
+<a class="navbar-brand d-sm-block me-3 flex-shrink-0" href="{{ route('clients.index') }}">
     <img src="{{ asset('frontend/img/logo/logo.png') }}" width="200px" alt="Cartzilla">
 </a>
-<h2 style="color: orangered">Thế giới mua sắm trực tuyến Bigdeal</h2>
+<h2 style="color: orangered" class="text-login">Thế giới mua sắm trực tuyến Bigdeal</h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form class="form_register form-horizontal form " role="form">
@@ -78,6 +78,9 @@
             <div class="div_button">
                 <button type="button" class="register mt-3">Đăng ký</button>
             </div>
+            <a class="text-primary forgot_pass mt-4 w-100 d-none text-register" id="signInMB">
+                <i class="bx bxs-key mr-2"></i>Đã có tài khoản? Hãy Đăng nhập !
+            </a>
         </form>
     </div>
 
@@ -128,7 +131,8 @@
             </div>
             <a class="text-primary forgot_pass mt-4" href="{{ route('password.request') }}"><i
                     class='bx bxs-key mr-2'></i> Quên mật khẩu?</a>
-
+            <a class="text-primary forgot_pass mt-4 w-100 d-none text-register" id="signUpMB"><i
+                    class='bx bxs-key mr-2'></i> Bạn chưa có tài khoản? Hãy Đăng ký !</a>
         </form>
     </div>
 
@@ -147,6 +151,16 @@
         </div>
     </div>
 </div>
+{{-- <script>
+    $('body').resize(function(){
+    const width = $('body').width();
+    console.log(width)
+    if(width < 600){
+        $('.overlay').css({'display':'none'});
+    }
+})
+.resize()
+</script> --}}
 
 
 @endsection

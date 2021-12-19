@@ -82,7 +82,7 @@
                                     <a type="hidden" id="wishlist_producturl{{ $pro->id }}"
                                         href="{{ route('shop.product-details', $pro->product_slug) }}">
                                     </a>
-                                    <div style="display: inline; padding: 1.5rem">
+                                    <div style="display: inline; padding: 10px">
                                         <a class="btn-action nav-link-style me-2" style="cursor:pointer;text-align: center;"
                                             onclick="add_compare({{ $pro->id }})">
                                             <i class="ci-compare me-1"></i>So sánh
