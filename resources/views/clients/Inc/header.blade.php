@@ -135,7 +135,8 @@ $category = Category::all();
                         </a>
                         <div class="content-user">
                             <ul>
-                                <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Đơn hàng</a></li>
+                                <li><a href="{{ route('account.order-list') }}"><i
+                                            class="fas fa-file-invoice-dollar"></i> Đơn hàng</a></li>
                                 <li>
                                     <a href="{{ route('account.notification') }}">
                                         <i class="far fa-bell"></i>

@@ -32,15 +32,17 @@
                                         <option value="">------- Hành động -------</option>
                                         <option value="trash">Thùng rác</option>
                                     </select>
-                                    <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
-                                    <a class="btn btn-primary"
+                                    <button class="btn-sm btn-primary handle rounded-0" type="submit" disabled>Hành
+                                        động</button>
+                                    <a class="btn btn-primary rounded-0"
                                         href="{{ route('comment.list-clearance', $product->id) }}">Chờ duyệt <span
                                             class="badge badge-light">{{ $countComment }}</span></a>
-                                    <a class="btn btn-primary" href="{{ route('comment.answered', $product->id) }}">Chờ
+                                    <a class="btn btn-primary rounded-0"
+                                        href="{{ route('comment.answered', $product->id) }}">Chờ
                                         phản hồi <span class="badge badge-light">{{ $countA }}</span></a>
                                     @if ($countTrashed)
                                         <a href="{{ route('comment.trash', $product->id) }}"
-                                            class="btn-sm btn-warning float-right mr-1">Thùng
+                                            class="btn-sm btn-warning rounded-0 float-right mr-1">Thùng
                                             rác
                                             ({{ $countTrashed }})</a>
                                     @endif

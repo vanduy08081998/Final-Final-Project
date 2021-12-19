@@ -16,13 +16,13 @@
 
     <td class="text-left">
         @if ($value->comment_admin_feedback == 1 && $value->user->position != 'admin')
-            <a class="btn btn-info">Đã phản
+            <a class="btn btn-info rounded-0">Đã phản
                 hồi</a>
         @elseif($value->user->position == 'admin')
-            <a class="btn btn-secondary">Chỉnh
+            <a class="btn btn-secondary rounded-0">Chỉnh
                 sửa</a>
         @else
-            <button type="button" class="btn btn-warning"
+            <button type="button" class="btn btn-warning rounded-0"
                 onclick="feedback({{ $value->id }}, {{ $parent_id }})">Phản
                 hồi</button>
         @endif
@@ -31,7 +31,7 @@
 
     <td>
         <div class="btn-group">
-            <button type="button" class="btn btn-success dropdown-toggle radius-30" data-toggle="dropdown"
+            <button type="button" class="btn btn-success dropdown-toggle rounded-0" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false"><i class="bx bx-cog"></i></button>
             <div class="dropdown-menu" style="">
                 <a href="{{ route('comment.delete', $value->id) }}" class="text-danger radius-30 dropdown-item"><i
