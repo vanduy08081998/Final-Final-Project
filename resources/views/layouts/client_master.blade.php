@@ -35,6 +35,12 @@
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="{{ asset('frontend/js/search.js') }}"></script>
+    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    <script src="{{ asset('frontend/js/account.js') }}"></script>
+    <script src="{{ asset('frontend/js/review.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
@@ -142,10 +148,29 @@
                     <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
                 </a>
             @endguest
-            <a class="d-table-cell handheld-toolbar-item" href="#">
+            @if (Auth::user())
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route ('account.account-info') }}">
+                <span class="handheld-toolbar-icon">@if (Auth::user()->avatar)
+                    @if (Auth::user()->provider_id == null)
+                        <img class="customer_picture"
+                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                            alt="avatar" style="border-radius:50%;">
+                    @else
+                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                            width="90" alt="avatar" style="border-radius:50%;">
+                    @endif
+                @else
+                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                        width="25" alt="avatar">
+                @endif</span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+            @else
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
                 <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
                 <span class="handheld-toolbar-label">Tài khoản</span>
             </a>
+            @endif
         </div>
     </div>
     {{-- Chatbox button --}}
