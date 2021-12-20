@@ -68,11 +68,13 @@ Route::prefix('/')->group(function () {
         Route::get('/checkout-complete', [CheckoutController::class, 'checkoutComplete'])->name('checkout.checkout-complete');
         Route::get('/checkout-review', [CheckoutController::class, 'checkoutReview'])->name('checkout.checkout-review');
         Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout.checkout');
+        Route::post('/checkout-promotion-code', [CheckoutController::class, 'promotionCode'])->name('checkout.promotioncode');
     });
     Route::prefix('/shop')->group(function () {
         Route::get('/shop-grid/{id}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
+        Route::post('/quickview', [ProductController::class, 'quickView'])->name('shop.quickview');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
         Route::get('/products-category/{category_slug}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
         Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');

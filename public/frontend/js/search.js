@@ -1,11 +1,10 @@
-let url_to = $('meta[name="url-to"]').attr('content')
-const formatter = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND',
-    minimumFractionDigits: 0
-})
-
 jQuery(document).ready(function($) {
+    let url_to = $('meta[name="url-to"]').attr('content')
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+        minimumFractionDigits: 0
+    })
     var engine = new Bloodhound({
         remote: {
             url: url_to+'/search?key=%QUERY%',
