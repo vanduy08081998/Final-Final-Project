@@ -29,13 +29,13 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                            @if (session('message'))
-                                        <div class="alert alert-success" role="alert">
-                                            {{ session('message') }}
-                                        </div>
-                            @endif
+                        @if (session('message'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('message') }}
+                            </div>
+                        @endif
                         <div class="card-title">
-                            
+
                             <h4 class="mb-0">Liệt kê slide</h4>
                         </div>
                         <hr />
@@ -47,7 +47,6 @@
                                         <th style="text-align: center;">Ảnh</th>
                                         <th style="text-align: center;">Tên slide</th>
                                         <th style="text-align: center;">Link slide</th>
-                                        <th style="text-align: center;">Nội dung slide</th>
                                         <th style="text-align: center;">Công cụ</th>
 
                                     </tr>
@@ -59,8 +58,12 @@
                                             <td class="py-2">
                                                 <div style="text-align: center;">
                                                     <div class="position-relative mr-2">
-                                                        <img class="avatar" width="90" height="58"
-                                                            src="{{ url('uploads/Banner/', $banner->banner_img) }}" />
+                                                        <img @if ($banner->banner_type == 0)
+                                                        width="150" height="70"
+                                                    @else
+                                                        width="60" height="130"
+                                                        @endif style="border-radius: 5px;"
+                                                        src="{{ url('uploads/Banner/', $banner->banner_img) }}" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -69,10 +72,6 @@
                                             </td>
                                             <td style="text-align: center;">
                                                 {{ $banner->banner_link }}
-
-                                            </td>
-                                            <td style="text-align: center;">
-                                                {{ $banner->banner_content }}
 
                                             </td>
                                             <td style="text-align: center;">
