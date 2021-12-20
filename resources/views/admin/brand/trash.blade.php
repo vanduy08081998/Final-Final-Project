@@ -23,7 +23,7 @@
                     </div>
                     <div class="ml-auto">
                         <div class="btn-group">
-                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
+                            <a href="{{ route('brand.index') }}" class="btn btn-primary rounded-0">Danh sách</a>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,8 @@
                                         <option value="delete">Xóa</option>
                                         <option value="restore">Khôi phục</option>
                                     </select>
-                                    <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
+                                    <button class="btn-sm btn-primary handle rounded-0" type="submit" disabled>Hành
+                                        động</button>
 
                                 </div>
                             </div>
@@ -65,7 +66,7 @@
                                                     <div style="text-align: center;">
                                                         <div class="position-relative mr-2">
                                                             <img class="avatar" width="90" height="58"
-                                                                src="{{ url('uploads/Brands/', $brand->brand_image) }}" />
+                                                                src="{{ url($brand->brand_image) }}" />
                                                         </div>
                                                     </div>
                                                 </td>
@@ -75,7 +76,7 @@
                                                 <td style="text-align: center;">
                                                     @foreach ($brand->categories as $item)
 
-                                                        <button
+                                                        <button type="button"
                                                             class="btn-sm btn-primary">{{ $item->category_name }}</button>
 
                                                     @endforeach

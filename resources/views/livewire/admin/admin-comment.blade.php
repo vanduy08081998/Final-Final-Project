@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-primary" id="exampleModalLabel">Phản hồi</h5>
-                    <button type="button" wire:click.prevent="close_modal('store')">
+                    <button type="button" class="close" wire:click.prevent="close_modal('store')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -57,7 +57,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-primary" id="exampleModalLabel">Chỉnh sửa</h5>
-                    <button type="button" wire:click.prevent="close_modal('edit')">
+                    <button type="button" class="close" wire:click.prevent="close_modal('edit')">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

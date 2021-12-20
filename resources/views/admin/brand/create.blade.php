@@ -112,7 +112,8 @@
                                         <select name="category_id[]" class="js-example-basic-multiple form-control"
                                             data-live-search="true" data-live-search="true" multiple>
                                             @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
-                                                @include('admin.Categories.categoryOptions', ['item' => $item,'category' => ''])
+                                                @include('admin.Categories.categoryOptions', ['item' => $item,'category' =>
+                                                ''])
 
                                                 @foreach ($item->subcategory()->get() as $childCategory)
                                                     @include('admin.Categories.categoryOptions', ['item' =>
@@ -137,6 +138,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     Logo thương hiệu
+                                </div>
+                                <div class="card-body d-flex justify-content-center">
+                                    <div class="preview hide mb-3" id="image__preview">
+                                        <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
+                                            alt="" height="100px" width="100px">
+                                    </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="file-options">

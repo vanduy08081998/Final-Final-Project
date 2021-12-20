@@ -50,9 +50,18 @@
                         <div class="d-flex align-items-center">
                             <div class="img-thumbnail rounded-circle position-relative flex-shrink-0"><span
                                     class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip"
-                                    title="Reward points">384</span><img class="rounded-circle"
-                                    src="{{ asset('uploads/Users') }}/{{ auth()->user()->avatar }}" width="90"
-                                    alt="Susan Gardner"></div>
+                                    title="Reward points">384</span>
+                                @if (auth()->user()->avatar != null)
+                                    <img class="rounded-circle"
+                                        src="{{ asset('uploads/Users') }}/{{ auth()->user()->avatar }}" width="90"
+                                        alt="Susan Gardner">
+                                @else
+                                    <img class="rounded-circle"
+                                        src="{{ asset('backend/img/profiles/avt.png') }}" width="90"
+                                        alt="Susan Gardner">
+                                @endif
+
+                            </div>
                             <div class="ps-3">
                                 <h3 class="fs-base mb-0">{{ auth()->user()->name }}</h3><span
                                     class="text-accent fs-sm">{{ auth()->user()->email }}</span>

@@ -35,18 +35,18 @@ class Notifica extends Component
         $check = '';
         if($this->comment){
             $check = $this->comment;
-            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->comment]])->latest()->get();
+            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->comment]])->latest()->paginate(5);
         }
         elseif($this->order){
             $check = $this->order;
-            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->order]])->latest()->get();
+            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->order]])->latest()->paginate(5);
         }
         elseif($this->review){
             $check = $this->review;
-            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->review]])->latest()->get();
+            $models = Notification::where([['id_user', Auth::user()->id],['type', $this->review]])->latest()->paginate(5);
         }
         else{
-            $models = Notification::where('id_user', Auth::user()->id)->latest()->get();
+            $models = Notification::where('id_user', Auth::user()->id)->latest()->paginate(5);
         }
         return view('livewire.notifica', compact('models', 'check'));
     }

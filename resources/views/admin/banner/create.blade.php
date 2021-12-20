@@ -49,9 +49,9 @@
                                 </div>
                                 <div class="card-body">
                                     @if (session('message'))
-                                            <div class="alert alert-success" role="alert">
-                                                {{ session('message') }}
-                                            </div>
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('message') }}
+                                        </div>
                                     @endif
                                     <!-- INput Group -->
                                     <div class="col-md-12 mb-3">
@@ -108,7 +108,8 @@
                                                 <span class="text-danger">{{ $errors->first('banner_type') }}</span>
                                             @enderror
                                         </div>
-                                        <input class="form-control" name="status" value="0" value="{{ old('status') }}" type="hidden">
+                                        <input class="form-control" name="status" value="0" value="{{ old('status') }}"
+                                            type="hidden">
                                     </div>
                                 </div>
                             </div>
@@ -134,22 +135,22 @@
                                     Ảnh
                                 </div>
                                 <div class="card-body d-flex justify-content-center">
-                                    <div class="preview hide mb-3">
+                                    <div class="preview hide mb-3" id="image__preview">
                                         <img src="https://st4.depositphotos.com/14953852/24787/v/600/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"
                                             alt="" height="100px" width="100px">
                                     </div>
                                 </div>
+
                                 <div class="card-footer">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="banner_img" onchange="readURL(this);"
-                                                class="custom-file-input" id="inputGroupFile04"
-                                                aria-describedby="inputGroupFileAddon04">
-                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-
-
-                                        </div>
+                                    <div class="file-options">
+                                        <a class="btn-file iframe-btn"
+                                            href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image"
+                                            style="color: #1e272e; font-size: 24px;"><input class="upload"><i
+                                                class="fa fa-upload"></i></a>
                                     </div>
+                                    <input type="hidden" id="image" data-upload="banner_img" data-preview="image__preview">
+                                    <input type="hidden" name="banner_img">
+
                                     @error('banner_img')
                                         <span class="text-danger">{{ $errors->first('banner_img') }}</span>
                                     @enderror
