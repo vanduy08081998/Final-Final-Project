@@ -2,94 +2,46 @@
 <html lang="en">
 
 <head>
-  <<<<<<< HEAD <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url-to" content="{{ URL::to('/') }}">
-    <title>BigDeal | @yield('title')</title>
-    <!-- SEO Meta Tags-->
-    @yield('meta')
-    <!-- Viewport-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon and Touch Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    {{-- <link rel="manifest" href="site.webmanifest"> --}}
-    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
-    <link rel="stylesheet" media="screen"
-      href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}">
-    <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
-    @livewireStyles
-    @livewireScripts
-    @routes
-    =======
-    <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url-to" content="{{ URL::to('/') }}">
-    <title>BigDeal | @yield('title')</title>
-    <!-- SEO Meta Tags-->
-    @yield('meta')
-    <!-- Viewport-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon and Touch Icons-->
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
-    {{-- <link rel="manifest" href="site.webmanifest"> --}}
-    <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen"
-      href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
-    <link rel="stylesheet" media="screen"
-      href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}">
-    <!-- Main Theme Styles + Bootstrap-->
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="{{ asset('frontend/js/search.js') }}"></script>
-    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
-    <script src="{{ asset('frontend/js/account.js') }}"></script>
-    <script src="{{ asset('frontend/js/review.js') }}"></script>
-    <script src="{{ asset('frontend/js/custom.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
-    @livewireStyles
-    @livewireScripts
-    @routes
-    >>>>>>> 70e584154f1381f22d0cac92a71a70ca3de74051
+  <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="url-to" content="{{ URL::to('/') }}">
+  <title>BigDeal | @yield('title')</title>
+  <!-- SEO Meta Tags-->
+  @yield('meta')
+  <!-- Viewport-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Favicon and Touch Icons-->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/img/logo/favicon.png') }}">
+  {{-- <link rel="manifest" href="site.webmanifest"> --}}
+  <link rel="mask-icon" color="#fe6a6a" href="safari-pinned-tab.svg">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
+  <link rel="stylesheet" media="screen"
+    href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}">
+  <!-- Main Theme Styles + Bootstrap-->
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
+  <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
+  <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
+  <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
+  @livewireStyles
+  @livewireScripts
+  @routes
 </head>
 <!-- Body-->
 <script>
