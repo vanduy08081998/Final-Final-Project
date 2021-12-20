@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
+
   @livewireStyles
   @livewireScripts
   @routes
@@ -167,7 +168,7 @@
   <!-- Vendor scrits: js libraries and plugins-->
   <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
   <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-
+  <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
 
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
@@ -202,6 +203,7 @@
   <script src="{{ asset('frontend/js/compare.js') }}"></script>
   <script src="{{ asset('frontend/js/quickview.js') }}"></script>
   <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
+
   <script>
     $('.input-images-1').imageUploader();
   </script>
@@ -243,6 +245,31 @@
   </script>
   <script>
     $(".preloader").fadeOut(600);
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(window).scroll(function(event) {
+        var pos_body = $('html,body').scrollTop();
+        //   console.log(pos_body);
+        if (pos_body > 545.4545288085938) {
+          $('.banner-main').addClass('banner-fixed');
+        }
+        if (pos_body < 545.4545288085938) {
+          $('.banner-main').removeClass('banner-fixed');
+        }
+      });
+    });
+  </script>
+
+  <script>
+    $('body').resize(function() {
+        const width = $('body').width();
+        console.log(width)
+        if (width < 1024) {
+          $('.card-body').removeClass('card-body-hidden');
+        }
+      })
+      .resize()
   </script>
 </body>
 

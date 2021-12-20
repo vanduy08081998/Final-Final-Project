@@ -121,19 +121,21 @@
         <!-- Product-->
         @foreach ($product as $product)
           <div class="product-item">
+            @if ($product->discount == 0)
+            @else
+              <span class="badge bg-danger badge-shadow">Giảm giá
+                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+            @endif
             <div class="card product-card">
-              @if ($product->discount == 0)
-              @else
-                <span class="badge bg-danger badge-shadow">Giảm giá
-                  {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-              @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
-                <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                  href="{{ route('shop.product-details', $product->product_slug) }}"></a>
+                <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
+                  style="margin: auto; display: block">
+              </a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name"
+                  href="#">{{ $product->Category->category_name }}</a>
                 <h3 class="product-title fs-sm"><a
-                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a>
+                    href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
                 <div class="d-flex justify-content-between">
                   @if ($product->discount_unit == '%')
@@ -160,6 +162,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
@@ -195,7 +198,6 @@
                   value="{{ number_format($product->unit_price) }}">
                 <input type="hidden" id="wishlist_productimg{{ $product->id }}"
                   value="{{ url($product->product_image) }}">
-
                 <a type="hidden" id="wishlist_producturl{{ $product->id }}"
                   href="{{ route('shop.product-details', $product->product_slug) }}">
                 </a>
@@ -207,6 +209,7 @@
                   <i class="ci-eye"></i>
                 </a>
               </div>
+              <!-- Quick View Modal-->
             </div>
           </div>
           <!-- Product-->
@@ -230,8 +233,8 @@
       <div class="tns-carousel-inner"
         data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
-        @foreach ($highlight as $product)
-          <div class="product-item" style="height: 375px">
+       @foreach ($highlight as $product)
+          <div class="product-item">
             @if ($product->discount == 0)
             @else
               <span class="badge bg-danger badge-shadow">Giảm giá
@@ -240,11 +243,13 @@
             <div class="card product-card">
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
-                <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                  href="{{ route('shop.product-details', $product->product_slug) }}"></a>
+                <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
+                  style="margin: auto; display: block">
+              </a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name"
+                  href="#">{{ $product->Category->category_name }}</a>
                 <h3 class="product-title fs-sm"><a
-                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a>
+                    href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
                 <div class="d-flex justify-content-between">
                   @if ($product->discount_unit == '%')
@@ -271,6 +276,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
@@ -317,6 +323,7 @@
                   <i class="ci-eye"></i>
                 </a>
               </div>
+              <!-- Quick View Modal-->
             </div>
           </div>
           <!-- Product-->

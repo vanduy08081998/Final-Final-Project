@@ -66,3 +66,22 @@ const quantityCheck = (quantity) => {
                                               </div> `);
     }
 };
+
+
+let flash_sale_end_date = $('._314-e778ac').attr('data-date')
+$("._314-e778ac")
+    .countdown(flash_sale_end_date, {
+        elapse: true,
+    })
+    .on("update.countdown", function (event) {
+        var $this = $(this);
+        if (event.elapsed) {
+            $this.html(event.strftime("After end: <span>%H:%M:%S</span>"));
+        } else {
+            $this.html(
+                event.strftime(
+                    'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+                )
+            );
+        }
+    });

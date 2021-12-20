@@ -31,6 +31,7 @@ use App\Http\Controllers\Clients\UserCommentController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
 use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
+use App\Http\Controllers\Clients\FlashDealProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,7 @@ Route::prefix('/')->group(function () {
     Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
     Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
     Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
-
+    Route::resource('client-flash-deals', FlashDealProductController::class);
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
         Route::post('/checkout-shipping-address', [CheckoutController::class, 'getShippingAddress'])->name('checkout.shipping-address');
@@ -177,6 +178,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
     Route::get('product__warehouse/{product}', [ProductAdmin::class, 'productWarehouse'])->name('products.warehouse');
+    Route::get('/inventory', [ProductAdmin::class, 'inventory'])->name('inventory');
     Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
     Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
     Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
