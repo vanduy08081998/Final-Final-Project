@@ -132,3 +132,17 @@ signUpButton.addEventListener('click', () => {
 signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active");
 });
+
+
+const signUpButtonMB = document.getElementById('signUpMB');
+const signInButtonMB = document.getElementById('signInMB');
+const containerMB = document.getElementById('container');
+
+signUpButtonMB.addEventListener('click', () => {
+    document.querySelector('.form_login').reset();
+    container.classList.add("right-panel-active");
+});
+
+signInButtonMB.addEventListener('click', () => {
+    containerMB.classList.remove("right-panel-active");
+});

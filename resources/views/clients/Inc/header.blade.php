@@ -289,7 +289,7 @@ $category = Category::all();
                                 Giới thiệu</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
+                                href="{{ route('shop.shop-grid', ['id' => 0]) }}"><i
                                     class="ci-lable"></i> Cửa hàng</a>
                         </li>
                         <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">

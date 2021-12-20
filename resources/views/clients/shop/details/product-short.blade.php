@@ -24,10 +24,6 @@
               <i class="ci-heart"></i>
             </button>
             @endif
-            {{-- <button class="btn-wishlist_{{$pro->id}} btn-sm text-muted" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
-            title="Xóa khỏi yêu thích" onclick="add_to_wishlist({{ $pro->id }})">
-            <i class="ci-heart"></i>
-          </button> --}}
             @else
             <button class="btn-wishlist_{{$pro->id}} btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left"
               title="Thêm vào yêu thích" onclick="add_to_wishlist({{ $pro->id }})">

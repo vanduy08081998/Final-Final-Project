@@ -1,4 +1,4 @@
-<div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
+<div class="bg-white shadow-lg p-4 ms-lg-auto">
         <div class="py-2 px-xl-2">
                 <div class="widget mb-3">
                         <h2 class="widget-title text-center">Order summary</h2>
@@ -29,9 +29,9 @@
                                         @if ($value->specifications != null)
                                         @foreach ($value->specifications as $key => $attr)
                                         <?php
-                      
+
                       $nameAttribute = \App\Models\Attribute::where('slug', $key)->first()->name;
-                      
+
                       ?>
                                         <div class="fs-sm"><span class="text-muted me-2">{{ $nameAttribute }}
                                                         :</span>{{ $attr }}
@@ -54,18 +54,7 @@
                         @endforelse
 
                 </div>
-                {{-- <ul class="list-unstyled fs-sm pb-2 border-bottom">
-                        <li class="d-flex justify-content-between align-items-center"><span
-                                        class="me-2">Subtotal:</span><span
-                                        class="text-end">$265.<small>00</small></span></li>
-                        <li class="d-flex justify-content-between align-items-center"><span
-                                        class="me-2">Shipping:</span><span class="text-end">—</span></li>
-                        <li class="d-flex justify-content-between align-items-center"><span
-                                        class="me-2">Taxes:</span><span class="text-end">$9.<small>50</small></span>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center"><span
-                                        class="me-2">Discount:</span><span class="text-end">—</span></li>
-                </ul> --}}
-                <h6 class="fw-normal text-center my-4">Tổng tiền : {{ number_format($totalprice) }}</h6>
+                <h6 class="fw-normal text-center my-4" id="totalprice" >Tổng tiền : {{ number_format($totalprice) }}</h6>
+                <input type="hidden" name="totalprice" value="{{ $totalprice }}">
         </div>
 </div>

@@ -703,15 +703,7 @@ button.carousel-control-next.show-next {
     text-decoration: none!important;
     cursor: pointer;
 }
-.trending-product h2 {
-    margin-bottom: 0px !important;
-    margin: auto 0;
-}
 
-.highlight-product h2 {
-    margin-bottom: 0px !important;
-    margin: auto 0;
-}
 .user-space {
     display: flex;
 }
@@ -748,17 +740,17 @@ button.carousel-control-next.show-next {
     }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 600px) {
     body {
-        max-width: 375px;
+        max-width: 100%;
     }
 
     .topbar {
-        width: 375px !important;
+        width: 100% !important;
     }
 
     .topbar-text {
-        width: 330px;
+        width: 100%;
         text-align: center;
     }
 
@@ -767,20 +759,27 @@ button.carousel-control-next.show-next {
     }
 
     .handheld-toolbar {
-        width: 375px;
+        width: 100%;
     }
-
-   .navbar .container .navbar-brand {
-       padding-left: 120px;
-   }
 
    .navbar-brand>img {
     width: 100px;
    }
 
+   .navbar .container .navbar-brand {
+       padding-left: 120px !important;
+    }
+
    .navbar-sticky {
-       width: 375px;
+       width: 100%;
+       
    }
+   .bh-widget-page__call-to-action {
+       display:none
+   }
+   /* .navbar-stuck-menu{
+       display: none;
+   } */
 
    .carousel-control .carousel-img img {
        height: 200px;
@@ -798,12 +797,12 @@ button.carousel-control-next.show-next {
    }
 
    .nav-slider {
-       display: none;
+       padding-left: 15px !important
    }
 
    .trending-product {
        margin-bottom: 50px;
-       margin-top: 0px;
+       margin-top: 0px !important;
        padding-top: 20px !important;
        text-align: center;
    }    
@@ -889,18 +888,23 @@ button.carousel-control-next.show-next {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     body {
-        max-width: 768px;
+        max-width: 100%;
     }
 
     .topbar {
-        width: 768px;
+        width: 100%;
     }
 
     .topbar-text {
         /* width: 768px; */
         text-align: center;
+    }
+
+    .navbar-sticky {
+        width: 100%;
+        justify-content: center;
     }
 
     .cart__dropdown {
@@ -938,8 +942,19 @@ button.carousel-control-next.show-next {
     .nav-s .banner-item {
         max-width: 170px !important;
     }
-}
 
+    .trending-product {
+        margin-top: 120px;
+    }
+
+    .card .product-card {
+        display: block;
+    }
+
+    .card-body-hidden {
+        display: block;
+    }
+}
 /*******************
  Preloader
  ********************/

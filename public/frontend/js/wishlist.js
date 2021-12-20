@@ -13,28 +13,13 @@ function add_to_wishlist(id) {
             id: id,
         },
         success: function (response) {
-            Swal.fire({
-                position: 'center',
-                icon: response.icon,
-                title: response.text,
-                showConfirmButton: response.confirm,
-                showCancelButton: response.cancel,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Đăng nhập',
-
-            }).then((result) => {
-          
-           
-                if (result.isCancel) {
-                    // window.location.href = 'http://127.0.0.1:8000/Custommers/login';
-                }
-            })
             show_icon_wishlist();
-            if(response.icon == 'success'){
+            if(response.result == 'success'){
+                toastr.success(response.text)
                 $('.btn-wishlist_'+id).removeClass('text-muted');
                 $('.btn-wishlist_'+id).addClass('text-danger');
             }else{
+                toastr.warning(response.text)
                 $('.btn-wishlist_'+id).removeClass('text-danger');
                 $('.btn-wishlist_'+id).addClass('text-muted'); 
             }
@@ -57,21 +42,13 @@ function delete_wishlist(id) {
             id: id,
         },
         success: function (response) {
-            Swal.fire({
-                position: 'center',
-                icon: response.icon,
-                title: response.text,
-                showConfirmButton: response.confirm,
-                showCancelButton: response.cancel,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Đăng nhập',
-
-            }).then((result) => {
-                location.reload();
-                if (result.isConfirmed) {
-                }
-            })
+            show_icon_wishlist();
+            if(response.result == 'warning'){
+                toastr.warning(response.text)
+            }
+            setTimeout(function(){
+                window.location.reload();
+            }, 1000);
         }
     });
 }
@@ -84,7 +61,6 @@ function show_icon_wishlist(){
         success: function (data){
            $('.count_wishlist').html('('+data+')');
         }
-
     })
 }
 show_icon_wishlist();

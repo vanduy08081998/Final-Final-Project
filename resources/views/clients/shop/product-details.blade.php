@@ -64,20 +64,30 @@
                     <div class="container pt-lg-3 pb-4 pb-sm-5 long-desc" style="position: relative">
                         <div class="row justify-content-center" style="text-align: justify">
                             <div class="col-lg-10 text-description" id="point">
-                                <div
-                                    class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
-                                    <div class=" align-items-center pt-3" style="width: 100% !important">
-                                        <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
-                                        {!! $product->short_description !!}
+                                @if ($product->short_description != null)
+                                    <div
+                                        class="d-md-flex justify-content-between align-items-start pb-4 mb-4 border-bottom bg-secondary">
+                                        <div class=" align-items-center pt-3" style="width: 100% !important">
+                                            <h3 class="text-center text-danger">Đặc điểm nổi bật</h3>
+                                            {!! $product->short_description !!}
+                                        </div>
                                     </div>
-                                </div>
-                                {!! $product->long_description !!}
+                                @else
+                                @endif
+
+                                @if ($product->long_description != null)
+                                    {!! $product->long_description !!}
+                                @else
+                                @endif
                             </div>
                         </div>
-                        <div class="btn-show fade-desc" id="point1">
-                            <button class="btn btn-danger justify-items-center show-more"
-                                style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
-                        </div>
+                        @if ($product->long_description != null)
+                            <div class="btn-show fade-desc" id="point1">
+                                <button class="btn btn-danger justify-items-center show-more"
+                                    style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                            </div>
+                        @else
+                        @endif
                     </div>
                 </div>
                 <!-- Product description-->
@@ -88,7 +98,6 @@
     <hr class="mb-5">
     <!-- Product carousel (You may also like)-->
     <!-- Bình luận ở đây nha bà con-->
-    @include('clients.shop.details.gallery-css')
 
     @livewire('reviews',['product' => $product])
     @include('clients.shop.details.related-product')
@@ -99,73 +108,7 @@
 @endsection
 
 @push('script')
-    <script type="text/javascript">
-        var swiper = new Swiper(".mySwiper", {
-            spaceBetween: 20,
-            slidesPerView: 6,
-            freeMode: true,
-            watchSlidesProgress: true,
-        });
-        var swiper2 = new Swiper(".mySwiper2", {
-            spaceBetween: 20,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-            thumbs: {
-                swiper: swiper,
-            },
-        });
-        $('#choice_attribute_options').on('change', function() {
-            getVariantPrice()
-        })
-
-        let qt_inc = document.querySelector('.qt-inc');
-        let qt_dec = document.querySelector('.qt-dec');
-
-
-        qt_dec.addEventListener('click', function(e) {
-            document.querySelector('#product_quantity').value = Number(document.querySelector(
-                '#product_quantity').value) - 1;
-            if (document.querySelector('.quantity_number').value < 1) {
-                document.querySelector('.quantity_number').value = 1;
-            }
-            getVariantPrice()
-        })
-        qt_inc.addEventListener('click', function(e) {
-            document.querySelector('#product_quantity').value = Number(document.querySelector(
-                '#product_quantity').value) + 1;
-            getVariantPrice()
-        })
-
-        const getVariantPrice = () => {
-            $.ajax({
-                type: "POST",
-                url: "{{ route('products.get_variant_price') }}",
-                data: $('#choice_attribute_options').serializeArray(),
-                success: function(response) {
-                    $('#specifications').html(response.specifications)
-                    $('.total_product_price').html(
-                        ` <strong>Tổng tiền: </strong><span>${response.price}</span>`)
-                    // Quantity check
-                    quantityCheck(response.product_quantity)
-                    // End Quantity check
-                }
-
-            })
-        }
-
-        const quantityCheck = (quantity) => {
-            if (quantity > 0) {
-                $('#product_badge').html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
-                                                  class="ci-security-check"></i>Sản phẩm còn hàng
-                                              </div>`)
-            } else {
-                $('#product_badge').html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                  class="fas fa-times" style="right: 70px; top: 550px"></i>Sản phẩm hết hàng
-                                              </div> `)
-            }
-        }
+    <script>
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
