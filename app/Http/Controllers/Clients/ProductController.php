@@ -28,6 +28,15 @@ class ProductController extends Controller
       'brand_id' => $brand_id,
     ]);
   }
+
+  public function quickview(Request $request){
+
+    $product = Product::find($request->id);
+
+
+    return view('clients.inc.quickview-details', compact('product'));
+  }
+
   public function productsCategory($category_slug)
   {
     $min = Product::orderByDESC('id')->min('unit_price');

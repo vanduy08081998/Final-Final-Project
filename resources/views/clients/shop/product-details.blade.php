@@ -98,7 +98,6 @@
     <hr class="mb-5">
     <!-- Product carousel (You may also like)-->
     <!-- Bình luận ở đây nha bà con-->
-    @include('clients.shop.details.gallery-css')
 
     @livewire('reviews',['product' => $product])
     @include('clients.shop.details.related-product')
@@ -109,7 +108,6 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
     <script>
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
         $(document).on('click', '.move-top', function() {
