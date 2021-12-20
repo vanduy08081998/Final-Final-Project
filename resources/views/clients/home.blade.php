@@ -232,12 +232,12 @@
         <!-- Product-->
         @foreach ($highlight as $product)
           <div class="product-item" style="height: 375px">
-            @if ($product->discount == 0)
-            @else
-              <span class="badge bg-danger badge-shadow">Giảm giá
-                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-            @endif
             <div class="card product-card">
+                @if ($product->discount == 0)
+                @else
+                  <span class="badge bg-danger badge-shadow">Giảm giá
+                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+                @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
                 <img src="{{ asset($product->product_image) }}" alt="Product"></a>
@@ -485,19 +485,3 @@
     </div>
   </section>
 @endsection
-{{-- @push('script')
-  <script>
-    $(document).ready(function() {
-      $(window).scroll(function(event) {
-        var pos_body = $('html,body').scrollTop();
-        //   console.log(pos_body);
-        if (pos_body > 545.4545288085938) {
-          $('.banner-main').addClass('banner-fixed');
-        }
-        if (pos_body < 545.4545288085938) {
-          $('.banner-main').removeClass('banner-fixed');
-        }
-      });
-    });
-  </script>
-@endpush --}}

@@ -83,6 +83,7 @@
             <div class="lds-pos"></div>
         </div>
     </div> --}}
+<<<<<<< HEAD
     <!-- Sign in / sign up modal-->
     @include('clients.Inc.modal-login')
     <main class="page-wrapper">
@@ -115,6 +116,36 @@
                     }
                 } else {
                     $cart = null;
+=======
+  <!-- Sign in / sign up modal-->
+  @include('clients.Inc.modal-login')
+  <main class="page-wrapper">
+    <!-- Navbar Electronics Store-->
+    @include('clients.Inc.header')
+
+
+    @yield('content')
+  </main>
+  <input type="hidden" name="" id="url_to" value="{{ URL::to('/') }}">
+  <!-- Footer-->
+  @include('clients.Inc.footer')
+  <!-- Toolbar for handheld devices (Default)-->
+  <div class="handheld-toolbar">
+    <div class="d-table table-layout-fixed w-100">
+      <a class="d-table-cell handheld-toolbar-item" href="javascript:void(0)" data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse" onclick="window.scrollTo(0, 0)">
+        <span class="handheld-toolbar-icon"><i class="ci-menu"></i></span>
+        <span class="handheld-toolbar-label">Menu</span>
+      </a>
+      @php
+        use App\Models\Cart;
+        if (auth()->check()) {
+            $cart = Cart::where('user_id', auth()->user()->id)->get();
+            $totalprice = 0;
+            foreach ($cart as $key => $value) {
+                foreach (json_decode($value->specifications) as $index => $item) {
+                    $totalprice += $value->quantity * $item->variant_price;
+>>>>>>> 9d407018aade514c5da3631cf99f1661a4849a22
                 }
             @endphp
             @auth
@@ -132,6 +163,7 @@
                             <span class="badge bg-primary rounded-pill ms-1">0</span>
                         </span>
 
+<<<<<<< HEAD
                         <span class="handheld-toolbar-label">Chưa có gì trong giỏ hàng</span>
                     </a>
                 @endif
@@ -163,6 +195,37 @@
                     </span>
                     <span class="handheld-toolbar-label">Tài khoản</span>
                 </a>
+=======
+            <span class="handheld-toolbar-label">Giỏ hàng</span>
+          </a>
+        @endif
+
+      @endauth
+      @guest
+        <a class="d-table-cell handheld-toolbar-item" href="{{ url('login') }}">
+          <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+          </span>
+          <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
+        </a>
+      @endguest
+      @if (Auth::user())
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route ('account.account-info') }}">
+                <span class="handheld-toolbar-icon">@if (Auth::user()->avatar)
+                    @if (Auth::user()->provider_id == null)
+                        <img class="customer_picture"
+                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                            alt="avatar" style="border-radius:50%;">
+                    @else
+                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                            width="90" alt="avatar" style="border-radius:50%;">
+                    @endif
+                @else
+                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                        width="25" alt="avatar">
+                @endif</span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+>>>>>>> 9d407018aade514c5da3631cf99f1661a4849a22
             @else
                 <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
                     <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
@@ -186,9 +249,14 @@
         <i class="btn-scroll-top-icon ci-arrow-up"></i>
     </a>
 
+<<<<<<< HEAD
     <!-- Vendor scrits: js libraries and plugins-->
     <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
+=======
+  <!-- Vendor scrits: js libraries and plugins-->
+  <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
+>>>>>>> 9d407018aade514c5da3631cf99f1661a4849a22
 
     <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
@@ -261,6 +329,7 @@
             }
         });
 
+<<<<<<< HEAD
         $(document).on('click', '.dropdown-item', function() {
             var href = $(this).attr('href');
             window.location.href = href;
@@ -269,6 +338,42 @@
     <script>
         $(".preloader").fadeOut(600);
     </script>
+=======
+    $(document).on('click', '.dropdown-item', function() {
+      var href = $(this).attr('href');
+      window.location.href = href;
+    })
+  </script>
+  <script>
+    $(".preloader").fadeOut(600);
+  </script>
+  <script>
+    $(document).ready(function() {
+      $(window).scroll(function(event) {
+        var pos_body = $('html,body').scrollTop();
+        //   console.log(pos_body);
+        if (pos_body > 545.4545288085938) {
+          $('.banner-main').addClass('banner-fixed');
+        }
+        if (pos_body < 545.4545288085938) {
+          $('.banner-main').removeClass('banner-fixed');
+        }
+      });
+    });
+  </script>
+
+  <script>
+  $('body').resize(function(){
+      const width = $('body').width();
+      console.log(width)
+      if(width < 1024){
+          $('.card-body').removeClass('card-body-hidden');
+      }
+  })
+  .resize()
+  </script>
+  
+>>>>>>> 9d407018aade514c5da3631cf99f1661a4849a22
 </body>
 
 </html>
