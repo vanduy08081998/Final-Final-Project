@@ -7,82 +7,119 @@
 <!-- Chart CSS -->
 {{-- <link rel="stylesheet" href="{{ URL::to('backend/plugins/morris/morris.css') }}"> --}}
 @section('content')
+    <style>
+        .dash-widget-icon {
+            color: white;
+            padding-top: 8%;
+            float: left;
+            height: 65px;
+            width: 65px;
+            text-align: center;
+            font-size: 30px;
+            line-height: 74px;
+            background: rgba(0, 0, 0, .2);
+            border-radius: 100%;
+        }
+
+        .progress {
+            background: rgba(0, 0, 0, .2);
+            margin: 5px -10px 5px 0;
+            height: 2px;
+            background: white;
+        }
+
+        h3.text-center.mb-4.statiscal {
+            color: #0e3b7f;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .card {
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px
+        }
+        .badge{
+            font-size: 15px;
+        }
+
+    </style>
     <!-- Page Content -->
     <div class="content container-fluid">
 
         @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'dashboard'])
 
-         <div class="row">
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-								<div class="card dash-widget">
-										<div class="card-body">
-												<span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
-												<div class="dash-widget-info">
-														<h3>112</h3>
-														<span>Projects</span>
-												</div>
-										</div>
-								</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-								<div class="card dash-widget">
-										<div class="card-body">
-												<span class="dash-widget-icon"><i class="fa fa-usd"></i></span>
-												<div class="dash-widget-info">
-														<h3>44</h3>
-														<span>Clients</span>
-												</div>
-										</div>
-								</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-								<div class="card dash-widget">
-										<div class="card-body">
-												<span class="dash-widget-icon"><i class="fa fa-diamond"></i></span>
-												<div class="dash-widget-info">
-														<h3>37</h3>
-														<span>Tasks</span>
-												</div>
-										</div>
-								</div>
-						</div>
-						<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-								<div class="card dash-widget">
-										<div class="card-body">
-												<span class="dash-widget-icon"><i class="fa fa-user"></i></span>
-												<div class="dash-widget-info">
-														<h3>218</h3>
-														<span>Employees</span>
-												</div>
-										</div>
-								</div>
-						</div>
-				</div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="card dash-widget bg-b-danger">
+                    <div class="card-body">
+                        <span class="dash-widget-icon"><i class="fas fa-cart-arrow-down"></i></span>
+                        <div class="dash-widget-info mb-2">
+                            <h3 class="mb-2">112</h3>
+                            <span>Tổng đơn hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="card dash-widget bg-b-blue">
+                    <div class="card-body">
+                        <span class="dash-widget-icon"><i class="fas fa-newspaper"></i></span>
+                        <div class="dash-widget-info">
+                            <h3>44</h3>
+                            <span>Tổng sản phẩm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="card dash-widget bg-b-cyan">
+                    <div class="card-body">
+                        <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                        <div class="dash-widget-info">
+                            <h3>37</h3>
+                            <span>Tổng khách hàng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="card dash-widget bg-b-purple">
+                    <div class="card-body">
+                        <span class="dash-widget-icon"><i class="fab fa-app-store-ios"></i></span>
+                        <div class="dash-widget-info">
+                            <h3>218</h3>
+                            <span>Tổng bài viết</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
-                        <div style="background: #e8e8e8" class="card">
+                        <div class="card">
                             <div class="card-body">
-                                <h3 class="text-primary text-center mb-3">Thống kê doanh số và số lượng bán ra</h3>
+                                <h3 class="text-center mb-4 statiscal">Biểu đồ thống kê doanh số và số lượng bán ra
+                                </h3>
                                 <form class="row" autocomplete="off">
                                     @csrf
                                     <div class="col-md-3">
                                         <p>Từ ngày: <input type="text" class="date date_start form-control">
-                                            <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm mt-1"
-                                                value="Lọc kết quả">
+                                            <input type="button" id="btn-dashboard-filter"
+                                                class="btn btn-primary btn-sm mt-1" value="Lọc kết quả">
                                         </p>
                                     </div>
                                     <div class="col-md-3">
                                         <p>Đến ngày: <input type="text" class="date date_end form-control"></p>
                                     </div>
-                
+
                                     <div class="col-md-3">
                                         <p>
                                             Lọc theo:
                                             <select class="dashboard-filter form-control">
-                                                <option>--Chọn--</option>
+                                                <option>--Chọn thời gian lọc--</option>
                                                 <option value="homnay">Hôm nay</option>
                                                 <option value="tuannay">Tuần này</option>
                                                 <option value="thangnay">Tháng này</option>
@@ -95,11 +132,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h3 class="text-primary">Thống kê đăng nhập</h3>
-                                <div id="line-charts"></div>
+                                <h3 class="text-danger text-center font-weight-bold">Biểu đồ số lượng sản phẩm bán chạy nhất: <strong class="product-chart-name"></strong></h3>
+                                <div class="product_statistical_chart">
+                                    <button wire:click.prevent="close-chart-product()" class="close_chart_product">Đóng</button>
+                                    <div id="line-charts"></div>
+                                </div>
+                                <div class="product_statistical mt-4">
+                                    @livewire('product-statistical')
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -341,7 +385,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-nowrap custom-table mb-0">
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Invoice ID</th>
@@ -820,26 +864,50 @@
         </div>
 
     </div>
+    <style>
+        .bg-b-danger {
+            min-height: 100px;
+            background: linear-gradient(45deg, #f30c41, #eb66dd);
+        }
+
+        .bg-b-blue {
+            background: linear-gradient(45deg, #1a77e2, #bfd6f1);
+        }
+
+        .bg-b-cyan {
+            background: linear-gradient(45deg, #40ffed, #29b5af);
+        }
+
+        .bg-b-purple {
+            background: linear-gradient(45deg, #a52dd8, #e29bf1);
+        }
+
+        .card.dash-widget {
+            border-bottom: 3px solid brown;
+            color: white;
+        }
+
+    </style>
     <!-- /Page Content -->
+    @include('admin.statistics.modal-product-statistical');
 @endsection
 <link rel="stylesheet" href="{{ asset('backend/plugins/morris/morris.css') }}">
 <link rel="stylesheet"
-href="{{asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.css')}}" />
+    href="{{ asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.css') }}" />
 @push('script')
+
     <!-- Chart JS -->
     <script src="{{ URL::to('backend/plugins/morris/morris.min.js') }}"></script>
     <script src="{{ URL::to('backend/plugins/raphael/raphael.min.js') }}"></script>
+
+    <script src="{{ asset('backend/plugins/material-datetimepicker/moment-with-locales.min.js') }}">
+    </script>
+    <script src="{{ asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.js') }}">
+    </script>
+    <script src="{{ asset('backend/plugins/material-datetimepicker/datetimepicker.js') }}"></script>
     <script src="{{ URL::to('backend/js/chart.js') }}"></script>
-
-    <script src="{{asset('backend/plugins/material-datetimepicker/moment-with-locales.min.js')}}">
-    </script>
-    <script
-        src="{{asset('backend/plugins/material-datetimepicker/bootstrap-material-datetimepicker.js')}}">
-    </script>
-    <script src="{{asset('backend/plugins/material-datetimepicker/datetimepicker.js')}}"></script>
-
     <script>
         charts()
     </script>
-    
+
 @endpush

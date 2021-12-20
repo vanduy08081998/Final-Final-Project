@@ -5,12 +5,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Statistical;
 use Carbon\Carbon;
+use App\Models\Product;
+use App\Models\Review;
+use App\Models\OrderDetail;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('admin.dashboard');
+        $all_product = Product::latest()->paginate(10);
+        foreach($all_product as $key => $product){
+            $product->reviews = round(Review::where([['product_id', $product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'),2);
+            $product->review = round(Review::where([['product_id', $product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'));
+            $product->comments = count(Comment::where([['comment_id_product', $product->id],['comment_parent_id',0]])->get());
+            $product->count_buy = count(OrderDetail::where('product_id', $product->id)->get());
+        }
+
+        return view('admin.dashboard')->with(compact('all_product'));
     }
     public function days_order(Request $request){
 	    $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
@@ -24,7 +36,6 @@ class HomeController extends Controller
 				'quantity' => $val->quantity
 			);
 		}
-        
 		echo $data = json_encode($chart_data);  
 	}
 

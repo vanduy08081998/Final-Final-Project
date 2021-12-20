@@ -1,36 +1,8 @@
 
-    // CKEDITOR.replace('ckeditor');
-    // CKEDITOR.replace('ckeditor1');
-    // CKEDITOR.replace('ckeditor2',{
-    //     filebrowserImageUploadUrl : "{{ url('uploads-ckeditor?_token='.csrf_token()) }}",
-    //     filebrowserBrowseUrl : "{{ url('file-browser?_token='.csrf_token()) }}",
-    //     filebrowserUploadMethod: 'form'
-    // });
-    // CKEDITOR.replace('ckeditor3');
-    // CKEDITOR.replace('id4')
-
-
-//DASHBOARD
-// $(document).ready(function() {
-//     $('.js-example-basic-multiple').select2();
-// });
-
-    $( function() {
-    $( ".date_start" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"yy-mm-dd",
-        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
-        duration: "slow"
-    });
-    $( ".date_end" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"yy-mm-dd",
-        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
-        duration: "slow"
-    });
-  } );
+$('.close_chart_product').click(function(){
+    $('.product_statistical_chart').addClass('d-none');
+    $('.product_statistical').removeClass('d-none');
+})
 
   function charts(){
     $(document).ready(function(){
@@ -45,6 +17,42 @@
         labels: ['đơn hàng','doanh số','số lượng bán ra']    
           
     });
+    var chart_line = new Morris.Line({
+        element: 'line-charts',
+        xkey: 'period',
+        ykeys: ['order', 'sales'],
+        labels: ['đơn hàng', 'doanh số'],
+        lineColors: ['#f43b48','#453a94'],
+        lineWidth: '3px',
+        resize: true,
+        redraw: true
+    });
+
+    function chart30daysorder_line(){
+        $.ajax({
+            url: 'days-order',
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "JSON",
+            success:function(data){
+                chart_line.setData(data);
+                    }
+        })
+    }
+   
+    $('.show_chart').click(function(){
+        let id = $(this).data('id');
+        $('.btn-show-chart'+id).removeClass('btn-success');
+        $('.show_chart').removeClass('btn-danger');
+        $('.show_chart').addClass('btn-success');
+        $('.btn-show-chart'+id).addClass('btn-danger');
+        chart30daysorder_line()  
+        // $('.product_statistical').addClass('d-none');
+        // $('.product_statistical_chart').removeClass('d-none');
+        // $('.product-statistical').modal('show');
+    })
 
 
        
@@ -110,6 +118,8 @@
 
 
 })
+
+
 
 }
 
