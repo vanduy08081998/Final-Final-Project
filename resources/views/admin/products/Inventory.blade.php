@@ -109,6 +109,13 @@
                         <td>{{ $buy }}</td>
                         <td>{{ $product->quantity - $buy }}</td>
                         <td>
+                          @if ($product->quantity - $buy <= 0)
+                          <button class="btn btn-danger rounded-0">Hết hàng</button>
+                          @else
+                          <button class="btn btn-success rounded-0">Hết hàng</button>
+                          @endif
+                        </td>
+                        <td>
                           <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
                             data-target="#exampleModal">
                             <i class="fa fa-shopping-cart"></i> Nhập kho
