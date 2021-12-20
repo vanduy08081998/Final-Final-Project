@@ -1,4 +1,4 @@
-<div>
+<div id="div_id">
     <div class="container-fluid" style="position:relative;">
         <ul class="nav nav-tabs nav-material">
             <li class="nav-item contact-not" onclick="checkbox('')">
@@ -43,7 +43,7 @@
             @if ($models->count() > 0)
                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                     @foreach ($models as $item)
-                        @if ($item->type == 'comment')
+                        @if ($item->type == 'comment' && $item->product)
                             <div class="content-not" data-id="{{ $item->id }}">
                                 <div class="icon-ct">
                                     <div class="content-icon">
@@ -53,7 +53,8 @@
                                 <div class="content-body">
                                     <a wire:click="deleted({{ $item->id }})"
                                         href="{{ route('shop.product-details', $item->product->product_slug) }}">
-                                        {!! $item->content !!}
+                                        <b>{{ $item->content }}</b> đã phản hồi lại bình luận của bạn trong phần
+                                        <b>Hỏi & Đáp</b>
                                         <div class="moving">
                                             Tại
                                             sản phẩm {{ $item->product->product_name }}
@@ -71,31 +72,52 @@
 
                                 </div>
                             </div>
-                        @elseif($item->type == 'order')
-                            <a href="{{ route('shop.product-details', $item->product->product_slug) }}"
-                                class="content-not">
+                        @elseif($item->type == 'order' && $item->order)
+                            <div class="content-not" data-id="{{ $item->id }}">
                                 <div class="icon-ct">
-                                    <div class="content-icon">
-                                        <i class="fas fa-money-bill-wave"></i>
+                                    <div class="content-icon text-danger">
+                                        <i class="fas fa-file-invoice-dollar"></i>
                                     </div>
                                 </div>
                                 <div class="content-body">
-                                    {!! $item->content !!}
-                                    {{-- <div class="moving">
-                        Tại sản phẩm {{ $item->product->product_name }}
-                    </div> --}}
+                                    <a class="text-dark" wire:click="deleted({{ $item->id }})"
+                                        href="{{ route('account.order-list') }}">
+
+                                        @if ($item->order->delivery_viewed == 1)
+                                            <strong>Đơn hàng</strong> của bạn <em class="text-warning">đang
+                                                được xử lý <i class="fas fa-warehouse"></i></em>
+                                        @elseif($item->order->delivery_viewed == 2)
+                                            <strong>Đơn hàng</strong> của bạn <em class="text-info">đang
+                                                được
+                                                vận chuyển <i class="fas fa-truck"></i></em>
+                                        @elseif($item->order->delivery_viewed == 3)
+                                            <strong>Đơn hàng</strong> của bạn <em class="text-success">đã
+                                                hoàn thành <i class="fas fa-check"></i></em>
+                                        @else
+                                            <strong>Đơn hàng</strong> của bạn <em class="text-danger">đã
+                                                hủy <i class="fas fa-exclamation-triangle"></i></em>
+                                        @endif
+
+                                        <div class="moving">
+                                            <b>Mã đơn:</b> {{ $item->order->date }} &nbsp; <b>Ngày đặt:</b>
+                                            {{ date('H:i:s d-m-Y', strtotime($item->order->created_at)) }}
+                                            &nbsp; <b>Tổng tiền:</b>
+                                            {{ number_format($item->order->grand_total, 0, '.', ',') . ' đ' }}
+                                        </div>
+
+                                    </a>
                                     <div class="time">
                                         <em> {{ $item->created_at->diffForHumans() }}</em>
                                     </div>
                                 </div>
                                 <div class="content-handle">
-                                    <span>
-                                        <i class="fas fa-times"
-                                            wire:click.prevent="deleted('{{ $item->id }}')"></i>
+                                    <span title="Xóa" wire:click.prevent="deleted({{ $item->id }})">
+                                        <i class="fas fa-times"></i>
                                     </span>
+
                                 </div>
-                            </a>
-                        @else
+                            </div>
+                        @elseif($item->type == 'review' && $item->product)
                             <div class="content-not" data-id="{{ $item->id }}">
                                 <div class="icon-ct">
                                     <div class="content-icon">
@@ -105,11 +127,10 @@
                                 <div class="content-body">
                                     <a wire:click="deleted({{ $item->id }})"
                                         href="{{ route('shop.product-details', $item->product->product_slug) }}">
-                                        {!! $item->content !!}
+                                        {{ $item->content }} đã phản hồi đánh giá của bạn!
                                         <div class="moving">
                                             Tại
-                                            sản phẩm {{ $item->product->product_name }}
-
+                                            sản phẩm <b>{{ $item->product->product_name }}</b>
                                         </div>
                                     </a>
                                     <div class="time">
@@ -123,6 +144,17 @@
 
                                 </div>
                             </div>
+                        @else
+                            <div class="nullable">
+                                <div class="icon-null">
+                                    <i class="far fa-question-circle"></i>
+                                </div>
+                                <div class="text-null">
+                                    Bạn chưa có thông báo nào!
+                                </div>
+                                <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
+                            </div>
+
                         @endif
                     @endforeach
                 </div>

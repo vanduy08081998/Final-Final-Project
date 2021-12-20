@@ -7,8 +7,10 @@
             <select class="form-select" id="order-sort" wire:model="select">
                 <option value="">Mới nhất</option>
                 <option value="latest">Cũ nhất</option>
-                <option value="delivering">Đang giao</option>
-                <option value="cancelled">Đã hủy</option>
+                <option value="1">Đang xử lý</option>
+                <option value="2">Đang vận chuyển</option>
+                <option value="3">Đã hoàn thành</option>
+                <option value="4">Đã hủy</option>
             </select>
         </div>
         <form class="user_logout" action="{{ route('logout') }}" method="post">
@@ -24,20 +26,35 @@
                 <tr>
                     <th>Mã đơn #</th>
                     <th>Ngày đặt</th>
-                    <th>Tình trạng</th>
+                    <th>Trạng thái</th>
                     <th>Tổng tiền</th>
+                    <th>Chi tiết</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($orders as $item)
                     <tr>
-                        <td class="py-3"><button class="nav-link-style fw-medium fs-sm"
-                                wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')">{{ $item->date }}</button>
+                        <td class="py-3"><button
+                                class="nav-link-style fw-medium fs-sm">{{ $item->date }}</button>
                         </td>
                         <td class="py-3">{{ date('H:i:s d-m-Y', strtotime($item->created_at)) }}</td>
-                        <td class="py-3"><span class="badge bg-info m-0">{{ $item->payment_status }}</span>
+                        <td class="py-3">
+                            @if ($item->delivery_viewed == 1)
+                                <span class="badge bg-info m-0">Đang xử lý</span>
+                            @elseif($item->delivery_viewed == 2)
+                                <span class="badge bg-warning m-0">Đang vận chuyển</span>
+                            @elseif($item->delivery_viewed == 3)
+                                <span class="badge bg-success m-0">Đã hoàn thành</span>
+                            @else
+                                <span class="badge bg-danger m-0">Đã hủy</span>
+                            @endif
+
                         </td>
                         <td class="py-3">{{ number_format($item->grand_total, 0, '.', ',') . ' đ' }}</td>
+                        <td><button
+                                wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')"
+                                class="btn-sm btn-primary" style="border-radius:50%;"><i
+                                    class="far fa-eye"></i></button></td>
                     </tr>
                 @endforeach
             </tbody>

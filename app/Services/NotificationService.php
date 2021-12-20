@@ -10,7 +10,7 @@ class NotificationService
                 'id_user' => $user_id, // Người nhận bình luận
                 'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận
                 'type' => $type, // Thể loại
-                'content' => '<strong>'.$content_name.'</strong> đã phản hồi bình luận của bạn trong Hỏi & Đáp' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
+                'content' => $content_name // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
             );
         }
         elseif($type == 'review'){
@@ -18,22 +18,22 @@ class NotificationService
                 'id_user' => $user_id, // Người nhận bình luận
                 'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận
                 'type' => $type, // Thể loại
-                'content' => '<strong>'.$content_name.'</strong> đã phản hồi đánh giá của bạn!' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
+                'content' => $content_name // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
             );
         }
-        elseif($type == 'discount'){
+        elseif($type == 'order'){
             $data = array(
-                'id_user' => $user_id, // Người nhận bình luận
-                'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận
-                'type' => $type, // Thể loại
-                'content' => 'Đơn hàng của bạn đã được cập nhật!' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
+                'id_user' => $user_id, 
+                'id_type' => $id_type, 
+                'type' => $type, 
+                'content' => $content_name 
             );
         }else{
             $data = array(
-                'id_user' => $user_id, // Người nhận bình luận
-                'id_type' => $id_type, // Lấy id của sản phẩm nơi bình luận
-                'type' => $type, // Thể loại
-                'content' => 'Đã có mã giảm giá mới!' // phần bình luận chỉ có tên của người trả lời . Mấy cái khác thì tùy.
+                'id_user' => $user_id, 
+                'id_type' => $id_type, 
+                'type' => $type, 
+                'content' => $content_name 
             );
         }
         Notification::create($data);

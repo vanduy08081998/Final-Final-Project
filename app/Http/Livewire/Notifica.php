@@ -9,7 +9,10 @@ use Livewire\WithPagination;
 
 class Notifica extends Component
 {
+    use WithPagination;
+
     protected $paginationTheme = 'bootstrap';
+    
     public $comment, $review, $order;
     protected $listeners = [
         'render' => 'render',

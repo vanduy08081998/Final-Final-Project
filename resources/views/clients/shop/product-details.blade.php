@@ -110,13 +110,7 @@
 @push('script')
     <script>
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
-        $(document).on('click', '.move-top', function() {
-            setTimeout(function() {
-                $('html, body').animate({
-                    scrollTop: $('#div_id').position().top
-                }, 'slow');
-            }, 1000);
-        })
+
         //Bình luận ở mục đầu tiên
         $(document).on('click', '.save-comment', function() {
             let URL = $(this).data('url')
