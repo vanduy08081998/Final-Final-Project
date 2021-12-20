@@ -58,9 +58,9 @@
     content: '';
     position: absolute;
     height: 2px;
-    width: 13px;
+    width: 15px;
     background: #fe696a;
-    left: 15px;
+    left: 12px;
     top: 18px;
 }
 
@@ -496,6 +496,10 @@
 }
 
 .comment_reply .out-child-load:nth-child(n+8) {
+    display: none;
+}
+
+.out-parent-load-review:nth-child(n+4) {
     display: none;
 }
 

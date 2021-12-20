@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Auth;
-
-
 
 class AccountOrder extends Component
 {
+    use WithPagination;
+
     public $select, $order_details = [],$orderId = [];
     protected $listeners = [
         'orderDetail'

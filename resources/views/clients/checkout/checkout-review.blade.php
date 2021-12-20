@@ -5,157 +5,175 @@
 
 
 @section('content')
-      <!-- Page Title-->
-      <div class="page-title-overlap bg-dark pt-4">
+    <!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
-          <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
-                <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
-                </li>
-                <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
-              </ol>
-            </nav>
-          </div>
-          <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-            <h1 class="h3 text-light mb-0">Checkout</h1>
-          </div>
+            <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
+                                    class="ci-home"></i>Home</a></li>
+                        <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+                        </li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
+                <h1 class="h3 text-light mb-0">Checkout</h1>
+            </div>
         </div>
-      </div>
-      <div class="container pb-5 mb-2 mb-md-4">
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
         <div class="row">
-          <section class="col-lg-8">
-            <!-- Steps-->
-            <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
-                <div class="step-progress"><span class="step-count">1</span></div>
-                <div class="step-label"><i class="ci-cart"></i>Cart</div></a><a class="step-item active" href="checkout-details.html">
-                <div class="step-progress"><span class="step-count">2</span></div>
-                <div class="step-label"><i class="ci-user-circle"></i>Details</div></a><a class="step-item active" href="checkout-shipping.html">
-                <div class="step-progress"><span class="step-count">3</span></div>
-                <div class="step-label"><i class="ci-package"></i>Shipping</div></a><a class="step-item active" href="checkout-payment.html">
-                <div class="step-progress"><span class="step-count">4</span></div>
-                <div class="step-label"><i class="ci-card"></i>Payment</div></a><a class="step-item active current" href="checkout-review.html">
-                <div class="step-progress"><span class="step-count">5</span></div>
-                <div class="step-label"><i class="ci-check-circle"></i>Review</div></a></div>
-            <!-- Order details-->
-            <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Review your order</h2>
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-              <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="img/shop/cart/01.jpg" width="160" alt="Product"></a>
-                <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">Women Colorblock Sneakers</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>White &amp; Blue</div>
-                  <div class="fs-lg text-accent pt-2">$154.<small>00</small></div>
-                </div>
-              </div>
-              <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-end" style="max-width: 9rem;">
-                <p class="mb-0"><span class="text-muted fs-sm">Quantity:</span><span>&nbsp;1</span></p>
-                <button class="btn btn-link px-0" type="button"><i class="ci-edit me-2"></i><span class="fs-sm">Edit</span></button>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-              <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="img/shop/cart/02.jpg" width="160" alt="Product"></a>
-                <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Brand:</span>Tommy Hilfiger</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Khaki</div>
-                  <div class="fs-lg text-accent pt-2">$79.<small>50</small></div>
-                </div>
-              </div>
-              <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-end" style="max-width: 9rem;">
-                <p class="mb-0"><span class="text-muted fs-sm">Quantity:</span><span>&nbsp;1</span></p>
-                <button class="btn btn-link px-0" type="button"><i class="ci-edit me-2"></i><span class="fs-sm">Edit</span></button>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-              <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="img/shop/cart/03.jpg" width="160" alt="Product"></a>
-                <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">3-Color Sun Stash Hat</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Brand:</span>The North Face</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Pink / Beige / Dark blue</div>
-                  <div class="fs-lg text-accent pt-2">$22.<small>50</small></div>
-                </div>
-              </div>
-              <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-end" style="max-width: 9rem;">
-                <p class="mb-0"><span class="text-muted fs-sm">Quantity:</span><span>&nbsp;1</span></p>
-                <button class="btn btn-link px-0" type="button"><i class="ci-edit me-2"></i><span class="fs-sm">Edit</span></button>
-              </div>
-            </div>
-            <!-- Item-->
-            <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-              <div class="d-sm-flex text-center text-sm-start"><a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html"><img src="img/shop/cart/04.jpg" width="160" alt="Product"></a>
-                <div class="pt-2">
-                  <h3 class="product-title fs-base mb-2"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a></h3>
-                  <div class="fs-sm"><span class="text-muted me-2">Size:</span>42</div>
-                  <div class="fs-sm"><span class="text-muted me-2">Color:</span>Light blue</div>
-                  <div class="fs-lg text-accent pt-2">$9.<small>00</small></div>
-                </div>
-              </div>
-              <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-end" style="max-width: 9rem;">
-                <p class="mb-0"><span class="text-muted fs-sm">Quantity:</span><span>&nbsp;1</span></p>
-                <button class="btn btn-link px-0" type="button"><i class="ci-edit me-2"></i><span class="fs-sm">Edit</span></button>
-              </div>
-            </div>
-            <!-- Client details-->
-            <div class="bg-secondary rounded-3 px-4 pt-4 pb-2">
-              <div class="row">
-                <div class="col-sm-6">
-                  <h4 class="h6">Shipping to:</h4>
-                  <ul class="list-unstyled fs-sm">
-                    <li><span class="text-muted">Client:&nbsp;</span>Susan Gardner</li>
-                    <li><span class="text-muted">Address:&nbsp;</span>44 Shirley Ave. West Chicago, IL 60185, USA</li>
-                    <li><span class="text-muted">Phone:&nbsp;</span>+1 (808) 764 554 330</li>
-                  </ul>
-                </div>
-                <div class="col-sm-6">
-                  <h4 class="h6">Payment method:</h4>
-                  <ul class="list-unstyled fs-sm">
-                    <li><span class="text-muted">Credit Card:&nbsp;</span>**** **** **** 5300</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- Navigation (desktop)-->
-            <div class="d-none d-lg-flex pt-4">
-              <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="checkout-complete.html"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
-            </div>
-          </section>
-          <!-- Sidebar-->
-          <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
-            <div class="bg-white rounded-3 shadow-lg p-4 ms-lg-auto">
-              <div class="py-2 px-xl-2">
-                <h2 class="h6 text-center mb-4">Order summary</h2>
-                <ul class="list-unstyled fs-sm pb-2 border-bottom">
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Subtotal:</span><span class="text-end">$265.<small>00</small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Shipping:</span><span class="text-end">—</span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Taxes:</span><span class="text-end">$9.<small>50</small></span></li>
-                  <li class="d-flex justify-content-between align-items-center"><span class="me-2">Discount:</span><span class="text-end">—</span></li>
-                </ul>
-                <h3 class="fw-normal text-center my-4">$274.<small>50</small></h3>
-                <form class="needs-validation" method="post" novalidate>
-                  <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Promo code" required>
-                    <div class="invalid-feedback">Please provide promo code.</div>
-                  </div>
-                  <button class="btn btn-outline-primary d-block w-100" type="submit">Apply promo code</button>
-                </form>
-              </div>
-            </div>
-          </aside>
+            <section class="col-lg-8">
+                <!-- Steps-->
+                <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
+                        <div class="step-progress"><span class="step-count">1</span></div>
+                        <div class="step-label"><i class="ci-cart"></i>Cart</div>
+                    </a><a class="step-item active" href="checkout-details.html">
+                        <div class="step-progress"><span class="step-count">2</span></div>
+                        <div class="step-label"><i class="ci-user-circle"></i>Details</div>
+                    </a><a class="step-item active" href="checkout-shipping.html">
+                        <div class="step-progress"><span class="step-count">3</span></div>
+                        <div class="step-label"><i class="ci-package"></i>Shipping</div>
+                    </a><a class="step-item active" href="checkout-payment.html">
+                        <div class="step-progress"><span class="step-count">4</span></div>
+                        <div class="step-label"><i class="ci-card"></i>Payment</div>
+                    </a><a class="step-item active current" href="checkout-review.html">
+                        <div class="step-progress"><span class="step-count">5</span></div>
+                        <div class="step-label"><i class="ci-check-circle"></i>Review</div>
+                    </a></div>
+                <!-- Order details-->
         </div>
-        <!-- Navigation (mobile)-->
-        <div class="row d-lg-none">
-          <div class="col-lg-8">
-            <div class="d-flex pt-4 mt-3">
-              <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100" href="checkout-payment.html"><i class="ci-arrow-left mt-sm-0 me-1"></i><span class="d-none d-sm-inline">Back to Payment</span><span class="d-inline d-sm-none">Back</span></a></div>
-              <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100" href="checkout-complete.html"><span class="d-none d-sm-inline">Complete order</span><span class="d-inline d-sm-none">Complete</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a></div>
+    </div>
+    <div class="container pb-5 mb-2 mb-md-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="success alert">
+                        <div class="alert-body">
+                            Thanh toán thành công
+                            <p><strong>Cảm ơn bạn đã đặt hàng của BigDeal</strong></p>
+                            <i><strong><a href="{{ URL::to('/') }}"> <i class="fa fa-home"></i> Về trang chủ</a></strong></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    <style>
+        .box {
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .alert {
+            margin-top: 25px;
+            background-color: #fff;
+            font-size: 25px;
+            font-family: sans-serif;
+            text-align: center;
+            width: 640pxpx;
+            height: 100px;
+            padding-top: 150px;
+            position: relative;
+            border: 1px solid #efefda;
+            border-radius: 2%;
+            box-shadow: 0px 0px 3px 1px #ccc;
+        }
+
+        .alert::before {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border-radius: 100%;
+            inset: 20px 0px 0px 100px;
+            font-size: 60px;
+            line-height: 100px;
+            border: 5px solid gray;
+            animation-name: reveal;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in-out;
+            margin-left: 18%;
+        }
+
+        .alert>.alert-body {
+            opacity: 0;
+            animation-name: reveal-message;
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+            animation-delay: 1.5s;
+            animation-fill-mode: forwards;
+            margin-top: 15px;
+        }
+
+        @keyframes reveal-message {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success {
+            color: green;
+        }
+
+        .success::before {
+            content: '✓';
+            background-color: #eff;
+            box-shadow: 0px 0px 12px 7px rgba(200, 255, 150, 0.8) inset;
+            border: 5px solid green;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .error::before {
+            content: '✗';
+            background-color: #fef;
+            box-shadow: 0px 0px 12px 7px rgba(255, 200, 150, 0.8) inset;
+            border: 5px solid red;
+        }
+
+        @keyframes reveal {
+            0% {
+                border: 5px solid transparent;
+                color: transparent;
+                box-shadow: 0px 0px 12px 7px rgba(255, 250, 250, 0.8) inset;
+                transform: rotate(1000deg);
+            }
+
+            25% {
+                border-top: 5px solid gray;
+                color: transparent;
+                box-shadow: 0px 0px 17px 10px rgba(255, 250, 250, 0.8) inset;
+            }
+
+            50% {
+                border-right: 5px solid gray;
+                border-left: 5px solid gray;
+                color: transparent;
+                box-shadow: 0px 0px 17px 10px rgba(200, 200, 200, 0.8) inset;
+            }
+
+            75% {
+                border-bottom: 5px solid gray;
+                color: gray;
+                box-shadow: 0px 0px 12px 7px rgba(200, 200, 200, 0.8) inset;
+            }
+
+            100% {
+                border: 5px solid gray;
+                box-shadow: 0px 0px 12px 7px rgba(200, 200, 200, 0.8) inset;
+            }
+        }
+
+    </style>
 @endsection

@@ -49,17 +49,20 @@
             </div>
         @else
             <div class="image">
-              <img src="https://thumbs.gfycat.com/CompleteShallowFlyingsquirrel-size_restricted.gif" alt="">
+                <img src="https://thumbs.gfycat.com/CompleteShallowFlyingsquirrel-size_restricted.gif" alt="">
             </div>
             <div class="text-center">
-              <i style="font-size: 16px; color: red"><strong>Chưa có sản phẩm trong giỏ hàng</strong></i>
-              <p>
-                <i> <a style="text-decoration: none; color: blue" href="{{ URL::to('/') }}"><strong> <i class="fa fa-shopping-cart"></i> Mua sắm ngay</strong></a> </i>
-              </p>
+                <i style="font-size: 16px; color: red"><strong>Chưa có sản phẩm trong giỏ hàng</strong></i>
+                <p>
+                    <i> <a style="text-decoration: none; color: blue" href="{{ URL::to('/') }}"><strong> <i
+                                    class="fa fa-shopping-cart"></i> Mua sắm ngay</strong></a> </i>
+                </p>
             </div>
         @endif
     </div>
 </div>
+
+
 <script>
     for (let i = 0; i < document.querySelectorAll('.btn-cart-remove').length; i++) {
 

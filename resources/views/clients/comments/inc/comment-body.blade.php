@@ -31,7 +31,7 @@
                     </div>
                     <div class="content-load-more-child content-none-{{ $reply->id }} d-none">
                         <span class="load-more more-{{ $reply->id }}" onclick="upMore({{ $reply->id }})"> Ẩn
-                            bớt<i class="fas fa-chevron-up"></i></span>
+                            bớt &nbsp;<i class="fas fa-chevron-up"></i></span>
                     </div>
                 @endif
             </div>
@@ -40,9 +40,13 @@
 
         @if ($comment->reply->count() > 2)
             <div class="mt-2 content-load-more-parent content-{{ $comment->id }}">
-                <span class="load-more" onclick="loadMore({{ $reply->id }})"><i class="far fa-comments"></i>...
+                <span class="load-more" onclick="loadMore({{ $comment->id }})"><i class="far fa-comments"></i>...
                     Xem thêm
                     ... <i class="far fa-comments"></i></span>
+            </div>
+            <div class="mt-2 content-load-more-parent content-none-{{ $comment->id }} d-none">
+                <span class="load-more" onclick="upMore({{ $comment->id }})"> Ẩn
+                    bớt &nbsp;<i class="fas fa-chevron-up"></i></span>
             </div>
         @endif
     </div>

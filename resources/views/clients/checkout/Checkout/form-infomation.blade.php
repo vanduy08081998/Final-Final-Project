@@ -5,12 +5,6 @@
         <div class="row">
             <!-- Content  -->
             <section class="col-lg-12">
-                <!-- Toolbar-->
-                <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-                    <h6 class="fs-base text-light mb-0">Danh sách đăng ký địa chỉ giao nhận hàng:</h6><a
-                        class="btn btn-primary btn-sm" href="account-signin.html"><i class="ci-sign-out me-2"></i>Đăng
-                        xuất</a>
-                </div>
                 <div class="align-middle add-ship mb-3">
                     <a class="add-shipping button-action" data-action="add" data-bs-toggle="modal" style="cursor: pointer"
                         data-bs-target="#addressModal"><i class="fa fa-plus fa-lg aria-hidden"></i> Thêm

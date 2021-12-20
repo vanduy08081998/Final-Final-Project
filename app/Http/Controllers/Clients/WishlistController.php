@@ -27,11 +27,8 @@ class WishlistController extends Controller
             if($wishlist != NULL) {
                 Wishlist::orderByDESC('id')->where('id_prod', $product['id'])->where('id_user', $user)->delete();
                 return response()->json([
-                    'icon' => 'warning',
-                    // 'title' => 'Chúc mừng',
+                    'result' => 'warning',
                     'text' => 'Đã xóa ' . $product['product_name'] . ' khỏi Yêu thích của bạn!',
-                    'confirm' => false,
-                    'cancel' => false,
                 ]);
             } else {
                 Wishlist::create([
@@ -39,19 +36,15 @@ class WishlistController extends Controller
                     'id_prod' => $product['id']
                 ]);
                 return response()->json([
-                    'icon' => 'success',
+                    'result' => 'success',
                     'text' => 'Đã thêm ' . $product['product_name'] . ' vào Yêu thích của bạn!',
-                    'confirm' => false,
-                    'cancel' => false,
                 ]);
             }
         } else {
             return response()->json([
-                'icon' => 'warning',
+                'result' => 'login',
                 'title' => 'Thất bại',
                 'text' => 'Bạn cần đăng nhập trước khi thêm!',
-                'confirm' => false,
-                'cancel' => false,
             ]);
         }
     }
@@ -62,10 +55,8 @@ class WishlistController extends Controller
         $user = Auth::user()->id;
         Wishlist::orderByDESC('id')->where('id_prod', $product['id'])->where('id_user', $user)->delete();
         return response()->json([
-            'icon' => 'warning',
+            'result' => 'warning',
             'text' => 'Đã xóa ' . $product['product_name'] . ' khỏi Yêu thích của bạn!',
-            'confirm' => false,
-            'cancel' => false,
         ]);
     }
 

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,39 +21,25 @@
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.css') }}" />
-    <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}" />
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/vendor/drift-zoom/dist/drift-basic.min.css') }}" />
     <link rel="stylesheet" media="screen"
         href="{{ asset('frontend/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/vendor/tiny-slider/dist/tiny-slider.css') }}">
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/theme.min.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
-        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::to('frontend/magiczoom/magiczoom.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ URL::to('frontend/css/image-uploader.min.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="{{ asset('frontend/js/search.js') }}"></script>
-    <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
-    <script src="{{ asset('frontend/js/account.js') }}"></script>
-    <script src="{{ asset('frontend/js/review.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
-    <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
+
     @livewireStyles
     @livewireScripts
     @routes
@@ -120,30 +103,97 @@
                 <span class="handheld-toolbar-icon"><i class="ci-menu"></i></span>
                 <span class="handheld-toolbar-label">Menu</span>
             </a>
-            <a class="d-table-cell handheld-toolbar-item" href="shop-cart.html">
-                <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
-                    <span class="badge bg-primary rounded-pill ms-1">4</span>
-                </span>
-                <span class="handheld-toolbar-label">$265.00</span>
-            </a>
-            <a class="d-table-cell handheld-toolbar-item" href="#">
-                <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
-                <span class="handheld-toolbar-label">Tài khoản</span>
-            </a>
+            @php
+                use App\Models\Cart;
+                if (auth()->check()) {
+                    $cart = Cart::where('user_id', auth()->user()->id)->get();
+                    $totalprice = 0;
+                    foreach ($cart as $key => $value) {
+                        foreach (json_decode($value->specifications) as $index => $item) {
+                            $totalprice += $value->quantity * $item->variant_price;
+                        }
+                    }
+                } else {
+                    $cart = null;
+                }
+            @endphp
+            @auth
+                @if (count($cart) > 0)
+                    <a class="d-table-cell handheld-toolbar-item" href="{{ route('cart.cart-list') }}">
+                        <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                            <span class="badge bg-primary rounded-pill ms-1">{{ count($cart) }}</span>
+                        </span>
+
+                        <span class="handheld-toolbar-label">{{ number_format($totalprice) }}</span>
+                    </a>
+                @else
+                    <a class="d-table-cell handheld-toolbar-item" href="{{ url('/') }}">
+                        <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                            <span class="badge bg-primary rounded-pill ms-1">0</span>
+                        </span>
+
+                        <span class="handheld-toolbar-label">Chưa có gì trong giỏ hàng</span>
+                    </a>
+                @endif
+
+            @endauth
+            @guest
+                <a class="d-table-cell handheld-toolbar-item" href="{{ url('login') }}">
+                    <span class="handheld-toolbar-icon"><i class="ci-cart"></i>
+                    </span>
+                    <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
+                </a>
+            @endguest
+            @if (Auth::user())
+                <a class="d-table-cell handheld-toolbar-item" href="{{ route('account.account-info') }}">
+                    <span class="handheld-toolbar-icon">
+                        @if (Auth::user()->avatar)
+                            @if (Auth::user()->provider_id == null)
+                                <img class="customer_picture"
+                                    src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                                    alt="avatar" style="border-radius:50%;">
+                            @else
+                                <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}" width="90"
+                                    alt="avatar" style="border-radius:50%;">
+                            @endif
+                        @else
+                            <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                                width="25" alt="avatar">
+                        @endif
+                    </span>
+                    <span class="handheld-toolbar-label">Tài khoản</span>
+                </a>
+            @else
+                <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
+                    <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
+                    <span class="handheld-toolbar-label">Tài khoản</span>
+                </a>
+            @endif
         </div>
     </div>
     {{-- Chatbox button --}}
     @include('clients.Inc.chatbox')
     <!-- GetButton.io widget -->
+    <!-- Compare -->
+    @include('clients.Inc.compare')
 
+    <!-- Quickview -->
+    @include('clients.Inc.quickview')
     <!-- /GetButton.io widget -->
     <!-- Back To Top Button-->
     <a class="btn-scroll-top" href="#top" data-scroll>
         <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
         <i class="btn-scroll-top-icon ci-arrow-up"></i>
     </a>
+
     <!-- Vendor scrits: js libraries and plugins-->
-    <script src="{{ URL::to('backend/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
+
+    <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
@@ -152,14 +202,12 @@
     <script src="{{ asset('frontend/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js">
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <!-- Main theme script-->
     <script src="{{ asset('frontend/js/theme.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
@@ -168,13 +216,17 @@
     <script src="{{ asset('frontend/js/range.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="{{ asset('frontend/js/checkout.js') }}"></script>
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/image-uploader.min.js') }}"></script>
-    <!-- Include the PayPal JavaScript SDK -->
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
-    </script>
     <script src="{{ asset('frontend/js/wishlist.js') }}"></script>
+    <script src="{{ asset('frontend/js/search.js') }}"></script>
+    <script src="{{ asset('frontend/js/account.js') }}"></script>
+    <script src="{{ asset('frontend/js/review.js') }}"></script>
+    <script src="{{ asset('frontend/js/chatbox.js') }}"></script>
+    <script src="{{ asset('frontend/js/compare.js') }}"></script>
+    <script src="{{ asset('frontend/js/quickview.js') }}"></script>
+    <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
+
     <script>
         $('.input-images-1').imageUploader();
     </script>

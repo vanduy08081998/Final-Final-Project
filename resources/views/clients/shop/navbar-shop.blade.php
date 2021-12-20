@@ -76,14 +76,9 @@
         <!-- Price range-->
         <div class="widget mb-4 pb-4">
             <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
-            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data">
+            <form id="search-by-price" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('POST')
-                <input type="range" name="range" max="{{ $max }}" min="{{ $min }}" id="myRange"
-                    value="{{ $min }}" step="1000" style="width: 100%;"><br>
-                <span style="float: left;"><span>{{ number_format($min) }} ₫</span></span>
-                <span style="float: right;"><span>{{ number_format($max) }} ₫</span></span><br>
-                <button class="btn btn-primary" style="float: right; margin-top: 20px" type="submit">Tìm</button>
+                <input type="text" class="js-range-slider" name="my_range" value="" />
             </form>
         </div>
 
