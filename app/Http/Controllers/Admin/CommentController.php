@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -81,6 +82,11 @@ class CommentController extends Controller
        $product = Product::find($id_product);
        $comments = Comment::where([['clearance_at', '!=', null],['comment_id_product', $id_product],['comment_parent_id', 0]])->get();
        return view('admin.comment-review.comments.not-answered-comment', compact('product', 'comments'));
+    }
+
+    public function unsatisfied(){
+        $userAdmin = User::where('position', 'admin')->get();
+        return view('admin.comment-review.comments.unsatisfied', compact('userAdmin'));
     }
 
     public function handle(Request $request)

@@ -1,23 +1,23 @@
 <div>
     <div class="container-fluid" style="position:relative;">
         <ul class="nav nav-tabs nav-material">
-            <li class="nav-item contact-not">
-                <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}" aria-selected="true">Tất cả</a>
+            <li class="nav-item contact-not" onclick="checkbox('')">
+                <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}">Tất cả</a>
                 <div class="material-border"></div>
             </li>
-            <li class="nav-item contact-not" data-type="order">
-                <a class="nav-link {{ $check == 'order' ? 'active checkedNot' : '' }}" aria-selected="false">Đơn
+            <li class="nav-item contact-not" data-type="order" onclick="checkbox('order')">
+                <a class="nav-link {{ $check == 'order' ? 'active checkedNot' : '' }}">Đơn
                     hàng</a>
                 <div class="material-border"></div>
             </li>
-            <li class="nav-item contact-not" data-type="comment">
-                <a class="nav-link {{ $check == 'comment' ? 'active checkedNot' : '' }}" aria-selected="false">Bình
+            <li class="nav-item contact-not" data-type="comment" onclick="checkbox('comment')">
+                <a class="nav-link {{ $check == 'comment' ? 'active checkedNot' : '' }}">Bình
                     luận</a>
                 <div class="material-border"></div>
             </li>
 
-            <li class="nav-item contact-not" data-type="review">
-                <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}" aria-selected="false">Đánh
+            <li class="nav-item contact-not" data-type="review" onclick="checkbox('review')">
+                <a class="nav-link {{ $check == 'review' ? 'active checkedNot' : '' }}">Đánh
                     giá</a>
                 <div class="material-border"></div>
             </li>
@@ -26,18 +26,17 @@
                     aria-selected="false">Mã giảm giá</a>
                 <div class="material-border"></div>
             </li> --}}
-            <span class="delete-notifica" data-type="{{ $check ?? '' }}">
+            <span class="delete-notifica" wire:click.prevent="deleteAll('{{ $check }}')">
                 <i class="far fa-trash-alt"></i>
             </span>
         </ul>
         <form class="d-none" wire:submit.prevent="render()">
-            <input type="checkbox" wire:model="comment" value="comment"
+            <input type="checkbox" wire:model.lazy="comment" value="comment"
                 class="comment-check {{ $check == 'comment' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="order" value="order"
+            <input type="checkbox" wire:model.lazy="order" value="order"
                 class="order-check {{ $check == 'order' ? 'checked-input' : '' }}">
-            <input type="checkbox" wire:model="review" value="review"
+            <input type="checkbox" wire:model.lazy="review" value="review"
                 class="review-check {{ $check == 'review' ? 'checked-input' : '' }}">
-
         </form>
 
         <div class="tab-content nav-material" id="top-tabContent">

@@ -91,30 +91,31 @@ Route::prefix('/')->group(function () {
       });
 
   Route::prefix('/account')->group(function () {
-    Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
-    Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
-    Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
-    Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
-    Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
-    Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-    Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
-    Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
-    Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
+        Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
+        Route::get('/order-list', [AccountController::class, 'orderList'])->name('account.order-list');
+        Route::get('/account-info', [AccountController::class, 'accountInfo'])->name('account.account-info');
+        Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
+        Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
+        Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
+        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
+        Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
+        Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
   });
   Route::resource('/shippings', ShippingController::class);
   // wishlist
   Route::prefix('/wishlist')->group(function () {
-    Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
-    Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
-    Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
-    Route::get('deleteWishlist', [WishlistController::class, 'show_icon_wishlist'])->name('wishlist.show_icon_wishlist');
+        Route::get('/list', [WishlistController::class, 'wishlist'])->name('account.wishlist');
+        Route::post('addToWish', [WishlistController::class, 'addToWish'])->name('wishlist.addToWish');
+        Route::post('deleteWishlist', [WishlistController::class, 'deleteWishlist'])->name('wishlist.deleteWishlist');
+        Route::get('deleteWishlist', [WishlistController::class, 'show_icon_wishlist'])->name('wishlist.show_icon_wishlist');
   });
   // Bình luận
-  Route::resource('/comment', CommentController::class);
-  Route::get('/comment/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
-  Route::get('/comment/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
-  Route::get('/comment/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
-
+    Route::resource('/comment', CommentController::class);
+        Route::prefix('/comment')->group(function () {
+        Route::get('/editComment/{id}', [CommentController::class, 'editComment'])->name('comment.editComment');
+        Route::get('/saveComment/{id}', [CommentController::class, 'saveComment'])->name('comment.saveComment');
+        Route::get('/recall/{id}', [CommentController::class, 'recall'])->name('comment.recall');
+    });
     Route::prefix('/account')->group(function () {
         Route::post('/update-profile-customer/{id}', [AccountController::class, 'update_profile_customer'])->name('account.update-profile-customer');
         Route::get('/order-tracking', [AccountController::class, 'orderTracking'])->name('account.order-tracking');
@@ -144,27 +145,44 @@ Route::prefix('/')->group(function () {
     });
 
     //Đánh giá
-    Route::resource('/review', ReviewController::class);
-    Route::get('/show-review/{product}', [ReviewController::class, 'show_review'])->name('review.show-review');
-    Route::get('/users', Users::class);
+        Route::resource('/review', ReviewController::class);
+        Route::get('/show-review/{product}', [ReviewController::class, 'show_review'])->name('review.show-review');
+        Route::get('/users', Users::class);
 
+    //paypal
+    Route::prefix('api/paypal')->group(function(){
+        Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
+        Route::post('/order', [PaypalController::class, 'create']);
+    });
 
+        Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
+
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::prefix('/login')->group(function () {
+        //Login Google
+        Route::get('/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+        Route::get('/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+        //Login Facebook
+        Route::get('/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+        Route::get('/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+    });
 });
 
 /*****************************************************************  Admin ***********************************************************************/
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
-    Route::get('/', [HomeController::class, 'index'])->name('admin.index');
-    //
-    Route::get('/StatisticsController', [StatisticsController::class, 'revenue'])->name('StatisticsController');
-    Route::post('/list_statistics_date', [StatisticsController::class, 'revenue'])->name('list_statistics_date');
+        Route::get('/', [HomeController::class, 'index'])->name('admin.index');
+        //Thống kê
+        Route::get('/StatisticsController', [StatisticsController::class, 'revenue'])->name('StatisticsController');
+        Route::post('/list_statistics_date', [StatisticsController::class, 'revenue'])->name('list_statistics_date');
 
-    // Categories
-    Route::resource('/categories', CategoryController::class);
-    Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
-    Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
-    //Brand
-
+        // Categories
+        Route::resource('/categories', CategoryController::class);
+        Route::get('/detach-brand/{brand_id}/{cate_id}', [CategoryController::class, 'detach_brand'])->name('detach-brand');
+        Route::post('/add-attr-category/{cate_id}', [CategoryController::class, 'add_attr_category'])->name('add_attr_category');
+        //Brand
     Route::prefix('/brand')->group(function () {
         Route::get('/trash', [BrandController::class, 'trash'])->name('brand.trash');
         Route::post('/restore/{id}', [BrandController::class, 'restore'])->name('brand.restore');
@@ -200,36 +218,51 @@ Route::group(['prefix' => 'admin'], function () {
     // Discount
     Route::resource('/discount', DiscountController::class);
 
-    Route::resource('/flash-deals', FlashDealController::class);
-    //Route prefix function
+        //Attributes
+        Route::resource('/attribute', AttributeController::class);
+        Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+        Route::get('/detach_cate_attr/{attr_id}/{cate_id}', [CategoryController::class, 'detach_cate_attr'])->name('detach_cate_attr');
+        Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
+        Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
+        Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
+        Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
 
-    Route::get('filemanager', function () {
-        echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
-    })->name('filemanager');
+        //banner
+        Route::resource('/banners', BannerController::class);
+        // Discount
+        Route::resource('/discount', DiscountController::class);
+        //Discount
+        Route::resource('/flash-deals', FlashDealController::class);
+        //Route prefix function
 
-    Route::resource('blogCate', BlogCateController::class);
-    Route::resource('blogs', BlogController::class);
-    Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
-    Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
-    Route::resource('informations', InformationsController::class);
+        Route::get('filemanager', function () {
+            echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
+        })->name('filemanager');
 
-    //user
-    Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
-    Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
-    Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
-    Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
-    route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
-    route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
-    Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
-    Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
-    Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
-    Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
-    Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
-    Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
-    Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
-    Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
-    Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
-    Route::resource('/users', UserController::class);
+        //Blog
+        Route::resource('blogCate', BlogCateController::class);
+        Route::resource('blogs', BlogController::class);
+        Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
+        Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
+        Route::resource('informations', InformationsController::class);
+
+        //user
+        Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
+        Route::get('/customer-trash', [UserController::class, 'customer_trash'])->name('customer_trash');
+        Route::post('/users/restore/{id}', [UserController::class, 'restore'])->name('user_restore');
+        Route::post('/users/force-delete/{id}', [UserController::class, 'forceDelete'])->name('user_forceDelete');
+        route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
+        route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
+        Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+        Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
+        Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
+        Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
+        Route::get('/add-permissions/{id}', [UserController::class, 'add_permissions'])->name('add_permissions');
+        Route::post('/assign-permissions/{id}', [UserController::class, 'assign_permissions'])->name('assign_permissions');
+        Route::get('/add-redirect-permissions/{id}', [UserController::class, 'add_redirect_permissions'])->name('add_redirect_permissions');
+        Route::post('/assign-redirect-permissions/{id}', [UserController::class, 'assign_redirect_permissions'])->name('assign_redirect_permissions');
+        Route::get('impersonate/{id}', [UserController::class, 'impersonate'])->name('impersonate');
+        Route::resource('/users', UserController::class);
 
     // comment
     Route::prefix('/comment')->group(function () {
@@ -241,12 +274,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/clearance/{id}', [CommentController::class, 'clearance'])->name('comment.clearance');
         Route::get('/answered/{id}', [CommentController::class, 'answered'])->name('comment.answered');
         Route::post('/handle', [CommentController::class, 'handle'])->name('comment.handle');
+        Route::get('/unsatisfied', [CommentController::class, 'unsatisfied'])->name('comment.unsatisfied');
     });
-    Route::resource('/comment', CommentController::class);
-    Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
-    Route::resource('/orders', OrderController::class);
-    Route::post('/orders/paymentstatus', [OrderController::class, 'paymentStatus'])->name('admin.orders.paymentstatus');
-    Route::post('/orders/delivery', [OrderController::class, 'delivery'])->name('admin.orders.delivery');
+        Route::resource('/comment', CommentController::class);
+        Route::get('/product/{id}/comment', [CommentController::class, 'productComment'])->name('product.comment');
+        Route::resource('/orders', OrderController::class);
+        Route::post('/orders/paymentstatus', [OrderController::class, 'paymentStatus'])->name('admin.orders.paymentstatus');
+        Route::post('/orders/delivery', [OrderController::class, 'delivery'])->name('admin.orders.delivery');
 
     // Đánh giá
     Route::resource('/review-admin', ReviewAdmin::class);
@@ -263,22 +297,5 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
 });
-//paypal
-Route::prefix('api/paypal')->group(function(){
-    Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
-    Route::post('/order', [PaypalController::class, 'create']);
-});
-
-Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
 
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-//Login Google
-Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
-
-//Login Facebook
-Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
-Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);

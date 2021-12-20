@@ -59,7 +59,8 @@
                                         <div class="form-group">
                                             <label for="name">Tên slide</label>
                                             <input class="form-control" name="banner_name" id="banner_name"
-                                                value="{{ $bannerId->banner_name }}" onkeyup="ChangeToSlug();" type="text">
+                                                value="{{ $bannerId->banner_name }}" onkeyup="ChangeToSlug();"
+                                                type="text">
                                             @error('banner_name')
                                                 <span class="text-danger">{{ $errors->first('banner_name') }}</span>
                                             @enderror
@@ -104,22 +105,21 @@
                             <div class="card">
                                 <div class="card-header">Ảnh slide</div>
                                 <div class="card-body d-flex justify-content-center">
-                                    <div class="preview hide mb-3">
+                                    <div class="preview hide mb-3" id="image__preview">
                                         <img src="{{ url('uploads/Banner/' . $bannerId->banner_img) }}" alt=""
                                             height="100px" width="100px">
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="banner_img" onchange="readURL(this);"
-                                                class="custom-file-input" id="inputGroupFile04"
-                                                aria-describedby="inputGroupFileAddon04">
-                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-
-
-                                        </div>
+                                    <div class="file-options">
+                                        <a class="btn-file iframe-btn"
+                                            href="{{ asset('rfm/filemanager') }}/dialog.php?field_id=image"
+                                            style="color: #1e272e; font-size: 24px;"><input class="upload"><i
+                                                class="fa fa-upload"></i></a>
                                     </div>
+                                    <input type="hidden" id="image" data-upload="banner_img" data-preview="image__preview">
+                                    <input type="hidden" name="banner_img">
+
                                     @error('banner_img')
                                         <span class="text-danger">{{ $errors->first('banner_img') }}</span>
                                     @enderror

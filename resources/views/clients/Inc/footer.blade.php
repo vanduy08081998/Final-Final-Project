@@ -1,6 +1,3 @@
-@php
-use App\Models\Category;
-@endphp
 <footer class="footer bg-dark pt-5">
     <div class="container">
         <div class="row pb-2">
@@ -8,7 +5,7 @@ use App\Models\Category;
                 <div class="widget widget-links widget-light pb-2 mb-4">
                     <h3 class="widget-title text-light">Danh mục sản phẩm</h3>
                     <ul class="widget-list">
-                        @foreach (App\Models\Category::orderByDESC('id_cate') as $cate)
+                        @foreach (App\Models\Category::orderBy('id_cate', 'ASC')->get() as $cate)
                             <li class="widget-list-item"><a class="widget-list-link"
                                     href="{{ route('shop.shop-grid', $cate->category_slug) }}">{{ $cate->category_name }}</a>
                             </li>

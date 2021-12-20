@@ -21,8 +21,6 @@ class AdminComment extends Component
         'feedback',
         'editFeedback'
     ];
-
-    
     
     public function getModelId($id, $action, $parent_id){
        if($action == 'edit'){
@@ -30,8 +28,7 @@ class AdminComment extends Component
         $this->comment_content = $this->modelId->comment_content;
         $this->handle = $action;
         $this->dispatchBrowserEvent('OpenEditFeedbackModal');
-       }else
-       {
+       }else{
         $this->modelId = Comment::find($id);
         $this->comment_content = '@'.$this->modelId->user->name. ' ';
         $this->handle = $action;
@@ -74,7 +71,7 @@ class AdminComment extends Component
     }
 
     public function editFeedback($id){
-        $this->emit('getModelId', $id, 'edit');
+        $this->emit('getModelId', $id, 'edit', '');
     }
 
 

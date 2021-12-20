@@ -162,8 +162,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -233,14 +232,14 @@
       <div class="tns-carousel-inner"
         data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
-       @foreach ($highlight as $product)
-          <div class="product-item">
-            @if ($product->discount == 0)
-            @else
-              <span class="badge bg-danger badge-shadow">Giảm giá
-                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-            @endif
+        @foreach ($highlight as $product)
+          <div class="product-item" style="height: 375px">
             <div class="card product-card">
+                @if ($product->discount == 0)
+                @else
+                  <span class="badge bg-danger badge-shadow">Giảm giá
+                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+                @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
@@ -276,8 +275,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center"  id="card-body" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -492,19 +490,3 @@
     </div>
   </section>
 @endsection
-@push('script')
-  <script>
-    $(document).ready(function() {
-      $(window).scroll(function(event) {
-        var pos_body = $('html,body').scrollTop();
-        //   console.log(pos_body);
-        if (pos_body > 545.4545288085938) {
-          $('.banner-main').addClass('banner-fixed');
-        }
-        if (pos_body < 545.4545288085938) {
-          $('.banner-main').removeClass('banner-fixed');
-        }
-      });
-    });
-  </script>
-@endpush

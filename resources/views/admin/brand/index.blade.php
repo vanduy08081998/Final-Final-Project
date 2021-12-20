@@ -23,7 +23,7 @@
                     </div>
                     <div class="ml-auto">
                         <div class="btn-group">
-                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Thêm thương hiệu</a>
+                            <a href="{{ route('brand.create') }}" class="btn btn-primary rounded-0">Thêm thương hiệu</a>
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,8 @@
                                         <option value="">------- Hành động ------</option>
                                         <option value="trash">------- Thùng rác ------</option>
                                     </select>
-                                    <button class="btn-sm btn-primary handle" type="submit" disabled>Hành động</button>
+                                    <button class="btn-sm btn-primary handle rounded-0" type="submit" disabled>Hành
+                                        động</button>
                                     @if ($countTrashed)
                                         <a href="{{ asset('admin/brand/trash') }}"
                                             class="btn btn-warning float-right">Thùng
@@ -80,15 +81,15 @@
                                                 <td class="text-center">
                                                     @foreach ($brand->categories as $item)
 
-                                                        <button
-                                                            class="btn-sm btn-primary">{{ $item->category_name }}</button>
+                                                        <button type="button"
+                                                            class="btn-sm btn-primary rounded-0">{{ $item->category_name }}</button>
 
                                                     @endforeach
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <button type="button"
-                                                            class="btn btn-success dropdown-toggle radius-30"
+                                                            class="btn btn-success dropdown-toggle rounded-0"
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false"><i class="bx bx-cog"></i></button>
                                                         <div
