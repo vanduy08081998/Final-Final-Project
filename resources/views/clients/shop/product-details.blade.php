@@ -179,6 +179,7 @@
                     comment_content: body
                 },
                 success: function() {
+                    toastr.success('Chỉnh sửa thành công!')
                     window.livewire.emit('render')
                 }
             })
@@ -191,6 +192,7 @@
             $.ajax({
                 url: URL,
                 success: function() {
+                    toastr.success('Bạn đã thu hồi một bình luận!')
                     window.livewire.emit('render')
                 }
             })

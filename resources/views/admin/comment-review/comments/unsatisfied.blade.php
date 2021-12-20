@@ -58,11 +58,11 @@
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <button class="btn btn-info">{{ $like }}
+                                                        <button class="btn btn-info" type="button">{{ $like }}
                                                             <i class="fas fa-thumbs-up"></i></button>
                                                     </td>
                                                     <td class="text-center">
-                                                        <button class="btn btn-danger">{{ $unlike }}
+                                                        <button class="btn btn-danger" type="button">{{ $unlike }}
                                                             <i class="fas fa-thumbs-down"></i>
                                                         </button>
                                                     </td>
