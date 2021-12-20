@@ -160,7 +160,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -271,7 +271,7 @@
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center"  id="card-body" style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -485,7 +485,7 @@
     </div>
   </section>
 @endsection
-@push('script')
+{{-- @push('script')
   <script>
     $(document).ready(function() {
       $(window).scroll(function(event) {
@@ -500,4 +500,4 @@
       });
     });
   </script>
-@endpush
+@endpush --}}

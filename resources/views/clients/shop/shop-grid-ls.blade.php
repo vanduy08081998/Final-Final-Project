@@ -101,7 +101,7 @@
                   </div>
                 </div>
 
-                <div class="card-body card-body-hidden text-center" style="z-index: 10; display: inline; padding: 15px">
+                <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
                   @if (Auth::user() != null)
                     <?php
                     $user = Auth::user()->id;

@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/range.css') }}">
   <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
   <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
+
   @livewireStyles
   @livewireScripts
   @routes
@@ -143,10 +144,29 @@
           <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
         </a>
       @endguest
-      <a class="d-table-cell handheld-toolbar-item" href="#">
-        <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
-        <span class="handheld-toolbar-label">Tài khoản</span>
-      </a>
+      @if (Auth::user())
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route ('account.account-info') }}">
+                <span class="handheld-toolbar-icon">@if (Auth::user()->avatar)
+                    @if (Auth::user()->provider_id == null)
+                        <img class="customer_picture"
+                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                            alt="avatar" style="border-radius:50%;">
+                    @else
+                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                            width="90" alt="avatar" style="border-radius:50%;">
+                    @endif
+                @else
+                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                        width="25" alt="avatar">
+                @endif</span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+            @else
+            <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
+                <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
+                <span class="handheld-toolbar-label">Tài khoản</span>
+            </a>
+            @endif
     </div>
   </div>
   {{-- Chatbox button --}}
@@ -166,6 +186,8 @@
 
   <!-- Vendor scrits: js libraries and plugins-->
   <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/custom.js') }}"></script>
+
   <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 
@@ -202,6 +224,7 @@
   <script src="{{ asset('frontend/js/compare.js') }}"></script>
   <script src="{{ asset('frontend/js/quickview.js') }}"></script>
   <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
+
   <script>
     $('.input-images-1').imageUploader();
   </script>
