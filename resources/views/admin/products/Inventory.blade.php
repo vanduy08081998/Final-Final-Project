@@ -17,9 +17,12 @@
               <table class="datatable table table-stripped table-bordered table-hovered">
                 <thead class="text-center">
                   <tr>
-                    {{-- <th>Tên sản phẩm</th> --}}
+                    <th>Tên sản phẩm</th>
                     <th>SKU</th>
                     <th>Số lượng</th>
+                    <th>Số lượng mua</th>
+                    <th>Số lượng tồn kho</th>
+                    <th>Trạng thái</th>
                     <th>Hành động</th>
                   </tr>
                 </thead>
@@ -28,9 +31,30 @@
                     @if ($product->type_of_category == 'isAttribute')
                       @foreach ($product->variants as $key => $variant)
                         <tr>
-                          {{-- <td>{{ $product->product_name }}</td> --}}
-                          <td>{{ $variant->variant }}</td>
+                          <td>{{ $product->product_name }}</td>
+                          <td>{!! str_replace('-', '<br>', $variant->variant) !!}</td>
                           <td>{{ $variant->variant_quantity }}</td>
+                          @php
+                            $qt_buy = \DB::table('order_details')
+                                ->where('product_id', $product->id)
+                                ->where('variant', $variant->variant)
+                                ->first();
+
+                            if ($qt_buy != null) {
+                                $buy = $qt_buy->quantity;
+                            } else {
+                                $buy = 0;
+                            }
+                          @endphp
+                          <td>{{ $buy }}</td>
+                          <td>{{ $variant->variant_quantity - $buy }}</td>
+                          <td>
+                            @if ($variant->variant_quantity - $buy <= 0)
+                              <button class="btn btn-danger rounded-0">Hết hàng</button>
+                            @else
+                              <button class="btn btn-success rounded-0">Còn hàng</button>
+                            @endif
+                          </td>
                           <td><button type="button" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"
                               data-toggle="modal" data-target="#exampleModal{{ $variant->id }}">
                               <i class="fa fa-shopping-cart"></i> Nhập kho
@@ -65,12 +89,25 @@
                       @endforeach
                     @else
                       <tr>
+                        <td>{{ $product->product_name }}</td>
                         <td>
                           {{ $product->sku }}
                         </td>
                         <td>
                           {{ $product->quantity }}
                         </td>
+                        @php
+                          $qt_buy = \DB::table('order_details')
+                              ->where('product_id', $product->id)
+                              ->first();
+                          if ($qt_buy != null) {
+                              $buy = $qt_buy->quantity;
+                          } else {
+                              $buy = 0;
+                          }
+                        @endphp
+                        <td>{{ $buy }}</td>
+                        <td>{{ $product->quantity - $buy }}</td>
                         <td>
                           <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
                             data-target="#exampleModal">

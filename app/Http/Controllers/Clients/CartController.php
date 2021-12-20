@@ -94,7 +94,8 @@ class CartController extends Controller
           'specifications' => json_encode($choice_options, JSON_UNESCAPED_UNICODE),
           'quantity' => $request->product_quantity,
           'user_id' => $user_id,
-          'product_id' => $request->product_id
+          'product_id' => $request->product_id,
+          'variant' => $str
         ]);
       } else {
         $cart->update([

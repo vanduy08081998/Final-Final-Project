@@ -70,7 +70,7 @@ Route::prefix('/')->group(function () {
         Route::post('/checkout-promotion-code', [CheckoutController::class, 'promotionCode'])->name('checkout.promotioncode');
     });
     Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid/{id}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+        Route::get('/shop-grid/{slug}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
         Route::post('/quickview', [ProductController::class, 'quickView'])->name('shop.quickview');

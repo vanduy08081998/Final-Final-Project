@@ -201,7 +201,7 @@ $category = Category::all();
               <ul class="dropdown-menu">
                 @foreach ($categories as $cate)
                   <li class="dropdown mega-dropdown">
-                    <a href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"
+                    <a href="{{ route('shop.shop-grid', ['slug' => $cate->category_slug]) }}"
                       class="dropdown-item dropdown-toggle" data-bs-toggle="dropdown">
                       <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                       {{ $cate->category_name }}
@@ -280,7 +280,7 @@ $category = Category::all();
                 Giới thiệu</a>
             </li>
             <li class="nav-item"><a class="nav-link"
-                href="{{ route('shop.shop-grid', ['id' => 0]) }}"><i class="ci-lable"></i> Cửa hàng</a>
+                href="{{ route('shop.shop-grid', ['slug' => 'all-category' ]) }}"><i class="ci-lable"></i> Cửa hàng</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('client-flash-deals.index') }}" data-bs-auto-close="outside"><i

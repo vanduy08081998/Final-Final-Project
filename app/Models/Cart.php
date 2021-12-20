@@ -10,6 +10,6 @@ class Cart extends Model
     use HasFactory;
 
     protected $table = 'carts';
-    protected $fillable = ['specifications', 'quantity', 'user_id', 'product_id'];
+    protected $fillable = ['specifications', 'quantity', 'user_id', 'product_id','variant'];
     public $timestamps = true;
 }

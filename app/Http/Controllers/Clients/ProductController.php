@@ -55,16 +55,18 @@ class ProductController extends Controller
       'category_id' => $category_id,
     ]);
   }
-  public function shopGrid($id)
+  public function shopGrid($slug)
   {
-    if ($id == 0) {
+    if ($slug == 'all-category') {
       $product = Product::simplePaginate(12);
       $cate = null;
+      $cate_id = null;
       $pro = Product::orderByDESC('id')->count();
     } else {
-      $product = Product::where('product_id_category', $id)->simplePaginate(12);
-      $cate = Category::where('id_cate', $id)->first();
-      $pro = Product::orderByDESC('id')->where('product_id_category', $id)->count();
+      $cate = Category::where('category_slug', $slug)->first();
+      $cate_id = $cate->id_cate;
+      $product = Product::where('product_id_category', $cate_id)->simplePaginate(12);
+      $pro = Product::orderByDESC('id')->where('product_id_category', $cate_id)->count();
     }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
@@ -80,7 +82,7 @@ class ProductController extends Controller
       'pro' => $pro,
       'category' => $categories,
       'brands' => $brands,
-      'id_cate' => $id
+      'id_cate' => $cate_id
     ]);
   }
 

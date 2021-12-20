@@ -127,11 +127,9 @@
                       <i class="ci-heart"></i>
                     </a>
                   @endif
-                  <input type="hidden" id="wishlist_productsku{{ $pro->id }}"
-                    value="{{ $pro->specifications }}">
+                  <input type="hidden" id="wishlist_productsku{{ $pro->id }}" value="{{ $pro->specifications }}">
                   <input type="hidden" value="{{ $pro->id }}">
-                  <input type="hidden" id="wishlist_productname{{ $pro->id }}"
-                    value="{{ $pro->product_name }}">
+                  <input type="hidden" id="wishlist_productname{{ $pro->id }}" value="{{ $pro->product_name }}">
                   <input type="hidden" id="wishlist_productprice{{ $pro->id }}"
                     value="{{ number_format($pro->unit_price) }}">
                   <input type="hidden" id="wishlist_productimg{{ $pro->id }}"
@@ -169,7 +167,11 @@
       var value = $('select[name="shorting"] option:selected').val()
       var orderby = $('select[name="shorting"] option:selected').attr('data-short')
       let _token = $('meta[name="csrf-token"]').attr('content')
-      let id_cate = @php echo $id_cate @endphp;
+      @if ($id_cate == null)
+        let id_cate = 0;
+      @else
+        let id_cate = @php echo $id_cate @endphp;
+      @endif
       $.ajax({
         type: "POST",
         url: "{{ route('clients.products.short') }}",
@@ -188,7 +190,11 @@
 
     function search_by_cate(id) {
       let _token = $('meta[name="csrf-token"]').attr('content')
-      let id_cate = @php echo $id_cate @endphp;
+      @if ($id_cate == null)
+        let id_cate = 0;
+      @else
+        let id_cate = @php echo $id_cate @endphp;
+      @endif
       let key = $(`#category_search_${id}`).val()
       $.ajax({
         type: "POST",
@@ -208,7 +214,7 @@
 
     function focusout(id) {
       let _token = $('meta[name="csrf-token"]').attr('content')
-      let id_cate = @php echo $id_cate @endphp;
+      let id_cate = 0;
       let key = $(`#category_search_${id}`).val()
       $.ajax({
         type: "POST",

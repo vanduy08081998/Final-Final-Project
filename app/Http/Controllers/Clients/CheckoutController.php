@@ -107,6 +107,7 @@ class CheckoutController extends Controller
                 $product_details['product_id'] = $cart->product_id;
                 $product_details['specification'] = $cart->specifications;
                 $product_details['quantity'] = $cart->quantity;
+                $product_details['variant'] = $cart->variant;
                 $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
                 if (\App\Models\Product::where('id', $cart->product_id)->first()->discount == null) {
                     $product_details['discount'] = 0;
