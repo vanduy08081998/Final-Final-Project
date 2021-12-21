@@ -860,3 +860,15 @@
     font-size: 1rem;
     color: #fff;
 }
+
+
+/* Order detail */
+
+.boxed {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 0.5px solid #4a90e2;
+    cursor: pointer;
+    border-radius: 4px;
+}

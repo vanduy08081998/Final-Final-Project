@@ -16,7 +16,15 @@ class Order extends Model
     public $timestamp = true;
 
     public function products()
-  {
-    return $this->belongsToMany(Product::class, 'order_details')->withPivot('specification','quantity', 'promotion_price','discount');;
-  }
+    {
+       return $this->belongsToMany(Product::class, 'order_details')->withPivot('specification','quantity', 'promotion_price','discount');;
+    }
+
+    public function status(){
+      return $this->hasOne(DeliveryViewed::class, 'delivery_viewed', 'delivery_viewed');
+    }
+
+    public function detail(){
+      return $this->hasMany(OrderDetail::class, 'order_id');
+    }
 }

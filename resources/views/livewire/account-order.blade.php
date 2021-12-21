@@ -27,7 +27,7 @@
                     <th>Mã đơn #</th>
                     <th>Ngày đặt</th>
                     <th>Trạng thái</th>
-                    <th>Tổng tiền</th>
+                    <th>Theo dõi</th>
                     <th>Chi tiết</th>
                 </tr>
             </thead>
@@ -39,22 +39,15 @@
                         </td>
                         <td class="py-3">{{ date('H:i:s d-m-Y', strtotime($item->created_at)) }}</td>
                         <td class="py-3">
-                            @if ($item->delivery_viewed == 1)
-                                <span class="badge bg-info m-0">Đang xử lý</span>
-                            @elseif($item->delivery_viewed == 2)
-                                <span class="badge bg-warning m-0">Đang vận chuyển</span>
-                            @elseif($item->delivery_viewed == 3)
-                                <span class="badge bg-success m-0">Đã hoàn thành</span>
-                            @else
-                                <span class="badge bg-danger m-0">Đã hủy</span>
-                            @endif
-
+                            <span
+                                class="badge {{ $item->status->id == 6 ? 'bg-danger' : 'bg-info' }} m-0">{{ $item->status->delivery_description }}</span>
                         </td>
-                        <td class="py-3">{{ number_format($item->grand_total, 0, '.', ',') . ' đ' }}</td>
+                        <td class="py-3"><a class="btn-sm btn-info"
+                                href="{{ url('account/order-tracking/' . $item->id) }}"><i
+                                    class="far fa-eye"></i></a></td>
                         <td><button
                                 wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')"
-                                class="btn-sm btn-primary" style="border-radius:50%;"><i
-                                    class="far fa-eye"></i></button></td>
+                                class="btn-sm btn-primary">Xem</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -73,21 +66,45 @@
                     <!-- Item-->
                     @forelse ($order_details as $item)
                         <div class="d-sm-flex justify-content-between mb-4 pb-3 pb-sm-2 border-bottom">
-                            <div class="d-sm-flex text-center text-sm-start"><a
-                                    class="d-inline-block flex-shrink-0 mx-auto" href="shop-single-v1.html"
-                                    style="width: 10rem;"><img src="{{ asset($item->product->product_image) }}"
-                                        alt="Product"></a>
-                                <div class="ps-sm-4 pt-2">
-                                    <h3 class="product-title fs-base mb-2"><a
-                                            href="shop-single-v1.html">{{ $item->product->product_name }}</a></h3>
-                                    {{-- <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>
-                                    <div class="fs-sm"><span class="text-muted me-2">Color:</span>White &amp;
-                                        Blue
-                                    </div> --}}
-                                    <div class="fs-lg text-accent pt-2">
-                                        {{ number_format($item->product->unit_price, 0, '.', ',') . ' đ' }}</div>
+                            @foreach (json_decode($item->specification) as $pro)
+                                <div class="d-sm-flex text-center text-sm-start"><a
+                                        class="d-inline-block flex-shrink-0 mx-auto" href="shop-single-v1.html"
+                                        style="width: 10rem;"><img src="{{ asset($pro->variant_image) }}"
+                                            alt="Product"></a>
+                                    <div class="ps-sm-4 pt-2">
+                                        <h3 class="product-title fs-base mb-2"><a
+                                                href="shop-single-v1.html">{{ $pro->product_name }}</a>
+                                        </h3>
+                                        {{-- <div class="fs-sm"><span class="text-muted me-2">Size:</span>8.5</div>
+                                        <div class="fs-sm"><span class="text-muted me-2">Color:</span>White
+                                            &amp;
+                                            Blue
+                                        </div> --}}
+                                        @if (!isset($pro->colors))
+                                            <div class="fs-sm"><span class="text-muted me-2">Màu
+                                                    sắc:</span>Không
+                                            </div>
+                                        @else
+                                            <div class="fs-sm"><span class="text-muted me-2">Màu
+                                                    sắc:</span>{{ \App\Models\Color::where('color_slug', $pro->colors)->first()->color_name }}
+                                            </div>
+                                        @endif
+                                        @if ($pro->specifications != null)
+                                            <div class="d-block mt-2">
+                                                @foreach ($pro->specifications as $ts)
+                                                    <label class="boxed">
+                                                        <strong>{{ $ts }}</strong>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        @else
+
+                                        @endif
+                                        <div class="fs-lg text-accent pt-2">
+                                            {{ number_format($pro->variant_price, 0, '.', ',') . ' đ' }}</div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                             <div class="pt-2 ps-sm-3 mx-auto mx-sm-0 text-center">
                                 <div class="text-muted mb-2">Số lượng:</div>{{ $item->quantity }}
                             </div>

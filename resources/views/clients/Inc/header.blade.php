@@ -42,32 +42,29 @@ $category = Category::all();
                 </div>
             </div>
             <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="topbar-text dropdown d-md-none ms-auto">
-                <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
+                <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn
+                    hàng</a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
                         @if ($wishlist == null && Auth::user == null)
-                        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                            <i class="ci-heart mt-n1"></i>Yêu thích (0)
-                        </a>
+                            <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                                <i class="ci-heart mt-n1"></i>Yêu thích (0)
+                            </a>
                         @elseif ($wishlist != NULL && Auth::user())
-                        <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                            <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
-                        {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
-                        </a>
+                            <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                                <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+                                {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
+                            </a>
                         @endif
                     </li>
                     <li>
                         <a class="dropdown-item" href="comparison.html">
                             <i class="ci-compare text-muted me-2"></i>So sánh</a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('account.order-tracking') }}">
-                            <i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng
-                        </a>
-                    </li>
                 </ul>
             </div>
-            <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="count-wishlist d-none d-md-block ms-3 text-nowrap">
+            <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
+                class="count-wishlist d-none d-md-block ms-3 text-nowrap">
                 @if ($wishlist == null && Auth::user == null)
                     <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
                         <i class="ci-heart mt-n1"></i>Yêu thích (0)
@@ -80,9 +77,6 @@ $category = Category::all();
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                     href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)
-                </a>
-                <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
-                    href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
                 </a>
             </div>
         </div>
@@ -121,67 +115,70 @@ $category = Category::all();
                 </form>
                 <!-- Toolbar-->
                 <div class="user-space">
-                @if (Auth::user())
-                    <div class="user-ct" style="position: relative">
-                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('account.account-info') }}">
-                            <div class="navbar-tool-icon-box">
-                                @if (Auth::user()->avatar)
-                                    @if (Auth::user()->provider_id == null)
-                                        <img class="customer_picture"
-                                            src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="90"
-                                            alt="avatar" style="border-radius:50%;">
+                    @if (Auth::user())
+                        <div class="user-ct" style="position: relative">
+                            <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2"
+                                href="{{ route('account.account-info') }}">
+                                <div class="navbar-tool-icon-box">
+                                    @if (Auth::user()->avatar)
+                                        @if (Auth::user()->provider_id == null)
+                                            <img class="customer_picture"
+                                                src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}"
+                                                width="90" alt="avatar" style="border-radius:50%;">
+                                        @else
+                                            <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
+                                                width="90" alt="avatar" style="border-radius:50%;">
+                                        @endif
                                     @else
-                                        <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}"
-                                            width="90" alt="avatar" style="border-radius:50%;">
+                                        <img class="customer_picture"
+                                            src="{{ URL::to('backend/img/profiles/avt.png') }}" width="90"
+                                            alt="avatar">
                                     @endif
-                                @else
-                                    <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
-                                        width="90" alt="avatar">
-                                @endif
+                                </div>
+                                <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
+
+                            </a>
+                            <div class="content-user">
+                                <ul>
+                                    <li><a href="{{ route('account.order-list') }}"><i
+                                                class="fas fa-file-invoice-dollar"></i> Đơn hàng</a></li>
+                                    <li>
+                                        <a href="{{ route('account.notification') }}">
+                                            <i class="far fa-bell"></i>
+                                            Thông báo <span>{{ Auth::user()->notification->count() }}</span></a>
+
+                                    </li>
+                                    <li><a href="{{ route('account.account-info') }}"><i
+                                                class="far fa-user-circle"></i>
+                                            Tài khoản</a></li>
+                                    @if (Auth::user()->position == 'admin')
+                                        <li><a href="{{ route('admin.index') }}"><i class="fas fa-user-shield"></i>
+                                                Quản trị admin</a></li>
+                                    @endif
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">
+                                            @csrf
+                                            <button type="submit"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                                        </form>
+
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="navbar-tool-text ms-n3">{{ Auth::user()->name }}</div>
+                        </div>
+                    @else
+                        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
+                            <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                                <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                            </a>
+                        </div>
+                    @endif
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                        <div class="navbar-tool dropdown ms-3 cart__dropdown">
 
-                        </a>
-                        <div class="content-user">
-                            <ul>
-                                <li><a href="{{ route('account.order-list') }}"><i
-                                            class="fas fa-file-invoice-dollar"></i> Đơn hàng</a></li>
-                                <li>
-                                    <a href="{{ route('account.notification') }}">
-                                        <i class="far fa-bell"></i>
-                                        Thông báo <span>{{ Auth::user()->notification->count() }}</span></a>
-
-                                </li>
-                                <li><a href="{{ route('account.account-info') }}"><i class="far fa-user-circle"></i>
-                                        Tài khoản</a></li>
-                                @if (Auth::user()->position == 'admin')
-                                    <li><a href="{{ route('admin.index') }}"><i class="fas fa-user-shield"></i>
-                                            Quản trị admin</a></li>
-                                @endif
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
-                                    </form>
-
-                                </li>
-                            </ul>
                         </div>
                     </div>
-                @else
-                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
-                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                        </a>
-                    </div>
-                @endif
-                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
-                    <div class="navbar-tool dropdown ms-3 cart__dropdown">
-
-                    </div>
                 </div>
-            </div>
 
             </div>
         </div>
@@ -289,8 +286,8 @@ $category = Category::all();
                                 Giới thiệu</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid', ['id' => 0]) }}"><i
-                                    class="ci-lable"></i> Cửa hàng</a>
+                                href="{{ route('shop.shop-grid', ['id' => 0]) }}"><i class="ci-lable"></i> Cửa
+                                hàng</a>
                         </li>
                         <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.about') }}"
