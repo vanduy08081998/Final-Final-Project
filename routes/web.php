@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
 use App\Http\Controllers\Clients\FlashDealProductController;
 
+use Spatie\Analytics\Period;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -299,7 +301,42 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
         Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');
     });
-    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
+    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');  
+});
+//Thống kê
+Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
+Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date'])->name('filter_by_date');
+Route::post('/dashboard-filter',  [HomeController::class, 'dashboard_filter'])->name('dashboard_filter');
+
+Route::post('/chart_product_line',  [HomeController::class, 'chart_product_line'])->name('chart_product_line');
+Route::post('/chart_product_max',  [HomeController::class, 'chart_product_max'])->name('chart_product_max');
+Route::post('/filter-by-date-product',  [HomeController::class, 'filter_by_date_product'])->name('filter_by_date_product');
+Route::post('/dashboard-filter-product',  [HomeController::class, 'dashboard_filter_product'])->name('dashboard_filter_product');
+
+//paypal
+Route::prefix('api/paypal')->group(function(){
+    Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
+    Route::post('/order', [PaypalController::class, 'create']);
+});
+
+Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Login Google
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Login Facebook
+Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
+
+Route::get('/test', function(){
+    $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+    return view('admin.statistics.google-analytics', ['analyticsData' => $analyticsData]);
 });
 
 Auth::routes();
