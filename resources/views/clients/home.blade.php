@@ -110,7 +110,7 @@
   <section class="container pt-5 trending-product">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-      <p style="font-size: 20px"><strong>Sản phẩm mới nhất</strong></p>
+      <h2><strong>Sản phẩm mới nhất</strong></h2>
       <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
             class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
@@ -220,7 +220,7 @@
   <section class="container mt-5 highlight-product">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-      <p style="font-size: 20px"><strong>Sản phẩm nổi bật</strong></p>
+      <h2><strong>Sản phẩm nổi bật</strong></h2>
       <div class="pt-3">
         <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
           <i class="ci-arrow-right ms-1 me-n1"></i>

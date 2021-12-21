@@ -35,6 +35,7 @@ class User extends Authenticatable
         'neighbor',
         'position',
         'password',
+        'user_status'
     ];
 
      /**

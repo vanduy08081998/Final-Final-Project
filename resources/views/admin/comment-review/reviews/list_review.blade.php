@@ -27,16 +27,15 @@
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Liệt kê sản phẩm có đánh giá</h4>
+                                <h4 class="mb-0">Danh sách đánh giá</h4>
                             </div>
                             <hr />
                             {{-- <div class="table-responsive"> --}}
                             <table class="datatable table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Hình ảnh</th>
                                         <th class="text-center">Sản phẩm</th>
-                                        <th class="text-center">Sao đánh giá</th>
+                                        <th class="text-center">Đánh giá</th>
                                         <th class="text-center">Lượt đánh giá</th>
                                         <th class="text-center">Hành động</th>
                                     </tr>
@@ -48,22 +47,20 @@
                                                 <td class="py-2">
                                                     <div class="text-center">
                                                         <div class="position-relative mr-2">
-                                                            <img width="60" height="80"
-                                                                src="{{ asset($product->product_image) }}" />
+                                                            <img width="60" height="66" style="border-radius: 5px;"
+                                                                src="{{ asset($product->product_image) }}" /><br>
+                                                            {{ $product->product_name }}
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $product->product_name }}
-                                                </td>
-                                                <td class="text-center">
+                                                    <span class="text-danger" style="font-size: 18px;">{{ $product->rating }} </span>
                                                     @for ($count = 1; $count <= round($product->rating); $count++)
-                                                        <i class="fa fa-star fs-ms text-danger me-1"></i>
+                                                        <i class="fa fa-star fs-ms text-warning me-1"></i>
                                                     @endfor
                                                     @for ($count = 1; $count <= 5 - round($product->rating); $count++)
-                                                        <i class="fa fa-star-o fs-ms text-danger me-1"></i>
+                                                        <i class="fa fa-star-o fs-ms text-warning me-1"></i>
                                                     @endfor
-                                                    <strong class="text-danger">({{ $product->rating }})</strong>
                                                 </td>
                                                 <td class="text-center">
                                                     {{ $product->count_review }} lượt đánh giá
