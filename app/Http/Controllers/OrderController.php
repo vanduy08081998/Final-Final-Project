@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role:admin', ['only' => ['index','show','paymentStatus','delivery']]);
+    }
     /**
      * Display a listing of the resource.
      *

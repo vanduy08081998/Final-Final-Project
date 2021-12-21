@@ -45,7 +45,7 @@
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                                                         class="bx bx-cog"></i></button>
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
-                                                    <a class="dropdown-item text-warning" style="text-align: center;
+                                                    <a class="dropdown-item text-warning" style="text-align: center;"
                                                         href="{{ route('attribute.edit', ['attribute' => $attri->id]) }}"><i class="fas fa-edit"></i> Sửa</a>
                                                     <form
                                                         action="{{ route('attribute.destroy', ['attribute' => $attri->id]) }}"

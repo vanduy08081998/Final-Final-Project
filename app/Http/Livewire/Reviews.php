@@ -176,30 +176,33 @@ class Reviews extends Component
         if(!Auth::user()){
             return redirect('/login');
         }
-        if(Auth::user()->position == 'admin'){
-            Review::find($review_id)->update(['admin_feedback' => 1]);
-            $review_status = 1;
-        }else{
-            $review_status = null;
+        if($this->content_rating != ''){
+            if(Auth::user()->position == 'admin'){
+                Review::find($review_id)->update(['admin_feedback' => 1]);
+                $review_status = 1;
+            }else{
+                $review_status = null;
+            }
+            Review::create([
+                'product_id' => $product_id,
+                'customer_id' => Auth::user()->id,
+                'content_rating' => $this->content_rating,
+                'review_parent' => $review_id,
+                'review_status' => $review_status
+            ]);
+    
+            $service = new NotificationService();
+            if(Auth::user()->position == 'admin'){
+                $service->store(Review::find($review_id)->customer_id , $product_id, 'review', 'BigDeal');
+            }
+            
+            
+            if(Auth::user()->position != 'admin'){
+            $this->dispatchBrowserEvent('OpenSuccess', []);
+            }
+            $this->emit('render');
         }
-        Review::create([
-            'product_id' => $product_id,
-            'customer_id' => Auth::user()->id,
-            'content_rating' => $this->content_rating,
-            'review_parent' => $review_id,
-            'review_status' => $review_status
-        ]);
 
-        $service = new NotificationService();
-        if(Auth::user()->position == 'admin'){
-            $service->store(Review::find($review_id)->customer_id , $product_id, 'review', 'BigDeal');
-        }
-        
-        
-        if(Auth::user()->position != 'admin'){
-        $this->dispatchBrowserEvent('OpenSuccess', []);
-        }
-        $this->emit('render');
     }
     public function useful($review_id){
         if(!Auth::user()){

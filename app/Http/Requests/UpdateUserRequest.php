@@ -28,7 +28,6 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($id, 'id') ,'max:255'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ];
     }
 
@@ -43,10 +42,6 @@ class UpdateUserRequest extends FormRequest
             'email.email'=> 'Vui lòng nhập đúng định dạng email! ',
             'email.max'=> 'Trường email không quá 255 ký tự! ',
             'email.string'=> 'Trường email không hợp lệ! ',
-            'password.required'=> 'Vui lòng không bỏ trống mật khẩu! ',
-            'password.string'=> 'Mật khẩu không hợp lệ! ',
-            'password.min'=> 'Mật khẩu không được nhỏ hơn 8 ký tự! ',
-            'password.confirmed'=> 'Mật khẩu xác nhận không hợp lệ! ',
         ];
     }
 

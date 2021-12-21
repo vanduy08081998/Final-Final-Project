@@ -61,9 +61,9 @@
                             @enderror
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label">Số điện thdfđfsoại</label>
+                            <label class="form-label">Số điện thoại</label>
                             {{-- regex:/(84|0[3|5|7|8|9])+([0-9]{8})/ --}}
-                            <input class="form-control" name="phone" oninvalid="setCustomValidity('Số điện thoại không đúng định dạng')" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" value="{{$shipping->phone}}" required>
+                            <input class="form-control" name="phone" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" value="{{$shipping->phone}}" required>
                             @error('phone')
                             <span style="font-size:14px" class="text-danger">{{ $message }}</span>
                             @enderror

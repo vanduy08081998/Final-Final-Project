@@ -10,6 +10,11 @@ use App\Http\Requests\AddBlogCateRequest;
 
 class BlogCateController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm danh mục bài viết', ['only' => ['store']]);
+        $this->middleware('permission:Sửa danh mục bài viết', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa danh mục bài viết', ['only' => ['destroy']]);
+    }
         /**
      * Display a listing of the resource.
      *

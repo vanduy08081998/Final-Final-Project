@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Số điện thoại</label>
-                            <input class="form-control" name="phone" oninvalid="setCustomValidity('Số điện thoại không đúng định dạng')" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" value="{{ old('phone') }}" required>
+                            <input class="form-control" name="phone" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" value="{{ old('phone') }}" required>
                             @error('phone')
                             <span style="font-size:14px" class="text-danger">{{ $message }}</span>
                             @enderror
