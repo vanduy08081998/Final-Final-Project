@@ -2,7 +2,6 @@
 
 use App\Http\Livewire\Users;
 use Spatie\Analytics\Period;
-use Spatie\Analytics\Analytics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
@@ -343,7 +342,7 @@ Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCa
 
 
 Route::get('/test', function(){
-    $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+    $analyticsData = Analytics::fetchTopBrowsers(Period::days(7));
     return view('admin.statistics.google-analytics', ['analyticsData' => $analyticsData]);
 });
 
