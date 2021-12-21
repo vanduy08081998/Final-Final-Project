@@ -30,10 +30,10 @@
                 </a>
                 <div class="ps-2">
                   <h6 class="widget-product-title"><a
-                      href="{{ URL::to('/shop/product-details', \App\Models\Product::where('product_name', $item->product_name)->first()->product_slug) }}">{{ $item->product_name }}}</a>
+                      href="{{ URL::to('/shop/product-details', \App\Models\Product::where('product_name', $item->product_name)->first()->product_slug) }}">{{ $item->product_name }}</a>
                   </h6>
                   <div class="widget-product-meta"><span
-                      class="text-accent me-2">{{ number_format($value->quantity * $item->variant_price) }}</small></span><span
+                      class="text-accent me-2">{{ number_format($value->quantity * $item->variant_price) }}₫</small></span><span
                       class="text-muted">x
                       {{ $value->quantity }}</span></div>
                 </div>
@@ -47,7 +47,7 @@
       </div>
       <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
         <div class="fs-sm me-2 py-2"><span class="text-muted">Tổng:</span><span
-            class="text-accent fs-base ms-1">{{ number_format($totalprice) }}</span></div><a
+            class="text-accent fs-base ms-1">{{ number_format($totalprice) }}₫</span></div><a
           class="btn btn-cart-view-dropdown btn-sm" href="{{ route('cart.cart-list') }}">Xem giỏ hàng</a>
       </div>
     @else
@@ -64,4 +64,3 @@
     @endif
   </div>
 </div>
-
