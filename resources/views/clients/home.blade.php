@@ -111,7 +111,7 @@
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
       <h2><strong>Sản phẩm mới nhất</strong></h2>
-      <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
+      <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="{{ route('shop.shop-grid', ['slug' => 'all-category' ]) }}">Xem thêm<i
             class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
     <!-- Grid-->
@@ -143,8 +143,8 @@
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
                     </div>
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    <div class="product-price" style="font-size: 12px; margin-top: 4px;">
+                      <span style="text-decoration: line-through; color: black;">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
                   @elseif ($product->discount == 0)
@@ -247,7 +247,7 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
       <h2><strong>Sản phẩm nổi bật</strong></h2>
       <div class="pt-3">
-        <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
+        <a class="btn btn-outline-accent btn-sm" href="{{ route('shop.shop-grid', ['slug' => 'all-category' ]) }}">Xem thêm
           <i class="ci-arrow-right ms-1 me-n1"></i>
         </a>
       </div>
@@ -281,8 +281,8 @@
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
                     </div>
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    <div class="product-price" style="font-size: 12px; margin-top: 4px;">
+                      <span style="text-decoration: line-through; color: black;">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
                   @elseif ($product->discount == 0)

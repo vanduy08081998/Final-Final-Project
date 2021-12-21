@@ -58,7 +58,7 @@ class HomeController extends Controller
         ->where('blog_status', 1)->simplePaginate(3);
         $blogCate = BlogCate::all();
         $blogs2 = Blog::orderByDESC('id')
-        ->where('blog_status', 1)->limit(3)->get();
+        ->where('blog_status', 1)->limit(5)->get();
         return view('clients.about.blog',[
             'blogs' => $blogs,
             'blogs1' => $blogs1,
@@ -93,10 +93,10 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        $infors = Information::orderByDESC('id')
-        ->where('infor_status', 1)->get();
+        $infor = Information::orderByDESC('id')
+        ->where('infor_status', 1)->first();
         return view('clients.about.contact',[
-            'infors' => $infors
+            'infor' => $infor
         ]);
     }
 

@@ -22,7 +22,6 @@
         </div>
     </div>
     <!-- Contact detail cards-->
-    @foreach ($infors as $infor)
     <section class="container pt-grid-gutter">
         <div class="row">
             <div class="col-xl-3 col-sm-6 mb-grid-gutter"><a class="card h-100" href="#map" data-scroll>
@@ -47,7 +46,7 @@
                     <div class="card-body text-center"><i class="ci-phone h3 mt-2 mb-4 text-primary"></i>
                         <h3 class="h6 mb-3">Số điện thoại</h3>
                         <ul class="list-unstyled fs-sm mb-0">
-                            <li><a class="nav-link-style" href="#">{{ $infor->phone }}</a></li>                        </ul>
+                            <li><a class="nav-link-style" href="tel:{{ $infor->phone }}">{{ $infor->phone }}</a></li>                        </ul>
                     </div>
                 </div>
             </div>
@@ -102,5 +101,4 @@
             </div>
         </div>
     </div>
-    @endforeach
 @endsection

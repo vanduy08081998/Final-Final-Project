@@ -98,8 +98,8 @@
                         <span>{{ number_format($pro->unit_price - ($pro->unit_price * $pro->discount) / 100) }}
                           ₫</span>
                       </div>
-                      <div class="product-price" style="font-size: 12px">
-                        <span style="text-decoration: line-through">{{ number_format($pro->unit_price) }}
+                      <div class="product-price" style="font-size: 13px; margin-top: 2px;">
+                        <span style="text-decoration: line-through; color: black;">{{ number_format($pro->unit_price) }}
                           ₫</span>
                       </div>
                     @elseif ($pro->discount == 0)

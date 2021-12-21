@@ -19,7 +19,7 @@
                         ngừng phát triển vươn lên, ra mắt với các siêu thị Bigdeal và cửa hàng Bigdeal+ ở Việt Nam, mang đến
                         cho người tiêu dùng sự lựa chọn đa dạng về chất lượng hàng hóa và dịch vụ, đáp ứng đầy đủ nhu cầu
                         trải nghiệm mua sắm từ bình dân đến cao cấp của mọi khách hàng.</p><a
-                        class="btn btn-primary btn-shadow" href="shop-grid-ls.html">Xem sản phẩm</a>
+                        class="btn btn-primary btn-shadow" href="{{ route('shop.shop-grid', ['slug' => 'all-category' ]) }}">Xem sản phẩm</a>
                 </div>
             </div>
         </section>
