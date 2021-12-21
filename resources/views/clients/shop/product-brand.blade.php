@@ -281,7 +281,7 @@
                                         <label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
                                     </div><span class="fs-xs text-muted">34</span>
                                 </li>
-                                
+
                             </ul>
                         </div>
                         <!-- Filter by Color-->
@@ -387,12 +387,12 @@
                     </div>
                 </div>
                 <div class="row mx-n2">
-                
+
                     <h4>Tất cả sản phẩm thuộc {{$brand_id->brand_name}}</h4>
                     <!-- Product-->
 
                     @foreach ($product_brand as $pro)
-                      
+
                         <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
                             <div class="card product-card">
                                 <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip"
@@ -446,7 +446,7 @@
                             </div>
                             <hr class="d-sm-none">
                         </div>
-     
+
                     @endforeach
                 </div>
                 <!-- Banner-->

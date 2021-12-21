@@ -153,9 +153,10 @@ class HomeController extends Controller
        ->pluck('product_id')
        ->all();
        $product_max_buy = Product::with(['reviews','comments','orders'])->whereIn('id', $count_buy)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$count_buy).")"))->first();
-        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
+       $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
 	    $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 		$get = StatisticalProduct::where('product_id', $product_max_buy->id)->whereBetween('order_date',[$sub30days,$now])->orderBy('order_date','ASC')->get();
+
 		foreach($get as $key => $val){
 			$chart_data[] = array(
 				'period' => $val->order_date,

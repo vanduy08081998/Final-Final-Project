@@ -103,16 +103,12 @@ class ProductController extends Controller
   public function searchByBrand(Request $request)
   {
 
-    if ($request->brand_key == null) {
+    if ($request->brandbox == null) {
       $products = Product::all();
     } else {
-      if ($request->brandbox == null) {
-        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->get();
-      } else {
-        $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->whereIn('product_id_brand', $request->brandbox)->get();
-      }
+      $products = Product::orderByDESC('id')->whereIn('product_id_brand', $request->brandbox)->get();
     }
-    return response()->json($products);
+    return view('clients.shop.details.search-by-brand', compact('products'));
   }
 
   public function shopList()
@@ -142,7 +138,7 @@ class ProductController extends Controller
   public function productDetails($slug)
   {
     $product = Product::where('product_slug', $slug)->first();
-    $product->update(['views'=> $product->views+1]);
+    $product->update(['views' => $product->views + 1]);
     $variants = ProductVariant::where('id_product', $product->id)->get();
     return view('clients.shop.product-details', compact('product', 'variants'));
   }
@@ -233,7 +229,6 @@ class ProductController extends Controller
           } else {
             $price = $product_stock->variant_price - ($product_stock->variant_price * $flash_deal->discount / 100);
           }
-
         }
       } else {
         if (count($product->flash_deals) == 0) {
@@ -248,7 +243,7 @@ class ProductController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          if($timestamp > $flash_deal->date_end){
+          if ($timestamp > $flash_deal->date_end) {
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
@@ -258,7 +253,7 @@ class ProductController extends Controller
             } else {
               $price = $product->unit_price;
             }
-          }else{
+          } else {
             $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
           }
         }

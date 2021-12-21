@@ -43,15 +43,23 @@ Quản lý tài khoản
                                     <td style="text-align: left">{{ $user->email }}</td>
                                     <td style="text-align: left">
                                         @foreach($user->roles as $key => $r)
+                                         @if($r->name != 'admin') 
                                         <a href="{{route('add_permissions', [$r->id])}}">
-                                            <button type="button" class="btn btn-danger font-weight-bold">
+                                            <button type="button" class="btn btn-outline-primary font-weight-bold">
                                                 <span aria-hidden="true" class="bi bi-person-check"></span>
                                                 {{$r->name}}</button>
                                         </a>
-                                        @endforeach
+                                        @else
+                                            <button type="button" class="btn btn-danger font-weight-bold">
+                                                <span aria-hidden="true" class="bi bi-person-check"></span>
+                                                {{$r->name}}</button>
+                                        @endif
+                                       
+                                        @endforeach 
                                     </td>
 
                                     <td style="text-align: left">
+                                        @if(Auth()->user()->id != $user->id)
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-success dropdown-toggle radius-30"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -74,6 +82,7 @@ Quản lý tài khoản
 
                                             </div>
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
