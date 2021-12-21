@@ -10,6 +10,11 @@ use App\Http\Requests\UpdateDiscountRequest;
 
 class DiscountController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm mã giảm giá', ['only' => ['store']]);
+        $this->middleware('permission:Sửa mã giảm giá', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa mã giảm giá', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

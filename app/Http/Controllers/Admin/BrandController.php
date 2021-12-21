@@ -16,6 +16,11 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('permission:Thêm thương hiệu', ['only' => ['store']]);
+        $this->middleware('permission:Sửa thương hiệu', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa thương hiệu', ['only' => ['destroy']]);
+    }
 
     public function index()
     {

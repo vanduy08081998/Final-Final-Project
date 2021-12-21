@@ -20,6 +20,10 @@ class BannerController extends Controller
     protected $generalService , $path;
     public function __construct(GeneralService $generalService)
     {
+        $this->middleware('permission:Thêm banner', ['only' => ['store']]);
+        $this->middleware('permission:Sửa banner', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa banner', ['only' => ['destroy']]);
+
         $this->path = 'uploads/Banner/';
         $this->generalService = $generalService;
     }

@@ -46,7 +46,7 @@
         @include('clients.shop.navbar-shop');
       </aside>
       <!-- Content  -->
-      <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
+      <section class="col-lg-9 col-sm-12 tab-content-shop" style="padding-right: 50px;">
         <!-- Toolbar-->
         <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
           <div class="d-flex flex-wrap">
@@ -75,7 +75,7 @@
         <div class="row mx-n2" id="product-short">
           <!-- Product-->
           @foreach ($product as $pro)
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2 mb-4">
               <div class="card product-card">
                 @if ($pro->discount == 0)
                 @else
@@ -92,7 +92,7 @@
                   <h3 class="product-title fs-sm text-center"><a
                       href="shop-single-v1.html">{{ Str::limit($pro->product_name, 30, '...') }}</a>
                   </h3>
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-between sale-price">
                     @if ($pro->discount != 0)
                       <div class="product-price">
                         <span>{{ number_format($pro->unit_price - ($pro->unit_price * $pro->discount) / 100) }}
@@ -106,6 +106,9 @@
                       <div class="product-price w-100 text-center">
                         <span>{{ number_format($pro->unit_price) }}
                           ₫</span>
+                      </div>
+                      <div class="product-price d-block d-sm-none" style="height: 12px">
+                        <span style="text-decoration: line-through"></span>
                       </div>
                     @endif
                   </div>
@@ -198,7 +201,7 @@
         </div>
 
         <!-- Pagination-->
-        <nav class="d-flex justify-content-center pt-2" aria-label="Page navigation">
+        <nav class="d-flex justify-content-center pt-2 col-12" aria-label="Page navigation">
           {{ $product->links() }}
         </nav>
       </section>
