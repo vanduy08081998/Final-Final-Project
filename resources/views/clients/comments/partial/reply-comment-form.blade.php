@@ -3,7 +3,7 @@
     <div class="{{ $form }} d-none form-comment-show reply-comment-{{ $value->id }}">
         <div class="form-reply-show">
             <div class="d-block">
-                <textarea class="form-control body-{{ $value->id }} form-validated" cols="2" rows="2"
+                <textarea class="form-control body-{{ $value->id }} form-validated" cols="2" rows="2" maxlength="300"
                     wire:model.lazy="comment_content"></textarea>
             </div>
             <div class="form-footer">

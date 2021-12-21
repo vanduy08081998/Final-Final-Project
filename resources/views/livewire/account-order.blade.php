@@ -62,7 +62,7 @@
                     <i class="far fa-question-circle"></i>
                 </div>
                 <div class="text-null">
-                    Bạn chưa có thông báo nào!
+                    Bạn chưa có đơn hàng nào!
                 </div>
                 <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
             </div>

@@ -81,7 +81,7 @@ $category = Category::all();
                     </a>
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
-                    href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh
+                    style="cursor: pointer" onclick="show()"><i class="ci-compare mt-n1"></i>So sánh
                 </a>
                 <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
                     href="{{ route('account.order-list') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng

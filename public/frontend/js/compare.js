@@ -7,6 +7,11 @@ function delete_compare(id) {
     }
 }
 
+
+function show() {
+    $("#sosanh").modal("show");
+}
+
 function add_compare(product_id) {
     $("#title-compare").innerText = "Chỉ cho phép so sánh 3 sản phẩm";
     var id = product_id;

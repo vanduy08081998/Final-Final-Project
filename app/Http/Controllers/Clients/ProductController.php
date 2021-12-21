@@ -62,11 +62,13 @@ class ProductController extends Controller
       $cate = null;
       $cate_id = null;
       $pro = Product::orderByDESC('id')->count();
+      $on = 0;
     } else {
       $cate = Category::where('category_slug', $slug)->first();
       $cate_id = $cate->id_cate;
       $product = Product::where('product_id_category', $cate_id)->simplePaginate(12);
       $pro = Product::orderByDESC('id')->where('product_id_category', $cate_id)->count();
+      $on = 1;
     }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
@@ -82,7 +84,8 @@ class ProductController extends Controller
       'pro' => $pro,
       'category' => $categories,
       'brands' => $brands,
-      'id_cate' => $cate_id
+      'id_cate' => $cate_id,
+      'on'=>$on
     ]);
   }
 

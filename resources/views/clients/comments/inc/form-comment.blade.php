@@ -4,7 +4,7 @@
                 <h4>Hỏi & Đáp</h4>
             </div>
             <div class="b-block">
-                <textarea class="form-control form-validated" id="form-one" cols="4" rows="4"
+                <textarea class="form-control form-validated" id="form-one" cols="4" rows="4" maxlength="300"
                     placeholder="Nhập bình luận và câu hỏi của bạn vào đây ......"></textarea>
             </div>
 

@@ -90,6 +90,32 @@ class AccountController extends Controller
        return back()->with('message','Cập nhật thành công !');
     }
 
+    public function crop(Request $request)
+    {
+        $path = 'uploads/Users/';
+        $file = $request->file('customer_avatar');
+        $new_image_name = 'UIMG'.date('Ymd').uniqid().'.jpg';
+        $upload = $file->move(public_path($path), $new_image_name);
+
+        if(!$upload){
+            return response()->json(['status'=>0, 'msg'=>'Vui lòng thử lại!']);
+        }else{
+            $oldPicture = User::find(Auth()->user()->id)->getAttributes()['avatar'];
+               if( $oldPicture != ''){
+               if(\File::exists(public_path($path.$oldPicture))){
+                \File::delete(public_path($path.$oldPicture));
+               }
+            }
+
+            $update = User::find(Auth()->user()->id)->update(['avatar'=>$new_image_name]);
+            if($upload){
+                return response()->json(['status'=>1, 'msg'=>'Thay đổi ảnh đại diện thành công']);
+            }else{
+                  return response()->json(['status'=>0, 'msg'=>'Vui lòng thử lại!']);
+            }
+        }
+    }
+
     public function notification(){
         if(!Auth::user()){
             return redirect('/login');
