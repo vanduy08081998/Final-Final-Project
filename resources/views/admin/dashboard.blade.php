@@ -10,7 +10,6 @@
     <style>
         .dash-widget-icon {
             color: white;
-            padding-top: 8%;
             float: left;
             height: 65px;
             width: 65px;
@@ -19,6 +18,9 @@
             line-height: 74px;
             background: rgba(0, 0, 0, .2);
             border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .progress {
@@ -54,8 +56,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fas fa-cart-arrow-down"></i></span>
                         <div class="dash-widget-info mb-2">
-                            <h3 class="mb-2">{{ $count_order }}</h3>
-                            <span>Đơn hàng</span>
+                            <h3 class="text-dark">{{ $count_order }}</h3>
+                            <span class="text-dark font-weight-bold">Đơn hàng</span>
                         </div>
                     </div>
                 </div>
@@ -65,8 +67,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fa fa-dropbox"></i></span>
                         <div class="dash-widget-info">
-                            <h3>{{ $count_product }}</h3>
-                            <span>Sản phẩm</span>
+                            <h3 class="text-dark">{{ $count_product }}</h3>
+                            <span class="text-dark font-weight-bold">Sản phẩm</span>
                         </div>
                     </div>
                 </div>
@@ -76,8 +78,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
                         <div class="dash-widget-info">
-                            <h3>{{ $count_user }}</h3>
-                            <span>Khách hàng</span>
+                            <h3 class="text-dark">{{ $count_user }}</h3>
+                            <span class="text-dark font-weight-bold">Khách hàng</span>
                         </div>
                     </div>
                 </div>
@@ -87,8 +89,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fas fa-newspaper"></i></span>
                         <div class="dash-widget-info">
-                            <h3>{{ $count_post }}</h3>
-                            <span>Bài viết</span>
+                            <h3 class="text-dark">{{ $count_post }}</h3>
+                            <span class="text-dark font-weight-bold">Bài viết</span>
                         </div>
                     </div>
                 </div>
@@ -392,5 +394,6 @@
                 }
             })
         });
+        
     </script>
 @endpush
