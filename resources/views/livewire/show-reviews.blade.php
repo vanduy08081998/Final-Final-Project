@@ -142,38 +142,44 @@ use Carbon\Carbon;
                         <label class="fs-sm fw-medium text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Lọc
                             theo:</label>
                         <button data-id="all"
-                            class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>Tất
+                            class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>Tất
                             cả</button>
 
                         <input
                             class="form-check-input d-none check-star-5 {{ $check == 'fivestar' ? 'check-star-active' : '' }}"
                             wire:model="checkfivestar" value="5star" type="checkbox" id="review_image_5">
                         <button data-id="5"
-                            class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>5
+                            class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>5
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-4 {{ $check == 'fourstar' ? 'check-star-active' : '' }}"
                             wire:model="checkfourstar" value="4star" type="checkbox" id="review_image_4">
                         <button data-id="4"
-                            class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>4
+                            class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>4
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-3 {{ $check == 'threestar' ? 'check-star-active' : '' }}"
                             wire:model="checkthreestar" value="3star" type="checkbox" id="review_image_3">
                         <button data-id="3"
-                            class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>3
+                            class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>3
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-2 {{ $check == 'twostar' ? 'check-star-active' : '' }}"
                             wire:model="checktwostar" value="2star" type="checkbox" id="review_image_2">
                         <button data-id="2"
-                            class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>2
+                            class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>2
                             sao</button>
                         <input
                             class="form-check-input d-none check-star-1 {{ $check == 'onestar' ? 'check-star-active' : '' }}"
                             wire:model="checkonestar" value="1star" type="checkbox" id="review_image_1">
                         <button data-id="1"
-                            class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}"><i class="ci-star-filled opacity-60 me-1"></i>1
+                            class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}"><i
+                                class="ci-star-filled opacity-60 me-1"></i>1
                             sao</button>
                     </div>
                 </div>
@@ -181,8 +187,8 @@ use Carbon\Carbon;
                     <div class="d-flex flex-nowrap align-items-center sort-review">
 
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block me-4" for="sort-reviews"> <input
-                                class="move-top form-check-input check-sort-review me-1" wire:model="image" value="review_image"
-                                type="checkbox"><span class="sort-review move-top"> Có hình ảnh
+                                class="move-top form-check-input check-sort-review me-1" wire:model="image"
+                                value="review_image" type="checkbox"><span class="sort-review move-top"> Có hình ảnh
                                 ({{ $count_review_image }})</span></label>
                         <label class="fs-sm text-nowrap me-2 d-none d-sm-block" for="sort-reviews"><input
                                 class="move-top form-check-input check-sort-review me-1" wire:model="introduce"
@@ -297,7 +303,8 @@ use Carbon\Carbon;
                                 $time = abs($second_date - $first_date);
                                 $time = floor($time / (60 * 60 * 24));
                                 ?>
-                                <button data-id="{{ $review->id }}" wire:mouseover="info_buy({{$review->id}})" wire:mouseout="none_info_buy()" class="btn-time-review fs-ms text-muted"
+                                <button data-id="{{ $review->id }}" wire:mouseover="info_buy({{ $review->id }})"
+                                    wire:mouseout="none_info_buy()" class="btn-time-review fs-ms text-muted"
                                     type="button"><i class="far fa-clock"></i> Đã dùng khoảng
                                     {{ $time }} ngày</button>
 
@@ -351,7 +358,8 @@ use Carbon\Carbon;
                                                 $useful_child_array = explode(',', $useful_child);
                                                 $count_child_useful = count($useful_child_array) - 1;
                                             @endphp
-                                            <div class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom">
+                                            <div
+                                                class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom out-parent-load-review load-show-{{ $review->id }}">
                                                 <div class="d-flex mb-2">
                                                     <div class="d-flex align-items-center me-4">
                                                         @if (!$review_child->user->avatar)
@@ -432,6 +440,19 @@ use Carbon\Carbon;
                                             </div>
                                         @endif
                                     @endforeach
+                                    @if ($review->review_child->count() > 2)
+                                        <div class="mt-2 content-load-more-parent content-{{ $review->id }}">
+                                            <span class="load-more" onclick="loadMore({{ $review->id }})"><i
+                                                    class="far fa-comments"></i>...
+                                                Xem thêm
+                                                ... <i class="far fa-comments"></i></span>
+                                        </div>
+                                        <div
+                                            class="mt-2 d-none content-load-more-parent content-none-{{ $review->id }}">
+                                            <span class="load-more" onclick="upMore({{ $review->id }})">Ẩn
+                                                bớt &nbsp;<i class="fas fa-chevron-up"></i></span>
+                                        </div>
+                                    @endif
                                 @endif
 
                             </div>
@@ -573,16 +594,16 @@ use Carbon\Carbon;
             $('.check-star-active').click();
             $("#review_image_" + sort_filterstar).click();
             $(".check-star-" + sort_filterstar).addClass('check-star-active');
-            
+
         })
-        $('.move-top').click(function(){
+        $('.move-top').click(function() {
             setTimeout(function() {
                 $('html, body').animate({
                     scrollTop: $('#div_id').position().top
                 }, 'slow');
             }, 1000);
         })
-    
+
 
         $('.show-full-image').click(function() {
             var key = $(this).data('id');
@@ -632,6 +653,22 @@ use Carbon\Carbon;
             text = text.replace(/gớm/gi, "");
             text = text.replace(/tởm/gi, "");
             return text;
+        }
+
+        function loadMore(id) {
+            let loadMore = $('.load-show-' + id + ':hidden')
+            loadMore.slice(0, 4).slideDown();
+            if (loadMore.length == 0) {
+                $('.content-' + id).addClass('d-none')
+                $('.content-none-' + id).removeClass('d-none')
+            }
+        }
+
+        function upMore(id) {
+            let loadMore = $('.load-show-' + id)
+            loadMore.slice(2, 20).slideUp();
+            $('.content-' + id).removeClass('d-none')
+            $('.content-none-' + id).addClass('d-none')
         }
     </script>
 @endpush

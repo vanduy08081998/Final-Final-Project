@@ -7,7 +7,7 @@ use Carbon\Carbon;
         <div class="col-md-12 col-sm-12 review-border">
             <h4 class="col-lg-12 mb-2 fw-bold "> Đánh giá {{ $product->product_name }}
             </h4>
-            <div class="row pt-2 pb-3" id="div_id">
+            <div class="row pt-2 pb-3">
                 <div class="col-lg-5 col-md-5 border-end ps-4 pe-4">
                     <div class="div-star">
                         <h3 class="d-inline-block fw-bold me-1">{{ $avg }}</h3>
@@ -182,7 +182,7 @@ use Carbon\Carbon;
                                             }
                                         }
                                     @endphp
-                                    <div  style="position: relative" class="text-nowrap">
+                                    <div style="position: relative" class="text-nowrap">
                                         @if (in_array($id_user, $useful_array))
                                             <button class="btn-review text-primary"
                                                 wire:click.prevent="un_useful({{ $review->id }})"><i
@@ -208,13 +208,13 @@ use Carbon\Carbon;
                                         $first_date = strtotime($review->time_buy);
                                         $second_date = strtotime($review->created_at);
                                         $time = abs($second_date - $first_date);
-                                        $time = floor($time / (60*60*24));
+                                        $time = floor($time / (60 * 60 * 24));
                                         ?>
 
-                                        <button data-id="{{$review->id}}" class="btn-time-review fs-ms text-muted" type="button"><i
-                                                class="far fa-clock"></i> Đã dùng khoảng
+                                        <button data-id="{{ $review->id }}" class="btn-time-review fs-ms text-muted"
+                                            type="button"><i class="far fa-clock"></i> Đã dùng khoảng
                                             {{ $time }} ngày</button>
-                                        <div class="info-buying info_buy_{{$review->id}} d-none">
+                                        <div class="info-buying info_buy_{{ $review->id }} d-none">
                                             <div class="info-buying-close"></div>
                                             <div class="info-buying-text">
 
@@ -232,11 +232,12 @@ use Carbon\Carbon;
                                             <div class="length-using">
                                                 <div class="length-percent" style="width:70%"></div>
                                             </div>
-                                            <p class="timeline-txt"> Đã dùng <span>Khoảng {{$time}} ngày</span></p>
+                                            <p class="timeline-txt"> Đã dùng <span>Khoảng {{ $time }}
+                                                    ngày</span></p>
 
                                             <ul style="list-style: none;" class="info-buying-list">
                                                 <li><span></span>Ở thời điểm đánh giá, khách đã mua sản <br> phẩm khoảng
-                                                    {{$time}} ngày</li>
+                                                    {{ $time }} ngày</li>
                                                 <li><span></span>Thời gian sử dụng thực tế có thể bằng hoặc <br>ít hơn
                                                     khoảng thời gian này.</li>
                                             </ul>
@@ -396,13 +397,13 @@ use Carbon\Carbon;
 
 @push('script')
     <script>
-        $('.btn-time-review').mouseover(function(){
+        $('.btn-time-review').mouseover(function() {
             let id = $(this).data('id');
-            $('.info_buy_'+id).removeClass('d-none');
+            $('.info_buy_' + id).removeClass('d-none');
         })
-        $('.btn-time-review').mouseout(function(){
+        $('.btn-time-review').mouseout(function() {
             let id = $(this).data('id');
-            $('.info_buy_'+id).addClass('d-none');
+            $('.info_buy_' + id).addClass('d-none');
         })
         let myContent = document.getElementById("content_rating");
         myContent.addEventListener("input", () => {

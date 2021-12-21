@@ -5,12 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Auth;
-
-
 
 class AccountOrder extends Component
 {
+    use WithPagination;
+
     public $select, $order_details = [],$orderId = [];
     protected $listeners = [
         'orderDetail'
@@ -26,10 +27,12 @@ class AccountOrder extends Component
     {
         if($this->select){
             if($this->select == 'latest'){
-                $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'ASC')->paginate(8);
+                $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'ASC')->paginate(10);
+            }else{
+                $orders = Order::where('delivery_viewed', $this->select)->latest()->paginate(10);
             }
         }else{
-            $orders = Order::where('user_id', Auth::user()->id)->latest()->paginate(8);
+            $orders = Order::where('user_id', Auth::user()->id)->latest()->paginate(10);
         }
         return view('livewire.account-order', compact('orders'));
     }

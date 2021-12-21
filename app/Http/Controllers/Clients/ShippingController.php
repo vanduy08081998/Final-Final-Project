@@ -71,7 +71,7 @@ class ShippingController extends Controller
         }
         Shipping::create($data);
         Toastr::success('Thêm địa chỉ thành công', 'Chúc mừng');
-        return redirect()->route('account.account-address');
+        return redirect()->back();
     }
 
     /**

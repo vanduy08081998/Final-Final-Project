@@ -4,9 +4,15 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Notification;
 use Livewire\Component;
+use Livewire\WithPagination;
+
 
 class Notifica extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+    
     public $comment, $review, $order;
     protected $listeners = [
         'render' => 'render',
