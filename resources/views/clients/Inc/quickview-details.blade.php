@@ -47,42 +47,45 @@
           <div class="price-and-icon mb-3 bg-light">
 
             <div class="product-price">
-              <div class="product-price__current-price ">
-                <h5>Giá gốc: </h5>
-                @if (count($product->flash_deals) == 0)
-                  @if ($product->discount_unit == '%')
-                    <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
-                      ₫</span>
-                    @if ($product->discount == 0)
-                    @else
-                      <small class="text-muted"
-                        style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
-                        ₫</small>
-                    @endif
+             <div class="product-price__current-price ">
+              <h5>Giá gốc: </h5>
+              @php
+                  $timestamp = time();
+              @endphp
+              @if (count($product->flash_deals) == 0)
+                @if ($product->discount_unit == '%')
+                  <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                    ₫</span>
+                  @if ($product->discount == 0)
                   @else
-                    {{ number_format($product->unit_price - $product->discount) }}
+                    <small class="text-muted"
+                      style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                      ₫</small>
                   @endif
                 @else
-                  @php
-                    $flash_deal = $product->flash_deals()->first();
-                  @endphp
-                  @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
-                    <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
-                      ₫</span>
-                    <small class="text-muted"
-                      style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
-                      ₫</small>
-                  @else
-                    <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
-                      ₫</span>
-                    <small class="text-muted"
-                      style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
-                      ₫</small>
-                  @endif
-
+                  {{ number_format($product->unit_price - $product->discount) }}
+                @endif
+              @else
+                @php
+                  $flash_deal = $product->flash_deals()->first();
+                @endphp
+                @if ($timestamp > $flash_deal->date_end)
+                  <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                    ₫</span>
+                  <small class="text-muted"
+                    style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    ₫</small>
+                @else
+                  <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
+                    ₫</span>
+                  <small class="text-muted"
+                    style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    ₫</small>
                 @endif
 
-              </div>
+              @endif
+
+            </div>
             </div>
 
             @if (count($product->flash_deals) == 0)
@@ -90,20 +93,26 @@
             @else
               @php
                 $flash_deal = $product->flash_deals()->first();
+                $timestamp = time();
               @endphp
-              <div class="_314-b55619"><a href="#!" class="">
-                  <div class="_314-2d0405 d7e-a90f22 d7e-04f3bc d7e-2243f4"
-                    style="background-image: url(&quot;https://media3.scdn.vn/img4/2020/06_18/FBnN0sGbAeXbPuZ7IIWp.png&quot;);">
-                    <img src="https://media3.scdn.vn/img4/2020/06_18/jaGsAfx1dzgHf82AyWSI.png" alt="flash-sale"
-                      class="_314-919f69">
-                    <div class="_314-65a424">
-                      <div class="_314-e778ac" data-date="{{ date('Y/m/d h:i:s', $flash_deal->date_end) }}"></div>
+
+              @if ($timestamp > $flash_deal->date_end)
+
+              @else
+                <div class="_314-b55619"><a href="#!" class="">
+                    <div class="_314-2d0405 d7e-a90f22 d7e-04f3bc d7e-2243f4"
+                      style="background-image: url(&quot;https://media3.scdn.vn/img4/2020/06_18/FBnN0sGbAeXbPuZ7IIWp.png&quot;);">
+                      <img src="https://media3.scdn.vn/img4/2020/06_18/jaGsAfx1dzgHf82AyWSI.png" alt="flash-sale"
+                        class="_314-919f69">
+                      <div class="_314-65a424">
+                        <div class="_314-e778ac" data-date="{{ date('Y/m/d h:i:s', $flash_deal->date_end) }}">
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </a></div>
+                  </a>
+                </div>
+              @endif
             @endif
-
-
           </div>
           @if ($product->choice_options != null)
             @forelse (json_decode($product->choice_options) as $option)

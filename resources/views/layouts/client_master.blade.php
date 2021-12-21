@@ -10,6 +10,8 @@
     @yield('meta')
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- gg console --}}
+    <meta name="google-site-verification" content="GOyVzGpIuj8DX2h8ZWqsaDqmbyByGWQJqu9aSPhfSLQ" />
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
@@ -54,7 +56,6 @@
         dataLayer.push(arguments);
     }
     gtag('js', new Date());
-
     gtag('config', 'G-CFSNQ4FS84');
 </script>
 
@@ -84,7 +85,6 @@
                 $('#' + result).html(data);
             }
         })
-
 
     }
 </script>
@@ -145,7 +145,7 @@
                             <span class="badge bg-primary rounded-pill ms-1">0</span>
                         </span>
 
-                        <span class="handheld-toolbar-label">Chưa có gì trong giỏ hàng</span>
+                        <span class="handheld-toolbar-label">Giỏ hàng</span>
                     </a>
                 @endif
 
@@ -157,10 +157,31 @@
                     <span class="handheld-toolbar-label">Bạn chưa đăng nhập</span>
                 </a>
             @endguest
-            <a class="d-table-cell handheld-toolbar-item" href="#">
-                <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
-                <span class="handheld-toolbar-label">Tài khoản</span>
-            </a>
+            @if (Auth::user())
+                <a class="d-table-cell handheld-toolbar-item" href="{{ route('account.account-info') }}">
+                    <span class="handheld-toolbar-icon">
+                        @if (Auth::user()->avatar)
+                            @if (Auth::user()->provider_id == null)
+                                <img class="customer_picture"
+                                    src="{{ URL::to('uploads/Users/', Auth::user()->avatar) }}" width="20"
+                                    alt="avatar" style="border-radius:50%;">
+                            @else
+                                <img class="customer_picture" src="{{ URL::to(Auth::user()->avatar) }}" width="90"
+                                    alt="avatar" style="border-radius:50%;">
+                            @endif
+                        @else
+                            <img class="customer_picture" src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                                width="25" alt="avatar">
+                        @endif
+                    </span>
+                    <span class="handheld-toolbar-label">Tài khoản</span>
+                </a>
+            @else
+                <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
+                    <span class="handheld-toolbar-icon"><i class="ci-user"></i></span>
+                    <span class="handheld-toolbar-label">Tài khoản</span>
+                </a>
+            @endif
         </div>
     </div>
     {{-- Chatbox button --}}
@@ -180,6 +201,7 @@
 
     <!-- Vendor scrits: js libraries and plugins-->
     <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
+
     <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
@@ -216,8 +238,6 @@
     <script src="{{ asset('frontend/js/compare.js') }}"></script>
     <script src="{{ asset('frontend/js/quickview.js') }}"></script>
     <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
-    <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-    <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
     <script>
         $('.input-images-1').imageUploader();
@@ -233,7 +253,6 @@
                 "progressBar": true,
             };
         })
-
         $(document).on('click', '#change_avatar', function() {
             $('#customer_avatar').click();
         })
@@ -252,52 +271,6 @@
                 alert(message);
             }
         });
-
-        $(document).on('click', '.dropdown-item', function() {
-            var href = $(this).attr('href');
-            window.location.href = href;
-        })
-    </script>
-    <script>
-        $(".preloader").fadeOut(600);
-    </script>
-    <script>
-        $(document).ready(function() {
-            $(window).scroll(function(event) {
-                var pos_body = $('html,body').scrollTop();
-                //   console.log(pos_body);
-                if (pos_body > 545.4545288085938) {
-                    $('.banner-main').addClass('banner-fixed');
-                }
-                if (pos_body < 545.4545288085938) {
-                    $('.banner-main').removeClass('banner-fixed');
-                }
-            });
-        });
-    </script>
-
-    <script>
-        $('body').resize(function() {
-                const width = $('body').width();
-                console.log(width)
-                if (width < 1024) {
-                    $('.card-body').removeClass('card-body-hidden');
-                }
-            })
-            .resize()
-    </script>
-
-    <script>
-        $(document).on('click', '.move-top', function() {
-            setTimeout(function() {
-                $('html, body').animate({
-                    scrollTop: $('#div_id').position().top
-                }, 'slow');
-            }, 1000);
-        })
-    </script>
-
-    <script>
         $(document).on('click', '.dropdown-item', function() {
             var href = $(this).attr('href');
             window.location.href = href;
@@ -323,7 +296,6 @@
             });
         });
     </script>
-
     <script>
         $('body').resize(function() {
                 const width = $('body').width();
@@ -334,7 +306,6 @@
             })
             .resize()
     </script>
-
 </body>
 
 </html>

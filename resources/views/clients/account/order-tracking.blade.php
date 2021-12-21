@@ -46,54 +46,67 @@
         <!-- Progress-->
         <div class="card border-0 shadow-lg">
             <div class="card-body pb-2">
+
                 <ul class="nav nav-tabs media-tabs nav-justified">
-                    <li class="nav-item">
-                        <div
-                            class="nav-link {{ $order->delivery_viewed == 2 ? 'active' : '' }} {{ $order->delivery_viewed > 2 ? 'completed' : '' }}">
-                            <div class="d-flex align-items-center">
-                                <div class="media-tab-media"><i class="ci-bag"></i></div>
-                                <div class="ps-3">
-                                    <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 1:</div>
-                                    <h6 class="media-tab-title text-nowrap mb-0">Xác nhận đơn hàng</h6>
+                    @if ($order->delivery_viewed != 6)
+                        <li class="nav-item">
+                            <div
+                                class="nav-link {{ $order->delivery_viewed == 2 ? 'active' : '' }} {{ $order->delivery_viewed > 2 ? 'completed' : '' }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="media-tab-media"><i class="ci-bag"></i></div>
+                                    <div class="ps-3">
+                                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 1:</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">Xác nhận đơn hàng</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div
-                            class="nav-link {{ $order->delivery_viewed == 3 ? 'active' : '' }} {{ $order->delivery_viewed > 3 ? 'completed' : '' }}">
-                            <div class="d-flex align-items-center">
-                                <div class="media-tab-media"><i class="ci-settings"></i></div>
-                                <div class="ps-3">
-                                    <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 2:</div>
-                                    <h6 class="media-tab-title text-nowrap mb-0">Đóng gói và giao hàng</h6>
+                        </li>
+                        <li class="nav-item">
+                            <div
+                                class="nav-link {{ $order->delivery_viewed == 3 ? 'active' : '' }} {{ $order->delivery_viewed > 3 ? 'completed' : '' }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="media-tab-media"><i class="ci-settings"></i></div>
+                                    <div class="ps-3">
+                                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 2:</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">Đóng gói và giao hàng</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div
-                            class="nav-link {{ $order->delivery_viewed == 4 ? 'active' : '' }} {{ $order->delivery_viewed > 4 ? 'completed' : '' }}">
-                            <div class="d-flex align-items-center">
-                                <div class="media-tab-media"><i class="ci-star"></i></div>
-                                <div class="ps-3">
-                                    <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 3:</div>
-                                    <h6 class="media-tab-title text-nowrap mb-0">Đang giao hàng</h6>
+                        </li>
+                        <li class="nav-item">
+                            <div
+                                class="nav-link {{ $order->delivery_viewed == 4 ? 'active' : '' }} {{ $order->delivery_viewed > 4 ? 'completed' : '' }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="media-tab-media"><i class="ci-star"></i></div>
+                                    <div class="ps-3">
+                                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 3:</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">Đang giao hàng</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item {{ $order->delivery_viewed == 5 ? 'completed' : '' }}">
-                        <div class="nav-link">
-                            <div class="d-flex align-items-center">
-                                <div class="media-tab-media"><i class="ci-package"></i></div>
-                                <div class="ps-3">
-                                    <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 4:</div>
-                                    <h6 class="media-tab-title text-nowrap mb-0">Đã giao hàng</h6>
+                        </li>
+                        <li class="nav-item {{ $order->delivery_viewed == 5 ? 'completed' : '' }}">
+                            <div class="nav-link">
+                                <div class="d-flex align-items-center">
+                                    <div class="media-tab-media"><i class="ci-package"></i></div>
+                                    <div class="ps-3">
+                                        <div class="media-tab-subtitle text-muted fs-xs mb-1">Bước 4:</div>
+                                        <h6 class="media-tab-title text-nowrap mb-0">Đã giao hàng</h6>
+                                    </div>
                                 </div>
                             </div>
+                        </li>
+                    @else
+                        <div class="nullable">
+                            <div class="icon-null">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="text-null">
+                                Đơn hàng đã bị hủy!
+                            </div>
+                            <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
                         </div>
-                    </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -154,7 +167,7 @@
                                 </div>
                             </div>
                         @empty
-                            <h1>Chả có gì</h1>
+                            <h1>Đơn hàng của bạn bị trống</h1>
                         @endforelse
 
                     </div>

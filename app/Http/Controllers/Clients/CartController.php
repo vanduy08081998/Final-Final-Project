@@ -8,12 +8,14 @@ use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CartController extends Controller
 {
   public function addToCart(Request $request)
   {
 
+    $timestamp = time();
     if (auth()->check()) {
       $product = Product::where('id', $request->product_id)->first();
       $choice_options = array();
@@ -56,7 +58,7 @@ class CartController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0) {
+          if ($timestamp > $flash_deal->date_end) {
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
@@ -86,7 +88,7 @@ class CartController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          if(strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0){
+          if($timestamp > $flash_deal->date_end){
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
@@ -216,5 +218,11 @@ class CartController extends Controller
       return response()->json(['totalprice' => $totalprice]);
     } else {
     }
+  }
+
+  public function carDeleteDefault($id){
+    Cart::find($id)->delete();
+    Toastr::success('Xóa thành công','Chúc mừng !');
+    return redirect()->back();
   }
 }
