@@ -24,11 +24,6 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="ml-auto">
-                        <div class="btn-group">
-                            <a href="{{ route('brand.create') }}" class="btn btn-primary radius-30">Bình luận</a>
-                        </div>
-                    </div>
                 </div>
                 <div class="card">
                     <form action="#" method="POST">

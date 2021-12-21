@@ -55,10 +55,10 @@ class HomeController extends Controller
         $blogs = Blog::orderByDESC('id')
         ->where('blog_status', 1)->get();
         $blogs1 = Blog::orderByDESC('id')
-        ->where('blog_status', 1)->get();
+        ->where('blog_status', 1)->simplePaginate(3);
         $blogCate = BlogCate::all();
         $blogs2 = Blog::orderByDESC('id')
-        ->where('blog_status', 1)->limit(5)->get();
+        ->where('blog_status', 1)->limit(3)->get();
         return view('clients.about.blog',[
             'blogs' => $blogs,
             'blogs1' => $blogs1,

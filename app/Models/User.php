@@ -35,6 +35,7 @@ class User extends Authenticatable
         'neighbor',
         'position',
         'password',
+        'user_status'
     ];
 
      /**
@@ -94,6 +95,10 @@ class User extends Authenticatable
 
     public function notification(){
         return $this->hasMany(Notification::class, 'id_user');
+    }
+
+    public function unsatisfied(){
+        return $this->belongsToMany(Comment::class, 'Unsatisfied');
     }
 
 }

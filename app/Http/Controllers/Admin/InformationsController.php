@@ -92,10 +92,10 @@ class InformationsController extends Controller
 
     public function statusInfor(Request $request)
     {
+        $infor1 = Information::where('id', '!=', $request->id);
+        $infor1->update(['infor_status' => 2]);
         $infor = Information::find($request->id);
-        $infor->update([
-            'infor_status' => $request->value
-        ]);
+        $infor->update(['infor_status' => 1]);
     }
 
 }

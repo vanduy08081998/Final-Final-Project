@@ -12,11 +12,11 @@
 //     });
 // });
 
-$('body').resize(function(){
-    const width = $('body').width();
-    // console.log(width)
-    if(width < 1024){
-        $('#card-body').removeClass('card-body-hidden');
-    }
-})
-.resize()
+// $('body').resize(function(){
+//     const width = $('body').width();
+//     // console.log(width)
+//     if(width < 1024){
+//         $('#card-body').removeClass('card-body-hidden');
+//     }
+// })
+// .resize()
