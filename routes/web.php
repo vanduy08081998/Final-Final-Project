@@ -172,6 +172,8 @@ Route::prefix('/')->group(function () {
 });
 
 /*****************************************************************  Admin ***********************************************************************/
+
+Route::group(['middleware' => ['role:admin|editor|author|published']], function () {
 Route::group(['prefix' => 'admin'], function () {
     // Dashboard
         Route::get('/', [HomeController::class, 'index'])->name('admin.index');
@@ -225,7 +227,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('filemanager', function () {
             echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
-        })->name('filemanager');
+        })->name('filemanager')->permission('QL files');
 
         //Blog
         Route::resource('blogCate', BlogCateController::class);
@@ -289,6 +291,8 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');  
 });
+
+ });
 //Thống kê
 Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
 Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date'])->name('filter_by_date');
@@ -298,6 +302,8 @@ Route::post('/chart_product_line',  [HomeController::class, 'chart_product_line'
 Route::post('/chart_product_max',  [HomeController::class, 'chart_product_max'])->name('chart_product_max');
 Route::post('/filter-by-date-product',  [HomeController::class, 'filter_by_date_product'])->name('filter_by_date_product');
 Route::post('/dashboard-filter-product',  [HomeController::class, 'dashboard_filter_product'])->name('dashboard_filter_product');
+
+
 
 //paypal
 Route::prefix('api/paypal')->group(function(){

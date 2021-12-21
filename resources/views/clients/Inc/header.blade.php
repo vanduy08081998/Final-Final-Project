@@ -107,6 +107,8 @@ $category = Category::all();
                     <input class="form-control rounded-start w-100 search-input"
                         style="border-radius: 25px 0 0 25px !important;" name="key" id="search" type="text"
                         placeholder="Tìm kiếm sản phẩm" required>
+
+                        
                     <select class="form-select flex-shrink-0" style="width: 10.5rem;" name="category">
                         <option name="category" value="0">Tất cả</option>
                         @foreach ($category as $cate)

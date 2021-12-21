@@ -20,7 +20,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">P</span>
                         </div>
-                        <input wire:model="phone" type="number" class="form-control" placeholder="Số điện thoại">
+                        <input wire:model="phone" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" class="form-control" placeholder="Số điện thoại">
                     </div>
                     @error('phone')
                     <span style="font-size:14px" class="text-danger">{{$message}}</span>

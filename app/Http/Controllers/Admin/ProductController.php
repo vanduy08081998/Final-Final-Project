@@ -31,6 +31,10 @@ class ProductController extends Controller
 
   public function __construct(GeneralService $generalService)
   {
+    $this->middleware('permission:Thêm sản phẩm', ['only' => ['store']]);
+    $this->middleware('permission:Sửa sản phẩm', ['only' => ['edit']]);
+    $this->middleware('permission:Xóa sản phẩm', ['only' => ['destroy']]);
+
     $this->path = 'frontend/img/shop/products/';
     $this->generalService = $generalService;
   }

@@ -16,6 +16,11 @@ use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Xóa khách hàng', ['only' => ['destroy']]);
+        $this->middleware('permission:Danh sách khách hàng', ['only' => ['list_customer']]);
+        $this->middleware('permission:Lịch sử mua', ['only' => ['history']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -97,9 +102,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $userId = User::find($id);
-        dd($userId);
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
         $userId->update($data);
         return back()->with('message','Cập nhật tài khoản thành công');
     }
@@ -184,7 +187,7 @@ class UserController extends Controller
     public function add_permissions($id)
     {
         $role = Role::find($id);
-        $all_permissions = Permission::latest()->get();
+        $all_permissions = Permission::latest('id','ASC')->get();
         $permissions_by_role = $role->permissions->pluck('id')->all();
         return view('admin.users.assign_permissions')->with(compact('role','all_permissions','permissions_by_role'));
     }

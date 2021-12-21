@@ -3,15 +3,6 @@
 @section('title', __('Forbidden'))
 @section('code', '403')
 @section('message', __($exception->getMessage() ?: 'Forbidden'))
-
-@extends('admin.layouts.master')
-
-@section('title')
-Thêm tài khoản
-@endsection
-
-@section('content')
-
 <div class="content container-fluid">
     @include('admin.inc.page-header',['bread_title' => '', 'bread_item' => ''])
     <div class="row">
@@ -1485,4 +1476,4 @@ svg{
 .st31{fill:#9799A2;}
 </style>
 
-@endsection
+

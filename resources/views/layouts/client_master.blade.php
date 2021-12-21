@@ -236,6 +236,11 @@
 
   <script>
     $('.input-images-1').imageUploader();
+
+    $('.product-search-header').click(function(){
+      var let = $(this).data('url');
+      alert(let);
+    })
   </script>
   {!! Toastr::message() !!}
   @include('sweetalert::alert')
