@@ -5,6 +5,7 @@ jQuery(document).ready(function($) {
         currency: 'VND',
         minimumFractionDigits: 0
     })
+
     var engine = new Bloodhound({
         remote: {
             url: url_to+'/search?key=%QUERY%',
@@ -17,8 +18,9 @@ jQuery(document).ready(function($) {
     $(".search-input").typeahead({
         hint: true,
         highlight: true,
-        minLength: 1
+        minLength: 3
     }, {
+        displayKey: 'value',
         source: engine.ttAdapter(),
         name: 'productList',
         templates: {
