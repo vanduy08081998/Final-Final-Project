@@ -7,6 +7,10 @@ function delete_compare(id) {
     }
 }
 
+function show() {
+    $("#sosanh").modal("show");
+}
+
 function add_compare(product_id) {
     $("#title-compare").innerText = "Chỉ cho phép so sánh 3 sản phẩm";
     var id = product_id;
@@ -28,7 +32,7 @@ function add_compare(product_id) {
         localStorage.setItem("compare", "[]");
     }
     var old_data = JSON.parse(localStorage.getItem("compare"));
-    var matches = $.grep(old_data, function (obj) {
+    var matches = $.grep(old_data, function(obj) {
         return obj.id == id;
     });
 
@@ -37,6 +41,8 @@ function add_compare(product_id) {
             "Sản phẩm đã có trong so sánh",
             "Xin mời chọn sản phẩm khác"
         );
+        $("#sosanh").modal("show");
+
         //   alert('Sản phẩm đã có trong so sánh');
         localStorage.setItem("compare", JSON.stringify(old_data));
         // $('#sosanh').modal('show');
@@ -77,7 +83,7 @@ function add_compare(product_id) {
                        </div>
                    </div>`;
             //foreach item conten ra gắn vào list_compare
-            $.each(JSON.parse(newItem.content), function (index, value) {
+            $.each(JSON.parse(newItem.content), function(index, value) {
                 list_compare += `<li>${value.specifications}: ${value.value}</li>`;
             });
             $("#row_compare").find(".anh").append(html);
@@ -86,6 +92,8 @@ function add_compare(product_id) {
             $("#sosanh").modal("show");
         } else {
             toastr.error("Chỉ có thể so sánh tối đa 3 sản phẩm", "Rất tiếc");
+            $("#sosanh").modal("show");
+
         }
         localStorage.setItem("compare", JSON.stringify(old_data));
     }

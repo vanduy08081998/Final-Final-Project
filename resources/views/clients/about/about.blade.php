@@ -14,7 +14,7 @@
             <div class="col-md-6 px-3 px-md-5 py-5">
                 <div class="mx-auto py-lg-5" style="max-width: 35rem;">
                     <h2 class="h3 pb-3">Tìm kiếm, lựa chọn, mua sắm trực tuyến</h2>
-                    <p class="fs-sm pb-3 text-muted"> Siêu thị và cửa hàng Bigdeal và Bigdeal+ là hai thương hiệu bán lẻ
+                    <p style="margin-right:-10%; text-align:justify" class="fs-sm pb-3 text-muted"> Siêu thị và cửa hàng Bigdeal và Bigdeal+ là hai thương hiệu bán lẻ
                         thuộc Tập Đoàn Trường Anh Group. Ra đời từ năm 2021 cho đến nay, hệ thống Bigdeal & Bigdeal+ không
                         ngừng phát triển vươn lên, ra mắt với các siêu thị Bigdeal và cửa hàng Bigdeal+ ở Việt Nam, mang đến
                         cho người tiêu dùng sự lựa chọn đa dạng về chất lượng hàng hóa và dịch vụ, đáp ứng đầy đủ nhu cầu
@@ -29,15 +29,16 @@
                 style="min-height: 15rem; background-image: url({{ asset('frontend/img/about/02.jpg') }});"></div>
             <div class="col-md-6 px-3 px-md-5 py-5 order-md-1">
                 <div class="mx-auto py-lg-5" style="max-width: 35rem;text-align: justify;">
-                    <h2 class="h3 pb-3">Chính sách giao nhận hàng</h2>
-                    <p class="fs-sm pb-3 text-muted"><b>Khi nhận hàng, quý khách hàng cần lưu ý thực hiện:</b>
+
+                    <h2 class="h3 pb-3">Chính sách về giao hàng và nhận hàng</h2>
+                    <p class="fs-sm pb-3 text-muted"><b style="color: black">Khi nhận hàng, quý khách hàng cần lưu ý thực hiện:</b>
                     <p>- Mở gói hàng và đối chiếu hàng hóa với hoá đơn tính tiền</p>
                     <p>- Kiểm tra sản phẩm thực tế có đúng với sản phẩm mà Khách hàng đã đặt mua hay không.</p>
                     <p>- Kiểm tra bao bì và sản phẩm có bị hư hại do quá trình vận chuyển hay không.</p>
                     <p> Nếu không hài lòng với 1 trong 3 điều trên, khách hàng có thể yêu cầu nhân viên giao hàng xác nhận
-                        và trả lại hàng.</p>
-                    Nếu không hài lòng với 1 trong 3 điều trên, khách hàng có thể yêu cầu nhân viên giao hàng xác nhận và
-                    trả lại hàng.
+                        và trả lại hàng.
+                    </p>
+
                     <p>
                         Bigdeal sẽ không chịu trách nhiệm giải quyết khiếu nại về việc thiếu hàng hoặc giao sai hàng của
                         khách hàng sau khi khách hàng đã ký nhận và thanh toán.</p>
@@ -54,7 +55,7 @@
             <div class="col-md-6 px-3 px-md-5 py-5">
                 <div class="mx-auto py-lg-5" style="max-width: 35rem;text-align: justify;">
                     <h2 class="h3 pb-3">Chính sách bảo mật thông tin</h2>
-                    <p class="fs-sm pb-3 text-muted">Chúng tôi cam kết sẽ bảo mật các Thông tin cá nhân của khách hàng, sẽ
+                    <p style="margin-right:-10%" class="fs-sm pb-3 text-muted">Chúng tôi cam kết sẽ bảo mật các Thông tin cá nhân của khách hàng, sẽ
                         nỗ lực hết sức và sử dụng các biện pháp thích hợp để các thông tin mà khách hàng cung cấp cho chúng
                         tôi trong quá trình sử dụng website & ứng dụng này được bảo mật và bảo vệ khỏi sự truy cập trái
                         phép. Tuy nhiên, Bigdeal không đảm bảo ngăn chặn được tất cả các truy cập trái phép. Công ty CP

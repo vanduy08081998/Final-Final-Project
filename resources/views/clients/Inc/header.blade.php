@@ -57,7 +57,7 @@ $category = Category::all();
             @endif
           </li>
           <li>
-            <a class="dropdown-item" href="comparison.html">
+            <a class="dropdown-item" href="comparison.html" >
               <i class="ci-compare text-muted me-2"></i>So sánh</a>
           </li>
           <li>
@@ -79,7 +79,7 @@ $category = Category::all();
             {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
           </a>
         @endif
-        <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i
+        <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" style="cursor: pointer"onclick="show()"><i
             class="ci-compare mt-n1"></i>So sánh
         </a>
         <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
