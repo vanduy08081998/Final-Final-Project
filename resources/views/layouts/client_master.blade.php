@@ -48,71 +48,44 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFSNQ4FS84"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-CFSNQ4FS84');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-CFSNQ4FS84');
 </script>
 
 <!-- Body-->
 <script>
-<<<<<<< HEAD
-    function fee() {
-        $(document).on('change', '.choose', function() {
-            var url = $('.route').data('url');
-            var action = $(this).attr("id");
-            var ma_id = $(this).val();
-            var result = '';
-            if (action == 'province') {
-                result = 'district';
-            } else {
-                result = 'ward';
-            }
-            $.ajax({
-                url: url,
-                method: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    action: action,
-                    ma_id: ma_id
-                },
-                success: function(data) {
-                    $('#' + result).html(data);
-                }
-            })
-        })
-
-=======
- function fee(action) {
+    function fee(action) {
         var url = $('.route').data('url');
-        var ma_id = $('chose_'+action).val();
-      
+        var ma_id = $('chose_' + action).val();
+
         var result = '';
         if (action == 'province') {
-          result = 'district';
+            result = 'district';
         } else {
-          result = 'ward';
+            result = 'ward';
         }
         $.ajax({
-          url: url,
-          method: "POST",
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          data: {
-            action: action,
-            ma_id: ma_id
-          },
-          success: function(data) {
-            $('#' + result).html(data);
-          }
+            url: url,
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                action: action,
+                ma_id: ma_id
+            },
+            success: function(data) {
+                $('#' + result).html(data);
+            }
         })
 
-  
->>>>>>> main
+
     }
 </script>
 
@@ -210,7 +183,6 @@
     <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
-<<<<<<< HEAD
 
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <script src="{{ asset('frontend/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -244,10 +216,8 @@
     <script src="{{ asset('frontend/js/compare.js') }}"></script>
     <script src="{{ asset('frontend/js/quickview.js') }}"></script>
     <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
-=======
-  <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-  <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
->>>>>>> main
+    <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
     <script>
         $('.input-images-1').imageUploader();
@@ -317,7 +287,6 @@
             .resize()
     </script>
 
-<<<<<<< HEAD
     <script>
         $(document).on('click', '.move-top', function() {
             setTimeout(function() {
@@ -328,42 +297,44 @@
         })
     </script>
 
-=======
-    $(document).on('click', '.dropdown-item', function() {
-      var href = $(this).attr('href');
-      window.location.href = href;
-    })
-  </script>
-  <script>
-    $(".preloader").fadeOut(600);
-  </script>
-  <script>
-    $(document).ready(function() {
-      $(window).scroll(function(event) {
-        var pos_body = $('html,body').scrollTop();
-          // console.log(pos_body);
-        if (pos_body > 545.4545288085938) {
-          $('.banner-main').addClass('banner-fixed');
-        }
-        if (pos_body < 545.4545288085938) {
-          $('.banner-main').removeClass('banner-fixed');
-        }
-      });
-    });
-  </script>
+    <script>
+        $(document).on('click', '.dropdown-item', function() {
+            var href = $(this).attr('href');
+            window.location.href = href;
+        })
+    </script>
+    <script>
+        $(".preloader").fadeOut(600);
+    </script>
+    <script>
+        $(document).ready(function() {
+            $(window).scroll(function(event) {
+                var pos_body = $('html,body').scrollTop();
+                // console.log(pos_body);
+                if (pos_body > 545.4545288085938) {
+                    $('.banner-main').addClass('banner-fixed');
+                }
+                if (pos_body < 545.4545288085938) {
+                    $('.banner-main').removeClass('banner-fixed');
+                }
+                if (pos_body > 2496) {
+                    $('.banner-main').removeClass('banner-fixed');
+                }
+            });
+        });
+    </script>
 
-  <script>
-  $('body').resize(function(){
-      const width = $('body').width();
-      // console.log(width)
-      if(width < 1024){
-          $('.card-body').removeClass('card-body-hidden');
-      }
-  })
-  .resize()
-  </script>
+    <script>
+        $('body').resize(function() {
+                const width = $('body').width();
+                // console.log(width)
+                if (width < 1024) {
+                    $('.card-body').removeClass('card-body-hidden');
+                }
+            })
+            .resize()
+    </script>
 
->>>>>>> main
 </body>
 
 </html>

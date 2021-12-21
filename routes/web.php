@@ -50,16 +50,16 @@ use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 /* Clients */
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-    Route::get('search', [SearchController::class, 'find']);
-    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
-    Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
-    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
-    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
-    Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
-    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
-    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
-    Route::resource('client-flash-deals', FlashDealProductController::class);
+        Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+        Route::get('search', [SearchController::class, 'find']);
+        Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+        Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
+        Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
+        Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+        Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
+        Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
+        Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
+        Route::resource('client-flash-deals', FlashDealProductController::class);
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
         Route::post('/checkout-shipping-address', [CheckoutController::class, 'getShippingAddress'])->name('checkout.shipping-address');

@@ -122,11 +122,11 @@
         @foreach ($product as $product)
           <div class="product-item">
             <div class="card product-card">
-               @if ($product->discount == 0)
-                @else
-                  <span class="badge bg-danger badge-shadow">Giảm giá
-                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-                @endif
+              @if ($product->discount == 0)
+              @else
+                <span class="badge bg-danger badge-shadow">Giảm giá
+                  {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+              @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
@@ -155,14 +155,42 @@
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating w-100 text-center"><i class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  <div class="star-rating w-100 text-center">
+                    @php
+                      $arrayRating = [];
+                      $avg = 0;
+                      $total = 0;
+                      $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                      $count = 0;
+                      if (count($reviews) > 0) {
+                          $count = count($reviews);
+                          foreach ($reviews as $key => $review) {
+                              $total += $review->count_rating;
+                          }
+                          $avg = round($total / $count);
+                      } else {
+                          $avg = 0;
+                          $count = 0;
+                      }
+                    @endphp
+
+                    @if ($reviews != null)
+                      @for ($i = 0; $i < 5; $i++)
+                        @for ($j = 0; $j < $avg; $j++)
+                          @php
+                            array_push($arrayRating, $j);
+                          @endphp
+                        @endfor
+                        <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                      @endfor
+                    @else
+
+                    @endif
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body"
+                style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -232,11 +260,11 @@
         @foreach ($highlight as $product)
           <div class="product-item" style="height: 375px">
             <div class="card product-card">
-                @if ($product->discount == 0)
-                @else
-                  <span class="badge bg-danger badge-shadow">Giảm giá
-                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-                @endif
+              @if ($product->discount == 0)
+              @else
+                <span class="badge bg-danger badge-shadow">Giảm giá
+                  {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+              @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
@@ -265,14 +293,42 @@
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating w-100 text-center"><i class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  <div class="star-rating w-100 text-center">
+                    @php
+                      $arrayRating = [];
+                      $avg = 0;
+                      $total = 0;
+                      $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                      $count = 0;
+                      if (count($reviews) > 0) {
+                          $count = count($reviews);
+                          foreach ($reviews as $key => $review) {
+                              $total += $review->count_rating;
+                          }
+                          $avg = round($total / $count);
+                      } else {
+                          $avg = 0;
+                          $count = 0;
+                      }
+                    @endphp
+
+                    @if ($reviews != null)
+                      @for ($i = 0; $i < 5; $i++)
+                        @for ($j = 0; $j < $avg; $j++)
+                          @php
+                            array_push($arrayRating, $j);
+                          @endphp
+                        @endfor
+                        <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                      @endfor
+                    @else
+
+                    @endif
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center"  id="card-body" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body"
+                style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -474,7 +530,8 @@
             <p class="text-muted fs-sm">Tin tức về cửa hàng, sản phẩm và xu hướng</p>
           </div>
         </a></div>
-      <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent" rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/BigDeal-106183301182718">
+      <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent"
+          rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/BigDeal-106183301182718">
           <div class="card-body text-center"><i class="ci-facebook h3 mt-2 mb-4 text-accent"></i>
             <h3 class="h5 mb-1">Theo dõi trên Facebook</h3>
             <p class="text-muted fs-sm">#MuaHangCungBigDeal</p>
