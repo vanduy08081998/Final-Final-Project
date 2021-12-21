@@ -36,19 +36,18 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ json_decode($order->shipping_address)->name }}</td>
                                             <td>{{ json_decode($order->shipping_address)->email }}</td>
-                                            <td>{{ json_decode($order->shipping_address)->address }}</td>
+                                            <td>{{ Str::limit(json_decode($order->shipping_address)->address, 40, '...') }}
+                                            </td>
                                             <td>{{ date('Y-m-d h:i:s', $order->date) }}</td>
-                                            <td>
-                                                <select name="delivery_viewed" class="form-control"
+                                            <td><select name="delivery_viewed" class="form-control"
                                                     onchange="delivery_viewed({{ $order->id }})" id="">
                                                     @foreach ($delivery_viewed as $item)
                                                         <option value="{{ $item->delivery_viewed }}"
                                                             @if ($order->delivery_viewed == $item->delivery_viewed) selected @endif>
-                                                            {{ $item->delivery_description }}
+                                                            {{                                                             $item->delivery_description }}
                                                         </option>
                                                     @endforeach
-                                                </select>
-                                            </td>
+                                                </select></td>
                                             <td>{{ number_format($order->grand_total) }}₫</td>
                                             <td>
                                                 <div class="status-toggle d-flex justify-content-center">
@@ -56,7 +55,7 @@
                                                         id="order_status_{{ $order->id }}" onchange=""
                                                         name="payment_status" class="check"
                                                         value="{{ $order->payment_status }}"
-                                                        {{ $order->payment_status == 'Confirmed' ? 'checked' : '' }}
+                                                        {{                                                         $order->payment_status == 'Confirmed' ? 'checked disabled' : '' }}
                                                         onchange="">
                                                     <label for="order_status_{{ $order->id }}"
                                                         class="checktoggle">checkbox</label>
@@ -84,11 +83,9 @@
     <script>
         const payment_status = function(id) {
             let val = '';
-
-            if (!$('#order_status_' + id).is(':checked')) {
-                val = 'NotConfirm';
-            } else {
+            if ($('#order_status_' + id).is(':checked')) {
                 val = 'Confirmed';
+                $('#order_status_' + id).prop('disabled', true);
             }
             let _token = $('meta[name="csrf-token"]').attr('content');
             $.ajax({

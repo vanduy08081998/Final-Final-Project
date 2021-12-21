@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Livewire\Users;
+use Spatie\Analytics\Period;
+use Spatie\Analytics\Analytics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BannerController;
@@ -23,14 +24,17 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Controllers\Clients\WishlistController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\UserCommentController;
+use App\Http\Controllers\Clients\FlashDealProductController;
 use App\Http\Controllers\Clients\HomeController as HomeClient;
-use App\Http\Controllers\Admin\ProductController as ProductAdmin;
+
 use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,16 +50,16 @@ use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
 /* Clients */
 
 Route::prefix('/')->group(function () {
-        Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
-        Route::get('search', [SearchController::class, 'find']);
-        Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
-        Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
-        Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
-        Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
-        Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
-        Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
-        Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
-
+    Route::get('/', [HomeClient::class, 'index'])->name('clients.index');
+    Route::get('search', [SearchController::class, 'find']);
+    Route::get('/blog', [HomeClient::class, 'blog'])->name('clients.blog');
+    Route::get('/blog-single/{id}', [HomeClient::class, 'blogSingle'])->name('clients.blog-single');
+    Route::get('/blog-category/{id}', [HomeClient::class, 'blogCategory'])->name('clients.blog-category');
+    Route::get('/contact', [HomeClient::class, 'contact'])->name('clients.contact');
+    Route::post('/contact', [HomeClient::class, 'feedback'])->name('clients.feedback');
+    Route::get('/about', [HomeClient::class, 'about'])->name('clients.about');
+    Route::get('/login', [HomeClient::class, 'login'])->name('clients.login');
+    Route::resource('client-flash-deals', FlashDealProductController::class);
     Route::prefix('/checkout')->group(function () {
         Route::get('/checkout-details', [CheckoutController::class, 'checkoutDetail'])->name('checkout.checkout-details');
         Route::post('/checkout-shipping-address', [CheckoutController::class, 'getShippingAddress'])->name('checkout.shipping-address');
@@ -69,7 +73,7 @@ Route::prefix('/')->group(function () {
         Route::post('/checkout-promotion-code', [CheckoutController::class, 'promotionCode'])->name('checkout.promotioncode');
     });
     Route::prefix('/shop')->group(function () {
-        Route::get('/shop-grid/{id}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
+        Route::get('/shop-grid/{slug}', [ProductController::class, 'shopGrid'])->name('shop.shop-grid');
         Route::get('/shop-list', [ProductController::class, 'shopList'])->name('shop.shop-list');
         Route::get('/product-details/{slug}', [ProductController::class, 'productDetails'])->name('shop.product-details');
         Route::post('/quickview', [ProductController::class, 'quickView'])->name('shop.quickview');
@@ -147,7 +151,7 @@ Route::prefix('/')->group(function () {
         Route::resource('/review', ReviewController::class);
         Route::get('/show-review/{product}', [ReviewController::class, 'show_review'])->name('review.show-review');
         Route::get('/users', Users::class);
-    
+
     //paypal
     Route::prefix('api/paypal')->group(function(){
         Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
@@ -190,19 +194,32 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::resource('/brand', BrandController::class);
 
-        // Product
-        Route::resource('/products', ProductAdmin::class);
-        Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
-        Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
-        Route::get('product__warehouse/{product}', [ProductAdmin::class, 'productWarehouse'])->name('products.warehouse');
-        Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
-        Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
-        Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
-        Route::post('product__specification', [ProductAdmin::class, 'getProductSpecification'])->name('admin.products.specifications');
-        Route::post('deals_today', [ProductAdmin::class, 'editDealsToday'])->name('admin.deals-today');
-        Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
-        Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
-        Route::get('/edit_product_feature', [ProductAdmin::class, 'editProductFeature'])->name('products.feature');
+    // Product
+    Route::resource('/products', ProductAdmin::class);
+    Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
+    Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');
+    Route::get('product__warehouse/{product}', [ProductAdmin::class, 'productWarehouse'])->name('products.warehouse');
+    Route::get('/inventory', [ProductAdmin::class, 'inventory'])->name('inventory');
+    Route::post('product__edit__warehouse/{id}', [ProductAdmin::class, 'producEditWarehouse'])->name('products.editwarehouse');
+    Route::post('product__edit__quantity/{id}', [ProductAdmin::class, 'producEditQuantity'])->name('products.editquantity');
+    Route::post('product__feature', [ProductAdmin::class, 'editProductFeature'])->name('admin.product-feature');
+    Route::post('product__specification', [ProductAdmin::class, 'getProductSpecification'])->name('admin.products.specifications');
+    Route::post('deals_today', [ProductAdmin::class, 'editDealsToday'])->name('admin.deals-today');
+    Route::post('/sku_combinations', [ProductAdmin::class, 'sku_combinations'])->name('sku_combinations');
+    Route::put('/sku_combinations_edit', [ProductAdmin::class, 'sku_combinations_edit'])->name('sku_combinations_edit');
+    Route::get('/edit_product_feature', [ProductAdmin::class, 'editProductFeature'])->name('products.feature');
+    //Attributes
+    Route::resource('/attribute', AttributeController::class);
+    Route::get('/category-attribute/{id}', [CategoryController::class, 'attribute'])->name('attribute');
+    Route::get('/detach_cate_attr/{attr_id}/{cate_id}', [CategoryController::class, 'detach_cate_attr'])->name('detach_cate_attr');
+    Route::get('/variant-attribute/{slug}', [AttributeController::class, 'variant'])->name('variant');
+    Route::get('/list_variants', [AttributeController::class, 'list_variants'])->name('list_variants');
+    Route::post('/add_variants', [AttributeController::class, 'add_variants'])->name('add_variants');
+    Route::get('/delete_variants', [AttributeController::class, 'delete_variants'])->name('delete_variants');
+    //banner
+    Route::resource('/banners', BannerController::class);
+    // Discount
+    Route::resource('/discount', DiscountController::class);
 
         //Attributes
         Route::resource('/attribute', AttributeController::class);
@@ -224,13 +241,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('filemanager', function () {
             echo "<script>window.location='" . url('/') . "/rfm/filemanager/dialog.php'</script>";
         })->name('filemanager');
-        
+
         //Blog
         Route::resource('blogCate', BlogCateController::class);
         Route::resource('blogs', BlogController::class);
         Route::get('/blogs/BlogOn/{id}', [BlogController::class, 'BlogOn'])->name('blogs.BlogOn');
         Route::get('/blogs/BlogOff/{id}', [BlogController::class, 'BlogOff'])->name('blogs.BlogOff');
         Route::resource('informations', InformationsController::class);
+        Route::post('informations/statusInfor/', [InformationsController::class, 'statusInfor'])->name('informations.statusInfor');
 
         //user
         Route::get('/admin-trash', [UserController::class, 'admin_trash'])->name('admin_trash');
@@ -240,6 +258,9 @@ Route::group(['prefix' => 'admin'], function () {
         route::get('/assign-roles/{id}', [UserController::class, 'assignRoles'])->name('assign-roles');
         route::post('/insert-roles/{id}', [UserController::class, 'insertRoles'])->name('insert-roles');
         Route::get('/list-customer', [UserController::class, 'list_customer'])->name('list_customer');
+        Route::get('/history/{id}', [UserController::class, 'history'])->name('history');
+        Route::post('/lockAccount', [UserController::class, 'lockAccount'])->name('lockAccount');
+        Route::post('/lockComment', [UserController::class, 'lockComment'])->name('lockComment');
         Route::get('/list-role', [UserController::class, 'list_role'])->name('list-role');
         Route::get('/delete-role/{id}', [UserController::class, 'delete_role'])->name('delete-role');
         Route::post('/create_role', [UserController::class, 'create_role'])->name('create-role');
@@ -281,7 +302,42 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
         Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');
     });
-    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
+    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');  
+});
+//Thống kê
+Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
+Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date'])->name('filter_by_date');
+Route::post('/dashboard-filter',  [HomeController::class, 'dashboard_filter'])->name('dashboard_filter');
+
+Route::post('/chart_product_line',  [HomeController::class, 'chart_product_line'])->name('chart_product_line');
+Route::post('/chart_product_max',  [HomeController::class, 'chart_product_max'])->name('chart_product_max');
+Route::post('/filter-by-date-product',  [HomeController::class, 'filter_by_date_product'])->name('filter_by_date_product');
+Route::post('/dashboard-filter-product',  [HomeController::class, 'dashboard_filter_product'])->name('dashboard_filter_product');
+
+//paypal
+Route::prefix('api/paypal')->group(function(){
+    Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
+    Route::post('/order', [PaypalController::class, 'create']);
+});
+
+Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'])->name('impersonate_destroy');
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+//Login Google
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallback']);
+
+//Login Facebook
+Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
+
+
+Route::get('/test', function(){
+    $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+    return view('admin.statistics.google-analytics', ['analyticsData' => $analyticsData]);
 });
 
 Auth::routes();

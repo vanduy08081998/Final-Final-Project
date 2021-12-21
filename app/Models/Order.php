@@ -12,8 +12,7 @@ class Order extends Model
     protected $table = 'orders';
     protected $fillable = ['user_id','shipping_address','shipping_status','payment_type', 'payment_status', 'payment_details',
      'grand_total', 'coupondiscount', 'code', 'date', 'viewed', 'delivery_viewed', 'commission_calculated', 'seller_id'];
-
-    public $timestamp = true;
+    protected $primaryKey = 'id';
 
     public function products()
     {

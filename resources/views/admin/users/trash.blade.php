@@ -26,9 +26,9 @@ Quản lý tài khoản
                         <table class="datatable table table-stripped mb-0">
                             <thead>
                                 <tr>
-                                    <th>Họ và tên</th>
-                                    <th>Email</th>
-                                    <th>Hành động</th>
+                                    <th style="text-align: left;">Tài khoản</th>
+                                    <th style="text-align: left;">Email</th>
+                                    <th style="text-align: center;">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>

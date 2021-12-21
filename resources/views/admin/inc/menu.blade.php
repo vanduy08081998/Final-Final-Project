@@ -99,10 +99,10 @@
     </li>
 
     <li class="submenu">
-        <a href="#"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span
+        <a href="#!"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
+            <li><a href="{{ route('inventory') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="menu-title">
@@ -156,31 +156,8 @@
             <li><a href="{{ route('orders.index') }}">Danh sách</a></li>
         </ul>
     </li>
-    <li class="submenu">
-        <a href="#"><i class="fa fa-truck" aria-hidden="true"></i> <span>Vận đơn</span> <span
-                class="menu-arrow"></span></a>
-        <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
-        </ul>
-    </li>
     <li class="menu-title">
-        <span>Thống kê</span>
-    </li>
-    <li class="submenu">
-        <a href="#"><i class="fa fa-shopping-cart"></i> <span>Doanh thu</span> <span class="menu-arrow"></span></a>
-        <ul style="display: none;">
-            <li><a href="{{ route('StatisticsController') }}">Danh sách</a></li>
-        </ul>
-    </li>
-    <li class="submenu">
-        <a href="#"><i class="fa fa-truck" aria-hidden="true"></i> <span>Vận đơn</span> <span
-                class="menu-arrow"></span></a>
-        <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
-        </ul>
-    </li>
-    <li class="menu-title">
-        <span>Đánh giá</span>
+        <span>Đánh giá & Bình luận</span>
     </li>
     <li class="submenu">
         <a href="#"
@@ -210,10 +187,6 @@
     </li>
     <li class="menu-title">
         <span>Website</span>
-    </li>
-    <li>
-        <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> <span>Cấu hình</span><span
-                class="menu-arrow"></span></a>
     </li>
     <li>
         <a href="#"

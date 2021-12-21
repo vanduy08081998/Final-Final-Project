@@ -61,6 +61,11 @@ $category = Category::all();
                         <a class="dropdown-item" href="comparison.html">
                             <i class="ci-compare text-muted me-2"></i>So sánh</a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('account.order-tracking') }}">
+                            <i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
@@ -77,6 +82,9 @@ $category = Category::all();
                 @endif
                 <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
                     href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh (3)
+                </a>
+                <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
+                    href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
                 </a>
             </div>
         </div>
@@ -280,20 +288,15 @@ $category = Category::all();
                                     class="ci-home"></i> Trang
                                 chủ</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clients.about') }}"
-                                data-bs-auto-close="outside"><i class="ci-flag"></i>
-                                Giới thiệu</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('shop.shop-grid', ['id' => 0]) }}"><i class="ci-lable"></i> Cửa
-                                hàng</a>
-                        </li>
                         <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.about') }}"
                                 data-bs-auto-close="outside">
                                 <i class="ci-flag"></i>Giới thiệu
                             </a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                href="{{ route('shop.shop-grid', ['id' => $cate->id_cate]) }}"><i
+                                    class="ci-lable"></i> Cửa hàng</a>
                         </li>
                         <li class="nav-item {{ request()->is('blog') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('clients.blog') }}">
