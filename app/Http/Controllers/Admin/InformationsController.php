@@ -9,6 +9,11 @@ use App\Http\Requests\AddInforRequest;
 
 class InformationsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm thông tin cữa hàng', ['only' => ['store']]);
+        $this->middleware('permission:Sửa thuộc tính sản phẩm', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa thuộc tính sản phẩm', ['only' => ['destroy']]);
+    }
         /**
      * Display a listing of the resource.
      *

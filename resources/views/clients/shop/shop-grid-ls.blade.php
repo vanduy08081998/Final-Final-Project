@@ -46,7 +46,7 @@
         @include('clients.shop.navbar-shop');
       </aside>
       <!-- Content  -->
-      <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
+      <section class="col-lg-9 col-sm-12 tab-content-shop" style="padding-right: 50px;">
         <!-- Toolbar-->
         <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
           <div class="d-flex flex-wrap">
@@ -75,7 +75,7 @@
         <div class="row mx-n2" id="product-short">
           <!-- Product-->
           @foreach ($product as $pro)
-            <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-6 px-2 mb-4">
               <div class="card product-card">
                 <a class="card-img-top d-block overflow-hidden"
                   href="{{ route('shop.product-details', $pro->product_slug) }}">
@@ -87,6 +87,7 @@
                   <h3 class="product-title fs-sm"><a
                       href="shop-single-v1.html">{{ Str::limit($pro->product_name, 30, '...') }}</a>
                   </h3>
+<<<<<<< HEAD
                   <div class="d-flex justify-content-between">
                     <div class="product-price"><span class="text-accent">{{ number_format($pro->unit_price) }}
                         ₫</span>
@@ -97,6 +98,60 @@
                       <i class="star-rating-icon ci-star-filled active"></i>
                       <i class="star-rating-icon ci-star-filled active"></i>
                       <i class="star-rating-icon ci-star"></i>
+=======
+                  <div class="d-flex justify-content-between sale-price">
+                    @if ($pro->discount != 0)
+                      <div class="product-price">
+                        <span>{{ number_format($pro->unit_price - ($pro->unit_price * $pro->discount) / 100) }}
+                          ₫</span>
+                      </div>
+                      <div class="product-price" style="font-size: 12px">
+                        <span style="text-decoration: line-through">{{ number_format($pro->unit_price) }}
+                          ₫</span>
+                      </div>
+                    @elseif ($pro->discount == 0)
+                      <div class="product-price w-100 text-center">
+                        <span>{{ number_format($pro->unit_price) }}
+                          ₫</span>
+                      </div>
+                      <div class="product-price d-block d-sm-none" style="height: 12px">
+                        <span style="text-decoration: line-through"></span>
+                      </div>
+                    @endif
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <div class="star-rating w-100 text-center">
+                      @php
+                        $arrayRating = [];
+                        $avg = 0;
+                        $total = 0;
+                        $reviews = \App\Models\Review::where('product_id', $pro->id)->get();
+                        $count = 0;
+                        if (count($reviews) > 0) {
+                            $count = count($reviews);
+                            foreach ($reviews as $key => $review) {
+                                $total += $review->count_rating;
+                            }
+                            $avg = round($total / $count);
+                        } else {
+                            $avg = 0;
+                            $count = 0;
+                        }
+                      @endphp
+
+                      @if ($reviews != null)
+                        @for ($i = 0; $i < 5; $i++)
+                          @for ($j = 0; $j < $avg; $j++)
+                            @php
+                              array_push($arrayRating, $j);
+                            @endphp
+                          @endfor
+                          <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                        @endfor
+                      @else
+
+                      @endif
+>>>>>>> main
                     </div>
                   </div>
                 </div>
@@ -166,7 +221,7 @@
 
         </div>
         <!-- Pagination-->
-        <nav class="d-flex justify-content-center pt-2" aria-label="Page navigation">
+        <nav class="d-flex justify-content-center pt-2 col-12" aria-label="Page navigation">
           {{ $product->links() }}
         </nav>
       </section>

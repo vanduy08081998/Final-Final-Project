@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 class CommentController extends Controller
 {
-
+    public function __construct(){
+        $this->middleware('permission:Duyệt bình luận', ['only' => ['clearance']]);
+        $this->middleware('permission:Sửa bình luận', ['only' => ['update']]);
+        $this->middleware('permission:Xóa bình luận', ['only' => ['delete']]);
+    }
     public function index()
     {
        $products = Product::latest()->get();
