@@ -174,7 +174,7 @@
                                 width="25" alt="avatar">
                         @endif
                     </span>
-                    <span class="handheld-toolbar-label">Tài khoản</span>
+                    <span class="handheld-toolbar-label">{{ Auth::user()->name }}</span>
                 </a>
             @else
                 <a class="d-table-cell handheld-toolbar-item" href="{{ route('login') }}">
