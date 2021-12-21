@@ -43,9 +43,10 @@ class PaypalController extends Controller
             foreach (json_decode($cart->specifications) as $key => $speciation) {
                 $total += $speciation->variant_price * $cart->quantity;
                 $product_details['product_id'] = $cart->product_id;
+                $product_details['specification'] = $cart->specifications;
                 $product_details['quantity'] = $cart->quantity;
+                $product_details['variant'] = $cart->variant;
                 $product_details['promotion_price'] = $speciation->variant_price * $cart->quantity;
-                $product_details['discount'] = \App\Models\Product::where('id', $cart->product_id)->first()->discount;
                 if (\App\Models\Product::where('id', $cart->product_id)->first()->discount == null) {
                     $product_details['discount'] = 0;
                 } else {
@@ -68,12 +69,12 @@ class PaypalController extends Controller
 
         $order->shipping_address = $shipping_address;
         $order->shipping_status = $shipping_method;
-        $order->payment_type = 'Paypal';
+        $order->payment_type = 'Tiền mặt';
         $order->payment_status = 'Confirmed';
-        $order->payment_details = 'Sản phẩm đã được mua';
-        $order->delivery_viewed = 1;
-        $order->delivery_viewed = 0;
-        $order->grand_total = $total;
+        $order->payment_details = '';
+        $order->code = $request->hiddenSaleCode;
+        $order->date = strtotime(date('Y-m-d H:i:s'));
+        $order->grand_total = $request->total * (100 - $request->promocodeInsert) / 100;
         $order->save();
         $order->products()->attach($product);
 

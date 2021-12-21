@@ -66,11 +66,20 @@
                   @php
                     $flash_deal = $product->flash_deals()->first();
                   @endphp
-                  <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
-                    ₫</span>
-                  <small class="text-muted"
-                    style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
-                    ₫</small>
+                  @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
+                    <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                      ₫</span>
+                    <small class="text-muted"
+                      style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                      ₫</small>
+                  @else
+                    <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
+                      ₫</span>
+                    <small class="text-muted"
+                      style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                      ₫</small>
+                  @endif
+
                 @endif
 
               </div>

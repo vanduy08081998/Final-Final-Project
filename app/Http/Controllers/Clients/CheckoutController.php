@@ -134,8 +134,9 @@ class CheckoutController extends Controller
         $order->payment_type = 'Tiền mặt';
         $order->payment_status = 'NotConfirm';
         $order->payment_details = '';
+        $order->code = $request->hiddenSaleCode;
         $order->date = strtotime(date('Y-m-d H:i:s'));
-        $order->grand_total = $request->total;
+        $order->grand_total = $request->total * (100 - $request->promocodeInsert) / 100;
         $order->save();
         $order->products()->attach($product);
 
@@ -151,9 +152,17 @@ class CheckoutController extends Controller
     {
         $promocode = DB::table('discount')->where('discount_code', $request->promocode)->first();
         if (!$promocode) {
-            return response()->json(['error' => 'error']);
+            return response()->json(['error' => 'Mã giảm giá không trùng khớp']);
         } else {
-            return response()->json(['success' => 'success', 'promocode' => $promocode]);
+
+            if($promocode->discount_limit <= 0){
+                return response()->json(['error' => 'Mã giảm giá đã hết số lượng', 'promocode' => $promocode]);
+            }else{
+                DB::table('discount')->where('discount_code', $request->promocode)->update([
+                    'discount_limit' => $promocode->discount_limit - 1
+                ]);
+            }
+            return response()->json(['success' => 'Nhập mã giảm giá thành công bạn được giảm giá '. $promocode->discount_deduct.' %', 'discount' => $promocode->discount_deduct]);
         }
     }
 }

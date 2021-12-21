@@ -285,7 +285,7 @@ $category = Category::all();
             <li class="nav-item">
               <a class="nav-link" href="{{ route('client-flash-deals.index') }}" data-bs-auto-close="outside"><i
                   class="ci-bookmark"></i>
-                Flash Sale</a>
+                Khuyến mãi</a>
             </li>
             <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
               <a class="nav-link" href="{{ route('clients.about') }}" data-bs-auto-close="outside">

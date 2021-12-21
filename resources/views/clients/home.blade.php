@@ -121,12 +121,12 @@
         <!-- Product-->
         @foreach ($product as $product)
           <div class="product-item">
-            @if ($product->discount == 0)
-            @else
-              <span class="badge bg-danger badge-shadow">Giảm giá
-                {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-            @endif
             <div class="card product-card">
+               @if ($product->discount == 0)
+                @else
+                  <span class="badge bg-danger badge-shadow">Giảm giá
+                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+                @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"

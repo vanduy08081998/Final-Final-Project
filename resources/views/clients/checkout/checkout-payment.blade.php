@@ -88,6 +88,7 @@
                                 <div class="widget mb-3">
 
                                     <div class="button-checkout-default mt-3">
+                                        <input type="hidden" name="sale_code" id="hidden_sale_code">
                                         <form class="needs-validation" method="post">
                                             @csrf
                                             <div class="mb-3">
@@ -129,12 +130,13 @@ foreach ($cart as $key => $cart) {
     }
 }
 ?>
-<input type="hidden" name="total_price" id="total_price" value="{{ round($total / 22000) }}">
+<input type="hidden" name="total_price" id="total_price" value="{{ round($total / 22000,2) }}">
 @push('script')
     <script
         src="https://www.paypal.com/sdk/js?client-id=AVoCCe7dYAM9wd4Uh-G1rYJiygcqS3B8ZQVVHzDRU0qVnf7I3XsXDdnG0EIG_pXpYThvtskM1JrPemmx&currency=USD">
     </script>
     <script>
+        console.log($('#total_price').val())
         paypal.Buttons({
 
             // Call your server to set up the transaction

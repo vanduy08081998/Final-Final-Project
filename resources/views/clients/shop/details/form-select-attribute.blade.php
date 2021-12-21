@@ -66,11 +66,20 @@
                 @php
                   $flash_deal = $product->flash_deals()->first();
                 @endphp
-                <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
-                  ₫</span>
-                <small class="text-muted"
-                  style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
-                  ₫</small>
+                @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
+                  <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
+                    ₫</span>
+                  <small class="text-muted"
+                    style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    ₫</small>
+                @else
+                  <span>{{ number_format($product->unit_price - ($product->unit_price * $flash_deal->discount) / 100) }}
+                    ₫</span>
+                  <small class="text-muted"
+                    style="font-size: 22px; text-decoration: line-through">{{ number_format($product->unit_price) }}
+                    ₫</small>
+                @endif
+
               @endif
 
             </div>
@@ -82,16 +91,22 @@
             @php
               $flash_deal = $product->flash_deals()->first();
             @endphp
-            <div class="_314-b55619"><a href="#!" class="">
-                <div class="_314-2d0405 d7e-a90f22 d7e-04f3bc d7e-2243f4"
-                  style="background-image: url(&quot;https://media3.scdn.vn/img4/2020/06_18/FBnN0sGbAeXbPuZ7IIWp.png&quot;);">
-                  <img src="https://media3.scdn.vn/img4/2020/06_18/jaGsAfx1dzgHf82AyWSI.png" alt="flash-sale"
-                    class="_314-919f69">
-                  <div class="_314-65a424">
-                    <div class="_314-e778ac" data-date="{{ date('Y/m/d h:i:s', $flash_deal->date_end) }}"></div>
+
+            @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
+
+            @else
+              <div class="_314-b55619"><a href="#!" class="">
+                  <div class="_314-2d0405 d7e-a90f22 d7e-04f3bc d7e-2243f4"
+                    style="background-image: url(&quot;https://media3.scdn.vn/img4/2020/06_18/FBnN0sGbAeXbPuZ7IIWp.png&quot;);">
+                    <img src="https://media3.scdn.vn/img4/2020/06_18/jaGsAfx1dzgHf82AyWSI.png" alt="flash-sale"
+                      class="_314-919f69">
+                    <div class="_314-65a424">
+                      <div class="_314-e778ac" data-date="{{ date('Y/m/d h:i:s', $flash_deal->date_end) }}"></div>
+                    </div>
                   </div>
-                </div>
-              </a></div>
+                </a>
+              </div>
+            @endif
           @endif
 
 
