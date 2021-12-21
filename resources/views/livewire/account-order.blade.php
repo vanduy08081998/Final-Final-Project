@@ -7,10 +7,9 @@
             <select class="form-select" id="order-sort" wire:model="select">
                 <option value="">Mới nhất</option>
                 <option value="latest">Cũ nhất</option>
-                <option value="1">Đang xử lý</option>
-                <option value="2">Đang vận chuyển</option>
-                <option value="3">Đã hoàn thành</option>
-                <option value="4">Đã hủy</option>
+                @foreach (\App\Models\DeliveryViewed::get() as $item)
+                    <option value="{{ $item->delivery_viewed }}">{{ $item->delivery_description }}</option>
+                @endforeach
             </select>
         </div>
         <form class="user_logout" action="{{ route('logout') }}" method="post">
@@ -20,39 +19,55 @@
         </form>
     </div>
     <!-- Orders list-->
-    <div class="table-responsive fs-md mb-4">
-        <table class="table table-hover mb-0">
-            <thead>
-                <tr>
-                    <th>Mã đơn #</th>
-                    <th>Ngày đặt</th>
-                    <th>Trạng thái</th>
-                    <th>Theo dõi</th>
-                    <th>Chi tiết</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $item)
+    @if ($orders->count() > 0)
+        <div class="table-responsive fs-md mb-4">
+            <table class="table table-hover mb-0">
+                <thead>
                     <tr>
-                        <td class="py-3"><button
-                                class="nav-link-style fw-medium fs-sm">{{ $item->date }}</button>
-                        </td>
-                        <td class="py-3">{{ date('H:i:s d-m-Y', strtotime($item->created_at)) }}</td>
-                        <td class="py-3">
-                            <span
-                                class="badge {{ $item->status->id == 6 ? 'bg-danger' : 'bg-info' }} m-0">{{ $item->status->delivery_description }}</span>
-                        </td>
-                        <td class="py-3"><a class="btn-sm btn-info"
-                                href="{{ url('account/order-tracking/' . $item->id) }}"><i
-                                    class="far fa-eye"></i></a></td>
-                        <td><button
-                                wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')"
-                                class="btn-sm btn-primary">Xem</button></td>
+                        <th>Mã đơn #</th>
+                        <th>Ngày đặt</th>
+                        <th>Trạng thái</th>
+                        <th>Theo dõi</th>
+                        <th>Chi tiết</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+
+                    @foreach ($orders as $item)
+                        <tr>
+                            <td class="py-3"><button
+                                    class="nav-link-style fw-medium fs-sm">{{ $item->date }}</button>
+                            </td>
+                            <td class="py-3">{{ date('H:i:s d-m-Y', strtotime($item->created_at)) }}</td>
+                            <td class="py-3">
+                                <span
+                                    class="badge {{ $item->status->id == 6 ? 'bg-danger' : 'bg-info' }} m-0">{{ $item->status->delivery_description }}</span>
+                            </td>
+                            <td class="py-3"><a class="btn-sm btn-info"
+                                    href="{{ url('account/order-tracking/' . $item->id) }}"><i
+                                        class="far fa-eye"></i></a></td>
+                            <td><button
+                                    wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')"
+                                    class="btn-sm btn-primary">Xem</button></td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+    @else
+        <div class="d-block">
+            <div class="nullable">
+                <div class="icon-null">
+                    <i class="far fa-question-circle"></i>
+                </div>
+                <div class="text-null">
+                    Bạn chưa có thông báo nào!
+                </div>
+                <a href="{{ route('clients.index') }}">Tiếp tục mua sắm</a>
+            </div>
+        </div>
+    @endif
     {{ $orders->links('clients.comments.inc.page-link') }}
 
     <div class="modal fade" id="order-details">

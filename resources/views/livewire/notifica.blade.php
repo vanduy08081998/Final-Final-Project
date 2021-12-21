@@ -83,20 +83,15 @@
                                     <a class="text-dark" wire:click="deleted({{ $item->id }})"
                                         href="{{ route('account.order-list') }}">
 
-                                        @if ($item->order->delivery_viewed == 1)
-                                            <strong>Đơn hàng</strong> của bạn <em class="text-warning">đang
-                                                được xử lý <i class="fas fa-warehouse"></i></em>
-                                        @elseif($item->order->delivery_viewed == 2)
-                                            <strong>Đơn hàng</strong> của bạn <em class="text-info">đang
-                                                được
-                                                vận chuyển <i class="fas fa-truck"></i></em>
-                                        @elseif($item->order->delivery_viewed == 3)
-                                            <strong>Đơn hàng</strong> của bạn <em class="text-success">đã
-                                                hoàn thành <i class="fas fa-check"></i></em>
-                                        @else
-                                            <strong>Đơn hàng</strong> của bạn <em class="text-danger">đã
-                                                hủy <i class="fas fa-exclamation-triangle"></i></em>
-                                        @endif
+                                        @foreach ($item->status as $status)
+                                            @if ($status->delivery_viewed == 6)
+                                                <strong>Đơn hàng</strong> của bạn <em
+                                                    class="text-danger">{{ $status->delivery_description }}</em>
+                                            @else
+                                                <strong>Đơn hàng</strong> của bạn <em
+                                                    class="text-info">{{ $status->delivery_description }}</em>
+                                            @endif
+                                        @endforeach
 
                                         <div class="moving">
                                             <b>Mã đơn:</b> {{ $item->order->date }} &nbsp; <b>Ngày đặt:</b>
