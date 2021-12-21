@@ -80,10 +80,10 @@ $category = Category::all();
           </a>
         @endif
         <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i
-            class="ci-compare mt-n1"></i>So sánh (3)
+            class="ci-compare mt-n1"></i>So sánh
         </a>
         <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
-          href="{{ route('account.order-tracking') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
+          href="{{ route('account.order-list') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
         </a>
       </div>
     </div>
@@ -206,25 +206,24 @@ $category = Category::all();
                       <span style="margin-right: 10px">{!! $cate->category_icon !!}</span>
                       {{ $cate->category_name }}
                     </a>
-                    <div class="dropdown-menu p-0" style="width:1000px; height:400px;">
+                    <div class="dropdown-menu p-0">
                       <div class="d-flex flex-wrap flex-sm-nowrap px-2">
-
                         <div class="mega-dropdown-column py-4 px-3">
+                          <p>Thương hiệu</p>
                           <div class="widget widget-links">
-                            <h4 class="fs-base mb-3">Thương hiệu <i class="fas fa-angle-down"></i></h4>
                             <ul class="widget-list">
                               @foreach ($cate->brands as $brand)
-                                <li class="widget-list-item pb-1"><a class="widget-list-link" href="#"><img
-                                      src="{{ url($brand->brand_image) }}" height="100" width="55">
-                                    <span>{{ $brand->brand_name }}</span>
+                                <li class="widget-list-item pb-2">
+                                  <a class="widget-list-link" href="#">
+                                    <img src="{{ url($brand->brand_image) }}" height="100px" width="80px">
                                   </a>
                                 </li>
-                              @endforeach
+                                @endforeach
                             </ul>
                           </div>
                         </div>
 
-                        <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
+                        {{-- <div class="mega-dropdown-column pt-4 pb-0 py-sm-4 px-3">
                           @foreach ($cate->subcategory as $cateChild)
                             <div class="widget widget-links pb-2">
                               <h6 class="fs-base mb-3">
@@ -239,26 +238,11 @@ $category = Category::all();
                               </ul>
                             </div>
                           @endforeach
-                        </div>
-
-                        <div class="mega-dropdown-column py-4 px-3">
-                          <div class="widget widget-links">
-                            <h6 class="fs-base mb-3">Accessories</h6>
-                            <ul class="widget-list">
-                              <li class="widget-list-item pb-1"><a class="widget-list-link" href="#">Monitors</a></li>
-                              <li class="widget-list-item pb-1"><a class="widget-list-link" href="#">Bags, Cases &amp;
-                                  Sleeves</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div class="mega-dropdown-column d-none d-lg-block py-4 text-center"><a class="d-block mb-2"
-                            href="#"><img
-                              src="{{ asset('https://lh3.googleusercontent.com/jSPmSAwSsjO3grPdLl49HYHhDKZwMZHs-Uj8-rcM8g3v_ObfkNkzvsGp5V-Ro4ZuZQWdyycYwU6YLfO6_qMFQ-NOewp3e7MPBw=rw-w400') }}"
-                              alt="Computers &amp; Accessories"></a>
-                          <div class="fs-sm mb-3">Starting from <span
-                              class='fw-medium'>$149.<small>80</small></span></div><a
-                            class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i
-                              class="ci-arrow-right fs-xs ms-1"></i></a>
+                        </div> --}}
+                        <div class="mega-dropdown-column d-none d-lg-block py-4 text-center">
+                          <a class="d-block mb-2" href="#">
+                            <img src="{{ asset('https://lh3.googleusercontent.com/jSPmSAwSsjO3grPdLl49HYHhDKZwMZHs-Uj8-rcM8g3v_ObfkNkzvsGp5V-Ro4ZuZQWdyycYwU6YLfO6_qMFQ-NOewp3e7MPBw=rw-w400') }}"
+                              alt="Computers &amp; Accessories" height="350px" width="200px"></a>
                         </div>
                       </div>
 

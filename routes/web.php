@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Livewire\Users;
+use Spatie\Analytics\Period;
+use Spatie\Analytics\Analytics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BannerController;
@@ -23,17 +24,17 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\FlashDealController;
 use App\Http\Controllers\Clients\AccountController;
 use App\Http\Controllers\Clients\ProductController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Clients\CheckoutController;
 use App\Http\Controllers\Clients\ShippingController;
 use App\Http\Controllers\Clients\WishlistController;
 use App\Http\Controllers\Admin\InformationsController;
 use App\Http\Controllers\Clients\UserCommentController;
-use App\Http\Controllers\Clients\HomeController as HomeClient;
-use App\Http\Controllers\Admin\ProductController as ProductAdmin;
-use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
 use App\Http\Controllers\Clients\FlashDealProductController;
+use App\Http\Controllers\Clients\HomeController as HomeClient;
 
-use Spatie\Analytics\Period;
+use App\Http\Controllers\Admin\ReviewController as ReviewAdmin;
+use App\Http\Controllers\Admin\ProductController as ProductAdmin;
 
 /*
 |--------------------------------------------------------------------------

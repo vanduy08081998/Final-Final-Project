@@ -77,29 +77,46 @@
           @foreach ($product as $pro)
             <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
               <div class="card product-card">
+                @if ($pro->discount == 0)
+                @else
+                  <span class="badge bg-danger badge-shadow">Giảm giá
+                    {{ $pro->discount }}@if ($pro->discount_unit == '%') % @else ₫ @endif</span>
+                @endif
                 <a class="card-img-top d-block overflow-hidden"
                   href="{{ route('shop.product-details', $pro->product_slug) }}">
                   <img srcset="{{ URL::to($pro->product_image) }} 2x" alt="Product" width="200px"
                     style="margin: auto; display: block">
                 </a>
-                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name"
-                    href="#">{{ $pro->Category->category_name }}</a>
-                  <h3 class="product-title fs-sm"><a
-                      href="shop-single-v1.html">{{ Str::limit($pro->product_name, 30, '...') }}</a>
-                  </h3>
-                  <div class="d-flex justify-content-between">
-                    <div class="product-price"><span class="text-accent">{{ number_format($pro->unit_price) }}
+                <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
+                  href="#">{{ $pro->Category->category_name }}</a>
+                <h3 class="product-title fs-sm text-center"><a
+                    href="shop-single-v1.html">{{ Str::limit($pro->product_name, 30, '...') }}</a>
+                </h3>
+                <div class="d-flex justify-content-between">
+                  @if ($pro->discount != 0)
+                    <div class="product-price">
+                      <span>{{ number_format($pro->unit_price - ($pro->unit_price * $pro->discount) / 100) }}
                         ₫</span>
                     </div>
-                    <div class="star-rating">
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star"></i>
+                    <div class="product-price" style="font-size: 12px">
+                      <span style="text-decoration: line-through">{{ number_format($pro->unit_price) }}
+                        ₫</span>
                     </div>
+                  @elseif ($pro->discount == 0)
+                    <div class="product-price w-100 text-center">
+                      <span>{{ number_format($pro->unit_price) }}
+                        ₫</span>
+                    </div>
+                  @endif
+                </div>
+                <div class="d-flex justify-content-between">
+                  <div class="star-rating w-100 text-center"><i class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i
+                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
                   </div>
                 </div>
+              </div>
 
                 <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
                   @if (Auth::user() != null)
