@@ -117,7 +117,7 @@
     <!-- Grid-->
     <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
       <div class="tns-carousel-inner"
-        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
         @foreach ($product as $product)
           <div class="product-item">
@@ -137,7 +137,7 @@
                 <h3 class="product-title fs-sm text-center"><a
                     href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between sale-price">
                   @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -151,6 +151,9 @@
                     <div class="product-price w-100 text-center">
                       <span>{{ number_format($product->unit_price) }}
                         ₫</span>
+                    </div>
+                    <div class="product-price d-block d-sm-none" style="height: 12px">
+                      <span style="text-decoration: line-through"></span>
                     </div>
                   @endif
                 </div>
@@ -255,7 +258,7 @@
     <!-- Grid-->
     <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
       <div class="tns-carousel-inner"
-        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
         @foreach ($highlight as $product)
           <div class="product-item" style="height: 375px">
@@ -275,7 +278,7 @@
                 <h3 class="product-title fs-sm text-center"><a
                     href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between sale-price">
                   @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -289,6 +292,9 @@
                     <div class="product-price w-100 text-center">
                       <span>{{ number_format($product->unit_price) }}
                         ₫</span>
+                    </div>
+                    <div class="product-price d-block d-sm-none" style="height: 12px">
+                      <span style="text-decoration: line-through"></span>
                     </div>
                   @endif
                 </div>

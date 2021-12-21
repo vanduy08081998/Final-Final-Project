@@ -60,7 +60,7 @@ Thêm tài khoản
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
                                                 aria-hidden="true"></i></span>
                                     </div>
-                                    <input name="password" id="password" value="{{ $userId->password }}" type="password"
+                                    <input name="password" id="password" type="password"
                                         class="form-control  @error('password') is-invalid @enderror border-left-0"
                                         placeholder="Mật khẩu">
                                     <div class="input-group-append"> <a href="javascript:;"
@@ -81,8 +81,8 @@ Thêm tài khoản
                                                 aria-hidden="true"></i></span>
                                     </div>
                                     <input id="password-confirm" name="password_confirmation"
-                                        value="{{ $userId->password }}" type="password"
-                                        class="form-control border-left-0" placeholder="Confirm Password">
+                                         type="password"
+                                        class="form-control border-left-0" placeholder="Xác nhận mật khẩu">
                                     <div class="input-group-append"> <a href="javascript:;"
                                             class="input-group-text bg-transparent border-left-0"><i class="fa fa-eye"
                                                 aria-hidden="true"></i></a>

@@ -32,20 +32,22 @@ class ReplyReview extends Component
         return view('livewire.admin.reply-review')->with(compact('review'));
     }
     public function ReplyRating ($review_id, $product_id){
-        Review::find($review_id)->update(['admin_feedback' => 1]);
-        Review::create([
-            'product_id' => $product_id,
-            'customer_id' => Auth::user()->id,
-            'content_rating' => $this->content_rating,
-            'review_parent' => $review_id,
-            'review_status' => 1,
-        ]);
-
-        $reviewId = Review::find($review_id);
-        
-        $service = new NotificationService();
-        $service->store($reviewId->customer_id , $product_id, 'review', 'BigDeal');
-        $this->emit('render');
+        if($content_rating != ''){
+            Review::find($review_id)->update(['admin_feedback' => 1]);
+            Review::create([
+                'product_id' => $product_id,
+                'customer_id' => Auth::user()->id,
+                'content_rating' => $this->content_rating,
+                'review_parent' => $review_id,
+                'review_status' => 1,
+            ]);
+    
+            $reviewId = Review::find($review_id);
+            
+            $service = new NotificationService();
+            $service->store($reviewId->customer_id , $product_id, 'review', 'BigDeal');
+            $this->emit('render');
+        }
     }
     public function discussion($review_id){
         $this->dispatchBrowserEvent('show_text');

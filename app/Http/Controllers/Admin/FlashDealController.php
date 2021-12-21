@@ -11,6 +11,11 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class FlashDealController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm siêu khuyến mãi', ['only' => ['store']]);
+        $this->middleware('permission:Sửa siêu khuyến mãi', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa siêu khuyến mãi', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

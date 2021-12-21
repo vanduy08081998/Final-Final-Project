@@ -92,6 +92,55 @@ $infor = Information::orderByDESC('id')
                 </a>
             </div>
         </div>
+      </div>
+      <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="topbar-text dropdown d-md-none ms-auto">
+        <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            @if ($wishlist == null && Auth::user == null)
+              <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                <i class="ci-heart mt-n1"></i>Yêu thích (0)
+              </a>
+            @elseif ($wishlist != NULL && Auth::user())
+              <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+                <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+                {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
+              </a>
+            @endif
+          </li>
+          <li>
+            <a class="dropdown-item" href="comparison.html">
+              <i class="ci-compare text-muted me-2"></i>So sánh</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{{ route('account.order-tracking') }}">
+              <i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
+        class="count-wishlist d-none d-md-block ms-3 text-nowrap">
+        @if ($wishlist == null && Auth::user == null)
+          <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+            <i class="ci-heart mt-n1"></i>Yêu thích (0)
+          </a>
+        @elseif ($wishlist != NULL && Auth::user())
+          <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
+            <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
+            {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
+          </a>
+        @endif
+        @if (Auth::user() == null)
+        @else
+        <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" href="comparison.html"><i
+            class="ci-compare mt-n1"></i>So sánh
+        </a>
+        <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
+          href="{{ route('account.order-list') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
+        </a>
+        @endif
+      </div>
     </div>
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">

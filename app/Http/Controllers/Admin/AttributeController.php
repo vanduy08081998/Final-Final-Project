@@ -11,6 +11,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AttributeController extends Controller
 {
+  public function __construct(){
+    $this->middleware('permission:Thêm thuộc tính sản phẩm', ['only' => ['store']]);
+    $this->middleware('permission:Sửa thuộc tính sản phẩm', ['only' => ['edit']]);
+    $this->middleware('permission:Xóa thuộc tính sản phẩm', ['only' => ['destroy']]);
+}
   /**
    * Display a listing of the resource.
    *

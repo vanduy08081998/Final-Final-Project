@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm danh mục', ['only' => ['store']]);
+        $this->middleware('permission:Sửa danh mục', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa danh mục', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -9,6 +9,11 @@ use Auth;
 
 class ReviewController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Duyệt đánh giá', ['only' => ['Browse']]);
+        $this->middleware('permission:Phản hồi đánh giá', ['only' => ['reply']]);
+        $this->middleware('permission:Xóa đánh giá', ['only' => ['delete']]);
+    }
     /**
      * Display a listing of the resource.
      *

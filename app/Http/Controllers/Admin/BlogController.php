@@ -10,6 +10,11 @@ use App\Http\Requests\AddBlogRequest;
 
 class BlogController extends Controller
 {
+    public function __construct(){
+        $this->middleware('permission:Thêm bài viết', ['only' => ['store']]);
+        $this->middleware('permission:Sửa bài viết', ['only' => ['edit']]);
+        $this->middleware('permission:Xóa bài viết', ['only' => ['destroy']]);
+    }
         /**
      * Display a listing of the resource.
      *
