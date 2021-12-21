@@ -37,7 +37,8 @@
         .card {
             box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px
         }
-        .badge{
+
+        .badge {
             font-size: 15px;
         }
 
@@ -45,7 +46,7 @@
     <!-- Page Content -->
     <div class="content container-fluid">
 
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'dashboard'])
+        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Thống kê'])
 
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
@@ -53,8 +54,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fas fa-cart-arrow-down"></i></span>
                         <div class="dash-widget-info mb-2">
-                            <h3 class="mb-2">112</h3>
-                            <span>Tổng đơn hàng</span>
+                            <h3 class="mb-2">{{ $count_order }}</h3>
+                            <span>Đơn hàng</span>
                         </div>
                     </div>
                 </div>
@@ -62,10 +63,10 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                 <div class="card dash-widget bg-b-blue">
                     <div class="card-body">
-                        <span class="dash-widget-icon"><i class="fas fa-newspaper"></i></span>
+                        <span class="dash-widget-icon"><i class="fa fa-dropbox"></i></span>
                         <div class="dash-widget-info">
-                            <h3>44</h3>
-                            <span>Tổng sản phẩm</span>
+                            <h3>{{ $count_product }}</h3>
+                            <span>Sản phẩm</span>
                         </div>
                     </div>
                 </div>
@@ -75,8 +76,8 @@
                     <div class="card-body">
                         <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
                         <div class="dash-widget-info">
-                            <h3>37</h3>
-                            <span>Tổng khách hàng</span>
+                            <h3>{{ $count_user }}</h3>
+                            <span>Khách hàng</span>
                         </div>
                     </div>
                 </div>
@@ -84,10 +85,10 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                 <div class="card dash-widget bg-b-purple">
                     <div class="card-body">
-                        <span class="dash-widget-icon"><i class="fab fa-app-store-ios"></i></span>
+                        <span class="dash-widget-icon"><i class="fas fa-newspaper"></i></span>
                         <div class="dash-widget-info">
-                            <h3>218</h3>
-                            <span>Tổng bài viết</span>
+                            <h3>{{ $count_post }}</h3>
+                            <span>Bài viết</span>
                         </div>
                     </div>
                 </div>
@@ -97,54 +98,63 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-center mb-4 statiscal">Biểu đồ thống kê doanh số và số lượng bán ra
-                                </h3>
-                                <form class="row" autocomplete="off">
-                                    @csrf
-                                    <div class="col-md-3">
-                                        <p>Từ ngày: <input type="text" class="date date_start form-control">
-                                            <input type="button" id="btn-dashboard-filter"
-                                                class="btn btn-primary btn-sm mt-1" value="Lọc kết quả">
-                                        </p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>Đến ngày: <input type="text" class="date date_end form-control"></p>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <p>
-                                            Lọc theo:
-                                            <select class="dashboard-filter form-control">
-                                                <option>--Chọn thời gian lọc--</option>
-                                                <option value="homnay">Hôm nay</option>
-                                                <option value="tuannay">Tuần này</option>
-                                                <option value="thangnay">Tháng này</option>
-                                                <option value="namnay">365 ngày qua</option>
-                                            </select>
-                                        </p>
-                                    </div>
-                                </form>
-                                <div id="chart"></div>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4 statiscal">Biểu đồ thống kê tổng doanh thu và số lượng sản phẩm bán
+                            ra
+                        </h3>
+                        <form class="row" autocomplete="off">
+                            <div class="col-md-3">
+                                <p>Từ ngày: <input type="text" class="date date_start form-control">
+                                    <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm mt-1"
+                                        value="Lọc kết quả">
+                                </p>
                             </div>
+                            <div class="col-md-3">
+                                <p>Đến ngày: <input type="text" class="date date_end form-control"></p>
+                            </div>
+
+                            <div class="col-md-3">
+                                <p>
+                                    Lọc theo:
+                                    <select class="dashboard-filter form-control">
+                                        <option>Chọn thời gian lọc</option>
+                                        <option value="today">Hôm nay</option>
+                                        <option value="week">Tuần này</option>
+                                        <option value="month">Tháng này</option>
+                                        <option value="year">365 ngày qua</option>
+                                    </select>
+                                </p>
+                            </div>
+                        </form>
+                        <div id="chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 d-flex">
+                <div class="card card-table flex-fill">
+                    <div class="card-header">
+                        <h3 class="card-title mb-0 font-weight-bold">Tổng sản phẩm thuộc danh mục</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div style="min-height: 400px;" id="donut"></div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="text-danger text-center font-weight-bold">Biểu đồ số lượng sản phẩm bán chạy nhất: <strong class="product-chart-name"></strong></h3>
-                                <div class="product_statistical_chart">
-                                    <button wire:click.prevent="close-chart-product()" class="close_chart_product">Đóng</button>
-                                    <div id="line-charts"></div>
-                                </div>
-                                <div class="product_statistical mt-4">
-                                    @livewire('product-statistical')
-                                </div>
-                                
-                            </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 d-flex">
+                <div class="card card-table flex-fill">
+                    <div class="card-header">
+                        <h3 class="card-title mb-0 font-weight-bold">Tổng sản phẩm bán ra của danh mục</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div style="min-height: 400px;" id="donut_cate_buy"></div>
                         </div>
                     </div>
                 </div>
@@ -153,346 +163,53 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card-group m-b-30">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <span class="d-block">New Employees</span>
-                                </div>
-                                <div>
-                                    <span class="text-success">+10%</span>
-                                </div>
-                            </div>
-                            <h3 class="mb-3">10</h3>
-                            <div class="progress mb-2" style="height: 5px;">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"
-                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Overall Employees 218</p>
-                        </div>
-                    </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center font-weight-bold mb-4">Biểu đồ doanh thu theo sản phẩm: <strong
+                                class="product-chart-name text-danger"></strong></h3>
+                        <div class="product_statistical_chart">
+                            <form class="row statistical-product-form" autocomplete="off">
+                                <div class="product-hidden"></div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <span class="d-block">Earnings</span>
+                                <div class="col-md-3">
+                                    <p>Từ ngày: <input type="text" class="date date_start_product form-control">
+                                        <input type="button" id="btn-dashboard-filter-product"
+                                            class="btn btn-primary btn-sm mt-1" value="Lọc kết quả">
+                                    </p>
                                 </div>
-                                <div>
-                                    <span class="text-success">+12.5%</span>
+                                <div class="col-md-3">
+                                    <p>Đến ngày: <input type="text" class="date date_end_product form-control"></p>
                                 </div>
-                            </div>
-                            <h3 class="mb-3">$1,42,300</h3>
-                            <div class="progress mb-2" style="height: 5px;">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"
-                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Previous Month <span class="text-muted">$1,15,852</span>
-                            </p>
-                        </div>
-                    </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <span class="d-block">Expenses</span>
+                                <div class="col-md-3">
+                                    <p>
+                                        Lọc theo:
+                                        <select class="dashboard-filter-product form-control">
+                                            <option>Chọn thời gian lọc</option>
+                                            <option value="today">Hôm nay</option>
+                                            <option value="week">Tuần này</option>
+                                            <option value="month">Tháng này</option>
+                                            <option value="year">365 ngày qua</option>
+                                        </select>
+                                    </p>
                                 </div>
-                                <div>
-                                    <span class="text-danger">-2.8%</span>
-                                </div>
-                            </div>
-                            <h3 class="mb-3">$8,500</h3>
-                            <div class="progress mb-2" style="height: 5px;">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"
-                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Previous Month <span class="text-muted">$7,500</span></p>
+                            </form>
+                            <div style="background: #eaebec;" id="line-charts"></div>
                         </div>
-                    </div>
+                        <div style="" class="product_statistical mt-4">
+                            @livewire('product-statistical')
+                        </div>
 
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <span class="d-block">Profit</span>
-                                </div>
-                                <div>
-                                    <span class="text-danger">-75%</span>
-                                </div>
-                            </div>
-                            <h3 class="mb-3">$1,12,000</h3>
-                            <div class="progress mb-2" style="height: 5px;">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"
-                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <p class="mb-0">Previous Month <span class="text-muted">$1,42,000</span>
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Statistics Widget -->
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-xl-4 d-flex">
-                <div class="card flex-fill dash-statistics">
-                    <div class="card-body">
-                        <h5 class="card-title">Statistics</h5>
-                        <div class="stats-list">
-                            <div class="stats-info">
-                                <p>Today Leave <strong>4 <small>/ 65</small></strong></p>
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 31%"
-                                        aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="stats-info">
-                                <p>Pending Invoice <strong>15 <small>/ 92</small></strong></p>
-                                <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 31%"
-                                        aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="stats-info">
-                                <p>Completed Projects <strong>85 <small>/ 112</small></strong></p>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 62%"
-                                        aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="stats-info">
-                                <p>Open Tickets <strong>190 <small>/ 212</small></strong></p>
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 62%"
-                                        aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="stats-info">
-                                <p>Closed Tickets <strong>22 <small>/ 212</small></strong></p>
-                                <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 22%"
-                                        aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="embed-api-auth-container"></div>
+        <div id="chart-container"></div>
+        <div id="view-selector-container"></div>
 
-            <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body">
-                        <h4 class="card-title">Task Statistics</h4>
-                        <div class="statistics">
-                            <div class="row">
-                                <div class="col-md-6 col-6 text-center">
-                                    <div class="stats-box mb-4">
-                                        <p>Total Tasks</p>
-                                        <h3>385</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-6 text-center">
-                                    <div class="stats-box mb-4">
-                                        <p>Overdue Tasks</p>
-                                        <h3>19</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-purple" role="progressbar" style="width: 30%" aria-valuenow="30"
-                                aria-valuemin="0" aria-valuemax="100">30%</div>
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 22%" aria-valuenow="18"
-                                aria-valuemin="0" aria-valuemax="100">22%</div>
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 24%" aria-valuenow="12"
-                                aria-valuemin="0" aria-valuemax="100">24%</div>
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 26%" aria-valuenow="14"
-                                aria-valuemin="0" aria-valuemax="100">21%</div>
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 10%" aria-valuenow="14"
-                                aria-valuemin="0" aria-valuemax="100">10%</div>
-                        </div>
-                        <div>
-                            <p><i class="fa fa-dot-circle-o text-purple mr-2"></i>Completed Tasks <span
-                                    class="float-right">166</span></p>
-                            <p><i class="fa fa-dot-circle-o text-warning mr-2"></i>Inprogress Tasks <span
-                                    class="float-right">115</span></p>
-                            <p><i class="fa fa-dot-circle-o text-success mr-2"></i>On Hold Tasks <span
-                                    class="float-right">31</span></p>
-                            <p><i class="fa fa-dot-circle-o text-danger mr-2"></i>Pending Tasks <span
-                                    class="float-right">47</span></p>
-                            <p class="mb-0"><i class="fa fa-dot-circle-o text-info mr-2"></i>Review
-                                Tasks <span class="float-right">5</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 col-lg-6 col-xl-4 d-flex">
-                <div class="card flex-fill">
-                    <div class="card-body">
-                        <h4 class="card-title">Today Absent <span class="badge bg-inverse-danger ml-2">5</span></h4>
-                        <div class="leave-info-box">
-                            <div class="media align-items-center">
-                                <a href="profile.html" class="avatar"><img alt="" src="assets/img/user.jpg"></a>
-                                <div class="media-body">
-                                    <div class="text-sm my-0">Martin Lewis</div>
-                                </div>
-                            </div>
-                            <div class="row align-items-center mt-3">
-                                <div class="col-6">
-                                    <h6 class="mb-0">4 Sep 2019</h6>
-                                    <span class="text-sm text-muted">Leave Date</span>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <span class="badge bg-inverse-danger">Pending</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="leave-info-box">
-                            <div class="media align-items-center">
-                                <a href="profile.html" class="avatar"><img alt="" src="assets/img/user.jpg"></a>
-                                <div class="media-body">
-                                    <div class="text-sm my-0">Martin Lewis</div>
-                                </div>
-                            </div>
-                            <div class="row align-items-center mt-3">
-                                <div class="col-6">
-                                    <h6 class="mb-0">4 Sep 2019</h6>
-                                    <span class="text-sm text-muted">Leave Date</span>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <span class="badge bg-inverse-success">Approved</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="load-more text-center">
-                            <a class="text-dark" href="javascript:void(0);">Load More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Statistics Widget -->
-
-        <div class="row">
-            <div class="col-md-6 d-flex">
-                <div class="card card-table flex-fill">
-                    <div class="card-header">
-                        <h3 class="card-title mb-0">Invoices</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="example" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice ID</th>
-                                        <th>Client</th>
-                                        <th>Due Date</th>
-                                        <th>Total</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0001</a></td>
-                                        <td>
-                                            <h2><a href="#">Global Technologies</a></h2>
-                                        </td>
-                                        <td>11 Mar 2019</td>
-                                        <td>$380</td>
-                                        <td>
-                                            <span class="badge bg-inverse-warning">Partially Paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0002</a></td>
-                                        <td>
-                                            <h2><a href="#">Delta Infotech</a></h2>
-                                        </td>
-                                        <td>8 Feb 2019</td>
-                                        <td>$500</td>
-                                        <td>
-                                            <span class="badge bg-inverse-success">Paid</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0003</a></td>
-                                        <td>
-                                            <h2><a href="#">Cream Inc</a></h2>
-                                        </td>
-                                        <td>23 Jan 2019</td>
-                                        <td>$60</td>
-                                        <td>
-                                            <span class="badge bg-inverse-danger">Unpaid</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="invoices.html">View all invoices</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 d-flex">
-                <div class="card card-table flex-fill">
-                    <div class="card-header">
-                        <h3 class="card-title mb-0">Payments</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table custom-table table-nowrap mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice ID</th>
-                                        <th>Client</th>
-                                        <th>Payment Type</th>
-                                        <th>Paid Date</th>
-                                        <th>Paid Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0001</a></td>
-                                        <td>
-                                            <h2><a href="#">Global Technologies</a></h2>
-                                        </td>
-                                        <td>Paypal</td>
-                                        <td>11 Mar 2019</td>
-                                        <td>$380</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0002</a></td>
-                                        <td>
-                                            <h2><a href="#">Delta Infotech</a></h2>
-                                        </td>
-                                        <td>Paypal</td>
-                                        <td>8 Feb 2019</td>
-                                        <td>$500</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="invoice-view.html">#INV-0003</a></td>
-                                        <td>
-                                            <h2><a href="#">Cream Inc</a></h2>
-                                        </td>
-                                        <td>Paypal</td>
-                                        <td>23 Jan 2019</td>
-                                        <td>$60</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="payments.html">View all payments</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+ 
 
         <div class="row">
             <div class="col-md-6 d-flex">
@@ -906,8 +623,146 @@
     </script>
     <script src="{{ asset('backend/plugins/material-datetimepicker/datetimepicker.js') }}"></script>
     <script src="{{ URL::to('backend/js/chart.js') }}"></script>
+
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-pie.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
     <script>
         charts()
     </script>
 
+    <script>
+        // $(document).ready(function(){
+
+        // var papa = Morris.Donut({
+        //   element: 'donut',
+        //   data: <?php echo $data; ?>
+        // });
+
+
+
+
+        // create a pie chart and set the data
+        chart = anychart.pie(<?php echo $data; ?>);
+        chart.innerRadius("30%");
+        chart.container("donut");
+        chart.draw();
+
+        // create a pie chart and set the data
+        chart = anychart.pie(<?php echo $data_cate_buy; ?>);
+        chart.innerRadius("30%");
+        chart.container("donut_cate_buy");
+        chart.draw();
+
+        var chart_line = new Morris.Area({
+            element: 'line-charts',
+            xkey: 'period',
+            ykeys: ['sales'],
+            labels: ['Doanh thu'],
+            lineColors: ['#56aaff'],
+            lineWidth: '3px',
+            resize: true,
+            redraw: true,
+            parseTime: false,
+            hideHover: 'auto'
+        });
+
+        function chart_product_line(id) {
+            $('.statistical-product-form')[0].reset();
+            $.ajax({
+                url: 'chart_product_line',
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id: id
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    for (item in data) {
+                        $('.product-chart-name').html(data[item]['name']);
+                        $('.product-hidden').html('<input type="hidden" class="product-id" value=' + data[item][
+                            'id'
+                        ] + '>')
+                    }
+                    chart_line.setData(data);
+                }
+            })
+            $('.btn-show-chart' + id).removeClass('btn-outline-success');
+            $('.show_chart').removeClass('btn-success');
+            $('.show_chart').addClass('btn-outline-success');
+            $('.btn-show-chart' + id).addClass('btn-success');
+        }
+        chart_product_max_line();
+
+        function chart_product_max_line() {
+            $.ajax({
+                url: 'chart_product_max',
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: "JSON",
+                success: function(data) {
+                    for (item in data) {
+                        $('.product-chart-name').html(data[item]['name']);
+                        $('.product-hidden').html('<input type="hidden" class="product-id" value=' + data[item][
+                            'id'
+                        ] + '>')
+                    }
+                    chart_line.setData(data);
+                }
+            })
+        }
+        $('#btn-dashboard-filter-product').click(function() {
+            var form_date = $('.date_start_product').val();
+            var to_date = $('.date_end_product').val();
+            var id = $('.product-id').val();
+            $.ajax({
+                url: 'filter-by-date-product',
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: "JSON",
+                data: {
+                    form_date: form_date,
+                    to_date: to_date,
+                    id: id
+                },
+                success: function(data) {
+                    if (data == '') {
+                        toastr.error('Chưa có dữ liệu')
+                    } else {
+                        chart_line.setData(data)
+                    }
+                }
+            });
+        });
+
+        $('.dashboard-filter-product').change(function() {
+            var dashboard_value = $(this).val();
+            var id = $('.product-id').val();
+            $.ajax({
+                url: 'dashboard-filter-product',
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType: "JSON",
+                data: {
+                    dashboard_value: dashboard_value,
+                    id: id
+                },
+                success: function(data) {
+                    if (data == '') {
+                        toastr.error('Chưa có dữ liệu')
+                    } else {
+                        chart_line.setData(data)
+                    }
+                }
+            })
+        });
+    </script>
 @endpush

@@ -8,25 +8,54 @@ use App\Models\Review;
 use App\Models\OrderDetail;
 use App\Models\Comment;
 use Livewire\WithPagination;
+use Brian2694\Toastr\Facades\Toastr;
+use DB;
 
 class ProductStatistical extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
+    public $sort, $search;
+
+    protected $listeners = [
+        'render' => 'render',
+    ];
+
 
     public function close_chart_product(){
         $this->emit('render');
     }
     public function render()
     {
-        $all_product = Product::with(['reviews','comments','orders'])->latest()->paginate(10);
-        // foreach($all_product as $key => $product){
-        //     $product->reviews = round(Review::where([['product_id', $product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'),2);
-        //     $product->review = round(Review::where([['product_id', $product->id],['review_status',1], ['review_parent', null]])->avg('count_rating'));
-        //     $product->comments = count(Comment::where([['comment_id_product', $product->id],['comment_parent_id',0]])->get());
-        //     $product->count_buy = count(OrderDetail::where('product_id', $product->id)->get());
-        // }
-        // $all_product = $all_product->sortByDesc('reviews')->paginate(10);
-        return view('livewire.product-statistical')->with(compact('all_product'));
+        if($this->search){
+            $all_product = Product::with(['reviews','comments','orders'])->where('product_name', 'LIKE','%'.$this->search.'%')->paginate(10);
+        }
+        elseif($this->sort == 'selling'){
+            $count_buy = DB::table('order_details')
+            ->select('product_id', DB::raw('count(*) as count_buy'))
+           ->groupBy('product_id')
+             ->orderBy('count_buy', 'DESC')
+           ->pluck('product_id')
+           ->all();
+         $all_product = Product::with(['reviews','comments','orders'])->whereIn('id', $count_buy)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$count_buy).")"))->paginate(10);
+        }
+        elseif($this->sort=='appreciate'){
+          $avg_rating = DB::table('review')->where('count_rating','!=',null)
+          ->select('product_id', DB::raw('avg(count_rating) as count_rating'))
+          ->groupBy('product_id')
+          ->orderBy('count_rating', 'DESC')
+          ->pluck('product_id')
+          ->all();
+          $all_product = Product::with(['reviews','comments','orders'])->whereIn('id', $avg_rating)->orderByRaw(\DB::raw("FIELD(id, ".implode(",",$avg_rating).")"))->paginate(10);
+        }
+        elseif($this->sort == 'see_more'){
+            $all_product = Product::with(['reviews','comments','orders'])->where('views','>',0)->latest('views')->paginate(10);
+        }elseif($this->sort == 'all'){
+            $all_product = Product::with(['reviews','comments','orders'])->latest()->paginate(10);
+        }
+        else{
+            $all_product = Product::with(['reviews','comments','orders'])->latest()->paginate(10);
+        }
+        return view('livewire.product-statistical', compact('all_product'));
     }
 }

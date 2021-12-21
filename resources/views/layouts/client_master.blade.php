@@ -57,34 +57,33 @@
 
 <!-- Body-->
 <script>
-  function fee() {
-    $(document).on('change', '.choose', function() {
-      var url = $('.route').data('url');
-      var action = $(this).attr("id");
-      var ma_id = $(this).val();
-      var result = '';
-      if (action == 'province') {
-        result = 'district';
-      } else {
-        result = 'ward';
-      }
-      $.ajax({
-        url: url,
-        method: "POST",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-          action: action,
-          ma_id: ma_id
-        },
-        success: function(data) {
-          $('#' + result).html(data);
+ function fee(action) {
+        var url = $('.route').data('url');
+        var ma_id = $('chose_'+action).val();
+      
+        var result = '';
+        if (action == 'province') {
+          result = 'district';
+        } else {
+          result = 'ward';
         }
-      })
-    })
+        $.ajax({
+          url: url,
+          method: "POST",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            action: action,
+            ma_id: ma_id
+          },
+          success: function(data) {
+            $('#' + result).html(data);
+          }
+        })
 
-  }
+  
+    }
 </script>
 
 <body class="handheld-toolbar-enabled">

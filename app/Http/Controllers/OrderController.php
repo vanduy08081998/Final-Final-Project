@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Statistical;
 use App\Models\Order;
+use App\Models\StatisticalProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -89,12 +90,13 @@ class OrderController extends Controller
     public function paymentStatus(Request $request){
         $order = Order::where('id',$request->id)->update(['payment_status' => $request->value]);
         $order = Order::where('id',$request->id)->first();
+        $order_details = $order->order_details;
+ 
         if($order->payment_status == 'Confirmed'){
             $total_order = 0;
 			$sales = 0;
 			$profit = 0;
 			$quantity = 0;
-
 
             $order_date = date("Y-m-d",$order->date);
             $statistic = Statistical::where('order_date',$order_date)->get();
@@ -118,8 +120,26 @@ class OrderController extends Controller
                 $statistic_new->total_order = 1;
                 $statistic_new->save();
             }
-        }
-    }
+            foreach($order_details as $key => $order_detail){
+                $statistic_product_id = StatisticalProduct::where([['order_date',$order_date],['product_id',$order_detail->product_id]])->first();
+                if(!$statistic_product_id){
+                    $statistic_new_product = new StatisticalProduct();
+                    $statistic_new_product->product_id = $order_detail->product_id;
+                    $statistic_new_product->order_date = $order_date;
+                    $statistic_new_product->sales = $order_detail->promotion_price;
+                    $statistic_new_product->quantity = $order_detail->quantity;
+                    $statistic_new_product->save();
+                }
+                else{      
+                $statistic_product_id->update([
+                    'sales' => $statistic_product_id->sales + $order_detail->promotion_price,
+                    'quantity' => $statistic_product_id->quantity + $order_detail->quantity
+                ]);
+                }
+            }
+
+        }       
+}
 
     public function delivery(Request $request){
         DB::table('orders')->where('id', $request->id)->update([

@@ -44,9 +44,6 @@
         </section>
     </div>
 </div>
-<script>
-    fee()
-</script>
 @endsection
 
 <!-- 'wards' => $wards -->

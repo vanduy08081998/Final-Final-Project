@@ -58,7 +58,7 @@
                                 <span class="input-group-text" id="basic-addon1">T</span>
                             </div>
 
-                            <select class="form-control choose province" id="province" required wire:model="province_id">
+                            <select class="form-control choose choose_province" onchange="fee('province')" id="province" required wire:model="province_id">
                                 <option value="">Chọn tỉnh, thành phố</option>
                                 @foreach ($provinces as $province)
                                 <option value="{{ $province->id }}">{{ $province->name }}</option>
@@ -72,7 +72,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Q</span>
                             </div>
-                            <select class="form-control choose district" id="district" required  wire:model="district_id">
+                            <select class="form-control choose choose_district" onchange="fee('district')" id="district" required  wire:model="district_id">
                                 <option value="">Chọn quận, huyện</option>
 
                             </select>
@@ -162,5 +162,6 @@
         </div>
     </div>
 </div>
+
 
 

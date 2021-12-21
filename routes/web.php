@@ -265,8 +265,14 @@ Route::group(['prefix' => 'admin'], function () {
 });
 //Thống kê
 Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
-Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date']);
-Route::post('/dashboard-filter',  [HomeController::class, 'dashboard_filter']);
+Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date'])->name('filter_by_date');
+Route::post('/dashboard-filter',  [HomeController::class, 'dashboard_filter'])->name('dashboard_filter');
+
+Route::post('/chart_product_line',  [HomeController::class, 'chart_product_line'])->name('chart_product_line');
+Route::post('/chart_product_max',  [HomeController::class, 'chart_product_max'])->name('chart_product_max');
+Route::post('/filter-by-date-product',  [HomeController::class, 'filter_by_date_product'])->name('filter_by_date_product');
+Route::post('/dashboard-filter-product',  [HomeController::class, 'dashboard_filter_product'])->name('dashboard_filter_product');
+
 //paypal
 Route::prefix('api/paypal')->group(function(){
     Route::post('/order/create', [PaypalController::class, 'create'])->name('paypal.create');
@@ -289,6 +295,6 @@ Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCa
 
 
 Route::get('/test', function(){
-    $d = Analytics::fetchVisitorsAndPageViews(Period::days(15));
-    echo "<pre>"; print_r($d); die();
+    $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(7));
+    return view('admin.statistics.google-analytics', ['analyticsData' => $analyticsData]);
 });
