@@ -68,9 +68,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $detail = [
-            'fullname' => $data['name'],
+            'fullname' => 'Bigdeal Store',
             'phone' => null,
-            'email' => $data['email'],
+            'email' => 'Bigdealdn@gmail.com',
             'title' => 'Đăng ký tài khoản thành công !',
             'message' => 'Chúc bạn mua sắm vui vẻ với BigDeal',
             'day_send' => date("d/m/Y"),
