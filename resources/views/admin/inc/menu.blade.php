@@ -98,6 +98,13 @@
         </ul>
     </li>
 
+    <li class="submenu">
+        <a href="#!"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span
+                class="menu-arrow"></span></a>
+        <ul style="display: none;">
+            <li><a href="{{ route('inventory') }}">Danh sách</a></li>
+        </ul>
+    </li>
     <li class="menu-title">
         <span>Chiến lược</span>
     </li>

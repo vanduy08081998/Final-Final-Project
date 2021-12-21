@@ -53,7 +53,7 @@
                                                 id="order_status_{{ $order->id }}" onchange="" name="payment_status"
                                                 class="check" value="{{ $order->payment_status }}" {{
                                                 $order->payment_status == 'Confirmed' ?
-                                            'checked' : '' }}
+                                            'checked disabled' : '' }}
                                             onchange="">
                                             <label for="order_status_{{ $order->id }}"
                                                 class="checktoggle">checkbox</label>
@@ -81,12 +81,10 @@
 <script>
     const payment_status = function(id) {
       let val = '';
-
-      if (!$('#order_status_' + id).is(':checked')) {
-        val = 'NotConfirm';
-      } else {
+      if ($('#order_status_' + id).is(':checked')) {
         val = 'Confirmed';
-      }
+        $('#order_status_' + id).prop('disabled', true);
+      } 
       let _token = $('meta[name="csrf-token"]').attr('content');
       $.ajax({
         type: "POST",

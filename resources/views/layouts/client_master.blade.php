@@ -10,6 +10,8 @@
   @yield('meta')
   <!-- Viewport-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{-- gg console --}}
+  <meta name="google-site-verification" content="GOyVzGpIuj8DX2h8ZWqsaDqmbyByGWQJqu9aSPhfSLQ" />
   <!-- Favicon and Touch Icons-->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
@@ -44,36 +46,46 @@
   @livewireScripts
   @routes
 </head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFSNQ4FS84"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CFSNQ4FS84');
+</script>
+
 <!-- Body-->
 <script>
-  function fee() {
-    $(document).on('change', '.choose', function() {
-      var url = $('.route').data('url');
-      var action = $(this).attr("id");
-      var ma_id = $(this).val();
-      var result = '';
-      if (action == 'province') {
-        result = 'district';
-      } else {
-        result = 'ward';
-      }
-      $.ajax({
-        url: url,
-        method: "POST",
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: {
-          action: action,
-          ma_id: ma_id
-        },
-        success: function(data) {
-          $('#' + result).html(data);
+ function fee(action) {
+        var url = $('.route').data('url');
+        var ma_id = $('chose_'+action).val();
+      
+        var result = '';
+        if (action == 'province') {
+          result = 'district';
+        } else {
+          result = 'ward';
         }
-      })
-    })
+        $.ajax({
+          url: url,
+          method: "POST",
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          data: {
+            action: action,
+            ma_id: ma_id
+          },
+          success: function(data) {
+            $('#' + result).html(data);
+          }
+        })
 
-  }
+  
+    }
 </script>
 
 <body class="handheld-toolbar-enabled">
@@ -188,7 +200,7 @@
   <script src="{{ asset('backend/js/jquery-3.5.1.min.js') }}"></script>
 
   <!-- JQUery ở đây nảy !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-
+  <script src="{{ asset('frontend/js/jquery.countdown.min.js') }}"></script>
 
 
   <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
@@ -270,11 +282,14 @@
     $(document).ready(function() {
       $(window).scroll(function(event) {
         var pos_body = $('html,body').scrollTop();
-        //   console.log(pos_body);
+          // console.log(pos_body);
         if (pos_body > 545.4545288085938) {
           $('.banner-main').addClass('banner-fixed');
         }
         if (pos_body < 545.4545288085938) {
+          $('.banner-main').removeClass('banner-fixed');
+        }
+        if (pos_body > 2496) {
           $('.banner-main').removeClass('banner-fixed');
         }
       });
@@ -284,14 +299,14 @@
   <script>
   $('body').resize(function(){
       const width = $('body').width();
-      console.log(width)
+      // console.log(width)
       if(width < 1024){
           $('.card-body').removeClass('card-body-hidden');
       }
   })
   .resize()
   </script>
-  
+
 </body>
 
 </html>
