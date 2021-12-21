@@ -29,7 +29,8 @@ class ProductController extends Controller
     ]);
   }
 
-  public function quickview(Request $request){
+  public function quickview(Request $request)
+  {
 
     $product = Product::find($request->id);
 
@@ -54,53 +55,57 @@ class ProductController extends Controller
       'category_id' => $category_id,
     ]);
   }
-  public function shopGrid($id)
+  public function shopGrid($slug)
   {
-    if($id == 0){
-        $product = Product::simplePaginate(12);
-        $cate = null;
-        $pro = Product::orderByDESC('id')->count();
-    }else{
-        $product = Product::where('product_id_category', $id)->simplePaginate(12);
-        $cate = Category::where('id_cate', $id)->first();
-        $pro = Product::orderByDESC('id')->where('product_id_category', $id)->count();
+    if ($slug == 'all-category') {
+      $product = Product::simplePaginate(12);
+      $cate = null;
+      $cate_id = null;
+      $pro = Product::orderByDESC('id')->count();
+    } else {
+      $cate = Category::where('category_slug', $slug)->first();
+      $cate_id = $cate->id_cate;
+      $product = Product::where('product_id_category', $cate_id)->simplePaginate(12);
+      $pro = Product::orderByDESC('id')->where('product_id_category', $cate_id)->count();
     }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
-    $products= Product::orderBy('id', 'asc')->get();
+    $products = Product::orderBy('id', 'asc')->get();
     $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
     $brands = Brand::orderBy('id', 'asc')->get();
     return view('clients.shop.shop-grid-ls', [
-        'min' => $min,
-        'max' => $max,
-        'product' => $product,
-        'products' => $products,
-        'cate' => $cate,
-        'pro' => $pro,
-        'category' => $categories,
-        'brands' => $brands,
-        'id_cate' => $id
+      'min' => $min,
+      'max' => $max,
+      'product' => $product,
+      'products' => $products,
+      'cate' => $cate,
+      'pro' => $pro,
+      'category' => $categories,
+      'brands' => $brands,
+      'id_cate' => $cate_id
     ]);
   }
 
-  public function searchByCate(Request $request){
-    if($request->key == ''){
+  public function searchByCate(Request $request)
+  {
+    if ($request->key == '') {
       $products = Product::simplePaginate(12);
-    }else{
+    } else {
       $products = Product::orderByDESC('id')
         ->where('product_name', 'REGEXP', $request->key)->where('product_id_category', $request->id)->get();
     }
     return view('clients.shop.details.search', compact('products'));
   }
 
-  public function searchByBrand(Request $request){
+  public function searchByBrand(Request $request)
+  {
 
     if ($request->brand_key == null) {
       $products = Product::all();
     } else {
-      if($request->brandbox == null){
+      if ($request->brandbox == null) {
         $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->get();
-      }else{
+      } else {
         $products = Product::orderByDESC('id')->where('product_name', 'REGEXP', $request->brand_key)->whereIn('product_id_brand', $request->brandbox)->get();
       }
     }
@@ -143,17 +148,34 @@ class ProductController extends Controller
   {
     // $color = \App\Models\Color::where('color_code', $request->input('radio-custom-color'));
     $product = Product::where('id', $request->product_id)->first();
+    $timestamp = time();
     if ($product->type_of_category == 'isNotAttribute') {
 
-
-      if($product->discount != null){
-        if($product->discount_unit == '%'){
-          $price = $product->unit_price - ($product->unit_price * $product->discount / 100 );
-        }else{
-          $price = $product->unit_price - $product->discount;
+      if (count($product->flash_deals) == 0) {
+        if ($product->discount != null) {
+          if ($product->discount_unit == '%') {
+            $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+          } else {
+            $price = $product->unit_price - $product->discount;
+          }
+        } else {
+          $price = $product->unit_price;
         }
-      }else{
-        $price = $product->unit_price;
+      } else {
+        $flash_deal = $product->flash_deals()->first();
+        if ($timestamp > $flash_deal->date_end) {
+          if ($product->discount != null) {
+            if ($product->discount_unit == '%') {
+              $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+            } else {
+              $price = $product->unit_price - $product->discount;
+            }
+          } else {
+            $price = $product->unit_price;
+          }
+        } else {
+          $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+        }
       }
 
       $product_quantity = $request->product_quantity;
@@ -164,7 +186,6 @@ class ProductController extends Controller
       ]);
     } else {
       $str = '';
-      $specifications = '';
       $product_quantity = $request->product_quantity;
       if ($request->has('radio_custom_color')) {
         $str = $request['radio_custom_color'];
@@ -172,30 +193,74 @@ class ProductController extends Controller
 
       if (json_decode($product->choice_options) != null) {
         foreach (json_decode($product->choice_options) as $key => $choice) {
-          $specifications .= '
-                                        <div class="d-flex">
-                                            <strong>' . \App\Models\Attribute::where('id', $choice->attribute_id)->first()->name . ':  </strong>
-                                            <p>&nbsp; ' . $request['radio_custom_' . $choice->attribute_id] . '</p>
-                                        </div>
-                    ';
           if ($str != null) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= '-' . str_replace([',', '/', '.', ' '], '', $request['radio_custom_' . $choice->attribute_id]);
           } else {
-            $str .= str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= str_replace([',', '/', '.', ' '], '', $request['radio_custom_' . $choice->attribute_id]);
           }
         }
       }
 
       $product_stock = ProductVariant::where('id_product', $request->product_id)->where('variant', $str)->first();
-      if($product->discount != null){
-        if($product->discount_unit == '%'){
-          $price = $product_stock->variant_price - ($product_stock->variant_price * $product->discount / 100 );
-        }else{
-          $price = $product_stock->variant_price - $product->discount;
+
+      $price = 0;
+      if ($product_stock != null) {
+        if (count($product->flash_deals) == 0) {
+          if ($product->discount != null) {
+            if ($product->discount_unit == '%') {
+              $price = $product_stock->variant_price - ($product_stock->variant_price * $product->discount / 100);
+            } else {
+              $price = $product_stock->variant_price - $product->discount;
+            }
+          } else {
+            $price = $product_stock->variant_price;
+          }
+        } else {
+          $flash_deal = $product->flash_deals()->first();
+          if ($timestamp > $flash_deal->date_end) {
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product_stock->variant_price - ($product_stock->variant_price * $product->discount / 100);
+              } else {
+                $price = $product_stock->variant_price - $product->discount;
+              }
+            } else {
+              $price = $product_stock->variant_price;
+            }
+          } else {
+            $price = $product_stock->variant_price - ($product_stock->variant_price * $flash_deal->discount / 100);
+          }
+
         }
-      }else{
-        $price = $product_stock->variant_price;
+      } else {
+        if (count($product->flash_deals) == 0) {
+          if ($product->discount != null) {
+            if ($product->discount_unit == '%') {
+              $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+            } else {
+              $price = $product->unit_price - $product->discount;
+            }
+          } else {
+            $price = $product->unit_price;
+          }
+        } else {
+          $flash_deal = $product->flash_deals()->first();
+          if($timestamp > $flash_deal->date_end){
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+              } else {
+                $price = $product->unit_price - $product->discount;
+              }
+            } else {
+              $price = $product->unit_price;
+            }
+          }else{
+            $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+          }
+        }
       }
+
       $variant_quantity = $product_stock->variant_quantity;
       $v_image = $product_stock->variant_image;
       return response()->json([
@@ -203,21 +268,20 @@ class ProductController extends Controller
         'product_quantity' => $variant_quantity,
         'quantity' => $product_quantity,
         'variant' =>  $product_stock,
-        'specifications' => $specifications,
         'variant_image' => $v_image
       ]);
-
     }
   }
 
-  public function productShort(Request $request){
-    if($request->value == 'all'){
-      if($request->id_cate == 0){
+  public function productShort(Request $request)
+  {
+    if ($request->value == 'all') {
+      if ($request->id_cate == 0) {
         $products = Product::orderBy('id', 'DESC')->simplePaginate(12);
-      }else{
+      } else {
         $products = Product::orderBy('id', 'DESC')->where('product_id_category', $request->id_cate)->simplePaginate(12);
       }
-    }else{
+    } else {
       if ($request->id_cate == 0) {
         $products = Product::orderBy($request->value, $request->orderby)->simplePaginate(12);
       } else {

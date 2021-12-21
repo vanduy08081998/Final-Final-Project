@@ -105,6 +105,15 @@ function quickviewModal(id) {
                     },
                 });
             });
+
+           let date_end = $("._314-e778ac").attr("data-date");
+           $("._314-e778ac").countdown(date_end, function (event) {
+               $(this).html(
+                   event.strftime(
+                       'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+                   )
+               );
+           });
         },
     });
 }

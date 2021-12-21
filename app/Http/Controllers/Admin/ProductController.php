@@ -692,4 +692,10 @@ class ProductController extends Controller
     Toastr::success('Nhập kho thành công', 'Chúc mừng');
     return redirect()->back();
   }
+
+  public function inventory(){
+    $products = Product::all();
+
+    return view('admin.products.Inventory', compact('products'));
+  }
 }

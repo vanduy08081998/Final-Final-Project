@@ -82,6 +82,7 @@
                 </li>
                 <li class="mb-0">
                     <form action="{{ route('logout') }}" method="POST">
+                        @csrf
                         <button type="submit" class="nav-link-style d-flex align-items-center px-4 py-3" href="#">
                             <i class="ci-sign-out opacity-60 me-2"></i>Đăng xuất
                         </button>

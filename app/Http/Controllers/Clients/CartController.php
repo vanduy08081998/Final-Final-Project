@@ -8,12 +8,14 @@ use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CartController extends Controller
 {
   public function addToCart(Request $request)
   {
 
+    $timestamp = time();
     if (auth()->check()) {
       $product = Product::where('id', $request->product_id)->first();
       $choice_options = array();
@@ -30,9 +32,9 @@ class CartController extends Controller
         foreach (json_decode($product->choice_options) as $key => $choice) {
           $options[Attribute::find($choice->attribute_id)->slug] = $request['radio_custom_' . $choice->attribute_id];
           if ($str != null) {
-            $str .= '-' . str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= '-' . str_replace([',', '/', '.', ' '], '', $request['radio_custom_' . $choice->attribute_id]);
           } else {
-            $str .= str_replace([',', '/','.',' '], '', $request['radio_custom_' . $choice->attribute_id]);
+            $str .= str_replace([',', '/', '.', ' '], '', $request['radio_custom_' . $choice->attribute_id]);
           }
         }
       } else {
@@ -44,27 +46,64 @@ class CartController extends Controller
       $item['product_name'] = $product->product_name;
       $item['specifications'] = $options;
       if ($product_variant != null) {
-        if($product->discount != null){
-          if($product->discount_unit == '%'){
-            $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100 );
-          }else{
-            $price = $product_variant->variant_price - $product->discount;
+        if (count($product->flash_deals) == 0) {
+          if ($product->discount != null) {
+            if ($product->discount_unit == '%') {
+              $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
+            } else {
+              $price = $product_variant->variant_price - $product->discount;
+            }
+          } else {
+            $price = $product_variant->variant_price;
           }
-        }else{
-          $price = $product_variant->variant_price;
+        } else {
+          $flash_deal = $product->flash_deals()->first();
+          if ($timestamp > $flash_deal->date_end) {
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
+              } else {
+                $price = $product_variant->variant_price - $product->discount;
+              }
+            } else {
+              $price = $product_variant->variant_price;
+            }
+          } else {
+            $price = $product_variant->variant_price - ($product_variant->variant_price * $flash_deal->discount / 100);
+          }
         }
+
         $item['variant_price'] = $price;
         $item['variant_image'] = $product_variant->variant_image;
       } else {
-        if($product->discount != null){
-          if($product->discount_unit == '%'){
-            $price = $product->unit_price - ($product->unit_price * $product->discount / 100 );
-          }else{
-            $price = $product->unit_price - $product->discount;
+        if (count($product->flash_deals) == 0) {
+          if ($product->discount != null) {
+            if ($product->discount_unit == '%') {
+              $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+            } else {
+              $price = $product->unit_price - $product->discount;
+            }
+          } else {
+            $price = $product->unit_price;
           }
-        }else{
-          $price = $product->unit_price;
+        } else {
+          $flash_deal = $product->flash_deals()->first();
+          if($timestamp > $flash_deal->date_end){
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+              } else {
+                $price = $product->unit_price - $product->discount;
+              }
+            } else {
+              $price = $product->unit_price;
+            }
+          }else{
+            $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+          }
         }
+
+
         $item['variant_price'] = $price;
         $item['variant_image'] = $product->product_image;
       }
@@ -81,7 +120,8 @@ class CartController extends Controller
           'specifications' => json_encode($choice_options, JSON_UNESCAPED_UNICODE),
           'quantity' => $request->product_quantity,
           'user_id' => $user_id,
-          'product_id' => $request->product_id
+          'product_id' => $request->product_id,
+          'variant' => $str
         ]);
       } else {
         $cart->update([
@@ -178,5 +218,11 @@ class CartController extends Controller
       return response()->json(['totalprice' => $totalprice]);
     } else {
     }
+  }
+
+  public function carDeleteDefault($id){
+    Cart::find($id)->delete();
+    Toastr::success('Xóa thành công','Chúc mừng !');
+    return redirect()->back();
   }
 }

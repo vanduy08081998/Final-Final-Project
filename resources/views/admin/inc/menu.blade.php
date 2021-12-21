@@ -99,10 +99,10 @@
     </li>
 
     <li class="submenu">
-        <a href="#"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span
+        <a href="#!"><i class="fa fa-university" aria-hidden="true"></i> <span>Tồn kho</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
-            <li><a href="#">Danh sách</a></li>
+            <li><a href="{{ route('inventory') }}">Danh sách</a></li>
         </ul>
     </li>
     <li class="menu-title">
@@ -111,7 +111,7 @@
     <li class="submenu">
         <a href="#"
             class="{{ request()->is('admin/banners') || request()->is('admin/banners/*') ? 'active' : '' }}"><i
-                class="fa fa-object-ungroup" aria-hidden="true"></i> <span> Slide</span> <span
+                class="fa fa-object-ungroup" aria-hidden="true"></i> <span> Banner</span> <span
                 class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('banners.index') }}">Danh sách</a></li>
@@ -131,7 +131,7 @@
     <li class="submenu">
         <a href="#"
             class="{{ request()->is('admin/flash-deals') || request()->is('admin/flash-deals/*') ? 'active' : '' }}"><i
-                class="fas fa-bookmark"></i> <span> Flash Sale</span> <span class="menu-arrow"></span></a>
+                class="fas fa-bookmark"></i> <span> Siêu khuyến mãi</span> <span class="menu-arrow"></span></a>
         <ul style="display: none;">
             <li><a href="{{ route('flash-deals.index') }}">Danh sách</a></li>
         </ul>

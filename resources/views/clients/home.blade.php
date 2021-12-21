@@ -110,14 +110,14 @@
   <section class="container pt-5 trending-product">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-      <p style="font-size: 20px"><strong>Sản phẩm mới nhất</strong></p>
+      <h2><strong>Sản phẩm mới nhất</strong></h2>
       <div class="pt-3"><a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm<i
             class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
     <!-- Grid-->
     <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
       <div class="tns-carousel-inner"
-        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
         @foreach ($product as $product)
           <div class="product-item">
@@ -129,14 +129,16 @@
               @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
-                <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                  href="{{ route('shop.product-details', $product->product_slug) }}"></a>
-                <h3 class="product-title fs-sm"><a
-                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a>
+                <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
+                  style="margin: auto; display: block">
+              </a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
+                  href="#">{{ $product->Category->category_name }}</a>
+                <h3 class="product-title fs-sm text-center"><a
+                    href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
-                <div class="d-flex justify-content-between">
-                  @if ($product->discount_unit == '%')
+                <div class="d-flex justify-content-between sale-price">
+                  @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
@@ -145,22 +147,53 @@
                       <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
-                  @else
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                  @elseif ($product->discount == 0)
+                    <div class="product-price w-100 text-center">
+                      <span>{{ number_format($product->unit_price) }}
                         ₫</span>
+                    </div>
+                    <div class="product-price d-block d-sm-none" style="height: 12px">
+                      <span style="text-decoration: line-through"></span>
                     </div>
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  <div class="star-rating w-100 text-center">
+                    @php
+                      $arrayRating = [];
+                      $avg = 0;
+                      $total = 0;
+                      $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                      $count = 0;
+                      if (count($reviews) > 0) {
+                          $count = count($reviews);
+                          foreach ($reviews as $key => $review) {
+                              $total += $review->count_rating;
+                          }
+                          $avg = round($total / $count);
+                      } else {
+                          $avg = 0;
+                          $count = 0;
+                      }
+                    @endphp
+
+                    @if ($reviews != null)
+                      @for ($i = 0; $i < 5; $i++)
+                        @for ($j = 0; $j < $avg; $j++)
+                          @php
+                            array_push($arrayRating, $j);
+                          @endphp
+                        @endfor
+                        <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                      @endfor
+                    @else
+
+                    @endif
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body"
+                style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -195,18 +228,15 @@
                   value="{{ number_format($product->unit_price) }}">
                 <input type="hidden" id="wishlist_productimg{{ $product->id }}"
                   value="{{ url($product->product_image) }}">
-
                 <a type="hidden" id="wishlist_producturl{{ $product->id }}"
                   href="{{ route('shop.product-details', $product->product_slug) }}">
                 </a>
-                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                  onclick="add_compare({{ $product->id }})">
-                  <i class="ci-compare me-1"></i>
                 </a>
                 <a class="nav-link-style me-3" onclick="quickviewModal({{ $product->id }})">
                   <i class="ci-eye"></i>
                 </a>
               </div>
+              <!-- Quick View Modal-->
             </div>
           </div>
           <!-- Product-->
@@ -215,10 +245,10 @@
     </div>
   </section>
   {{-- Sản phẩm nổi bật --}}
-  <section class="container mt-5 highlight-product">
+  <section class="container highlight-product">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-      <p style="font-size: 20px"><strong>Sản phẩm nổi bật</strong></p>
+      <h2><strong>Sản phẩm nổi bật</strong></h2>
       <div class="pt-3">
         <a class="btn btn-outline-accent btn-sm" href="shop-grid-ls.html">Xem thêm
           <i class="ci-arrow-right ms-1 me-n1"></i>
@@ -228,26 +258,28 @@
     <!-- Grid-->
     <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
       <div class="tns-carousel-inner"
-        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
+        data-carousel-options="{&quot;items&quot;: 2, &quot;controls&quot;: true, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2},&quot;500&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 18},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 20}, &quot;1280&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;1920&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}, &quot;966&quot;:{&quot;items&quot;:5, &quot;gutter&quot;: 30}}}">
         <!-- Product-->
         @foreach ($highlight as $product)
           <div class="product-item" style="height: 375px">
             <div class="card product-card">
-                @if ($product->discount == 0)
-                @else
-                  <span class="badge bg-danger badge-shadow">Giảm giá
-                    {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
-                @endif
+              @if ($product->discount == 0)
+              @else
+                <span class="badge bg-danger badge-shadow">Giảm giá
+                  {{ $product->discount }}@if ($product->discount_unit == '%') % @else ₫ @endif</span>
+              @endif
               <a class="card-img-top d-block overflow-hidden"
                 href="{{ route('shop.product-details', $product->product_slug) }}">
-                <img src="{{ asset($product->product_image) }}" alt="Product"></a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1"
-                  href="{{ route('shop.product-details', $product->product_slug) }}"></a>
-                <h3 class="product-title fs-sm"><a
-                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ trans($product->product_name) }}</a>
+                <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
+                  style="margin: auto; display: block">
+              </a>
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
+                  href="#">{{ $product->Category->category_name }}</a>
+                <h3 class="product-title fs-sm text-center"><a
+                    href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
-                <div class="d-flex justify-content-between">
-                  @if ($product->discount_unit == '%')
+                <div class="d-flex justify-content-between sale-price">
+                  @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
@@ -256,22 +288,52 @@
                       <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
-                  @else
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                  @elseif ($product->discount == 0)
+                    <div class="product-price w-100 text-center">
+                      <span>{{ number_format($product->unit_price) }}
                         ₫</span>
+                    </div>
+                    <div class="product-price d-block d-sm-none" style="height: 12px">
+                      <span style="text-decoration: line-through"></span>
                     </div>
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i
-                      class="star-rating-icon ci-star-filled active"></i><i class="star-rating-icon ci-star"></i>
+                  <div class="star-rating w-100 text-center">
+                    @php
+                      $arrayRating = [];
+                      $avg = 0;
+                      $total = 0;
+                      $reviews = \App\Models\Review::where('product_id', $product->id)->get();
+                      $count = 0;
+                      if (count($reviews) > 0) {
+                          $count = count($reviews);
+                          foreach ($reviews as $key => $review) {
+                              $total += $review->count_rating;
+                          }
+                          $avg = round($total / $count);
+                      } else {
+                          $avg = 0;
+                          $count = 0;
+                      }
+                    @endphp
+
+                    @if ($reviews != null)
+                      @for ($i = 0; $i < 5; $i++)
+                        @for ($j = 0; $j < $avg; $j++)
+                          @php
+                            array_push($arrayRating, $j);
+                          @endphp
+                        @endfor
+                        <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                      @endfor
+                    @else
+                    @endif
                   </div>
                 </div>
               </div>
-              <div class="card-body card-body-hidden text-center"  id="card-body" style="z-index: 10; display: inline; padding: 15px">
+              <div class="card-body card-body-hidden text-center" id="card-body"
+                style="z-index: 10; display: inline; padding: 15px">
                 @if (Auth::user() != null)
                   <?php
                   $user = Auth::user()->id;
@@ -309,14 +371,12 @@
                 <a type="hidden" id="wishlist_producturl{{ $product->id }}"
                   href="{{ route('shop.product-details', $product->product_slug) }}">
                 </a>
-                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                  onclick="add_compare({{ $product->id }})">
-                  <i class="ci-compare me-1"></i>
                 </a>
                 <a class="nav-link-style me-3" onclick="quickviewModal({{ $product->id }})">
                   <i class="ci-eye"></i>
                 </a>
               </div>
+              <!-- Quick View Modal-->
             </div>
           </div>
           <!-- Product-->
@@ -469,14 +529,14 @@
   <section class="container-fluid px-0">
     <div class="row g-0">
       <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
-          href="blog-list-sidebar.html">
+          href="{{ route('clients.blog') }}">
           <div class="card-body text-center"><i class="ci-edit h3 mt-2 mb-4 text-primary"></i>
             <h3 class="h5 mb-1">Xem các bài viết</h3>
             <p class="text-muted fs-sm">Tin tức về cửa hàng, sản phẩm và xu hướng</p>
           </div>
         </a></div>
       <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent"
-          href="#">
+          rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/BigDeal-106183301182718">
           <div class="card-body text-center"><i class="ci-facebook h3 mt-2 mb-4 text-accent"></i>
             <h3 class="h5 mb-1">Theo dõi trên Facebook</h3>
             <p class="text-muted fs-sm">#MuaHangCungBigDeal</p>

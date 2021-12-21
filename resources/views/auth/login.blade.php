@@ -87,7 +87,7 @@
 
     <div class="form-container sign-in-container">
         <form class="form_login form-horizontal form" role="form">
-            <!-- <form action="{{ route('login') }}" method="post" enctype="multipart/form-data">
+            <!-- <form action="" method="post" enctype="multipart/form-data">
             @csrf -->
             <h2 class="mt-5">Đăng nhập</h2>
             <div class="social-container text-left">
