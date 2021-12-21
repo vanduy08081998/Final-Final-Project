@@ -65,7 +65,7 @@ class AdminComment extends Component
         ]);
         
         $service = new NotificationService();
-        $service->store(Comment::find($id)->comment_id_user, $product_id, 'comment', Auth::user()->name);
+        $service->store(Comment::find($id)->comment_id_user, $product_id, 'comment', 'BigDeal');
         
         $this->dispatchBrowserEvent('reload');
     }

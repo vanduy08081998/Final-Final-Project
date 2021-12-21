@@ -18,7 +18,7 @@ function cartCheckout() {
                 $("#totalprice").text(
                     `Tổng tiền: ${formatter.format(
                         (totalprice * (100 - Number(promocode))) / 100
-                    )}`
+                    )}₫`
                 );
             }
         },
@@ -44,7 +44,7 @@ const localPromocode = (discount, response, promocodeText) => {
             $("#totalprice").text(
                 `Tổng tiền: ${formatter.format(
                     (totalprice * (100 - promocode)) / 100
-                )}`
+                )}₫`
             );
         }
         if (response.error) {

@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\StatisticalProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\NotificationService;
 
 class OrderController extends Controller
 {
@@ -145,8 +146,11 @@ class OrderController extends Controller
 }
 
     public function delivery(Request $request){
-        DB::table('orders')->where('id', $request->id)->update([
+        $order = Order::find($request->id);
+        $order->update([
             'delivery_viewed' => $request->value
         ]);
+        $service = new NotificationService();
+        $service->store($order->user_id, $order->id, 'order', $request->value);
     }
 }
