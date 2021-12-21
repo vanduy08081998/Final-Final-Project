@@ -56,7 +56,19 @@ class CartController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          $price = $product_variant->variant_price - ($product_variant->variant_price * $flash_deal->discount / 100);
+          if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0) {
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
+              } else {
+                $price = $product_variant->variant_price - $product->discount;
+              }
+            } else {
+              $price = $product_variant->variant_price;
+            }
+          } else {
+            $price = $product_variant->variant_price - ($product_variant->variant_price * $flash_deal->discount / 100);
+          }
         }
 
         $item['variant_price'] = $price;
@@ -74,7 +86,19 @@ class CartController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+          if(strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0){
+            if ($product->discount != null) {
+              if ($product->discount_unit == '%') {
+                $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+              } else {
+                $price = $product->unit_price - $product->discount;
+              }
+            } else {
+              $price = $product->unit_price;
+            }
+          }else{
+            $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+          }
         }
 
 

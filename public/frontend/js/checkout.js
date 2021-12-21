@@ -29,11 +29,13 @@ cartCheckout();
 
 const localPromocode = (discount, response, promocodeText) => {
     let promocode = localStorage.getItem("promocode");
+    let promoText = localStorage.getItem("promoText")
     if (!promocode) {
         if (response.success) {
             toastr.success(response.success, "Chúc mừng");
             $("#hidden_sale_code").val(promocodeText);
             localStorage.setItem("promocode", discount);
+            localStorage.setItem("promoText", promocodeText);
             const formatter = new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
@@ -73,6 +75,13 @@ $(".needs-validation").on("submit", function (event) {
 
 const checkoutComplete = () => {
     let localcheckout = localStorage.getItem("promocode");
+    let promoText = localStorage.getItem("promoText");
+    let proText = "";
+    if (!promoText) {
+        proText = "";
+    } else {
+        proText = promoText;
+    }
     let promocodeInsert = 0;
     if (!localcheckout) {
         promocodeInsert = 0;
@@ -86,10 +95,11 @@ const checkoutComplete = () => {
             _token: $('meta[name="csrf-token"]').attr("content"),
             total: $('input[name="totalprice"]').val(),
             promocodeInsert: promocodeInsert,
-            hiddenSaleCode: $("#hidden_sale_code").val()
+            hiddenSaleCode: proText,
         },
         success: function (response) {
             localStorage.removeItem("promocode");
+            localStorage.removeItem("promoText");
             window.location.href = route("checkout.checkout-review");
         },
     });

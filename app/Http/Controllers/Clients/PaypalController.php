@@ -69,7 +69,7 @@ class PaypalController extends Controller
 
         $order->shipping_address = $shipping_address;
         $order->shipping_status = $shipping_method;
-        $order->payment_type = 'Tiền mặt';
+        $order->payment_type = 'Paypal';
         $order->payment_status = 'Confirmed';
         $order->payment_details = '';
         $order->code = $request->hiddenSaleCode;
