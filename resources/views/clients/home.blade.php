@@ -322,7 +322,6 @@
                         <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
                       @endfor
                     @else
-
                     @endif
                   </div>
                 </div>

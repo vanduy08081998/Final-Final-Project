@@ -106,25 +106,14 @@ function quickviewModal(id) {
                 });
             });
 
-            let date_end = $("._314-e778ac").attr("data-date");
-            $("._314-e778ac")
-                .countdown(date_end, {
-                    elapse: true,
-                })
-                .on("update.countdown", function (event) {
-                    var $this = $(this);
-                    if (event.elapsed) {
-                        $this.html(
-                            event.strftime("After end: <span>%H:%M:%S</span>")
-                        );
-                    } else {
-                        $this.html(
-                            event.strftime(
-                                'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
-                            )
-                        );
-                    }
-                });
+           let date_end = $("._314-e778ac").attr("data-date");
+           $("._314-e778ac").countdown(date_end, function (event) {
+               $(this).html(
+                   event.strftime(
+                       'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+                   )
+               );
+           });
         },
     });
 }

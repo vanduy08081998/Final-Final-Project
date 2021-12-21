@@ -91,6 +91,7 @@ Route::prefix('/')->group(function () {
         Route::post('/cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
         Route::get('/cart-dropdown', [CartController::class, 'cartDropdown'])->name('cart.dropdown');
         Route::post('/cart-total', [CartController::class, 'cartTotals'])->name('cart.total');
+        Route::post('/cart-delete-default/{id}', [CartController::class, 'carDeleteDefault'])->name('carts.delete.default');
       });
 
   Route::prefix('/account')->group(function () {
@@ -302,7 +303,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/reply/{id}', [ReviewAdmin::class, 'reply'])->name('review-admin.reply');
         Route::post('/handle', [ReviewAdmin::class, 'handle'])->name('review-admin.handle');
     });
-    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');  
+    Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
 });
 //Thống kê
 Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');

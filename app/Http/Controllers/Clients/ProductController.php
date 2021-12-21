@@ -148,6 +148,7 @@ class ProductController extends Controller
   {
     // $color = \App\Models\Color::where('color_code', $request->input('radio-custom-color'));
     $product = Product::where('id', $request->product_id)->first();
+    $timestamp = time();
     if ($product->type_of_category == 'isNotAttribute') {
 
       if (count($product->flash_deals) == 0) {
@@ -162,7 +163,7 @@ class ProductController extends Controller
         }
       } else {
         $flash_deal = $product->flash_deals()->first();
-        if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0) {
+        if ($timestamp > $flash_deal->date_end) {
           if ($product->discount != null) {
             if ($product->discount_unit == '%') {
               $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
@@ -216,7 +217,7 @@ class ProductController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0) {
+          if ($timestamp > $flash_deal->date_end) {
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product_stock->variant_price - ($product_stock->variant_price * $product->discount / 100);
@@ -244,7 +245,7 @@ class ProductController extends Controller
           }
         } else {
           $flash_deal = $product->flash_deals()->first();
-          if(strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0){
+          if($timestamp > $flash_deal->date_end){
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
@@ -257,8 +258,6 @@ class ProductController extends Controller
           }else{
             $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
           }
-
-
         }
       }
 

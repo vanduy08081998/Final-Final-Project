@@ -49,6 +49,9 @@
           <div class="product-price">
             <div class="product-price__current-price ">
               <h5>Giá gốc: </h5>
+              @php
+                  $timestamp = time();
+              @endphp
               @if (count($product->flash_deals) == 0)
                 @if ($product->discount_unit == '%')
                   <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
@@ -66,7 +69,7 @@
                 @php
                   $flash_deal = $product->flash_deals()->first();
                 @endphp
-                @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
+                @if ($timestamp > $flash_deal->date_end)
                   <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                     ₫</span>
                   <small class="text-muted"
@@ -92,7 +95,7 @@
               $flash_deal = $product->flash_deals()->first();
             @endphp
 
-            @if (strtotime(date('Y/m/d h:i:s')) - $flash_deal->date_end > 0)
+            @if ($timestamp > $flash_deal->date_end)
 
             @else
               <div class="_314-b55619"><a href="#!" class="">
