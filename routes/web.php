@@ -340,10 +340,4 @@ Route::get('login/google/callback', [LoginController::class, 'handleGoogleCallba
 Route::get('login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('login/facebook/callback', [LoginController::class, 'handleFacebookCallback']);
 
-
-Route::get('/test', function(){
-    $analyticsData = Analytics::fetchTopBrowsers(Period::days(7));
-    return view('admin.statistics.google-analytics', ['analyticsData' => $analyticsData]);
-});
-
 Auth::routes();
