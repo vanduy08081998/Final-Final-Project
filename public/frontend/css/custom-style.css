@@ -724,6 +724,16 @@ button.carousel-control-next.show-next {
     overflow: auto;
 }
 
+.trending-product h2 {
+    margin-bottom: 0px !important;
+    margin: auto 0
+}
+
+.highlight-product h2 {
+    margin-bottom: 0px !important;
+    margin: auto 0
+}
+
 @media screen and (max-width: 1366px) {
     .banner-main {
         display: none;
@@ -870,6 +880,10 @@ button.carousel-control-next.show-next {
     }
 
     .user-space {
+        display: none;
+    }
+
+    #product-short hr {
         display: none;
     }
 }
