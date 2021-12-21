@@ -10,6 +10,8 @@
   @yield('meta')
   <!-- Viewport-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{-- gg console --}}
+  <meta name="google-site-verification" content="GOyVzGpIuj8DX2h8ZWqsaDqmbyByGWQJqu9aSPhfSLQ" />
   <!-- Favicon and Touch Icons-->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/img/logo/favicon.png') }}">
@@ -285,6 +287,9 @@
           $('.banner-main').addClass('banner-fixed');
         }
         if (pos_body < 545.4545288085938) {
+          $('.banner-main').removeClass('banner-fixed');
+        }
+        if (pos_body > 2496) {
           $('.banner-main').removeClass('banner-fixed');
         }
       });
