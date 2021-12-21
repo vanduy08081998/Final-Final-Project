@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 mb-2">
                 <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Tình trạng
-                        đơn hàng:</span>{{ $order->status->delivery_description }}</div>
+                        đơn hàng:</span>{{ $order->status ? $order->status->delivery_description : 'Đang xử lý' }}</div>
             </div>
             <div class="col-md-4 mb-2">
                 <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Ngày giao

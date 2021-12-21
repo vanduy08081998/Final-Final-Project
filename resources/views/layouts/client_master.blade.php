@@ -306,6 +306,15 @@
             })
             .resize()
     </script>
+    <script>
+        $('.move-top').click(function() {
+            setTimeout(function() {
+                $('html, body').animate({
+                    scrollTop: $('#div_id').position().top
+                }, 'slow');
+            }, 1000);
+        })
+    </script>
 </body>
 
 </html>

@@ -40,8 +40,13 @@
                             </td>
                             <td class="py-3">{{ date('H:i:s d-m-Y', strtotime($item->created_at)) }}</td>
                             <td class="py-3">
-                                <span
-                                    class="badge {{ $item->status->id == 6 ? 'bg-danger' : 'bg-info' }} m-0">{{ $item->status->delivery_description }}</span>
+                                @if ($item->status)
+                                    <span
+                                        class="badge {{ $item->status->id == 6 ? 'bg-danger' : 'bg-info' }} m-0">{{ $item->status->delivery_description }}</span>
+                                @else
+                                    <span class="badge bg-info m-0">Đang xử lý</span>
+                                @endif
+
                             </td>
                             <td class="py-3"><a class="btn-sm btn-info"
                                     href="{{ url('account/order-tracking/' . $item->id) }}"><i
