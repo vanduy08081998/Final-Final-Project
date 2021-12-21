@@ -49,7 +49,8 @@ class Product extends Model
     'shipping_day',
     'choice_options',
     'colors',
-    'deals_today'
+    'deals_today',
+    'views'
   ];
 
   public $timestamps = TRUE;

@@ -61,15 +61,16 @@
                             @enderror
                         </div>
                         <div class="col-sm-6">
-                            <label class="form-label">Số điện thoại</label>
-                            <input class="form-control" name="phone" type="text" value="{{$shipping->phone}}" required>
+                            <label class="form-label">Số điện thdfđfsoại</label>
+                            {{-- regex:/(84|0[3|5|7|8|9])+([0-9]{8})/ --}}
+                            <input class="form-control" name="phone" oninvalid="setCustomValidity('Số điện thoại không đúng định dạng')" pattern="(0[3|5|7|8|9])+[0-9]{8}" type="tel" value="{{$shipping->phone}}" required>
                             @error('phone')
                             <span style="font-size:14px" class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Tỉnh/thành phố</label>
-                            <select class="form-control choose province" id="province" name="province_id" required>
+                            <select class="form-control choose choose_province" onchange="fee('province')" id="province" name="province_id" required>
                                 <option value="">Chọn tỉnh, thành phố</option>
                                 @foreach ($provinces as $province)
                                 <option {{ $province->id == $shipping->province_id ? 'selected' : ''}} value="{{ $province->id }}">{{ $province->name }}</option>
@@ -78,7 +79,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Quận/huyện</label>
-                            <select class="form-control choose district" id="district" name="district_id" required>
+                            <select class="form-control choose choose_district" onchange="fee('district')" name="district_id" required>
                                 <option value="">Chọn quận, huyện</option>
                                 @foreach ($districts as $district)
                                 <option {{ $district->id == $shipping->district_id ? 'selected' : ''}} value="{{ $district->id }}">{{ $district->name }}</option>

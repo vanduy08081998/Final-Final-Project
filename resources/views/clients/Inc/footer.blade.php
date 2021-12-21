@@ -63,7 +63,7 @@
                     <h3 class="widget-title text-light pb-1">Theo dõi chúng tôi tại: </h3>
                     <div class="d-flex flex-wrap">
                         <a class="btn-social bs-light bs-twitter mb-2" href="#"><i class="ci-twitter"></i></a>
-                        <a class="btn-social bs-light bs-facebook ms-2 mb-2" href="#"><i class="ci-facebook"></i></a>
+                        <a class="btn-social bs-light bs-facebook ms-2 mb-2" rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/BigDeal-106183301182718"><i class="ci-facebook"></i></a>
                         <a class="btn-social bs-light bs-instagram ms-2 mb-2" href="#"><i
                                 class="ci-instagram"></i></a>
                         <a class="btn-social bs-light bs-pinterest ms-2 mb-2" href="#"><i

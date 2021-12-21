@@ -139,6 +139,7 @@ class ProductController extends Controller
   public function productDetails($slug)
   {
     $product = Product::where('product_slug', $slug)->first();
+    $product->update(['views'=> $product->views+1]);
     $variants = ProductVariant::where('id_product', $product->id)->get();
     return view('clients.shop.product-details', compact('product', 'variants'));
   }

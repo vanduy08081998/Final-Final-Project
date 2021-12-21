@@ -33,13 +33,13 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/login/google/callback',
+        'redirect' => 'https://bigdealfpt.com/login/google/callback',
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'https://localhost/Final-Final-Project/public/login/facebook/callback',
+        'redirect' => 'https://bigdealfpt.com/login/facebook/callback',
     ],
 
 ];

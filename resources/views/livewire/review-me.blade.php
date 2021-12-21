@@ -6,43 +6,46 @@ use Carbon\Carbon;
     <div class="d-flex pt-3">
         <div class="d-flex flex-nowrap align-items-center sort-star">
             <form wire:submit.prevent="render()">
-                <button data-id="all"
+                {{-- <input
+                    class="form-check-input d-none check-star-all {{ $check == '' ? 'check-star-active' : '' }}"
+                    wire:model="checkfivestar" type="checkbox" id="review_image_all"> --}}
+                <button onclick="click_star('all')"
                     class="move-top filterstar-all check-filterstar {{ $check == '' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i> Tất
                     cả</button>
 
-                <input
+                <input 
                     class="form-check-input d-none check-star-5 {{ $check == 'fivestar' ? 'check-star-active' : '' }}"
                     wire:model="checkfivestar" value="5star" type="checkbox" id="review_image_5">
-                <button data-id="5"
+                <button onclick="click_star(5)"
                     class="move-top filterstar-5 check-filterstar  {{ $check == 'fivestar' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i>5
                     sao</button>
                 <input
                     class="form-check-input d-none check-star-4 {{ $check == 'fourstar' ? 'check-star-active' : '' }}"
                     wire:model="checkfourstar" value="4star" type="checkbox" id="review_image_4">
-                <button data-id="4"
+                <button onclick="click_star(4)"
                     class="move-top filterstar-4 check-filterstar  {{ $check == 'fourstar' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i>4
                     sao</button>
                 <input
                     class="form-check-input d-none check-star-3 {{ $check == 'threestar' ? 'check-star-active' : '' }}"
                     wire:model="checkthreestar" value="3star" type="checkbox" id="review_image_3">
-                <button data-id="3"
+                <button onclick="click_star(3)"
                     class="move-top filterstar-3 check-filterstar  {{ $check == 'threestar' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i>3
                     sao</button>
                 <input
                     class="form-check-input d-none check-star-2 {{ $check == 'twostar' ? 'check-star-active' : '' }}"
                     wire:model="checktwostar" value="2star" type="checkbox" id="review_image_2">
-                <button data-id="2"
+                <button onclick="click_star(2)"
                     class="move-top filterstar-2 check-filterstar  {{ $check == 'twostar' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i>2
                     sao</button>
                 <input
                     class="form-check-input d-none check-star-1 {{ $check == 'onestar' ? 'check-star-active' : '' }}"
                     wire:model="checkonestar" value="1star" type="checkbox" id="review_image_1">
-                <button data-id="1"
+                <button onclick="click_star(1)"
                     class="move-top filterstar-1 check-filterstar  {{ $check == 'onestar' ? 'active' : '' }}"><i
                         class="ci-star-filled opacity-60 me-2"></i>1
                     sao</button>
@@ -76,12 +79,14 @@ use Carbon\Carbon;
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="hide-review">
-                            @if($review->review_eye == null)
-                            <button wire:click.prevent="review_eye_slash({{$review->id}})"><i class="fas fa-eye"></i> Thiết lập ẩn danh</button>
+                            @if ($review->review_eye == null)
+                                <button wire:click.prevent="review_eye_slash({{ $review->id }})"><i
+                                        class="fas fa-eye"></i> Thiết lập ẩn danh</button>
                             @else
-                            <button class="text-muted" wire:click.prevent="review_eye({{$review->id}})"><i class="fas fa-eye-slash"></i> Thiết lập công khai</button>
+                                <button class="text-muted" wire:click.prevent="review_eye({{ $review->id }})"><i
+                                        class="fas fa-eye-slash"></i> Thiết lập công khai</button>
                             @endif
                         </div>
                     </div>
@@ -167,67 +172,68 @@ use Carbon\Carbon;
                     @if (count($review->review_child) > 0)
                         <div
                             class="col-lg-12 mt-2 rating_reply {{ isset($class) && $class == $review->id ? 'down' : '' }}">
-                            <p class="fw-bold fs-md text-danger"><i class="fas fa-user-shield"></i> Phản hồi của quản trị viên</p>
+                            <p class="fw-bold fs-md text-danger"><i class="fas fa-user-shield"></i> Phản hồi của quản
+                                trị viên</p>
                             @foreach ($review->review_child as $key => $review_child)
-                            @if($review_child->user->position == 'admin')
-                                @if ($review_child->review_status != null)
-                                    @php
-                                        $useful_child = $review_child->useful;
-                                        $useful_child_array = explode(',', $useful_child);
-                                        $count_child_useful = count($useful_child_array) - 1;
-                                    @endphp
-                                    <div class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom">
-                                        <div class="d-flex mb-2">
-                                            <div class="d-flex align-items-center me-4">
-                                                @if (!$review_child->user->avatar)
-                                                    <img style="z-index:1" class="rounded-circle"
-                                                        src="{{ URL::to('backend/img/profiles/avt.png') }}"
-                                                        width="35" alt="{{ $review->user->name }}">
-                                                @else
-                                                    <img style="z-index:1" class="rounded-circle"
-                                                        src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
-                                                        width="35" alt="{{ $review->user->name }}">
-                                                @endif
-                                                <div class="ps-2">
-                                                    <h6 class="fs-md mb-0 fw-bold text-primary">
-                                                        {{ $review_child->user->name }}
-                                                    </h6>
-                                                </div>
-                                                @if ($review_child->user->position == 'admin')
-                                                    <div class="fs-sm ms-sm-1  text-success">
-                                                        <b class="qtv"> Quản trị viên </b>
+                                @if ($review_child->user->position == 'admin')
+                                    @if ($review_child->review_status != null)
+                                        @php
+                                            $useful_child = $review_child->useful;
+                                            $useful_child_array = explode(',', $useful_child);
+                                            $count_child_useful = count($useful_child_array) - 1;
+                                        @endphp
+                                        <div class="col-lg-12 mt-2 mb-4 pb-2 rating_reply_content border-bottom">
+                                            <div class="d-flex mb-2">
+                                                <div class="d-flex align-items-center me-4">
+                                                    @if (!$review_child->user->avatar)
+                                                        <img style="z-index:1" class="rounded-circle"
+                                                            src="{{ URL::to('backend/img/profiles/avt.png') }}"
+                                                            width="35" alt="{{ $review->user->name }}">
+                                                    @else
+                                                        <img style="z-index:1" class="rounded-circle"
+                                                            src="{{ URL::to('uploads/Users/', $review_child->user->avatar) }}"
+                                                            width="35" alt="{{ $review->user->name }}">
+                                                    @endif
+                                                    <div class="ps-2">
+                                                        <h6 class="fs-md mb-0 fw-bold text-primary">
+                                                            {{ $review_child->user->name }}
+                                                        </h6>
                                                     </div>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="review-reply-content">
-                                            <p
-                                                class="fs-md mb-2 review ms-1 text-review text-review-child-{{ $review_child->id }}">
-                                                {{ $review_child->content_rating }}</p>
-                                            <form
-                                                class="edit-review form-edit-review-{{ $review_child->id }} d-none">
-                                                <textarea
-                                                    data-url="{{ route('review.update', ['review' => $review_child->id]) }}"
-                                                    class="form-validated form-control edit-text-review edit-child-review-{{ $review_child->id }}"
-                                                    rows="2">{{ $review_child->content_rating }}</textarea>
-                                                <div class="form-review d-flex justify-content-end">
-                                                    <button type="button" class="btn-submit-text"
-                                                        onclick="update_content_review({{ $review_child->id }})">Cập
-                                                        nhật <i class="fa fa-paper-plane"
-                                                            aria-hidden="true"></i></button>
+                                                    @if ($review_child->user->position == 'admin')
+                                                        <div class="fs-sm ms-sm-1  text-success">
+                                                            <b class="qtv"> Quản trị viên </b>
+                                                        </div>
+                                                    @endif
                                                 </div>
-                                                </textarea>
-                                            </form>
-                                            <div class="text-nowrap d-flex flex-wrap">
-                                                <button class="fs-ms btn-time-review review-child text-muted"
-                                                    type="button"><i class="far fa-clock"></i> Đã thảo luận
-                                                    khoảng
-                                                    {{ $review->created_at->diffForHumans() }} </button>
-                                           
+                                            </div>
+                                            <div class="review-reply-content">
+                                                <p
+                                                    class="fs-md mb-2 review ms-1 text-review text-review-child-{{ $review_child->id }}">
+                                                    {{ $review_child->content_rating }}</p>
+                                                <form
+                                                    class="edit-review form-edit-review-{{ $review_child->id }} d-none">
+                                                    <textarea
+                                                        data-url="{{ route('review.update', ['review' => $review_child->id]) }}"
+                                                        class="form-validated form-control edit-text-review edit-child-review-{{ $review_child->id }}"
+                                                        rows="2">{{ $review_child->content_rating }}</textarea>
+                                                    <div class="form-review d-flex justify-content-end">
+                                                        <button type="button" class="btn-submit-text"
+                                                            onclick="update_content_review({{ $review_child->id }})">Cập
+                                                            nhật <i class="fa fa-paper-plane"
+                                                                aria-hidden="true"></i></button>
+                                                    </div>
+                                                    </textarea>
+                                                </form>
+                                                <div class="text-nowrap d-flex flex-wrap">
+                                                    <button class="fs-ms btn-time-review review-child text-muted"
+                                                        type="button"><i class="far fa-clock"></i> Đã thảo luận
+                                                        khoảng
+                                                        {{ $review->created_at->diffForHumans() }} </button>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
                                 @endif
                             @endforeach
 
@@ -259,13 +265,12 @@ use Carbon\Carbon;
 
 </style>
 <script>
-    $('.check-filterstar').click(function() {
-        var sort_filterstar = $(this).data('id');
-        $('.check-star-active').click();
+
+    function click_star(sort_filterstar) {
+        $(".check-star-active").click();
         $("#review_image_" + sort_filterstar).click();
         $(".check-star-" + sort_filterstar).addClass('check-star-active');
-
-    })
+    }
     $('.move-top').click(function() {
         setTimeout(function() {
             $('html, body').animate({

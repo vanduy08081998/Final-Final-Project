@@ -132,13 +132,13 @@
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
                   style="margin: auto; display: block">
               </a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name"
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
                   href="#">{{ $product->Category->category_name }}</a>
-                <h3 class="product-title fs-sm"><a
+                <h3 class="product-title fs-sm text-center"><a
                     href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
                 <div class="d-flex justify-content-between">
-                  @if ($product->discount_unit == '%')
+                  @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
@@ -147,15 +147,15 @@
                       <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
-                  @else
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                  @elseif ($product->discount == 0)
+                    <div class="product-price w-100 text-center">
+                      <span>{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating">
+                  <div class="star-rating w-100 text-center">
                     @php
                       $arrayRating = [];
                       $avg = 0;
@@ -228,9 +228,6 @@
                 <a type="hidden" id="wishlist_producturl{{ $product->id }}"
                   href="{{ route('shop.product-details', $product->product_slug) }}">
                 </a>
-                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                  onclick="add_compare({{ $product->id }})">
-                  <i class="ci-compare me-1"></i>
                 </a>
                 <a class="nav-link-style me-3" onclick="quickviewModal({{ $product->id }})">
                   <i class="ci-eye"></i>
@@ -245,7 +242,7 @@
     </div>
   </section>
   {{-- Sản phẩm nổi bật --}}
-  <section class="container mt-5 highlight-product">
+  <section class="container highlight-product">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
       <h2><strong>Sản phẩm nổi bật</strong></h2>
@@ -273,13 +270,13 @@
                 <img srcset="{{ URL::to($product->product_image) }} 2x" alt="Product" width="200px"
                   style="margin: auto; display: block">
               </a>
-              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name"
+              <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
                   href="#">{{ $product->Category->category_name }}</a>
-                <h3 class="product-title fs-sm"><a
+                <h3 class="product-title fs-sm text-center"><a
                     href="shop-single-v1.html">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h3>
                 <div class="d-flex justify-content-between">
-                  @if ($product->discount_unit == '%')
+                  @if ($product->discount != 0)
                     <div class="product-price">
                       <span>{{ number_format($product->unit_price - ($product->unit_price * $product->discount) / 100) }}
                         ₫</span>
@@ -288,15 +285,15 @@
                       <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
-                  @else
-                    <div class="product-price" style="font-size: 12px">
-                      <span style="text-decoration: line-through">{{ number_format($product->unit_price) }}
+                  @elseif ($product->discount == 0)
+                    <div class="product-price w-100 text-center">
+                      <span>{{ number_format($product->unit_price) }}
                         ₫</span>
                     </div>
                   @endif
                 </div>
                 <div class="d-flex justify-content-between">
-                  <div class="star-rating">
+                  <div class="star-rating w-100 text-center">
                     @php
                       $arrayRating = [];
                       $avg = 0;
@@ -327,7 +324,6 @@
                     @else
 
                     @endif
-
                   </div>
                 </div>
               </div>
@@ -370,9 +366,6 @@
                 <a type="hidden" id="wishlist_producturl{{ $product->id }}"
                   href="{{ route('shop.product-details', $product->product_slug) }}">
                 </a>
-                <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                  onclick="add_compare({{ $product->id }})">
-                  <i class="ci-compare me-1"></i>
                 </a>
                 <a class="nav-link-style me-3" onclick="quickviewModal({{ $product->id }})">
                   <i class="ci-eye"></i>
@@ -531,14 +524,14 @@
   <section class="container-fluid px-0">
     <div class="row g-0">
       <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
-          href="blog-list-sidebar.html">
+          href="{{ route('clients.blog') }}">
           <div class="card-body text-center"><i class="ci-edit h3 mt-2 mb-4 text-primary"></i>
             <h3 class="h5 mb-1">Xem các bài viết</h3>
             <p class="text-muted fs-sm">Tin tức về cửa hàng, sản phẩm và xu hướng</p>
           </div>
         </a></div>
       <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-accent"
-          href="#">
+          rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/BigDeal-106183301182718">
           <div class="card-body text-center"><i class="ci-facebook h3 mt-2 mb-4 text-accent"></i>
             <h3 class="h5 mb-1">Theo dõi trên Facebook</h3>
             <p class="text-muted fs-sm">#MuaHangCungBigDeal</p>
