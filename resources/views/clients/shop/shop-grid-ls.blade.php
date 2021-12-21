@@ -92,16 +92,42 @@
                         ₫</span>
                     </div>
                     <div class="star-rating">
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star-filled active"></i>
-                      <i class="star-rating-icon ci-star"></i>
+                      @php
+                        $arrayRating = [];
+                        $avg = 0;
+                        $total = 0;
+                        $reviews = \App\Models\Review::where('product_id', $pro->id)->get();
+                        $count = 0;
+                        if (count($reviews) > 0) {
+                            $count = count($reviews);
+                            foreach ($reviews as $key => $review) {
+                                $total += $review->count_rating;
+                            }
+                            $avg = round($total / $count);
+                        } else {
+                            $avg = 0;
+                            $count = 0;
+                        }
+                      @endphp
+
+                      @if ($reviews != null)
+                        @for ($i = 0; $i < 5; $i++)
+                          @for ($j = 0; $j < $avg; $j++)
+                            @php
+                              array_push($arrayRating, $j);
+                            @endphp
+                          @endfor
+                          <i class="star-rating-icon ci-star-filled @if (in_array($i, $arrayRating)) active @endif"></i>
+                        @endfor
+                      @else
+
+                      @endif
                     </div>
                   </div>
                 </div>
 
-                <div class="card-body card-body-hidden text-center" id="card-body" style="z-index: 10; display: inline; padding: 15px">
+                <div class="card-body card-body-hidden text-center" id="card-body"
+                  style="z-index: 10; display: inline; padding: 15px">
                   @if (Auth::user() != null)
                     <?php
                     $user = Auth::user()->id;

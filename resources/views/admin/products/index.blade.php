@@ -14,8 +14,6 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="card mb-0">
-          {{-- @include('admin.inc.card-header', ['table_title' => 'Sản phẩm' , 'table_content' =>
-        'Quản lý sản phẩm']) --}}
           <div class="card-body">
             <div class="table-responsive">
               @include('admin.products.product-table')
