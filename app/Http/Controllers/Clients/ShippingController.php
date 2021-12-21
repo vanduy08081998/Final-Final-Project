@@ -8,6 +8,7 @@ use App\Models\Provinces;
 use App\Models\Districts;
 use App\Models\Wards;
 use App\Models\Shipping;
+use Brian2694\Toastr\Facades\Toastr;
 use Auth;
 
 class ShippingController extends Controller
@@ -43,7 +44,7 @@ class ShippingController extends Controller
     {
         $this->validate($request, [
             'fullname' => ['string', 'max:255'],
-            'phone' => ['numeric', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})/'],
+            'phone' => ['numeric','regex:/(84|0[3|5|7|8|9])+([0-9]{8})/'],
             'neighbor' => ['string','max:255','min:4']
         ],
         [
@@ -69,7 +70,8 @@ class ShippingController extends Controller
         }
         }
         Shipping::create($data);
-        return back()->with('message','Cập nhật địa chỉ thành công !');
+        Toastr::success('Thêm địa chỉ thành công', 'Chúc mừng');
+        return redirect()->route('account.account-address');
     }
 
     /**

@@ -180,6 +180,7 @@ return [
         Brian2694\Toastr\ToastrServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
     ],
 
@@ -238,6 +239,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ],
 
 ];

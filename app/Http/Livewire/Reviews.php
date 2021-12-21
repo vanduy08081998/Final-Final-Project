@@ -121,7 +121,7 @@ class Reviews extends Component
             $all_count_review = 1;
         }
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d h:i:s');
-        $order =  Order::where([['user_id', $this->userLoginId],['shipping_status',2]])->get();
+        $order =  Order::where([['user_id', $this->userLoginId],['payment_status','Confirmed']])->get();
         $bought = 0;
         $count_buy = 0;
         $new_purchase = 0;
