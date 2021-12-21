@@ -98,15 +98,14 @@ $category = Category::all();
                     <img src="{{ asset('frontend/img/logo/logo.png') }}" width="74" alt="Cartzilla">
                 </a>
                 <!-- Search-->
-                <form class="input-group d-none d-lg-flex flex-nowrap mx-4 typeahead search-form-header"
+                <form class="input-group d-none d-lg-flex flex-nowrap mx-4 search-form-header"
                     action="{{ route('search.searchs') }}" method="POST" enctype="multipart/form-data"
                     id="choice-form">
                     @csrf
                     @method('POST')
-
                     <input class="form-control rounded-start w-100 search-input"
                         style="border-radius: 25px 0 0 25px !important;" name="key" id="search" type="text"
-                        placeholder="Tìm kiếm sản phẩm" required>
+                        placeholder="Tìm kiếm sản phẩm ?" required >
                     <select class="form-select flex-shrink-0" style="width: 10.5rem;" name="category">
                         <option name="category" value="0">Tất cả</option>
                         @foreach ($category as $cate)
