@@ -95,7 +95,7 @@ class OrderController extends Controller
         $order = Order::where('id',$request->id)->update(['payment_status' => $request->value]);
         $order = Order::where('id',$request->id)->first();
         $order_details = $order->detail;
- 
+
         if($order->payment_status == 'Confirmed'){
             $total_order = 0;
 			$sales = 0;
@@ -113,7 +113,7 @@ class OrderController extends Controller
             if($statistic_count>0){
                 $statistic_update = Statistical::where('order_date',$order_date)->first();
                 $statistic_update->sales = $statistic_update->sales + $order->grand_total;
-                $statistic_update->quantity = $statistic_update->quantity + $order->order_details->sum('quantity');
+                $statistic_update->quantity = $statistic_update->quantity + $order->detail->sum('quantity');
                 $statistic_update->total_order = $statistic_update->total_order + 1;
                 $statistic_update->save();
             }else{
@@ -134,7 +134,7 @@ class OrderController extends Controller
                     $statistic_new_product->quantity = $order_detail->quantity;
                     $statistic_new_product->save();
                 }
-                else{      
+                else{
                 $statistic_product_id->update([
                     'sales' => $statistic_product_id->sales + $order_detail->promotion_price,
                     'quantity' => $statistic_product_id->quantity + $order_detail->quantity
@@ -142,7 +142,7 @@ class OrderController extends Controller
                 }
             }
 
-        }       
+        }
 }
 
     public function delivery(Request $request){
