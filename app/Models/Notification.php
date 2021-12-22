@@ -15,4 +15,8 @@ class Notification extends Model
     public function product(){
         return $this->belongsTo(Product::class, 'id_type');
     }
+
+    public function order(){
+        return $this->belongsTo(Order::class, 'id_type');
+    }
 }

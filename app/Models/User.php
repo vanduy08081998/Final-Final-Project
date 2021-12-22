@@ -69,7 +69,7 @@ class User extends Authenticatable
 
 
     public function comments(){
-        return $this->hasMany(Comment::class, 'comment_user_id')->paginate(5);
+        return $this->hasMany(Comment::class, 'comment_id_user');
     }
 
     public function likeComments(){
@@ -98,7 +98,7 @@ class User extends Authenticatable
     }
 
     public function unsatisfied(){
-        return $this->belongsToMany(Comment::class, 'Unsatisfied');
+        return $this->hasMany(Unsatisfied::class, 'user_id');
     }
 
 }

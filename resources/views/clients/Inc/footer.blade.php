@@ -40,26 +40,6 @@
             </div>
             <div class="col-md-4">
                 <div class="widget pb-2 mb-4">
-                    <h3 class="widget-title text-light pb-1">Nhận tin tức từ chúng tôi</h3>
-                    <form class="subscription-form validate" action="" method="post" name="mc-embedded-subscribe-form"
-                        novalidate>
-                        <div class="input-group flex-nowrap"><i
-                                class="ci-mail position-absolute top-50 translate-middle-y text-muted fs-base ms-3"></i>
-                            <input class="form-control rounded-start" type="email" name="EMAIL"
-                                placeholder="Nhập Email của bạn..." required>
-                            <button class="btn btn-primary" type="submit" name="subscribe">Đăng ký*</button>
-                        </div>
-                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                            <input class="subscription-form-antispam" type="text"
-                                name="b_c7103e2c981361a6639545bd5_29ca296126" tabindex="-1">
-                        </div>
-                        <div class="form-text text-light opacity-50">*Đăng ký để nhận các tin tức và khuyến mãi mới
-                            nhất.</div>
-                        <div class="subscription-status"></div>
-                    </form>
-                </div>
-                <div class="widget pb-2 mb-4">
                     <h3 class="widget-title text-light pb-1">Theo dõi chúng tôi tại: </h3>
                     <div class="d-flex flex-wrap">
                         <a class="btn-social bs-light bs-twitter mb-2" href="#"><i class="ci-twitter"></i></a>

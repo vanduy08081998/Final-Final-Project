@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\SendMail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -54,6 +56,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        
     }
 
     /**
@@ -64,6 +67,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $detail = [
+            'fullname' => 'Bigdeal Store',
+            'phone' => null,
+            'email' => 'Bigdealdn@gmail.com',
+            'title' => 'Đăng ký tài khoản thành công !',
+            'message' => 'Chúc bạn mua sắm vui vẻ với BigDeal',
+            'day_send' => date("d/m/Y"),
+        ];
+        Mail::to($data['email'])->send(new SendMail($detail));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

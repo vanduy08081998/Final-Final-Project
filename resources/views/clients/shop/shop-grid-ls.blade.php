@@ -185,10 +185,15 @@
                   <a type="hidden" id="wishlist_producturl{{ $pro->id }}"
                     href="{{ route('shop.product-details', $pro->product_slug) }}">
                   </a>
-                  <a class="btn-action nav-link-style me-3" style="cursor:pointer;"
-                    onclick="add_compare({{ $pro->id }})">
-                    <i class="ci-compare me-1"></i>
-                  </a>
+                  @if ($on == 1)
+                        <a class="btn-action nav-link-style me-3" style="cursor:pointer;" onclick="add_compare({{ $pro->id }})">
+                            <i class="ci-compare me-1"></i>
+                        </a>
+                    @else
+                        <a class="btn-action nav-link-style me-3" style="cursor:pointer;visibility:hidden;" onclick="add_compare({{ $pro->id }})">
+                            <i class="ci-compare me-1"></i>
+                        </a>
+                    @endif
                   <a class="nav-link-style me-3" onclick="quickviewModal({{ $pro->id }})">
                     <i class="ci-eye"></i>
                   </a>

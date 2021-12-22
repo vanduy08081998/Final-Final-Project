@@ -110,13 +110,7 @@
 @push('script')
     <script>
         // ///////////////////// XỬ LÝ BÌNH LUẬN //////////////////////////////////////////////
-        $(document).on('click', '.move-top', function() {
-            setTimeout(function() {
-                $('html, body').animate({
-                    scrollTop: $('#div_id').position().top
-                }, 'slow');
-            }, 1000);
-        })
+
         //Bình luận ở mục đầu tiên
         $(document).on('click', '.save-comment', function() {
             let URL = $(this).data('url')
@@ -179,6 +173,7 @@
                     comment_content: body
                 },
                 success: function() {
+                    toastr.success('Chỉnh sửa thành công!')
                     window.livewire.emit('render')
                 }
             })
@@ -191,6 +186,7 @@
             $.ajax({
                 url: URL,
                 success: function() {
+                    toastr.success('Bạn đã thu hồi một bình luận!')
                     window.livewire.emit('render')
                 }
             })

@@ -66,9 +66,8 @@ const updateQuantity = (i, quantity, cart_price) => {
         },
         success: function (response) {
             var formatter = new Intl.NumberFormat("en-US");
-            cart_price.textContent = formatter.format(
-                response.price * quantity
-            );
+            cart_price.textContent =
+                formatter.format(response.price * quantity) + "₫";
             cartDropdown();
             cartTotals();
         },
@@ -112,7 +111,9 @@ const cartTotals = () => {
         },
         success: function (response) {
             var formatter = new Intl.NumberFormat("en-US");
-            $(".cart_total_price").html(formatter.format(response.totalprice));
+            $(".cart_total_price").html(
+                formatter.format(response.totalprice) + "₫"
+            );
         },
     });
 };

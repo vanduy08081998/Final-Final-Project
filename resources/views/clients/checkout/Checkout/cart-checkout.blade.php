@@ -44,7 +44,7 @@
                                         @endif
                                         <div class="widget-product-meta"><span class="text-accent me-2">{{
                                                         number_format($value->variant_price * $cart->quantity)
-                                                        }}</span><span class="text-muted">x
+                                                        }}₫</span><span class="text-muted">x
                                                         {{ $cart->quantity }}</span></div>
                                 </div>
                         </div>
@@ -54,7 +54,7 @@
                         @endforelse
 
                 </div>
-                <h6 class="fw-normal text-center my-4" id="totalprice" >Tổng tiền : {{ number_format($totalprice) }}</h6>
+                <h6 class="fw-normal text-center my-4" id="totalprice" >Tổng tiền : {{ number_format($totalprice) }}₫</h6>
                 <input type="hidden" name="totalprice" value="{{ $totalprice }}">
         </div>
 </div>

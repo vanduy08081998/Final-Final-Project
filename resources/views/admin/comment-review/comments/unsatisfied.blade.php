@@ -29,7 +29,7 @@
                                 <table class="datatable table table-stripped mb-0">
                                     <thead>
                                         <tr>
-                                            <td>{{ trans('Quản trị viên') }}</td>
+                                            <td>{{ trans('Quản trị viên (tên)') }}</td>
                                             <td class="text-center">{{ trans('Hài lòng') }} <i
                                                     class="fas fa-thumbs-up"></i></td>
                                             <td class="text-center">{{ trans('Không hài lòng') }} <i
@@ -37,26 +37,37 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $like = 0;
+                                            $unlike = 0;
+                                        @endphp
                                         @foreach ($userAdmin as $user)
-                                            <tr>
-                                                <td class="text-left">
+                                            @if ($user->comments->count() > 0)
+                                                @foreach ($user->comments as $com)
+                                                    @php
+                                                        $like += $com->usersLike->count();
+                                                        $unlike += $com->userUnsatisfied->count();
+                                                    @endphp
+                                                @endforeach
 
-                                                    <strong class="text-info">{{ $user->name }}</strong>
+                                                <tr>
+                                                    <td class="text-left">
 
-                                                </td>
+                                                        <strong class="text-info">{{ $user->name }}</strong>
 
-                                                <td class="text-center">
-                                                    <button class="btn btn-info">{{ $user->likeComments->count() }} <i
-                                                            class="fas fa-thumbs-up"></i></button>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-danger">{{ $user->unsatisfied->count() }} <i
-                                                            class="fas fa-thumbs-down"></i>
-                                                    </button>
-                                                </td>
+                                                    </td>
 
-
-                                            </tr>
+                                                    <td class="text-center">
+                                                        <button class="btn btn-info" type="button">{{ $like }}
+                                                            <i class="fas fa-thumbs-up"></i></button>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <button class="btn btn-danger" type="button">{{ $unlike }}
+                                                            <i class="fas fa-thumbs-down"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
