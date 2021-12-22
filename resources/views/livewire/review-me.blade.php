@@ -92,7 +92,7 @@ use Carbon\Carbon;
                     </div>
                     <p class="fs-md mb-2 review">{{ $review->content_rating }}</p>
                     @if ($review->image)
-                        <div class="text-nowrap">
+                        <div class="text-nowrap content-review">
                             @php
                                 $str = $review->image;
                                 $image_array = explode(',', $str);
@@ -116,7 +116,7 @@ use Carbon\Carbon;
                             }
                         }
                     @endphp
-                    <div style="position: relative" class="text-nowrap">
+                    <div style="position: relative" class="text-nowrap content-review">
                         <button class="btn-review btn-discussion text-primary" type="button"><i
                                 class="far fa-thumbs-up me-1"></i>Hữu ích @if (isset($count_useful) && $count_useful > 0)({{ $count_useful }}) @endif </button>
 

@@ -1,7 +1,7 @@
 @extends('layouts.client_master')
 
 
-@section('title', 'Thông tin giao hàng')
+@section('title', 'Phương thức vận chuyển')
 
 
 @section('content')
@@ -16,16 +16,16 @@
       <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-            <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a>
+            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('clients.index') }}"><i class="ci-home"></i>Trang chủ</a>
             </li>
-            <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+            <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}">Cửa hàng</a>
             </li>
-            <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
+            <li class="breadcrumb-item text-nowrap active" aria-current="page">Thanh toán</li>
           </ol>
         </nav>
       </div>
       <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-        <h1 class="h3 text-light mb-0">Checkout</h1>
+        <h1 class="h3 text-light mb-0">Phuơng thức vận chuyển</h1>
       </div>
     </div>
   </div>
@@ -36,22 +36,9 @@
         <form id="shipping_methods" method="POST">
           @csrf
           <!-- Steps-->
-          <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
-              <div class="step-progress"><span class="step-count">1</span></div>
-              <div class="step-label"><i class="ci-cart"></i>Cart</div>
-            </a><a class="step-item active" href="checkout-details.html">
-              <div class="step-progress"><span class="step-count">2</span></div>
-              <div class="step-label"><i class="ci-user-circle"></i>Details</div>
-            </a><a class="step-item active current" href="checkout-shipping.html">
-              <div class="step-progress"><span class="step-count">3</span></div>
-              <div class="step-label"><i class="ci-package"></i>Shipping</div>
-            </a><a class="step-item" href="checkout-payment.html">
-              <div class="step-progress"><span class="step-count">4</span></div>
-              <div class="step-label"><i class="ci-card"></i>Payment</div>
-            </a><a class="step-item" href="checkout-review.html">
-              <div class="step-progress"><span class="step-count">5</span></div>
-              <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-            </a></div>
+          <div class="steps steps-light pt-2 pb-3 mb-5">
+            @include('clients.Inc.checkout-bar')
+          </div>
           <!-- Shipping methods table-->
           {{-- <h2 class="h6 pb-3 mb-2">Chọn phương thức thanh toán</h2> --}}
           <div class="table-responsive">
@@ -89,16 +76,14 @@
             </table>
           </div>
           <!-- Navigation (desktop)-->
-          <div class="d-none d-lg-flex pt-4">
+          <div class="d-flex pt-4">
             <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100"
                 href="{{ route('checkout.checkout-details') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span
-                  class="d-none d-sm-inline">Quay
-                  lại</span><span class="d-inline d-sm-none">Back</span></a></div>
+                  class="d-sm-inline">Quay lại</span></a></div>
             @if (count($carts) <= 0)
-             <div class="w-50 ps-2"><button class="d-none d-sm-inline btn btn-primary d-block w-100" disabled>Mua hàng để tiếp tục</button>
+             <div class="w-50 ps-2"><button class="d-sm-inline btn btn-primary d-block w-100" disabled>Mua hàng để tiếp tục</button>
             @else
-              <div class="w-50 ps-2"><button class="d-none d-sm-inline btn btn-primary d-block w-100">Tiếp
-                  tục</button>
+              <div class="w-50 ps-2"><button class="d-sm-inline btn btn-primary d-block w-100">Tiếp tục</button>
             @endif
           </div>
     </div>
@@ -109,20 +94,6 @@
     <aside class="col-lg-4 pt-4 pt-lg-0 ps-xl-5" id="cart_checkout">
 
     </aside>
-  </div>
-  <!-- Navigation (mobile)-->
-  <div class="row d-lg-none">
-    <div class="col-lg-8">
-      <div class="d-flex pt-4 mt-3">
-        <div class="w-50 pe-3"><a class="btn btn-secondary d-block w-100"
-            href="{{ route('checkout.checkout-details') }}"><i class="ci-arrow-left mt-sm-0 me-1"></i><span
-              class="d-none d-sm-inline">Back to
-              Adresses</span><span class="d-inline d-sm-none">Back</span></a></div>
-        <div class="w-50 ps-2"><a class="btn btn-primary d-block w-100"><span class="d-none d-sm-inline">Proceed
-              to Payment</span><span class="d-inline d-sm-none">Next</span><i class="ci-arrow-right mt-sm-0 ms-1"></i></a>
-        </div>
-      </div>
-    </div>
   </div>
   </div>
 @endsection

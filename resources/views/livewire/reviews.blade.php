@@ -157,7 +157,7 @@ use Carbon\Carbon;
                                     </div>
                                     <p class="fs-md mb-2 review">{{ $review->content_rating }}</p>
                                     @if ($review->image)
-                                        <div class="text-nowrap">
+                                        <div class="text-nowrap content-review">
                                             @php
                                                 $str = $review->image;
                                                 $image_array = explode(',', $str);
@@ -182,7 +182,7 @@ use Carbon\Carbon;
                                             }
                                         }
                                     @endphp
-                                    <div style="position: relative" class="text-nowrap">
+                                    <div style="position: relative" class="text-nowrap content-review">
                                         @if (in_array($id_user, $useful_array))
                                             <button class="btn-review text-primary"
                                                 wire:click.prevent="un_useful({{ $review->id }})"><i

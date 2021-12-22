@@ -84,7 +84,7 @@
                         @if ($product->long_description != null)
                             <div class="btn-show fade-desc" id="point1">
                                 <button class="btn btn-danger justify-items-center show-more"
-                                    style="display: block; margin: 0 auto; margin-top: 30px">Xem thêm</button>
+                                    style="display: block; margin: 0 auto; margin-top: 50px">Xem thêm</button>
                             </div>
                         @else
                         @endif

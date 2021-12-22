@@ -30,7 +30,7 @@
     <!-- List of items-->
     <section class="col-lg-8">
       <div class="d-flex justify-content-between align-items-center pt-3 pb-4 pb-sm-5 mt-1">
-        <h2 class="h6 text-light mb-0">Sản phẩm</h2><a class="btn btn-outline-primary btn-sm ps-2"
+        <h2 class="h6 text-light mb-0 d-none d-sm-block">Sản phẩm</h2><a class="btn btn-outline-primary btn-sm ps-2"
           href="shop-grid-ls.html"><i class="ci-arrow-left me-2"></i>Tiếp tục mua hàng</a>
       </div>
       <?php $totalprice = 0; ?>

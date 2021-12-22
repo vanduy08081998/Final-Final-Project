@@ -11,13 +11,11 @@
     <!-- Product gallery-->
     <div class="col-lg-4" id="content-wrapper">
       <ul id="imageGallery">
-        <li data-thumb="{{ URL::to($product->product_image) }}"
-        data-src="{{ URL::to($product->product_image) }}">
-        <img width="100%" src="{{ URL::to($product->product_image) }}" />
-    </li>
+        <li data-thumb="{{ URL::to($product->product_image) }}" data-src="{{ URL::to($product->product_image) }}">
+          <img width="100%" src="{{ URL::to($product->product_image) }}" />
+        </li>
         @forelse (explode(',', $product->product_gallery) as $item)
-        <li data-thumb="{{ URL::to($item) }}"
-            data-src="{{ URL::to($item) }}">
+        <li class="img-small" data-thumb="{{ URL::to($item) }}" data-src="{{ URL::to($item) }}">
             <img width="100%" src="{{ URL::to($item) }}" />
         </li>
         @empty
