@@ -49,7 +49,7 @@ class ReviewMe extends Component
         $all_review = Review::where([['review_parent', null],['count_rating', 1],['review_status',1],['customer_id', Auth::user()->id]])->latest('id')->paginate(3);
         $check = 'onestar';
         }else{
-            $all_review = Review::where([['review_parent', null],['customer_id', Auth::user()->id]])->latest()->paginate(3);
+            $all_review = Review::where([['review_parent', null],['review_status',1],['customer_id', Auth::user()->id]])->latest()->paginate(3);
         }
         return view('livewire.review-me', compact('all_review', 'check'));
     }
