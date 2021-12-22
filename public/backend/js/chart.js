@@ -1,4 +1,3 @@
-
 $('.close_chart_product').click(function(){
     $('.product_statistical_chart').addClass('d-none');
     $('.product_statistical').removeClass('d-none');
@@ -14,12 +13,12 @@ $('.close_chart_product').click(function(){
         hideHover: 'auto',
         xkey: 'period',
         ykeys: ['order','sales','quantity'],
-        labels: ['Đơn hàng','Doanh thu','Số lượng bán ra']    
-          
+        labels: ['Đơn hàng','Doanh thu','Số lượng bán ra']
+
     });
 
 
-    $('#btn-dashboard-filter').click(function(){ 
+    $('#btn-dashboard-filter').click(function(){
         var form_date = $('.date_start').val();
         var to_date = $('.date_end').val();
         $.ajax({
@@ -36,12 +35,12 @@ $('.close_chart_product').click(function(){
                 }else{
                    chart.setData(data)
                 }
-                }   
+                }
         });
     });
 
-    $('.dashboard-filter').change(function(){    
-        var dashboard_value = $(this).val();   
+    $('.dashboard-filter').change(function(){
+        var dashboard_value = $(this).val();
         $.ajax({
         url: 'dashboard-filter',
         method: "POST",
@@ -110,4 +109,4 @@ $('.close_chart_product').click(function(){
 
 
 
- 
+

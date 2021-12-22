@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Attribute;
 use Illuminate\Http\Request;
 use App\Models\ProductVariant;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -46,19 +47,17 @@ class CartController extends Controller
       $item['product_name'] = $product->product_name;
       $item['specifications'] = $options;
       if ($product_variant != null) {
-        if (count($product->flash_deals) == 0) {
-          if ($product->discount != null) {
-            if ($product->discount_unit == '%') {
-              $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
-            } else {
-              $price = $product_variant->variant_price - $product->discount;
-            }
-          } else {
-            $price = $product_variant->variant_price;
-          }
+
+        $order_no_variant = DB::table('order_details')->where('product_id', $product->id)->where('variant', $str)->first();
+        if ($order_no_variant != null) {
+          $quantity_order = $order_no_variant->quantity;
         } else {
-          $flash_deal = $product->flash_deals()->first();
-          if ($timestamp > $flash_deal->date_end) {
+          $quantity_order = 0;
+        }
+        if($product_variant->variant_quantity - $quantity_order <= 0){
+          return response()->json(['error_quantity' => 'Sản phẩm đã hết hàng']);
+        }else{
+          if (count($product->flash_deals) == 0) {
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
@@ -69,26 +68,37 @@ class CartController extends Controller
               $price = $product_variant->variant_price;
             }
           } else {
-            $price = $product_variant->variant_price - ($product_variant->variant_price * $flash_deal->discount / 100);
+            $flash_deal = $product->flash_deals()->first();
+            if ($timestamp > $flash_deal->date_end) {
+              if ($product->discount != null) {
+                if ($product->discount_unit == '%') {
+                  $price = $product_variant->variant_price - ($product_variant->variant_price * $product->discount / 100);
+                } else {
+                  $price = $product_variant->variant_price - $product->discount;
+                }
+              } else {
+                $price = $product_variant->variant_price;
+              }
+            } else {
+              $price = $product_variant->variant_price - ($product_variant->variant_price * $flash_deal->discount / 100);
+            }
           }
+          $item['variant_price'] = $price;
+          $item['variant_image'] = $product_variant->variant_image;
+        }
+      } else {
+        $order_no_variant = DB::table('order_details')->where('product_id', $product->id)->first();
+
+        if($order_no_variant != null){
+          $quantity_order = $order_no_variant->quantity;
+        }else{
+          $quantity_order = 0;
         }
 
-        $item['variant_price'] = $price;
-        $item['variant_image'] = $product_variant->variant_image;
-      } else {
-        if (count($product->flash_deals) == 0) {
-          if ($product->discount != null) {
-            if ($product->discount_unit == '%') {
-              $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
-            } else {
-              $price = $product->unit_price - $product->discount;
-            }
-          } else {
-            $price = $product->unit_price;
-          }
-        } else {
-          $flash_deal = $product->flash_deals()->first();
-          if($timestamp > $flash_deal->date_end){
+        if($product->quantity - $quantity_order <= 0){
+          return response()->json(['error_quantity' => 'Sản phẩm đã hết hàng']);
+        }else{
+          if (count($product->flash_deals) == 0) {
             if ($product->discount != null) {
               if ($product->discount_unit == '%') {
                 $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
@@ -98,14 +108,25 @@ class CartController extends Controller
             } else {
               $price = $product->unit_price;
             }
-          }else{
-            $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+          } else {
+            $flash_deal = $product->flash_deals()->first();
+            if ($timestamp > $flash_deal->date_end) {
+              if ($product->discount != null) {
+                if ($product->discount_unit == '%') {
+                  $price = $product->unit_price - ($product->unit_price * $product->discount / 100);
+                } else {
+                  $price = $product->unit_price - $product->discount;
+                }
+              } else {
+                $price = $product->unit_price;
+              }
+            } else {
+              $price = $product->unit_price - ($product->unit_price * $flash_deal->discount / 100);
+            }
           }
+          $item['variant_price'] = $price;
+          $item['variant_image'] = $product->product_image;
         }
-
-
-        $item['variant_price'] = $price;
-        $item['variant_image'] = $product->product_image;
       }
 
       array_push($choice_options, $item);
@@ -128,10 +149,10 @@ class CartController extends Controller
           'quantity' => $cart->quantity + $request->product_quantity
         ]);
       }
-      return response()->json(['success' => 'success', 'str' => $str]);
+      return response()->json(['success' => 'Thêm giỏ hàng thành công', 'str' => $str]);
     } else {
       $user_id = null;
-      return response()->json(['error' => 'error']);
+      return response()->json(['error' => 'Bạn phải đăng nhập trước khi mua hàng']);
     }
   }
   public function cartList()

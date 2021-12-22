@@ -234,7 +234,11 @@ class ProductController extends Controller
     } else {
       $deals_today = 0;
     }
-
+    $flash_deal_array = array();
+    $items = array();
+    foreach (DB::table('flash_deals_products')->get() as $key => $val) {
+      array_push($flash_deal_array, $val->product_id);
+    }
 
     $data = [
       'product_name' => $request->product_name,
@@ -277,9 +281,7 @@ class ProductController extends Controller
     ];
 
     $product = Product::create($data);
-
     Product::find($product->id)->flash_deals()->attach($request->id_flash_deal);
-
     $options = array();
 
     if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
@@ -354,7 +356,7 @@ class ProductController extends Controller
       }
     }
 
-
+    Toastr::success('Thêm sản phẩm thành công', 'Chúc mừng');
     return redirect()->route('products.index');
   }
 
@@ -517,79 +519,82 @@ class ProductController extends Controller
     ];
 
     $product->update($data);
+    $product->flash_deals()->sync($request->id_flash_deal);
 
-    $options = array();
+    if($request->type_of_category == 'isNotAttribute'){
 
-    if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
-      $colors_active = 1;
-      array_push($options, $request->colors);
-    } else {
-      $colors_active = 0;
-    }
-
-
-    if ($request->has('choice_no')) {
-      foreach ($request->choice_no as $key => $no) {
-        $name = 'attribute_value_' . $no;
-        $data = array();
-
-
-        // foreach (json_decode($request[$name][0]) as $key => $item) {
-        foreach ($request[$name] as $key => $item) {
-          // array_push($data, $item->value);
-          array_push($data, $item);
-        }
-        array_push($options, $data);
+    }else{
+      $options = array();
+      if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
+        $colors_active = 1;
+        array_push($options, $request->colors);
+      } else {
+        $colors_active = 0;
       }
-    }
-    $combinations = Combinations::makeCombinations($options);
-    if (count($combinations[0]) > 0) {
-      foreach ($combinations as $key => $combination) {
-        $sku = '';
+      if ($request->has('choice_no')) {
+        foreach ($request->choice_no as $key => $no) {
+          $name = 'attribute_value_' . $no;
+          $data = array();
 
-        $str = '';
 
-        foreach ($combination as $key => $item) {
-          if ($key > 0) {
-            $str .= '-' . str_replace([',', '/','.',':',' ','%'], '', $item);
-            $sku .= '-' . str_replace(' ', '', $item);
-          } else {
-            if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
-              $color_name = \App\Models\Color::where('color_code', $item)->first()->color_slug;
-              $str .= $color_name;
-              $sku .= '-' . $color_name;
-            } else {
-              $str .= str_replace([',', '/','.',':',' ','%'], '', $item);
+          // foreach (json_decode($request[$name][0]) as $key => $item) {
+          foreach ($request[$name] as $key => $item) {
+            // array_push($data, $item->value);
+            array_push($data, $item);
+          }
+          array_push($options, $data);
+        }
+      }
+      $combinations = Combinations::makeCombinations($options);
+      if (count($combinations[0]) > 0) {
+        foreach ($combinations as $key => $combination) {
+          $sku = '';
+
+          $str = '';
+
+          foreach ($combination as $key => $item) {
+            if ($key > 0) {
+              $str .= '-' . str_replace([',', '/', '.', ':', ' ', '%'], '', $item);
               $sku .= '-' . str_replace(' ', '', $item);
+            } else {
+              if ($request->has('colors_active') && $request->has('colors') && count($request->colors) > 0) {
+                $color_name = \App\Models\Color::where('color_code', $item)->first()->color_slug;
+                $str .= $color_name;
+                $sku .= '-' . $color_name;
+              } else {
+                $str .= str_replace([',', '/', '.', ':', ' ', '%'], '', $item);
+                $sku .= '-' . str_replace(' ', '', $item);
+              }
             }
           }
-        }
-        $product_variant = ProductVariant::where('id_product', $product->id)->where('variant', $str)->first();
-        if ($product_variant == null) {
-          $product_variant = new ProductVariant;
-          $product_variant->id_product = $product->id;
-        }
+          $product_variant = ProductVariant::where('id_product', $product->id)->where('variant', $str)->first();
+          if ($product_variant == null) {
+            $product_variant = new ProductVariant;
+            $product_variant->id_product = $product->id;
+          }
 
-        if (isset($request['price_' . str_replace('.', '_', $str)])) {
+          if (isset($request['price_' . str_replace('.', '_', $str)])) {
 
-          $product_variant->variant = $str;
-          $product_variant->variant_price = $request['price_' . str_replace('.', '_', $str)];
-          $product_variant->sku = $request['sku_' . str_replace('.', '_', $str)];
-          $product_variant->variant_quantity = $request['qty_' . str_replace('.', '_', $str)];
-          $product_variant->variant_image = $request['img_' . str_replace('.', '_', $str)];
+            $product_variant->variant = $str;
+            $product_variant->variant_price = $request['price_' . str_replace('.', '_', $str)];
+            $product_variant->sku = $request['sku_' . str_replace('.', '_', $str)];
+            $product_variant->variant_quantity = $request['qty_' . str_replace('.', '_', $str)];
+            $product_variant->variant_image = $request['img_' . str_replace('.', '_', $str)];
 
-          $product_variant->save();
+            $product_variant->save();
+          }
         }
+      } else {
+        $product_variant              = new ProductVariant;
+        $product_variant->id_product  = $product->id;
+        $product_variant->variant     = '';
+        $product_variant->variant_price       = $request->unit_price;
+        $product_variant->sku         = $request->sku;
+        $product_variant->variant_quantity         = $request->current_stock;
+        $product_variant->save();
       }
-    } else {
-      $product_variant              = new ProductVariant;
-      $product_variant->id_product  = $product->id;
-      $product_variant->variant     = '';
-      $product_variant->variant_price       = $request->unit_price;
-      $product_variant->sku         = $request->sku;
-      $product_variant->variant_quantity         = $request->current_stock;
-      $product_variant->save();
     }
+
 
     $array_fixed_attr = [];
 
@@ -616,6 +621,7 @@ class ProductController extends Controller
         Specification::where('product_id', $product->id)->whereNotIn('specifications',$array_fixed_attr)->delete();
       }
     }
+    Toastr::success('Cập nhật phẩm thành công', 'Chúc mừng');
     return redirect()->route('products.index');
   }
 

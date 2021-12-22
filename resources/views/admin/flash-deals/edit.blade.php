@@ -8,6 +8,11 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
+        @if (session()->has('message'))
+          @foreach (session()->get('message') as $item)
+            <div class="alert alert-danger">Sản phẩm {{ \App\Models\Product::where('id', $item)->first()->product_name }} hiện đang ở trong một chiến dịch khác</div>
+          @endforeach
+        @endif
         <div class="card-body">
           <form action="{{ route('flash-deals.update', $flash_deal->id) }}" method="POST">
             @csrf

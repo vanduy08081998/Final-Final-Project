@@ -502,7 +502,7 @@
                                                                         <p>Email:
                                                                             {{json_decode($order->shipping_address)->email }}
                                                                         </p>
-                                                                        <p>Số điện thoại: </p>
+                                                                        <p>Số điện thoại: {{json_decode($order->shipping_address)->phone }}</p>
                                                                         <p> Địa chỉ:
                                                                             {{json_decode($order->shipping_address)->address }}
                                                                         </p>
@@ -538,14 +538,18 @@
                                                                         <table width="100%" cellspacing="0"
                                                                             cellpadding="0">
                                                                             <tbody>
+                                                                                @php
+                                                                                    $info = App\Models\Information::orderByDESC('id')
+                                                                                    ->where('infor_status', 1)
+                                                                                    ->first();
+                                                                                @endphp
                                                                                 <tr>
                                                                                     <td class="esd-block-text es-p10t es-p5b es-m-txt-c"
                                                                                         align="left">
                                                                                         <p><i
                                                                                                 class="fas fa-home"></i>
-                                                                                            137 Nguyễn Thị Thập - Hòa
-                                                                                            Khánh Nam - Liên Chiểu - Đà
-                                                                                            Nẵng</p>
+                                                                                                {{ $info->address }}
+                                                                                           </p>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -553,7 +557,7 @@
                                                                                         align="left">
                                                                                         <p><i
                                                                                                 class="fas fa-envelope"></i>
-                                                                                            bigdealdn@gmail.com<br>
+                                                                                           {{ $info->email }}<br>
                                                                                         </p>
                                                                                     </td>
                                                                                 </tr>
@@ -562,7 +566,7 @@
                                                                                         align="left">
                                                                                         <p><i
                                                                                                 class="fas fa-phone-square-alt"></i>
-                                                                                            +84 33 944 8486<br>
+                                                                                            {{ $info->phone }}<br>
                                                                                         </p>
                                                                                     </td>
                                                                                 </tr>
