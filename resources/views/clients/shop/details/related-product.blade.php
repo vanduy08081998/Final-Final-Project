@@ -9,10 +9,10 @@
         <div>
           <div class="card product-card card-static">
             <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i
-                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="#"><img
+                class="ci-heart"></i></button><a class="card-img-top d-block overflow-hidden" href="{{ route('shop.product-details', $proOther->product_slug) }}"><img
                 src="{{ asset($proOther->product_image) }}" alt="Product"></a>
             <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#"></a> 
-              <h3 class="product-title fs-sm"><a href="#">{{ trans($proOther->product_name) }}</a>
+              <h3 class="product-title fs-sm"><a href="{{ route('shop.product-details', $proOther->product_slug) }}">{{ trans($proOther->product_name) }}</a>
               </h3>
               <div class="d-flex justify-content-between">
                 <div class="product-price">{{ number_format($proOther->unit_price) }}</span>

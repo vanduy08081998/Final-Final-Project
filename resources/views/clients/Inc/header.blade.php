@@ -108,7 +108,6 @@ $infor = Information::orderByDESC('id')
                     id="choice-form">
                     @csrf
                     @method('POST')
-
                     <input class="form-control rounded-start w-100 search-input"
                         style="border-radius: 25px 0 0 25px !important;" name="key" id="search" type="text"
                         placeholder="Tìm kiếm sản phẩm" required>
@@ -178,20 +177,19 @@ $infor = Information::orderByDESC('id')
                             </div>
                         </div>
                     @else
-                        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
-                            <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                                <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                            </a>
-                        </div>
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
+                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                        </a>
+                    </div>
                     @endif
                     <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                         <div class="navbar-tool dropdown ms-3 cart__dropdown">
-
+                          {{-- cart dropdown --}}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
