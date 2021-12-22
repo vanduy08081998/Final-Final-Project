@@ -422,7 +422,10 @@
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror
                             </div>
-
+                            <div class="form-group mb-3">
+                              <label>Số lượng gốc</label>
+                              <input type="number" name="product_unit_quantity" id="" class="form-control">
+                            </div>
                             <div class="form-group mb-3">
                               <label>Liên kết bên ngoài</label>
                               <input type="text" name="ex_link" id="" class="form-control">

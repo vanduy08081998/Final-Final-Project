@@ -153,10 +153,10 @@ class ProductController extends Controller
       $shipping_stock = 0;
     }
 
-    if ($request->has('quantity')) {
+    if ($request->type_of_category == 'isNotAttribute') {
       $quantity = $request->quantity;
     } else {
-      $quantity = 0;
+      $quantity = $request->product_unit_quantity;
     }
 
     if ($request->type_of_category == 'isNotAttribute') {
@@ -402,10 +402,10 @@ class ProductController extends Controller
       $shipping_stock = 0;
     }
 
-    if ($request->has('quantity')) {
+    if ($request->type_of_category == 'isNotAttribute') {
       $quantity = $request->quantity;
     } else {
-      $quantity = 0;
+      $quantity = $request->product_unit_quantity;
     }
 
     if ($request->type_of_category == 'isNotAttribute') {
