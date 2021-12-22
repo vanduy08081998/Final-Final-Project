@@ -36,7 +36,7 @@
                                     <a class="btn btn-success"
                                         href="{{ route('review-admin.list-browse', $product->id) }}">Chờ duyệt <span
                                             class="badge badge-light">{{ $count_not_browse }}</span></a>
-                                    <a class="btn btn-primary"
+                                    <a class="btn btn-danger"
                                         href="{{ route('review-admin.feedback', $product->id) }}">Chờ
                                         phản hồi <span class="badge badge-light">{{ $count_not_feedback }}</span></a>
                                     @if ($countTrashed)
@@ -87,7 +87,7 @@
                                                 <td class="text-left">
                                                     @if ($value->admin_feedback == 1)
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button
-                                                                type="button" class="btn btn-info">Đã phản hồi</button>
+                                                                type="button" class="btn btn-info">Đã phản hồi ({{count($value->review_child)}})</button>
                                                         </a>
                                                     @else
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button

@@ -11,7 +11,7 @@ use App\Services\NotificationService;
 class OrderController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:admin', ['only' => ['index','show','paymentStatus','delivery']]);
+        $this->middleware('permission:QL đơn hàng', ['only' => ['index','show','paymentStatus','delivery']]);
     }
     /**
      * Display a listing of the resource.

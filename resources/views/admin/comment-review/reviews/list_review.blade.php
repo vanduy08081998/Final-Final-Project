@@ -54,7 +54,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="text-danger" style="font-size: 18px;">{{ $product->rating }} </span>
+                                                    <span class="text-danger font-weight-bold" style="font-size: 16px;">{{ $product->rating }} </span>
                                                     @for ($count = 1; $count <= round($product->rating); $count++)
                                                         <i class="fa fa-star fs-ms text-warning me-1"></i>
                                                     @endfor
@@ -62,8 +62,13 @@
                                                         <i class="fa fa-star-o fs-ms text-warning me-1"></i>
                                                     @endfor
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $product->count_review }} lượt đánh giá
+                                                <td class="text-center text-primary font-weight-bold">
+                                                    {{ $product->count_review }} lượt đánh giá <br>
+                                                    @foreach($product->reviews as $review)
+                                                          @if($review->review_status == null)
+                                                          <span class="text-danger">(Chờ duyệt)</span>
+                                                          @endif
+                                                    @endforeach
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

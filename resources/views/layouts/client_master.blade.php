@@ -32,7 +32,7 @@
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/custom-style.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/ijaboCropTool.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/boxed/css/boxed-check.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ URL::to('frontend/dist/assets/owl.theme.default.min.css') }}">
@@ -220,7 +220,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js">
     </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <script src="{{ URL::to('frontend/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('frontend/js/ijaboCropTool.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
@@ -238,6 +238,7 @@
     <script src="{{ asset('frontend/js/compare.js') }}"></script>
     <script src="{{ asset('frontend/js/quickview.js') }}"></script>
     <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
+    <script src="{{ asset('frontend/js/noel.js') }}"></script>
 
     <script>
         $('.input-images-1').imageUploader();

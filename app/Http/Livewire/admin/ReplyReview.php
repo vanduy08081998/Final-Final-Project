@@ -32,7 +32,7 @@ class ReplyReview extends Component
         return view('livewire.admin.reply-review')->with(compact('review'));
     }
     public function ReplyRating ($review_id, $product_id){
-        if($content_rating != ''){
+        if($this->content_rating != ''){
             Review::find($review_id)->update(['admin_feedback' => 1]);
             Review::create([
                 'product_id' => $product_id,
