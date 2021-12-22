@@ -63,6 +63,7 @@
                     {{ csrf_field() }}
                     @isset($shipping_default)
                         <input type="hidden" name="name" value="{{ $shipping_default->ward->name }}">
+                        <input type="hidden" name="phone" value="{{ $shipping_default->phone }}">
                         <input type="hidden" name="email" value="{{ auth()->user()->email }}">
                         <input type="hidden" name="address"
                             value="{{ $shipping_default->neighbor }} -

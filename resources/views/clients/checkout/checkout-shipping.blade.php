@@ -76,11 +76,9 @@
                                         Canada</span></td>
                                 <td class="align-middle">{{ $shipping->delivery_time_from }} - {{
                                     $shipping->delivery_time_from }} Ngày</td>
-                                <td class="align-middle">{{ $shipping->handing_fee }}</td>
+                                <td class="align-middle">{{ number_format($shipping->handing_fee) }} <sup>đ</sup> </td>
                             </tr>
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
@@ -128,6 +126,14 @@
         type: "POST",
         url: route('checkout.shipping-method'),
         data: $(this).serializeArray(),
+        beforeSend: () => {
+            $("body").append(`<div class="preloader">
+                <div class="lds-ripple">
+                    <div class="lds-pos"></div>
+                    <div class="lds-pos"></div>
+                </div>
+            </div>`);
+        },
         success: function (response) {
             window.location.href="{{ route('checkout.checkout-payment') }}"
         }

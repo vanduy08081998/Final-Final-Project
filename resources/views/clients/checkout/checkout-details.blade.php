@@ -48,9 +48,7 @@
                 @auth
                     <div class="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
                         <div class="d-flex align-items-center">
-                            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0"><span
-                                    class="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip"
-                                    title="Reward points">384</span>
+                            <div class="img-thumbnail rounded-circle position-relative flex-shrink-0">
                                 @if (auth()->user()->avatar != null)
                                     <img class="rounded-circle"
                                         src="{{ asset('uploads/Users') }}/{{ auth()->user()->avatar }}" width="90"
@@ -126,6 +124,14 @@
                 type: "POST",
                 url: route('checkout.shipping-address'),
                 data: $(this).serializeArray(),
+                beforeSend: () => {
+                    $("body").append(`<div class="preloader">
+                        <div class="lds-ripple">
+                            <div class="lds-pos"></div>
+                            <div class="lds-pos"></div>
+                        </div>
+                    </div>`);
+                },
                 success: function(response) {
                     window.location.href = "{{ route('checkout.checkout-shipping') }}"
                 }

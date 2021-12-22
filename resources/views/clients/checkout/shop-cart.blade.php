@@ -79,7 +79,6 @@
                 thuộc
                 tinh</span></div>
             @endif
-
             <div class="fs-lg text-accent pt-2"><span>Tổng giá :
               </span><span class="cart_price">{{ number_format($value->variant_price * $cart->quantity) }}₫</span>
             </div>

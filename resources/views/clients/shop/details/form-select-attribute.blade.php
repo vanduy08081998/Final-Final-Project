@@ -50,7 +50,7 @@
             <div class="product-price__current-price ">
               <h5>Giá gốc: </h5>
               @php
-                  $timestamp = time();
+                $timestamp = time();
               @endphp
               @if (count($product->flash_deals) == 0)
                 @if ($product->discount_unit == '%')
@@ -203,6 +203,15 @@
             <li class="item-promotion general-promotion"><a href="https://cellphones.com.vn/thu-cu-doi-moi">Thu cũ lên
                 đời - Trợ giá 1 triệu&nbsp;<span class="color-red">(xem chi tiết)</span></a>
             </li>
+            <li class="item-promotion general-promotion"><a href="https://cellphones.com.vn/thu-cu-doi-moi">Thuế VAT:
+                {{ $product->vat }} %</span></a>
+            </li>
+            @if ($product->multiple_stock == 'on')
+              <li class="item-promotion general-promotion"><a href="#!"  style="color: red" ><strong>Sản phẩm số lượng lớn</strong></span></a>
+              </li>
+            @else
+
+            @endif
           </ul>
           <div class="cps-additional-note">
             <p><a style="text-transform: uppercase"><img src="https://cellphones.com.vn/media/icon/icon_fire.png"

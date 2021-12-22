@@ -29,7 +29,7 @@ cartCheckout();
 
 const localPromocode = (discount, response, promocodeText) => {
     let promocode = localStorage.getItem("promocode");
-    let promoText = localStorage.getItem("promoText")
+    let promoText = localStorage.getItem("promoText");
     if (!promocode) {
         if (response.success) {
             toastr.success(response.success, "Chúc mừng");
@@ -96,6 +96,14 @@ const checkoutComplete = () => {
             total: $('input[name="totalprice"]').val(),
             promocodeInsert: promocodeInsert,
             hiddenSaleCode: proText,
+        },
+        beforeSend: () => {
+            $("body").append(`<div class="preloader">
+                <div class="lds-ripple">
+                    <div class="lds-pos"></div>
+                    <div class="lds-pos"></div>
+                </div>
+            </div>`);
         },
         success: function (response) {
             localStorage.removeItem("promocode");

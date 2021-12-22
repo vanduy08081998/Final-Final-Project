@@ -55,10 +55,10 @@
         <img src="https://thumbs.gfycat.com/CompleteShallowFlyingsquirrel-size_restricted.gif" alt="">
       </div>
       <div class="text-center">
-        <i style="font-size: 16px; color: red"><strong>Chưa có sản phẩm trong giỏ hàng</strong></i>
+        <p style="font-size: 16px; color: #27ae60"><strong>Chưa có sản phẩm trong giỏ hàng</strong></p>
         <p>
-          <i> <a style="text-decoration: none; color: blue" href="{{ URL::to('/') }}"><strong> <i
-                  class="fa fa-shopping-cart"></i> Mua sắm ngay</strong></a> </i>
+          <p> <a style="text-decoration: none; color: #27ae60" href="{{ URL::to('/') }}"><strong> <i
+                  class="fa fa-shopping-cart"></i> Mua sắm ngay</strong></a> </p>
         </p>
       </div>
     @endif
