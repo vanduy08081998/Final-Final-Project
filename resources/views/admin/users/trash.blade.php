@@ -9,14 +9,11 @@ Quản lý tài khoản
 <!-- Page Wrapper -->
 
 <div class="content container-fluid">
-
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Thùng rác (tài khoản nhân
-    viên)'])
-
     <div class="row">
         <div class="col-sm-12">
             <div class="card mb-0">
                 <div class="card-body">
+                    <h4 class="text-primary mb-2">Thùng rác (tài khoản nhân viên) </h4>
                     @if (session('message'))
                     <div class="alert alert-success" role="alert">
                         {{ session('message') }}

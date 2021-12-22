@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 mb-2">
                 <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Tình trạng
-                        đơn hàng:</span>{{ $order->status->delivery_description }}</div>
+                        đơn hàng:</span>{{ $order->status ? $order->status->delivery_description : 'Đang xử lý' }}</div>
             </div>
             <div class="col-md-4 mb-2">
                 <div class="bg-secondary h-100 p-4 text-center rounded-3"><span class="fw-medium text-dark me-2">Ngày giao
@@ -85,8 +85,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item {{ $order->delivery_viewed == 5 ? 'completed' : '' }}">
-                            <div class="nav-link">
+                        <li class="nav-item">
+                            <div class="nav-link {{ $order->delivery_viewed == 5 ? 'completed' : '' }}">
                                 <div class="d-flex align-items-center">
                                     <div class="media-tab-media"><i class="ci-package"></i></div>
                                     <div class="ps-3">
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         @empty
-                            <h1>Đơn hàng của bạn bị trống</h1>
+                            <h1>Đang cập nhật ... </h1>
                         @endforelse
 
                     </div>
