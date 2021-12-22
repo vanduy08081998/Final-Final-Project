@@ -6,8 +6,10 @@
   <!-- Page Wrapper -->
 
   <div class="content container-fluid">
-
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản tồn kho'])
+    <div class="card-title">
+      <h4 class="text-primary mb-2 d-inline font-weight-bold">Quản tồn kho</h4>
+      <hr />
+  </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="card mb-0">

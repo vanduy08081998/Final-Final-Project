@@ -12,6 +12,7 @@
                     @method('PATCH')
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-8 col-sm-12 col-lg-8 col-8 col-xl-8">
+                            @include('admin.inc.card-header', ['table_title' => 'Cập nhật bài viết'])
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">

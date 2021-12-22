@@ -139,15 +139,20 @@
                 </div>
                 <!-- Footer-->
                 <div class="modal-footer flex-wrap justify-content-between bg-secondary fs-md">
+                    @php
+                        if($orderId){
+                            $ship = DB::table('shipping_method')->where('id', $orderId->shipping_status)->first();
+                        }
+                    @endphp
                     <div class="px-2 py-1"><span class="text-muted">Thành
                             tiền:&nbsp;</span><span>{{ $orderId ? number_format($orderId->grand_total, 0, '.', ',') . ' đ' : '' }}</span>
                     </div>
                     <div class="px-2 py-1"><span class="text-muted">Phí giao
-                            hàng:&nbsp;</span><span>22,000 đ</span></div>
+                            hàng:&nbsp;</span><span>{{$orderId ? number_format($ship->handing_fee, 0, '.', ',') . ' đ' : ''}}</span></div>
                     {{-- <div class="px-2 py-1"><span
                             class="text-muted">Thuế:&nbsp;</span><span>$9.<small>50</small></span></div> --}}
                     <div class="px-2 py-1"><span class="text-muted">Tổng tiền:&nbsp;</span><span
-                            class="fs-lg">{{ $orderId ? number_format($orderId->grand_total, 0, '.', ',') . ' đ' : '' }}</span>
+                            class="fs-lg">{{ $orderId ? number_format($orderId->grand_total + $ship->handing_fee , 0, '.', ',') . ' đ' : '' }}</span>
                     </div>
                 </div>
             </div>

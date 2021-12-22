@@ -48,7 +48,7 @@
     <!-- Page Content -->
     <div class="content container-fluid">
 
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Thống kê'])
+        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị'])
 
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
@@ -122,8 +122,8 @@
                                     <select class="dashboard-filter form-control">
                                         <option>Chọn thời gian lọc</option>
                                         <option value="today">Hôm nay</option>
-                                        <option value="week">Tuần này</option>
-                                        <option value="month">Tháng này</option>
+                                        <option value="week">7 ngày trước</option>
+                                        <option value="month">30 ngày trước</option>
                                         <option value="year">365 ngày qua</option>
                                     </select>
                                 </p>
@@ -189,8 +189,8 @@
                                         <select class="dashboard-filter-product form-control">
                                             <option>Chọn thời gian lọc</option>
                                             <option value="today">Hôm nay</option>
-                                            <option value="week">Tuần này</option>
-                                            <option value="month">Tháng này</option>
+                                            <option value="week">7 ngày trước</option>
+                                            <option value="month">30 ngày trước</option>
                                             <option value="year">365 ngày qua</option>
                                         </select>
                                     </p>
@@ -211,7 +211,6 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="text-center text-danger font-weight-bold mb-4">Dữ liệu khách truy cập và số lần xem trang</h3>
                         <div style="" class="product_statistical mt-4">
                             @livewire('google-analytics')
                         </div>

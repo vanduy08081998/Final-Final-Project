@@ -60,7 +60,7 @@
           <div class="table-responsive" data-simplebar>
             <div class="d-flex d-xl-block">
               <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item"
-                href="{{ route('shop.shop-grid', 23) }}" style="min-width: 16rem;">
+                href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}" style="min-width: 16rem;">
                 <img src="{{ asset('frontend/img/home/banners/banner-sm02.png') }}" width="100" alt="Banner">
                 <div class="py-4 px-2 banner-item-text">
                   <h5 class="mb-2"><span class="fw-light">Điện Thoại</span><br>có
@@ -69,7 +69,7 @@
                 </div>
               </a>
               <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 me-4 me-xl-0 banner-item"
-                href="{{ route('shop.shop-grid', 27) }}" style="min-width: 16rem;">
+                href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}" style="min-width: 16rem;">
                 <img src="{{ asset('frontend/img/home/banners/banner-sm01.png') }}" width="100" alt="Banner">
                 <div class="py-4 px-2 banner-item-text">
                   <h5 class="mb-2"><span class="fw-light">Camera</span><br><span
@@ -78,7 +78,7 @@
                 </div>
               </a>
               <a class="d-flex align-items-center bg-faded-info rounded-3 pt-2 ps-2 mb-4 banner-item"
-                href="{{ route('shop.shop-grid', 25) }}" style="min-width: 16rem;">
+                href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}" style="min-width: 16rem;">
                 <img src="{{ asset('frontend/img/home/banners/banner-sm03.png') }}" width="100" alt="Banner">
                 <div class="py-4 px-2 banner-item-text">
                   <h5 class="mb-2"><span class="fw-light">Phụ Kiện Số</span><br><span
@@ -394,7 +394,7 @@
             <h3 class="mt-4 mb-1 text-body fw-light">Tất cả</h3>
             <h2 class="mb-1">Các sản phẩm từ Apple</h2>
             <p class="h5 text-body fw-light">sẽ giảm giá 15%</p>
-            <a class="btn btn-accent" href="#">Mua ngay <i class="ci-arrow-right"></i></a>
+            <a class="badge bg-success p-3" href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}">Mua ngay <i class="ci-arrow-right"></i></a>
           </div>
         </div>
         <div class="col-md-7"><img src="{{ asset('frontend/img/home/banners/offer.jpg') }}"

@@ -5,6 +5,10 @@
 
 @section('content')
 <div class="content container-fluid">
+  <div class="card-title">
+    <h4 class="mb-0 font-weight-bold">Cập nhật chiến dịch Flash-Sale</h4>
+</div>
+<hr />
   <div class="row">
     <div class="col-sm-12">
       <div class="card">

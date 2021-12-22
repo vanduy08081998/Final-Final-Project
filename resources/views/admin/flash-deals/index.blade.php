@@ -6,8 +6,10 @@
     <!-- Page Wrapper -->
 
     <div class="content container-fluid">
-
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý Chiến dịch Flash-Sale'])
+        <div class="card-title">
+            <h4 class="mb-0 font-weight-bold">Quản lý Chiến dịch Flash-Sale</h4>
+        </div>
+        <hr />
         <div class="text-right mb-3"><a href="{{ route('flash-deals.create') }}" class="btn btn-info"
                 style="border-radius: 40px">Thêm chiến dịch</a></div>
         <div class="row">

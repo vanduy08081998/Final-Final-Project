@@ -7,13 +7,10 @@
 
 @section('content')
     <div class="content container-fluid">
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý danh
-        mục'])
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    @include('admin.inc.card-header', ['table_title' => 'Loại sản phẩm' , 'table_content' =>
-                    'Quản lý loại sản phẩm'])
+                    @include('admin.inc.card-header', ['table_title' => 'Cập nhật danh mục sản phẩm'])
                     <div class="card-body">
                         <form action="{{ route('categories.update', $category->id_cate) }}" method="post"
                             enctype="multipart/form-data">

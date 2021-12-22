@@ -8,16 +8,15 @@
     <!-- Page Wrapper -->
 
     <div class="content container-fluid">
-
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý danh
-        mục'])
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
-                    @include('admin.inc.card-header', ['table_title' => 'Danh mục bài viết' , 'table_content' =>
-                    'Quản lý danh mục bài viết'])
+              
                     <div class="card-body">
+                        <div class="card-title">
+                            <h4 class="text-primary mb-2 d-inline font-weight-bold">Danh sách danh mục bài viết: </h4>
+                            <hr />
+                        </div>
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered datatable" style="width:100%">
                                 <thead>

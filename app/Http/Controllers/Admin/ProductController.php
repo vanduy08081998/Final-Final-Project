@@ -47,8 +47,9 @@ class ProductController extends Controller
   public function index()
   {
     $product = Product::orderByDESC('id')->get();
+    $countTrashed = Product::onlyTrashed()->count();
     return view('admin.products.index', [
-      'product' => $product,
+      'product' => $product, 'countTrashed' => $countTrashed
     ]);
   }
 
@@ -698,4 +699,40 @@ class ProductController extends Controller
 
     return view('admin.products.Inventory', compact('products'));
   }
+
+  public function trash()
+    {
+        $product = Product::onlyTrashed()->get();
+        return view('admin.products.trash', compact('product'));
+    }
+
+    public function delete($id){
+       Product::find($id)->delete();
+       return back()->with('message', 'Đã đẩy vào thùng rác');
+    }
+
+  public function handle(Request $request)
+    {
+        $data = $request->all();
+        switch ($data['handle']) {
+            case 'trash':
+                $ids = $data['checkItem'];
+                Product::whereIn('id', $ids)->delete();
+                return redirect()->back();
+                break;
+            case 'delete':
+                $ids = $data['checkItem'];
+                Product::whereIn('id', $ids)->forceDelete();
+                return redirect()->back();
+                break;
+            case 'restore':
+                $ids = $data['checkItem'];
+                Product::whereIn('id', $ids)->restore();
+                return redirect()->back();
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
 }
