@@ -279,14 +279,14 @@ class ProductController extends Controller
         }
       }
 
-      $variant_quantity = $product_stock->variant_quantity;
-      $v_image = $product_stock->variant_image;
+      // $variant_quantity = $product_stock->variant_quantity;
+      // $v_image = $product_stock->variant_image;
       return response()->json([
         'price' => number_format($price * $product_quantity),
-        'product_quantity' => $variant_quantity,
+        // 'product_quantity' => $variant_quantity,
         'quantity' => $product_quantity,
         'variant' =>  $product_stock,
-        'variant_image' => $v_image
+        // 'variant_image' => $v_image
       ]);
     }
   }

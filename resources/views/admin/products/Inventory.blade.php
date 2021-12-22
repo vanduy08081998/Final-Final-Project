@@ -29,17 +29,82 @@
                 <tbody>
                   @foreach ($products as $product)
                     @if ($product->type_of_category == 'isAttribute')
-                      @foreach ($product->variants as $key => $variant)
+                      @if (count($product->variants) > 0)
+                        @foreach ($product->variants as $key => $variant)
+                          <tr>
+                            <td>{{ $product->product_name }}</td>
+                            <td>{!! str_replace('-', '<br>', $variant->variant) !!}</td>
+                            <td>{{ $variant->variant_quantity }}</td>
+                            @php
+                              $qt_buy = \DB::table('order_details')
+                                  ->where('product_id', $product->id)
+                                  ->where('variant', $variant->variant)
+                                  ->first();
+
+                              if ($qt_buy != null) {
+                                  $buy = $qt_buy->quantity;
+                              } else {
+                                  $buy = 0;
+                              }
+                            @endphp
+                            <td>{{ $buy }}</td>
+                            <td>{{ $variant->variant_quantity - $buy }}</td>
+                            <td>
+                              @if ($variant->variant_quantity - $buy <= 0)
+                                <button class="btn btn-danger rounded-0">Hết hàng</button>
+                              @else
+                                <button class="btn btn-success rounded-0">Còn hàng</button>
+                              @endif
+                            </td>
+                            <td><button type="button" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"
+                                data-toggle="modal" data-target="#exampleModal{{ $variant->id }}">
+                                <i class="fa fa-shopping-cart"></i> Nhập kho
+                              </button></td>
+                          </tr>
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal{{ $variant->id }}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">{{ $variant->variant }}</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="{{ route('products.editwarehouse', $variant->id) }}" method="post"
+                                    enctype="multipart/form">
+                                    @csrf
+                                    <div class="form-group">
+                                      <input type="number" name="variant_quantity" id="" class="form-control rounded-0">
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">
+                                      <i class="fa fa-shopping-cart"></i> Nhập kho
+                                    </button>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        @endforeach
+                      @else
                         <tr>
                           <td>{{ $product->product_name }}</td>
-                          <td>{!! str_replace('-', '<br>', $variant->variant) !!}</td>
-                          <td>{{ $variant->variant_quantity }}</td>
+                          <td>
+                            {{ $product->sku }}
+                          </td>
+                          <td>
+                            @if ($product->quantity == null)
+                              0
+                            @else
+                              {{ $product->quantity }}
+                            @endif
+                          </td>
                           @php
                             $qt_buy = \DB::table('order_details')
                                 ->where('product_id', $product->id)
-                                ->where('variant', $variant->variant)
                                 ->first();
-
                             if ($qt_buy != null) {
                                 $buy = $qt_buy->quantity;
                             } else {
@@ -47,46 +112,47 @@
                             }
                           @endphp
                           <td>{{ $buy }}</td>
-                          <td>{{ $variant->variant_quantity - $buy }}</td>
+                          <td>{{ $product->quantity - $buy }}</td>
                           <td>
-                            @if ($variant->variant_quantity - $buy <= 0)
+                            @if ($product->quantity - $buy <= 0)
                               <button class="btn btn-danger rounded-0">Hết hàng</button>
                             @else
                               <button class="btn btn-success rounded-0">Còn hàng</button>
                             @endif
                           </td>
-                          <td><button type="button" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5"
-                              data-toggle="modal" data-target="#exampleModal{{ $variant->id }}">
+                          <td>
+                            <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
+                              data-target="#exampleModal{{ $product->id }}">
                               <i class="fa fa-shopping-cart"></i> Nhập kho
-                            </button></td>
-                        </tr>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal{{ $variant->id }}" tabindex="-1" role="dialog"
-                          aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ $variant->variant }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form action="{{ route('products.editwarehouse', $variant->id) }}" method="post"
-                                  enctype="multipart/form">
-                                  @csrf
-                                  <div class="form-group">
-                                    <input type="number" name="variant_quantity" id="" class="form-control rounded-0">
+                            </button>
+                            <div class="modal fade" id="exampleModal{{ $product->id }}" tabindex="-1" role="dialog"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ $product->product_name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
                                   </div>
-                                  <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">
-                                    <i class="fa fa-shopping-cart"></i> Nhập kho
-                                  </button>
-                                </form>
+                                  <div class="modal-body">
+                                    <form action="{{ route('products.editquantity', $product->id) }}" method="post"
+                                      enctype="multipart/form">
+                                      @csrf
+                                      <div class="form-group">
+                                        <input type="number" name="quantity" id="" class="form-control rounded-0">
+                                      </div>
+                                      <button type="submit" class="btn btn-success btn-flat btn-addon m-b-10 m-l-5">
+                                        <i class="fa fa-shopping-cart"></i> Nhập kho
+                                      </button>
+                                    </form>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      @endforeach
+                          </td>
+                        </tr>
+                      @endif
                     @else
                       <tr>
                         <td>{{ $product->product_name }}</td>
@@ -94,7 +160,11 @@
                           {{ $product->sku }}
                         </td>
                         <td>
-                          {{ $product->quantity }}
+                          @if ($product->quantity == null)
+                            0
+                          @else
+                            {{ $product->quantity }}
+                          @endif
                         </td>
                         @php
                           $qt_buy = \DB::table('order_details')
@@ -110,17 +180,17 @@
                         <td>{{ $product->quantity - $buy }}</td>
                         <td>
                           @if ($product->quantity - $buy <= 0)
-                          <button class="btn btn-danger rounded-0">Hết hàng</button>
+                            <button class="btn btn-danger rounded-0">Hết hàng</button>
                           @else
-                          <button class="btn btn-success rounded-0">Hết hàng</button>
+                            <button class="btn btn-success rounded-0">Còn hàng</button>
                           @endif
                         </td>
                         <td>
                           <button class="btn btn-success btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
-                            data-target="#exampleModal">
+                            data-target="#exampleModal{{ $product->id }}">
                             <i class="fa fa-shopping-cart"></i> Nhập kho
                           </button>
-                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                          <div class="modal fade" id="exampleModal{{ $product->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">

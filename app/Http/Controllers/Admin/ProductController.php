@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Cart;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
@@ -633,7 +634,39 @@ class ProductController extends Controller
    */
   public function destroy($id)
   {
-    Product::find($id)->delete();
+
+    $product = Product::find($id);
+
+    if($product->variants != null){
+      foreach ($product->variants() as $key => $variant) {
+        $variant->delete();
+      }
+    }else{
+
+    }
+
+    $array_flash = [];
+    if($product->flash_deals != null){
+      foreach ($product->flash_deals as $key => $flash_deals) {
+        array_push($array_flash, $flash_deals->id);
+
+      }
+      $product->flash_deals()->detach($array_flash);
+    }else{
+
+    }
+
+
+    if(count(Cart::where('product_id', $product->id)->get()) > 0){
+      Toastr::error('Sản phẩm đang còn trong giỏ hàng, không thể xóa', 'Rất tiếc');
+    }
+
+    if(DB::table('order_details')->where('product_id', $product->id)->get() != null){
+      Toastr::error('Thất bại', 'Rất tiếc');
+    }
+
+    $product->delete();
+    Toastr::success('Xóa sản phẩm thành công','Chúc mừng');
     return redirect()->back()->with('message', 'Xóa sản phẩm thành công');
   }
 
@@ -701,7 +734,6 @@ class ProductController extends Controller
 
   public function inventory(){
     $products = Product::all();
-
     return view('admin.products.Inventory', compact('products'));
   }
 }

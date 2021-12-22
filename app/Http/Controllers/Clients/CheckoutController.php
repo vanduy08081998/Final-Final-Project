@@ -155,7 +155,6 @@ class CheckoutController extends Controller
         if (!$promocode) {
             return response()->json(['error' => 'Mã giảm giá không trùng khớp']);
         } else {
-
             if($promocode->discount_limit <= 0){
                 return response()->json(['error' => 'Mã giảm giá đã hết số lượng', 'promocode' => $promocode]);
             }else{
