@@ -1,4 +1,4 @@
-<h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Thông tin giao hàng</h2>
+<h2 class="h6 pt-1 pb-3 mb-3 border-bottom col-12">Thông tin giao hàng</h2>
 @php
 use App\Models\Cart;
 @endphp
@@ -9,8 +9,8 @@ use App\Models\Cart;
       <section class="col-lg-12">
         <div class="align-middle add-ship mb-3">
           <a class="add-shipping button-action" data-action="add" data-bs-toggle="modal" style="cursor: pointer"
-            data-bs-target="#addressModal"><i class="fa fa-plus fa-lg aria-hidden"></i> Thêm
-            địa chỉ mới</a>
+            data-bs-target="#addressModal"><i class="fa fa-plus fa-lg aria-hidden"></i> Thêm địa chỉ mới
+          </a>
         </div>
         @if (session('message'))
           <div class="alert alert-success" role="alert">
@@ -22,7 +22,7 @@ use App\Models\Cart;
           <table class="table table-hover mb-0">
             <tbody>
               @if ($shipping_default)
-                <tr class="table-dark">
+                <tr class="table-dark form-address-default">
                   <td class="py-3 align-middle">
                     <i class="bi bi-check2-circle"></i>
                     <p>
@@ -82,12 +82,17 @@ use App\Models\Cart;
           </div>
         @else
           <div class="row">
-            <div class="col-md-6 mt-3">
+            <div class="col-md-6 mt-3 btn-checkout-btn">
               <button class="btn btn-primary">Chuyển đến bước tiếp theo &rarr;</button>
             </div>
           </div>
           @endif
         </form>
+        <div class="row">
+          <div class="col-md-6 mt-3 btn-checkout-btn">
+            <a href="{{ route('cart.cart-list') }}"><button class="btn btn-danger">&larr; Quay lại trang trước</button></a>
+          </div>
+        </div>
       </section>
     </div>
   </div>

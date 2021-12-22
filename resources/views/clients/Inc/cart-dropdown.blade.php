@@ -1,6 +1,6 @@
-<a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span
+<a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{{ route('cart.cart-list') }}"><span
     class="navbar-tool-label cart-count">{{ count($cart) }}</span><i class="navbar-tool-icon ci-cart"></i></a><a
-  class="navbar-link-dropdown" href="shop-cart.html"><small>Giỏ hàng</small></a>
+  class="navbar-link-dropdown" href="{{ route('cart.cart-list') }}"><small>Giỏ hàng</small></a>
 <!-- Cart dropdown-->
 <div class="dropdown-menu dropdown-menu-end">
   <div class="widget widget-cart px-3 pt-2 pb-3" style="width: 20rem;">

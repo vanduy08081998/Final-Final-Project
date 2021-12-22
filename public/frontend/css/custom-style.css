@@ -4,6 +4,10 @@
     }
 }
 
+body {
+    background-color: #e7edf3;
+}
+
 /* banner */
 .banner {
     padding-bottom: 0px !important;
@@ -768,11 +772,18 @@ button.carousel-control-next.show-next {
     }
 }
 
+    .fw-normal {
+        font-weight: 600 !important;
+    }
+
 @media screen and (max-width: 600px) {
     body {
         max-width: 100%;
+        background-color: #fff;
     }
-
+    .product-card .card-body {
+        margin-bottom: 0 !important;
+    }
     .topbar {
         width: 100% !important;
     }
@@ -787,7 +798,7 @@ button.carousel-control-next.show-next {
     }
 
     .handheld-toolbar {
-        width: 100%;
+        max-width: 100%;
     }
 
    .navbar-brand>img {
@@ -795,7 +806,7 @@ button.carousel-control-next.show-next {
    }
 
    .navbar .container .navbar-brand {
-       padding-left: calc(100% - 60%)!important;
+       padding-left: calc(100% - 65%)!important;
     }
 
    .navbar-sticky {
@@ -959,6 +970,51 @@ button.carousel-control-next.show-next {
         width: 100% !important;
         margin-left: 0% !important;
     }
+
+    #content-wrapper .lSPager {
+        margin-left: calc(100% - 73%) !important;
+        margin-top: 20px !important;
+    }
+
+    ._314-2d0405 {
+        flex-direction: column !important;
+    }
+
+    ._314-65a424 {
+        display: block;
+    }
+
+    .content-review {
+        display: contents !important;
+    }
+
+    #cart_0 {
+        padding-top: 25px !important;
+    }
+
+    .form-quantity {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-checkout-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .box-checkout-review {
+        margin-bottom: 120px !important;
+    }
+
+    .checkout-success::before {
+        margin-left: 7% !important;
+        margin-top: 15px !important;
+    }
+
+    .form-address-default {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 1280px) {
@@ -1021,7 +1077,7 @@ button.carousel-control-next.show-next {
         display: none;
     }
     .navbar .container .navbar-brand {
-        padding-left: calc(100% - 60%)!important;
+        padding-left: calc(100% - 60%);
     }
     .nav-slider {
         padding-left: 0px !important;
