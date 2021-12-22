@@ -11,16 +11,16 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i
-                                    class="ci-home"></i>Home</a></li>
-                        <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
-                        </li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">Checkout</li>
+                      <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('clients.index') }}"><i class="ci-home"></i>Trang chủ</a>
+                      </li>
+                      <li class="breadcrumb-item text-nowrap"><a href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}">Cửa hàng</a>
+                      </li>
+                      <li class="breadcrumb-item text-nowrap active" aria-current="page">Thanh toán</li>
                     </ol>
-                </nav>
+                  </nav>
             </div>
             <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-                <h1 class="h3 text-light mb-0">Checkout</h1>
+                <h1 class="h3 text-light mb-0 mb-xs-5">Thanh toán thành công</h1>
             </div>
         </div>
     </div>
@@ -28,30 +28,17 @@
         <div class="row">
             <section class="col-lg-8">
                 <!-- Steps-->
-                <div class="steps steps-light pt-2 pb-3 mb-5"><a class="step-item active" href="shop-cart.html">
-                        <div class="step-progress"><span class="step-count">1</span></div>
-                        <div class="step-label"><i class="ci-cart"></i>Cart</div>
-                    </a><a class="step-item active" href="checkout-details.html">
-                        <div class="step-progress"><span class="step-count">2</span></div>
-                        <div class="step-label"><i class="ci-user-circle"></i>Details</div>
-                    </a><a class="step-item active" href="checkout-shipping.html">
-                        <div class="step-progress"><span class="step-count">3</span></div>
-                        <div class="step-label"><i class="ci-package"></i>Shipping</div>
-                    </a><a class="step-item active" href="checkout-payment.html">
-                        <div class="step-progress"><span class="step-count">4</span></div>
-                        <div class="step-label"><i class="ci-card"></i>Payment</div>
-                    </a><a class="step-item active current" href="checkout-review.html">
-                        <div class="step-progress"><span class="step-count">5</span></div>
-                        <div class="step-label"><i class="ci-check-circle"></i>Review</div>
-                    </a></div>
+                <div class="steps steps-light pt-2 pb-3 mb-5">
+                    @include('clients.Inc.checkout-bar')
+                </div>
                 <!-- Order details-->
         </div>
     </div>
     <div class="container pb-5 mb-2 mb-md-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="box">
-                    <div class="success alert">
+                <div class="box box-checkout-review">
+                    <div class="success alert checkout-success">
                         <div class="alert-body">
                             Thanh toán thành công
                             <p><strong>Cảm ơn bạn đã đặt hàng của BigDeal</strong></p>

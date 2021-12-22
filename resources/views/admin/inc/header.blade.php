@@ -3,8 +3,8 @@
 
     <!-- Logo -->
     <div class="header-left">
-        <a href="{{route('admin.index')}}" class="logo">
-            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="45" style="margin-left: -35px;"
+        <a href="{{ url('admin') }}" class="logo">
+            <img src="{{ URL::to('backend/img/logo.png') }}" width="150" height="45" style="margin-left: -10px; margin-top: 8px;"
                 alt="">
         </a>
     </div>
@@ -36,7 +36,7 @@
     <a id="mobile_btn" class="mobile_btn" href="#sidebar" style="margin-top: 10px"><i class="fa fa-bars"></i></a>
 
     <!-- Header Menu -->
-    <ul class="nav user-menu"> 
+    <ul class="nav user-menu">
         @if (Auth::user())
             <li class="nav-item dropdown has-arrow main-drop">
                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">

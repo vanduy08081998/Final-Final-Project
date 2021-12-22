@@ -94,8 +94,6 @@ $infor = Information::orderByDESC('id')
             </div>
         </div>
       </div>
-    </div>
-    <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
@@ -226,7 +224,7 @@ $infor = Information::orderByDESC('id')
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-2">
-                                                                    <a class="widget-list-link" href="#">
+                                                                    <a class="widget-list-link" href="{{ route('shop.products_brand', $brand->brand_slug) }}">
                                                                         <img src="{{ url($brand->brand_image) }}"
                                                                             height="100px" width="80px">
                                                                     </a>

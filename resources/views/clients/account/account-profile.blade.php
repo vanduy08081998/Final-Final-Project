@@ -27,7 +27,7 @@
 <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
         <!-- Sidebar-->
-        @include('Clients.Inc.account-sidebar')
+        @include('clients.Inc.account-sidebar')
         <!-- Content  -->
         <section class="col-lg-8">
             <!-- Toolbar-->
