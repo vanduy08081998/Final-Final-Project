@@ -93,36 +93,6 @@ $infor = Information::orderByDESC('id')
             </div>
         </div>
       </div>
-      <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="topbar-text dropdown d-md-none ms-auto">
-        <a class="topbar-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Yêu thích / So sánh / Đơn hàng</a>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            @if ($wishlist == null && Auth::user == null)
-              <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                <i class="ci-heart mt-n1"></i>Yêu thích (0)
-              </a>
-            @elseif ($wishlist != NULL && Auth::user())
-              <a class="topbar-link d-none d-md-inline-block" href="{{ route('account.wishlist') }}">
-                <i class="ci-heart mt-n1"></i>Yêu thích <span class="count_wishlist"></span>
-                {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
-              </a>
-            @endif
-          </li>
-          <li>
-            <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" style="cursor: pointer" onclick="show()"><i class="ci-compare mt-n1"></i>So sánh
-              </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="{{ route('account.order-tracking') }}">
-              <i class="ci-location text-muted me-2"></i>Theo dõi đơn hàng
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div data-url="{{ route('wishlist.show_icon_wishlist') }}"
-        class="count-wishlist d-none d-md-block ms-3 text-nowrap">
-
-      </div>
     </div>
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">
@@ -140,7 +110,6 @@ $infor = Information::orderByDESC('id')
                     id="choice-form">
                     @csrf
                     @method('POST')
-
                     <input class="form-control rounded-start w-100 search-input"
                         style="border-radius: 25px 0 0 25px !important;" name="key" id="search" type="text"
                         placeholder="Tìm kiếm sản phẩm" required>
@@ -210,20 +179,19 @@ $infor = Information::orderByDESC('id')
                             </div>
                         </div>
                     @else
-                        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
-                            <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                                <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                            </a>
-                        </div>
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
+                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                        </a>
+                    </div>
                     @endif
                     <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                         <div class="navbar-tool dropdown ms-3 cart__dropdown">
-
+                          {{-- cart dropdown --}}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
