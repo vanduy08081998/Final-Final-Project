@@ -62,12 +62,14 @@ class CommentLive extends Component
         Comment::create($data);
         // Gửi thông báo đến người được trả lời
         $service = new NotificationService();
-        $service->store(Comment::find($comment_reply_id)->comment_id_user, $this->product->id, 'comment', Auth::user()->name);
         // Nếu người phản hồi là admin thì chuyển trạng thái của comment này thành đã được phản hồi.
         if(Auth::user()->position == 'admin'){
             Comment::find($comment_reply_id)->update([
                 'comment_admin_feedback' => 1
             ]);
+            $service->store(Comment::find($comment_reply_id)->comment_id_user, $this->product->id, 'comment', 'BigDeal');
+        }else{
+            $service->store(Comment::find($comment_reply_id)->comment_id_user, $this->product->id, 'comment', Auth::user()->name);
         }
         $this->emit('render');
 

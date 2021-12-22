@@ -17,15 +17,15 @@ class GoogleAnalytics extends Component
     public function render()
     { 
         if($this->sort_google == 'today'){
-            $date = 0;
-        }elseif($this->sort_google == 'yesterday'){
             $date = 1;
+        }elseif($this->sort_google == 'yesterday'){
+            $date = 2;
         }elseif($this->sort_google == 'week'){
-            $date = 7;
+            $date = 8;
         }elseif($this->sort_google == 'month'){
             $date = 30;
         }else{
-            $date = 0;
+            $date = 1;
         }
         $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days($date));
         return view('livewire.google-analytics')->with(compact('analyticsData'));

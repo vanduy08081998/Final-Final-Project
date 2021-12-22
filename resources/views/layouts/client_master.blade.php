@@ -42,6 +42,11 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/product-details-custom.css') }}">
 
+    <link href="{{ asset('frontend/css/lightgallery.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/lightslider.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/prettify.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/owl.carousel.min.css') }}" rel="stylesheet">
+
     @livewireStyles
     @livewireScripts
     @routes
@@ -238,8 +243,33 @@
     <script src="{{ asset('frontend/js/compare.js') }}"></script>
     <script src="{{ asset('frontend/js/quickview.js') }}"></script>
     <script src="{{ asset('frontend/js/productdetails.js') }}"></script>
-    <script src="{{ asset('frontend/js/noel.js') }}"></script>
+   
 
+    <script src="{{ asset('frontend/js/lightgallery-all.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/lightslider.js') }}"></script>
+    <script src="{{ asset('frontend/js/prettify.js') }}"></script>
+    <script>
+     $(document).ready(function () {
+        $('#imageGallery').lightSlider({
+            gallery: true,
+            item: 1,
+            loop: true,
+            thumbItem: 9,
+            // slideMargin: 0,
+            // auto: true,
+            // speed: 1500,
+            freeMove: true,
+            mode: false,
+            enableDrag: false,
+            currentPagerPosition: 'left',
+            onSliderLoad: function (el) {
+                el.lightGallery({
+                    selector: '#imageGallery .lslide'
+                });
+            }
+        });
+    });
+    </script>
     <script>
         $('.input-images-1').imageUploader();
     </script>

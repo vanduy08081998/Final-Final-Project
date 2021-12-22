@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::latest()->get();
         $delivery_viewed = DB::table('delivery_viewed')->get();
         return view('admin.orders.index', compact('orders', 'delivery_viewed'));
     }
@@ -94,7 +94,7 @@ class OrderController extends Controller
     public function paymentStatus(Request $request){
         $order = Order::where('id',$request->id)->update(['payment_status' => $request->value]);
         $order = Order::where('id',$request->id)->first();
-        $order_details = $order->order_details;
+        $order_details = $order->detail;
  
         if($order->payment_status == 'Confirmed'){
             $total_order = 0;
@@ -120,7 +120,7 @@ class OrderController extends Controller
                 $statistic_new = new Statistical();
                 $statistic_new->order_date = $order_date;
                 $statistic_new->sales = $order->grand_total;
-                $statistic_new->quantity = $order->order_details->sum('quantity');
+                $statistic_new->quantity = $order->detail->sum('quantity');
                 $statistic_new->total_order = 1;
                 $statistic_new->save();
             }

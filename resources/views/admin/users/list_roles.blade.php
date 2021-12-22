@@ -9,14 +9,11 @@
 
 
     <div class="content container-fluid">
-
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Danh sách vai trò'])
-
         <div class="row">
-
             <div class="col-sm-12">
                 <div class="card mb-0 ">
                     <div class="card-body">
+                        <h4 class="text-primary mb-2">Danh sách vai trò: </h4>
                         @if (session('message'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('message') }}

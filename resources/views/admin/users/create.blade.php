@@ -7,13 +7,14 @@ Thêm tài khoản
 @section('content')
 
 <div class="content container-fluid">
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Thêm tài khoản nhân viên'])
     <div class="row">
         <div class="col-sm-12">
             <div class="card radius-15">
                 <div class="card-body border-lg-top-danger">
                     <div class="card-body p-1">
                         <div class="form-body">
+                            <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
+                            <h4 class="text-primary mb-3">Thêm tài khoản nhân viên</h4>
                             @if (session('message'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('message') }}

@@ -55,7 +55,23 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ],
+    [
+        'name.required' => 'Họ và tên không được để trống!',
+        'name.string' => 'Họ và tên không hợp lệ!',
+        'name.max' => 'Họ và tên không được quá 255 ký tự!',
+        'email.required' => 'Email không được để trống!',
+        'email.string' => 'Email không hợp lệ!',
+        'email.email' => 'Email không đúng định dạng!',
+        'email.max' => 'Email không được quá 255 ký tự!',
+        'email.unique' => 'Email đã tồn tại!',
+        'password.required' => 'Mật khẩu được để trống!',
+        'password.string' => 'Mật khẩu không hợp lệ!',
+        'password.min' => 'Mật khẩu phải lớn hơn 8 ký tự!',
+        'password.confirmed' => 'Xác nhận mật khẩu không khớp!'
+
+    ]);
+        
         
     }
 
@@ -67,15 +83,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $detail = [
-            'fullname' => 'Bigdeal Store',
-            'phone' => null,
-            'email' => 'Bigdealdn@gmail.com',
-            'title' => 'Đăng ký tài khoản thành công !',
-            'message' => 'Chúc bạn mua sắm vui vẻ với BigDeal',
-            'day_send' => date("d/m/Y"),
-        ];
-        Mail::to($data['email'])->send(new SendMail($detail));
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
