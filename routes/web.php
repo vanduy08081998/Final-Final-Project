@@ -100,7 +100,6 @@ Route::prefix('/')->group(function () {
         Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
         Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
         Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
   });

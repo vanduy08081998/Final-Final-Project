@@ -275,8 +275,6 @@
                     <span>{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-user-admin">
-                    <a class="dropdown-item" href="profile.html"><i class="far fa-user-circle"></i> My Profile</a>
-                    <a class="dropdown-item" href="settings.html"><i class="fas fa-user-cog"></i> Settings</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="dropdown-item" type="submit"><i class="fas fa-sign-out-alt"></i> Đăng

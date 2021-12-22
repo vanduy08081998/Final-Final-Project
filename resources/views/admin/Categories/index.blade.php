@@ -30,14 +30,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $key => $value)
-                                        @include('admin.Categories.category_indexRows', ['value' => $value])
+                                        @include('admin.categories.category_indexRows', ['value' => $value])
 
                                         @foreach ($value->subcategory()->get() as $childCategory)
-                                            @include('admin.Categories.category_indexRows', ['value' => $childCategory,
+                                            @include('admin.categories.category_indexRows', ['value' => $childCategory,
                                             'prefix' => '--'])
 
                                             @foreach ($childCategory->subcategory()->get() as $childCategory2)
-                                                @include('admin.Categories.category_indexRows', ['value' => $childCategory2,
+                                                @include('admin.categories.category_indexRows', ['value' => $childCategory2,
                                                 'prefix' => '----'])
                                             @endforeach
                                         @endforeach
