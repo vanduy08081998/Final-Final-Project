@@ -207,6 +207,19 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center text-danger font-weight-bold mb-4">Dữ liệu khách truy cập và số lần xem trang</h3>
+                        <div style="" class="product_statistical mt-4">
+                            @livewire('google-analytics')
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="embed-api-auth-container"></div>
         <div id="chart-container"></div>
         <div id="view-selector-container"></div>

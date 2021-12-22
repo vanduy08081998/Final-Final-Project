@@ -70,7 +70,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.Categories.edit', compact('category'));
     }
 
     /**
@@ -84,7 +84,7 @@ class CategoryController extends Controller
     {
         Category::find($id)->update($request->all());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('Categories.index');
     }
 
     /**

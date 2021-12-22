@@ -42,7 +42,8 @@ $infor = Information::orderByDESC('id')
             <div>
                 <div class="topbar-text text-nowrap d-none d-md-inline-block border-light">
                     <span class="text-muted me-1">Tư vấn 24/7: </span>
-                    <a class="topbar-link" href="tel:{{ $infor->phone }}"><i class="ci-phone text-primary"></i> {{ $infor->phone }}</a>
+                    <a class="topbar-link" href="tel:{{ $infor->phone }}"><i class="ci-phone text-primary"></i>
+                        {{ $infor->phone }}</a>
                 </div>
             </div>
             <div data-url="{{ route('wishlist.show_icon_wishlist') }}" class="topbar-text dropdown d-md-none ms-auto">
@@ -84,15 +85,15 @@ $infor = Information::orderByDESC('id')
                         {{-- ({{ Wishlist::orderByDESC('id')->where('id_user', Auth::user()->id)->count() }}) --}}
                     </a>
                 @endif
-                <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block"
-                    href="comparison.html"><i class="ci-compare mt-n1"></i>So sánh
+                <a class="topbar-link ms-3 ps-3 border-start border-light d-none d-md-inline-block" style="cursor: pointer" onclick="show()">
+                    <i class="ci-compare mt-n1"></i>So sánh
                 </a>
                 <a class="topbar-link ms-3 border-start border-light ps-3 d-none d-md-inline-block"
                     href="{{ route('account.order-list') }}"><i class="ci-location mt-n1"></i>Theo dõi đơn hàng
                 </a>
             </div>
         </div>
-      </div>
+    </div>
     </div>
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">
@@ -179,16 +180,16 @@ $infor = Information::orderByDESC('id')
                             </div>
                         </div>
                     @else
-                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
-                        <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
-                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
-                            <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
-                        </a>
-                    </div>
+                        <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center user-icon">
+                            <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="{{ route('login') }}">
+                                <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-user"></i></div>
+                                <div class="navbar-tool-text ms-n3"><small>Đăng nhập / Đăng ký</small>Tài khoản</div>
+                            </a>
+                        </div>
                     @endif
                     <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                         <div class="navbar-tool dropdown ms-3 cart__dropdown">
-                          {{-- cart dropdown --}}
+                            {{-- cart dropdown --}}
                         </div>
                     </div>
                 </div>
