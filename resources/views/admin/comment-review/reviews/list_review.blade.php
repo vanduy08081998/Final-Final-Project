@@ -9,19 +9,6 @@
         <!--page-content-wrapper-->
         <div class="page-content-wrapper">
             <div class="page-content">
-                <!--breadcrumb-->
-                <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
-                    <div class="breadcrumb-title pr-3">Sản phẩm</div>
-                    <div class="pl-3">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0 p-0">
-                                <li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">Đánh giá sản phẩm</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
                 <div class="card">
                     <form action="#" method="POST">
                         @csrf
@@ -54,7 +41,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="text-danger" style="font-size: 18px;">{{ $product->rating }} </span>
+                                                    <span class="text-danger font-weight-bold" style="font-size: 16px;">{{ $product->rating }} </span>
                                                     @for ($count = 1; $count <= round($product->rating); $count++)
                                                         <i class="fa fa-star fs-ms text-warning me-1"></i>
                                                     @endfor
@@ -62,8 +49,13 @@
                                                         <i class="fa fa-star-o fs-ms text-warning me-1"></i>
                                                     @endfor
                                                 </td>
-                                                <td class="text-center">
-                                                    {{ $product->count_review }} lượt đánh giá
+                                                <td class="text-center text-primary font-weight-bold">
+                                                    {{ $product->count_review }} lượt đánh giá <br>
+                                                    @foreach($product->reviews as $review)
+                                                          @if($review->review_status == null)
+                                                          <span class="text-danger">(Chờ duyệt)</span>
+                                                          @endif
+                                                    @endforeach
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

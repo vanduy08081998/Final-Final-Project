@@ -549,3 +549,6 @@
     </div>
   </section>
 @endsection
+@push('script')
+<script src="{{ asset('frontend/js/noel.js') }}"></script>
+@endpush

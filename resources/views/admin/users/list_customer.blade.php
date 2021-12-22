@@ -9,15 +9,13 @@
     <!-- Page Wrapper -->
 
     <div class="content container-fluid">
-
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Danh sách khách hàng'])
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
                     <div class="card-body">
                         <div class="card-title">
-                            <a href="{{ route('customer_trash') }}" class="btn btn-warning">Thùng rác
+                            <h4 class="mb-2 d-inline">Danh sách khách hàng</h4>
+                            <a href="{{ route('customer_trash') }}" class="btn btn-warning float-right">Thùng rác
                                 ({{ $countTrashed }})</a>
                             <hr />
                         </div>

@@ -100,7 +100,6 @@ Route::prefix('/')->group(function () {
         Route::get('/account-review', [AccountController::class, 'accountReview'])->name('account.account-review');
         Route::get('/account-notification', [AccountController::class, 'notification'])->name('account.notification');
         Route::get('/account-address', [AccountController::class, 'accountAddress'])->name('account.account-address');
-        Route::get('/account-payment', [AccountController::class, 'accountPayment'])->name('account.account-payment');
         Route::post('change-profile-picture', [AccountController::class, 'crop'])->name('crop');
         Route::post('/select-address', [ShippingController::class, 'select_address'])->name('select-address');
   });
@@ -306,8 +305,6 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::get('/product/{id}/review', [ReviewAdmin::class, 'productReview'])->name('product.review');
 });
-
- });
 //Thống kê
 Route::post('/days-order',  [HomeController::class, 'days_order'])->name('days_order');
 Route::post('/filter-by-date',  [HomeController::class, 'filter_by_date'])->name('filter_by_date');
@@ -318,6 +315,7 @@ Route::post('/chart_product_max',  [HomeController::class, 'chart_product_max'])
 Route::post('/filter-by-date-product',  [HomeController::class, 'filter_by_date_product'])->name('filter_by_date_product');
 Route::post('/dashboard-filter-product',  [HomeController::class, 'dashboard_filter_product'])->name('dashboard_filter_product');
 
+ });
 
 
 //paypal
@@ -330,7 +328,7 @@ Route::get('/impersonate-destroy', [UserController::class, 'impersonate_destroy'
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeClient::class, 'index'])->name('home');
 
 //Login Google
 Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');

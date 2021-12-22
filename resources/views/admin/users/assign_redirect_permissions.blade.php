@@ -7,7 +7,6 @@
 @section('content')
 
     <div class="content container-fluid">
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'QUẢN LÝ QUYỀN TRỰC TIẾP'])
         <div class="row">
             <div class="col-sm-12">
                 <div class="card radius-15">
@@ -19,6 +18,7 @@
                                         {{ session('message') }}
                                     </div>
                                 @endif
+                                <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
                                 <h4 class="text-primary">Cấp quyền trực tiếp cho nhân viên:
                                     <button class="btn btn-danger"><strong style="text-transform:uppercase">
                                             <i class="bi bi-person-check"></i>
@@ -28,7 +28,7 @@
 
                                 <form action="{{ route('assign_redirect_permissions', [$user->id]) }}" method="post">
                                     @csrf
-                                    <div class="row">
+                                    <div class="row pl-3">
                                         @foreach ($all_permissions as $key => $per)
                                             @if ($per->parent == 0)
 

@@ -7,13 +7,13 @@ Thêm tài khoản
 @section('content')
 
 <div class="content container">
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Cập nhật tài khoản nhân
-    viên'])
     <div class="row">
         <div class="col-sm-12">
             <div class="card radius-15">
                 <div class="card-body border-lg-top-danger">
                     <div class="card-body p-1">
+                        <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
+                        <h4 class="text-primary mb-3">Cập nhật tài khoản nhân viên</h4>
                         <div class="form-body">
                             @if (session('message'))
                             <div class="alert alert-success" role="alert">

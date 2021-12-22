@@ -7,8 +7,6 @@ Thêm tài khoản
 @section('content')
 
 <div class="content container-fluid">
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'QUẢN LÝ VAI TRÒ CHO TÀI
-    KHOẢN'])
     <div class="row">
         <div class="col-sm-12">
             <div class="card radius-15">
@@ -20,6 +18,7 @@ Thêm tài khoản
                                 {{ session('message') }}
                             </div>
                             @endif
+                            <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
                             <h3 class="text-danger">Cấp vai trò cho tài khoản: <strong class="text-primary">{{$user->name}}</strong></h3>
                             <hr>
                             <h4 class="text-dark">Vai trò hiện tại:

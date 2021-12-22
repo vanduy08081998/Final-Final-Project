@@ -62,7 +62,7 @@
                                         </div>
                                     </a>
                                     <div class="time">
-                                        <em> {{ $item->created_at->diffForHumans() }}</em>
+                                        <em>Lúc {{ $item->created_at->diffForHumans() }}</em>
                                     </div>
                                 </div>
                                 <div class="content-handle">
@@ -83,15 +83,8 @@
                                     <a class="text-dark" wire:click="deleted({{ $item->id }})"
                                         href="{{ route('account.order-list') }}">
 
-                                        @foreach ($item->status as $status)
-                                            @if ($status->delivery_viewed == 6)
-                                                <strong>Đơn hàng</strong> của bạn <em
-                                                    class="text-danger">{{ $status->delivery_description }}</em>
-                                            @else
-                                                <strong>Đơn hàng</strong> của bạn <em
-                                                    class="text-info">{{ $status->delivery_description }}</em>
-                                            @endif
-                                        @endforeach
+                                        <strong>Đơn hàng</strong> của bạn <em
+                                        class="text-danger">{{ $item->order->status ? $item->order->status->delivery_description : 'đang chờ xử lý' }}</em>
 
                                         <div class="moving">
                                             <b>Mã đơn:</b> {{ $item->order->date }} &nbsp; <b>Ngày đặt:</b>

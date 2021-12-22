@@ -67,13 +67,6 @@ class AccountController extends Controller
         return view('clients.account.account-address')->with(compact('shipping_default','shipping_all'));
     }
 
-    public function accountPayment() {
-        if(!Auth::user()){
-            return redirect('/login');
-        }
-        return view('clients.account.account-payment');
-    }
-
     public function update_profile_customer(Request $request, $id)
     {
         $this->validate($request, [

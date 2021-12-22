@@ -79,11 +79,11 @@
                                                     @if ($value->admin_feedback == 1)
 
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button
-                                                                type="button" class="btn btn-info">Đã phản hồi</button>
+                                                                type="button" class="btn btn-info">Đã phản hồi ({{count($value->review_child)}})</button>
                                                         </a>
                                                     @else
                                                         <a href="{{ route('review-admin.reply', $value->id) }}"> <button
-                                                                type="button" class="btn btn-warning">Phản hồi</button>
+                                                                type="button" class="btn btn-warning">Phản hồi ({{count($value->review_child)}})</button>
                                                         </a>
                                                     @endif
                                                 </td>

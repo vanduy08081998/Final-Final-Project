@@ -140,8 +140,7 @@
                                         class="fs-md mb-2 review ms-1 text-review text-review-child-{{ $review_child->id }}">
                                         {{ $review_child->content_rating }}</p>
                                     <div class="text-nowrap d-flex flex-wrap">
-                                        <button class="btn btn-primary btn-review me-1"
-                                            wire:click.prevent="useful({{ $review_child->id }})"><i
+                                        <button disabled class="btn btn-primary btn-review me-1"><i
                                                 class="far fa-thumbs-up"></i>
                                             Hữu ích @if ($count_child_useful > 0)({{ $count_child_useful }}) @endif </button>
                                         <button class="btn btn-dark btn-time-review review-child me-1"

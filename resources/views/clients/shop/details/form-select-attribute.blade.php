@@ -7,40 +7,26 @@
       </h1>
   </div>
   <div class="row">
+
     <!-- Product gallery-->
     <div class="col-lg-4" id="content-wrapper">
-      <div class="box-gallery">
-        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-          class="swiper mySwiper2 gallery-slider ">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="{{ URL::to($product->product_image) }}" />
-            </div>
-            @forelse (explode(',', $product->product_gallery) as $item)
-              <div class="swiper-slide">
-                <img src="{{ URL::to($item) }}" />
-              </div>
-            @empty
-            @endforelse
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-        </div>
-        <div thumbsSlider="" class="swiper mySwiper gallery-thumbs" style="margin-top: 10px;">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="{{ URL::to($product->product_image) }}" />
-            </div>
-            @forelse (explode(',', $product->product_gallery) as $item)
-              <div class="swiper-slide">
-                <img src="{{ URL::to($item) }}" />
-              </div>
-            @empty
-            @endforelse
-          </div>
-        </div>
-      </div>
+      <ul id="imageGallery">
+        <li data-thumb="{{ URL::to($product->product_image) }}"
+        data-src="{{ URL::to($product->product_image) }}">
+        <img width="100%" src="{{ URL::to($product->product_image) }}" />
+    </li>
+        @forelse (explode(',', $product->product_gallery) as $item)
+        <li data-thumb="{{ URL::to($item) }}"
+            data-src="{{ URL::to($item) }}">
+            <img width="100%" src="{{ URL::to($item) }}" />
+        </li>
+        @empty
+        @endforelse
+    </ul>
+
     </div>
+
+
     <!-- Product details-->
     <div class="col-lg-4 pt-4 pt-lg-0">
       <div class="product-details ms-auto pb-3">
