@@ -17,13 +17,13 @@ use Auth;
 class AccountController extends Controller
 {
 
-   
     public function orderTracking($id) {
         if(!Auth::user()){
             return redirect('/login');
         }
         $order = Order::find($id);
-        return view('clients.account.order-tracking', compact('order'));
+        $ship = DB::table('shipping_method')->where('id', $order->shipping_status)->first();
+        return view('clients.account.order-tracking', compact('order', 'ship'));
     }
 
     public function wishlist() {
