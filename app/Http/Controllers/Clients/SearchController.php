@@ -24,6 +24,8 @@ class SearchController extends Controller
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');
         $cate = null;
+        $cate_id = null;
+        $on = 0;
         $products = Product::orderBy('id', 'asc')->get();
         $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
         $brands = Brand::orderBy('id', 'asc')->get();
@@ -36,7 +38,8 @@ class SearchController extends Controller
             'pro' => $pro,
             'category' => $categories,
             'brands' => $brands,
-            'id_cate' => 0
+            'id_cate' => $cate_id,
+            'on'=> $on
         ]);
     }
 

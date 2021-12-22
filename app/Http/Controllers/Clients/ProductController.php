@@ -85,7 +85,7 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
       'id_cate' => $cate_id,
-      'on'=>$on
+      'on'=> $on
     ]);
   }
 
