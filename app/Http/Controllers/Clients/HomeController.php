@@ -101,7 +101,8 @@ class HomeController extends Controller
     }
 
     public function feedback(Request $request){
-        $infors = Information::all();
+        $infor = Information::orderByDESC('id')
+        ->where('infor_status', 1)->first();
         $detail = [
             'fullname' => $request->fullname,
             'phone' => $request->phone,
@@ -112,7 +113,7 @@ class HomeController extends Controller
         ];
         Mail::to('bigdealdn@gmail.com')->send(new SendMail($detail));
         return view('clients.about.contact',[
-            'infors' => $infors
+            'infor' => $infor
         ]);
 
     }

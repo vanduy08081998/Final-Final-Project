@@ -30,6 +30,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Email gửi từ BigDeal-Store Online')->view('clients.about.sendMail');
+        return $this->subject('Email gửi từ BigDeal-Store Online')->view('clients.Mails.sendMail');
     }
 }
