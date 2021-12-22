@@ -213,7 +213,7 @@
                     <div class="card-body">
                         <h3 class="text-center text-danger font-weight-bold mb-4">Dữ liệu khách truy cập và số lần xem trang</h3>
                         <div style="" class="product_statistical mt-4">
-                            @livewire('google-analytics')
+                            {{-- @livewire('google-analytics') --}}
                         </div>
 
                     </div>

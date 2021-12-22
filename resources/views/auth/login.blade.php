@@ -23,7 +23,6 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form class="form_register form-horizontal form " role="form">
-            <!-- <form method="POST" action="{{ route('register') }}"> -->
             <h2 class="mt-4">Đăng ký</h2>
             <div class="social-container text-left">
                 <a href="{{route('login.facebook')}}" class="social facebook">
@@ -87,8 +86,6 @@
 
     <div class="form-container sign-in-container">
         <form class="form_login form-horizontal form" role="form">
-            <!-- <form action="" method="post" enctype="multipart/form-data">
-            @csrf -->
             <h2 class="mt-5">Đăng nhập</h2>
             <div class="social-container text-left">
                 <a href="{{route('login.facebook')}}" class="social facebook"><i
@@ -125,7 +122,6 @@
 
             </div>
 
-            <!-- <a href="{{ route('password.request') }}">Quên mật khẩu?</a> -->
             <div class="div_button">
                 <button class="mt-3 login" type="button">Đăng nhập</button>
             </div>
