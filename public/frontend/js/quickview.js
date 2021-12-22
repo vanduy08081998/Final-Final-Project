@@ -92,7 +92,7 @@ function quickviewModal(id) {
                             toastr.success(
                                 "Thêm giỏ hàng thành công",
                                 "Chúc mừng"
-                            );
+                            ); // Thông báo thêm giỏ hàng thành công
                             cartDropdown();
                         }
 
@@ -110,7 +110,7 @@ function quickviewModal(id) {
            $("._314-e778ac").countdown(date_end, function (event) {
                $(this).html(
                    event.strftime(
-                       'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+                       'Còn:&nbsp <span class="date">%D ngày</span> &nbsp <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
                    )
                );
            });

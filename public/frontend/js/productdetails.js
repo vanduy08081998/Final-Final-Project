@@ -70,11 +70,17 @@ const quantityCheck = (quantity) => {
 let flash_sale_end_date = $("._314-e778ac").attr("data-date");
 console.log(flash_sale_end_date);
 $("._314-e778ac").countdown(flash_sale_end_date, function (event) {
-    $(this).html(
-        event.strftime(
-            'Còn: <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
-        )
-    );
+    var $this = $(this);
+    if (event.elapsed) {
+        window.location.reload()
+    } else {
+        $this.html(
+            event.strftime(
+                'Còn:&nbsp <span class="date">%D ngày</span> &nbsp <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+            )
+        );
+    }
+
 });
 
 

@@ -251,7 +251,7 @@ use Carbon\Carbon;
                             </div>
                             <p class="fs-md mb-2 review">{{ $review->content_rating }}</p>
                             @if ($review->image)
-                                <div class="text-nowrap">
+                                <div class="text-nowrap content-review">
                                     @php
                                         $str = $review->image;
                                         $image_array = explode(',', $str);

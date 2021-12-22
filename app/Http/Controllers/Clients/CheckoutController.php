@@ -63,6 +63,7 @@ class CheckoutController extends Controller
         $options['name'] = auth()->user()->name;
         $options['email'] = $request->email;
         $options['address'] = $request->address;
+        $options['phone'] = $request->phone;
 
         if ($shipping_address != null) {
             $shipping_address = $options;

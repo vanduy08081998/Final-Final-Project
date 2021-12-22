@@ -78,7 +78,7 @@ Route::prefix('/')->group(function () {
         Route::post('/quickview', [ProductController::class, 'quickView'])->name('shop.quickview');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
         Route::get('/products-category/{category_slug}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
-        Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
+        Route::get('/products-brand/{slug}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
         Route::post('/short', [ProductController::class, 'productShort'])->name('clients.products.short');
         Route::post('/searchByCate', [ProductController::class, 'searchByCate'])->name('clients.products.searchbycate');
         Route::post('/searchByBrand', [ProductController::class, 'searchByBrand'])->name('clients.products.searchbybrand');

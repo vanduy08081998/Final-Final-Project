@@ -1,8 +1,14 @@
 @extends('layouts.client_master')
 
-
 @section('title', 'Danh sách sản phẩm')
 
+@section('meta')
+@foreach ($product as $item)
+    <meta name="description" content="{!! $item->meta_description !!}">
+    <meta name="keywords" content="{!! $item->meta_keywords !!}">
+    <meta name="author" content="{!! $item->meta_title !!}">
+@endforeach
+@endsection
 
 @section('content')
   <?php
@@ -90,7 +96,7 @@
                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1 category-name text-center"
                     href="#">{{ $pro->Category->category_name }}</a>
                   <h3 class="product-title fs-sm text-center"><a
-                      href="shop-single-v1.html">{{ Str::limit($pro->product_name, 30, '...') }}</a>
+                      href="{{ route('shop.product-details', $pro->product_slug) }}">{{ Str::limit($pro->product_name, 30, '...') }}</a>
                   </h3>
                   <div class="d-flex justify-content-between sale-price">
                     @if ($pro->discount != 0)
@@ -292,7 +298,7 @@
         url: "{{ route('clients.products.searchbybrand') }}",
         data: $('#form-search-brand').serializeArray(),
         success: function(response) {
-          console.log(response)
+           $('#product-short').html(response)
         }
       });
 
