@@ -15,7 +15,7 @@ class MailController extends Controller
             'title' => 'tiêu đề',
             'body' => 'nội dung'
         ];
-        Mail::to('nkokkenpro1995@gmail.com')->send(new SendMail($detail));
+        Mail::to('bigdealdn@gmail.com')->send(new SendMail($detail));
 
     }
 }
