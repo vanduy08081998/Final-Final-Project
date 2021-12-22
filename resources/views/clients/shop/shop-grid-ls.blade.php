@@ -298,7 +298,7 @@
         url: "{{ route('clients.products.searchbybrand') }}",
         data: $('#form-search-brand').serializeArray(),
         success: function(response) {
-          console.log(response)
+           $('#product-short').html(response)
         }
       });
 

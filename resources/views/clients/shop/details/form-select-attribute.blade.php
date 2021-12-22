@@ -207,7 +207,8 @@
                 {{ $product->vat }} %</span></a>
             </li>
             @if ($product->multiple_stock == 'on')
-              <li class="item-promotion general-promotion"><a href="#!"  style="color: red" ><strong>Sản phẩm số lượng lớn</strong></span></a>
+              <li class="item-promotion general-promotion"><a href="#!" style="color: red"><strong>Sản phẩm số lượng
+                    lớn</strong></span></a>
               </li>
             @else
 
@@ -313,10 +314,32 @@
       </button>
     </div>
     <div class="d-flex mb-4 btn-wishcom">
-      <div class="w-100 me-3">
-        <button class="btn btn-secondary d-block w-100" type="button"><i class="ci-heart fs-lg me-2"></i>
-          <span class='d-none d-sm-inline'>Thêm vào yêu thích</span>
-        </button>
+      <div class="w-100 me-3 text-center">
+        @if (Auth::user() != null)
+          <?php
+          $user = Auth::user()->id;
+          $wishlist = App\Models\Wishlist::orderByDESC('id')
+              ->where('id_prod', $product->id)
+              ->where('id_user', $user)
+              ->first();
+          ?>
+          @if ($wishlist != null)
+            <button class="btn-wishlist_{{ $product->id }} nav-link-style me-3" style="cursor: pointer;color: red"
+              onclick="add_to_wishlist({{ $product->id }})">
+              <i class="ci-heart"></i> Xóa khỏi yêu thích
+            </button>
+          @elseif ($wishlist == NULL)
+            <button class="btn-wishlist_{{ $product->id }} nav-link-style me-3" style="cursor: pointer;"
+              onclick="add_to_wishlist({{ $product->id }})">
+              <i class="ci-heart"></i> Thêm vào yêu thích
+            </button>
+          @endif
+        @else
+          <button class="btn-wishlist_{{ $product->id }} nav-link-style me-3" style="cursor: pointer;"
+            onclick="add_to_wishlist({{ $product->id }})">
+            <i class="ci-heart"></i> Thêm vào yêu thích
+          </button>
+        @endif
       </div>
     </div>
   </div>

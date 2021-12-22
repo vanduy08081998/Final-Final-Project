@@ -43,7 +43,7 @@
                                         @foreach ($cate->brands as $brand)
                                             <li class="widget-list-item widget-filter-item">
                                                 <a class="widget-list-link d-flex justify-content-between align-items-center"
-                                                    href="#">
+                                                    href="{{ route('shop.products_brand', $brand->brand_slug) }}">
                                                     <span
                                                         class="widget-filter-item-text">{{ $brand->brand_name }}</span>
                                                     <span

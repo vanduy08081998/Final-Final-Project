@@ -1,7 +1,7 @@
 <div class="bg-white shadow-lg p-4 ms-lg-auto">
   <div class="py-2 px-xl-2">
     <div class="widget mb-3">
-      <h2 class="widget-title text-center">Order summary</h2>
+      {{-- <h2 class="widget-title text-center">Ord</h2> --}}
       <?php $totalprice = 0; ?>
       @forelse ($carts as $cart)
         @foreach (json_decode($cart->specifications) as $key => $value)
@@ -17,8 +17,7 @@
               @endif
             </a>
             <div class="ps-2">
-              <h6 class="widget-product-title"><a
-                  href="shop-single-v1.html">{{$value->product_name }}</a>
+              <h6 class="widget-product-title"><a href="shop-single-v1.html">{{ $value->product_name }}</a>
               </h6>
               @if ($value->colors != null)
                 <?php $colorname = \App\Models\Color::where('color_slug', $value->colors)->first()->color_name; ?>
@@ -45,18 +44,25 @@
                     tinh</span></div>
               @endif
               <div class="widget-product-meta"><span
-                  class="text-accent me-2">{{ ($value->variant_price * $cart->quantity) }}₫</span><span
+                  class="text-accent me-2">{{ $value->variant_price * $cart->quantity }}₫</span><span
                   class="text-muted">x
                   {{ $cart->quantity }}</span></div>
             </div>
           </div>
         @endforeach
       @empty
-
+        <div class="text-center">
+          <h5 style="font-size: 16px">Không có sản phẩm trong giỏ hàng</h5>
+        </div>
       @endforelse
 
     </div>
-    <h6 class="fw-normal text-center my-4" id="totalprice">Tổng tiền : {{ number_format($totalprice) }}₫</h6>
-    <input type="hidden" name="totalprice" value="{{ $totalprice }}">
+    @if (count($carts) <= 0)
+
+    @else
+      <h6 class="fw-normal text-center my-4" id="totalprice">Tổng tiền : {{ number_format($totalprice) }}₫</h6>
+      <input type="hidden" name="totalprice" value="{{ $totalprice }}">
+    @endif
+
   </div>
 </div>
