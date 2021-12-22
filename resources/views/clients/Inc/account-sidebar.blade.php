@@ -33,7 +33,7 @@
                 <li class="border-bottom mb-0">
                     <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account.order-list') ? 'active' : '' }}"
                         href="{{ route('account.order-list') }}">
-                        <i class="ci-bag opacity-60 me-2"></i>Đơn hàng<span class="fs-sm text-muted ms-auto">1</span>
+                        <i class="ci-bag opacity-60 me-2"></i>Đơn hàng
                     </a>
                 </li>
                 <li class="border-bottom mb-0">

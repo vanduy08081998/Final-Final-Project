@@ -28,24 +28,24 @@ class CheckoutController extends Controller
         $user = User::find(Auth()->user()->id);
         $shipping_default = Shipping::where([['user_id', Auth::user()->id], ['default', 1]])->first();
         $shipping_all = Shipping::where([['user_id', Auth::user()->id], ['default', 0]])->get();
-        return view('Clients.checkout.checkout-details')->with(compact('shipping_default', 'shipping_all', 'provinces', 'districts', 'wards', 'user'));
+        return view('clients.checkout.checkout-details')->with(compact('shipping_default', 'shipping_all', 'provinces', 'districts', 'wards', 'user'));
     }
     public function checkoutShipping()
     {
         $shipping_methods = DB::table('shipping_method')->get();
-        return view('Clients.checkout.checkout-shipping', compact('shipping_methods'));
+        return view('clients.checkout.checkout-shipping', compact('shipping_methods'));
     }
     public function checkoutPayment()
     {
-        return view('Clients.checkout.checkout-payment');
+        return view('clients.checkout.checkout-payment');
     }
     public function checkoutComplete()
     {
-        return view('Clients.checkout.checkout-complete');
+        return view('clients.checkout.checkout-complete');
     }
     public function checkoutReview()
     {
-        return view('Clients.checkout.checkout-review');
+        return view('clients.checkout.checkout-review');
     }
 
     public function checkoutCartCheckout()

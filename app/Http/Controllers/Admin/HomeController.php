@@ -40,12 +40,16 @@ class HomeController extends Controller
            ->select('categories.category_name', DB::raw('SUM(order_details.quantity) AS total'))
            ->orderByDESC('total')->where('orders.payment_status','Confirmed')
            ->get();
-        foreach($done_cate as $key => $done){
-            $chart_data_buy[] = array(
-				'x' => $done->category_name,
-				'value' => (float)$done->total,
-			);
-        }
+           if(count($done_cate)==0){
+                $chart_data_buy = '';
+           }else{
+            foreach($done_cate as $key => $done){
+                $chart_data_buy[] = array(
+                    'x' => $done->category_name,
+                    'value' => (float)$done->total,
+                );
+            }
+           };
         $data_cate_buy = json_encode($chart_data_buy);
         return view('admin.dashboard')->with(compact('count_product','count_order','count_user','count_post','data','data_cate_buy'));
     }
@@ -155,7 +159,7 @@ class HomeController extends Controller
        $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
 	    $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 		$get = StatisticalProduct::where('product_id', $product_max_buy->id)->whereBetween('order_date',[$sub30days,$now])->orderBy('order_date','ASC')->get();
-		foreach($get as $key => $val){
+        foreach($get as $key => $val){
 			$chart_data[] = array(
 				'period' => $val->order_date,
 				'sales' => $val->sales,
