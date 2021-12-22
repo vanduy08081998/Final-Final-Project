@@ -94,8 +94,6 @@ $infor = Information::orderByDESC('id')
             </div>
         </div>
       </div>
-    </div>
-    <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
