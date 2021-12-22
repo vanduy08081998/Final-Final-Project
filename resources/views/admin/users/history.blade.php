@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="card mb-0">
                 <div class="card-body">
-                  <h4 class="text-primary mb-2">Quản lý hóa đơn</h4>
+                  <h4 class="text-primary mb-2 font-weight-bold">Quản lý hóa đơn</h4> <hr>
                     <div class="table-responsive">
                         <table class="datatable table table-stripped table-bordered">
                             <thead>

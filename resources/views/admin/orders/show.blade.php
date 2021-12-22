@@ -6,11 +6,9 @@
   <!-- Page Wrapper -->
 
   <div class="content container-fluid">
-
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý hóa đơn chi tiết'])
-    {{-- <div class="text-right mb-3"><a href="{{ route('products.create') }}" class="btn btn-info"
-            style="border-radius: 40px">Thêm sản
-            phẩm</a></div> --}}
+    <div class="card-title">
+      <h4 class="mb-0 font-weight-bold">Quản lý hóa đơn chi tiết</h4>
+  </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="card mb-0">

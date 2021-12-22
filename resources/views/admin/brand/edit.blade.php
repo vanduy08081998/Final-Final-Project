@@ -17,7 +17,7 @@
                         <div class="col-lg-8">
                             <div class="card radius-5">
                                 <div class="card-header">
-                                    Cập nhật thương hiệu
+                                  <h4 class="font-weight-bold text-dark"> Cập nhật thương hiệu </h4>
                                 </div>
                                 <div class="card-body">
 

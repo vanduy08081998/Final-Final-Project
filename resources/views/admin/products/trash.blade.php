@@ -6,19 +6,19 @@
   <!-- Page Wrapper -->
 
   <div class="content container-fluid">
-    <div class="card-title">
-      <h4 class="text-primary mb-2 d-inline font-weight-bold">Danh sách sản phẩm </h4>
-      <a href="{{ route('products.create') }}" class="btn btn-info float-right" style="border-radius: 40px">Thêm sản
-        phẩm</a>
-      <hr />
-  </div>
- 
+
+    {{-- @include('admin.inc.page-header',['bread_title' => 'Trang quản trị sản phẩm', 'bread_item' => 'Thùng rác']) --}}
     <div class="row">
+        <div class="mb-3 block">
+            <h4 class="font-weight-bold text-dark d-inline">Thùng rác sản phẩm</h4>
+            <a href="{{ route('products.index') }}" class="btn btn-info float-right mb-2">Danh sách</a>
+            <hr>
+        </div>
       <div class="col-sm-12">
         <div class="card mb-0">
           <div class="card-body">
             <div class="table-responsive">
-              @include('admin.products.product-table')
+              @include('admin.products.product-table-trash')
             </div>
           </div>
         </div>

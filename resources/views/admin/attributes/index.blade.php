@@ -6,23 +6,22 @@
 
 @section('content')
     <div class="content container-fluid">
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý thuộc
-        tính sản phẩm'])
+        <div class="card-title">
+            <h4 class="text-primary mb-2 d-inline font-weight-bold">Quản lý thuộc
+                tính sản phẩm </h4>
+                <span class="text-right mb-3 float-right"><a href="{{ route('attribute.create') }}" class="btn btn-info"
+                    style="border-radius: 40px">Thêm thuộc tính sản phẩm</a></span>
+            <hr />
+        </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="text-right mb-3"><a href="{{ route('attribute.create') }}" class="btn btn-info"
-                        style="border-radius: 40px">Thêm thuộc tính sản phẩm</a></div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">
-                            <h4 class="mb-0">Liệt kê thuộc tính</h4>
-                        </div>
                         @if (session('message'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('message') }}
                             </div>
                         @endif
-                        <hr />
                         <table id="example" class="table table-striped table-bordered datatable" style="width:100%">
                             <thead>
                                 <tr>

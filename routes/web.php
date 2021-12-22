@@ -78,7 +78,7 @@ Route::prefix('/')->group(function () {
         Route::post('/quickview', [ProductController::class, 'quickView'])->name('shop.quickview');
         Route::post('/get-variant-price', [ProductController::class, 'getVariantPrice'])->name('products.get_variant_price');
         Route::get('/products-category/{category_slug}', [ProductController::class, 'productsCategory'])->name('shop.products_category');
-        Route::get('/products-brand/{slug}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
+        Route::get('/products-brand/{id}', [ProductController::class, 'productsBrand'])->name('shop.products_brand');
         Route::post('/short', [ProductController::class, 'productShort'])->name('clients.products.short');
         Route::post('/searchByCate', [ProductController::class, 'searchByCate'])->name('clients.products.searchbycate');
         Route::post('/searchByBrand', [ProductController::class, 'searchByBrand'])->name('clients.products.searchbybrand');
@@ -196,6 +196,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/brand', BrandController::class);
 
     // Product
+    Route::post('/products/handle', [ProductAdmin::class, 'handle'])->name('products.handle');
+    Route::get('/products/delete/{id}', [ProductAdmin::class, 'delete'])->name('products.delete');
+    Route::get('/products/trash', [ProductAdmin::class, 'trash'])->name('products.trash');
     Route::resource('/products', ProductAdmin::class);
     Route::get('product__attributes', [ProductAdmin::class, 'getProductAttributes'])->name('admin.product__attributes');
     Route::get('product__variants', [ProductAdmin::class, 'productVariants'])->name('admin.product__variants');

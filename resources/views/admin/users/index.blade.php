@@ -14,7 +14,7 @@ Quản lý tài khoản
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="card-title">
-                        <h4 class="text-primary mb-2 d-inline">Danh sách vai trò: </h4>
+                        <h4 class="text-primary mb-2 d-inline font-weight-bold">Danh sách nhân viên: </h4>
                         <a href="{{ route('admin_trash') }}" class="btn btn-warning float-right">Thùng rác
                             ({{ $countTrashed }})</a>
                         <hr />

@@ -9,13 +9,10 @@
 
     <div class="content container-fluid">
 
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý thông tin cữa hàng'])
-
         <div class="row">
             <div class="col-sm-12">
                 <div class="card mb-0">
-                    @include('admin.inc.card-header', ['table_title' => 'Thông tin liên hệ' , 'table_content' =>
-                    'Quản lý thông tin liên hệ'])
+                    @include('admin.inc.card-header', ['table_title' => 'Thông tin liên hệ'])
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered datatable" style="width:100%">

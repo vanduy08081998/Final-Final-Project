@@ -25,7 +25,7 @@
                             <div class="carousel-item show show-image-review show-slider-image-{{$key}}">
                                 <img src="{{ URL::to('uploads/Reviews', $image_array[0]) }}"
                                     class="d-block show image-review" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
+                                <div class="carousel-caption d-none d-md-block" style="width:60%;">
                                     {{-- <h5>Second slide label</h5>
                                     <p>Some representative placeholder content for the second slide.</p> --}}
                                     <div class="d-flex mb-2">
@@ -51,7 +51,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-wrap flex-column justify-content-start">
+                                        <div class="d-flex flex-wrap flex-column justify-content-start" style="margin-left: -10%;">
                                             <div class="fs-sm mt-1 text-success bought-review me-2"><i class="fa fa-check-circle me-1"
                                                     aria-hidden="true"></i>
                                                 Đã mua tại Bigdeal</div>
@@ -62,7 +62,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <p class="fs-md mb-2 review show">{{ $review->content_rating }}</p>
+                                    <p class="fs-md mb-2 review show" style="width:70%;">{{ $review->content_rating }}</p>
                                 </div>
                             </div>
                         @endif

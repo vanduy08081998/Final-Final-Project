@@ -177,11 +177,11 @@
                                 tiền:&nbsp;</span><span>{{ $order ? number_format($order->grand_total, 0, '.', ',') . ' đ' : '' }}</span>
                         </div>
                         <div class="px-2 py-1"><span class="text-muted">Phí giao
-                                hàng:&nbsp;</span><span>{{number_format($ship, 0,'.', ','). ' đ'}}</span></div>
+                                hàng:&nbsp;</span><span>{{ number_format($ship->handing_fee, 0,'.', ',').' đ'}}</span></div>
                         {{-- <div class="px-2 py-1"><span
                         class="text-muted">Thuế:&nbsp;</span><span>$9.<small>50</small></span></div> --}}
                         <div class="px-2 py-1"><span class="text-muted">Tổng tiền:&nbsp;</span><span
-                                class="fs-lg">{{ $order ? number_format($order->grand_total, 0, '.', ',') . ' đ' : '' }}</span>
+                                class="fs-lg">{{ $order ? number_format($order->grand_total + $ship->handing_fee, 0, '.', ',') . ' đ' : '' }}</span>
                         </div>
                     </div>
                 </div>
