@@ -11,40 +11,59 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-  public function productsBrand($slug)
+  // public function productsBrand($slug)
+  // {
+
+  //   if ($slug == 'all-brands') {
+  //     $product = Product::simplePaginate(12);
+  //     // $cate = null;
+  //     // $cate_id = null;
+  //     $pro = Product::orderByDESC('id')->count();
+  //     $on = 0;
+  //   } else {
+  //     $brand = Brand::where('brand_slug', $slug)->first();
+  //     $brand_id = $brand->id;
+  //     $product = Product::where('product_id_brand', $brand_id)->simplePaginate(12);
+  //     // $cate = Category::where('id_cate', $product->product_id_category)->first();
+  //     // $cate_id = $cate->id;
+  //     $pro = Product::orderByDESC('id')->where('product_id_brand', $brand_id)->count();
+  //     $on = 1;
+  //   }
+  //   $min = Product::orderByDESC('id')->min('unit_price');
+  //   $max = Product::orderByDESC('id')->max('unit_price');
+  //   $products = Product::orderBy('id', 'asc')->get();
+  //   $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
+  //   $brands = Brand::orderBy('id', 'asc')->get();
+  //   return view('clients.shop.product-brand', [
+  //     'min' => $min,
+  //     'max' => $max,
+  //     'product' => $product,
+  //     'products' => $products,
+  //     // 'cate' => $cate,
+  //     'pro' => $pro,
+  //     'category' => $categories,
+  //     'brand_id' => $brand_id,
+  //     'brands' => $brands,
+  //     'id_brand' => $brand_id,
+  //     'on' => $on
+  //   ]);
+  // }
+  public function productsBrand($id)
   {
 
-    if ($slug == 'all-brands') {
-      $product = Product::simplePaginate(12);
-      // $cate = null;
-      // $cate_id = null;
-      $pro = Product::orderByDESC('id')->count();
-      $on = 0;
-    } else {
-      $brand = Brand::where('brand_slug', $slug)->first();
-      $brand_id = $brand->id;
-      $product = Product::where('product_id_brand', $brand_id)->simplePaginate(12);
-      // $cate = Category::where('id_cate', $product->product_id_category)->first();
-      // $cate_id = $cate->id;
-      $pro = Product::orderByDESC('id')->where('product_id_brand', $brand_id)->count();
-      $on = 1;
-    }
     $min = Product::orderByDESC('id')->min('unit_price');
     $max = Product::orderByDESC('id')->max('unit_price');
-    $products = Product::orderBy('id', 'asc')->get();
-    $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
-    $brands = Brand::orderBy('id', 'asc')->get();
+    $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
+    $product_brand = Product::where('product_id_brand', $id)->orderByDESC('id')->get();
+    $brand_id = Brand::where('id', $id)->first();
+    $brands = Brand::orderByDESC('id')->get();
     return view('clients.shop.product-brand', [
       'min' => $min,
       'max' => $max,
-      'product' => $product,
-      'products' => $products,
-      'pro' => $pro,
+      'product_brand' => $product_brand,
       'category' => $categories,
-      'brand_id' => $brand_id,
       'brands' => $brands,
-      'id_brand' => $brand_id,
-      'on' => $on
+      'brand_id' => $brand_id,
     ]);
   }
 

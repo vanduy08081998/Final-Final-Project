@@ -113,7 +113,7 @@ class OrderController extends Controller
             if($statistic_count>0){
                 $statistic_update = Statistical::where('order_date',$order_date)->first();
                 $statistic_update->sales = $statistic_update->sales + $order->grand_total;
-                $statistic_update->quantity = $statistic_update->quantity + $order->order_details->sum('quantity');
+                $statistic_update->quantity = $statistic_update->quantity + $order->detail->sum('quantity');
                 $statistic_update->total_order = $statistic_update->total_order + 1;
                 $statistic_update->save();
             }else{

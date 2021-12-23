@@ -14,7 +14,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Liệt kê thương hiệu</h4>
+                                <h4 class="mb-0 font-weight-bold">Liệt kê thương hiệu</h4> <hr>
                                 <div class="d-block mt-2">
                                     <select name="handle" id="" class="form-select-sm">
                                         <option value="">------- Hành động ------</option>

@@ -13,7 +13,10 @@
             <div class="col-sm-12">
                 <div class="card mb-0 ">
                     <div class="card-body">
-                        <h4 class="text-primary mb-2">Danh sách vai trò: </h4>
+                        <div class="card-title">
+                            <h4 class="text-primary font-weight-bold mb-2 d-inline">Danh sách vai trò: </h4>
+                            <hr />
+                        </div>
                         @if (session('message'))
                             <div class="alert alert-success" role="alert">
                                 {{ session('message') }}

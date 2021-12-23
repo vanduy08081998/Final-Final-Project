@@ -7,14 +7,14 @@
 
 @section('content')
     <div class="content container-fluid">
-        @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Thêm danh
-        mục'])
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    @include('admin.inc.card-header', ['table_title' => 'Danh mục bài viết' , 'table_content' =>
-                    'Quản lý danh mục bài viết'])
                     <div class="card-body">
+                        <div class="card-title">
+                            <h4 class="text-primary mb-2 d-inline font-weight-bold">Thêm danh mục bài viết: </h4>
+                            <hr />
+                        </div>
                         <form action="{{ route('blogCate.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">

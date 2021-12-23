@@ -6,7 +6,11 @@
 @section('content')
 
 
-  <div class="content container-fluid">
+<div class="content container-fluid">
+    <div class="card-title">
+        <h4 class="text-primary mb-2 d-inline font-weight-bold">Thêm sản phẩm</h4>
+        <hr />
+    </div>
     <div class="row">
 
       <style>

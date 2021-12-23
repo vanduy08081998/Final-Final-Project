@@ -13,7 +13,7 @@ Quản lý tài khoản
         <div class="col-sm-12">
             <div class="card mb-0">
                 <div class="card-body">
-                    <h4 class="text-primary mb-2">Thùng rác (tài khoản nhân viên) </h4>
+                    <h4 class="text-primary mb-2 font-weight-bold">Thùng rác (tài khoản nhân viên) </h4><hr>
                     @if (session('message'))
                     <div class="alert alert-success" role="alert">
                         {{ session('message') }}

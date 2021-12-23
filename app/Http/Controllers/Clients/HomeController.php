@@ -23,8 +23,8 @@ class HomeController extends Controller
     public function index(){
         $slide = Banner::orderByDESC('id')->where('banner_type', '0')->get();
         $banner = Banner::orderByDESC('id')->where('banner_type', '1')->get();
-        $product = Product::orderBy('id', 'ASC')->get();
-        $highlight = Product::orderBy('id', 'ASC')->get();
+        $product = Product::orderBy('id', 'DESC')->limit(10)->get();
+        $highlight = Product::where('feature_product','on')->orderBy('id', 'ASC')->get();
         $brand = Brand::orderByDESC('id')->get();
         $newProduct = Product::orderByDESC('id')->limit(4)->get();
         // $sellingProducts GROUP BY `product_id` ,`count_rating`
