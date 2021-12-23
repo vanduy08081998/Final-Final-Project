@@ -18,15 +18,14 @@ $(".card_add_btn").click(function () {
         success: function (response) {
             console.log(response);
             if (response.success) {
-                toastr.success("Thêm giỏ hàng thành công", "Chúc mừng");
+                toastr.success(response.success, "Chúc mừng");
                 cartDropdown();
             }
-
             if (response.error) {
-                toastr.error(
-                    "Bạn phải đăng nhập trước khi mua hàng",
-                    "Cảnh báo"
-                );
+                toastr.error(response.error, "Cảnh báo");
+            }
+            if (response.error_quantity) {
+                toastr.error(response.error_quantity, "Cảnh báo");
             }
         },
     });

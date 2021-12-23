@@ -17,7 +17,7 @@
                             </div>
                         @endif
                         <a href="{{route('list-role')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
-                        <h4 class="text-primary">Cấp quyền thông qua vai trò:
+                        <h4 class="text-primary font-weight-bold">Cấp quyền thông qua vai trò:
                             <button class="btn btn-danger"><strong style="text-transform:uppercase">
                                     <i class="bi bi-person-check"></i>
                                     {{ $role->name }}
@@ -158,8 +158,8 @@
         }
 
         .card.col-md-3.text-dark.mt-3.mr-2 {
-            border: linear-gradient(45deg, #40ffed, #29b5af);
-            box-shadow: rgb(38 57 77) 0px 20px 30px -10px;
+            -webkit-box-shadow: 0 0 10px #CCCCCC;
+        box-shadow: 0 0 10px #CCCCCC;
 
         }
         

@@ -17,7 +17,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="card-title">
-                                <h4 class="mb-0">Liệt kê sản phẩm theo bình luận</h4>
+                                <h4 class="mb-0 font-weight-bold">Liệt kê sản phẩm theo bình luận</h4>
                             </div>
                             <hr />
                             {{-- <div class="table-responsive"> --}}

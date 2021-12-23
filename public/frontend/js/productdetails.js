@@ -46,25 +46,8 @@ const getVariantPrice = () => {
                 <span>${response.price}
                   ₫</span>`
             );
-            // Quantity check
-            quantityCheck(response.product_quantity);
-            // End Quantity check
         },
     });
-};
-
-const quantityCheck = (quantity) => {
-    if (quantity > 0) {
-        $("#product_badge")
-            .html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
-                                                  class="ci-security-check"></i>Sản phẩm còn hàng
-                                              </div>`);
-    } else {
-        $("#product_badge")
-            .html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                  class="fas fa-times" style="right: 70px; top: 550px"></i>Sản phẩm hết hàng
-                                              </div> `);
-    }
 };
 
 let flash_sale_end_date = $("._314-e778ac").attr("data-date");

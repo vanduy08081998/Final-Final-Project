@@ -13,6 +13,7 @@
                     @method('POST')
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-12 col-sm-12 col-lg-8 col-8 col-xl-8">
+                            @include('admin.inc.card-header', ['table_title' => 'Thêm thông tin cửa hàng'])
                             <div class="card">
                                 <div class="card-body">
                                     <input type="hidden" name="poster" value="1">

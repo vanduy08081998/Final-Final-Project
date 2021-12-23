@@ -15,8 +15,8 @@
                         <div class="col-lg-8">
                             <div class="card radius-5">
                                 <div class="card-header">
-                                    Thêm mới thương hiệu
-                                </div>
+                                    <h4 class="font-weight-bold text-dark"> Thêm mới thương hiệu </h4>
+                                  </div>
                                 <div class="card-body">
                                     @if (session('message'))
                                         <div class="alert alert-success" role="alert">

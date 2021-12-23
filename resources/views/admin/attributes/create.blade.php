@@ -8,6 +8,10 @@
 
         <div class="row justify-content-center">
             <div class="col-sm-7">
+                <div class="card-title">
+                    <h4 class="text-primary mb-2 d-inline font-weight-bold">Thêm thuộc
+                        tính sản phẩm </h4>
+                </div>
                 <div class="card radius-15">
                     <div class="card-body">
 

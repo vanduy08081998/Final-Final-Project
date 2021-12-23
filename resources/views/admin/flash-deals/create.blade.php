@@ -5,13 +5,17 @@
 
 @section('content')
 <div class="content container-fluid">
+  <div class="card-title">
+    <h4 class="mb-0 font-weight-bold">Thêm quản lý Chiến dịch Flash-Sale</h4>
+</div>
+<hr />
   <div class="row">
     <div class="col-sm-12">
       @if (session()->has('message'))
       @foreach (session()->get('message') as $item)
-        <div class="alert alert-danger">Sản phẩm {{ $item }} Đã tồn tại trong một chiến dịch khác</div>
+        <div class="alert alert-danger">Sản phẩm {{ \App\Models\Product::where('id', $item)->first()->product_name }} Đã tồn tại trong một chiến dịch khác</div>
       @endforeach
-          
+
       @endif
       <div class="card">
         <div class="card-body">

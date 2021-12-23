@@ -13,7 +13,10 @@ Thêm tài khoản
                 <div class="card-body border-lg-top-danger">
                     <div class="card-body p-1">
                         <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
-                        <h4 class="text-primary mb-3">Cập nhật tài khoản nhân viên</h4>
+                        <div class="card-title">
+                            <h4 class="text-primary font-weight-bold mb-2 d-inline">Cập nhật tài khoản nhân viên: </h4>
+                            <hr />
+                        </div>
                         <div class="form-body">
                             @if (session('message'))
                             <div class="alert alert-success" role="alert">

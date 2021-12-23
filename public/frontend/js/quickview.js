@@ -60,25 +60,8 @@ function quickviewModal(id) {
                 <span>${response.price}
                   ₫</span>`
                         );
-                        // Quantity check
-                        quantityCheck(response.product_quantity);
-                        // End Quantity check
                     },
                 });
-            };
-
-            const quantityCheck = (quantity) => {
-                if (quantity > 0) {
-                    $("#product_badge")
-                        .html(` <div class="product-badge product-available mt-n1 bg-green" style="right: 70px; top: 550px"><i
-                                                  class="ci-security-check"></i>Sản phẩm còn hàng
-                                              </div>`);
-                } else {
-                    $("#product_badge")
-                        .html(`<div class="product-badge product-available mt-n1 bg-red"><i
-                                                  class="fas fa-times" style="right: 70px; top: 550px"></i>Sản phẩm hết hàng
-                                              </div> `);
-                }
             };
 
             $(".card_add_btn").click(function () {
@@ -89,31 +72,27 @@ function quickviewModal(id) {
                     success: function (response) {
                         console.log(response);
                         if (response.success) {
-                            toastr.success(
-                                "Thêm giỏ hàng thành công",
-                                "Chúc mừng"
-                            ); // Thông báo thêm giỏ hàng thành công
+                            toastr.success(response.success, "Chúc mừng");
                             cartDropdown();
                         }
-
                         if (response.error) {
-                            toastr.error(
-                                "Bạn phải đăng nhập trước khi mua hàng",
-                                "Cảnh báo"
-                            );
+                            toastr.error(response.error, "Cảnh báo");
+                        }
+                        if (response.error_quantity) {
+                            toastr.error(response.error_quantity, "Cảnh báo");
                         }
                     },
                 });
             });
 
-           let date_end = $("._314-e778ac").attr("data-date");
-           $("._314-e778ac").countdown(date_end, function (event) {
-               $(this).html(
-                   event.strftime(
-                       'Còn:&nbsp <span class="date">%D ngày</span> &nbsp <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
-                   )
-               );
-           });
+            let date_end = $("._314-e778ac").attr("data-date");
+            $("._314-e778ac").countdown(date_end, function (event) {
+                $(this).html(
+                    event.strftime(
+                        'Còn:&nbsp <span class="date">%D ngày</span> &nbsp <span class="hour">%H</span>:<span class="min">%M</span>:<span class="sec">%S</span>'
+                    )
+                );
+            });
         },
     });
 }

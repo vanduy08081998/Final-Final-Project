@@ -1,7 +1,7 @@
 <?php
 use Carbon\Carbon;
 ?>
-<div class="container" wire:ignore.self>
+<div style="background: white; padding:40px" class="container" wire:ignore.self>
     <!-- Reviews-->
     <h4 class="row mb-4 fw-bold"> {{ $all_count_review }} đánh giá {{ $product->product_name }}
     </h4>

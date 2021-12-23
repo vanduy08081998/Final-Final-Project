@@ -14,7 +14,7 @@
                 <div class="card mb-0">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="mb-2 d-inline">Danh sách khách hàng</h4>
+                            <h4 class="mb-2 d-inline font-weight-bold">Danh sách khách hàng</h4>
                             <a href="{{ route('customer_trash') }}" class="btn btn-warning float-right">Thùng rác
                                 ({{ $countTrashed }})</a>
                             <hr />
