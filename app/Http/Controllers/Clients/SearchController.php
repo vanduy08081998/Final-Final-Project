@@ -40,7 +40,6 @@ class SearchController extends Controller
         ]);
     }
 
-
     public function range(Request $request)
     {
         $array_range = explode(';', $request->my_range);

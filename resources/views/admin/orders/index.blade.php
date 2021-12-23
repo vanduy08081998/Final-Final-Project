@@ -39,7 +39,8 @@
                                             <td>{{ Str::limit(json_decode($order->shipping_address)->address, 40, '...') }}
                                             </td>
                                             <td>{{ date('Y-m-d h:i:s', $order->date) }}</td>
-                                            <td><select name="delivery_viewed" class="form-control"
+                                            <td>
+                                                <select name="delivery_viewed" id="delivery_viewed_{{ $order->id }}" class="form-control"
                                                     onchange="delivery_viewed({{ $order->id }})" id="">
                                                     @foreach ($delivery_viewed as $item)
                                                         <option value="{{ $item->delivery_viewed }}"
@@ -47,7 +48,9 @@
                                                             {{                                                             $item->delivery_description }}
                                                         </option>
                                                     @endforeach
-                                                </select></td>
+                                                </select>
+
+                                            </td>
                                             <td>{{ number_format($order->grand_total) }}₫</td>
                                             <td>
                                                 <div class="status-toggle d-flex justify-content-center">
@@ -104,7 +107,8 @@
 
 
         const delivery_viewed = function(id) {
-            let val = $('select[name="delivery_viewed"] option:selected').val();
+            let val = $(`#delivery_viewed_${id} option:selected`).val();
+            console.log(val)
             let _token = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type: "POST",

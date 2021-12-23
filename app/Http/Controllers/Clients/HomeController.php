@@ -14,6 +14,7 @@ use App\Models\Information;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -111,9 +112,8 @@ class HomeController extends Controller
             'day_send' => date("d/m/Y")
         ];
         Mail::to('bigdealdn@gmail.com')->send(new SendMail($detail));
-        return view('clients.about.contact',[
-            'infors' => $infors
-        ]);
+        Toastr::success('Gửi mail thành công', 'Chúc mừng');
+        return redirect()->back();
 
     }
 
@@ -122,3 +122,4 @@ class HomeController extends Controller
     }
 
 }
+

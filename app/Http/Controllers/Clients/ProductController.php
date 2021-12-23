@@ -39,7 +39,6 @@ class ProductController extends Controller
       'max' => $max,
       'product' => $product,
       'products' => $products,
-      // 'cate' => $cate,
       'pro' => $pro,
       'category' => $categories,
       'brand_id' => $brand_id,
