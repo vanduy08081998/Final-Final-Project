@@ -111,7 +111,7 @@
     </main>
     <input type="hidden" name="" id="url_to" value="{{ URL::to('/') }}">
     <!-- Footer-->
-    <iframe src="https://www.nhaccuatui.com/mh/auto/Sr7TPiIcHU" width="1" height="1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+    {{-- <iframe src="https://www.nhaccuatui.com/mh/auto/Sr7TPiIcHU" width="1" height="1" frameborder="0" allowfullscreen allow="autoplay"></iframe> --}}
     @include('clients.Inc.footer')
     <!-- Toolbar for handheld devices (Default)-->
     <div class="handheld-toolbar">
