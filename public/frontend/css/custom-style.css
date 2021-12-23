@@ -775,7 +775,10 @@ button.carousel-control-next.show-next {
     .fw-normal {
         font-weight: 600 !important;
     }
-
+    #content-wrapper .lSPager {
+        margin-left: calc(100% - 73%) !important;
+        margin-top: 20px !important;
+    }
 @media screen and (max-width: 600px) {
     body {
         max-width: 100%;
@@ -880,6 +883,8 @@ button.carousel-control-next.show-next {
     .detail-tab .tab-content {
         width: 100%;
         margin: 0 auto;
+        display: flex !important;
+        justify-content: center !important;
     }
 
     .tab-pane {
