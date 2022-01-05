@@ -11,7 +11,7 @@
                     @csrf
                     @method('POST')
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 col-sm-12 col-lg-8 col-8 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
                             @include('admin.inc.card-header', ['table_title' => 'Thêm bài viết'])
                             <div class="card">
                                 <div class="card-body">
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 col-sm-12 col-lg-8 col-8 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
                             <div class="card">
                                 <div class="card-body">
                                     <input type="hidden" name="poster" value="1">
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-md-12 col-sm-12 col-lg-8 col-12 col-xl-8">
+                        <div class="col-md-12 col-sm-12 col-lg-12 col-12 col-xl-12">
                             <div class="card">
                                 <div class="card-header">Ảnh tiêu đề</div>
                                 <div class="card-body">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <div class="col-sm-8">
+                        <div class="col-sm-12">
                             <button class="btn btn-primary" style="float: right;">Thêm bài viết</button>
                         </div>
                     </div>

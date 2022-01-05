@@ -3,8 +3,10 @@
             value="{{ $value->id }}"></td>
     <td class="text-left">
 
-        <strong class="text-info">{!! $value->user->position == 'admin' ? '<b class="logo-qtv">Quản Trị Viên</b>' : $value->user->name !!}</strong>
-        {!! $value->replyOne ? ($value->replyOne->user->position == 'admin' ? '<b class="logo-qtv">Quản Trị Viên</b>' : 'đã trả lời <strong>' . $value->replyOne->user->name . '</strong>') : '' !!}
+        <strong class="text-info">
+          {!! $value->user->position == 'admin' ? '<b class="logo-qtv">Quản Trị Viên</b>' : $value->user->name !!}
+       </strong>
+        {!! $value->replyOne ? ($value->replyOne->user->position == 'admin' ? 'đã trả lời <b class="logo-qtv">Quản Trị Viên</b>' : 'đã trả lời <strong>' . $value->replyOne->user->name . '</strong>') : '' !!}
 
     </td>
 

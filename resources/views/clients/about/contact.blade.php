@@ -69,7 +69,7 @@
             </div>
             <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
                 <h2 class="h4">Đóng góp ý kiến</h2>
-                <form class="needs-validation" action="{{ route('clients.feedback') }}" method="post" enctype="multipart/form-data" id="choice-form">
+                <form action="{{ route('clients.feedback') }}" method="post" enctype="multipart/form-data" id="choice-form">
                     @csrf
                     @method('POST')
                     <div class="row g-3">

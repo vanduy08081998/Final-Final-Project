@@ -20,7 +20,7 @@
     </div>
     <!-- Orders list-->
     @if ($orders->count() > 0)
-        <div class="table-responsive fs-md mb-4">
+        <div class="table-responsive fs-md mb-4 bg-light">
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
@@ -29,6 +29,7 @@
                         <th>Trạng thái</th>
                         <th>Theo dõi</th>
                         <th>Chi tiết</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +55,20 @@
                             <td><button
                                     wire:click.prevent="orderDetail('{{ $item->id }}', '{{ $item->grand_total }}')"
                                     class="btn-sm btn-primary">Xem</button></td>
+                            
+                             <td>
+                                @if($item->status)
+                                     @if($item->status->delivery_viewed == 1 || $item->status->delivery_viewed == 2)  
+                                            <a class="btn-sm btn-danger"  style="cursor: pointer;" wire:click.prevent="deleteOrder({{$item->id}})" >Hủy</a>
+
+                                     @else
+
+                                     @endif
+
+                                @else 
+                                         <a class="btn-sm btn-danger"  style="cursor: pointer;" wire:click.prevent="deleteOrder({{$item->id}})">Hủy</a>
+                                @endif
+                             </td>
                         </tr>
                     @endforeach
 

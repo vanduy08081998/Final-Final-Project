@@ -32,7 +32,7 @@
                                    <tr>
                                        <td>{{ $key+1 }}</td>
                                        <td>{{ $flashdeal->title }}</td>
-                                       <td><img src="{{ asset($flashdeal->banner) }}" width="40" height="40"></td>
+                                       <td><img src="{{ asset($flashdeal->banner) }}" width="110px" height="50px"></td>
                                        <td>
                                            @php
                                                 $date_start = date('m/d/Y', $flashdeal->date_start);

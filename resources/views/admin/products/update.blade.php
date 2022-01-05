@@ -444,6 +444,7 @@
                     <div class="form-group">
                       <label>Thêm vào chiến dịch</label>
                       <select name="id_flash_deal" class="form-control">
+                        <option value="">-- Chọn chiến dịch</option>
                         @foreach ($flash_deals as $deal)
                           @if ($product->flash_deals()->first() != null)
                             <option value="{{ $deal->id }}" @if ($product->flash_deals()->first()->id == $deal->id) selected @endif>

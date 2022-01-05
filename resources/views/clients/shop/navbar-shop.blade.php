@@ -41,15 +41,17 @@
                                             </a>
                                         </li>
                                         @foreach ($cate->brands as $brand)
+                                      @if($products->where('product_id_category', $cate->id_cate)->where('product_id_brand', $brand->id)->count() > 0)
                                             <li class="widget-list-item widget-filter-item">
                                                 <a class="widget-list-link d-flex justify-content-between align-items-center"
-                                                    href="{{ route('shop.products_brand', $brand->brand_slug) }}">
+                                                    href="{{route('shop.products_brand_all', ['cate_slug' => $cate->category_slug, 'brand_slug' => $brand->brand_slug])}}">
                                                     <span
                                                         class="widget-filter-item-text">{{ $brand->brand_name }}</span>
                                                     <span
                                                         class="fs-xs text-muted ms-3">{{ $products->where('product_id_category', $cate->id_cate)->where('product_id_brand', $brand->id)->count() }}</span>
                                                 </a>
                                             </li>
+                                      @endif
                                         @endforeach
                                     </ul>
                                 </div>

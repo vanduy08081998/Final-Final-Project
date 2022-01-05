@@ -26,7 +26,7 @@
     <!-- Lineawesome CSS -->
     <link rel="stylesheet" href="{{ URL::to('backend/css/line-awesome.min.css') }}">
     <!-- Datatable CSS -->
-    <link rel="stylesheet" href="{{ URL::to('Backend/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::to('backend/css/dataTables.bootstrap4.min.css') }}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ URL::to('backend/css/style.css') }}">
     <!-- Latest compiled and minified CSS -->
@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend/css/select2.min.css') }}">
+    <link rel="stylesheet" media="screen" href="{{ asset('frontend/css/toastr.min.css') }}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="{{ asset('fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::to('backend/css/select2.css') }}">
@@ -69,8 +70,8 @@
     <!-- Slimscroll JS -->
     <script src="{{ URL::to('backend/js/jquery.slimscroll.min.js') }}"></script>
     <!-- Datatable JS -->
-    <script src="{{ URL::to('Backend/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::to('Backend/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::to('backend/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::to('backend/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="https://cdn.ckeditor.com/4.17.0/standard/ckeditor.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js">
@@ -85,7 +86,8 @@
     <script src="{{ asset('backend/js/fancybox.js') }}"></script>
     <script src="{{ asset('fancybox/dist/jquery.fancybox.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
+    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('backend/js/select2.min.js') }}"></script>
     <!-- Custom JS -->

@@ -212,7 +212,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div style="" class="product_statistical mt-4">
-                            {{-- @livewire('google-analytics') --}}
+                            @livewire('google-analytics') 
                         </div>
 
                     </div>

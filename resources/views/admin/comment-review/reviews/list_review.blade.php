@@ -51,11 +51,15 @@
                                                 </td>
                                                 <td class="text-center text-primary font-weight-bold">
                                                     {{ $product->count_review }} lượt đánh giá <br>
+                                                    @php $check = 0 @endphp
                                                     @foreach($product->reviews as $review)
                                                           @if($review->review_status == null)
-                                                          <span class="text-danger">(Chờ duyệt)</span>
+                                                              @php $check++ @endphp
                                                           @endif
                                                     @endforeach
+                                                  @if($check != 0)
+                                                   <span class="text-danger">(Chờ duyệt)</span>
+                                                  @endif
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

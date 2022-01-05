@@ -27,11 +27,11 @@
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
-        @include('Clients.Inc.account-sidebar')
+        @include('clients.Inc.account-sidebar')
         <!-- Content  -->
-        <section class="col-lg-8">
+        <section class="col-lg-8 bg-light pb-4">
             <!-- Toolbar-->
-            <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
+            <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-2 mb-lg-3">
                 <h6 class="fs-base text-light mb-0">Đăng ký địa chỉ giao nhận hàng:</h6><a
                     class="btn btn-primary btn-sm" href="account-signin.html"><i class="ci-sign-out me-2"></i>Đăng
                     xuất</a>

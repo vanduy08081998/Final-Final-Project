@@ -224,9 +224,9 @@ $infor = Information::orderByDESC('id')
                                                         <ul class="widget-list">
                                                             @foreach ($cate->brands as $brand)
                                                                 <li class="widget-list-item pb-2">
-                                                                    <a class="widget-list-link" href="{{ route('shop.products_brand', $brand->brand_slug) }}">
+                                                                    <a class="widget-list-link" href="{{route('shop.products_brand_all',['cate_slug' => $cate->category_slug,'brand_slug' => $brand->brand_slug])}}">
                                                                         <img src="{{ url($brand->brand_image) }}"
-                                                                            height="100px" width="80px">
+                                                                            height="90px" width="70px">
                                                                     </a>
                                                                 </li>
                                                             @endforeach
@@ -243,7 +243,8 @@ $infor = Information::orderByDESC('id')
                               <ul class="widget-list">
                                 @foreach ($cateChild->brands as $brand)
                                   <li class="widget-list-item pb-1">
-                                    <a class="widget-list-link" href="#">{{ $brand->brand_name }}</a>
+                                   <a class="widget-list-link" href="{{route('shop.products_brand_all',['id_cate' => $cate->id_cate,'brand_id' => $brand->id])}}">
+                                   <img src="{{ url($brand->brand_image) }}" height="100px" width="80px"></a>
                                   </li>
                                 @endforeach
                               </ul>

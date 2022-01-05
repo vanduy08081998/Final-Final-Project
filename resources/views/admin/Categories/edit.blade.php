@@ -108,15 +108,15 @@
                                                 <select name="category_parent_id" id="" class="form-control">
                                                     <option value="">Chọn danh mục</option>
                                                     @foreach (App\Models\Category::where('category_parent_id', null)->get() as $item)
-                                                        @include('admin.categories.categoryOptions', ['item' => $item,'category' => $category->id])
+                                                        @include('admin.Categories.categoryOptions', ['item' => $item,'category' => $category->id])
 
                                                         @foreach ($item->subcategory()->get() as $childCategory)
-                                                            @include('admin.categories.categoryOptions', ['item' =>
+                                                            @include('admin.Categories.categoryOptions', ['item' =>
                                                             $childCategory,
                                                             'prefix' => '--','category' => $category->id])
 
                                                             @foreach ($childCategory->subcategory()->get() as $childCategory2)
-                                                                @include('admin.categories.categoryOptions', ['item' =>
+                                                                @include('admin.Categories.categoryOptions', ['item' =>
                                                                 $childCategory2,
                                                                 'prefix' => '----','category' => $category->id])
                                                             @endforeach

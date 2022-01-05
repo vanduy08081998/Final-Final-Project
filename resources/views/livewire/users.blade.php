@@ -1,4 +1,4 @@
-<div wire:ignore.self class="row gx-4 border">
+<div wire:ignore.self class="row gx-4 border bg-light">
     <div class="bg-secondary rounded-3 p-4 mb-4 border">
         <div class="d-flex align-items-center">
             @if (Auth::user()->avatar)

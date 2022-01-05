@@ -74,12 +74,7 @@
                         <i class="ci-location opacity-60 me-2"></i>Địa chỉ giao nhận
                     </a>
                 </li>
-                <li class="mb-0">
-                    <a class="nav-link-style d-flex align-items-center px-4 py-3 {{ Route::currentRouteNamed('account.account-payment') ? 'active' : '' }}"
-                        href="{{ route('account.account-payment') }}">
-                        <i class="ci-card opacity-60 me-2"></i>Phương thức thanh toán
-                    </a>
-                </li>
+                
                 <li class="mb-0">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf

@@ -2,7 +2,7 @@
   <i style="font-size: 20px"><strong>{{ $product->product_name }}</strong></i>
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-<div class="modal-body">
+<div class="modal-body quickview-body">
   <form id="choice_attribute_options" class="choice_attribute_options" onchange="getVariantPrice()">
     @csrf
     <input type="hidden" name="product_id" value="{{ $product->id }}">

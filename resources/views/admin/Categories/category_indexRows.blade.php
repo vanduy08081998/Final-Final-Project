@@ -25,6 +25,6 @@
             </div>
         </div>
 
-        @include('admin.categories.category_brand_modal',['value' => $value])
+        @include('admin.Categories.category_brand_modal',['value' => $value])
     </td>
 </tr>

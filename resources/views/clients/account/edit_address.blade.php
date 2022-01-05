@@ -27,7 +27,7 @@
 </div>
 <div class="container pb-5 mb-2 mb-md-4">
     <div class="row">
-        @include('slients.Inc.account-sidebar')
+        @include('clients.Inc.account-sidebar')
         <!-- Content  -->
         <section class="col-lg-8">
             <!-- Toolbar-->
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Add New Address-->
-            <form action="{{route('shippings.update', ['shipping' => $shipping->id])}}" method="post">
+            <form style="padding:20px; background:white" action="{{route('shippings.update', ['shipping' => $shipping->id])}}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="align-middle add-ship mb-3">

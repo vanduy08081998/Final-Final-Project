@@ -187,7 +187,7 @@ class UserController extends Controller
     public function add_permissions($id)
     {
         $role = Role::find($id);
-        $all_permissions = Permission::latest('id','ASC')->get();
+        $all_permissions = Permission::all();
         $permissions_by_role = $role->permissions->pluck('id')->all();
         return view('admin.users.assign_permissions')->with(compact('role','all_permissions','permissions_by_role'));
     }

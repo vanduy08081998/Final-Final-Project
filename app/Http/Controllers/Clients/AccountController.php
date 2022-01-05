@@ -13,6 +13,7 @@ use App\Models\Shipping;
 use App\Models\Review;
 use Session;
 use Auth;
+use DB;
 
 class AccountController extends Controller
 {

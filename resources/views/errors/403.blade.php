@@ -2,7 +2,7 @@
 
 <div id="container_anim">
     <div id="lock" class="key-container">
-        <?xml version="1.0" standalone="no"?>
+     
         <!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             style="isolation:isolate" viewBox="317.286 -217 248 354" width="248" height="354">
             <g>
@@ -29,7 +29,6 @@
     </div>
 
     <div id="key">
-        <?xml version="1.0" standalone="no"?>
         <!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             style="isolation:isolate" viewBox="232.612 288.821 169.348 109.179" width="169.348" height="109.179">
             <g>

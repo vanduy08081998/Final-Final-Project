@@ -15,11 +15,13 @@ class SearchController extends Controller
         if ($request->category == 0) {
             $product = Product::where('product_name', 'REGEXP', $request->key)->simplePaginate(12);
             $pro = Product::where('product_name', 'REGEXP', $request->key)->count();
+            $on = 0;
         } else {
             $product = Product::where('product_id_category', $request->category)
                 ->where('product_name', 'REGEXP', $request->key)->simplePaginate(12);
             $pro = Product::where('product_id_category', $request->category)
                 ->where('product_name', 'REGEXP', $request->key)->count();
+             $on = 1;
         }
         $min = Product::orderByDESC('id')->min('unit_price');
         $max = Product::orderByDESC('id')->max('unit_price');
@@ -36,7 +38,8 @@ class SearchController extends Controller
             'pro' => $pro,
             'category' => $categories,
             'brands' => $brands,
-            'id_cate' => 0
+            'id_cate' => 0,
+            'on'=>$on
         ]);
     }
 

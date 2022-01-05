@@ -177,177 +177,9 @@
         <div class="row">
             <!-- Sidebar-->
             <aside class="col-lg-3">
+                @include('clients.shop.navbar-shop');
                 <!-- Sidebar-->
-                <div class="offcanvas offcanvas-collapse bg-white w-100 rounded-3 shadow-lg py-1" id="shop-sidebar"
-                    style="max-width: 24rem">
-                    <div class="offcanvas-header align-items-center shadow-sm">
-                        <h2 class="h5 mb-0">Bộ lọc</h2>
-                        <button class="btn-close ms-auto" type="button" data-bs-dismiss="offcanvas"
-                            aria-label="Thoát"></button>
-                    </div>
-                    <div class="offcanvas-body py-grid-gutter px-lg-grid-gutter">
-                        <!-- Categories-->
-                        <div class="widget widget-categories mb-4 pb-4 border-bottom">
-                            <h3 class="widget-title">Danh mục</h3>
-                            <div class="accordion mt-n1" id="shop-categories">
-                                @foreach ($category as $key => $cate)
-                                <div class="accordion-item">
-                                    <h3 class="accordion-header">
-                                        <a class="accordion-button collapsed" href="#collapseSection-{{ $key }}" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseExample">
-                                            {{ $cate->category_name }}
-                                        </a>
-                                    </h3>
-                                    <div class="accordion-collapse collapse" id="collapseSection-{{ $key }}">
-                                        <div class="accordion-body">
-                                            <div class="widget widget-links widget-filter">
-                                                <div class="input-group input-group-sm mb-2">
-                                                    <input class="widget-filter-search form-control rounded-end" type="text" placeholder="Tìm kiếm">
-                                                    <i class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                                                </div>
-                                                <ul class="widget-list widget-filter-list pt-1" style="height: 12rem;" data-simplebar data-simplebar-auto-hide="false">
-                                                    <li class="widget-list-item widget-filter-item">
-                                                        <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                            <span class="widget-filter-item-text">View all</span>
-                                                            <span class="fs-xs text-muted ms-3">{{ $product_brand->where('product_id_category', $cate->id_cate) }}</span>
-                                                        </a>
-                                                    </li>
-                                                    @foreach ($cate->brands as $brand)
-                                                    <li class="widget-list-item widget-filter-item">
-                                                        <a class="widget-list-link d-flex justify-content-between align-items-center" href="#">
-                                                            <span class="widget-filter-item-text">{{ $brand->brand_name }}</span>
-                                                            <span class="fs-xs text-muted ms-3">247</span>
-                                                        </a>
-                                                    </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <!-- Price range-->
-                        <div class="widget mb-4 pb-4">
-                            <h3 class="widget-title">Tìm theo giá: <span id="demo"></span></h3>
-                            <form action="{{ route('search.range') }}" method="POST" enctype="multipart/form-data"
-                                class="border-bottom">
-                                @csrf
-                                @method('POST')
-                                <input type="range" name="range" max="{{ $max }}" min="{{ $min }}"
-                                    id="myRange" value="{{ $min }}" step="1000" style="width: 260px;"><br>
-                                <span style="float: left; margin-left: -5px;"><span>{{ number_format($min) }}
-                                        ₫</span></span>
-                                <span style="float: right; margin-right: -25px;"><span>{{ number_format($max) }}
-                                        ₫</span></span><br>
-                                <button class="btn btn-primary" style="float: right; margin-top: 15px;"
-                                    type="submit">Tìm</button>
-                            </form>
-                        </div>
-                        <!-- Filter by Brand-->
-                        <div class="widget widget-filter mb-4 pb-4 pt-4 border-bottom">
-                            <h3 class="widget-title">Brand</h3>
-                            <div class="input-group input-group-sm mb-2">
-                                <input class="widget-filter-search form-control rounded-end pe-5" type="text"
-                                    placeholder="Search"><i
-                                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                            </div>
-                            <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
-                                data-simplebar data-simplebar-auto-hide="false">
-                                @foreach ($brands as $brand)
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="adidas">
-                                        <label class="form-check-label widget-filter-item-text" for="adidas">{{ $brand->brand_name }}</label>
-                                    </div>
-                                    <span class="fs-xs text-muted">123</span>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <!-- Filter by Size-->
-                        <div class="widget widget-filter mb-4 pb-4 border-bottom">
-                            <h3 class="widget-title">Size</h3>
-                            <div class="input-group input-group-sm mb-2">
-                                <input class="widget-filter-search form-control rounded-end pe-5" type="text"
-                                    placeholder="Search"><i
-                                    class="ci-search position-absolute top-50 end-0 translate-middle-y fs-sm me-3"></i>
-                            </div>
-                            <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
-                                data-simplebar data-simplebar-auto-hide="false">
-                                <li class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="size-xs">
-                                        <label class="form-check-label widget-filter-item-text" for="size-xs">XS</label>
-                                    </div><span class="fs-xs text-muted">34</span>
-                                </li>
 
-                            </ul>
-                        </div>
-                        <!-- Filter by Color-->
-                        <div class="widget">
-                            <h3 class="widget-title">Color</h3>
-                            <div class="d-flex flex-wrap">
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-blue-gray">
-                                    <label class="form-option-label rounded-circle" for="color-blue-gray"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #b3c8db;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-blue-gray">Blue-gray</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-burgundy">
-                                    <label class="form-option-label rounded-circle" for="color-burgundy"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #ca7295;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-burgundy">Burgundy</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-teal">
-                                    <label class="form-option-label rounded-circle" for="color-teal"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #91c2c3;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-teal">Teal</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-brown">
-                                    <label class="form-option-label rounded-circle" for="color-brown"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #9a8480;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-brown">Brown</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-coral-red">
-                                    <label class="form-option-label rounded-circle" for="color-coral-red"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #ff7072;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-coral-red">Coral red</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-navy">
-                                    <label class="form-option-label rounded-circle" for="color-navy"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #696dc8;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-navy">Navy</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-charcoal">
-                                    <label class="form-option-label rounded-circle" for="color-charcoal"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #4e4d4d;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-charcoal">Charcoal</label>
-                                </div>
-                                <div class="form-check form-option text-center mb-2 mx-1" style="width: 4rem;">
-                                    <input class="form-check-input" type="checkbox" id="color-sky-blue">
-                                    <label class="form-option-label rounded-circle" for="color-sky-blue"><span
-                                            class="form-option-color rounded-circle"
-                                            style="background-color: #8bcdf5;"></span></label>
-                                    <label class="d-block fs-xs text-muted mt-n1" for="color-sky-blue">Sky blue</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </aside>
             <!-- Content  -->
             <section class="col-lg-9 tab-content-shop" style="padding-right: 50px;">
@@ -364,29 +196,12 @@
                                 <option>Lượt đánh giá</option>
                                 <option>Từ A - Z</option>
                                 <option>Từ Z - A</option>
-                            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">của 287
-                                sản phẩm</span>
+                            </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">
+                            </span>
                         </div>
                     </div>
                 </div>
-                    {{-- <div class="d-none d-sm-flex pb-3"><a
-                            class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2"
-                            href="{{ route('shop.shop-grid') }}"><i class="ci-view-grid"></i></a><a
-                            class="btn btn-icon nav-link-style nav-link-light" href="{{ route('shop.shop-list') }}"><i
-                                class="ci-view-list"></i></a></div>
-                </div> --}}
-                <!-- Products grid-->
-                {{-- <div class="py-sm-2">
-                    <div
-                        class="d-sm-flex justify-content-between align-items-center bg-secondary overflow-hidden mb-4 rounded-3">
-                        <div class="py-4 my-2 my-md-0 py-md-5 px-4 ms-md-3 text-center text-sm-start">
-                            <h4 class="fs-lg fw-light mb-2">Converse All Star</h4>
-                            <h3 class="mb-4">Make Your Day Comfortable</h3><a
-                                class="btn btn-primary btn-shadow btn-sm" href="#">Shop Now</a>
-                        </div><img class="d-block ms-auto" src="{{ asset('frontend/img/shop/catalog/banner.jpg') }}"
-                            alt="Shop Converse">
-                    </div>
-                </div> --}}
+
                 <div class="row mx-n2">
 
                     <!-- Product-->
@@ -404,7 +219,7 @@
                                 </a>
                                 <div class="card-body py-2"><a class="product-meta d-block fs-xs pb-1" href="#">{{ $pro->Category->category_name }}</a>
                                     <h3 class="product-title fs-sm"><a
-                                            href="shop-single-v1.html">{{ $pro->product_name }}</a></h3>
+                                            href="">{{ $pro->product_name }}</a></h3>
                                     <div class="d-flex justify-content-between">
                                         <div class="product-price"><span
                                                 class="text-accent">{{ number_format($pro->unit_price) }}VNĐ</span></div>
@@ -429,3 +244,101 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+<script>
+    function shorting() {
+      var value = $('select[name="shorting"] option:selected').val()
+      var orderby = $('select[name="shorting"] option:selected').attr('data-short')
+      let _token = $('meta[name="csrf-token"]').attr('content')
+      let id_cate = 0;
+      $.ajax({
+        type: "POST",
+        url: "{{ route('clients.products.short') }}",
+        data: {
+          value: value,
+          orderby: orderby,
+          id_cate: id_cate,
+          _token: _token
+        },
+        success: function(response) {
+          $('#product-short').html(response)
+        }
+
+      })
+    }
+
+    function search_by_cate(id) {
+      let _token = $('meta[name="csrf-token"]').attr('content')
+      let id_cate = 0;
+      let key = $(#category_search_${id}).val()
+      $.ajax({
+        type: "POST",
+        url: "{{ route('clients.products.searchbycate') }}",
+        data: {
+          id: id,
+          id_cate: id_cate,
+          key: key,
+          _token: _token
+        },
+        success: function(response) {
+          $('#product-short').html(response)
+        }
+
+      })
+    }
+
+    function focusout(id) {
+      let _token = $('meta[name="csrf-token"]').attr('content')
+      let id_cate = 0;
+      let key = $(#category_search_${id}).val()
+      $.ajax({
+        type: "POST",
+        url: "{{ route('clients.products.searchbycate') }}",
+        data: {
+          id: id,
+          id_cate: id_cate,
+          key: '',
+          _token: _token
+        },
+        success: function(response) {
+          $('#product-short').html(response)
+        }
+
+      })
+    }
+
+    function searchBrand() {
+      $.ajax({
+        type: "POST",
+        url: "{{ route('clients.products.searchbybrand') }}",
+        data: $('#form-search-brand').serializeArray(),
+        success: function(response) {
+          $('#product-short').html(response)
+        }
+      });
+    }
+    $(".js-range-slider").ionRangeSlider({
+      type: "double",
+      min: @php echo $min @endphp,
+      max: @php echo $max @endphp,
+      from: 200,
+      to: 500,
+      grid: true
+    });
+    $('#search-by-price').on('change', function(event) {
+      event.preventDefault()
+      $.ajax({
+        type: "POST",
+        url: "{{ route('search.range') }}",
+        data: $(this).serializeArray(),
+        success: function(response) {
+          $('#product-short').html(response)
+        }
+      });
+    })
+  </script>
+@endpush
+
+
+

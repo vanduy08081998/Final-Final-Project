@@ -48,6 +48,28 @@ class ProductController extends Controller
   //     'on' => $on
   //   ]);
   // }
+  
+  public function productsBrandAll ($cate_slug,$brand_slug){
+
+    $min = Product::orderByDESC('id')->min('unit_price');
+    $max = Product::orderByDESC('id')->max('unit_price');
+    $brand = Brand::where('brand_slug', $brand_slug)->first();
+    $category = Category::where('category_slug', $cate_slug)->first();
+    $product_brand = Product::where('product_id_brand',$brand->id)->where('product_id_category',$category->id_cate)->get();
+    $products = Product::orderBy('id', 'asc')->get();
+    $category = Category::where('category_parent_id', null)->orderBy('id_cate', 'asc')->get();
+    $brands = Brand::orderByDESC('id')->get();
+    $brand_id = Brand::where('id', $brand->id)->first();
+    return view('clients.shop.product-brand', [
+      'min' => $min,
+      'max' => $max,
+      'product_brand' => $product_brand,
+      'brand_id' => $brand_id,
+      'category' => $category,
+      'brands' => $brands,
+      'products' => $products,
+    ]);
+  }
   public function productsBrand($id)
   {
 
@@ -55,8 +77,9 @@ class ProductController extends Controller
     $max = Product::orderByDESC('id')->max('unit_price');
     $categories = Category::where('category_parent_id', null)->orderBy('id_cate', 'desc')->get();
     $product_brand = Product::where('product_id_brand', $id)->orderByDESC('id')->get();
-    $brand_id = Brand::where('id', $id)->first();
     $brands = Brand::orderByDESC('id')->get();
+    $brand_id = Brand::find($id);
+    $products = Product::orderBy('id', 'asc');
     return view('clients.shop.product-brand', [
       'min' => $min,
       'max' => $max,
@@ -64,7 +87,8 @@ class ProductController extends Controller
       'category' => $categories,
       'brands' => $brands,
       'brand_id' => $brand_id,
-    ]);
+      'products' => $products,
+      ]);
   }
 
   public function quickview(Request $request)
@@ -73,7 +97,7 @@ class ProductController extends Controller
     $product = Product::find($request->id);
 
 
-    return view('clients.inc.quickview-details', compact('product'));
+    return view('clients.Inc.quickview-details', compact('product'));
   }
 
   public function productsCategory($category_slug)
@@ -104,7 +128,7 @@ class ProductController extends Controller
     } else {
       $cate = Category::where('category_slug', $slug)->first();
       $cate_id = $cate->id_cate;
-      $product = Product::where('product_id_category', $cate_id)->simplePaginate(12);
+      $product = Product::where('product_id_category', $cate_id)->orderByDESC('id')->simplePaginate(12);
       $pro = Product::orderByDESC('id')->where('product_id_category', $cate_id)->count();
       $on = 1;
     }

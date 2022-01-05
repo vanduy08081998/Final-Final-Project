@@ -47,7 +47,7 @@
             </div>
             @endif
             <!-- Addresses list-->
-            <div class="table-responsive fs-md">
+            <div style="padding:20px; background:white" class="table-responsive fs-md">
                 <table class="table table-hover mb-0">
                     <tbody>
                         @if($shipping_default)

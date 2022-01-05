@@ -32,7 +32,7 @@
                                         @foreach ($all_permissions as $key => $per)
                                             @if ($per->parent == 0)
 
-                                                <div class="card col-md-3 text-dark mt-3 mr-2" style="max-width: 18rem;">
+                                                <div class="card col-md-3 text-dark mt-3 mr-4" style="max-width: 18rem;">
                                                     <div class="card-header">
                                                         <label class="container mt-2 font-weight-bold"> {{ $per->name }}
                                                             <input value="{{ $per->id }}" data-id="{{ $per->id }}"

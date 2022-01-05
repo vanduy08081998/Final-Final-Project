@@ -1,7 +1,7 @@
 <?php
 use Carbon\Carbon;
 ?>
-<div class="container-fluid" id="div_id" style="position:relative">
+<div class="container-fluid bg-light pt-3 pb-3" id="div_id" style="position:relative">
     <h3 class="text-danger"> Đánh giá của bạn </h3>
     <div class="d-flex pt-3">
         <div class="d-flex flex-nowrap align-items-center sort-star">

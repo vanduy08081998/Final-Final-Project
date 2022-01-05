@@ -36,7 +36,7 @@
                 <!-- Wishlist-->
                 <!-- Item-->
                 @foreach ($wishlist as $item)
-                <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
+                <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom bg-light">
                     <div class="d-block d-sm-flex align-items-start text-center text-sm-start"><a class="d-block flex-shrink-0 mx-auto me-sm-4"
                             href="shop-single-v1.html" style="width: 10rem;"><img src="{{ URL::to($item->Product->product_image) }}" alt="Product"></a>
                         <div class="pt-2">

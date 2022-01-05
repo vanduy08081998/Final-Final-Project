@@ -21,8 +21,8 @@
   </style>
 
   <!-- Hero (Banners + Slider)-->
-  <section class="bg-secondary py-4 banner">
-    <div class="container py-xl-2">
+  <section class="py-4 banner">
+    <div class="container py-xl-2 bg-light">
       <div class="row">
         <!-- Slider     -->
         <div class="col-xl-9 pt-xl-4 order-xl-2 slider">
@@ -36,12 +36,11 @@
                       <img class="d-block mx-auto" src="{{ url('uploads/Banner/', $item->banner_img) }}"
                         alt="VR Collection">
                     </div>
-                    <div
-                      class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text">
-                      <h2 class="fw-light pb-1 from-bottom" style="color: #38ada9;"></h2>
-                      <h1 class="display-4 from-bottom delay-1" style="color: #38ada9;">
+                    <div class="col-lg-5 col-md-6 offset-lg-1 order-md-1 pt-4 pb-md-4 text-center text-md-start carousel-text text-light">
+                      <h2 class="fw-light pb-1 from-bottom" style="color: #fff;"></h2>
+                      <h1 class="display-4 from-bottom delay-1" style="color: #fff;">
                         {{ $item->banner_name }}</h1>
-                      <h4 class="fw-light pb-3 from-bottom delay-2" style="color: #38ada9; font-weight: 700;">Với Nhiều Ưu
+                      <h4 class="fw-light pb-3 from-bottom delay-2" style="color: #fff; font-weight: 700;">Với Nhiều Ưu
                         Đãi Hấp Dẫn Đang Chờ
                         Bạn</h4>
                       <div class="d-table scale-up delay-4 mx-auto mx-md-0">
@@ -92,7 +91,7 @@
       </div>
     </div>
   </section>
-  <section class="container-fluid banner-main">
+  <section class="container-fluid banner-main" style="z-index:-1;">
     <div class="banner-left col-md-1">
       <a href="{{ $banner[0]->banner_link }}">
         <img src="{{ url('uploads/Banner/', $banner[0]->banner_img) }}" alt="">
@@ -107,7 +106,7 @@
   </section>
 
   <!-- Products grid (Trending products)-->
-  <section class="container pt-5 trending-product">
+  <section class="container pt-2 trending-product bg-light mt-4">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
       <h2><strong>Sản phẩm mới nhất</strong></h2>
@@ -247,16 +246,13 @@
     </div>
   </section>
   {{-- Sản phẩm nổi bật --}}
-  <section class="container highlight-product">
+  <section class="container highlight-product bg-light mt-4">
     <!-- Heading-->
     <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
       <h2><strong>Sản phẩm nổi bật</strong></h2>
-      <div class="pt-3">
-        <a class="btn btn-outline-accent btn-sm" href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}">Xem
-          thêm
-          <i class="ci-arrow-right ms-1 me-n1"></i>
-        </a>
-      </div>
+      <div class="pt-3"><a class="btn btn-outline-accent btn-sm"
+          href="{{ route('shop.shop-grid', ['slug' => 'all-category']) }}">Xem thêm<i
+            class="ci-arrow-right ms-1 me-n1"></i></a></div>
     </div>
     <!-- Grid-->
     <div class="tns-carousel tns-controls-static tns-controls-outside" style="height: 360px">
@@ -389,8 +385,8 @@
     </div>
   </section>
   <!-- Promo banner-->
-  <section class="container mt-4 mb-grid-gutter">
-    <div class="bg-faded-info rounded-3 py-4">
+  <section class="container mt-4 mb-grid-gutter py-4 bg-light">
+    <div class="bg-faded-info rounded-3">
       <div class="row align-items-center">
         <div class="col-md-5">
           <div class="px-4 pe-sm-0 ps-sm-5">
@@ -407,7 +403,7 @@
     </div>
   </section>
   <!-- Brands carousel-->
-  <section class="container mb-5 mt-5">
+  <section class="container mb-5 mt-5 bg-light">
     <div class="tns-carousel">
       <div class="tns-carousel-inner"
         data-carousel-options="{ &quot;nav&quot;: false, &quot;controls&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 3000, &quot;loop&quot;: true, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1},&quot;360&quot;:{&quot;items&quot;:2},&quot;600&quot;:{&quot;items&quot;:3},&quot;991&quot;:{&quot;items&quot;:4},&quot;1200&quot;:{&quot;items&quot;:4}} }">
@@ -423,7 +419,7 @@
     </div>
   </section>
   <!-- Product widgets-->
-  <section class="container pb-4 pb-md-5">
+  <section class="container pb-4 pb-md-5 bg-light" style="z-index:2;">
     <div class="row">
       <!-- Bestsellers-->
       <div class="col-md-4 col-sm-6 mb-2 py-3">
@@ -431,11 +427,11 @@
           <h3 class="widget-title">Đánh giá cao</h3>
           @foreach ($productRating as $product)
             <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                href="{{ url('shop/product-details') }}"><img src="{{ asset($product->product_image) }}" width="64"
+                href="{{ route('shop.product-details', $product->product_slug) }}"><img src="{{ asset($product->product_image) }}" width="64"
                   alt="Product"></a>
               <div class="ps-2">
                 <h6 class="widget-product-title"><a
-                    href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h6>
                 @if ($product->discount_unit == '%')
                   <div class="product-price">
@@ -465,11 +461,11 @@
           <h3 class="widget-title">Sản phẩm mới</h3>
           @foreach ($newProduct as $product)
             <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                href="{{ url('shop/product-details') }}"><img src="{{ asset($product->product_image) }}" width="64"
+                href="{{ route('shop.product-details', $product->product_slug) }}"><img src="{{ asset($product->product_image) }}" width="64"
                   alt="Product"></a>
               <div class="ps-2">
                 <h6 class="widget-product-title"><a
-                    href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h6>
                 @if ($product->discount_unit == '%')
                   <div class="product-price">
@@ -499,11 +495,11 @@
           <h3 class="widget-title">Bán chạy nhất</h3>
           @foreach ($sellingProducts as $product)
             <div class="d-flex align-items-center pb-2 border-bottom"><a class="d-block flex-shrink-0"
-                href="{{ url('shop/product-details') }}"><img src="{{ asset($product->product_image) }}" width="64"
+                href="{{ route('shop.product-details', $product->product_slug) }}"><img src="{{ asset($product->product_image) }}" width="64"
                   alt="Product"></a>
               <div class="ps-2">
                 <h6 class="widget-product-title"><a
-                    href="{{ url('shop/product-details') }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
+                    href="{{ route('shop.product-details', $product->product_slug) }}">{{ Str::limit($product->product_name, 30, '...') }}</a>
                 </h6>
                 @if ($product->discount_unit == '%')
                   <div class="product-price">
@@ -530,7 +526,7 @@
     </div>
   </section>
   <!-- Blog + Instagram info cards-->
-  <section class="container-fluid px-0">
+  <section class="container px-0">
     <div class="row g-0">
       <div class="col-md-6"><a class="card border-0 rounded-0 text-decoration-none py-md-4 bg-faded-primary"
           href="{{ route('clients.blog') }}">

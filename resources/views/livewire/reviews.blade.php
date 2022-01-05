@@ -87,7 +87,7 @@ use Carbon\Carbon;
 
                 </div>
 
-                <div class="col-lg-7 col-md-7 text-center">
+                <div class="col-lg-7 col-md-7 text-left">
                     <div class="show-image-review">
                         @forelse ($list_image_array as $key => $img)
                             @if ($key < 8)

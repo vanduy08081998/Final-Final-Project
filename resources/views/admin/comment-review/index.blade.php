@@ -24,7 +24,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" colspan="2">Sản phẩm được bình luận</th>
+                                        <th class="text-center">Sản phẩm</th>
                                         <th class="text-center">Số lượng</th>
                                         <th class="text-center">Chờ phản hồi</th>
                                         <th class="text-center">Chờ duyệt</th>
@@ -35,16 +35,15 @@
                                     @foreach ($products as $product)
                                         @if ($product->comments->count())
                                             <tr>
-                                                <td>
-                                                    <div class="position-relative mr-2">
-                                                        <img width="40" height="60"
-                                                            src="{{ asset($product->product_image) }}" />
+                                               
+                                              <td class="py-2">
+                                                    <div class="text-center">
+                                                        <div class="position-relative mr-2">
+                                                            <img width="60" height="66" style="border-radius: 5px;"
+                                                                src="{{ asset($product->product_image) }}" /><br>
+                                                            {{ $product->product_name }}
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td class="text-center">
-
-                                                    {{ $product->product_name }}
-
                                                 </td>
                                                 <td class="text-center">
                                                     <button

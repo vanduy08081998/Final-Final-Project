@@ -1020,6 +1020,11 @@ button.carousel-control-next.show-next {
         display: flex;
         flex-direction: column;
     }
+
+    .quickview-body {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 1280px) {

@@ -8,16 +8,16 @@
   <!-- Page Wrapper -->
 
   <div class="content container-fluid">
-
-    @include('admin.inc.page-header',['bread_title' => 'Trang quản trị', 'bread_item' => 'Quản lý danh
-    mục'])
- <div class="text-right mb-3"><a href="{{ route('categories.create') }}" class="btn btn-info" style="border-radius: 40px">Thêm danh mục</a></div>
     <div class="row">
       <div class="col-sm-12">
 
         <div class="card mb-0">
-          @include('admin.inc.card-header', ['table_title' => 'Loại sản phẩm' , 'table_content' =>
-          'Quản lý loại sản phẩm'])
+          <div class="card-tille pr-3 pl-3 pt-4">
+            <h4 class="d-inline font-weight-bold text-dark">
+              Danh mục sản phẩm
+            </h4>
+             <span class="text-right mb-3 float-right"><a href="{{ route('categories.create') }}" class="btn btn-info" style="border-radius: 40px">Thêm danh mục</a></span>
+          </div>
           <div class="card-body">
 
             <div class="table-responsive">
@@ -31,14 +31,14 @@
                 </thead>
                 <tbody>
                   @foreach ($categories as $key => $value)
-                    @include('admin.categories.category_indexRows', ['value' => $value])
+                    @include('admin.Categories.category_indexRows', ['value' => $value])
 
                     @foreach ($value->subcategory()->get() as $childCategory)
-                      @include('admin.categories.category_indexRows', ['value' => $childCategory,
+                      @include('admin.Categories.category_indexRows', ['value' => $childCategory,
                       'prefix' => '--'])
 
                       @foreach ($childCategory->subcategory()->get() as $childCategory2)
-                        @include('admin.categories.category_indexRows', ['value' => $childCategory2,
+                        @include('admin.Categories.category_indexRows', ['value' => $childCategory2,
                         'prefix' => '----'])
                       @endforeach
                     @endforeach

@@ -21,6 +21,18 @@
             width: 100%;
         }
 
+      #content-wrapper .lSPager {
+        margin-left: calc(100% - 73%) !important;
+        margin-top: 20px !important;
+    }
+      @media screen and (max-width: 600px) {
+        .detail-tab .tab-content {
+        width: 100%;
+        margin: 0 auto;
+        display: flex !important;
+        justify-content: center !important;
+    }
+      }
     </style>
     <div class="page-title-overlap bg-dark pt-4">
         <div class="container py-2 py-lg-3">

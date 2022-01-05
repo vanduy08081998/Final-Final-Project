@@ -16,7 +16,7 @@
                                 {{ session('message') }}
                             </div>
                         @endif
-                        <a href="{{route('list-role')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
+                        <a href="{{route('users.index')}}"><button class="btn btn-outline-primary float-right">Danh sách</button></a>
                         <h4 class="text-primary font-weight-bold">Cấp quyền thông qua vai trò:
                             <button class="btn btn-danger"><strong style="text-transform:uppercase">
                                     <i class="bi bi-person-check"></i>
@@ -31,7 +31,7 @@
                                 @foreach ($all_permissions as $key => $per)
                                     @if ($per->parent == 0)
 
-                                        <div class="card col-md-3 text-dark mt-3 mr-2" style="max-width: 18rem;">
+                                        <div class="card col-md-3 text-dark mt-3 mr-4" style="max-width: 18rem;">
                                             <div class="card-header">
                                                 <label class="container mt-2 font-weight-bold"> {{ $per->name }}
                                                     <input value="{{ $per->id }}" data-id="{{ $per->id }}"

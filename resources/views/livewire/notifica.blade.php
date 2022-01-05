@@ -1,5 +1,5 @@
 <div id="div_id">
-    <div class="container-fluid" style="position:relative;">
+    <div class="container-fluid bg-light pb-3 pr-2" style="position:relative;">
         <ul class="nav nav-tabs nav-material">
             <li class="nav-item contact-not" onclick="checkbox('')">
                 <a class="nav-link {{ !$check ? ' active checkedNot' : '' }}">Tất cả</a>

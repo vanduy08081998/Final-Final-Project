@@ -200,7 +200,7 @@ use Carbon\Carbon;
                     <div class="d-flex flex-nowrap align-items-center">
                         <label class="fs-sm fw-medium text-nowrap me-2 d-none d-sm-block" for="sort-reviews">Sắp
                             xếp:</label>
-                        <select class="form-select form-select-sort move-top" wire:model="sort" id="sort-reviews">
+                        <select class="form-select form-select-sort" wire:model="sort" id="sort-reviews">
                             <option>Mới nhất</option>
                             <option>Hữu ích</option>
                             <option>Đánh giá cao</option>
